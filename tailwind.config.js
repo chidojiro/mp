@@ -156,6 +156,7 @@ module.exports = {
       semibold: 500,
       bold: 700,
     },
+
     extend: {
       typography: {
         DEFAULT: {
@@ -169,6 +170,9 @@ module.exports = {
             },
           },
         },
+      },
+      borderRadius: {
+        lg: '0.625rem',
       },
     },
   },

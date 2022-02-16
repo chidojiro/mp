@@ -5,12 +5,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { Tabs } from '../common';
-import { Editting } from './Editting';
+import { Draft } from './Draft';
 import { End } from './End';
 import { InProgress } from './InProgress';
 
 export const MyMarketingAction = () => {
-  const { t } = useTranslation('myMarketingAction');
+  const { t } = useTranslation(['myMarketingAction']);
 
   const {
     query: { marketingActionName },
@@ -36,13 +36,13 @@ export const MyMarketingAction = () => {
       content: <End />,
     },
     {
-      value: HeaderTab.Editing,
+      value: HeaderTab.Ended,
       label: (
         <Link passHref href={UriUtils.replace(['editing'])}>
           <a className='block'>{t('edittingTab')}</a>
         </Link>
       ),
-      content: <Editting />,
+      content: <Draft />,
     },
   ];
   return (

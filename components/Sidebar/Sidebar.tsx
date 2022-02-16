@@ -27,16 +27,12 @@ export const Sidebar = () => {
         {
           path: `${projectPrefix}/f2-conversion-rate-trends`,
           label: t('f2ConversionRateTrends'),
-          matches: [
-            '/organizations/[organizationId]/projects/[projectId]/f2-conversion-rate-trends',
-          ],
+          matches: ['/organizations/[organizationId]/projects/[projectId]/f2-conversion-rate-trends'],
         },
         {
           path: `${projectPrefix}/semi-royal-conversion-rate`,
           label: t('semiRoyalConversionRate'),
-          matches: [
-            '/organizations/[organizationId]/projects/[projectId]/semi-royal-conversion-rate',
-          ],
+          matches: ['/organizations/[organizationId]/projects/[projectId]/semi-royal-conversion-rate'],
         },
         {
           path: `${projectPrefix}/loyal-conversion-rate`,
@@ -51,16 +47,12 @@ export const Sidebar = () => {
         {
           path: `${projectPrefix}/dormant-customers-return`,
           label: t('returnOfDormantCustomers'),
-          matches: [
-            '/organizations/[organizationId]/projects/[projectId]/dormant-customers-return',
-          ],
+          matches: ['/organizations/[organizationId]/projects/[projectId]/dormant-customers-return'],
         },
         {
           path: `${projectPrefix}/f1-dormant-customers-return`,
           label: t('returnOfF1DormantCustomers'),
-          matches: [
-            '/organizations/[organizationId]/projects/[projectId]/f1-dormant-customers-return',
-          ],
+          matches: ['/organizations/[organizationId]/projects/[projectId]/f1-dormant-customers-return'],
         },
       ],
     },

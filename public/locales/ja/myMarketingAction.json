@@ -1,5 +1,6 @@
 {
+  "menuMyMarketingAction": "My施策",
   "inProgressTab": "実施中",
-  "endTab": "実施終了",
-  "edittingTab": "編集中"
+  "finishedTab": "実施終了",
+  "draftTab": "編集中"
 }

@@ -1,5 +1,5 @@
 import { Detail } from '../Detail';
 
-export const End = () => {
+export const Draft = () => {
   return <Detail />;
 };

@@ -8,3 +8,4 @@ export * from './Tag';
 export * from './Tabs';
 export * from './Accordion';
 export * from './Redirect';
+export * from './SideMenu';
