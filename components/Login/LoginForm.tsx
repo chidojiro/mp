@@ -24,7 +24,7 @@ export const LoginForm = () => {
   const icon = showPwd ? <EyeIcon className='w-5 h-5' /> : <EyeOffIcon className='w-5 h-5' />;
 
   const onSubmit = () => {
-    router.push('/dashboard');
+    router.push('/organizations/1/dashboard');
   };
 
   return (

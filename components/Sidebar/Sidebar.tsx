@@ -4,18 +4,20 @@ import { NavItem, NavItemData } from './NavItem';
 export const Sidebar = () => {
   const { t } = useTranslation();
 
-  const urlPrefix = `/organizations/${1}/projects/${1}`;
+  const organizationPrefix = `/organizations/${1}`;
+  const projectPrefix = `${organizationPrefix}/projects/${1}`;
 
   const menu: NavItemData[] = [
     {
-      path: '/dashboard',
+      path: `${organizationPrefix}/dashboard`,
       label: t('menuDashboard'),
+      matches: ['/organizations/[organizationId]/dashboard'],
     },
     {
       label: t('menuReport'),
       children: [
         {
-          path: `${urlPrefix}/policy-report`,
+          path: `${projectPrefix}/policy-report/line-email`,
           label: t('policyReport'),
           matches: [
             '/organizations/[organizationId]/projects/[projectId]/policy-report/[slug]',
@@ -23,46 +25,65 @@ export const Sidebar = () => {
           ],
         },
         {
-          path: `${urlPrefix}/f2-conversion-rate-trends`,
+          path: `${projectPrefix}/f2-conversion-rate-trends`,
           label: t('f2ConversionRateTrends'),
+          matches: [
+            '/organizations/[organizationId]/projects/[projectId]/f2-conversion-rate-trends',
+          ],
         },
         {
-          path: `${urlPrefix}/semi-royal-conversion-rate`,
+          path: `${projectPrefix}/semi-royal-conversion-rate`,
           label: t('semiRoyalConversionRate'),
+          matches: [
+            '/organizations/[organizationId]/projects/[projectId]/semi-royal-conversion-rate',
+          ],
         },
         {
-          path: `${urlPrefix}/loyal-conversion-rate`,
+          path: `${projectPrefix}/loyal-conversion-rate`,
           label: t('loyalConversionRate'),
+          matches: ['/organizations/[organizationId]/projects/[projectId]/loyal-conversion-rate'],
         },
         {
-          path: `${urlPrefix}/loyal-customers`,
+          path: `${projectPrefix}/loyal-customers`,
           label: t('numberOfLoyalCustomers'),
+          matches: ['/organizations/[organizationId]/projects/[projectId]/loyal-customers'],
         },
         {
-          path: `${urlPrefix}/dormant-customers-return`,
+          path: `${projectPrefix}/dormant-customers-return`,
           label: t('returnOfDormantCustomers'),
+          matches: [
+            '/organizations/[organizationId]/projects/[projectId]/dormant-customers-return',
+          ],
         },
         {
-          path: `${urlPrefix}/f1-dormant-customers-return`,
+          path: `${projectPrefix}/f1-dormant-customers-return`,
           label: t('returnOfF1DormantCustomers'),
+          matches: [
+            '/organizations/[organizationId]/projects/[projectId]/f1-dormant-customers-return',
+          ],
         },
       ],
     },
     {
-      path: '/marketing-action',
-      label: t('menuMarketingAction'),
-    },
-    {
-      path: '/actions',
-      label: t('menuActions'),
-    },
-    {
-      path: '/my-marketing-action',
+      path: `${projectPrefix}/marketing-actions`,
       label: t('menuMyMarketingAction'),
+      matches: [
+        '/organizations/[organizationId]/projects/[projectId]/marketing-actions',
+        '/organizations/[organizationId]/projects/[projectId]/marketing-actions/[marketing-action-name]',
+      ],
     },
     {
-      path: '/settings',
+      path: `${projectPrefix}/marketing-actions/new/report`,
+      label: t('menuCreateMeasure'),
+      matches: [
+        '/organizations/[organizationId]/projects/[projectId]/marketing-actions/new',
+        '/organizations/[organizationId]/projects/[projectId]/marketing-actions/new/[marketing-action-name]',
+      ],
+    },
+    {
+      path: `${projectPrefix}/settings`,
       label: t('menuSettings'),
+      matches: ['/organizations/[organizationId]/projects/[projectId]/settings'],
     },
   ];
   return (

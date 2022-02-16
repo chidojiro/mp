@@ -5,14 +5,10 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 function Dashboard() {
   const { t } = useTranslation();
 
-  return (
-    <Layout title={t('menuDashboard')}>
-      <div className='flex'>dashboard</div>
-    </Layout>
-  );
+  return <Layout title={t('menuDashboard')}></Layout>;
 }
 
-export const getStaticProps = async ({ locale }: any) => ({
+export const getServerSideProps = async ({ locale }: any) => ({
   props: {
     ...(await serverSideTranslations(locale)),
   },

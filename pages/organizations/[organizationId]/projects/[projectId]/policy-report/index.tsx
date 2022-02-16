@@ -1,19 +1,11 @@
-import { useRouter } from 'next/router';
+import { Redirect } from '@/components';
 import React from 'react';
 import URI from 'urijs';
 
 const Reports = () => {
-  const router = useRouter();
+  const uri = new URI();
 
-  React.useEffect(() => {
-    const uri = new URI();
-    uri.segment('line-email');
-
-    router.replace(uri.href());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return null;
+  return <Redirect href={uri.segment('line-email').href()} method='replace' />;
 };
 
 export default Reports;

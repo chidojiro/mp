@@ -1,12 +1,7 @@
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { Redirect } from '@/components';
 
 export const IndexPage = () => {
-  const router = useRouter();
-  useEffect(() => {
-    router.replace('/login');
-  }, [router]);
-  return <div>Index Page</div>;
+  return <Redirect href='/login' method='replace' />;
 };
 
 export default IndexPage;

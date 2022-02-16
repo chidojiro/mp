@@ -6,7 +6,7 @@ import { MainContent } from './MainContent';
 type Props = {
   title: string;
   subTitle?: string;
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 export const Layout = ({ title, subTitle, children }: Props) => {
