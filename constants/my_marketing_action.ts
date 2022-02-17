@@ -1,5 +1,5 @@
 export enum HeaderTab {
-  InProgress = 'inProgress',
-  Ended = 'ended',
-  Editting = 'editting',
+  InProgress = 'in-progress',
+  Ended = 'finished',
+  Editing = 'editing',
 }
