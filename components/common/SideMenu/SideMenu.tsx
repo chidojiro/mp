@@ -9,10 +9,10 @@ export type Menu = {
 
 type Props = HeadlessTabsProps & {
   className?: string;
-  items?: Menu[];
+  items: Menu[];
 };
 
-export const SideMenu = ({ className, onChange, items = [] }: Props) => {
+export const SideMenu = ({ className, onChange, items }: Props) => {
   return (
     <HeadlessTabs onChange={onChange}>
       <div className='flex w-full'>

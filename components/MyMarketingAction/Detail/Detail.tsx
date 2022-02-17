@@ -29,7 +29,7 @@ export const Detail = () => {
 
   return (
     <div className='flex w-full h-full mt-7'>
-      <SideMenu items={listMenu} className='w-[200px]' onChange={onChange} />
+      <SideMenu items={listMenu} onChange={onChange} />
     </div>
   );
 };
