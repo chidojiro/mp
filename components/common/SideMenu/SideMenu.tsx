@@ -12,9 +12,9 @@ type Props = HeadlessTabsProps & {
   items: Menu[];
 };
 
-export const SideMenu = ({ className, onChange, items }: Props) => {
+export const SideMenu = ({ value, className, onChange, items }: Props) => {
   return (
-    <HeadlessTabs onChange={onChange}>
+    <HeadlessTabs value={value} onChange={onChange}>
       <div className='flex w-full'>
         <div className={classNames('mr-7 w-[200px]', className)}>
           <nav className='flex flex-col items-center w-full -mb-px'>
