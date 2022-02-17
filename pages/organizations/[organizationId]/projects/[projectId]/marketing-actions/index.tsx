@@ -4,7 +4,7 @@ import URI from 'urijs';
 function MarketingActions() {
   const uri = new URI();
 
-  return <Redirect href={uri.segment('report').href()} />;
+  return <Redirect href={uri.segment('in-progress').href()} />;
 }
 
 export default MarketingActions;
