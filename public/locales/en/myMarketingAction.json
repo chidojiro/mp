@@ -2,5 +2,16 @@
   "menuMyMarketingAction": "My Marketing Action",
   "inProgressTab": "In progress",
   "finishedTab": "Finished",
-  "draftTab": "Editing"
+  "draftTab": "Editing",
+  "targetCustomer": "Target Customer",
+  "period": "Implementation period",
+  "policyReport": "Policy Report",
+  "notSet": "Not Set",
+  "useLine": "Line sending or not",
+  "msgSetting1": "Message 1 setting",
+  "msgSetting2": "Message 2 setting",
+  "timeDelivery": "Delivery timing",
+  "msgContentEmail": "Message content (email)",
+  "msgContentLine": "Message content (LINE)",
+  "lineMsg": "LINE Message {{number}}"
 }

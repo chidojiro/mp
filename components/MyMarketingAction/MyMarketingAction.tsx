@@ -18,18 +18,18 @@ export const MyMarketingAction = () => {
 
   const tabs = [
     {
-      value: HeaderTab.InProgress,
+      value: HeaderTab.Active,
       label: (
-        <Link passHref href={UriUtils.replace(['in-progress'])}>
+        <Link passHref href={UriUtils.replace([HeaderTab.Active])}>
           <a className='block'>{t('inProgressTab')}</a>
         </Link>
       ),
       content: <InProgress />,
     },
     {
-      value: HeaderTab.Ended,
+      value: HeaderTab.Terminated,
       label: (
-        <Link passHref href={UriUtils.replace(['finished'])}>
+        <Link passHref href={UriUtils.replace([HeaderTab.Terminated])}>
           <a className='block'>{t('finishedTab')}</a>
         </Link>
       ),
@@ -38,7 +38,7 @@ export const MyMarketingAction = () => {
     {
       value: HeaderTab.Draft,
       label: (
-        <Link passHref href={UriUtils.replace(['editing'])}>
+        <Link passHref href={UriUtils.replace([HeaderTab.Draft])}>
           <a className='block'>{t('draftTab')}</a>
         </Link>
       ),

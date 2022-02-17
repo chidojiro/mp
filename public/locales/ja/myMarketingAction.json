@@ -2,5 +2,17 @@
   "menuMyMarketingAction": "My施策",
   "inProgressTab": "実施中",
   "finishedTab": "実施終了",
-  "draftTab": "編集中"
+  "draftTab": "編集中",
+  "targetCustomer": "ターゲット顧客",
+  "period": "実施期間",
+  "policyReport": "施策レポート",
+  "editInEditor": "施策エディタで編集",
+  "notSet": "未設定",
+  "useLine": "LINE送信の有無",
+  "msgSetting1": "メッセージ１設定",
+  "msgSetting2": "メッセージ2設定",
+  "timeDelivery": "配信タイミング",
+  "msgContentEmail": "メッセージ内容（メール）",
+  "msgContentLine": "メッセージ内容（LINE)",
+  "lineMsg": "LINEメッセージ {{number}}"
 }
