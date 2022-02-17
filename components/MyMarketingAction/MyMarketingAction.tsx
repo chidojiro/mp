@@ -4,13 +4,13 @@ import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { Tabs } from '../common';
-import { Editting } from './Editting';
+import { Layout, Tabs } from '../common';
+import { Draft } from './Draft';
 import { End } from './End';
 import { InProgress } from './InProgress';
 
 export const MyMarketingAction = () => {
-  const { t } = useTranslation('myMarketingAction');
+  const { t } = useTranslation(['myMarketingAction']);
 
   const {
     query: { marketingActionName },
@@ -30,24 +30,26 @@ export const MyMarketingAction = () => {
       value: HeaderTab.Ended,
       label: (
         <Link passHref href={UriUtils.replace(['finished'])}>
-          <a className='block'>{t('endTab')}</a>
+          <a className='block'>{t('finishedTab')}</a>
         </Link>
       ),
       content: <End />,
     },
     {
-      value: HeaderTab.Editing,
+      value: HeaderTab.Draft,
       label: (
         <Link passHref href={UriUtils.replace(['editing'])}>
-          <a className='block'>{t('edittingTab')}</a>
+          <a className='block'>{t('draftTab')}</a>
         </Link>
       ),
-      content: <Editting />,
+      content: <Draft />,
     },
   ];
   return (
-    <div className='flex h-full'>
-      <Tabs className='w-full h-full' items={tabs} value={marketingActionName as string} />
-    </div>
+    <Layout title={t('menuMyMarketingAction')}>
+      <div className='flex h-full'>
+        <Tabs className='w-full h-full' items={tabs} value={marketingActionName as string} />
+      </div>
+    </Layout>
   );
 };

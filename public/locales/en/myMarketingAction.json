@@ -1,5 +1,6 @@
 {
+  "menuMyMarketingAction": "My Marketing Action",
   "inProgressTab": "In progress",
-  "endTab": "Finished",
-  "edittingTab": "Editing"
+  "finishedTab": "Finished",
+  "draftTab": "Editing"
 }

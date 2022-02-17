@@ -20,7 +20,7 @@ export const Tabs = ({ value, onChange, items, className }: Props) => {
   return (
     <HeadlessTabs value={value} onChange={onChange}>
       <div className={className}>
-        <div className='hidden sm:block'>
+        <div className='hidden h-full sm:block'>
           <div className='border-b border-gray-200'>
             <nav className='flex items-center w-full -mb-px' aria-label='Tabs'>
               {items.map((tab, idx) => (
@@ -29,9 +29,7 @@ export const Tabs = ({ value, onChange, items, className }: Props) => {
                     <button
                       onClick={onClick}
                       className={classNames(
-                        isActive
-                          ? 'border-secondary text-secondary'
-                          : 'border-transparent text-gray-800',
+                        isActive ? 'border-secondary text-secondary' : 'border-transparent text-gray-800',
                         'whitespace-nowrap py-4 px-1 border-b-[3px] font-medium text-sm flex-1'
                       )}
                       aria-current={isActive ? 'page' : undefined}>

@@ -2,28 +2,22 @@ import { ChevronRightIcon } from '@heroicons/react/outline';
 import { Button } from '../common';
 import { Icon } from '../icons';
 
-export const MarketingActionItem = () => {
+type Props = {
+  className?: string;
+};
+
+export const MarketingActionItem = ({ className }: Props) => {
   return (
-    <div>
-      <div className='flex mb-4 text-secondary'>
-        <div className='font-bold'>おすすめ度 1位</div>
-      </div>
+    <div className={className}>
       <div className='border rounded border-gray'>
-        <div className='flex items-center justify-between h-10 px-5 py-2 text-white rounded-t bg-secondary'>
-          <div className='flex items-center font-semibold text-medium'>
-            <Icon name='repeat' className='w-4 h-4' />
-            <span className='mx-2 '>ただいま実施中: </span>
-            <span>12/15(水) 12:00 ~ 12/25(土) 12:00</span>
-          </div>
-          <div className='flex items-center text-medium'>
-            <span>詳細を見る</span>
-            <ChevronRightIcon className='w-4 h-4 ml-1' />
-          </div>
-        </div>
         <div className='p-10'>
           <div className='flex items-center'>
             <Icon name='cart' className='w-14 h-14' />
             <h3 className='font-bold ml-7 text-gray-dark'>カゴ落ち通知</h3>
+            <div className='flex items-center p-3 font-semibold text-white rounded-full bg-secondary text-medium'>
+              <Icon name='repeat' className='w-4 h-4' />
+              <span className='mx-2 '>ただいま実施中: </span>
+            </div>
           </div>
           <div className='flex justify-between mt-7'>
             <div className='flex-1'>

@@ -1,14 +1,8 @@
-import { Layout, MyMarketingAction } from '@/components';
-import { useTranslation } from 'next-i18next';
+import { MyMarketingAction } from '@/components';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 function MyMarketingActionPage() {
-  const { t } = useTranslation();
-  return (
-    <Layout title={t('menuMyMarketingAction')}>
-      <MyMarketingAction />
-    </Layout>
-  );
+  return <MyMarketingAction />;
 }
 
 export const getServerSideProps = async ({ locale }: any) => ({

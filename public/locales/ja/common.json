@@ -1,8 +1,8 @@
 {
   "menuDashboard": "ダッシュボード",
   "menuMarketingAction": "実施した施策",
-  "menuActions": "施策一覧",
   "menuMyMarketingAction": "My施策",
+  "menuCreateMA": "施策をつくる",
   "menuSettings": "設定",
   "menuReport": "レポート",
   "menuCreateMeasure": "施策をつくる",
