@@ -1,19 +1,25 @@
 import { Tabs as HeadlessTabs, TabsProps as HeadlessTabsProps } from '@/headless';
 import classNames from 'classnames';
 
-type Props = HeadlessTabsProps & {
-  className?: string;
-  menu?: any[];
+export type Menu = {
+  id: string;
+  name?: string;
+  content?: React.ReactNode;
 };
 
-export const SideMenu = ({ className, onChange, menu = [] }: Props) => {
+type Props = HeadlessTabsProps & {
+  className?: string;
+  items?: Menu[];
+};
+
+export const SideMenu = ({ className, onChange, items = [] }: Props) => {
   return (
     <HeadlessTabs onChange={onChange}>
       <div className='flex w-full'>
         <div className={classNames('mr-7 w-[200px]', className)}>
           <nav className='flex flex-col items-center w-full -mb-px'>
-            {menu.map((item, idx) => (
-              <HeadlessTabs.Item key={item.id ?? idx} content={item.content} value={item.id.toString()}>
+            {items.map((item, idx) => (
+              <HeadlessTabs.Item key={item.id ?? idx} content={item.content} value={item.id}>
                 {({ isActive, onClick }) => (
                   <div
                     key={item.id}

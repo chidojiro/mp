@@ -6,17 +6,17 @@ import { SideMenu } from '../../common';
 // example
 const listMenu = [
   {
-    id: 1,
+    id: '1',
     name: 'カゴ落ち通知',
     content: <MarketingAction>notification</MarketingAction>,
   },
   {
-    id: 2,
+    id: '2',
     name: '購入後ステップ配信',
     content: <MarketingAction>step delivery</MarketingAction>,
   },
   {
-    id: 3,
+    id: '3',
     name: 'レコメンド診断ボット（静的）',
     content: <MarketingAction>recommend list</MarketingAction>,
   },
@@ -29,7 +29,7 @@ export const Detail = () => {
 
   return (
     <div className='flex w-full h-full mt-7'>
-      <SideMenu menu={listMenu} className='w-[200px]' onChange={onChange} />
+      <SideMenu items={listMenu} className='w-[200px]' onChange={onChange} />
     </div>
   );
 };

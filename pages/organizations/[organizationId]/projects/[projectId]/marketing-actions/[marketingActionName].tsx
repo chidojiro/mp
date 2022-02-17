@@ -7,7 +7,7 @@ function MyMarketingActionPage() {
 
 export const getServerSideProps = async ({ locale }: any) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['common', 'my-marketing-action', 'myMarketingAction'])),
+    ...(await serverSideTranslations(locale, ['common', 'myMarketingAction'])),
   },
 });
 
