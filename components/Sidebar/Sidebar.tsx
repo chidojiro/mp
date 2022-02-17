@@ -61,7 +61,7 @@ export const Sidebar = () => {
       label: t('menuMyMarketingAction'),
       matches: [
         '/organizations/[organizationId]/projects/[projectId]/marketing-actions',
-        '/organizations/[organizationId]/projects/[projectId]/marketing-actions/[marketing-action-name]',
+        '/organizations/[organizationId]/projects/[projectId]/marketing-actions/[marketingActionStatus]',
       ],
     },
     {

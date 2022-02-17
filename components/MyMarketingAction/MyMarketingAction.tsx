@@ -13,7 +13,7 @@ export const MyMarketingAction = () => {
   const { t } = useTranslation(['myMarketingAction']);
 
   const {
-    query: { marketingActionName },
+    query: { marketingActionStatus },
   } = useRouter();
 
   const tabs = [
@@ -48,7 +48,7 @@ export const MyMarketingAction = () => {
   return (
     <Layout title={t('menuMyMarketingAction')}>
       <div className='flex h-full'>
-        <Tabs className='w-full h-full' items={tabs} value={marketingActionName as string} />
+        <Tabs className='w-full h-full' items={tabs} value={marketingActionStatus as string} />
       </div>
     </Layout>
   );
