@@ -36,9 +36,7 @@ export const Action = () => {
       </div>
       <div className='flex justify-center w-full mt-7'>
         <Link passHref href={url}>
-          <a>
-            <Button className='font-semibold bg-input w-[350px]'>{btn}</Button>
-          </a>
+          <a className='text-white bg-input w-[350px] px-6 py-2 text-center rounded'>{btn}</a>
         </Link>
       </div>
     </div>
