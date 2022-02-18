@@ -13,5 +13,11 @@
   "timeDelivery": "Delivery timing",
   "msgContentEmail": "Message content (email)",
   "msgContentLine": "Message content (LINE)",
-  "lineMsg": "LINE Message {{number}}"
+  "lineMsg": "LINE Message {{number}}",
+  "editor": "Marketing Action Editor",
+  "basketDropNoti": "Basket drop notification",
+  "viewPreview": "View preview",
+  "confirm": "Contents have been confirmed",
+  "lineOption": "LINE transmission available (LINE to LINE holders, e-mail to others)",
+  "noLine": "No LINE sending (sent to everyone by e-mail)"
 }

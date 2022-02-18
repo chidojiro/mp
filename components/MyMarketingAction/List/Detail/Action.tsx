@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 export const Action = () => {
-  const { t } = useTranslation('myMarketingAction');
+  const { t } = useTranslation('marketingAction');
   const {
     query: { marketingActionStatus },
   } = useRouter();

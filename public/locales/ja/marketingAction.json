@@ -14,5 +14,11 @@
   "timeDelivery": "配信タイミング",
   "msgContentEmail": "メッセージ内容（メール）",
   "msgContentLine": "メッセージ内容（LINE)",
-  "lineMsg": "LINEメッセージ {{number}}"
+  "lineMsg": "LINEメッセージ {{number}}",
+  "editor": "施策エディタ",
+  "basketDropNoti": "カゴ落ち通知",
+  "viewPreview": "プレビューを見る",
+  "confirm": "内容を確認しました",
+  "lineOption": "LINE送信あり（LINE保有者にはLINE、それ以外にはメールで送信）",
+  "noLine": "LINE送信なし（全員にメールで送信）"
 }

@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 
 export const StepDelivery = () => {
-  const { t } = useTranslation('myMarketingAction');
+  const { t } = useTranslation('marketingAction');
 
   return (
     <div className='rounded-bl-lg rounded-br-lg bg-gray-light'>

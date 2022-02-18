@@ -12,5 +12,7 @@
   "loyalConversionRate": "Loyal Conversion Rate",
   "numberOfLoyalCustomers": "Number of loyal customers",
   "returnOfDormantCustomers": "Return of dormant customers",
-  "returnOfF1DormantCustomers": "Return of F1 dormant customers"
+  "returnOfF1DormantCustomers": "Return of F1 dormant customers",
+  "editor": "Marketing Action Editor",
+  "cartAbandonedNoti": "Basket drop notification"
 }

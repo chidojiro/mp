@@ -62,6 +62,7 @@ export const Sidebar = () => {
       matches: [
         '/organizations/[organizationId]/projects/[projectId]/marketing-actions',
         '/organizations/[organizationId]/projects/[projectId]/marketing-actions/[marketingActionStatus]',
+        '/organizations/[organizationId]/projects/[projectId]/marketing-actions/edit/[marketing_action_name]',
       ],
     },
     {

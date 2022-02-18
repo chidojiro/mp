@@ -1,6 +1,6 @@
 import { Value } from 'classnames';
 import React from 'react';
-import { SideMenu } from '../../common';
+import { SideMenu } from '../../../common';
 import { MarketingAction } from './MarketingAction';
 
 // example
