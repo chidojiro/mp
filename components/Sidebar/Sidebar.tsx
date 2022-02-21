@@ -74,12 +74,13 @@ export const Sidebar = () => {
       ],
     },
     {
-      path: `${projectPrefix}/actions/active`,
+      path: `${projectPrefix}/actions/active/1`,
       label: t('menuMyMarketingAction'),
       matches: [
         '/organizations/[organizationId]/projects/[projectId]/actions',
-        '/organizations/[organizationId]/projects/[projectId]/actions/[marketingActionStatus]',
+        '/organizations/[organizationId]/projects/[projectId]/actions/[marketingActionStatus]/[marketingActionId]',
         '/organizations/[organizationId]/projects/[projectId]/actions/edit/[marketing_action_name]',
+        '/organizations/[organizationId]/projects/[projectId]/actions/edit/[marketing_action_name]/',
       ],
     },
     {

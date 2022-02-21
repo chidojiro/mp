@@ -1,13 +1,12 @@
 import { Tabs as HeadlessTabs, TabsProps as HeadlessTabsProps } from '@/headless';
 import { ClassName } from '@/types';
 import classNames from 'classnames';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 export type Item = {
   value: string;
   label: React.ReactNode;
   content: React.ReactNode;
+  onClick?: () => void;
 };
 
 export type Props = HeadlessTabsProps &
@@ -16,8 +15,6 @@ export type Props = HeadlessTabsProps &
   };
 
 export const SideMenu = ({ value, className, onChange, items }: Props) => {
-  const { pathname, query } = useRouter();
-
   return (
     <HeadlessTabs value={value} onChange={onChange}>
       <div className={classNames('flex w-full', className)}>
@@ -26,21 +23,20 @@ export const SideMenu = ({ value, className, onChange, items }: Props) => {
             {items.map((item, idx) => (
               <HeadlessTabs.Item key={item.value ?? idx} content={item.content} value={item.value}>
                 {({ isActive, onClick }) => (
-                  <Link
-                    passHref
-                    href={{ pathname, query: { ...query, marketingActionName: item.value } }}>
-                    <a
-                      key={item.value}
-                      onClick={onClick}
-                      className={classNames(
-                        'text-ellipsis overflow-hidden whitespace-nowrap text-gray-dark w-full rounded-full cursor-pointer text-medium px-[18px] mb-2.5 py-[6px]',
-                        {
-                          'bg-gray-light border border-dark-gray rounded-full': isActive,
-                        }
-                      )}>
-                      {item.label}
-                    </a>
-                  </Link>
+                  <div
+                    key={item.value}
+                    onClick={() => {
+                      onClick();
+                      item.onClick?.();
+                    }}
+                    className={classNames(
+                      'text-ellipsis overflow-hidden whitespace-nowrap text-gray-dark w-full rounded-full cursor-pointer text-medium px-[18px] mb-2.5 py-[6px]',
+                      {
+                        'bg-gray-light border border-dark-gray rounded-full': isActive,
+                      }
+                    )}>
+                    {item.label}
+                  </div>
                 )}
               </HeadlessTabs.Item>
             ))}

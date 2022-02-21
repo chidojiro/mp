@@ -1,5 +1,4 @@
-import { Button } from '@/components/common';
-import { Icon } from '@/components/Icon';
+import { Icon } from '@/components';
 import { HeaderTab } from '@/constants';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
@@ -11,7 +10,7 @@ export const Action = () => {
     query: { marketingActionStatus },
   } = useRouter();
 
-  const url = '/organizations/1/projects/1/policy-report/line-email';
+  const url = '/organizations/1/projects/1/reports/policy-report/line-email';
   const btn = marketingActionStatus === HeaderTab.Draft ? t('editInEditor') : t('policyReport');
 
   return (

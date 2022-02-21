@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router';
 import React from 'react';
+import { LinkProps } from 'next/link';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {
   method?: 'push' | 'replace';
-  href: string;
+  href: LinkProps['href'];
 };
 
 // eslint-disable-next-line no-empty-pattern

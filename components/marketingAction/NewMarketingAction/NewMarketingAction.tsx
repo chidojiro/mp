@@ -4,12 +4,14 @@ import { UpdateInformation } from './UpdateInformation';
 import { ActionContainer } from '../ActionContainer';
 import { CartAbandoned } from './CartAbandoned';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};
 
 // eslint-disable-next-line no-empty-pattern
 export const NewMarketingAction = ({}: Props) => {
+  const { query, pathname } = useRouter();
   const { t } = useTranslation('marketingAction');
 
   const {
@@ -26,7 +28,11 @@ export const NewMarketingAction = ({}: Props) => {
           descriptionImageUrl='/images/cart-abandoned-description.png'
           flowImgUrl='/images/cart-abandoned-flow.png'></ActionContainer>
       ),
-      label: t('cartAbandoned'),
+      label: (
+        <Link href={{ pathname, query: { ...query, marketingActionName: 'cart-abandoned' } }}>
+          {t('cartAbandoned')}
+        </Link>
+      ),
       value: 'cart-abandoned',
     },
     {
@@ -38,7 +44,15 @@ export const NewMarketingAction = ({}: Props) => {
           descriptionImageUrl='/images/step-delivery-after-purchase-description.png'
           flowImgUrl='/images/step-delivery-after-purchase-flow.png'></ActionContainer>
       ),
-      label: t('stepDeliveryAfterPurchase'),
+      label: (
+        <Link
+          href={{
+            pathname,
+            query: { ...query, marketingActionName: 'step-delivery-after-purchase' },
+          }}>
+          {t('stepDeliveryAfterPurchase')}
+        </Link>
+      ),
       value: 'step-delivery-after-purchase',
     },
     {
@@ -49,7 +63,11 @@ export const NewMarketingAction = ({}: Props) => {
           description={t('cartPageFaqDescription')}
           descriptionImageUrl='/images/cart-page-faq-description.png'></ActionContainer>
       ),
-      label: t('cartPageFaq'),
+      label: (
+        <Link href={{ pathname, query: { ...query, marketingActionName: 'cart-page-faq' } }}>
+          {t('cartPageFaq')}
+        </Link>
+      ),
       value: 'cart-page-faq',
     },
     {
@@ -60,7 +78,15 @@ export const NewMarketingAction = ({}: Props) => {
           description={t('recommendationDiagnosisBotStaticDescription')}
           descriptionImageUrl='/images/recommendation-diagnosis-bot-description.png'></ActionContainer>
       ),
-      label: t('recommendationDiagnosisBotStatic'),
+      label: (
+        <Link
+          href={{
+            pathname,
+            query: { ...query, marketingActionName: 'recommendation-diagnosis-bot' },
+          }}>
+          {t('recommendationDiagnosisBotStatic')}
+        </Link>
+      ),
       value: 'recommendation-diagnosis-bot',
     },
     {
@@ -71,7 +97,15 @@ export const NewMarketingAction = ({}: Props) => {
           description={t('conditionalFreeShippingDescription')}
           descriptionImageUrl='/images/conditional-free-shipping-description.png'></ActionContainer>
       ),
-      label: t('conditionalFreeShipping'),
+      label: (
+        <Link
+          href={{
+            pathname,
+            query: { ...query, marketingActionName: 'conditional-free-shipping' },
+          }}>
+          {t('conditionalFreeShipping')}
+        </Link>
+      ),
       value: 'conditional-free-shipping',
     },
     {
@@ -82,7 +116,15 @@ export const NewMarketingAction = ({}: Props) => {
           description={t('rankingBasedOnOverallPurchaseHistoryDescription')}
           descriptionImageUrl='/images/ranking-description.png'></ActionContainer>
       ),
-      label: t('rankingBasedOnOverallPurchaseHistory'),
+      label: (
+        <Link
+          href={{
+            pathname,
+            query: { ...query, marketingActionName: 'ranking-based-on-overall-purchase-history' },
+          }}>
+          {t('rankingBasedOnOverallPurchaseHistory')}
+        </Link>
+      ),
       value: 'ranking-based-on-overall-purchase-history',
     },
     {
@@ -93,7 +135,18 @@ export const NewMarketingAction = ({}: Props) => {
           description={t('rankingByCategoryBasedOnOverallPurchaseHistoryDescription')}
           descriptionImageUrl='/images/ranking-description.png'></ActionContainer>
       ),
-      label: t('rankingByCategoryBasedOnOverallPurchaseHistory'),
+      label: (
+        <Link
+          href={{
+            pathname,
+            query: {
+              ...query,
+              marketingActionName: 'ranking-by-category-based-on-overall-purchase-history',
+            },
+          }}>
+          {t('rankingByCategoryBasedOnOverallPurchaseHistory')}
+        </Link>
+      ),
       value: 'ranking-by-category-based-on-overall-purchase-history',
     },
   ];
