@@ -1,8 +1,10 @@
-import { RadioGroup } from '@/components/common';
+import { Form, RadioGroup } from '@/components';
 import { Step } from '@/constants';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { Steps } from '../Steps';
+import { MessageSetting } from './MessageSetting';
+import { TargetCustomerGroup } from './TargetCustomerGroup';
 
 export const CartAbandoned = () => {
   const { t } = useTranslation('marketingAction');
@@ -10,12 +12,12 @@ export const CartAbandoned = () => {
   const renderStep1 = () => {
     const lineOptions = [
       { value: 'line', label: t('lineOption') },
-      { value: 'no-line', label: t('noLine') },
+      { value: 'no_line', label: t('noLine') },
     ];
     return (
       <>
         <div className='font-bold text-gray-dark mb-2.5'>{t('useLine')}</div>
-        <RadioGroup>
+        <Form.RadioGroup name='cart_abandon_use_line'>
           {lineOptions.map(option => (
             <RadioGroup.Option
               colorScheme='secondary'
@@ -25,19 +27,35 @@ export const CartAbandoned = () => {
               value={option.value}
             />
           ))}
-        </RadioGroup>
+        </Form.RadioGroup>
       </>
     );
   };
 
-  const renderStep2 = () => {
-    // step2
-    return null;
-  };
-
   const renderStep3 = () => {
-    // step3
-    return null;
+    const msg2DeliveryOptions = [
+      { value: 'second_message_on', label: t('msg2On') },
+      { value: 'second_message_off', label: t('msg2Off') },
+    ];
+    return (
+      <div>
+        <div className='px-10 pb-5 -mx-10 border-b-4 border-white mb-7'>
+          <div className='font-bold text-gray-dark mb-2.5'>{t('msg2Option')}</div>
+          <Form.RadioGroup name='cart_abandon_use_line'>
+            {msg2DeliveryOptions.map(option => (
+              <RadioGroup.Option
+                colorScheme='secondary'
+                key={option.value}
+                className='mb-2.5 text-gray-dark text-medium'
+                label={option.label}
+                value={option.value}
+              />
+            ))}
+          </Form.RadioGroup>
+        </div>
+        <MessageSetting />
+      </div>
+    );
   };
 
   const steps: Step[] = [
@@ -48,11 +66,18 @@ export const CartAbandoned = () => {
     },
     {
       name: t('msgSetting1'),
-      children: renderStep2(),
+      children: <MessageSetting />,
+      showPreviewBtn: true,
     },
     {
       name: t('msgSetting2'),
       children: renderStep3(),
+      showPreviewBtn: true,
+    },
+    {
+      name: t('targetSetting'),
+      children: <TargetCustomerGroup />,
+      showPreviewBtn: true,
     },
   ];
 

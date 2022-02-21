@@ -19,7 +19,7 @@ export const TextArea = React.forwardRef(({ className, label, ...restProps }: Pr
       <textarea
         ref={ref}
         className={classNames(
-          'w-full rounded min-h-[160px] outline-none p-2',
+          'w-full rounded min-h-[100px] outline-none p-2',
           'border border-solid border-input focus:border-input-focus'
         )}
         {...restProps}

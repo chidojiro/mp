@@ -1,9 +1,10 @@
-import { Button } from '@/components/common';
+import { Button, Form } from '@/components/common';
 import { Icon } from '@/components';
 import { Step } from '@/constants';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
+import { useForm } from 'react-hook-form';
 
 type Props = {
   className?: string;
@@ -14,8 +15,15 @@ export const Steps = ({ className, steps }: Props) => {
   const { t } = useTranslation('marketingAction');
   const idLastStep = steps.length - 1;
 
+  const methods = useForm();
+
+  const onSubmit = (data: any) => {
+    // handle change
+    console.log('submit', data);
+  };
+
   return (
-    <div className={className}>
+    <Form methods={methods} onSubmit={onSubmit} className={className}>
       {steps.map((step: Step, idx: number) => (
         <div
           key={idx}
@@ -36,19 +44,29 @@ export const Steps = ({ className, steps }: Props) => {
               <h3 className='text-gray-dark'>{step.name}</h3>
             </div>
             <div className='w-full px-10 py-8 mb-5 rounded-lg bg-gray-light'>{step.children}</div>
-            {step?.showButton && (
-              <div className='flex justify-end mb-8'>
+
+            <div className='flex justify-end mb-8'>
+              {step?.showPreviewBtn ? (
+                <>
+                  <Button className='font-semibold border-none bg-input min-w-[240px] mr-2.5' variant='outline'>
+                    {t('viewPreview')}
+                  </Button>
+                  <Button className='font-semibold border-none bg-[#68CE97] min-w-[240px]' variant='outline'>
+                    {t('confirm')}
+                  </Button>
+                </>
+              ) : (
                 <Button
-                  className='font-semibold border-none bg-input w-60 mr-2.5'
-                  variant='outline'>
+                  colorScheme='default'
+                  variant='outline'
+                  className='font-semibold min-w-[240px] border-[#68CE97] text-[#68CE97] border-2'>
                   {t('viewPreview')}
                 </Button>
-                <Button className='font-semibold w-60'>{t('confirm')}</Button>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       ))}
-    </div>
+    </Form>
   );
 };
