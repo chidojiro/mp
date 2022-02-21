@@ -74,7 +74,7 @@ export const Sidebar = () => {
       ],
     },
     {
-      path: `${projectPrefix}/actions`,
+      path: `${projectPrefix}/actions/active`,
       label: t('menuMyMarketingAction'),
       matches: [
         '/organizations/[organizationId]/projects/[projectId]/actions',
@@ -83,7 +83,7 @@ export const Sidebar = () => {
       ],
     },
     {
-      path: `${projectPrefix}/actions/new`,
+      path: `${projectPrefix}/actions/new/cart-abandoned`,
       label: t('menuCreateMeasure'),
       matches: [
         '/organizations/[organizationId]/projects/[projectId]/actions/new',
