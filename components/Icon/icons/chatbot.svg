@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50.001" height="50" viewBox="0 0 50.001 50">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="長方形_6226" data-name="長方形 6226" width="50.001" height="47.918" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="グループ_6841" data-name="グループ 6841" transform="translate(-279.999 -196)">
+    <rect id="長方形_6224" data-name="長方形 6224" width="50" height="50" transform="translate(280 196)" fill="none"/>
+    <g id="グループ_6601" data-name="グループ 6601" transform="translate(279.999 197.041)">
+      <g id="グループ_6600" data-name="グループ 6600" transform="translate(0 0)" clip-path="url(#clip-path)">
+        <path id="パス_5897" data-name="パス 5897" d="M60.5,68.544H44.634a6.223,6.223,0,0,1-6.215-6.215V53.634a6.223,6.223,0,0,1,6.215-6.215H60.5a6.222,6.222,0,0,1,6.215,6.215v8.695A6.222,6.222,0,0,1,60.5,68.544M44.634,50.809a2.828,2.828,0,0,0-2.825,2.825v8.695a2.828,2.828,0,0,0,2.825,2.825H60.5a2.828,2.828,0,0,0,2.825-2.825V53.634A2.828,2.828,0,0,0,60.5,50.809Z" transform="translate(-16.711 -20.626)" fill="#55c5d9"/>
+        <path id="パス_5898" data-name="パス 5898" d="M57.408,62.99a2.371,2.371,0,1,0-2.371,2.371,2.371,2.371,0,0,0,2.371-2.371" transform="translate(-22.908 -26.368)" fill="#55c5d9"/>
+        <path id="パス_5899" data-name="パス 5899" d="M70.595,62.99a2.371,2.371,0,1,0-2.371,2.371,2.371,2.371,0,0,0,2.371-2.371" transform="translate(-28.644 -26.368)" fill="#55c5d9"/>
+        <path id="パス_5900" data-name="パス 5900" d="M64.187,34.479a3.174,3.174,0,1,1-3.174-3.174,3.174,3.174,0,0,1,3.174,3.174" transform="translate(-25.158 -13.617)" fill="#55c5d9"/>
+        <line id="線_227" data-name="線 227" y2="8.905" transform="translate(35.854 19.583)" fill="red"/>
+        <rect id="長方形_6225" data-name="長方形 6225" width="3.39" height="8.905" transform="translate(34.159 19.583)" fill="#55c5d9"/>
+        <path id="パス_5901" data-name="パス 5901" d="M21.057,31.422l-1.879-4.411a10.027,10.027,0,1,0-2.865,3.722Z" transform="translate(0 -5.613)" fill="#ffba00"/>
+        <path id="パス_5902" data-name="パス 5902" d="M52.918,7.758a7.758,7.758,0,1,0-9.556,7.54l1.8,3.142,1.8-3.142a7.755,7.755,0,0,0,5.959-7.54" transform="translate(-16.269 0)" fill="#ffba00"/>
+        <path id="パス_5903" data-name="パス 5903" d="M19.824,61.837,16.69,60.043a7.758,7.758,0,1,0,0,3.588Z" transform="translate(-0.605 -23.523)" fill="#ffba00"/>
+      </g>
+    </g>
+  </g>
+</svg>

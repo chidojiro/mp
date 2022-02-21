@@ -93,7 +93,7 @@ const palette = {
 
 module.exports = {
   mode: 'jit',
-  content: ['./**/*.{tsx,ts}'],
+  content: ['./**/*.{tsx,ts,json}'],
   theme: {
     fontSize: {
       small: '10px',

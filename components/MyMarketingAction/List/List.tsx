@@ -11,6 +11,7 @@ import { InProgress } from './InProgress';
 
 export const List = () => {
   const { t } = useTranslation(['marketingAction']);
+  const { pathname } = useRouter();
 
   const {
     query: { marketingActionStatus },
@@ -20,7 +21,7 @@ export const List = () => {
     {
       value: HeaderTab.Active,
       label: (
-        <Link passHref href={UriUtils.replace([HeaderTab.Active])}>
+        <Link passHref href={UriUtils.replace(pathname, [HeaderTab.Active])}>
           <a className='block'>{t('inProgressTab')}</a>
         </Link>
       ),
@@ -29,7 +30,7 @@ export const List = () => {
     {
       value: HeaderTab.Terminated,
       label: (
-        <Link passHref href={UriUtils.replace([HeaderTab.Terminated])}>
+        <Link passHref href={UriUtils.replace(pathname, [HeaderTab.Terminated])}>
           <a className='block'>{t('finishedTab')}</a>
         </Link>
       ),
@@ -38,7 +39,7 @@ export const List = () => {
     {
       value: HeaderTab.Draft,
       label: (
-        <Link passHref href={UriUtils.replace([HeaderTab.Draft])}>
+        <Link passHref href={UriUtils.replace(pathname, [HeaderTab.Draft])}>
           <a className='block'>{t('draftTab')}</a>
         </Link>
       ),

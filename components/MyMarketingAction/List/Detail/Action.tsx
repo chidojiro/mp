@@ -1,5 +1,5 @@
 import { Button } from '@/components/common';
-import { Icon } from '@/components/icons';
+import { Icon } from '@/components/Icon';
 import { HeaderTab } from '@/constants';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
