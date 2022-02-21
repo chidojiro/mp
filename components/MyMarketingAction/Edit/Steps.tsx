@@ -1,5 +1,5 @@
 import { Button } from '@/components/common';
-import { Icon } from '@/components/icons';
+import { Icon } from '@/components';
 import { Step } from '@/constants';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
@@ -38,7 +38,9 @@ export const Steps = ({ className, steps }: Props) => {
             <div className='w-full px-10 py-8 mb-5 rounded-lg bg-gray-light'>{step.children}</div>
             {step?.showButton && (
               <div className='flex justify-end mb-8'>
-                <Button className='font-semibold border-none bg-input w-60 mr-2.5' variant='outline'>
+                <Button
+                  className='font-semibold border-none bg-input w-60 mr-2.5'
+                  variant='outline'>
                   {t('viewPreview')}
                 </Button>
                 <Button className='font-semibold w-60'>{t('confirm')}</Button>

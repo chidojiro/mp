@@ -7,8 +7,6 @@ export const Edit = () => {
   const { t } = useTranslation();
   const { query } = useRouter();
 
-  console.log(query.marketing_action_name);
-
   const renderMAEditor = () => {
     switch (query.marketing_action_name) {
       case 'cart-abandoned':

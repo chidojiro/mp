@@ -1,0 +1,1 @@
+export { NewMarketingAction } from './NewMarketingAction';
