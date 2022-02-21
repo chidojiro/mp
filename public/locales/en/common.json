@@ -13,6 +13,7 @@
   "numberOfLoyalCustomers": "Number of loyal customers",
   "returnOfDormantCustomers": "Return of dormant customers",
   "returnOfF1DormantCustomers": "Return of F1 dormant customers",
+  "loyalDormantCustomersReturn": "Return of loyal dormant customers",
   "mon": "Mon",
   "tue": "Tue",
   "wed": "Wed",

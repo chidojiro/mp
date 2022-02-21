@@ -1,6 +1,5 @@
 import { Layout, Tabs } from '@/components/common';
 import { HeaderTab } from '@/constants';
-import { UriUtils } from '@/utils';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -11,7 +10,7 @@ import { InProgress } from './InProgress';
 
 export const List = () => {
   const { t } = useTranslation(['marketingAction']);
-  const { pathname } = useRouter();
+  const { pathname, query } = useRouter();
 
   const {
     query: { marketingActionStatus },
@@ -21,7 +20,9 @@ export const List = () => {
     {
       value: HeaderTab.Active,
       label: (
-        <Link passHref href={UriUtils.replace(pathname, [HeaderTab.Active])}>
+        <Link
+          passHref
+          href={{ pathname, query: { ...query, marketingActionStatus: HeaderTab.Active } }}>
           <a className='block'>{t('inProgressTab')}</a>
         </Link>
       ),
@@ -30,7 +31,9 @@ export const List = () => {
     {
       value: HeaderTab.Terminated,
       label: (
-        <Link passHref href={UriUtils.replace(pathname, [HeaderTab.Terminated])}>
+        <Link
+          passHref
+          href={{ pathname, query: { ...query, marketingActionStatus: HeaderTab.Terminated } }}>
           <a className='block'>{t('finishedTab')}</a>
         </Link>
       ),
@@ -39,7 +42,9 @@ export const List = () => {
     {
       value: HeaderTab.Draft,
       label: (
-        <Link passHref href={UriUtils.replace(pathname, [HeaderTab.Draft])}>
+        <Link
+          passHref
+          href={{ pathname, query: { ...query, marketingActionStatus: HeaderTab.Draft } }}>
           <a className='block'>{t('draftTab')}</a>
         </Link>
       ),

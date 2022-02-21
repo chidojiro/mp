@@ -1,6 +1,5 @@
 import { Table } from '@/components';
 import { ClassName } from '@/types';
-import { UriUtils } from '@/utils';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import React from 'react';
