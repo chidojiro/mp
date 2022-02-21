@@ -1,8 +1,9 @@
 import React from 'react';
 import { Option } from '@/types';
 import { useTranslation } from 'next-i18next';
-import { CheckboxGroup, Form } from '@/components';
+import { CheckboxGroup } from '@/components';
 import { CheckboxTag } from './CheckboxTag';
+import { useRouter } from 'next/router';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};
@@ -11,6 +12,8 @@ type Props = {};
 export const TargetFilter = ({}: Props) => {
   const { t } = useTranslation('report');
 
+  const { query, push, pathname } = useRouter();
+
   const targetOptions = React.useMemo<Option[]>(
     () => [
       { label: t('all'), value: 'all' },
@@ -18,19 +21,25 @@ export const TargetFilter = ({}: Props) => {
       { label: t('f0others'), value: 'f0others' },
       { label: t('F1'), value: 'f1' },
       { label: t('F2'), value: 'f2' },
-      { label: t('semiRoyal'), value: 'semiRoyal' },
+      { label: t('semiRoyal'), value: 'semiroyal' },
       { label: t('royal'), value: 'royal' },
       { label: t('f1dormant'), value: 'f1dormant' },
-      { label: t('royalDormant'), value: 'royalDormant' },
+      { label: t('royalDormant'), value: 'royaldormant' },
     ],
     [t]
   );
+
+  const handleTargetChange = (value: string[]) => {
+    push({ pathname, query: { ...query, targets: value } });
+  };
 
   return (
     <div className='flex items-center gap-8'>
       <div className='font-bold'>{t('target')}</div>
       <div className='flex items-center gap-2'>
-        <CheckboxGroup>
+        <CheckboxGroup
+          value={[query.targets].flat().filter(Boolean) as string[]}
+          onChange={handleTargetChange}>
           {targetOptions.map(({ value, label }) => (
             <CheckboxTag value={value} label={label} key={value} />
           ))}
