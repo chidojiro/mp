@@ -1,11 +1,11 @@
 import { Redirect } from '@/components';
+import { useRouter } from 'next/router';
 import React from 'react';
-import URI from 'urijs';
 
 const Reports = () => {
-  const uri = new URI();
+  const { asPath } = useRouter();
 
-  return <Redirect href={uri.segment('line-email').href()} method='replace' />;
+  return <Redirect href={`${asPath}/line-email`} />;
 };
 
 export default Reports;

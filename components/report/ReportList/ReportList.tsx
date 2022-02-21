@@ -28,7 +28,7 @@ export const ReportList = ({}: Props) => {
     [t]
   );
 
-  const slug = query.slug as string;
+  const policyType = query.policyType as string;
 
   return (
     <Layout title={t('measureReport')} subTitle={t('list')}>
@@ -41,7 +41,7 @@ export const ReportList = ({}: Props) => {
         <div className='flex items-center gap-8'>
           <div className='font-bold'>{t('policyType')}</div>
           <div className='flex items-center gap-2'>
-            <RadioGroup value={slug}>
+            <RadioGroup value={policyType}>
               {policyTypeOptions.map(({ value, label }) => (
                 <RadioTag value={value} label={label} key={value} />
               ))}
@@ -49,7 +49,7 @@ export const ReportList = ({}: Props) => {
           </div>
         </div>
       </div>
-      <ReportsTable policyType={slug} className='mt-10' />
+      <ReportsTable policyType={policyType} className='mt-10' />
     </Layout>
   );
 };
