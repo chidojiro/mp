@@ -2,9 +2,9 @@ import { Redirect } from '@/components';
 import { useRouter } from 'next/router';
 
 function MyMarketingActionPage() {
-  const { query, pathname } = useRouter();
+  const { asPath } = useRouter();
 
-  return <Redirect href={{ pathname: `${pathname}/${1}`, query: { ...query } }} />;
+  return <Redirect href={`${asPath}/${1}`} />;
 }
 
 export default MyMarketingActionPage;

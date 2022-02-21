@@ -2,7 +2,6 @@ import { RadioGroup } from '@/components';
 import classNames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import URI from 'urijs';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {
@@ -12,17 +11,12 @@ type Props = {
 
 // eslint-disable-next-line no-empty-pattern
 export const RadioTag = ({ value, label }: Props) => {
-  const getHref = () => {
-    const uri = new URI();
-    const segments = uri.segment();
-    const newSegments = [...segments.slice(0, segments.length - 1), value];
-    return '/' + newSegments.join('/');
-  };
+  const { pathname, query } = useRouter();
 
   return (
     <RadioGroup.Option value={value}>
       {({ handleChange, isChecked, value }) => (
-        <Link href={getHref()} passHref>
+        <Link href={{ pathname, query: { ...query, policyType: value } }} passHref>
           <label
             className={classNames(
               'rounded-full px-4 py-1.5 font-bold cursor-pointer text-medium',

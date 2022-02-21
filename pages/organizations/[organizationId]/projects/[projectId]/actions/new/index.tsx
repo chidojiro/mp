@@ -1,10 +1,10 @@
 import { Redirect } from '@/components';
-import URI from 'urijs';
+import { useRouter } from 'next/router';
 
 function NewMarketingActions() {
-  const uri = new URI();
+  const { asPath } = useRouter();
 
-  return <Redirect href={uri.segment('cart-abandoned').href()} />;
+  return <Redirect href={`${asPath}/cart-abandoned`} />;
 }
 
 export default NewMarketingActions;

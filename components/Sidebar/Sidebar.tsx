@@ -20,8 +20,8 @@ export const Sidebar = () => {
           path: `${projectPrefix}/reports/policy-report/line-email`,
           label: t('policyReport'),
           matches: [
-            '/organizations/[organizationId]/projects/[projectId]/reports/policy-report/[slug]',
-            '/organizations/[organizationId]/projects/[projectId]/reports/policy-report/[slug]/[projectId]',
+            '/organizations/[organizationId]/projects/[projectId]/reports/policy-report/[policyType]',
+            '/organizations/[organizationId]/projects/[projectId]/reports/policy-report/[policyType]/[projectId]',
           ],
         },
         {

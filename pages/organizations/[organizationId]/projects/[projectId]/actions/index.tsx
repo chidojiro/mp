@@ -1,11 +1,11 @@
 import { Redirect } from '@/components';
 import { HeaderTab } from '@/constants';
-import URI from 'urijs';
+import { useRouter } from 'next/router';
 
 function MarketingActions() {
-  const uri = new URI();
+  const { asPath } = useRouter();
 
-  return <Redirect href={uri.segment(HeaderTab.Active).href()} />;
+  return <Redirect href={`${asPath}/${HeaderTab.Active}`} />;
 }
 
 export default MarketingActions;
