@@ -12,17 +12,16 @@ export const List = () => {
   const { t } = useTranslation(['marketingAction']);
   const { pathname, query } = useRouter();
 
-  const {
-    query: { marketingActionStatus },
-  } = useRouter();
-
   const tabs = [
     {
       value: HeaderTab.Active,
       label: (
         <Link
           passHref
-          href={{ pathname, query: { ...query, marketingActionStatus: HeaderTab.Active } }}>
+          href={{
+            pathname,
+            query: { ...query, marketingActionStatus: HeaderTab.Active, marketingActionId: 1 },
+          }}>
           <a className='block'>{t('inProgressTab')}</a>
         </Link>
       ),
@@ -33,7 +32,10 @@ export const List = () => {
       label: (
         <Link
           passHref
-          href={{ pathname, query: { ...query, marketingActionStatus: HeaderTab.Terminated } }}>
+          href={{
+            pathname,
+            query: { ...query, marketingActionStatus: HeaderTab.Terminated, marketingActionId: 1 },
+          }}>
           <a className='block'>{t('finishedTab')}</a>
         </Link>
       ),
@@ -44,7 +46,10 @@ export const List = () => {
       label: (
         <Link
           passHref
-          href={{ pathname, query: { ...query, marketingActionStatus: HeaderTab.Draft } }}>
+          href={{
+            pathname,
+            query: { ...query, marketingActionStatus: HeaderTab.Draft, marketingActionId: 1 },
+          }}>
           <a className='block'>{t('draftTab')}</a>
         </Link>
       ),
@@ -54,7 +59,11 @@ export const List = () => {
   return (
     <Layout title={t('menuMyMarketingAction')}>
       <div className='flex h-full'>
-        <Tabs className='w-full h-full' items={tabs} value={marketingActionStatus as string} />
+        <Tabs
+          className='w-full h-full'
+          items={tabs}
+          value={query.marketingActionStatus as string}
+        />
       </div>
     </Layout>
   );

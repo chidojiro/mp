@@ -1,6 +1,4 @@
-import { ChevronRightIcon } from '@heroicons/react/outline';
-import { Button } from '../common';
-import { Icon } from '../Icon';
+import { Button, Icon } from '../common';
 
 type Props = {
   className?: string;

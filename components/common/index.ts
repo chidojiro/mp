@@ -9,3 +9,4 @@ export * from './Tabs';
 export * from './Accordion';
 export * from './Redirect';
 export * from './SideMenu';
+export * from './Icon';
