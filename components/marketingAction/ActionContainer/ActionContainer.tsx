@@ -8,7 +8,7 @@ import { Label } from './Label';
 type Props = ClassName & {
   iconName: IconName;
   title: string;
-  flowImgUrl: string;
+  flowImgUrl?: string;
   description: string;
   descriptionImageUrl: string;
 };
@@ -30,43 +30,48 @@ export const ActionContainer = ({
         <Icon size={50} name={iconName} />
         <h3 className='text-gray-800'>{title}</h3>
       </div>
-      <div className='text-gray-800'>{description}</div>
-      <div className='flex flex-wrap gap-8 mt-5'>
-        <div className='flex'>
-          <Label>{t('degreeOfPriority')}</Label>
-          <Tag>
-            <div className='mr-1 text-danger'>!!!</div>
-            {t('high')}
-          </Tag>
+      <div className='flex'>
+        <div>
+          <div className='text-gray-800'>{description}</div>
+          <div className='flex flex-wrap gap-8 mt-5'>
+            <div className='flex'>
+              <Label>{t('degreeOfPriority')}</Label>
+              <Tag>
+                <div className='mr-1 text-danger'>!!!</div>
+                {t('high')}
+              </Tag>
+            </div>
+            <div className='flex'>
+              <Label>{t('relatedPages')}</Label>
+              <Tag>{t('TOP')}</Tag>
+            </div>
+            <div className='flex'>
+              <Label>{t('output')}</Label>
+              <Tag>{t('lineEmail')}</Tag>
+            </div>
+            <div className='flex'>
+              <Label>{t('appearancePage')}</Label>
+              <Tag>{t('category')}</Tag>
+            </div>
+            <div className='flex'>
+              <Label>{t('estimatedTimeRequired')}</Label>
+              <Tag>00{t('minute')}</Tag>
+            </div>
+          </div>
+          <div className='flex mt-5'>
+            <Label>{t('recommendedCustomer')}</Label>
+            <div className='flex gap-1'>
+              <Tag>{tCommon('f0member')}</Tag>
+              <Tag>{tCommon('f0others')}</Tag>
+              <Tag>{tCommon('semiRoyal')}</Tag>
+              <Tag>{tCommon('royal')}</Tag>
+              <Tag>{tCommon('dormant')}</Tag>
+              <Tag>{tCommon('f1dormant')}</Tag>
+              <Tag>{tCommon('royalDormant')}</Tag>
+            </div>
+          </div>
         </div>
-        <div className='flex'>
-          <Label>{t('relatedPages')}</Label>
-          <Tag>{t('TOP')}</Tag>
-        </div>
-        <div className='flex'>
-          <Label>{t('output')}</Label>
-          <Tag>{t('lineEmail')}</Tag>
-        </div>
-        <div className='flex'>
-          <Label>{t('appearancePage')}</Label>
-          <Tag>{t('category')}</Tag>
-        </div>
-        <div className='flex'>
-          <Label>{t('estimatedTimeRequired')}</Label>
-          <Tag>00{t('minute')}</Tag>
-        </div>
-      </div>
-      <div className='flex mt-5'>
-        <Label>{t('recommendedCustomer')}</Label>
-        <div className='flex gap-1'>
-          <Tag>{tCommon('f0member')}</Tag>
-          <Tag>{tCommon('f0others')}</Tag>
-          <Tag>{tCommon('semiRoyal')}</Tag>
-          <Tag>{tCommon('royal')}</Tag>
-          <Tag>{tCommon('dormant')}</Tag>
-          <Tag>{tCommon('f1dormant')}</Tag>
-          <Tag>{tCommon('royalDormant')}</Tag>
-        </div>
+        <img className='ml-10 w-[240px]' alt='' src={descriptionImageUrl} />
       </div>
       {!!flowImgUrl && (
         <div className='mt-5'>

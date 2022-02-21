@@ -1,6 +1,5 @@
 import { Tabs as HeadlessTabs, TabsProps as HeadlessTabsProps } from '@/headless';
 import { ClassName } from '@/types';
-import { UriUtils } from '@/utils';
 import classNames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -17,7 +16,7 @@ export type Props = HeadlessTabsProps &
   };
 
 export const SideMenu = ({ value, className, onChange, items }: Props) => {
-  const router = useRouter();
+  const { pathname, query } = useRouter();
 
   return (
     <HeadlessTabs value={value} onChange={onChange}>
@@ -27,7 +26,9 @@ export const SideMenu = ({ value, className, onChange, items }: Props) => {
             {items.map((item, idx) => (
               <HeadlessTabs.Item key={item.value ?? idx} content={item.content} value={item.value}>
                 {({ isActive, onClick }) => (
-                  <Link passHref href={UriUtils.replace(router.pathname, [item.value])}>
+                  <Link
+                    passHref
+                    href={{ pathname, query: { ...query, marketingActionName: item.value } }}>
                     <a
                       key={item.value}
                       onClick={onClick}

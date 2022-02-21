@@ -47,5 +47,9 @@
   "category": "カテゴリー",
   "lineEmail": "LINE・メール",
   "policyFlow": "施策フロー",
-  "useThisTemplate": "このテンプレートを使う"
+  "useThisTemplate": "このテンプレートを使う",
+  "rankingBasedOnOverallPurchaseHistory": "全体の購入履歴に基づくランキング（動的）",
+  "rankingByCategoryBasedOnOverallPurchaseHistory": "全体の購入履歴に基づくカテゴリーごとのランキング（動的）",
+  "rankingBasedOnOverallPurchaseHistoryDescription": "商品購入を妨げる心理（ストレス・不安）として、「商品数が多いのほど探すのが面倒くさい」「商品購入に失敗したくない」があります。そのため、ランキングを表示することで「商品数を把握しやすくし、みんなが選んだものから選んでもらうこと」で、顧客のストレス・不安の解消を図り、購入意欲を向上させる効果が期待できます。",
+  "rankingByCategoryBasedOnOverallPurchaseHistoryDescription": "（仮）商品購入を妨げる心理（ストレス・不安）として、「商品数が多いのほど探すのが面倒くさい」「商品購入に失敗したくない」があります。そのため、ランキングを表示することで「商品数を把握しやすくし、みんなが選んだものから選んでもらうこと」で、顧客のストレス・不安の解消を図り、購入意欲を向上させる効果が期待できます。"
 }

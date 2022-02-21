@@ -13,6 +13,7 @@
   "numberOfLoyalCustomers": "ロイヤル顧客数推移",
   "returnOfDormantCustomers": "休眠顧客復帰推移",
   "returnOfF1DormantCustomers": "F1休眠顧客復帰推移",
+  "loyalDormantCustomersReturn": "ロイヤル休眠顧客復帰推移",
   "mon": "月",
   "tue": "火",
   "wed": "水",

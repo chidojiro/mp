@@ -11,7 +11,8 @@ import Mail from './icons/mail.svg';
 import Mails from './icons/mails.svg';
 import NoImage from './icons/no-image.svg';
 import Upload from './icons/upload.svg';
-import Check from '/public/images/check.svg';
+import Check from './icons/check.svg';
+import Ranking from './icons/ranking.svg';
 
 const ICONS = {
   group: Group,
@@ -27,6 +28,7 @@ const ICONS = {
   'no-image': NoImage,
   upload: Upload,
   check: Check,
+  ranking: Ranking,
 };
 
 export type Name = keyof typeof ICONS;

@@ -23,7 +23,7 @@ export const NewMarketingAction = ({}: Props) => {
           iconName='cart'
           title={t('cartAbandoned')}
           description={t('cartAbandonedDescription')}
-          descriptionImageUrl=''
+          descriptionImageUrl='/images/cart-abandoned-description.png'
           flowImgUrl='/images/cart-abandoned-flow.png'></ActionContainer>
       ),
       label: t('cartAbandoned'),
@@ -35,7 +35,7 @@ export const NewMarketingAction = ({}: Props) => {
           iconName='mails'
           title={t('stepDeliveryAfterPurchase')}
           description={t('stepDeliveryAfterPurchaseDescription')}
-          descriptionImageUrl='/image/'
+          descriptionImageUrl='/images/step-delivery-after-purchase-description.png'
           flowImgUrl='/images/step-delivery-after-purchase-flow.png'></ActionContainer>
       ),
       label: t('stepDeliveryAfterPurchase'),
@@ -47,8 +47,7 @@ export const NewMarketingAction = ({}: Props) => {
           iconName='cart-question'
           title={t('cartPageFaq')}
           description={t('cartPageFaqDescription')}
-          descriptionImageUrl='/image/'
-          flowImgUrl=''></ActionContainer>
+          descriptionImageUrl='/images/cart-page-faq-description.png'></ActionContainer>
       ),
       label: t('cartPageFaq'),
       value: 'cart-page-faq',
@@ -59,8 +58,7 @@ export const NewMarketingAction = ({}: Props) => {
           iconName='chatbot'
           title={t('recommendationDiagnosisBotStatic')}
           description={t('recommendationDiagnosisBotStaticDescription')}
-          descriptionImageUrl='/image/'
-          flowImgUrl=''></ActionContainer>
+          descriptionImageUrl='/images/recommendation-diagnosis-bot-description.png'></ActionContainer>
       ),
       label: t('recommendationDiagnosisBotStatic'),
       value: 'recommendation-diagnosis-bot',
@@ -71,36 +69,33 @@ export const NewMarketingAction = ({}: Props) => {
           iconName='free-shipping'
           title={t('conditionalFreeShipping')}
           description={t('conditionalFreeShippingDescription')}
-          descriptionImageUrl='/image/'
-          flowImgUrl=''></ActionContainer>
+          descriptionImageUrl='/images/conditional-free-shipping-description.png'></ActionContainer>
       ),
       label: t('conditionalFreeShipping'),
       value: 'conditional-free-shipping',
     },
-    // {
-    //   content: (
-    //     <ActionContainer
-    //       iconName='cart'
-    //       title={t('cartAbandoned')}
-    //       description={t('cartAbandonedDescription')}
-    //       descriptionImageUrl='/image/'
-    //       flowImgUrl=''></ActionContainer>
-    //   ),
-    //   label: t(''),
-    //   value: '',
-    // },
-    // {
-    //   content: (
-    //     <ActionContainer
-    //       iconName='cart'
-    //       title={t('cartAbandoned')}
-    //       description={t('cartAbandonedDescription')}
-    //       descriptionImageUrl='/image/'
-    //       flowImgUrl=''></ActionContainer>
-    //   ),
-    //   label: t(''),
-    //   value: '',
-    // },
+    {
+      content: (
+        <ActionContainer
+          iconName='ranking'
+          title={t('rankingBasedOnOverallPurchaseHistory')}
+          description={t('rankingBasedOnOverallPurchaseHistoryDescription')}
+          descriptionImageUrl='/images/ranking-description.png'></ActionContainer>
+      ),
+      label: t('rankingBasedOnOverallPurchaseHistory'),
+      value: 'ranking-based-on-overall-purchase-history',
+    },
+    {
+      content: (
+        <ActionContainer
+          iconName='ranking'
+          title={t('rankingByCategoryBasedOnOverallPurchaseHistory')}
+          description={t('rankingByCategoryBasedOnOverallPurchaseHistoryDescription')}
+          descriptionImageUrl='/images/ranking-description.png'></ActionContainer>
+      ),
+      label: t('rankingByCategoryBasedOnOverallPurchaseHistory'),
+      value: 'ranking-by-category-based-on-overall-purchase-history',
+    },
   ];
 
   return (

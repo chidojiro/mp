@@ -56,7 +56,7 @@ export const NavItem = ({ data }: Props) => {
           <Link passHref href={item.path || ''} key={item.label}>
             <a
               className={classNames(
-                'flex text-medium items-center pl-12 pr-6 py-2.5 hover:bg-dark-gray truncate',
+                'block text-medium items-center pl-12 pr-6 py-2.5 hover:bg-dark-gray truncate',
                 {
                   'bg-dark-gray': isMatched(item),
                 }

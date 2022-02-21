@@ -46,5 +46,9 @@
   "category": "Category",
   "lineEmail": "LINE / Email",
   "policyFlow": "Policy flow",
-  "useThisTemplate": "Use this template"
+  "useThisTemplate": "Use this template",
+  "rankingBasedOnOverallPurchaseHistory": "Ranking based on overall purchase history (dynamic)",
+  "rankingByCategoryBasedOnOverallPurchaseHistory": "Ranking by category based on overall purchase history (dynamic)",
+  "rankingBasedOnOverallPurchaseHistoryDescription": "The psychology (stress and anxiety) that hinders the purchase of a product is \"the more products there are, the more troublesome it is to search for them\" and \"I don't want to make a mistake in purchasing a product. Therefore, displaying rankings \"makes it easier to grasp the number of products and have customers choose from the ones that everyone else has selected\" is expected to relieve customers' stress and anxiety and improve their willingness to purchase.",
+  "rankingByCategoryBasedOnOverallPurchaseHistoryDescription": "（The psychology (stress and anxiety) that hinders the purchase of a product is \"the more products there are, the more troublesome it is to search for them\" and \"I don't want to make a mistake in purchasing a product. Therefore, displaying rankings \"makes it easier to grasp the number of products and have customers choose from the ones that everyone else has selected\" is expected to relieve customers' stress and anxiety and improve their willingness to purchase."
 }
