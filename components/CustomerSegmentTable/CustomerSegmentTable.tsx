@@ -118,6 +118,40 @@ export const CustomerSegmentTable = ({
   ...props
 }: CustomerSegmentTableProps) => {
   const { t } = useTranslation('dashboard');
+
+  const getFirstLabel = (target: string) => {
+    switch (target) {
+      case 'f0':
+        return t('labelMember');
+      case 'sleep':
+        return t('labelF1Sleep');
+      default:
+        return t('labelAverage');
+    }
+  };
+
+  const getSecondLabel = (target: string) => {
+    switch (target) {
+      case 'f0':
+        return t('labelOther');
+      case 'sleep':
+        return t('labelRoyalDormant');
+      default:
+        return t('labelTotal');
+    }
+  };
+
+  const getEndLabel = (target: string) => {
+    switch (target) {
+      case 'f0':
+        return t('labelPeople');
+      case 'sleep':
+        return t('labelPeople');
+      default:
+        return t('labelYen');
+    }
+  };
+
   return (
     <div className='flex' {...props}>
       {data.map((dataSet, index) => {
@@ -128,15 +162,7 @@ export const CustomerSegmentTable = ({
                 <Icon name={iconSource(dataSet.target)} className='h-10 w-10' />
               </div>
               <div className='text-regular'>{t(dataSet.target)}</div>
-              <div className='text-medium-sm'>
-                {dataSet.target === 'semi-royal' && semiRoyalSubtext
-                  ? semiRoyalSubtext
-                  : dataSet.target === 'royal' && royalSubtext
-                  ? royalSubtext
-                  : dataSet.target === 'sleep' && sleepSubtext
-                  ? sleepSubtext
-                  : t(dataSet.target + 'Subtext')}
-              </div>
+              <div className='text-medium-sm'>{t(dataSet.target + 'Subtext')}</div>
             </div>
             <div className={dashboardCardBodyClasses(index, data.length)}>
               <div className='flex items-center justify-center h-full w-full relative'>
@@ -152,39 +178,23 @@ export const CustomerSegmentTable = ({
                     ''
                   )}
                   <div className='flex items-center container justify-between my-2'>
-                    <div className='text-left ml-6'>
-                      {dataSet.target === 'f0'
-                        ? t('labelMember')
-                        : dataSet.target === 'sleep'
-                        ? t('labelF1Sleep')
-                        : t('labelAverage')}
-                    </div>
+                    <div className='text-left ml-6'>{getFirstLabel(dataSet.target)}</div>
                     <div
                       className={
                         dataSet.target !== 'f0' ? 'text-right mr-6' : 'text-right mr-6 font-bold'
                       }>
                       {getFirstDataPoint(dataSet)}
-                      {dataSet.target === 'f0' || dataSet.target === 'sleep'
-                        ? t('labelPeople')
-                        : t('labelYen')}
+                      {getEndLabel(dataSet.target)}
                     </div>
                   </div>
                   <div className='flex items-center container justify-between my-2'>
-                    <div className='text-left ml-6'>
-                      {dataSet.target === 'f0'
-                        ? t('labelOther')
-                        : dataSet.target === 'sleep'
-                        ? t('labelRoyalDormant')
-                        : t('labelTotal')}
-                    </div>
+                    <div className='text-left ml-6'>{getSecondLabel(dataSet.target)}</div>
                     <div
                       className={
                         dataSet.target !== 'f0' ? 'text-right mr-6' : 'text-right mr-6 font-bold'
                       }>
                       {getSecondDataPoint(dataSet)}
-                      {dataSet.target === 'f0' || dataSet.target === 'sleep'
-                        ? t('labelPeople')
-                        : t('labelYen')}
+                      {getEndLabel(dataSet.target)}
                     </div>
                   </div>
                 </div>
