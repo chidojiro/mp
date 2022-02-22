@@ -17,6 +17,10 @@ module.exports = {
           options: {
             svgoConfig: {
               plugins: [
+                { 
+                  name: 'prefixIds',
+                  active: true,
+                },
                 {
                   name: 'removeViewBox',
                   active: false,
