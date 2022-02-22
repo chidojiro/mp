@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import { Icon } from '@/components/common/Icon/Icon';
+import { useTranslation } from 'next-i18next';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Props = CustomerSegmentTableProps;
@@ -75,51 +76,6 @@ const iconSource = (status: string) => {
   }
 }
 
-const getLabel = (status: string) => {
-  switch (status) {
-    case 'f0':
-      return 'F0'
-    case 'f1':
-      return 'F1'
-    case 'f2':
-      return 'F2'
-    case 'semi-royal':
-      return '準ロイヤル'
-    case 'royal':
-      return 'ロイヤル'
-    case 'sleep':
-      return '休眠'
-  }
-}
-
-const getSubtext = (status: string) => {
-  switch (status) {
-    case 'f0':
-      return '未購入'
-    case 'f1':
-      return '1回購入'
-    case 'f2':
-      return '2回購入'
-    case 'semi-royal':
-      return '3回以上購入'
-    case 'royal':
-      return '5回以上かつ30,000円以上購入'
-    case 'sleep':
-      return '直近180日間で購入なし'
-  }
-}
-
-const getFirstDataLabel = (dataSet: { target: string; }) => {
-  switch (dataSet.target) {
-    case 'f0': 
-      return '会員：';
-    case 'sleep':
-      return 'F1休眠：';
-    default:
-      return '平均：';
-  }
-}
-
 const getFirstDataPoint = (dataSet: { target: string; members: string; f1Sleep: string; average: string; }) => {
   switch (dataSet.target) {
     case 'f0': 
@@ -128,17 +84,6 @@ const getFirstDataPoint = (dataSet: { target: string; members: string; f1Sleep: 
       return dataSet.f1Sleep;
     default:
       return dataSet.average;
-  }
-}
-
-const getSecondDataLabel = (dataSet: { target: string; }) => {
-  switch (dataSet.target) {
-    case 'f0': 
-      return 'その他：';
-    case 'sleep':
-      return 'ロイヤル休眠：';
-    default:
-      return '合計：';
   }
 }
 
@@ -153,38 +98,29 @@ const getSecondDataPoint = (dataSet: { target: string; other: string; royalSleep
   }
 }
 
-const getEndTag = (dataSet: { target: string; }) => {
-  switch (dataSet.target) {
-    case 'f0': 
-      return '人';
-    case 'sleep':
-      return '人';
-    default:
-      return '円';
-  }
-}
-
-export const CustomerSegmentTable = ({semiRoyalSubtext, royalSubtext, sleepSubtext, data, onClick, ...props}: CustomerSegmentTableProps) => (
+export const CustomerSegmentTable = ({semiRoyalSubtext, royalSubtext, sleepSubtext, data, onClick, ...props}: CustomerSegmentTableProps) => {
+  const { t } = useTranslation('dashboard');
+  return (
   <div className="flex" {...props}>
     {data.map((dataSet, index) => {
       return (
         <div className="flex flex-col flex-1" key={dataSet.target}>
           <div className={dashboardCardHeaderClasses(dataSet.target, index, data.length)}>
             <div className="absolute -top-4"><Icon name={iconSource(dataSet.target)} className="h-10 w-10" /></div>
-            <div className="text-regular">{getLabel(dataSet.target)}</div>
-            <div className="text-medium-sm">{dataSet.target === 'semi-royal' && semiRoyalSubtext ? semiRoyalSubtext : dataSet.target === 'royal' && royalSubtext ? royalSubtext : dataSet.target === 'sleep' && sleepSubtext ? sleepSubtext : getSubtext(dataSet.target)}</div>
+            <div className="text-regular">{t(dataSet.target)}</div>
+            <div className="text-medium-sm">{dataSet.target === 'semi-royal' && semiRoyalSubtext ? semiRoyalSubtext : dataSet.target === 'royal' && royalSubtext ? royalSubtext : dataSet.target === 'sleep' && sleepSubtext ? sleepSubtext : t(dataSet.target + "Subtext")}</div>
           </div>
           <div className={dashboardCardBodyClasses(index, data.length)}>
             <div className="flex items-center justify-center h-full w-full relative">
               <div className="text-medium w-full">
-                {dataSet.target !== 'f0' ? <div className="flex items-center container justify-end text-right my-2"><div className="mr-6 font-bold">{dataSet.numOfCustomers}人</div></div> : '' }
+                {dataSet.target !== 'f0' ? <div className="flex items-center container justify-end text-right my-2"><div className="mr-6 font-bold">{dataSet.numOfCustomers}{t('labelPeople')}</div></div> : '' }
                 <div className="flex items-center container justify-between my-2">
-                  <div className="text-left ml-6">{getFirstDataLabel(dataSet)}</div>
-                  <div className={dataSet.target !== 'f0' ? "text-right mr-6" : "text-right mr-6 font-bold"}>{getFirstDataPoint(dataSet)}{getEndTag(dataSet)}</div>
+                  <div className="text-left ml-6">{dataSet.target === 'f0' ? t('labelMember') : dataSet.target === 'sleep' ? t('labelF1Sleep') : t('labelAverage')}</div>
+                  <div className={dataSet.target !== 'f0' ? "text-right mr-6" : "text-right mr-6 font-bold"}>{getFirstDataPoint(dataSet)}{dataSet.target === 'f1' || dataSet.target === 'sleep' ? t('labelPeople') : t('labelYen')}</div>
                 </div>
                 <div className="flex items-center container justify-between my-2">
-                  <div className="text-left ml-6">{getSecondDataLabel(dataSet)}</div>
-                  <div className={dataSet.target !== 'f0' ? "text-right mr-6" : "text-right mr-6 font-bold"}>{getSecondDataPoint(dataSet)}{getEndTag(dataSet)}</div>
+                  <div className="text-left ml-6">{dataSet.target === 'f0' ? t('labelOther') : dataSet.target === 'sleep' ? t('labelRoyalDormant') : t('labelTotal')}</div>
+                  <div className={dataSet.target !== 'f0' ? "text-right mr-6" : "text-right mr-6 font-bold"}>{getSecondDataPoint(dataSet)}{dataSet.target === 'f1' || dataSet.target === 'sleep' ? t('labelPeople') : t('labelYen')}</div>
                 </div>
               </div>
               {dataSet.target !== 'sleep' ? <div className={getTriangleClasses(dataSet.target)} onClick={() => onClick(dataSet.target)}><Icon name="triangle-right" className="h-7 w-5" /></div> : ''}
@@ -194,6 +130,6 @@ export const CustomerSegmentTable = ({semiRoyalSubtext, royalSubtext, sleepSubte
       )
     })}
   </div>
-);
+)};
 
 export default CustomerSegmentTable;
