@@ -3,6 +3,7 @@ import React, { Fragment, useState } from 'react';
 
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
+import classNames from 'classnames';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Props = SelectProps;
@@ -16,9 +17,12 @@ export type SelectProps = {
   options: any[],
 }
 
-function classNames(...classes: (string | undefined)[]) {
-  return classes.filter(Boolean).join(' ')
-}
+const getStylesByActiveStatus = (active: boolean) =>
+  classNames({
+    'bg-gray-100 text-gray-900': active === true,
+    'text-gray-700': active === false,
+    'block px-4 py-2 text-sm': true,
+  });
 
 export const Select = ({ defaultValue, options, ...props }: SelectProps) => {
   const [selected, setSelected] = useState(defaultValue ? defaultValue : 'Options')
@@ -49,10 +53,7 @@ export const Select = ({ defaultValue, options, ...props }: SelectProps) => {
                     <a
                       href={option.href}
                       onClick={() => setSelected(option.name)}
-                      className={classNames(
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                        'block px-4 py-2 text-sm'
-                      )}
+                      className={getStylesByActiveStatus(active)}
                     >
                       {option.name}
                     </a>

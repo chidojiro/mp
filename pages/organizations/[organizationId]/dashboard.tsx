@@ -89,14 +89,14 @@ function Dashboard() {
       <h4 className="text-gray-600 mb-5">レポート</h4>
 
       <div className="w-full mb-20" >
-        <div className="dashboard-grid-parent">
-          <div className="dashboard-grid-section1"><CustomerReportButton featuredIcon={<Icon name="f1-graduate" className="h-[25px] w-[65px]" />} label="F2転換率推移" /></div>
-          <div className="dashboard-grid-section2"><CustomerReportButton featuredIcon={<Icon name="f2-graduate" className="h-[25px] w-[65px]" />} label="準ロイヤル転換率推移" /></div>
-          <div className="dashboard-grid-section3"><CustomerReportButton featuredIcon={<Icon name="semi-royal-graduate" className="h-[25px] w-[65px]" />} label="ロイヤル転換率推移" /></div>
-          <div className="dashboard-grid-section4"><CustomerReportButton featuredIcon={<Icon name="royal-fluctuate" className="h-[25px] w-[65px]" />} label="ロイヤル顧客数推移" /></div>
-          <div className="dashboard-grid-section5"><CustomerReportButton featuredIcon={<Icon name="sleep-returned" className="h-[25px] w-[65px]" />} label="休眠顧客復帰推移" /></div>
-          <div className="dashboard-grid-section6"><CustomerReportButton featuredIcon={<Icon name="f1-sleep-returned" className="h-[25px] w-[65px]" />} label="F1休眠顧客復帰推移" /></div>
-          <div className="dashboard-grid-section7"><CustomerReportButton featuredIcon={<Icon name="royal-sleep-returned" className="h-[25px] w-[65px]" />} label="ロイヤル休眠顧客復帰推移" /></div>
+        <div className="grid grid-cols-2 grid-rows-4 gap-[10px]">
+          <CustomerReportButton featuredIcon={<Icon name="f1-graduate" className="h-[25px] w-[65px]" />} label="F2転換率推移" />
+          <CustomerReportButton featuredIcon={<Icon name="f2-graduate" className="h-[25px] w-[65px]" />} label="準ロイヤル転換率推移" />
+          <CustomerReportButton featuredIcon={<Icon name="semi-royal-graduate" className="h-[25px] w-[65px]" />} label="ロイヤル転換率推移" />
+          <CustomerReportButton featuredIcon={<Icon name="royal-fluctuate" className="h-[25px] w-[65px]" />} label="ロイヤル顧客数推移" />
+          <CustomerReportButton featuredIcon={<Icon name="sleep-returned" className="h-[25px] w-[65px]" />} label="休眠顧客復帰推移" />
+          <CustomerReportButton featuredIcon={<Icon name="f1-sleep-returned" className="h-[25px] w-[65px]" />} label="F1休眠顧客復帰推移" />
+          <CustomerReportButton featuredIcon={<Icon name="royal-sleep-returned" className="h-[25px] w-[65px]" />} label="ロイヤル休眠顧客復帰推移" />
         </div>
       </div>
     </Layout>
