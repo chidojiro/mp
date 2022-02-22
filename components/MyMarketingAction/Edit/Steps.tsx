@@ -33,10 +33,10 @@ export const Steps = ({ className, steps }: Props) => {
           })}>
           <div
             className={classNames(
-              'flex z-10 items-center justify-center mr-5 border-2 rounded-full w-[30px] h-7 border-primary bg-gray',
-              { 'bg-primary': step.isDone }
+              'flex z-10 items-center justify-center mr-5 border-2 rounded-full w-[30px] h-7 border-primary',
+              step.isDone ? 'bg-primary' : 'bg-gray'
             )}>
-            <Icon name='check' className='w-[17px] h-[13px]' />
+            <Icon name='check' className='w-[17px] h-[13px] text-primary' />
           </div>
           <div className='flex flex-col w-full '>
             <div className='flex mb-5'>

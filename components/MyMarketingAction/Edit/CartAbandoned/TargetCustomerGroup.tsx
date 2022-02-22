@@ -17,7 +17,7 @@ export const TargetCustomerGroup = () => {
     { label: 'F2', value: t('f2') },
     { label: t('semiRoyal'), value: 'semi_royal' },
     { label: t('royal'), value: 'royal' },
-    { label: t('f1Dormant'), value: 'f1_dormant' },
+    { label: t('f1dormant'), value: 'f1_dormant' },
     { label: t('royalDormant'), value: 'royal_dormant' },
   ];
 

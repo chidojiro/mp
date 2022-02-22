@@ -11,6 +11,7 @@ type Props = ClassName & {
   flowImgUrl?: string;
   description: string;
   descriptionImageUrl: string;
+  showUseTemplateBtn?: boolean;
 };
 
 // eslint-disable-next-line no-empty-pattern
@@ -20,6 +21,7 @@ export const ActionContainer = ({
   flowImgUrl,
   description,
   descriptionImageUrl,
+  showUseTemplateBtn = true,
 }: Props) => {
   const { t } = useTranslation('marketingAction');
   const { t: tCommon } = useTranslation('common');
@@ -79,7 +81,7 @@ export const ActionContainer = ({
           <img className='mt-3' alt='' src={flowImgUrl} />
         </div>
       )}
-      <Button className='w-[360px] !block mx-auto mt-6'>{t('useThisTemplate')}</Button>
+      {showUseTemplateBtn && <Button className='w-[360px] !block mx-auto mt-6'>{t('useThisTemplate')}</Button>}
     </div>
   );
 };

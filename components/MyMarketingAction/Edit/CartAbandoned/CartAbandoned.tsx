@@ -1,4 +1,5 @@
 import { Form, RadioGroup } from '@/components';
+import { ActionContainer } from '@/components/marketingAction/ActionContainer';
 import { Step } from '@/constants';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
@@ -81,5 +82,16 @@ export const CartAbandoned = () => {
     },
   ];
 
-  return <Steps steps={steps} />;
+  return (
+    <div>
+      <ActionContainer
+        showUseTemplateBtn={false}
+        iconName='cart'
+        title={t('cartAbandoned')}
+        description={t('cartAbandonedDescription')}
+        descriptionImageUrl='/images/cart-abandoned-description.png'
+        flowImgUrl='/images/cart-abandoned-flow.png'></ActionContainer>
+      <Steps className='mt-[60px]' steps={steps} />
+    </div>
+  );
 };
