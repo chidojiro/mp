@@ -164,7 +164,7 @@ export const CustomerSegmentTable = ({
                         dataSet.target !== 'f0' ? 'text-right mr-6' : 'text-right mr-6 font-bold'
                       }>
                       {getFirstDataPoint(dataSet)}
-                      {dataSet.target === 'f1' || dataSet.target === 'sleep'
+                      {dataSet.target === 'f0' || dataSet.target === 'sleep'
                         ? t('labelPeople')
                         : t('labelYen')}
                     </div>
@@ -182,7 +182,7 @@ export const CustomerSegmentTable = ({
                         dataSet.target !== 'f0' ? 'text-right mr-6' : 'text-right mr-6 font-bold'
                       }>
                       {getSecondDataPoint(dataSet)}
-                      {dataSet.target === 'f1' || dataSet.target === 'sleep'
+                      {dataSet.target === 'f0' || dataSet.target === 'sleep'
                         ? t('labelPeople')
                         : t('labelYen')}
                     </div>
