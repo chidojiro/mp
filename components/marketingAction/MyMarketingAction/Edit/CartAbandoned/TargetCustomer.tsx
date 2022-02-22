@@ -19,7 +19,7 @@ export const TargetCustomer = ({ label, value }: Props) => {
             )}>
             <Icon name='check' className='w-[16px] h-[13px]' size={5} />
           </div>
-          <input type='checkbox' value={value} onChange={handleChange} className='minimized' />
+          <input checked={isChecked} type='checkbox' value={value} onChange={handleChange} className='minimized' />
           <span className={'ml-2.5 text-regular-sm text-gray-dark'}>{label}</span>
         </label>
       )}
