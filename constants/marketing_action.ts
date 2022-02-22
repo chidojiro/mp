@@ -3,10 +3,19 @@ export enum HeaderTab {
   Terminated = 'terminated',
   Draft = 'draft',
 }
-
 export interface Step {
   name: string;
-  showButton?: boolean;
+  showPreviewBtn?: boolean;
   isDone?: boolean;
   children?: React.ReactNode;
+}
+
+export enum MESSAGE_TYPE {
+  TEXT = 'text',
+  IMAGE = 'image',
+}
+
+export interface Message {
+  type: MESSAGE_TYPE;
+  content?: React.ReactNode;
 }

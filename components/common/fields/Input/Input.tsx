@@ -7,7 +7,7 @@ type BaseInputProps = Omit<HTMLInputProps, 'ref' | 'type'> & {
   ref?: React.Ref<HTMLInputElement>;
 };
 
-type InputType = 'email' | 'file' | 'hidden' | 'number' | 'password' | 'tel' | 'text';
+type InputType = 'email' | 'file' | 'hidden' | 'number' | 'password' | 'tel' | 'text' | 'time';
 
 export type Props = BaseInputProps & {
   label?: string;
@@ -78,10 +78,7 @@ export const Input = React.forwardRef(
     React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);
 
     const renderInput = () => {
-      const inputClassName = classNames(
-        'h-full w-full m-0 px-4 py-2 bg-transparent',
-        'outline-none border-none'
-      );
+      const inputClassName = classNames('h-full w-full m-0 px-4 py-2 bg-transparent', 'outline-none border-none');
 
       return (
         <input
@@ -129,33 +126,21 @@ export const Input = React.forwardRef(
         {!!label && <label htmlFor={name}>{label}</label>}
         <div className={classNames('w-full flex relative')}>
           {addonBefore && (
-            <div
-              className={classNames(
-                'flex items-center px-2.5 flex-shrink-0 border-0 !border-r',
-                borderClassNames
-              )}>
+            <div className={classNames('flex items-center px-2.5 flex-shrink-0 border-0 !border-r', borderClassNames)}>
               {addonBefore}
             </div>
           )}
           <div className='flex items-center flex-1'>
             {!!innerLeft && (
-              <div className={classNames('flex items-center h-full px-4 z-1 flex-shrink-0')}>
-                {innerLeft}
-              </div>
+              <div className={classNames('flex items-center h-full px-4 z-1 flex-shrink-0')}>{innerLeft}</div>
             )}
             {renderInput()}
             {!!innerRight && (
-              <div className={classNames('flex items-center flex-shrink-0 h-full px-4 z-1')}>
-                {innerRight}
-              </div>
+              <div className={classNames('flex items-center flex-shrink-0 h-full px-4 z-1')}>{innerRight}</div>
             )}
           </div>
           {addonAfter && (
-            <div
-              className={classNames(
-                'flex items-center px-4 flex-shrink-0 border-0 !border-l',
-                borderClassNames
-              )}>
+            <div className={classNames('flex items-center px-4 flex-shrink-0 border-0 !border-l', borderClassNames)}>
               {addonAfter}
             </div>
           )}
