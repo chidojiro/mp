@@ -18,7 +18,7 @@ export const ColorOption = ({ color }: Props) => {
             style={{ borderColor: isChecked ? color.color : '' }}>
             <div className={classNames('w-full h-full rounded ')} style={{ backgroundColor: color.color }}></div>
           </div>
-          <input type='radio' checked={isChecked} value={value} onChange={handleChange} />
+          <input type='radio' checked={isChecked} value={value} onChange={handleChange} className='minimized' />
           <span className={classNames('ml-2.5 text-medium text-gray-dark', { 'font-bold': isChecked })}>
             {color.label}
           </span>
