@@ -1,5 +1,5 @@
 import { Form, RadioGroup } from '@/components';
-import { ActionContainer } from '@/components/marketingAction/ActionContainer';
+import { ActionContainer } from '@/components/marketingAction';
 import { Step } from '@/constants';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
