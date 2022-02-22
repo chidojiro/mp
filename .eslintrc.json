@@ -9,6 +9,7 @@
     "no-console": [1, { "allow": ["warn", "error", "info"] }],
     "import/first": 0,
     "@typescript-eslint/no-non-null-assertion": 0,
-    "@next/next/no-img-element": 0
+    "@next/next/no-img-element": 0,
+    "no-nested-ternary": 2
   }
 }
