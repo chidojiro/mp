@@ -29,5 +29,6 @@
   "f1dormant": "F1 Dormant",
   "royalDormant": "Royal dormant",
   "editor": "Marketing Action Editor",
-  "cartAbandonedNoti": "Basket drop notification"
+  "cartAbandonedNoti": "Basket drop notification",
+  "csvDownload": "Download CSV"
 }
