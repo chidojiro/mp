@@ -4,7 +4,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { CustomerSegmentTable } from '@/components/CustomerSegmentTable/CustomerSegmentTable';
 import { CustomerReportButton } from '@/components/CustomerReportButton/CustomerReportButton';
 import { CSVButton } from '@/components/CSVButton/CSVButton';
-import { Icon } from '@/components/common/Icon/Icon';
+import { Icon } from '@/components';
 
 const placeholder = [
   {

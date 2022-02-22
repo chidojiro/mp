@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
-import { Icon } from '@/components/common/Icon/Icon';
+import { Icon } from '@/components';
 import { useTranslation } from 'next-i18next';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
