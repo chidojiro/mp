@@ -32,8 +32,8 @@ const defaultBackgroundColors: { [key in Variant]: string } = {
 
 const greenBackgroundColors: { [key in Variant]: string } = {
   link: 'bg-none',
-  outline: 'bg-none',
-  solid: 'bg-white',
+  outline: 'bg-white',
+  solid: 'bg-mint-green',
 };
 
 const backgroundColors: { [key in ColorScheme]: { [key in Variant]: string } } = {

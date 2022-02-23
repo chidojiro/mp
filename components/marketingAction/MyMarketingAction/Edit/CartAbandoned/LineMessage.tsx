@@ -17,7 +17,6 @@ export const LineMessage = () => {
   };
 
   const onChangeType = (id: number, value: MESSAGE_TYPE) => {
-    console.log(value);
     setMessages(prevState => {
       return prevState.map(message => {
         return message.id === id ? { ...message, type: value } : message;

@@ -29,9 +29,8 @@ export const LineMessageItem = ({ message, handleChangeType }: Props) => {
   };
 
   const getSelectBox = () => {
-    const selectBox: any[] = [];
-    Object.keys(messageTypes).forEach((optionItem: any) => {
-      selectBox.push({ value: optionItem, label: messageTypes[optionItem] });
+    const selectBox = Object.keys(messageTypes).map((optionItem: any) => {
+      return { value: optionItem, label: messageTypes[optionItem] };
     });
 
     return <Select options={selectBox} onChange={onChangeType} />;
