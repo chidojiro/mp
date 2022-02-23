@@ -24,6 +24,7 @@ export const Steps = ({ className, steps }: Props) => {
 
   return (
     <Form methods={methods} onSubmit={onSubmit} className={className}>
+      <button>aaa</button>
       {steps.map((step: Step, idx: number) => (
         <div
           key={idx}
@@ -56,10 +57,7 @@ export const Steps = ({ className, steps }: Props) => {
                   </Button>
                 </>
               ) : (
-                <Button
-                  colorScheme='default'
-                  variant='outline'
-                  className='font-semibold min-w-[240px] border-[#68CE97] text-[#68CE97] border-2'>
+                <Button colorScheme='green' variant='outline' className='font-semibold min-w-[240px] border-2'>
                   {t('viewPreview')}
                 </Button>
               )}

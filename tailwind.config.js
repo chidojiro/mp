@@ -151,6 +151,7 @@ module.exports = {
       white: '#fff',
       black: '#000',
       'dark-gray': '#E6E6E6',
+      'mint-green': '#68CE97',
     },
     fontWeight: {
       semibold: 500,

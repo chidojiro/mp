@@ -77,6 +77,6 @@
   "msg2Off": "2通目を配信しない",
   "targetSetting": "ターゲット設定",
   "textMessage": "テキストメッセージ",
-  "imageMessage": "テキストメッセージ",
+  "imageMessage": "イメージメッセージ",
   "addNewMessage": "LINEメッセージを追加"
 }
