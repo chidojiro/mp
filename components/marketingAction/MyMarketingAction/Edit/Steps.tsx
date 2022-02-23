@@ -1,29 +1,20 @@
-import { Button, Form } from '@/components/common';
 import { Icon } from '@/components';
+import { Button } from '@/components/common';
 import { Step } from '@/constants';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { useForm } from 'react-hook-form';
 
 type Props = {
-  className?: string;
   steps: Step[];
 };
 
-export const Steps = ({ className, steps }: Props) => {
+export const Steps = ({ steps }: Props) => {
   const { t } = useTranslation('marketingAction');
   const idLastStep = steps.length - 1;
 
-  const methods = useForm();
-
-  const onSubmit = (data: any) => {
-    // handle change
-    console.log('submit', data);
-  };
-
   return (
-    <Form methods={methods} onSubmit={onSubmit} className={className}>
+    <>
       {steps.map((step: Step, idx: number) => (
         <div
           key={idx}
@@ -51,7 +42,7 @@ export const Steps = ({ className, steps }: Props) => {
                   <Button className='font-semibold border-none bg-input min-w-[240px] mr-2.5' variant='outline'>
                     {t('viewPreview')}
                   </Button>
-                  <Button className='font-semibold border-none bg-[#68CE97] min-w-[240px]' variant='outline'>
+                  <Button className='font-semibold border-none bg-mint-green min-w-[240px]' variant='outline'>
                     {t('confirm')}
                   </Button>
                 </>
@@ -64,6 +55,6 @@ export const Steps = ({ className, steps }: Props) => {
           </div>
         </div>
       ))}
-    </Form>
+    </>
   );
 };

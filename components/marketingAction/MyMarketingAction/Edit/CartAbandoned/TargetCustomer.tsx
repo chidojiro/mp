@@ -14,10 +14,10 @@ export const TargetCustomer = ({ label, value }: Props) => {
         <label className={'flex items-center mb-2.5'}>
           <div
             className={classNames(
-              'w-5 h-5 rounded flex items-center justify-center ',
+              'w-4 h-4 rounded flex items-center justify-center ',
               isChecked ? 'bg-secondary' : 'bg-white'
             )}>
-            <Icon name='check' className='w-[16px] h-[13px]' size={5} />
+            <Icon name='check' className='w-[12px] h-[10px]' />
           </div>
           <input checked={isChecked} type='checkbox' value={value} onChange={handleChange} className='minimized' />
           <span className={'ml-2.5 text-regular-sm text-gray-dark'}>{label}</span>

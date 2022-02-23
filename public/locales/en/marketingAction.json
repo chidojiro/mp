@@ -77,5 +77,7 @@
   "targetSetting": "Target Settings",
   "textMessage": "Text Message",
   "imageMessage": "Image Message",
-  "addNewMessage": "Add a LINE message"
+  "addNewMessage": "Add a LINE message",
+  "saveDraft": "Save as Draft",
+  "implementTemplate": "Implement the template"
 }
