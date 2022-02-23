@@ -24,7 +24,6 @@ export const Steps = ({ className, steps }: Props) => {
 
   return (
     <Form methods={methods} onSubmit={onSubmit} className={className}>
-      <button>aaa</button>
       {steps.map((step: Step, idx: number) => (
         <div
           key={idx}
