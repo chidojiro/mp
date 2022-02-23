@@ -1,24 +1,35 @@
 import { Form, RadioGroup } from '@/components';
+import { Button } from '@/components/common';
 import { ActionContainer } from '@/components/marketingAction';
 import { Step } from '@/constants';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
+import { useForm, useWatch } from 'react-hook-form';
 import { Steps } from '../Steps';
 import { MessageSetting } from './MessageSetting';
 import { TargetCustomerGroup } from './TargetCustomerGroup';
 
 export const CartAbandoned = () => {
   const { t } = useTranslation('marketingAction');
+  const methods = useForm();
+  const { control } = methods;
+  const isUseLine = useWatch({ name: 'is_use_line', control });
+  const targetCustomers = useWatch({ name: 'target_customers', control });
+
+  const onSubmit = (data: any) => {
+    // handle change
+    console.log('submit', data);
+  };
 
   const renderStep1 = () => {
     const lineOptions = [
-      { value: 'line', label: t('lineOption') },
-      { value: 'no_line', label: t('noLine') },
+      { value: 'yes', label: t('lineOption') },
+      { value: 'no', label: t('noLine') },
     ];
     return (
       <>
         <div className='font-bold text-gray-dark mb-2.5'>{t('useLine')}</div>
-        <Form.RadioGroup name='cart_abandon_use_line'>
+        <Form.RadioGroup name='is_use_line'>
           {lineOptions.map(option => (
             <RadioGroup.Option
               colorScheme='secondary'
@@ -62,7 +73,7 @@ export const CartAbandoned = () => {
   const steps: Step[] = [
     {
       name: t('useLine'),
-      isDone: true,
+      isDone: isUseLine,
       children: renderStep1(),
     },
     {
@@ -79,6 +90,7 @@ export const CartAbandoned = () => {
       name: t('targetSetting'),
       children: <TargetCustomerGroup />,
       showPreviewBtn: true,
+      isDone: targetCustomers?.length,
     },
   ];
 
@@ -91,7 +103,13 @@ export const CartAbandoned = () => {
         description={t('cartAbandonedDescription')}
         descriptionImageUrl='/images/cart-abandoned-description.png'
         flowImgUrl='/images/cart-abandoned-flow.png'></ActionContainer>
-      <Steps className='mt-[60px]' steps={steps} />
+      <Form methods={methods} onSubmit={onSubmit} className='mt-[60px]'>
+        <Steps steps={steps} />
+      </Form>
+      <div className='flex justify-center'>
+        <Button className='mr-5 min-w-[480px] h-[52px] bg-input border-none'>{t('saveDraft')}</Button>
+        <Button className='min-w-[480px] h-[52px]'>{t('implementTemplate')}</Button>
+      </div>
     </div>
   );
 };

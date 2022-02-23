@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { Children, ClassName, HTMLButtonProps } from 'types';
 
 type Variant = 'link' | 'outline' | 'solid';
-type ColorScheme = 'primary' | 'secondary' | 'default' | 'danger';
+type ColorScheme = 'primary' | 'secondary' | 'default' | 'danger' | 'green';
 type Size = 'xs' | 'sm' | 'md' | 'lg';
 
 const primaryBackgroundColors: { [key in Variant]: string } = {
@@ -30,11 +30,18 @@ const defaultBackgroundColors: { [key in Variant]: string } = {
   solid: 'bg-white',
 };
 
+const greenBackgroundColors: { [key in Variant]: string } = {
+  link: 'bg-none',
+  outline: 'bg-white',
+  solid: 'bg-mint-green',
+};
+
 const backgroundColors: { [key in ColorScheme]: { [key in Variant]: string } } = {
   danger: dangerBackgroundColors,
   default: defaultBackgroundColors,
   primary: primaryBackgroundColors,
   secondary: secondaryBackgroundColors,
+  green: greenBackgroundColors,
 };
 
 const primaryBorderColors: { [key in Variant]: string } = {
@@ -61,11 +68,18 @@ const defaultBorderColors: { [key in Variant]: string } = {
   solid: 'border-none',
 };
 
+const greenBorderColors: { [key in Variant]: string } = {
+  link: 'border-none',
+  outline: 'border-mint-green',
+  solid: 'border-none',
+};
+
 const borderColors: { [key in ColorScheme]: { [key in Variant]: string } } = {
   danger: dangerBorderColors,
   default: defaultBorderColors,
   primary: primaryBorderColors,
   secondary: secondaryBorderColors,
+  green: greenBorderColors,
 };
 
 const primaryTextColors: { [key in Variant]: string } = {
@@ -92,11 +106,18 @@ const defaultTextColors: { [key in Variant]: string } = {
   solid: 'text-white',
 };
 
+const greenTextColors: { [key in Variant]: string } = {
+  link: 'text-mint-green',
+  outline: 'text-mint-green',
+  solid: 'text-white',
+};
+
 const textColors: { [key in ColorScheme]: { [key in Variant]: string } } = {
   danger: dangerTextColors,
   default: defaultTextColors,
   primary: primaryTextColors,
   secondary: secondaryTextColors,
+  green: greenTextColors,
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -112,16 +133,7 @@ export type Props = Children &
 
 export const Button = React.forwardRef<HTMLElement, Props>(
   (
-    {
-      variant = 'solid',
-      colorScheme = 'primary',
-      className,
-      children,
-      type = 'button',
-      disabled,
-      icon,
-      ...restProps
-    },
+    { variant = 'solid', colorScheme = 'primary', className, children, type = 'button', disabled, icon, ...restProps },
     ref: any
   ) => {
     const backgroundColor = backgroundColors[colorScheme][variant];

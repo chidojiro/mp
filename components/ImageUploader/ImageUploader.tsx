@@ -54,7 +54,7 @@ export const ImageUploader = ({ originalUrl, className }: Props) => {
             <div className='rounded flex items-center justify-center flex-col flex-1 border border-dashed border-gray text-gray-700 mr-2.5 py-6'>
               <Icon name='upload' size={20} />
               <div className='mb-2.5 text-medium'>{t('dragNdrop')}</div>
-              <button className='px-2.5 border-gray-700 border rounded-full text-small px-3 py-0.5'>
+              <button type='button' className='px-2.5 border-gray-700 border rounded-full text-small px-3 py-0.5'>
                 {t('selectFile')}
               </button>
             </div>

@@ -16,6 +16,7 @@ export enum MESSAGE_TYPE {
 }
 
 export interface Message {
+  id: number;
   type: MESSAGE_TYPE;
   content?: React.ReactNode;
 }

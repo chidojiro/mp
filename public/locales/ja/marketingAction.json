@@ -77,6 +77,8 @@
   "msg2Off": "2通目を配信しない",
   "targetSetting": "ターゲット設定",
   "textMessage": "テキストメッセージ",
-  "imageMessage": "テキストメッセージ",
-  "addNewMessage": "LINEメッセージを追加"
+  "imageMessage": "イメージメッセージ",
+  "addNewMessage": "LINEメッセージを追加",
+  "saveDraft": "下書き保存",
+  "implementTemplate": "施策を実行する"
 }
