@@ -13,9 +13,8 @@ export const CartAbandoned = () => {
   const { t } = useTranslation('marketingAction');
   const methods = useForm();
   const { control } = methods;
-  const is_use_line = useWatch({ name: 'is_use_line', control });
-
-  console.log(is_use_line);
+  const isUseLine = useWatch({ name: 'is_use_line', control });
+  const targetCustomers = useWatch({ name: 'target_customers', control });
 
   const onSubmit = (data: any) => {
     // handle change
@@ -74,7 +73,7 @@ export const CartAbandoned = () => {
   const steps: Step[] = [
     {
       name: t('useLine'),
-      isDone: is_use_line,
+      isDone: isUseLine,
       children: renderStep1(),
     },
     {
@@ -91,6 +90,7 @@ export const CartAbandoned = () => {
       name: t('targetSetting'),
       children: <TargetCustomerGroup />,
       showPreviewBtn: true,
+      isDone: targetCustomers?.length,
     },
   ];
 
