@@ -79,5 +79,6 @@
   "imageMessage": "Image Message",
   "addNewMessage": "Add a LINE message",
   "saveDraft": "Save as Draft",
-  "implementTemplate": "Implement the template"
+  "implementTemplate": "Implement the template",
+  "colorSettings": "Color settings"
 }
