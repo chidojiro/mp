@@ -1,6 +1,4 @@
-import { Form } from '@/components';
-import { Icon } from '@/components';
-import { ImageUploader } from '@/components';
+import { Form, Icon } from '@/components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { ColorGroup } from './ColorGroup';
@@ -10,14 +8,8 @@ export const MessageSetting = () => {
   const { t } = useTranslation('marketingAction');
 
   const emailFields = [
-    { title: t('logo'), content: <ImageUploader /> },
-    { title: t('headLines'), content: <Form.Input name='head_line' /> },
+    { title: t('headLines'), content: <Form.Input name='head_lines_email' /> },
     { title: t('bodyText'), content: <Form.TextArea name='body_text' /> },
-    { title: t('storeName'), content: <Form.Input name='store_name' /> },
-    { title: t('siteURL'), content: <Form.Input name='site_url' /> },
-    { title: t('contactInfo'), content: <Form.Input name='contact_info' /> },
-    { title: t('mainColor'), content: <ColorGroup name='main_color' /> },
-    { title: t('subColor'), content: <ColorGroup name='sub_color' /> },
   ];
 
   return (
@@ -38,22 +30,37 @@ export const MessageSetting = () => {
         </div>
         <div className='flex justify-between mt-2'>
           <div className='flex-1 mr-10'>
-            {emailFields.map((field, idx) => (
-              <div key={idx} className='mb-4'>
-                <div className='mb-2.5 font-semibold text-secondary'>{field.title}</div>
-                {field.content}
-              </div>
-            ))}
+            <div className='mb-4'>
+              <div className='mb-2.5 font-semibold text-secondary text-medium'>{t('headLines')}</div>
+              <Form.Input name='head_lines_email' />
+            </div>
+            <div className='mb-4'>
+              <div className='mb-2.5 font-semibold text-secondary text-medium'>{t('bodyText')}</div>
+              <Form.TextArea name='body_text' />
+            </div>
           </div>
-          <div className='w-[400px] rounded bg-white h-fit'>form</div>
+          <div className='w-[335px] rounded bg-white h-fit'>form</div>
         </div>
       </div>
-      <div className='mt-7'>
+      <div className='px-10 -mx-10 border-b-4 border-white mt-7 pb-7'>
         <div className='flex items-center'>
           <Icon name='line' size={20} className='mr-2' />
           <div className='font-semibold'>{t('msgContentLine')}</div>
         </div>
-        <LineMessage />
+        <div className='flex justify-between mt-2'>
+          <div className='flex-1 mr-10'>
+            <div className='mb-4'>
+              <div className='mb-2.5 font-semibold text-secondary text-medium'>{t('headLines')}</div>
+              <Form.Input name='head_lines_line' />
+            </div>
+            <LineMessage />
+          </div>
+          <div className='w-[335px] rounded bg-white h-fit'>display</div>
+        </div>
+      </div>
+      <div className='w-2/3 mt-7'>
+        <div className='mb-2 font-semibold'>{t('colorSettings')}</div>
+        <ColorGroup name='colors' />
       </div>
     </>
   );

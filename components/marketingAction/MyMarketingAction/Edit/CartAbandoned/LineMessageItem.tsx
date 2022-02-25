@@ -32,7 +32,15 @@ export const LineMessageItem = ({ message, handleChangeType }: Props) => {
       return { value: optionItem, label: messageTypes[optionItem] };
     });
 
-    return <Form.Select name={`type_line_${message.id}`} options={selectBox} onChange={onChangeType} />;
+    return (
+      <Form.Select
+        value={selectBox[0].value}
+        defaultValue={selectBox[0].value}
+        name={`type_line_${message.id}`}
+        options={selectBox}
+        onChange={onChangeType}
+      />
+    );
   };
 
   return (
