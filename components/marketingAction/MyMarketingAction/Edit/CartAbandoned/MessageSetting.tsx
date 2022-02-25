@@ -7,11 +7,6 @@ import { LineMessage } from './LineMessage';
 export const MessageSetting = () => {
   const { t } = useTranslation('marketingAction');
 
-  const emailFields = [
-    { title: t('headLines'), content: <Form.Input name='head_lines_email' /> },
-    { title: t('bodyText'), content: <Form.TextArea name='body_text' /> },
-  ];
-
   return (
     <>
       <div className='px-10 -mx-10 border-b-4 border-white'>

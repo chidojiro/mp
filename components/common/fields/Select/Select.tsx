@@ -13,7 +13,7 @@ export type SelectProps = {
   options: Option[];
   name?: string;
   value?: string;
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
 };
 
 const getStylesByActiveStatus = (active: boolean) => {

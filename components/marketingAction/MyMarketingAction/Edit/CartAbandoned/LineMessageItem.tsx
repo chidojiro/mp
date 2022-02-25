@@ -34,7 +34,6 @@ export const LineMessageItem = ({ message, handleChangeType }: Props) => {
 
     return (
       <Form.Select
-        value={selectBox[0].value}
         defaultValue={selectBox[0].value}
         name={`type_line_${message.id}`}
         options={selectBox}
