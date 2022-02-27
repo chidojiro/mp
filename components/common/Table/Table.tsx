@@ -33,7 +33,8 @@ export const Table = ({ className, size = DEFAULT_SIZE, ...restProps }: Props) =
     <TableContext.Provider value={providerValue}>
       <table
         {...restProps}
-        className={classNames('mp-table', 'w-full border-collapse table-auto', className)}></table>
+        className={classNames('mp-table', 'w-full border-collapse table-auto', className)}
+      ></table>
     </TableContext.Provider>
   );
 };

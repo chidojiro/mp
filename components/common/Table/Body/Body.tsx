@@ -11,10 +11,7 @@ export const Body = ({ className, ...restProps }: Props) => {
   return (
     <tbody
       {...restProps}
-      className={classNames(
-        'mp-table-body',
-        'border-l border-solid border-gray-400',
-        className
-      )}></tbody>
+      className={classNames('mp-table-body', 'border-l border-solid border-gray-400', className)}
+    ></tbody>
   );
 };

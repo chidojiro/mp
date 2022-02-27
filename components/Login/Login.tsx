@@ -14,7 +14,9 @@ export const Login = () => {
           <img src='/images/GMP_givery.png' alt='' className='w-24 ml-1' />
           <img src='/images/logoMP.png' alt='' className='w-[475px]' />
           <div className='mt-2 mb-24 font-medium text-gray-700'>{t('titleMP')}</div>
-          <div className='font-semibold text-gray-800 whitespace-pre-line text-h4'>{t('description')}</div>
+          <div className='font-semibold text-gray-800 whitespace-pre-line text-h4'>
+            {t('description')}
+          </div>
         </div>
       </div>
       <div className='z-10 flex items-center justify-center bg-gray-light'>

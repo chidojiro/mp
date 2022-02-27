@@ -46,14 +46,18 @@ export const Select = ({ defaultValue, onChange, options, ...props }: SelectProp
         enterTo='transform opacity-100 scale-100'
         leave='transition ease-in duration-75'
         leaveFrom='transform opacity-100 scale-100'
-        leaveTo='transform opacity-0 scale-95'>
+        leaveTo='transform opacity-0 scale-95'
+      >
         <Menu.Items className='absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white rounded shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
           <div className='py-1'>
             {options.map((option, id) => {
               return (
                 <Menu.Item key={id}>
                   {({ active }) => (
-                    <div onClick={() => handleSelect(option)} className={getStylesByActiveStatus(active)}>
+                    <div
+                      onClick={() => handleSelect(option)}
+                      className={getStylesByActiveStatus(active)}
+                    >
                       {option.label}
                     </div>
                   )}

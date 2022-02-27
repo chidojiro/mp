@@ -13,7 +13,7 @@ import NoImage from './icons/no-image.svg';
 import Upload from './icons/upload.svg';
 import Check from './icons/check.svg';
 import Ranking from './icons/ranking.svg';
-import TriangleRight from './icons/triangle-right.svg'
+import TriangleRight from './icons/triangle-right.svg';
 import f0Icon from './icons/f0-status.svg';
 import f1Icon from './icons/f1-status.svg';
 import f2Icon from './icons/f2-status.svg';
@@ -22,13 +22,13 @@ import royalIcon from './icons/royal-status.svg';
 import sleepIcon from './icons/sleep-status.svg';
 import popoverClose from './icons/popover-close.svg';
 import popoverTail from './icons/popover-tail.svg';
-import f1Graduate from './icons/f1-graduate.svg'
-import f2Graduate from './icons/f2-graduate.svg'
-import semiroyalGraduate from './icons/semiroyal-graduate.svg'
-import royalFluctuate from './icons/royal-fluctuate.svg'
-import sleepReturned from './icons/sleep-returned.svg'
-import f1SleepReturned from './icons/f1-sleep-returned.svg'
-import royalSleepReturned from './icons/royal-sleep-returned.svg'
+import f1Graduate from './icons/f1-graduate.svg';
+import f2Graduate from './icons/f2-graduate.svg';
+import semiroyalGraduate from './icons/semiroyal-graduate.svg';
+import royalFluctuate from './icons/royal-fluctuate.svg';
+import sleepReturned from './icons/sleep-returned.svg';
+import f1SleepReturned from './icons/f1-sleep-returned.svg';
+import royalSleepReturned from './icons/royal-sleep-returned.svg';
 
 const ICONS = {
   group: Group,

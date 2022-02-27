@@ -17,7 +17,7 @@ module.exports = {
           options: {
             svgoConfig: {
               plugins: [
-                { 
+                {
                   name: 'prefixIds',
                   active: true,
                 },

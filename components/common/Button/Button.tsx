@@ -133,7 +133,16 @@ export type Props = Children &
 
 export const Button = React.forwardRef<HTMLElement, Props>(
   (
-    { variant = 'solid', colorScheme = 'primary', className, children, type = 'button', disabled, icon, ...restProps },
+    {
+      variant = 'solid',
+      colorScheme = 'primary',
+      className,
+      children,
+      type = 'button',
+      disabled,
+      icon,
+      ...restProps
+    },
     ref: any
   ) => {
     const backgroundColor = backgroundColors[colorScheme][variant];
@@ -157,7 +166,8 @@ export const Button = React.forwardRef<HTMLElement, Props>(
             disabled,
           },
           className
-        )}>
+        )}
+      >
         {!!icon && <div className='mr-3'>{icon}</div>}
         {children}
       </button>

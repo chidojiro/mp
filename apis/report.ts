@@ -3,18 +3,18 @@ import { RestApi } from './base';
 export const ReportApi = {
   rfm_report: async (): Promise<any> => {
     const result = await RestApi.get('rfm_matrix_dashboard/');
-    if(result.status === 200) {
+    if (result.status === 200) {
       // convert data
-      const data = result.data.result
+      const data = result.data.result;
       const segments = [
-        "f0",
-        "f1",
+        'f0',
+        'f1',
         'f2',
         'semi-loyal',
         // TODO: Need change to loyal
         'royal',
-        'sleep'
-      ]
+        'sleep',
+      ];
       return [
         {
           target: 'f0',
@@ -33,7 +33,10 @@ export const ReportApi = {
           other: '',
           count: data.f1_purchase_count_recent_period,
           total: data.f1_sales_amount_recent_period,
-          average: data.f1_purchase_count_recent_period > 0 ? data.f1_sales_amount_recent_period / data.f1_purchase_count_recent_period : 0, 
+          average:
+            data.f1_purchase_count_recent_period > 0
+              ? data.f1_sales_amount_recent_period / data.f1_purchase_count_recent_period
+              : 0,
           f1Sleep: '',
           royalSleep: '',
         },
@@ -44,7 +47,10 @@ export const ReportApi = {
           other: '',
           count: data.f2_purchase_count_recent_period,
           total: data.f2_sales_amount_recent_period,
-          average: data.f2_purchase_count_recent_period > 0 ? data.f2_sales_amount_recent_period / data.f2_purchase_count_recent_period : 0, 
+          average:
+            data.f2_purchase_count_recent_period > 0
+              ? data.f2_sales_amount_recent_period / data.f2_purchase_count_recent_period
+              : 0,
           f1Sleep: '',
           royalSleep: '',
         },
@@ -55,7 +61,11 @@ export const ReportApi = {
           other: '',
           count: data.next_loyal_purchase_count_recent_period,
           total: data.next_loyal_sales_amount_recent_period,
-          average: data.next_loyal_purchase_count_recent_period > 0 ? data.next_loyal_sales_amount_recent_period / data.next_loyal_purchase_count_recent_period : 0,
+          average:
+            data.next_loyal_purchase_count_recent_period > 0
+              ? data.next_loyal_sales_amount_recent_period /
+                data.next_loyal_purchase_count_recent_period
+              : 0,
           f1Sleep: '',
           royalSleep: '',
         },
@@ -66,7 +76,10 @@ export const ReportApi = {
           other: '',
           data: data.loyal_purchase_count_recent_period,
           total: data.loyal_sales_amount_recent_period,
-          average: data.loyal_purchase_count_recent_period > 0 ? data.loyal_sales_amount_recent_period / data.loyal_purchase_count_recent_period : 0,
+          average:
+            data.loyal_purchase_count_recent_period > 0
+              ? data.loyal_sales_amount_recent_period / data.loyal_purchase_count_recent_period
+              : 0,
           f1Sleep: '',
           royalSleep: '',
         },
@@ -80,8 +93,8 @@ export const ReportApi = {
           f1Sleep: data.f1_sleep_candidate_uu,
           royalSleep: data.loyal_sleep_candidate_uu,
         },
-      ]
+      ];
     }
-    return []
+    return [];
   },
 };

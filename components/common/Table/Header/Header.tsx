@@ -17,6 +17,7 @@ export const Header = ({ className, ...restProps }: Props) => {
         'border-r border-b border-solid border-gray-400 last-of-type:border-r-none',
         'py-3 px-6',
         className
-      )}></th>
+      )}
+    ></th>
   );
 };
