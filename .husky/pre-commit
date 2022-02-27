@@ -3,6 +3,5 @@
 
 set -e
 yarn typecheck
-yarn lint
-
 npx lint-staged
+yarn lint
