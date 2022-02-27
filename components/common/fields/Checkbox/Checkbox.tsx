@@ -41,7 +41,8 @@ export const Checkbox = React.forwardRef<HTMLInputElement, Props>(
       <label
         className={classNames('mp-checkbox', 'flex items-center', className)}
         role='switch'
-        aria-checked={checked}>
+        aria-checked={checked}
+      >
         <div
           className={classNames(
             'w-4 h-4',
@@ -50,7 +51,8 @@ export const Checkbox = React.forwardRef<HTMLInputElement, Props>(
               'bg-white': !checked,
               [`${activeBackground} border-none`]: checked,
             }
-          )}></div>
+          )}
+        ></div>
         <input
           className='minimized'
           type='checkbox'

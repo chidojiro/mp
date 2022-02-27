@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react';
 import { ReportApi } from '@/apis';
 import useSWR from 'swr';
 
-
 const placeholder = [
   {
     target: 'f0',
@@ -75,11 +74,11 @@ const placeholder = [
 
 function Dashboard() {
   const { t } = useTranslation('dashboard');
-  const [report, setReport] = useState(null)
+  const [report, setReport] = useState(null);
   const { data, error } = useSWR('/api/user', ReportApi.rfm_report, {
-      fallbackData: placeholder
-  } )
-  console.log(data)
+    fallbackData: placeholder,
+  });
+  console.log(data);
   // useEffect(() => {
   //     const loadData = async () => {
   //       const result = await ReportApi.rfm_report();
@@ -87,7 +86,6 @@ function Dashboard() {
   //     }
   //     loadData()
   //   }, [report])
-
 
   return (
     <Layout title={t('menuDashboard')}>
@@ -102,9 +100,7 @@ function Dashboard() {
       </div>
 
       <div className='w-full mb-12'>
-      {!!data && (
-        <CustomerSegmentTable data={data} onClick={() => console.log('click')} />
-          )}
+        {!!data && <CustomerSegmentTable data={data} onClick={() => console.log('click')} />}
       </div>
 
       <h4 className='text-gray-600 mb-5'>{t('labelReport')}</h4>

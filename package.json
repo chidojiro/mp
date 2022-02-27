@@ -6,7 +6,7 @@
     "test": "jest --maxWorkers=1",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --fix",
+    "lint": "next lint",
     "prettify": "prettier --write .",
     "prepare": "husky install",
     "typecheck": "tsc"

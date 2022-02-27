@@ -26,8 +26,8 @@ export const LoginForm = () => {
   const icon = showPwd ? <EyeIcon className='w-5 h-5' /> : <EyeOffIcon className='w-5 h-5' />;
 
   const onSubmit = async (val: LoginData) => {
-    const isSuccess = await AuthService.login(val)
-    if(isSuccess) {
+    const isSuccess = await AuthService.login(val);
+    if (isSuccess) {
       router.push('/organizations/1/dashboard');
     }
   };

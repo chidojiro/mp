@@ -39,7 +39,8 @@ export const TargetFilter = ({}: Props) => {
       <div className='flex items-center gap-2'>
         <CheckboxGroup
           value={[query.targets].flat().filter(Boolean) as string[]}
-          onChange={handleTargetChange}>
+          onChange={handleTargetChange}
+        >
           {targetOptions.map(({ value, label }) => (
             <CheckboxTag value={value} label={label} key={value} />
           ))}

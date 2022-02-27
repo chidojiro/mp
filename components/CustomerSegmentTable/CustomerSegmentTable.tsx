@@ -182,7 +182,8 @@ export const CustomerSegmentTable = ({
                     <div
                       className={
                         dataSet.target !== 'f0' ? 'text-right mr-6' : 'text-right mr-6 font-bold'
-                      }>
+                      }
+                    >
                       {getFirstDataPoint(dataSet)}
                       {getEndLabel(dataSet.target)}
                     </div>
@@ -192,7 +193,8 @@ export const CustomerSegmentTable = ({
                     <div
                       className={
                         dataSet.target !== 'f0' ? 'text-right mr-6' : 'text-right mr-6 font-bold'
-                      }>
+                      }
+                    >
                       {getSecondDataPoint(dataSet)}
                       {getEndLabel(dataSet.target)}
                     </div>
@@ -201,7 +203,8 @@ export const CustomerSegmentTable = ({
                 {dataSet.target !== 'sleep' ? (
                   <div
                     className={getTriangleClasses(dataSet.target)}
-                    onClick={() => onClick(dataSet.target)}>
+                    onClick={() => onClick(dataSet.target)}
+                  >
                     <Icon name='triangle-right' className='h-7 w-5' />
                   </div>
                 ) : (
