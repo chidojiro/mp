@@ -20,7 +20,15 @@ const activeBorders: { [key in ColorScheme]: string } = {
 // eslint-disable-next-line no-empty-pattern
 export const Radio = React.forwardRef<HTMLInputElement, Props>(
   (
-    { checked: checkedProp, onChange, className, label, defaultChecked, colorScheme = 'primary', ...restProps }: Props,
+    {
+      checked: checkedProp,
+      onChange,
+      className,
+      label,
+      defaultChecked,
+      colorScheme = 'primary',
+      ...restProps
+    }: Props,
     ref: any
   ) => {
     const [checkedState, setCheckedState] = React.useState(checkedProp ?? defaultChecked);
@@ -36,13 +44,23 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
     const activeBorder = activeBorders[colorScheme];
 
     return (
-      <label className={classNames('mp-radio', 'flex items-center', className)} role='switch' aria-checked={checked}>
+      <label
+        className={classNames('mp-radio', 'flex items-center', className)}
+        role='switch'
+        aria-checked={checked}
+      >
         <div
-          className={classNames('w-4 h-4', 'flex items-center justify-center', 'border border-solid rounded-full', {
-            'border-input bg-white': !checked,
-            [activeBackground]: checked,
-            [activeBorder]: checked,
-          })}>
+          className={classNames(
+            'w-4 h-4',
+            'flex items-center justify-center',
+            'border border-solid rounded-full',
+            {
+              'border-input bg-white': !checked,
+              [activeBackground]: checked,
+              [activeBorder]: checked,
+            }
+          )}
+        >
           <div className={classNames('w-1.5 h-1.5 rounded-full', { 'bg-white': checked })}></div>
         </div>
         <input

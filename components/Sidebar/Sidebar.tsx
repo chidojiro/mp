@@ -104,7 +104,8 @@ export const Sidebar = () => {
         'flex flex-col border-r border-gray-300 bg-gray-light w-[200px]',
         'fixed top-12 left-0'
       )}
-      style={{ height: 'calc(100vh - 48px)' }}>
+      style={{ height: 'calc(100vh - 48px)' }}
+    >
       <div className='flex flex-col flex-grow'>
         {menu.map(menuItem => (
           <NavItem key={menuItem.label} data={menuItem} />

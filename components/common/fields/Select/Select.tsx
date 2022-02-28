@@ -25,7 +25,17 @@ const getStylesByActiveStatus = (active: boolean) => {
 };
 
 export const Select = React.forwardRef<HTMLInputElement, Props>(
-  ({ defaultValue, value: valueProp, onChange: onChangeProp, name, options, ...props }: SelectProps, ref) => {
+  (
+    {
+      defaultValue,
+      value: valueProp,
+      onChange: onChangeProp,
+      name,
+      options,
+      ...props
+    }: SelectProps,
+    ref
+  ) => {
     const [value, setValue] = useControllable({
       value: valueProp,
       defaultValue,
@@ -40,7 +50,8 @@ export const Select = React.forwardRef<HTMLInputElement, Props>(
         <div>
           <Menu.Button
             {...props}
-            className='inline-flex items-center justify-between w-[200px] px-2.5 py-1.5 text-sm text-gray-dark bg-white border border-gray-300 rounded shadow-sm text-medium hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100'>
+            className='inline-flex items-center justify-between w-[200px] px-2.5 py-1.5 text-sm text-gray-dark bg-white border border-gray-300 rounded shadow-sm text-medium hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100'
+          >
             {selectedOption?.label}
             <ChevronDownIcon className='w-5 h-5 ml-2 -mr-1 bg text-secondary' aria-hidden='true' />
           </Menu.Button>
@@ -53,14 +64,18 @@ export const Select = React.forwardRef<HTMLInputElement, Props>(
           enterTo='transform opacity-100 scale-100'
           leave='transition ease-in duration-75'
           leaveFrom='transform opacity-100 scale-100'
-          leaveTo='transform opacity-0 scale-95'>
+          leaveTo='transform opacity-0 scale-95'
+        >
           <Menu.Items className='absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white rounded shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
             <div className='py-1'>
               {options.map((option, id) => {
                 return (
                   <Menu.Item key={id}>
                     {({ active }) => (
-                      <div onClick={() => setValue(option.value)} className={getStylesByActiveStatus(active)}>
+                      <div
+                        onClick={() => setValue(option.value)}
+                        className={getStylesByActiveStatus(active)}
+                      >
                         {option.label}
                       </div>
                     )}

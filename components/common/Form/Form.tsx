@@ -19,7 +19,9 @@ import {
 // eslint-disable-next-line no-empty-pattern
 export const Form = (props: FormProps) => <HeadlessForm {...props} />;
 
-const FormInput = (props: FieldProps & Omit<InputProps, keyof FieldProps>) => <Field {...props} component={Input} />;
+const FormInput = (props: FieldProps & Omit<InputProps, keyof FieldProps>) => (
+  <Field {...props} component={Input} />
+);
 const FormTextArea = (props: FieldProps & Omit<TextAreaProps, keyof FieldProps>) => (
   <Field {...props} component={TextArea} />
 );
@@ -32,7 +34,9 @@ const FormCheckboxGroup = (props: FieldProps & Omit<CheckboxGroupProps, keyof Fi
 const FormRadioGroup = (props: FieldProps & Omit<RadioGroupProps, keyof FieldProps>) => (
   <Field {...props} component={RadioGroup} />
 );
-const FormSelect = (props: FieldProps & Omit<SelectProps, keyof FieldProps>) => <Field {...props} component={Select} />;
+const FormSelect = (props: FieldProps & Omit<SelectProps, keyof FieldProps>) => (
+  <Field {...props} component={Select} />
+);
 
 const FormErrorMessage = ({ name, className, ...restProps }: HTMLDivProps & { name: string }) => (
   <p className={classNames('text-danger', className)} {...restProps}>
