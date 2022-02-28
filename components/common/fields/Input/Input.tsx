@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import React from 'react';
 import { useStateToggle, useControllable } from '@/hooks';
 import { HTMLInputProps } from '@/types';
+import { TimeInput } from './Time';
+import { NumberInput } from './Number';
 
 type BaseInputProps = Omit<HTMLInputProps, 'ref' | 'type'> & {
   ref?: React.Ref<HTMLInputElement>;
@@ -18,8 +20,10 @@ export type Props = BaseInputProps & {
   innerRight?: React.ReactNode;
   htmlType?: InputType;
   trimOnBlur?: boolean;
+  allowNegative?: boolean;
   onEnterPress?: () => void;
   pattern?: string;
+  prefixes?: string[];
 };
 
 export const Input = React.forwardRef(
@@ -38,6 +42,7 @@ export const Input = React.forwardRef(
       value: valueProp,
       onChange: onChangeProp,
       trimOnBlur = true,
+      prefixes = ['AM', 'PM'],
       onEnterPress,
       onKeyDown,
       ...props
@@ -82,6 +87,31 @@ export const Input = React.forwardRef(
         'h-full w-full m-0 px-4 py-2 bg-transparent',
         'outline-none border-none'
       );
+
+      if (htmlType === 'number') {
+        return (
+          <NumberInput
+            ref={ref}
+            className={inputClassName}
+            {...props}
+            value={value}
+            onChange={setValue}
+            onBlur={handleBlur}
+          />
+        );
+      } else if (htmlType === 'time') {
+        return (
+          <TimeInput
+            ref={ref}
+            className='w-4 h-full py-2 m-0 bg-transparent border-none outline-none'
+            {...props}
+            value={value}
+            prefixes={prefixes}
+            onChange={setValue}
+            onBlur={handleBlur}
+          />
+        );
+      }
 
       return (
         <input
