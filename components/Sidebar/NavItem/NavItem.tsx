@@ -33,7 +33,8 @@ export const NavItem = ({ data }: Props) => {
         <a
           className={classNames('flex text-medium items-center px-6 py-2.5 hover:bg-dark-gray', {
             'bg-dark-gray': isMatched(data),
-          })}>
+          })}
+        >
           <Icon name='group' className='w-4 h-4 mr-2 text-primary' />
           {label}
         </a>
@@ -46,7 +47,8 @@ export const NavItem = ({ data }: Props) => {
         <div
           className={classNames(
             'cursor-pointer flex text-medium items-center px-6 py-2.5 hover:bg-dark-gray'
-          )}>
+          )}
+        >
           <Icon name='group' size={16} className='mr-2 text-primary' />
           {label}
         </div>
@@ -60,7 +62,8 @@ export const NavItem = ({ data }: Props) => {
                 {
                   'bg-dark-gray': isMatched(item),
                 }
-              )}>
+              )}
+            >
               {item.label}
             </a>
           </Link>

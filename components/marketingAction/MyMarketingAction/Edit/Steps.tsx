@@ -20,14 +20,14 @@ export const Steps = ({ steps }: Props) => {
           key={idx}
           className={classNames('flex relative', {
             'before:ml-3.5 before:border before:h-full before:absolute': idx !== idLastStep,
-            'before:border-primary': step.isDone,
+            'before:border-mint-green': step.isDone,
           })}>
           <div
             className={classNames(
-              'flex z-10 items-center justify-center mr-5 border-2 rounded-full w-[30px] h-7 border-primary',
-              step.isDone ? 'bg-primary' : 'bg-gray'
+              'flex z-10 items-center justify-center mr-5 border-2 rounded-full w-[30px] h-7 border-mint-green',
+              step.isDone ? 'bg-mint-green' : 'bg-gray'
             )}>
-            <Icon name='check' className='w-[17px] h-[13px] text-primary' />
+            <Icon name='check' className='w-[17px] h-[13px]' />
           </div>
           <div className='flex flex-col w-full '>
             <div className='flex mb-5'>
@@ -36,7 +36,7 @@ export const Steps = ({ steps }: Props) => {
             </div>
             <div className='w-full px-10 py-8 mb-5 rounded-lg bg-gray-light'>{step.children}</div>
 
-            <div className='flex justify-end mb-8'>
+            <div className='flex justify-center mb-8'>
               {step?.showPreviewBtn ? (
                 <>
                   <Button className='font-semibold border-none bg-input min-w-[240px] mr-2.5' variant='outline'>

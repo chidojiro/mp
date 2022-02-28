@@ -12,7 +12,8 @@ export default {
 const Template: ComponentStory<typeof OverlayingLoader> = args => (
   <OverlayingLoader
     {...args}
-    component={<div className='flex items-center justify-center w-full h-full'>Loading...</div>}>
+    component={<div className='flex items-center justify-center w-full h-full'>Loading...</div>}
+  >
     <div className='w-[500px] h-[500px] bg-gray-300 opacity-50'>{lorem}</div>
   </OverlayingLoader>
 );

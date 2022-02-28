@@ -247,7 +247,8 @@ export const CustomerSegmentTable = ({
                 {dataSet.target !== 'sleep' ? (
                   <div
                     className={getTriangleClasses(dataSet.target)}
-                    onClick={() => onClick(dataSet.target)}>
+                    onClick={() => onClick(dataSet.target)}
+                  >
                     <Icon name='triangle-right' className='h-7 w-5' />
                   </div>
                 ) : (

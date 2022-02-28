@@ -1,16 +1,16 @@
 import React from 'react';
 import { ComponentStory } from '@storybook/react';
 
-import { useOverlayingLoader } from '.';
+import { useOverlay } from '.';
 
 export default {
-  title: 'Hooks/useOverlayingLoader',
+  title: 'Hooks/useOverlay',
 };
 
 const Template: ComponentStory<any> = ({ active, hostWidth, hostHeight }: any) => {
   const ref = React.useRef<HTMLDivElement>(null);
 
-  useOverlayingLoader({
+  useOverlay({
     active,
     host: ref,
     component: <div className='flex items-center justify-center w-full h-full'>Loading...</div>,

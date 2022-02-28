@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import { NavItem, NavItemData } from './NavItem';
 
@@ -98,7 +99,12 @@ export const Sidebar = () => {
     },
   ];
   return (
-    <div className='flex flex-col border-r border-gray-300 bg-gray-light w-[200px]'>
+    <div
+      className={classNames(
+        'flex flex-col border-r border-gray-300 bg-gray-light w-[200px]',
+        'fixed top-12 left-0'
+      )}
+      style={{ height: 'calc(100vh - 48px)' }}>
       <div className='flex flex-col flex-grow'>
         {menu.map(menuItem => (
           <NavItem key={menuItem.label} data={menuItem} />

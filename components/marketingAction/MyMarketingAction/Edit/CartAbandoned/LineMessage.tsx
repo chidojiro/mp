@@ -32,7 +32,12 @@ export const LineMessage = () => {
         <LineMessageItem key={idx} message={message} handleChangeType={onChangeType} />
       ))}
       {allowAddingMsg && (
-        <Button onClick={addNewMessage} colorScheme='secondary' variant='outline' className='w-full border-2'>
+        <Button
+          onClick={addNewMessage}
+          colorScheme='secondary'
+          variant='outline'
+          className='w-full border-2'
+        >
           <span className='mr-2 font-bold text-regular'>+</span>
           {t('addNewMessage')}
         </Button>

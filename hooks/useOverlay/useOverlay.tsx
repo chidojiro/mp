@@ -12,11 +12,7 @@ export type Props = {
 const OVERLAYING_SPINNER_CLASS_NAME = 'hsk-overlaying-spinner';
 const OVERLAYING_SPINNER_DATA_SPINNER_IDS = 'data-spinnerids';
 
-export const useOverlayingLoader = ({
-  active,
-  host: hostProp,
-  component = 'loading...',
-}: Props) => {
+export const useOverlay = ({ active, host: hostProp, component = 'loading...' }: Props) => {
   const idRef = React.useRef(UUID());
 
   const getHostElement = React.useCallback(() => {

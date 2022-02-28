@@ -18,7 +18,8 @@ export const CSVButton = ({ onClick, ...props }: CSVButtonProps) => {
     <div
       className='rounded bg-white border border-gray-500 w-40 h-10 flex items-center justify-center text-medium font-bold cursor-pointer'
       onClick={onClick}
-      {...props}>
+      {...props}
+    >
       <Icon name='download' className='h-4 w-4 mr-2' />
       <span>{t('csvDownload')}</span>
     </div>

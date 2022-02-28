@@ -34,7 +34,8 @@ export const SideMenu = ({ value, className, onChange, items }: Props) => {
                       {
                         'bg-gray-light border border-dark-gray rounded-full': isActive,
                       }
-                    )}>
+                    )}
+                  >
                     {item.label}
                   </div>
                 )}

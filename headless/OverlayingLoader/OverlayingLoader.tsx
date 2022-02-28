@@ -1,8 +1,8 @@
 import React, { ForwardedRef } from 'react';
-import { UseOverlayingLoaderProps, useOverlayingLoader } from 'hooks';
+import { useOverlayProps, useOverlay } from 'hooks';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-type Props = Omit<UseOverlayingLoaderProps, 'host'> & { children: JSX.Element };
+type Props = Omit<useOverlayProps, 'host'> & { children: JSX.Element };
 
 // eslint-disable-next-line no-empty-pattern
 export const OverlayingLoader = React.forwardRef(
@@ -13,7 +13,7 @@ export const OverlayingLoader = React.forwardRef(
 
     const clonedChildren = React.cloneElement(children, { ref: internalRef });
 
-    useOverlayingLoader({ active, host: internalRef, component });
+    useOverlay({ active, host: internalRef, component });
 
     return <>{clonedChildren}</>;
   }
