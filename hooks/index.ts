@@ -5,7 +5,7 @@ export * from './useOnClickOutside';
 export * from './useControllable';
 export * from './useVisibilityControl';
 export * from './usePagination';
-export * from './useOverlayingLoader';
+export * from './useOverlay';
 export * from './useNotification';
 export * from './useGlobalState';
 export * from './useIsoMorphicEffect';

@@ -1,10 +1,9 @@
-import { Layout } from '@/components';
+import { Icon, Layout } from '@/components';
+import { CSVButton } from '@/components/CSVButton/CSVButton';
+import { CustomerReportButton } from '@/components/CustomerReportButton/CustomerReportButton';
+import { CustomerSegmentTable } from '@/components/CustomerSegmentTable/CustomerSegmentTable';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { CustomerSegmentTable } from '@/components/CustomerSegmentTable/CustomerSegmentTable';
-import { CustomerReportButton } from '@/components/CustomerReportButton/CustomerReportButton';
-import { CSVButton } from '@/components/CSVButton/CSVButton';
-import { Icon } from '@/components';
 
 const placeholder = [
   {
@@ -74,11 +73,11 @@ function Dashboard() {
 
   return (
     <Layout title={t('menuDashboard')}>
-      <h4 className='text-gray-600 mb-2 mt-5'>{t('dashboardCustomerAnalysis')}</h4>
+      <h4 className='mt-5 mb-2 text-gray-600'>{t('dashboardCustomerAnalysis')}</h4>
 
-      <div className='w-full flex justify-between items-end mb-10'>
+      <div className='flex items-end justify-between w-full mb-10'>
         <div className='flex'>
-          <div className='font-bold mr-5'>{t('timePeriod')}</div>
+          <div className='mr-5 font-bold'>{t('timePeriod')}</div>
           <div>{t('dashboardPeriodLast180Days')}</div>
         </div>
         <CSVButton />
@@ -88,7 +87,7 @@ function Dashboard() {
         <CustomerSegmentTable data={placeholder} onClick={() => console.log('click')} />
       </div>
 
-      <h4 className='text-gray-600 mb-5'>{t('labelReport')}</h4>
+      <h4 className='mb-5 text-gray-600'>{t('labelReport')}</h4>
 
       <div className='w-full'>
         <div className='grid grid-cols-2 grid-rows-4 gap-[10px]'>
