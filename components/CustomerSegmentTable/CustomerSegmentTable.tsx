@@ -160,8 +160,8 @@ export const CustomerSegmentTable = ({
             S
           </div>
           <div className='text-right mr-6'>
-            {data.synalioUsers}
-            {t('labelPeople')} ({data.synalioPercentage}
+            {data.webUsers}
+            {t('labelPeople')} ({data.webPercentage}
             {t('labelPercent')})
           </div>
         </div>
@@ -183,6 +183,7 @@ export const CustomerSegmentTable = ({
   return (
     <div className='flex' {...props}>
       {data.map((dataSet, index) => {
+        console.log('dataset:', dataSet);
         return (
           <div className='flex flex-col flex-1' key={dataSet.target}>
             <div className={dashboardCardHeaderClasses(dataSet.target, index, data.length)}>
@@ -198,7 +199,8 @@ export const CustomerSegmentTable = ({
                   dataSet.target === 'f0'
                     ? 'flex items-start my-[5px] justify-center h-full w-full relative'
                     : 'flex items-center justify-center h-full w-full relative'
-                }>
+                }
+              >
                 <div className='text-medium w-full'>
                   {dataSet.target !== 'f0' ? (
                     <div className='flex items-center container justify-end text-right my-2'>
@@ -238,7 +240,8 @@ export const CustomerSegmentTable = ({
                         dataSet.target !== 'f0'
                           ? 'text-right mr-6'
                           : 'text-right mr-6 font-bold text-regular'
-                      }>
+                      }
+                    >
                       {getSecondDataPoint(dataSet)}
                       {getEndLabel(dataSet.target)}
                     </div>

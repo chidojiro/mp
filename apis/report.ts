@@ -6,15 +6,6 @@ export const ReportApi = {
     if (result.status === 200) {
       // convert data
       const data = result.data.result;
-      const segments = [
-        'f0',
-        'f1',
-        'f2',
-        'semi-loyal',
-        // TODO: Need change to loyal
-        'royal',
-        'sleep',
-      ];
       return [
         {
           target: 'f0',
@@ -24,7 +15,11 @@ export const ReportApi = {
           average: '',
           total: '',
           f1Sleep: '',
-          royalSleep: '',
+          loyalSleep: '',
+          webUsers: data.f0_member_web_uu,
+          webPercentage: data.f0_member_uu > 0 ? data.f0_member_web_uu / data.f0_member_uu : 0,
+          lineUsers: data.f0_member_line_uu,
+          linePercentage: data.f0_member_uu > 0 ? data.f0_member_line_uu / data.f0_member_uu : 0,
         },
         {
           target: 'f1',
@@ -38,7 +33,11 @@ export const ReportApi = {
               ? data.f1_sales_amount_recent_period / data.f1_purchase_count_recent_period
               : 0,
           f1Sleep: '',
-          royalSleep: '',
+          loyalSleep: '',
+          webUsers: data.f1_web_uu,
+          webPercentage: data.f1_uu > 0 ? data.f1_web_uu / data.f1_uu : 0,
+          lineUsers: data.f1_line_uu,
+          linePercentage: data.f1_uu > 0 ? data.f1_line_uu / data.f1_uu : 0,
         },
         {
           target: 'f2',
@@ -52,10 +51,14 @@ export const ReportApi = {
               ? data.f2_sales_amount_recent_period / data.f2_purchase_count_recent_period
               : 0,
           f1Sleep: '',
-          royalSleep: '',
+          loyalSleep: '',
+          webUsers: data.f2_web_uu,
+          webPercentage: data.f2_uu > 0 ? data.f2_web_uu / data.f2_uu : 0,
+          lineUsers: data.f2_line_uu,
+          linePercentage: data.f2_uu > 0 ? data.f2_line_uu / data.f2_uu : 0,
         },
         {
-          target: 'semi-royal',
+          target: 'semi-loyal',
           numOfCustomers: data.next_loyal_uu,
           members: '',
           other: '',
@@ -67,10 +70,14 @@ export const ReportApi = {
                 data.next_loyal_purchase_count_recent_period
               : 0,
           f1Sleep: '',
-          royalSleep: '',
+          loyalSleep: '',
+          webUsers: data.next_loyal_web_uu,
+          webPercentage: data.next_loyal_uu > 0 ? data.next_loyal_web_uu / data.next_loyal_uu : 0,
+          lineUsers: data.next_loyal_line_uu,
+          linePercentage: data.next_loyal_uu > 0 ? data.next_loyal_line_uu / data.next_loyal_uu : 0,
         },
         {
-          target: 'royal',
+          target: 'loyal',
           numOfCustomers: data.loyal_uu,
           members: '',
           other: '',
@@ -81,7 +88,11 @@ export const ReportApi = {
               ? data.loyal_sales_amount_recent_period / data.loyal_purchase_count_recent_period
               : 0,
           f1Sleep: '',
-          royalSleep: '',
+          loyalSleep: '',
+          webUsers: data.loyal_web_uu,
+          webPercentage: data.loyal_uu > 0 ? data.loyal_web_uu / data.loyal_uu : 0,
+          lineUsers: data.loyal_line_uu,
+          linePercentage: data.loyal_uu > 0 ? data.loyal_line_uu / data.loyal_uu : 0,
         },
         {
           target: 'sleep',
@@ -91,7 +102,17 @@ export const ReportApi = {
           average: '',
           total: '',
           f1Sleep: data.f1_sleep_candidate_uu,
-          royalSleep: data.loyal_sleep_candidate_uu,
+          loyalSleep: data.loyal_sleep_candidate_uu,
+          webUsers: data.total_sleep_candidate_web_uu,
+          webPercentage:
+            data.total_sleep_candidate_uu > 0
+              ? data.total_sleep_candidate_web_uu / data.total_sleep_candidate_uu
+              : 0,
+          lineUsers: data.total_sleep_candidate_line_uu,
+          linePercentage:
+            data.total_sleep_candidate_uu > 0
+              ? data.total_sleep_candidate_line_uu / data.total_sleep_candidate_uu
+              : 0,
         },
       ];
     }
