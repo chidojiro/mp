@@ -25,9 +25,9 @@ axios.interceptors.request.use(
       config.headers.Authorization = `Bearer ${CookiesUtils.get(AUTH_TOKEN)}`;
     }
     // config.headers['X-Frontend-Version'] = `${APP_VERSION}_${BUILD_NUMBER}`
-    config.headers['X-Request-Id'] = nanoid();
+    config.headers['X-Request-Id'] = nanoid(32);
     if (config.method === 'post') {
-      config.headers['X-Idempotent-Key'] = nanoid();
+      config.headers['X-Idempotent-Key'] = nanoid(32);
     }
     return config;
   },

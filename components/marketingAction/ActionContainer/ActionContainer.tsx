@@ -81,7 +81,9 @@ export const ActionContainer = ({
           <img className='mt-3' alt='' src={flowImgUrl} />
         </div>
       )}
-      {showUseTemplateBtn && <Button className='w-[360px] !block mx-auto mt-6'>{t('useThisTemplate')}</Button>}
+      {showUseTemplateBtn && (
+        <Button className='w-[360px] !block mx-auto mt-6'>{t('useThisTemplate')}</Button>
+      )}
     </div>
   );
 };

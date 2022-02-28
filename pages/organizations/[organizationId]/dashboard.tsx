@@ -1,9 +1,12 @@
+import { ReportApi } from '@/apis';
 import { Icon, Layout } from '@/components';
 import { CSVButton } from '@/components/CSVButton/CSVButton';
 import { CustomerReportButton } from '@/components/CustomerReportButton/CustomerReportButton';
 import { CustomerSegmentTable } from '@/components/CustomerSegmentTable/CustomerSegmentTable';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useState } from 'react';
+import useSWR from 'swr';
 
 const placeholder = [
   {
@@ -70,6 +73,18 @@ const placeholder = [
 
 function Dashboard() {
   const { t } = useTranslation('dashboard');
+  const [report, setReport] = useState(null);
+  const { data, error } = useSWR('/api/user', ReportApi.rfm_report, {
+    fallbackData: placeholder,
+  });
+  console.log(data);
+  // useEffect(() => {
+  //     const loadData = async () => {
+  //       const result = await ReportApi.rfm_report();
+  //       setReport(result.data.result)
+  //     }
+  //     loadData()
+  //   }, [report])
 
   return (
     <Layout title={t('menuDashboard')}>
@@ -84,7 +99,7 @@ function Dashboard() {
       </div>
 
       <div className='w-full mb-12'>
-        <CustomerSegmentTable data={placeholder} onClick={() => console.log('click')} />
+        {!!data && <CustomerSegmentTable data={data} onClick={() => console.log('click')} />}
       </div>
 
       <h4 className='mb-5 text-gray-600'>{t('labelReport')}</h4>

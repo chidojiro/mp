@@ -21,7 +21,8 @@ export const List = () => {
           href={{
             pathname,
             query: { ...query, marketingActionStatus: HeaderTab.Active, marketingActionId: 1 },
-          }}>
+          }}
+        >
           <a className='block'>{t('inProgressTab')}</a>
         </Link>
       ),
@@ -35,7 +36,8 @@ export const List = () => {
           href={{
             pathname,
             query: { ...query, marketingActionStatus: HeaderTab.Terminated, marketingActionId: 1 },
-          }}>
+          }}
+        >
           <a className='block'>{t('finishedTab')}</a>
         </Link>
       ),
@@ -49,7 +51,8 @@ export const List = () => {
           href={{
             pathname,
             query: { ...query, marketingActionStatus: HeaderTab.Draft, marketingActionId: 1 },
-          }}>
+          }}
+        >
           <a className='block'>{t('draftTab')}</a>
         </Link>
       ),

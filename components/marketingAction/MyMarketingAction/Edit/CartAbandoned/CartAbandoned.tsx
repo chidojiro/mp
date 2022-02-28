@@ -102,12 +102,15 @@ export const CartAbandoned = () => {
         title={t('cartAbandoned')}
         description={t('cartAbandonedDescription')}
         descriptionImageUrl='/images/cart-abandoned-description.png'
-        flowImgUrl='/images/cart-abandoned-flow.png'></ActionContainer>
+        flowImgUrl='/images/cart-abandoned-flow.png'
+      ></ActionContainer>
       <Form methods={methods} onSubmit={onSubmit} className='mt-[60px]'>
         <Steps steps={steps} />
       </Form>
       <div className='flex justify-center'>
-        <Button className='mr-5 min-w-[480px] h-[52px] bg-input border-none'>{t('saveDraft')}</Button>
+        <Button className='mr-5 min-w-[480px] h-[52px] bg-input border-none'>
+          {t('saveDraft')}
+        </Button>
         <Button className='min-w-[480px] h-[52px]'>{t('implementTemplate')}</Button>
       </div>
     </div>

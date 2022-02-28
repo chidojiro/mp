@@ -14,7 +14,8 @@ export const Tag = ({ className, children, size = 'md' }: Props) => {
         'flex items-center',
         { 'px-2 py-1': size === 'md', 'px-3 py-1.5': size === 'lg' },
         className
-      )}>
+      )}
+    >
       {children}
     </div>
   );

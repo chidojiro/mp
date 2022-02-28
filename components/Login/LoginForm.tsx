@@ -1,5 +1,7 @@
 import { Form } from '@/components';
 import { useStateToggle } from '@/hooks';
+import { LoginData } from '@/types';
+import { AuthService } from '@/utils/auth';
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'next-i18next';
@@ -23,8 +25,11 @@ export const LoginForm = () => {
   const [showPwd, toggleShowPwd] = useStateToggle(false);
   const icon = showPwd ? <EyeIcon className='w-5 h-5' /> : <EyeOffIcon className='w-5 h-5' />;
 
-  const onSubmit = () => {
-    router.push('/organizations/1/dashboard');
+  const onSubmit = async (val: LoginData) => {
+    const isSuccess = await AuthService.login(val);
+    if (isSuccess) {
+      router.push('/organizations/1/dashboard');
+    }
   };
 
   return (

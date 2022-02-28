@@ -26,7 +26,8 @@ export const NewMarketingAction = ({}: Props) => {
           title={t('cartAbandoned')}
           description={t('cartAbandonedDescription')}
           descriptionImageUrl='/images/cart-abandoned-description.png'
-          flowImgUrl='/images/cart-abandoned-flow.png'></ActionContainer>
+          flowImgUrl='/images/cart-abandoned-flow.png'
+        ></ActionContainer>
       ),
       label: (
         <Link href={{ pathname, query: { ...query, marketingActionName: 'cart-abandoned' } }}>
@@ -42,14 +43,16 @@ export const NewMarketingAction = ({}: Props) => {
           title={t('stepDeliveryAfterPurchase')}
           description={t('stepDeliveryAfterPurchaseDescription')}
           descriptionImageUrl='/images/step-delivery-after-purchase-description.png'
-          flowImgUrl='/images/step-delivery-after-purchase-flow.png'></ActionContainer>
+          flowImgUrl='/images/step-delivery-after-purchase-flow.png'
+        ></ActionContainer>
       ),
       label: (
         <Link
           href={{
             pathname,
             query: { ...query, marketingActionName: 'step-delivery-after-purchase' },
-          }}>
+          }}
+        >
           {t('stepDeliveryAfterPurchase')}
         </Link>
       ),
@@ -61,7 +64,8 @@ export const NewMarketingAction = ({}: Props) => {
           iconName='cart-question'
           title={t('cartPageFaq')}
           description={t('cartPageFaqDescription')}
-          descriptionImageUrl='/images/cart-page-faq-description.png'></ActionContainer>
+          descriptionImageUrl='/images/cart-page-faq-description.png'
+        ></ActionContainer>
       ),
       label: (
         <Link href={{ pathname, query: { ...query, marketingActionName: 'cart-page-faq' } }}>
@@ -76,14 +80,16 @@ export const NewMarketingAction = ({}: Props) => {
           iconName='chatbot'
           title={t('recommendationDiagnosisBotStatic')}
           description={t('recommendationDiagnosisBotStaticDescription')}
-          descriptionImageUrl='/images/recommendation-diagnosis-bot-description.png'></ActionContainer>
+          descriptionImageUrl='/images/recommendation-diagnosis-bot-description.png'
+        ></ActionContainer>
       ),
       label: (
         <Link
           href={{
             pathname,
             query: { ...query, marketingActionName: 'recommendation-diagnosis-bot' },
-          }}>
+          }}
+        >
           {t('recommendationDiagnosisBotStatic')}
         </Link>
       ),
@@ -95,14 +101,16 @@ export const NewMarketingAction = ({}: Props) => {
           iconName='free-shipping'
           title={t('conditionalFreeShipping')}
           description={t('conditionalFreeShippingDescription')}
-          descriptionImageUrl='/images/conditional-free-shipping-description.png'></ActionContainer>
+          descriptionImageUrl='/images/conditional-free-shipping-description.png'
+        ></ActionContainer>
       ),
       label: (
         <Link
           href={{
             pathname,
             query: { ...query, marketingActionName: 'conditional-free-shipping' },
-          }}>
+          }}
+        >
           {t('conditionalFreeShipping')}
         </Link>
       ),
@@ -114,14 +122,16 @@ export const NewMarketingAction = ({}: Props) => {
           iconName='ranking'
           title={t('rankingBasedOnOverallPurchaseHistory')}
           description={t('rankingBasedOnOverallPurchaseHistoryDescription')}
-          descriptionImageUrl='/images/ranking-description.png'></ActionContainer>
+          descriptionImageUrl='/images/ranking-description.png'
+        ></ActionContainer>
       ),
       label: (
         <Link
           href={{
             pathname,
             query: { ...query, marketingActionName: 'ranking-based-on-overall-purchase-history' },
-          }}>
+          }}
+        >
           {t('rankingBasedOnOverallPurchaseHistory')}
         </Link>
       ),
@@ -133,7 +143,8 @@ export const NewMarketingAction = ({}: Props) => {
           iconName='ranking'
           title={t('rankingByCategoryBasedOnOverallPurchaseHistory')}
           description={t('rankingByCategoryBasedOnOverallPurchaseHistoryDescription')}
-          descriptionImageUrl='/images/ranking-description.png'></ActionContainer>
+          descriptionImageUrl='/images/ranking-description.png'
+        ></ActionContainer>
       ),
       label: (
         <Link
@@ -143,7 +154,8 @@ export const NewMarketingAction = ({}: Props) => {
               ...query,
               marketingActionName: 'ranking-by-category-based-on-overall-purchase-history',
             },
-          }}>
+          }}
+        >
           {t('rankingByCategoryBasedOnOverallPurchaseHistory')}
         </Link>
       ),

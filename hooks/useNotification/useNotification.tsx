@@ -158,7 +158,8 @@ export const useNotification = (props?: Props) => {
         placement={placement}
         offsetEach={offsetEach}
         offsetX={offsetX}
-        offsetY={offsetY}>
+        offsetY={offsetY}
+      >
         {Object.keys(allNotifications).map(id => (
           <React.Fragment key={id}>
             {/* // TODO: performance with handleClose */}

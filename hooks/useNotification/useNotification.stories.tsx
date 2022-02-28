@@ -28,7 +28,8 @@ const Template: ComponentStory<any> = ({}: any) => {
                   </Notification>
                 ) : null,
             })
-          }>
+          }
+        >
           top-left
         </button>
         <button
@@ -43,7 +44,8 @@ const Template: ComponentStory<any> = ({}: any) => {
                   </Notification>
                 ) : null,
             })
-          }>
+          }
+        >
           top-center
         </button>
         <button
@@ -58,7 +60,8 @@ const Template: ComponentStory<any> = ({}: any) => {
                   </Notification>
                 ) : null,
             })
-          }>
+          }
+        >
           top-right
         </button>
 
@@ -74,7 +77,8 @@ const Template: ComponentStory<any> = ({}: any) => {
                   </Notification>
                 ) : null,
             })
-          }>
+          }
+        >
           bottom-left
         </button>
         <button
@@ -89,7 +93,8 @@ const Template: ComponentStory<any> = ({}: any) => {
                   </Notification>
                 ) : null,
             })
-          }>
+          }
+        >
           bottom-center
         </button>
         <button
@@ -104,7 +109,8 @@ const Template: ComponentStory<any> = ({}: any) => {
                   </Notification>
                 ) : null,
             })
-          }>
+          }
+        >
           bottom-right
         </button>
       </div>
