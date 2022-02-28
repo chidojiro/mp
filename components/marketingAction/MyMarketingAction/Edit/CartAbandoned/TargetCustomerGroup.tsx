@@ -13,8 +13,8 @@ export const TargetCustomerGroup = () => {
 
   const targetCustomers: TargetCustomer[] = [
     { label: t('f0member'), value: 'f0_member' },
-    { label: 'F1', value: t('f1') },
-    { label: 'F2', value: t('f2') },
+    { label: 'F1', value: 'f1' },
+    { label: 'F2', value: 'f2' },
     { label: t('semiRoyal'), value: 'semi_royal' },
     { label: t('royal'), value: 'royal' },
     { label: t('f1dormant'), value: 'f1_dormant' },

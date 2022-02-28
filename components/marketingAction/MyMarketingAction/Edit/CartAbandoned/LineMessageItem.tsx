@@ -1,5 +1,4 @@
 import { Form, ImageUploader } from '@/components';
-import { Select } from '@/components/common/fields/Select';
 import { Message, MESSAGE_TYPE } from '@/constants';
 import { useTranslation } from 'next-i18next';
 
@@ -20,7 +19,7 @@ export const LineMessageItem = ({ message, handleChangeType }: Props) => {
     return message.type === MESSAGE_TYPE.IMAGE ? (
       <ImageUploader />
     ) : (
-      <Form.TextArea name={`line_message.${message.id}`} />
+      <Form.TextArea name={`line_message_${message.id}`} />
     );
   };
 
@@ -33,18 +32,20 @@ export const LineMessageItem = ({ message, handleChangeType }: Props) => {
       return { value: optionItem, label: messageTypes[optionItem] };
     });
 
-    return <Select options={selectBox} onChange={onChangeType} />;
+    return (
+      <Form.Select
+        defaultValue={selectBox[0].value}
+        name={`type_line_${message.id}`}
+        options={selectBox}
+        onChange={onChangeType}
+      />
+    );
   };
 
   return (
     <div className='mb-5'>
-      <div className='mb-1 font-semibold text-medium text-secondary'>
-        {t('lineMsg', { number: message.id + 1 })}
-      </div>
-      <div className='mb-2.5 flex'>
-        <div>{getSelectBox()}</div>
-        <div></div>
-      </div>
+      <div className='mb-1 font-semibold text-medium text-secondary'>{t('lineMsg', { number: message.id + 1 })}</div>
+      <div className='mb-2.5'>{getSelectBox()}</div>
       <div>{renderMessageContent()}</div>
     </div>
   );
