@@ -32,7 +32,8 @@ export const CustomerReportButton = ({
 }: CustomerReportButtonProps) => (
   <div
     className='border border-gray-500 border-solid rounded-md h-[60px] flex items-center justify-between text-gray-800 cursor-pointer'
-    {...props}>
+    {...props}
+  >
     <div className='flex items-center'>
       <div className='mx-5 h-full flex items-center'>{featuredIcon}</div>
       <div className='text-sm font-bold mx-1'>{label}</div>

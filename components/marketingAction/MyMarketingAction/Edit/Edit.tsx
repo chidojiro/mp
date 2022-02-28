@@ -1,4 +1,4 @@
-import { Layout } from '@/components/common';
+import { Layout } from '@/components';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { CartAbandoned } from './CartAbandoned';

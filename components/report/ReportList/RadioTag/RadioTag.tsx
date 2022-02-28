@@ -26,12 +26,14 @@ export const RadioTag = ({ value, label }: Props) => {
                 'border-gray-500 bg-white': !isChecked,
                 'bg-primary border-primary text-white': isChecked,
               }
-            )}>
+            )}
+          >
             <div
               className={classNames('w-3 h-3 rounded-full', 'flex items-center justify-center', {
                 'bg-gray-300': !isChecked,
                 'bg-white': isChecked,
-              })}>
+              })}
+            >
               {!!isChecked && <div className='w-1.5 h-1.5 rounded-full bg-primary'></div>}
             </div>
             <span>{label}</span>

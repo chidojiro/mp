@@ -21,12 +21,14 @@ export const CheckboxTag = ({ value, label }: Props) => {
               'border-gray-500 bg-white': !isChecked,
               'bg-primary border-primary text-white': isChecked,
             }
-          )}>
+          )}
+        >
           <div
             className={classNames('w-3 h-3 rounded-sm', {
               'bg-gray-300': !isChecked,
               'bg-white': isChecked,
-            })}></div>
+            })}
+          ></div>
           <span>{label}</span>
           <input
             type='checkbox'

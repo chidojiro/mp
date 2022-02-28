@@ -15,7 +15,8 @@ export const UpdateInformation = ({ className }: Props) => {
         'rounded-lg border-2 border-solid border-primary',
         'p-8 mb-14',
         className
-      )}>
+      )}
+    >
       <h5 className='mb-4 text-primary'>{t('updateInformation')}</h5>
       <div className='space-y-3 text-gray-800'>
         <div className='flex items-center'>

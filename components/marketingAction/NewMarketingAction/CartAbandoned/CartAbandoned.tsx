@@ -14,6 +14,7 @@ export const CartAbandoned = ({}: Props) => {
       title={t('cartAbandoned')}
       description={t('cartAbandonedDescription')}
       descriptionImageUrl='/image/'
-      flowImgUrl=''></ActionContainer>
+      flowImgUrl=''
+    ></ActionContainer>
   );
 };

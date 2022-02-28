@@ -1,59 +1,110 @@
-import { Form } from '@/components';
-import { Icon } from '@/components';
-import { ImageUploader } from '@/components';
+import { Form, Icon } from '@/components';
+import { Button, RadioGroup } from '@/components/common';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
+import { useWatch } from 'react-hook-form';
 import { ColorGroup } from './ColorGroup';
-import { LineMessage } from './LineMessage';
+import { DateTime } from './DateTime';
 
-export const MessageSetting = () => {
+type Props = {
+  showLineSettings: boolean;
+};
+
+export const MessageSetting = ({ showLineSettings }: Props) => {
   const { t } = useTranslation('marketingAction');
 
-  const emailFields = [
-    { title: t('logo'), content: <ImageUploader /> },
-    { title: t('headLines'), content: <Form.Input name='head_line' /> },
-    { title: t('bodyText'), content: <Form.TextArea name='body_text' /> },
-    { title: t('storeName'), content: <Form.Input name='store_name' /> },
-    { title: t('siteURL'), content: <Form.Input name='site_url' /> },
-    { title: t('contactInfo'), content: <Form.Input name='contact_info' /> },
-    { title: t('mainColor'), content: <ColorGroup name='main_color' /> },
-    { title: t('subColor'), content: <ColorGroup name='sub_color' /> },
+  const textMessageOptions = [
+    { value: 'text_message', label: t('displayMsg') },
+    { value: 'no_text_message', label: t('noDisplay') },
   ];
+  const showLineMsg = useWatch({ name: 'line_message_display' }) === textMessageOptions[0].value;
+  const headlinesEmail = useWatch({ name: 'headlines_email' });
+  const textEmail = useWatch({ name: 'text_email' });
 
   return (
     <>
-      <div className='px-10 -mx-10 border-b-4 border-white'>
-        <div className='mb-1 font-semibold'>{t('timeDelivery')}</div>
-        <div className='flex items-center text-gray-dark text-medium mb-7'>
-          <div>{t('fromTheDateCartAbandoned')}</div>
-          <Form.Input name='from_the_date' className='w-20 mx-2.5' />
-          {t('daysAfter')}
-          <Form.Input htmlType='time' name='time' className='ml-2.5 w-20' />
-        </div>
+      <div className='px-10 -mx-10 border-b-4 border-white pb-7'>
+        <DateTime
+          fromTheDateText={t('fromTheDateCartAbandoned')}
+          inputDateName='date_cart_abandoned'
+          inputTimeName='time_cart_abandoned'
+        />
       </div>
       <div className='px-10 -mx-10 border-b-4 border-white mt-7'>
         <div className='flex items-center'>
           <Icon name='mail' className='mr-2' size={18} />
           <div className='font-semibold'>{t('msgContentEmail')}</div>
         </div>
-        <div className='flex justify-between mt-2'>
+        <div className='flex justify-between mt-2 mb-7'>
           <div className='flex-1 mr-10'>
-            {emailFields.map((field, idx) => (
-              <div key={idx} className='mb-4'>
-                <div className='mb-2.5 font-semibold text-secondary'>{field.title}</div>
-                {field.content}
-              </div>
-            ))}
+            <div className='mb-4'>
+              <div className='mb-2.5 font-semibold text-secondary text-medium'>{t('headLines')}</div>
+              <Form.Input name='headlines_email' />
+            </div>
+            <div className='mb-4'>
+              <div className='mb-2.5 font-semibold text-secondary text-medium'>{t('bodyText')}</div>
+              <Form.TextArea name='text_email' />
+            </div>
           </div>
-          <div className='w-[400px] rounded bg-white h-fit'>form</div>
+          <div>
+            <div className='flex justify-between mb-2 text-medium'>
+              <span className='text-secondary'>{t('preview')}</span>
+              <span className='text-gray-700 underline cursor-pointer'>{t('openPreview')}</span>
+            </div>
+            <div className='w-[335px] rounded bg-white h-fit p-5 border border-gray-300'>
+              <h2 className='mb-4 text-center text-secondary'>Brand Logo</h2>
+              <div className='flex justify-center w-full'>
+                <h3 className='w-[160px] mb-4 whitespace-pre-line text-gray-dark text-center'>{headlinesEmail}</h3>
+              </div>
+              <div className='mb-3 font-semibold'>山田 太郎 様</div>
+              <div className='mb-3 text-gray-dark'>{textEmail}</div>
+              <Button className='w-full text-center'>{t('viewShoppingCart')}</Button>
+            </div>
+          </div>
         </div>
       </div>
-      <div className='mt-7'>
-        <div className='flex items-center'>
-          <Icon name='line' size={20} className='mr-2' />
-          <div className='font-semibold'>{t('msgContentLine')}</div>
+      {showLineSettings && (
+        <div className='px-10 -mx-10 border-b-4 border-white mt-7 pb-7'>
+          <div className='flex items-center'>
+            <Icon name='line' size={20} className='mr-2' />
+            <div className='font-semibold'>{t('msgContentLine')}</div>
+          </div>
+          <div className='flex justify-between mt-2 mb-7'>
+            <div className='flex-1 mr-10'>
+              <div className='mb-4'>
+                <div className='mb-2.5 font-semibold text-secondary text-medium'>{t('textMessage')}</div>
+                <Form.RadioGroup name='line_message_display'>
+                  {textMessageOptions.map(option => (
+                    <RadioGroup.Option
+                      colorScheme='secondary'
+                      key={option.value}
+                      className='mb-2.5 text-gray-dark text-medium'
+                      label={option.label}
+                      value={option.value}
+                    />
+                  ))}
+                </Form.RadioGroup>
+                {showLineMsg && (
+                  <>
+                    <div className='flex mb-3 text-medium text-gray-dark'>
+                      <div className='mr-2 w-fit bg-white py-2 px-2.5 rounded border border-gray-300'>{t('emoji')}</div>
+                      <div className='w-fit bg-white py-2 px-2.5 rounded border border-gray-300'>
+                        <span className='mr-1 font-bold text-secondary'>@</span>
+                        {t('variable')}
+                      </div>
+                    </div>
+                    <Form.TextArea name='text_line' />
+                  </>
+                )}
+              </div>
+            </div>
+            <div className='w-[335px] rounded bg-white h-fit'>preview</div>
+          </div>
         </div>
-        <LineMessage />
+      )}
+      <div className='w-2/3 mt-7'>
+        <div className='mb-2 font-semibold'>{t('colorSettings')}</div>
+        <ColorGroup name='colors' />
       </div>
     </>
   );

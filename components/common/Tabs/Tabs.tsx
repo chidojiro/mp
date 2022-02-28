@@ -29,10 +29,13 @@ export const Tabs = ({ value, onChange, items, className }: Props) => {
                     <button
                       onClick={onClick}
                       className={classNames(
-                        isActive ? 'border-secondary text-secondary' : 'border-transparent text-gray-800',
+                        isActive
+                          ? 'border-secondary text-secondary'
+                          : 'border-transparent text-gray-800',
                         'whitespace-nowrap py-4 px-1 border-b-[3px] font-medium text-sm flex-1'
                       )}
-                      aria-current={isActive ? 'page' : undefined}>
+                      aria-current={isActive ? 'page' : undefined}
+                    >
                       {tab.label}
                     </button>
                   )}
