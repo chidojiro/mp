@@ -32,10 +32,10 @@ export const Sidebar = () => {
           ],
         },
         {
-          path: `${projectPrefix}/reports/semi-royal-conversion-rate`,
-          label: t('semiRoyalConversionRate'),
+          path: `${projectPrefix}/reports/semi-loyal-conversion-rate`,
+          label: t('semiLoyalConversionRate'),
           matches: [
-            '/organizations/[organizationId]/projects/[projectId]/reports/semi-royal-conversion-rate',
+            '/organizations/[organizationId]/projects/[projectId]/reports/semi-loyal-conversion-rate',
           ],
         },
         {

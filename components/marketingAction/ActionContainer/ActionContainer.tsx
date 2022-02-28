@@ -65,11 +65,11 @@ export const ActionContainer = ({
             <div className='flex gap-1'>
               <Tag>{tCommon('f0member')}</Tag>
               <Tag>{tCommon('f0others')}</Tag>
-              <Tag>{tCommon('semiRoyal')}</Tag>
-              <Tag>{tCommon('royal')}</Tag>
+              <Tag>{tCommon('semiLoyal')}</Tag>
+              <Tag>{tCommon('loyal')}</Tag>
               <Tag>{tCommon('dormant')}</Tag>
               <Tag>{tCommon('f1dormant')}</Tag>
-              <Tag>{tCommon('royalDormant')}</Tag>
+              <Tag>{tCommon('loyalDormant')}</Tag>
             </div>
           </div>
         </div>
@@ -81,7 +81,9 @@ export const ActionContainer = ({
           <img className='mt-3' alt='' src={flowImgUrl} />
         </div>
       )}
-      {showUseTemplateBtn && <Button className='w-[360px] !block mx-auto mt-6'>{t('useThisTemplate')}</Button>}
+      {showUseTemplateBtn && (
+        <Button className='w-[360px] !block mx-auto mt-6'>{t('useThisTemplate')}</Button>
+      )}
     </div>
   );
 };

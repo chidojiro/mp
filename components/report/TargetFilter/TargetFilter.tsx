@@ -21,10 +21,10 @@ export const TargetFilter = ({}: Props) => {
       { label: t('f0others'), value: 'f0others' },
       { label: t('F1'), value: 'f1' },
       { label: t('F2'), value: 'f2' },
-      { label: t('semiRoyal'), value: 'semiroyal' },
-      { label: t('royal'), value: 'royal' },
+      { label: t('semiLoyal'), value: 'semiloyal' },
+      { label: t('loyal'), value: 'loyal' },
       { label: t('f1dormant'), value: 'f1dormant' },
-      { label: t('royalDormant'), value: 'royaldormant' },
+      { label: t('loyalDormant'), value: 'loyaldormant' },
     ],
     [t]
   );

@@ -2,10 +2,10 @@ import { Layout } from '@/components';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-function SemiRoyalConversionRate() {
+function SemiLoyalConversionRate() {
   const { t } = useTranslation();
 
-  return <Layout title={t('semiRoyalConversionRate')}></Layout>;
+  return <Layout title={t('semiLoyalConversionRate')}></Layout>;
 }
 
 export const getServerSideProps = async ({ locale }: any) => ({
@@ -14,4 +14,4 @@ export const getServerSideProps = async ({ locale }: any) => ({
   },
 });
 
-export default SemiRoyalConversionRate;
+export default SemiLoyalConversionRate;

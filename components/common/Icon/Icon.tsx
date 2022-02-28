@@ -13,22 +13,22 @@ import NoImage from './icons/no-image.svg';
 import Upload from './icons/upload.svg';
 import Check from './icons/check.svg';
 import Ranking from './icons/ranking.svg';
-import TriangleRight from './icons/triangle-right.svg'
+import TriangleRight from './icons/triangle-right.svg';
 import f0Icon from './icons/f0-status.svg';
 import f1Icon from './icons/f1-status.svg';
 import f2Icon from './icons/f2-status.svg';
-import semiRoyalIcon from './icons/semiroyal-status.svg';
-import royalIcon from './icons/royal-status.svg';
+import semiLoyalIcon from './icons/semiloyal-status.svg';
+import loyalIcon from './icons/loyal-status.svg';
 import sleepIcon from './icons/sleep-status.svg';
 import popoverClose from './icons/popover-close.svg';
 import popoverTail from './icons/popover-tail.svg';
-import f1Graduate from './icons/f1-graduate.svg'
-import f2Graduate from './icons/f2-graduate.svg'
-import semiroyalGraduate from './icons/semiroyal-graduate.svg'
-import royalFluctuate from './icons/royal-fluctuate.svg'
-import sleepReturned from './icons/sleep-returned.svg'
-import f1SleepReturned from './icons/f1-sleep-returned.svg'
-import royalSleepReturned from './icons/royal-sleep-returned.svg'
+import f1Graduate from './icons/f1-graduate.svg';
+import f2Graduate from './icons/f2-graduate.svg';
+import semiloyalGraduate from './icons/semiloyal-graduate.svg';
+import loyalFluctuate from './icons/loyal-fluctuate.svg';
+import sleepReturned from './icons/sleep-returned.svg';
+import f1SleepReturned from './icons/f1-sleep-returned.svg';
+import loyalSleepReturned from './icons/loyal-sleep-returned.svg';
 
 const ICONS = {
   group: Group,
@@ -49,18 +49,18 @@ const ICONS = {
   'f0-status': f0Icon,
   'f1-status': f1Icon,
   'f2-status': f2Icon,
-  'semi-royal-status': semiRoyalIcon,
-  'royal-status': royalIcon,
+  'semi-loyal-status': semiLoyalIcon,
+  'loyal-status': loyalIcon,
   'sleep-status': sleepIcon,
   'popover-close': popoverClose,
   'popover-tail': popoverTail,
   'f1-graduate': f1Graduate,
   'f2-graduate': f2Graduate,
-  'semi-royal-graduate': semiroyalGraduate,
-  'royal-fluctuate': royalFluctuate,
+  'semi-loyal-graduate': semiloyalGraduate,
+  'loyal-fluctuate': loyalFluctuate,
   'sleep-returned': sleepReturned,
   'f1-sleep-returned': f1SleepReturned,
-  'royal-sleep-returned': royalSleepReturned,
+  'loyal-sleep-returned': loyalSleepReturned,
 };
 
 export type Name = keyof typeof ICONS;

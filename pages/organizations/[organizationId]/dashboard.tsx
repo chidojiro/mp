@@ -15,7 +15,7 @@ const placeholder = [
     average: '',
     total: '',
     f1Sleep: '',
-    royalSleep: '',
+    loyalSleep: '',
   },
   {
     target: 'f1',
@@ -25,7 +25,7 @@ const placeholder = [
     average: '2,277',
     total: '4,180,440',
     f1Sleep: '',
-    royalSleep: '',
+    loyalSleep: '',
   },
   {
     target: 'f2',
@@ -35,27 +35,27 @@ const placeholder = [
     average: '2,612',
     total: '2,329,001',
     f1Sleep: '',
-    royalSleep: '',
+    lSleep: '',
   },
   {
-    target: 'semi-royal',
+    target: 'semi-loyal',
     numOfCustomers: '8,022',
     members: '',
     other: '',
     average: '2,612',
     total: '2,329,001',
     f1Sleep: '',
-    royalSleep: '',
+    loyalSleep: '',
   },
   {
-    target: 'royal',
+    target: 'loyal',
     numOfCustomers: '19,404',
     members: '',
     other: '',
     average: '32,277',
     total: '4,180,440',
     f1Sleep: '',
-    royalSleep: '',
+    loyalSleep: '',
   },
   {
     target: 'sleep',
@@ -65,7 +65,7 @@ const placeholder = [
     average: '',
     total: '',
     f1Sleep: '124',
-    royalSleep: '30',
+    loyalSleep: '30',
   },
 ];
 
@@ -98,15 +98,15 @@ function Dashboard() {
           />
           <CustomerReportButton
             featuredIcon={<Icon name='f2-graduate' className='h-[25px] w-[65px]' />}
-            label={t('semiRoyalConversionRate')}
+            label={t('semiLoyalConversionRate')}
           />
           <CustomerReportButton
-            featuredIcon={<Icon name='semi-royal-graduate' className='h-[25px] w-[65px]' />}
-            label={t('royalConversionRate')}
+            featuredIcon={<Icon name='semi-loyal-graduate' className='h-[25px] w-[65px]' />}
+            label={t('loyalConversionRate')}
           />
           <CustomerReportButton
-            featuredIcon={<Icon name='royal-fluctuate' className='h-[25px] w-[65px]' />}
-            label={t('royalCustomerTrend')}
+            featuredIcon={<Icon name='loyal-fluctuate' className='h-[25px] w-[65px]' />}
+            label={t('loyalCustomerTrend')}
           />
           <CustomerReportButton
             featuredIcon={<Icon name='sleep-returned' className='h-[25px] w-[65px]' />}
@@ -117,8 +117,8 @@ function Dashboard() {
             label={t('dormantF1CustomerReturnTrend')}
           />
           <CustomerReportButton
-            featuredIcon={<Icon name='royal-sleep-returned' className='h-[25px] w-[65px]' />}
-            label={t('dormantRoyalCustomerReturnTrend')}
+            featuredIcon={<Icon name='loyal-sleep-returned' className='h-[25px] w-[65px]' />}
+            label={t('dormantLoyalCustomerReturnTrend')}
           />
         </div>
       </div>
