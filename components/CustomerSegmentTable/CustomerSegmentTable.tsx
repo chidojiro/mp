@@ -16,12 +16,12 @@ export type CustomerSegmentTableProps = {
     average: '', 
     total: '', 
     f1Sleep: '', 
-    royalSleep: '',
+    loyalSleep: '',
   }]
   */
   data: any[];
-  semiRoyalSubtext?: string;
-  royalSubtext?: string;
+  semiLoyalSubtext?: string;
+  loyalSubtext?: string;
   sleepSubtext?: string;
   onClick: (value: any) => void;
 };
@@ -31,8 +31,8 @@ const dashboardCardHeaderClasses = (status: string, index: number, length: numbe
     'bg-purple-500': status === 'f0',
     'bg-primary': status === 'f1',
     'bg-green-500': status === 'f2',
-    'bg-secondary': status === 'semi-royal',
-    'bg-orange-500': status === 'royal',
+    'bg-secondary': status === 'semi-loyal',
+    'bg-orange-500': status === 'loyal',
     'bg-sleepy': status === 'sleep',
 
     'rounded-tl-[10px]': index === 0,
@@ -48,14 +48,14 @@ const dashboardCardBodyClasses = (index: number, length: number) =>
 
     'rounded-br-[10px]': index === length - 1,
 
-    'flex flex-col min-w-44 w-full h-24 border-r border-b border-gray-500': true,
+    'flex flex-col min-w-44 w-full h-40 border-r border-b border-gray-500': true,
   });
 
 const getTriangleClasses = (dataSet: string) =>
   classNames({
     'absolute cursor-pointer': true,
-    'right-[-15px]': dataSet !== 'royal',
-    'rotate-180 right-[-8px]': dataSet === 'royal',
+    'right-[-15px]': dataSet !== 'loyal',
+    'rotate-180 right-[-8px]': dataSet === 'loyal',
   });
 
 const iconSource = (status: string) => {
@@ -66,10 +66,10 @@ const iconSource = (status: string) => {
       return 'f1-status';
     case 'f2':
       return 'f2-status';
-    case 'semi-royal':
-      return 'semi-royal-status';
-    case 'royal':
-      return 'royal-status';
+    case 'semi-loyal':
+      return 'semi-loyal-status';
+    case 'loyal':
+      return 'loyal-status';
     case 'sleep':
       return 'sleep-status';
     default:
@@ -96,22 +96,22 @@ const getFirstDataPoint = (dataSet: {
 const getSecondDataPoint = (dataSet: {
   target: string;
   other: string;
-  royalSleep: string;
+  loyalSleep: string;
   total: string;
 }) => {
   switch (dataSet.target) {
     case 'f0':
       return dataSet.other;
     case 'sleep':
-      return dataSet.royalSleep;
+      return dataSet.loyalSleep;
     default:
       return dataSet.total;
   }
 };
 
 export const CustomerSegmentTable = ({
-  semiRoyalSubtext,
-  royalSubtext,
+  semiLoyalSubtext,
+  loyalSubtext,
   sleepSubtext,
   data,
   onClick,
@@ -135,7 +135,7 @@ export const CustomerSegmentTable = ({
       case 'f0':
         return t('labelOther');
       case 'sleep':
-        return t('labelRoyalDormant');
+        return t('labelLoyalDormant');
       default:
         return t('labelTotal');
     }
@@ -152,6 +152,34 @@ export const CustomerSegmentTable = ({
     }
   };
 
+  const SLData = (data: any) => {
+    return (
+      <>
+        <div className='flex items-center container justify-between my-2'>
+          <div className='text-left ml-6 bg-primary rounded-full text-white h-4 w-4 flex justify-center text-medium-sm'>
+            S
+          </div>
+          <div className='text-right mr-6'>
+            {data.synalioUsers}
+            {t('labelPeople')} ({data.synalioPercentage}
+            {t('labelPercent')})
+          </div>
+        </div>
+
+        <div className='flex items-center container justify-between my-2'>
+          <div className='text-left ml-6 bg-[#06C755] rounded-full text-white h-4 w-4 flex justify-center text-medium-sm'>
+            L
+          </div>
+          <div className='text-right mr-6'>
+            {data.lineUsers}
+            {t('labelPeople')} ({data.linePercentage}
+            {t('labelPercent')})
+          </div>
+        </div>
+      </>
+    );
+  };
+
   return (
     <div className='flex' {...props}>
       {data.map((dataSet, index) => {
@@ -165,36 +193,52 @@ export const CustomerSegmentTable = ({
               <div className='text-medium-sm'>{t(dataSet.target + 'Subtext')}</div>
             </div>
             <div className={dashboardCardBodyClasses(index, data.length)}>
-              <div className='flex items-center justify-center h-full w-full relative'>
+              <div
+                className={
+                  dataSet.target === 'f0'
+                    ? 'flex items-start my-[5px] justify-center h-full w-full relative'
+                    : 'flex items-center justify-center h-full w-full relative'
+                }>
                 <div className='text-medium w-full'>
                   {dataSet.target !== 'f0' ? (
                     <div className='flex items-center container justify-end text-right my-2'>
-                      <div className='mr-6 font-bold'>
+                      <div className='mr-6 font-bold text-regular'>
                         {dataSet.numOfCustomers}
                         {t('labelPeople')}
                       </div>
                     </div>
                   ) : (
+                    <div className='flex items-center container justify-between my-2'>
+                      <div className='text-left ml-6'>{t('labelMember')}</div>
+                      <div className='text-right mr-6 font-bold text-regular'>
+                        {dataSet.members}
+                        {t('labelPeople')}
+                      </div>
+                    </div>
+                  )}
+
+                  {SLData(dataSet)}
+
+                  {dataSet.target !== 'f0' ? (
+                    <div className='flex items-center container justify-between my-2'>
+                      <div className='text-left ml-6'>{getFirstLabel(dataSet.target)}</div>
+                      <div className='text-right mr-6'>
+                        {getFirstDataPoint(dataSet)}
+                        {getEndLabel(dataSet.target)}
+                      </div>
+                    </div>
+                  ) : (
                     ''
                   )}
-                  <div className='flex items-center container justify-between my-2'>
-                    <div className='text-left ml-6'>{getFirstLabel(dataSet.target)}</div>
-                    <div
-                      className={
-                        dataSet.target !== 'f0' ? 'text-right mr-6' : 'text-right mr-6 font-bold'
-                      }
-                    >
-                      {getFirstDataPoint(dataSet)}
-                      {getEndLabel(dataSet.target)}
-                    </div>
-                  </div>
+
                   <div className='flex items-center container justify-between my-2'>
                     <div className='text-left ml-6'>{getSecondLabel(dataSet.target)}</div>
                     <div
                       className={
-                        dataSet.target !== 'f0' ? 'text-right mr-6' : 'text-right mr-6 font-bold'
-                      }
-                    >
+                        dataSet.target !== 'f0'
+                          ? 'text-right mr-6'
+                          : 'text-right mr-6 font-bold text-regular'
+                      }>
                       {getSecondDataPoint(dataSet)}
                       {getEndLabel(dataSet.target)}
                     </div>
