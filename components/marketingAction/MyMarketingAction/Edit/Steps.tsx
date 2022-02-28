@@ -21,12 +21,14 @@ export const Steps = ({ steps }: Props) => {
           className={classNames('flex relative', {
             'before:ml-3.5 before:border before:h-full before:absolute': idx !== idLastStep,
             'before:border-mint-green': step.isDone,
-          })}>
+          })}
+        >
           <div
             className={classNames(
               'flex z-10 items-center justify-center mr-5 border-2 rounded-full w-[30px] h-7 border-mint-green',
               step.isDone ? 'bg-mint-green' : 'bg-gray'
-            )}>
+            )}
+          >
             <Icon name='check' className='w-[17px] h-[13px]' />
           </div>
           <div className='flex flex-col w-full '>
@@ -39,15 +41,25 @@ export const Steps = ({ steps }: Props) => {
             <div className='flex justify-center mb-8'>
               {step?.showPreviewBtn ? (
                 <>
-                  <Button className='font-semibold border-none bg-input min-w-[240px] mr-2.5' variant='outline'>
+                  <Button
+                    className='font-semibold border-none bg-input min-w-[240px] mr-2.5'
+                    variant='outline'
+                  >
                     {t('viewPreview')}
                   </Button>
-                  <Button className='font-semibold border-none bg-mint-green min-w-[240px]' variant='outline'>
+                  <Button
+                    className='font-semibold border-none bg-mint-green min-w-[240px]'
+                    variant='outline'
+                  >
                     {t('confirm')}
                   </Button>
                 </>
               ) : (
-                <Button colorScheme='green' variant='outline' className='font-semibold min-w-[240px] border-2'>
+                <Button
+                  colorScheme='green'
+                  variant='outline'
+                  className='font-semibold min-w-[240px] border-2'
+                >
                   {t('viewPreview')}
                 </Button>
               )}

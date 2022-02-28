@@ -29,13 +29,15 @@ export const Overlay = ({ children, control: controlProp, title }: Props) => {
         'absolute top-0 left-0 z-50',
         'flex items-center justify-center'
       )}
-      style={{ width: `calc(100vw - ${sidebarWidth})`, height: `calc(100vh - ${headerHeight})` }}>
+      style={{ width: `calc(100vw - ${sidebarWidth})`, height: `calc(100vh - ${headerHeight})` }}
+    >
       <div
         className={classNames(
           'w-full px-5 py-2 text-white text-h5',
           'absolute top-0 left-0',
           'flex items-center justify-between'
-        )}>
+        )}
+      >
         <div>{title}</div>
         <div className='w-4 h-4 cursor-pointer' onClick={control.close}>
           X

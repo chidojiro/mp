@@ -44,7 +44,9 @@ export const LineMessageItem = ({ message, handleChangeType }: Props) => {
 
   return (
     <div className='mb-5'>
-      <div className='mb-1 font-semibold text-medium text-secondary'>{t('lineMsg', { number: message.id + 1 })}</div>
+      <div className='mb-1 font-semibold text-medium text-secondary'>
+        {t('lineMsg', { number: message.id + 1 })}
+      </div>
       <div className='mb-2.5'>{getSelectBox()}</div>
       <div>{renderMessageContent()}</div>
     </div>

@@ -38,7 +38,9 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
         <div className='flex justify-between mt-2 mb-7'>
           <div className='flex-1 mr-10'>
             <div className='mb-4'>
-              <div className='mb-2.5 font-semibold text-secondary text-medium'>{t('headLines')}</div>
+              <div className='mb-2.5 font-semibold text-secondary text-medium'>
+                {t('headLines')}
+              </div>
               <Form.Input name='headlines_email' />
             </div>
             <div className='mb-4'>
@@ -54,7 +56,9 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
             <div className='w-[335px] rounded bg-white h-fit p-5 border border-gray-300'>
               <h2 className='mb-4 text-center text-secondary'>Brand Logo</h2>
               <div className='flex justify-center w-full'>
-                <h3 className='w-[160px] mb-4 whitespace-pre-line text-gray-dark text-center'>{headlinesEmail}</h3>
+                <h3 className='w-[160px] mb-4 whitespace-pre-line text-gray-dark text-center'>
+                  {headlinesEmail}
+                </h3>
               </div>
               <div className='mb-3 font-semibold'>山田 太郎 様</div>
               <div className='mb-3 text-gray-dark'>{textEmail}</div>
@@ -72,7 +76,9 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
           <div className='flex justify-between mt-2 mb-7'>
             <div className='flex-1 mr-10'>
               <div className='mb-4'>
-                <div className='mb-2.5 font-semibold text-secondary text-medium'>{t('textMessage')}</div>
+                <div className='mb-2.5 font-semibold text-secondary text-medium'>
+                  {t('textMessage')}
+                </div>
                 <Form.RadioGroup name='line_message_display'>
                   {textMessageOptions.map(option => (
                     <RadioGroup.Option
@@ -87,7 +93,9 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
                 {showLineMsg && (
                   <>
                     <div className='flex mb-3 text-medium text-gray-dark'>
-                      <div className='mr-2 w-fit bg-white py-2 px-2.5 rounded border border-gray-300'>{t('emoji')}</div>
+                      <div className='mr-2 w-fit bg-white py-2 px-2.5 rounded border border-gray-300'>
+                        {t('emoji')}
+                      </div>
                       <div className='w-fit bg-white py-2 px-2.5 rounded border border-gray-300'>
                         <span className='mr-1 font-bold text-secondary'>@</span>
                         {t('variable')}
