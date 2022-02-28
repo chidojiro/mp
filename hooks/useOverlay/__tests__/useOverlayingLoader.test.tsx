@@ -1,11 +1,11 @@
 import { screen } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 import React from 'react';
-import { useOverlayingLoader } from '..';
+import { useOverlay } from '..';
 
 it('should show overlaying loader', () => {
   renderHook(() =>
-    useOverlayingLoader({
+    useOverlay({
       active: true,
       host: document.body,
       component: <div data-testid='overloading-loader'></div>,
@@ -17,7 +17,7 @@ it('should show overlaying loader', () => {
 
 it('should not show overlaying loader', () => {
   renderHook(() =>
-    useOverlayingLoader({
+    useOverlay({
       active: false,
       host: document.body,
       component: <div data-testid='overloading-loader'></div>,

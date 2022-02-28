@@ -1,4 +1,4 @@
-import { Layout, Tabs } from '@/components/common';
+import { Layout, Tabs } from '@/components';
 import { HeaderTab } from '@/constants';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
