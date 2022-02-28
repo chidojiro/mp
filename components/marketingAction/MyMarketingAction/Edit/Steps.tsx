@@ -36,7 +36,7 @@ export const Steps = ({ steps }: Props) => {
             </div>
             <div className='w-full px-10 py-8 mb-5 rounded-lg bg-gray-light'>{step.children}</div>
 
-            <div className='flex justify-end mb-8'>
+            <div className='flex justify-center mb-8'>
               {step?.showPreviewBtn ? (
                 <>
                   <Button className='font-semibold border-none bg-input min-w-[240px] mr-2.5' variant='outline'>

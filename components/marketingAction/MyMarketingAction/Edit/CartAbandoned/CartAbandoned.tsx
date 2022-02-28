@@ -6,6 +6,7 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { Steps } from '../Steps';
+import { DateTime } from './DateTime';
 import { MessageSetting } from './MessageSetting';
 import { TargetCustomerGroup } from './TargetCustomerGroup';
 
@@ -16,16 +17,17 @@ export const CartAbandoned = () => {
   const isUseLine = useWatch({ name: 'is_use_line', control });
   const targetCustomers = useWatch({ name: 'target_customers', control });
 
+  const lineOptions = [
+    { value: 'yes', label: t('lineOption') },
+    { value: 'no', label: t('noLine') },
+  ];
+
   const onSubmit = (data: any) => {
     // handle change
     console.log('submit', data);
   };
 
   const renderStep1 = () => {
-    const lineOptions = [
-      { value: 'yes', label: t('lineOption') },
-      { value: 'no', label: t('noLine') },
-    ];
     return (
       <>
         <div className='font-bold text-gray-dark mb-2.5'>{t('useLine')}</div>
@@ -49,11 +51,17 @@ export const CartAbandoned = () => {
       { value: 'second_message_on', label: t('msg2On') },
       { value: 'second_message_off', label: t('msg2Off') },
     ];
+
+    const deliverMessageOptions = [
+      { value: 'deliver_same_message', label: t('deliverFirstMsg') },
+      { value: 'deliver_different_message', label: t('deliverDifferentMsg') },
+    ];
+
     return (
       <div>
         <div className='px-10 pb-5 -mx-10 border-b-4 border-white mb-7'>
           <div className='font-bold text-gray-dark mb-2.5'>{t('msg2Option')}</div>
-          <Form.RadioGroup name='cart_abandon_use_line'>
+          <Form.RadioGroup name='second_message'>
             {msg2DeliveryOptions.map(option => (
               <RadioGroup.Option
                 colorScheme='secondary'
@@ -65,7 +73,27 @@ export const CartAbandoned = () => {
             ))}
           </Form.RadioGroup>
         </div>
-        <MessageSetting />
+        <div className='px-10 pb-5 -mx-10 border-b-4 border-white mb-7'>
+          <div className='font-bold text-gray-dark mb-2.5'>{t('contentHasChanged')}</div>
+          <Form.RadioGroup name='same_message_delivery'>
+            {deliverMessageOptions.map(option => (
+              <RadioGroup.Option
+                colorScheme='secondary'
+                key={option.value}
+                className='mb-2.5 text-gray-dark text-medium'
+                label={option.label}
+                value={option.value}
+              />
+            ))}
+          </Form.RadioGroup>
+        </div>
+        <div>
+          <DateTime
+            fromTheDateText={t('fromTheDateCartAbandoned')}
+            inputDateName='date_cart_abandoned'
+            inputTimeName='time_cart_abandoned'
+          />
+        </div>
       </div>
     );
   };
@@ -78,7 +106,7 @@ export const CartAbandoned = () => {
     },
     {
       name: t('msgSetting1'),
-      children: <MessageSetting />,
+      children: <MessageSetting showLineSettings={isUseLine === lineOptions[0].value} />,
       showPreviewBtn: true,
     },
     {

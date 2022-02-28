@@ -80,5 +80,15 @@
   "addNewMessage": "Add a LINE message",
   "saveDraft": "Save as Draft",
   "implementTemplate": "Implement the template",
-  "colorSettings": "Color settings"
+  "colorSettings": "Color settings",
+  "displayMsg": "Display",
+  "noDisplay": "Do not display",
+  "emoji": "Emoji",
+  "variable": "Variable",
+  "contentHasChanged": "Whether or not the content has changed since the first message",
+  "deliverFirstMsg": "Deliver the same message as the first message",
+  "deliverDifferentMsg": "Deliver a message with a different content from the first message",
+  "preview": "Preview (Mobile)",
+  "openPreview": "Open Preview",
+  "viewShoppingCart": "View Shopping Cart"
 }
