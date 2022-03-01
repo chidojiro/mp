@@ -139,8 +139,8 @@ export const Input = React.forwardRef(
 
     const isHidden = htmlType === 'hidden';
 
-    const borderClassNames = classNames('border border-input border-solid', {
-      'border-input-focus': isFocused,
+    const borderClassNames = classNames('border border-gray-300  border-solid', {
+      'border-input': isFocused,
       '!border-danger': error,
     });
 

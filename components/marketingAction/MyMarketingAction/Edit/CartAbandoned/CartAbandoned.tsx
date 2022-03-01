@@ -134,9 +134,6 @@ export const CartAbandoned = () => {
       ></ActionContainer>
       <Form methods={methods} onSubmit={onSubmit} className='mt-[60px]'>
         <Steps steps={steps} />
-        <Button type='submit' className='min-w-[480px] h-[52px]'>
-          {t('implementTemplate')}
-        </Button>
       </Form>
       <div className='flex justify-center'>
         <Button className='mr-5 min-w-[480px] h-[52px] bg-input border-none'>
