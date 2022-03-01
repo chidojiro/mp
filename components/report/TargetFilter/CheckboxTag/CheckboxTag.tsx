@@ -1,4 +1,5 @@
 import { CheckboxGroup } from '@/components';
+import { Icon } from '@/components/common';
 import classNames from 'classnames';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -18,17 +19,19 @@ export const CheckboxTag = ({ value, label }: Props) => {
             'flex items-center gap-1',
             'border border-solid',
             {
-              'border-gray-500 bg-white': !isChecked,
+              'border-gray-500 bg-white text-gray-dark': !isChecked,
               'bg-primary border-primary text-white': isChecked,
             }
           )}
         >
           <div
-            className={classNames('w-3 h-3 rounded-sm', {
+            className={classNames('w-3 h-3 rounded-sm flex items-center justify-center', {
               'bg-gray-300': !isChecked,
               'bg-white': isChecked,
             })}
-          ></div>
+          >
+            {isChecked && <Icon name='check' className='w-[10px] h-[8px] text-primary' />}
+          </div>
           <span>{label}</span>
           <input
             type='checkbox'

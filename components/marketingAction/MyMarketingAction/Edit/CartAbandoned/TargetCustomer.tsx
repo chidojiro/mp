@@ -18,7 +18,7 @@ export const TargetCustomer = ({ label, value }: Props) => {
               isChecked ? 'bg-secondary' : 'bg-white border border-gray-300'
             )}
           >
-            <Icon name='check' className='w-[12px] h-[10px]' />
+            <Icon name='check' className='w-[12px] h-[10px] text-white' />
           </div>
           <input
             checked={isChecked}

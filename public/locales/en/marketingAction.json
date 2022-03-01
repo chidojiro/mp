@@ -90,5 +90,10 @@
   "deliverDifferentMsg": "Deliver a message with a different content from the first message",
   "preview": "Preview (Mobile)",
   "openPreview": "Open Preview",
-  "viewShoppingCart": "View Shopping Cart"
+  "viewShoppingCart": "View Shopping Cart",
+  "am": "A.M",
+  "pm": "P.M",
+  "messageDelivery": "Message Delivery",
+  "chatbot": "Chatbots",
+  "popup": "Pop-ups"
 }

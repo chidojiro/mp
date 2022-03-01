@@ -91,5 +91,10 @@
   "deliverDifferentMsg": "1通目と異なる内容のメッセージを配信する",
   "preview": "プレビュー（モバイル）",
   "openPreview": "プレビューを開く",
-  "viewShoppingCart": "ショッピングカートを見る"
+  "viewShoppingCart": "ショッピングカートを見る",
+  "am": "午前",
+  "pm": "午後",
+  "messageDelivery": "メッセージ配信",
+  "chatbot": "チャットボット",
+  "popup": "ポップアップ"
 }
