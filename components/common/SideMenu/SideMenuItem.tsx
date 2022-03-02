@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const SideMenuItem = ({ isOpenAccordion, data }: Props) => {
-  const { label, value, content, subItems: items, onClick: onClickItem } = data;
+  const { label, value, content, children: items, onClick: onClickItem } = data;
 
   const accordionControl = useVisibilityControl(isOpenAccordion);
   if (content) {

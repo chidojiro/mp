@@ -20,7 +20,7 @@ export const NewMarketingAction = ({}: Props) => {
   const groups: SideMenuGroup[] = [
     {
       icon: 'mail',
-      name: t('messageDelivery'),
+      label: t('messageDelivery'),
       items: [
         {
           content: (
@@ -65,7 +65,7 @@ export const NewMarketingAction = ({}: Props) => {
     },
     {
       icon: 'mail',
-      name: t('chatbot'),
+      label: t('chatbot'),
       items: [
         {
           content: (
@@ -156,7 +156,7 @@ export const NewMarketingAction = ({}: Props) => {
     },
     {
       icon: 'mail',
-      name: t('popup'),
+      label: t('popup'),
       items: [
         {
           content: (

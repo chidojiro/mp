@@ -29,7 +29,7 @@ export const Detail = () => {
     {
       value: '2',
       label: '購入後ステップ配信',
-      subItems: [
+      children: [
         {
           value: '2021_12_15',
 
@@ -69,7 +69,7 @@ export const Detail = () => {
   const groups: SideMenuGroup[] = [
     {
       icon: 'mail',
-      name: t('messageDelivery'),
+      label: t('messageDelivery'),
       items: listMenu,
     },
   ];

@@ -8,13 +8,13 @@ export type Item = {
   value: string;
   label?: React.ReactNode;
   content?: React.ReactNode;
-  subItems?: Item[];
+  children?: Item[];
   onClick?: () => void;
 };
 
 export type GroupItem = {
   icon: IconName;
-  name: string;
+  label: string;
   items: Item[];
 };
 
@@ -25,7 +25,7 @@ export type Props = HeadlessTabsProps &
 
 export const SideMenu = ({ value, className, onChange, groups }: Props) => {
   const isOpenAccordion = (item: Item, val: any) => {
-    const _values = item.subItems?.map(_item => _item.value) || [];
+    const _values = item.children?.map(_item => _item.value) || [];
     return _values.includes(val);
   };
 
@@ -38,7 +38,7 @@ export const SideMenu = ({ value, className, onChange, groups }: Props) => {
               <div key={id} className='w-full'>
                 <div className='flex items-center pb-1 border-b-2 border-dark-gray'>
                   <Icon name={group.icon} className='w-4' />
-                  <span className='ml-1 font-bold text-medium text-input'>{group.name}</span>
+                  <span className='ml-1 font-bold text-medium text-input'>{group.label}</span>
                 </div>
                 <div className='mt-2.5 mb-3'>
                   {group.items.map((item: Item, idx: number) => (
