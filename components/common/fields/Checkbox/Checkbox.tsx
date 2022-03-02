@@ -46,7 +46,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, Props>(
         <div
           className={classNames(
             'w-4 h-4',
-            'border border-solid border-input focus:border-input-focus rounded-sm',
+            'border border-solid border-input-focus focus:border-gray-400 rounded-sm',
             {
               'bg-white': !checked,
               [`${activeBackground} border-none`]: checked,

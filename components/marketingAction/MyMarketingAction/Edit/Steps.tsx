@@ -42,7 +42,7 @@ export const Steps = ({ steps }: Props) => {
               {step?.showPreviewBtn ? (
                 <>
                   <Button
-                    className='font-semibold border-none bg-input min-w-[240px] mr-2.5'
+                    className='font-semibold border-none bg-input-focus min-w-[240px] mr-2.5'
                     variant='outline'
                   >
                     {t('viewPreview')}

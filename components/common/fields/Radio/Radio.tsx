@@ -55,7 +55,7 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
             'flex items-center justify-center',
             'border border-solid rounded-full',
             {
-              'border-input bg-white': !checked,
+              'border-input-focus bg-white': !checked,
               [activeBackground]: checked,
               [activeBorder]: checked,
             }

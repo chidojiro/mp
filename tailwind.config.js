@@ -146,7 +146,7 @@ module.exports = {
         light: palette.gray[100],
         dark: palette.gray[800],
       },
-      input: { DEFAULT: palette.gray[600], focus: palette.gray[400] },
+      input: { DEFAULT: palette.gray[300], focus: palette.gray[600] },
       sleepy: '#B4B4B4',
       white: '#fff',
       black: '#000',
