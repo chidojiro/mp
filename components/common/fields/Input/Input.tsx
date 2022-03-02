@@ -23,7 +23,7 @@ export type Props = BaseInputProps & {
   allowNegative?: boolean;
   onEnterPress?: () => void;
   pattern?: string;
-  prefixes?: string[];
+  periods?: string[];
 };
 
 export const Input = React.forwardRef(
@@ -42,7 +42,7 @@ export const Input = React.forwardRef(
       value: valueProp,
       onChange: onChangeProp,
       trimOnBlur = true,
-      prefixes = ['AM', 'PM'],
+      periods = ['AM', 'PM'],
       onEnterPress,
       onKeyDown,
       ...props
@@ -106,7 +106,7 @@ export const Input = React.forwardRef(
             className='w-4 h-full py-2 m-0 bg-transparent border-none outline-none'
             {...props}
             value={value}
-            prefixes={prefixes}
+            periods={periods}
             onChange={setValue}
             onBlur={handleBlur}
           />

@@ -25,7 +25,7 @@ export const DateTime = ({ fromTheDateText, inputDateName, inputTimeName }: Prop
             </div>
           }
           name={inputTimeName}
-          prefixes={[t('am'), t('pm')]}
+          periods={[t('am'), t('pm')]}
           className='ml-2.5 w-[120px]'
         />
       </div>
