@@ -15,10 +15,10 @@ export const DateTime = ({ fromTheDateText, inputDateName, inputTimeName }: Prop
       <div className='mb-1 font-semibold'>{t('timeDelivery')}</div>
       <div className='flex items-center text-gray-dark text-medium'>
         <div>{fromTheDateText}</div>
-        <Form.Input htmlType='number' name={inputDateName} className='w-20 mx-2.5' />
+        <Form.Input type='number' name={inputDateName} className='w-20 mx-2.5' />
         {t('daysAfter')}
         <Form.Input
-          htmlType='time'
+          type='time'
           innerLeft={
             <div className='flex items-center -mr-3'>
               <Icon name='clock' size={20} />

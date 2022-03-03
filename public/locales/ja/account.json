@@ -1,0 +1,17 @@
+{
+  "accountSettings": "アカウント設定",
+  "emailAddressLoginId": "メールアドレス（ログインID）",
+  "password": "パスワード",
+  "change": "変更する",
+  "changeEmailAddress": "メールアドレス変更",
+  "newEmailAddress": "新メールアドレス",
+  "stopEditingAndReturn": "編集を中断して戻る",
+  "sendConfirmationEmail": "確認メールを送信する",
+  "emailAddressChangeIsComplete": "メールアドレスの変更が完了しました。",
+  "passwordChange": "パスワード変更",
+  "oldPassword": "旧パスワード",
+  "newPassword": "新パスワード",
+  "newPasswordConfirmation": "新パスワード（確認）",
+  "save": "保存する",
+  "passwordChangeHasBeenCompleted": "パスワードの変更が完了しました。"
+}

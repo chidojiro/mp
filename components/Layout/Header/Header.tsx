@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import Link from 'next/link';
 
 export const Header = () => {
   return (
@@ -14,7 +15,9 @@ export const Header = () => {
         <img src='/images/GMP_givery.png' alt='' className='w-25 h-7' />
         <img src='/images/mp.png' alt='' className='h-7' />
       </div>
-      <div className='font-semibold text-medium'>demo@gmail.com</div>
+      <Link href='/account' passHref>
+        <a className='font-semibold text-medium'>demo@gmail.com</a>
+      </Link>
     </div>
   );
 };
