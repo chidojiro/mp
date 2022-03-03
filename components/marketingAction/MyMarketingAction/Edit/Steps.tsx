@@ -29,7 +29,7 @@ export const Steps = ({ steps }: Props) => {
               step.isDone ? 'bg-mint-green' : 'bg-gray'
             )}
           >
-            <Icon name='check' className='w-[17px] h-[13px]' />
+            <Icon name='check' className='w-[17px] h-[13px] text-white' />
           </div>
           <div className='flex flex-col w-full '>
             <div className='flex mb-5'>
