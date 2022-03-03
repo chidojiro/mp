@@ -29,6 +29,7 @@ import loyalFluctuate from './icons/loyal-fluctuate.svg';
 import sleepReturned from './icons/sleep-returned.svg';
 import f1SleepReturned from './icons/f1-sleep-returned.svg';
 import loyalSleepReturned from './icons/loyal-sleep-returned.svg';
+import Clock from './icons/clock.svg';
 
 const ICONS = {
   group: Group,
@@ -61,6 +62,7 @@ const ICONS = {
   'sleep-returned': sleepReturned,
   'f1-sleep-returned': f1SleepReturned,
   'loyal-sleep-returned': loyalSleepReturned,
+  clock: Clock,
 };
 
 export type Name = keyof typeof ICONS;

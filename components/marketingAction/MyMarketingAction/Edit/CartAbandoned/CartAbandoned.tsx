@@ -90,8 +90,8 @@ export const CartAbandoned = () => {
         <div>
           <DateTime
             fromTheDateText={t('fromTheDateCartAbandoned')}
-            inputDateName='date_cart_abandoned'
-            inputTimeName='time_cart_abandoned'
+            inputDateName='date_cart_abandoned_2'
+            inputTimeName='time_cart_abandoned_2'
           />
         </div>
       </div>
@@ -136,7 +136,7 @@ export const CartAbandoned = () => {
         <Steps steps={steps} />
       </Form>
       <div className='flex justify-center'>
-        <Button className='mr-5 min-w-[480px] h-[52px] bg-input border-none'>
+        <Button className='mr-5 min-w-[480px] h-[52px] bg-input-focus border-none'>
           {t('saveDraft')}
         </Button>
         <Button className='min-w-[480px] h-[52px]'>{t('implementTemplate')}</Button>

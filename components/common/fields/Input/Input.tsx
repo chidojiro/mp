@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import React from 'react';
 import { useStateToggle, useControllable } from '@/hooks';
 import { HTMLInputProps } from '@/types';
+import { TimeInput } from './Time';
+import { NumberInput } from './Number';
 
 type BaseInputProps = Omit<HTMLInputProps, 'ref' | 'type'> & {
   ref?: React.Ref<HTMLInputElement>;
@@ -18,8 +20,10 @@ export type Props = BaseInputProps & {
   innerRight?: React.ReactNode;
   htmlType?: InputType;
   trimOnBlur?: boolean;
+  allowNegative?: boolean;
   onEnterPress?: () => void;
   pattern?: string;
+  periods?: string[];
 };
 
 export const Input = React.forwardRef(
@@ -38,6 +42,7 @@ export const Input = React.forwardRef(
       value: valueProp,
       onChange: onChangeProp,
       trimOnBlur = true,
+      periods = ['AM', 'PM'],
       onEnterPress,
       onKeyDown,
       ...props
@@ -83,6 +88,31 @@ export const Input = React.forwardRef(
         'outline-none border-none'
       );
 
+      if (htmlType === 'number') {
+        return (
+          <NumberInput
+            ref={ref}
+            className={inputClassName}
+            {...props}
+            value={value}
+            onChange={setValue}
+            onBlur={handleBlur}
+          />
+        );
+      } else if (htmlType === 'time') {
+        return (
+          <TimeInput
+            ref={ref}
+            className='w-4 h-full py-2 m-0 bg-transparent border-none outline-none'
+            {...props}
+            value={value}
+            periods={periods}
+            onChange={setValue}
+            onBlur={handleBlur}
+          />
+        );
+      }
+
       return (
         <input
           ref={inputRef}
@@ -109,8 +139,8 @@ export const Input = React.forwardRef(
 
     const isHidden = htmlType === 'hidden';
 
-    const borderClassNames = classNames('border border-input border-solid', {
-      'border-input-focus': isFocused,
+    const borderClassNames = classNames('border border-input  border-solid', {
+      'border-input': isFocused,
       '!border-danger': error,
     });
 

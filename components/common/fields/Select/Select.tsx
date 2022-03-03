@@ -50,7 +50,7 @@ export const Select = React.forwardRef<HTMLInputElement, Props>(
         <div>
           <Menu.Button
             {...props}
-            className='inline-flex items-center justify-between w-[200px] px-2.5 py-1.5 text-sm text-gray-dark bg-white border border-gray-300 rounded shadow-sm text-medium hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100'
+            className='inline-flex items-center justify-between w-[200px] px-2.5 py-1.5 text-sm text-gray-dark bg-white border border-input rounded shadow-sm text-medium hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100'
           >
             {selectedOption?.label}
             <ChevronDownIcon className='w-5 h-5 ml-2 -mr-1 bg text-secondary' aria-hidden='true' />

@@ -1,4 +1,4 @@
-import { Form } from '@/components/common';
+import { Form, Icon } from '@/components/common';
 import { useTranslation } from 'next-i18next';
 
 type Props = {
@@ -17,7 +17,17 @@ export const DateTime = ({ fromTheDateText, inputDateName, inputTimeName }: Prop
         <div>{fromTheDateText}</div>
         <Form.Input htmlType='number' name={inputDateName} className='w-20 mx-2.5' />
         {t('daysAfter')}
-        <Form.Input htmlType='time' name={inputTimeName} className='ml-2.5 w-[120px]' />
+        <Form.Input
+          htmlType='time'
+          innerLeft={
+            <div className='flex items-center -mr-3'>
+              <Icon name='clock' size={20} />
+            </div>
+          }
+          name={inputTimeName}
+          periods={[t('am'), t('pm')]}
+          className='ml-2.5 w-[120px]'
+        />
       </div>
     </>
   );
