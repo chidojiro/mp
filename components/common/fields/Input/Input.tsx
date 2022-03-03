@@ -18,7 +18,7 @@ export type Props = BaseInputProps & {
   addonAfter?: React.ReactNode;
   innerLeft?: React.ReactNode;
   innerRight?: React.ReactNode;
-  htmlType?: InputType;
+  type?: InputType;
   trimOnBlur?: boolean;
   allowNegative?: boolean;
   onEnterPress?: () => void;
@@ -32,7 +32,7 @@ export const Input = React.forwardRef(
       label,
       className,
       error,
-      htmlType = 'text',
+      type = 'text',
       addonAfter,
       addonBefore,
       innerLeft,
@@ -88,7 +88,7 @@ export const Input = React.forwardRef(
         'outline-none border-none'
       );
 
-      if (htmlType === 'number') {
+      if (type === 'number') {
         return (
           <NumberInput
             ref={ref}
@@ -99,7 +99,9 @@ export const Input = React.forwardRef(
             onBlur={handleBlur}
           />
         );
-      } else if (htmlType === 'time') {
+      }
+
+      if (type === 'time') {
         return (
           <TimeInput
             ref={ref}
@@ -117,7 +119,7 @@ export const Input = React.forwardRef(
         <input
           ref={inputRef}
           className={inputClassName}
-          type={htmlType}
+          type={type}
           {...props}
           onInput={handleInput}
           onFocus={handleFocus}
@@ -137,7 +139,7 @@ export const Input = React.forwardRef(
       }
     };
 
-    const isHidden = htmlType === 'hidden';
+    const isHidden = type === 'hidden';
 
     const borderClassNames = classNames('border border-input  border-solid', {
       'border-input': isFocused,

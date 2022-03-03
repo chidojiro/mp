@@ -5,15 +5,13 @@ import { RegisterOptions, useController, useFormContext } from 'react-hook-form'
 export type Props<T = any> = {
   rules?: RegisterOptions;
   name: string;
-  noErrorMessage?: boolean;
   errorGroup?: string[];
   className?: string;
   onChange?: (e: any) => void;
   onBlur?: (e: any) => void;
   value?: any;
   emptyValue?: any;
-  defaultChecked?: boolean;
-  type?: 'checkbox' | 'radio' | 'common';
+  componentType?: 'checkbox' | 'radio' | 'common';
   component: React.ComponentType<T>;
 };
 
@@ -27,8 +25,7 @@ export const Field = <T,>({
   value: valueProp,
   errorGroup = [],
   emptyValue = '',
-  defaultChecked,
-  type = 'common',
+  componentType = 'common',
   ...restProps
 }: Props<T>) => {
   const Component = component;
@@ -48,10 +45,6 @@ export const Field = <T,>({
   React.useEffect(() => {
     if (emptyValue && !value) {
       setValue(name, emptyValue, { shouldDirty: false });
-    }
-
-    if (defaultChecked) {
-      setValue(name, true, { shouldDirty: false });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -81,7 +74,7 @@ export const Field = <T,>({
     onBlurProp?.(e);
   };
 
-  const isCheckboxOrRadio = ['checkbox', 'radio'].includes(type);
+  const isCheckboxOrRadio = ['checkbox', 'radio'].includes(componentType);
 
   const resolveValue = React.useCallback(
     () => {
@@ -106,7 +99,7 @@ export const Field = <T,>({
       JSON.stringify(valueProp),
       rules?.valueAsDate,
       rules?.valueAsNumber,
-      type,
+      componentType,
     ]
     /* eslint-enable react-hooks/exhaustive-deps */
   );

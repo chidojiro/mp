@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { Children, ClassName, HTMLButtonProps } from 'types';
 
 type Variant = 'link' | 'outline' | 'solid';
-type ColorScheme = 'primary' | 'secondary' | 'default' | 'danger' | 'green';
+type ColorScheme = 'primary' | 'secondary' | 'default' | 'danger' | 'green' | 'negative';
 type Size = 'xs' | 'sm' | 'md' | 'lg';
 
 const primaryBackgroundColors: { [key in Variant]: string } = {
@@ -36,12 +36,19 @@ const greenBackgroundColors: { [key in Variant]: string } = {
   solid: 'bg-mint-green',
 };
 
+const negativeBackgroundColors: { [key in Variant]: string } = {
+  link: 'bg-none',
+  outline: 'bg-white',
+  solid: 'bg-gray-600',
+};
+
 const backgroundColors: { [key in ColorScheme]: { [key in Variant]: string } } = {
   danger: dangerBackgroundColors,
   default: defaultBackgroundColors,
   primary: primaryBackgroundColors,
   secondary: secondaryBackgroundColors,
   green: greenBackgroundColors,
+  negative: negativeBackgroundColors,
 };
 
 const primaryBorderColors: { [key in Variant]: string } = {
@@ -74,12 +81,19 @@ const greenBorderColors: { [key in Variant]: string } = {
   solid: 'border-none',
 };
 
+const negativeBorderColors: { [key in Variant]: string } = {
+  link: 'border-none',
+  outline: 'border-gray-600',
+  solid: 'border-none',
+};
+
 const borderColors: { [key in ColorScheme]: { [key in Variant]: string } } = {
   danger: dangerBorderColors,
   default: defaultBorderColors,
   primary: primaryBorderColors,
   secondary: secondaryBorderColors,
   green: greenBorderColors,
+  negative: negativeBorderColors,
 };
 
 const primaryTextColors: { [key in Variant]: string } = {
@@ -112,12 +126,19 @@ const greenTextColors: { [key in Variant]: string } = {
   solid: 'text-white',
 };
 
+const negativeTextColors: { [key in Variant]: string } = {
+  link: 'text-gray-600',
+  outline: 'text-gray-600',
+  solid: 'text-white',
+};
+
 const textColors: { [key in ColorScheme]: { [key in Variant]: string } } = {
   danger: dangerTextColors,
   default: defaultTextColors,
   primary: primaryTextColors,
   secondary: secondaryTextColors,
   green: greenTextColors,
+  negative: negativeTextColors,
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types
