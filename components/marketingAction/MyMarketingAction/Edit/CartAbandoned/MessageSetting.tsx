@@ -41,10 +41,14 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
               <div className='mb-2.5 font-semibold text-secondary text-medium'>
                 {t('headLines')}
               </div>
-              <Form.Input name='headlines_email' />
+              <Form.TextArea name='headlines_email' />
             </div>
             <div className='mb-4'>
               <div className='mb-2.5 font-semibold text-secondary text-medium'>{t('bodyText')}</div>
+              <div className='w-fit bg-white py-2 mb-2.5 px-2.5 flex items-center rounded border border-input'>
+                <Icon name='variable' className='w-4 h-3.5 mr-1' />
+                <span className='text-medium text-gray-dark'>{t('variable')}</span>
+              </div>
               <Form.TextArea name='text_email' />
             </div>
           </div>
@@ -92,13 +96,14 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
                 </Form.RadioGroup>
                 {showLineMsg && (
                   <>
-                    <div className='flex mb-3 text-medium text-gray-dark'>
-                      <div className='mr-2 w-fit bg-white py-2 px-2.5 rounded border border-input'>
-                        {t('emoji')}
+                    <div className='flex mb-2.5 text-medium text-gray-dark'>
+                      <div className='w-fit bg-white py-2 px-2.5 mr-2.5 flex items-center rounded border border-input'>
+                        <Icon name='emoji' className='w-4 h-3.5 mr-1' />
+                        <span className='text-medium text-gray-dark'>{t('emoji')}</span>
                       </div>
-                      <div className='w-fit bg-white py-2 px-2.5 rounded border border-input'>
-                        <span className='mr-1 font-bold text-secondary'>@</span>
-                        {t('variable')}
+                      <div className='w-fit bg-white py-2 px-2.5 flex items-center rounded border border-input'>
+                        <Icon name='variable' className='w-4 h-3.5 mr-1' />
+                        <span className='text-medium text-gray-dark'>{t('variable')}</span>
                       </div>
                     </div>
                     <Form.TextArea name='text_line' />

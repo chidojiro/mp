@@ -136,8 +136,11 @@ export const CartAbandoned = () => {
         <Steps steps={steps} />
       </Form>
       <div className='flex justify-center'>
-        <Button className='mr-5 min-w-[480px] h-[52px] bg-input-focus border-none'>
+        <Button className='mr-5 min-w-[240px] h-[52px] bg-input-focus border-none'>
           {t('saveDraft')}
+        </Button>
+        <Button className='mr-5 min-w-[240px] h-[52px] bg-input-focus border-none'>
+          {t('stopEditing')}
         </Button>
         <Button className='min-w-[480px] h-[52px]'>{t('implementTemplate')}</Button>
       </div>

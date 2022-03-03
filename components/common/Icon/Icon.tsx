@@ -30,6 +30,10 @@ import sleepReturned from './icons/sleep-returned.svg';
 import f1SleepReturned from './icons/f1-sleep-returned.svg';
 import loyalSleepReturned from './icons/loyal-sleep-returned.svg';
 import Clock from './icons/clock.svg';
+import Chatbot2 from './icons/chatbot2.svg';
+import Popup from './icons/popup.svg';
+import Variable from './icons/variable.svg';
+import Emoji from './icons/emoji.svg';
 
 const ICONS = {
   group: Group,
@@ -63,6 +67,10 @@ const ICONS = {
   'f1-sleep-returned': f1SleepReturned,
   'loyal-sleep-returned': loyalSleepReturned,
   clock: Clock,
+  chatbot2: Chatbot2,
+  popup: Popup,
+  variable: Variable,
+  emoji: Emoji,
 };
 
 export type Name = keyof typeof ICONS;

@@ -64,7 +64,7 @@ export const NewMarketingAction = ({}: Props) => {
       ],
     },
     {
-      icon: 'mail',
+      icon: 'chatbot2',
       label: t('chatbot'),
       items: [
         {
@@ -155,7 +155,7 @@ export const NewMarketingAction = ({}: Props) => {
       ],
     },
     {
-      icon: 'mail',
+      icon: 'popup',
       label: t('popup'),
       items: [
         {
