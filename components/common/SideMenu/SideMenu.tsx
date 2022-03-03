@@ -37,7 +37,7 @@ export const SideMenu = ({ value, className, onChange, groups }: Props) => {
             {groups.map((group, id) => (
               <div key={id} className='w-full'>
                 <div className='flex items-center pb-1 border-b-2 border-dark-gray'>
-                  <Icon name={group.icon} className='w-4' />
+                  <Icon name={group.icon} className='w-3.5 h-3.5' />
                   <span className='ml-1 font-bold text-medium text-input-focus'>{group.label}</span>
                 </div>
                 <div className='mt-2.5 mb-3'>

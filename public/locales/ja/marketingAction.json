@@ -80,6 +80,7 @@
   "imageMessage": "イメージメッセージ",
   "addNewMessage": "LINEメッセージを追加",
   "saveDraft": "下書き保存",
+  "stepEditing": "編集を中断して戻る",
   "implementTemplate": "施策を実行する",
   "colorSettings": "カラー設定",
   "displayMsg": "表示する",

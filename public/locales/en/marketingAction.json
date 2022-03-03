@@ -79,6 +79,7 @@
   "imageMessage": "Image Message",
   "addNewMessage": "Add a LINE message",
   "saveDraft": "Save as Draft",
+  "stepEditing": "Stop editing and return",
   "implementTemplate": "Implement the template",
   "colorSettings": "Color settings",
   "displayMsg": "Display",
