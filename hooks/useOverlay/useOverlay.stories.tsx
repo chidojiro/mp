@@ -17,7 +17,7 @@ const Template: ComponentStory<any> = ({ active, hostWidth, hostHeight }: any) =
   });
 
   return (
-    <div className='bg-gray-300' style={{ width: hostWidth, height: hostHeight }} ref={ref}></div>
+    <div className='bg-input' style={{ width: hostWidth, height: hostHeight }} ref={ref}></div>
   );
 };
 

@@ -30,7 +30,7 @@ export const RadioTag = ({ value, label }: Props) => {
           >
             <div
               className={classNames('w-3 h-3 rounded-full', 'flex items-center justify-center', {
-                'bg-gray-300': !isChecked,
+                'bg-input': !isChecked,
                 'bg-white': isChecked,
               })}
             >

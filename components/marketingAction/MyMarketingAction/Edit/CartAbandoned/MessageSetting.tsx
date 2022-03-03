@@ -53,7 +53,7 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
               <span className='text-secondary'>{t('preview')}</span>
               <span className='text-gray-700 underline cursor-pointer'>{t('openPreview')}</span>
             </div>
-            <div className='w-[335px] rounded bg-white h-fit p-5 border border-gray-300'>
+            <div className='w-[335px] rounded bg-white h-fit p-5 border border-input'>
               <h2 className='mb-4 text-center text-secondary'>Brand Logo</h2>
               <div className='flex justify-center w-full'>
                 <h3 className='w-[160px] mb-4 whitespace-pre-line text-gray-dark text-center'>
@@ -93,10 +93,10 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
                 {showLineMsg && (
                   <>
                     <div className='flex mb-3 text-medium text-gray-dark'>
-                      <div className='mr-2 w-fit bg-white py-2 px-2.5 rounded border border-gray-300'>
+                      <div className='mr-2 w-fit bg-white py-2 px-2.5 rounded border border-input'>
                         {t('emoji')}
                       </div>
-                      <div className='w-fit bg-white py-2 px-2.5 rounded border border-gray-300'>
+                      <div className='w-fit bg-white py-2 px-2.5 rounded border border-input'>
                         <span className='mr-1 font-bold text-secondary'>@</span>
                         {t('variable')}
                       </div>

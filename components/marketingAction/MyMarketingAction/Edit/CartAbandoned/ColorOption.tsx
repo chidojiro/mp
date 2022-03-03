@@ -15,7 +15,7 @@ export const ColorOption = ({ color }: Props) => {
             className={classNames(
               'w-[34px] h-[34px] p-1 rounded flex items-center border bg-white',
               {
-                'border-gray-300': !isChecked,
+                'border-input': !isChecked,
               }
             )}
             style={{ borderColor: isChecked ? color.color : '' }}
