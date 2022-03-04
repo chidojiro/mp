@@ -2,6 +2,7 @@ import { Form, RadioGroup } from '@/components';
 import { Button } from '@/components/common';
 import { ActionContainer } from '@/components/marketingAction';
 import { Step } from '@/constants';
+import { useVisibilityControl } from '@/hooks';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { useForm, useWatch } from 'react-hook-form';
@@ -123,7 +124,7 @@ export const CartAbandoned = () => {
   ];
 
   return (
-    <div>
+    <div className='relative'>
       <ActionContainer
         showUseTemplateBtn={false}
         iconName='cart'

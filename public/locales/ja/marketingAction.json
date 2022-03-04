@@ -80,7 +80,7 @@
   "imageMessage": "イメージメッセージ",
   "addNewMessage": "LINEメッセージを追加",
   "saveDraft": "下書き保存",
-  "stepEditing": "編集を中断して戻る",
+  "stopEditing": "編集を中断して戻る",
   "implementTemplate": "施策を実行する",
   "colorSettings": "カラー設定",
   "displayMsg": "表示する",
@@ -97,5 +97,18 @@
   "pm": "午後",
   "messageDelivery": "メッセージ配信",
   "chatbot": "チャットボット",
-  "popup": "ポップアップ"
+  "popup": "ポップアップ",
+  "viewThisItem": "この商品を見る",
+  "email": "メール",
+  "mobile": "モバイル",
+  "testDelivery": "テスト配信",
+  "executeTemplate": "施策「{{template}}」を実行します。よろしいですか？",
+  "cancel": "キャンセル",
+  "alertAfterExecuting": "施策「{{template}}」を実行しました！ \n今後は、My施策の「実行中」タブから施策の実施状況を確認することができます。",
+  "alertAfterSaveAsDraft": "施策「{{template}}」を下書き保存しました。 \n保存された下書きは、My施策の「下書き」タブから確認・編集が可能です。",
+  "gotoMyMA": "My施策へ",
+  "testDeliveryEmail": "テスト配信（メール）",
+  "testDeliveryEmailDesc": "以下の入力欄に受信用に使用したいメールアドレスを入力後、「テスト配信を実行する」ボタンを押してください。",
+  "emailAddForTest": "テスト配信用メールアドレス",
+  "executeTest": "テスト配信を実行する"
 }

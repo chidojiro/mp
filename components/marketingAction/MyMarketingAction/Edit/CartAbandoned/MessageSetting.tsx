@@ -1,10 +1,13 @@
 import { Form, Icon } from '@/components';
-import { Button, RadioGroup } from '@/components/common';
+import { RadioGroup } from '@/components/common';
+import { useVisibilityControl, VisibilityControl } from '@/hooks';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { useWatch } from 'react-hook-form';
 import { ColorGroup } from './ColorGroup';
 import { DateTime } from './DateTime';
+import { PreviewMessage } from './PreviewMessage';
+import { PreviewModal } from './PreviewModal';
 
 type Props = {
   showLineSettings: boolean;
@@ -12,6 +15,7 @@ type Props = {
 
 export const MessageSetting = ({ showLineSettings }: Props) => {
   const { t } = useTranslation('marketingAction');
+  const previewMessageControl = useVisibilityControl();
 
   const textMessageOptions = [
     { value: 'text_message', label: t('displayMsg') },
@@ -55,19 +59,14 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
           <div>
             <div className='flex justify-between mb-2 text-medium'>
               <span className='text-secondary'>{t('preview')}</span>
-              <span className='text-gray-700 underline cursor-pointer'>{t('openPreview')}</span>
+              <span
+                className='text-gray-700 underline cursor-pointer'
+                onClick={previewMessageControl.open}
+              >
+                {t('openPreview')}
+              </span>
             </div>
-            <div className='w-[335px] rounded bg-white h-fit p-5 border border-input'>
-              <h2 className='mb-4 text-center text-secondary'>Brand Logo</h2>
-              <div className='flex justify-center w-full'>
-                <h3 className='w-[160px] mb-4 whitespace-pre-line text-gray-dark text-center'>
-                  {headlinesEmail}
-                </h3>
-              </div>
-              <div className='mb-3 font-semibold'>山田 太郎 様</div>
-              <div className='mb-3 text-gray-dark'>{textEmail}</div>
-              <Button className='w-full text-center'>{t('viewShoppingCart')}</Button>
-            </div>
+            <PreviewMessage headlines={headlinesEmail} body={textEmail} showMobileVersion={true} />
           </div>
         </div>
       </div>
@@ -118,6 +117,13 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
       <div className='w-2/3 mt-7'>
         <div className='mb-2 font-semibold'>{t('colorSettings')}</div>
         <ColorGroup name='colors' />
+      </div>
+      <div>
+        <PreviewModal
+          headlines={headlinesEmail}
+          body={textEmail}
+          control={useVisibilityControl(true)}
+        />
       </div>
     </>
   );

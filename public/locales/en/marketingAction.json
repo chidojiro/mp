@@ -79,7 +79,7 @@
   "imageMessage": "Image Message",
   "addNewMessage": "Add a LINE message",
   "saveDraft": "Save as Draft",
-  "stepEditing": "Stop editing and return",
+  "stopEditing": "Stop editing and return",
   "implementTemplate": "Implement the template",
   "colorSettings": "Color settings",
   "displayMsg": "Display",
@@ -96,5 +96,18 @@
   "pm": "P.M",
   "messageDelivery": "Message Delivery",
   "chatbot": "Chatbots",
-  "popup": "Pop-ups"
+  "popup": "Pop-ups",
+  "viewThisItem": "View this item",
+  "email": "Email",
+  "mobile": "Mobile",
+  "testDelivery": "Test Delivery",
+  "executeTemplate": "Execute the measure \"{{template}}\". Are you sure?",
+  "cancel": "Cancel",
+  "alertAfterExecuting": "The measure \"{{template}}\" has been executed! From now on, you can check the implementation status of the measure from the \"Running\" tab of My Measures.",
+  "alertAfterSaveAsDraft": "The measure \"{{template}}\" has been saved as a draft. Saved drafts can be viewed and edited from the \"Drafts\" tab of My Measures.",
+  "gotoMyMA": "Go to my marketing action",
+  "testDeliveryEmail": "Test delivery (e-mail)",
+  "testDeliveryEmailDesc": "Please enter the e-mail address you would like to use for reception in the field below, then press the \"Execute Test Delivery\" button.",
+  "emailAddForTest": "E-mail address for test delivery",
+  "executeTest": "Execute test delivery"
 }
