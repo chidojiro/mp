@@ -8,6 +8,8 @@ import {
   CheckboxProps,
   Input,
   InputProps,
+  Password,
+  PasswordProps,
   RadioGroup,
   RadioGroupProps,
   Select,
@@ -37,6 +39,9 @@ const FormRadioGroup = (props: FieldProps & Omit<RadioGroupProps, keyof FieldPro
 const FormSelect = (props: FieldProps & Omit<SelectProps, keyof FieldProps>) => (
   <Field {...props} component={Select} />
 );
+const FormPassword = (props: FieldProps & Omit<PasswordProps, keyof FieldProps>) => (
+  <Field {...props} component={Password} />
+);
 
 const FormErrorMessage = ({ name, className, ...restProps }: HTMLDivProps & { name: string }) => (
   <p className={classNames('text-danger', className)} {...restProps}>
@@ -50,4 +55,5 @@ Form.Checkbox = FormCheckbox;
 Form.CheckboxGroup = FormCheckboxGroup;
 Form.RadioGroup = FormRadioGroup;
 Form.Select = FormSelect;
+Form.Password = FormPassword;
 Form.ErrorMessage = FormErrorMessage;

@@ -1,0 +1,17 @@
+{
+  "accountSettings": "Account Settings",
+  "emailAddressLoginId": "E-mail address (login ID)",
+  "password": "Password",
+  "change": "Change",
+  "changeEmailAddress": "Change email address",
+  "newEmailAddress": "New email address",
+  "stopEditingAndReturn": "Stop editing and return",
+  "sendConfirmationEmail": "Send confirmation email",
+  "emailAddressChangeIsComplete": "Email address change is complete.",
+  "passwordChange": "Password Change",
+  "oldPassword": "Old Password",
+  "newPassword": "New Password",
+  "newPasswordConfirmation": "New password (confirmation)",
+  "save": "Save",
+  "passwordChangeHasBeenCompleted": "Password change has been completed."
+}

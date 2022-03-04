@@ -36,17 +36,12 @@ export const LoginForm = () => {
     <div className='w-[400px]'>
       <div className='mb-5 font-bold prose text-center text-h4'>{t('login')}</div>
       <Form methods={methods} onSubmit={onSubmit}>
-        <Form.Input
-          name='email'
-          className='w-full mb-1'
-          htmlType='email'
-          placeholder={t('email')}
-        />
+        <Form.Input name='email' className='w-full mb-1' type='email' placeholder={t('email')} />
         <Form.ErrorMessage name='email' className='mb-2'></Form.ErrorMessage>
         <Form.Input
           name='password'
           className='w-full mb-1'
-          htmlType={showPwd ? 'text' : 'password'}
+          type={showPwd ? 'text' : 'password'}
           placeholder={t('password')}
           innerRight={
             <div className='cursor-pointer' onClick={() => toggleShowPwd()}>

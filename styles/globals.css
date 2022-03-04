@@ -45,10 +45,11 @@
   ::after {
     box-sizing: inherit;
     font-family: 'Noto Sans JP', sans-serif;
+    color: inherit;
   }
 
   html {
-    box-sizing: border-box;
+    @apply box-border text-gray-800;
   }
 
   h1,
