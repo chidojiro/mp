@@ -8,3 +8,4 @@ export * from './Accordion';
 export * from './Redirect';
 export * from './SideMenu';
 export * from './Icon';
+export * from './SwitchButtons';
