@@ -27,7 +27,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, Props>(
     useEffect(() => {
       const _value = `${displayValue(hour)}:${displayValue(minute)}`;
       setValue(_value);
-    }, [hour, minute, setValue, displayValue]);
+    }, [hour, minute, displayValue]);
 
     const handleInputHour = (event: React.ChangeEvent<HTMLInputElement>) => {
       const _hour = Number(event.target.value.trim());

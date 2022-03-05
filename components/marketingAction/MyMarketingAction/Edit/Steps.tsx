@@ -60,7 +60,7 @@ export const Steps = ({ steps }: Props) => {
                   variant='outline'
                   className='font-semibold min-w-[240px] border-2'
                 >
-                  {t('viewPreview')}
+                  {t('confirm')}
                 </Button>
               )}
             </div>

@@ -8,6 +8,8 @@ export interface Step {
   showPreviewBtn?: boolean;
   isDone?: boolean;
   children?: React.ReactNode;
+  onConfirm?: () => void;
+  onShowPreview?: () => void;
 }
 
 export enum MESSAGE_TYPE {

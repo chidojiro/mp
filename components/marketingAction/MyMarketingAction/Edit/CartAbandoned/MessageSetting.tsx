@@ -21,17 +21,17 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
     { value: 'text_message', label: t('displayMsg') },
     { value: 'no_text_message', label: t('noDisplay') },
   ];
-  const showLineMsg = useWatch({ name: 'line_message_display' }) === textMessageOptions[0].value;
-  const headlinesEmail = useWatch({ name: 'headlines_email' });
-  const textEmail = useWatch({ name: 'text_email' });
+
+  const firstMessage = useWatch({ name: 'first_message' });
+  const showLineMsg = firstMessage?.line_option === textMessageOptions[0].value;
 
   return (
     <>
       <div className='px-10 -mx-10 border-b-4 border-white pb-7'>
         <DateTime
           fromTheDateText={t('fromTheDateCartAbandoned')}
-          inputDateName='date_cart_abandoned'
-          inputTimeName='time_cart_abandoned'
+          inputDateName='first_message.delivery_date'
+          inputTimeName='first_message.delivery_time'
         />
       </div>
       <div className='px-10 -mx-10 border-b-4 border-white mt-7'>
@@ -45,7 +45,7 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
               <div className='mb-2.5 font-semibold text-secondary text-medium'>
                 {t('headLines')}
               </div>
-              <Form.TextArea name='headlines_email' />
+              <Form.TextArea name='first_message.headlines_email' />
             </div>
             <div className='mb-4'>
               <div className='mb-2.5 font-semibold text-secondary text-medium'>{t('bodyText')}</div>
@@ -53,7 +53,7 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
                 <Icon name='variable' className='w-4 h-3.5 mr-1' />
                 <span className='text-medium text-gray-dark'>{t('variable')}</span>
               </div>
-              <Form.TextArea name='text_email' />
+              <Form.TextArea name='first_message.text_email' />
             </div>
           </div>
           <div>
@@ -66,7 +66,11 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
                 {t('openPreview')}
               </span>
             </div>
-            <PreviewMessage headlines={headlinesEmail} body={textEmail} showMobileVersion={true} />
+            <PreviewMessage
+              headlines={firstMessage?.headlines_email}
+              body={firstMessage?.text_email}
+              showMobileVersion={true}
+            />
           </div>
         </div>
       </div>
@@ -82,7 +86,7 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
                 <div className='mb-2.5 font-semibold text-secondary text-medium'>
                   {t('textMessage')}
                 </div>
-                <Form.RadioGroup name='line_message_display'>
+                <Form.RadioGroup name='first_message.line_option'>
                   {textMessageOptions.map(option => (
                     <RadioGroup.Option
                       colorScheme='secondary'
@@ -105,7 +109,7 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
                         <span className='text-medium text-gray-dark'>{t('variable')}</span>
                       </div>
                     </div>
-                    <Form.TextArea name='text_line' />
+                    <Form.TextArea name='first_message.text_line' />
                   </>
                 )}
               </div>
@@ -116,14 +120,14 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
       )}
       <div className='w-2/3 mt-7'>
         <div className='mb-2 font-semibold'>{t('colorSettings')}</div>
-        <ColorGroup name='colors' />
+        <ColorGroup name='first_message.colors' />
       </div>
       <div>
-        <PreviewModal
+        {/* <PreviewModal
           headlines={headlinesEmail}
           body={textEmail}
-          control={useVisibilityControl(true)}
-        />
+          control={useVisibilityControl(false)}
+        /> */}
       </div>
     </>
   );
