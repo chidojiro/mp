@@ -8,14 +8,16 @@ import {
   CheckboxProps,
   Input,
   InputProps,
-  Password,
-  PasswordProps,
+  PasswordInput,
+  PasswordInputProps,
   RadioGroup,
   RadioGroupProps,
   Select,
   SelectProps,
   TextArea,
   TextAreaProps,
+  TimeInput,
+  TimeInputProps,
 } from '../fields';
 
 // eslint-disable-next-line no-empty-pattern
@@ -39,8 +41,11 @@ const FormRadioGroup = (props: FieldProps & Omit<RadioGroupProps, keyof FieldPro
 const FormSelect = (props: FieldProps & Omit<SelectProps, keyof FieldProps>) => (
   <Field {...props} component={Select} />
 );
-const FormPassword = (props: FieldProps & Omit<PasswordProps, keyof FieldProps>) => (
-  <Field {...props} component={Password} />
+const FormPasswordInput = (props: FieldProps & Omit<PasswordInputProps, keyof FieldProps>) => (
+  <Field {...props} component={PasswordInput} />
+);
+const FormTimeInput = (props: FieldProps & Omit<TimeInputProps, keyof FieldProps>) => (
+  <Field {...props} component={TimeInput} emptyValue='00:00' />
 );
 
 const FormErrorMessage = ({ name, className, ...restProps }: HTMLDivProps & { name: string }) => (
@@ -55,5 +60,6 @@ Form.Checkbox = FormCheckbox;
 Form.CheckboxGroup = FormCheckboxGroup;
 Form.RadioGroup = FormRadioGroup;
 Form.Select = FormSelect;
-Form.Password = FormPassword;
+Form.PasswordInput = FormPasswordInput;
+Form.TimeInput = FormTimeInput;
 Form.ErrorMessage = FormErrorMessage;

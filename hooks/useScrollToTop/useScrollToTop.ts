@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import { useIsoMorphicEffect } from '../useIsoMorphicEffect';
 
 export const useScrollToTop = (deps: any[]) => {
   const { pathname } = useRouter();
 
-  React.useLayoutEffect(() => {
+  useIsoMorphicEffect(() => {
     window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps || [pathname]);

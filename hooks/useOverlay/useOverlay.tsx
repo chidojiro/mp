@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import { v4 as UUID } from 'uuid';
 import { AssertUtils } from 'utils';
 import React from 'react';
+import { useIsoMorphicEffect } from '../useIsoMorphicEffect';
 
 export type Props = {
   active: boolean;
@@ -59,7 +60,7 @@ export const useOverlay = ({ active, host: hostProp, component = 'loading...' }:
     foundSpinnerContainer.setAttribute(OVERLAYING_SPINNER_DATA_SPINNER_IDS, dataSpinnerIds);
   }, [getOverlayingSpinnerContainer]);
 
-  React.useLayoutEffect(() => {
+  useIsoMorphicEffect(() => {
     const host = getHostElement();
 
     if (!host) return;
@@ -104,7 +105,7 @@ export const useOverlay = ({ active, host: hostProp, component = 'loading...' }:
     getHostElement,
   ]);
 
-  React.useLayoutEffect(() => {
+  useIsoMorphicEffect(() => {
     return () => {
       unregisterSpinnerId();
     };

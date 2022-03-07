@@ -1,8 +1,13 @@
-import { useControllable } from '@/hooks';
+import { useControllable, useVisibilityControl } from '@/hooks';
+import { NumberUtils } from '@/utils';
+import classNames from 'classnames';
 import React from 'react';
 import { Props as InputProps } from '../Input';
 
 type Props = Omit<InputProps, 'ref'>;
+
+const allowNegativePattern = /^\-?[0-9]+$/;
+const disallowNegativePattern = /^[0-9]*$/;
 
 export const NumberInput = React.forwardRef<HTMLInputElement, Props>(
   (
@@ -10,71 +15,70 @@ export const NumberInput = React.forwardRef<HTMLInputElement, Props>(
       className,
       defaultValue,
       name,
-      onBlur,
       min,
       max,
       allowNegative = false,
       value: valueProp,
       onChange,
+      pad,
+      onFocus,
+      onBlur,
       ...restProps
     },
     ref
   ) => {
     const [value, setValue] = useControllable({
-      value: valueProp?.toString(),
+      value: valueProp,
       onChange,
-      defaultValue: defaultValue?.toString(),
+      defaultValue,
     });
 
-    const displayValue = (val: string) => {
-      if (allowNegative && val === '-') {
-        return '-0';
-      }
-
-      if (Number.isNaN(+val)) {
-        return value;
-      }
-
-      const absVal = Math.abs(+val).toString();
-
-      if (allowNegative && val.startsWith('-')) {
-        return `-${absVal}`;
-      }
-      return absVal;
+    const focusControl = useVisibilityControl();
+    const handleFocus: React.FocusEventHandler<HTMLInputElement> = e => {
+      focusControl.open();
+      onFocus?.(e);
+    };
+    const handleBlur: React.FocusEventHandler<HTMLInputElement> = e => {
+      focusControl.close();
+      onBlur?.(e);
     };
 
-    const handleChange: React.ChangeEventHandler<HTMLInputElement> = event => {
-      const _value = event.target.value.trim();
-      let newValue = _value ? displayValue(_value) : '';
+    const pattern = allowNegative ? allowNegativePattern : disallowNegativePattern;
 
-      if (min !== undefined && +newValue < +min) {
-        newValue = min.toString();
+    const handleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
+      if (!pattern.test(e.target.value)) {
+        e.target.value = value;
+        setValue(e);
+        return;
       }
 
-      if (max !== undefined && +newValue > +max) {
+      let newValue = (+e.target.value).toString();
+      if (!newValue) {
+        newValue = '0';
+      } else if (newValue === '-') {
+        newValue = '-' + NumberUtils.pad(0, pad);
+      } else if (min !== undefined && +newValue < +min) {
+        newValue = min.toString();
+      } else if (max !== undefined && +newValue > +max) {
         newValue = max.toString();
       }
 
-      setValue?.(newValue);
+      e.target.value = newValue;
+      setValue(e);
     };
 
-    const handleBlur: React.FocusEventHandler<HTMLInputElement> = event => {
-      const displayValue = event.target.value;
-
-      event.target.value = displayValue;
-
-      onBlur?.(event);
-    };
+    const _value = focusControl.visible ? value : NumberUtils.pad(value, pad ?? 1);
 
     return (
       <input
         ref={ref}
-        className={className}
+        className={classNames('mp-input__native--number', className)}
         type='text'
-        value={value}
+        value={_value?.toString() ?? ''}
         onChange={handleChange}
-        onBlur={handleBlur}
         name={name}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         {...restProps}
       />
     );

@@ -7,7 +7,7 @@ import { Input, InputProps } from '..';
 export type Props = Omit<InputProps, 'type'>;
 
 // eslint-disable-next-line no-empty-pattern
-export const Password = ({ ...restProps }: Props) => {
+export const PasswordInput = ({ ...restProps }: Props) => {
   const showPasswordControl = useVisibilityControl();
 
   return (

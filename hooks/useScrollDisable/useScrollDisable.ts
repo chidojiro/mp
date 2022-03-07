@@ -1,7 +1,8 @@
 import React from 'react';
+import { useIsoMorphicEffect } from '../useIsoMorphicEffect';
 
 export const useScrollDisable = (disable: boolean) => {
-  React.useLayoutEffect(() => {
+  useIsoMorphicEffect(() => {
     if (disable) {
       const currentWidth = document.documentElement.offsetWidth;
 

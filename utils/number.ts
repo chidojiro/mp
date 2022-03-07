@@ -1,5 +1,5 @@
-const pad = (num: string | number, size = 2) => {
-  let _num = num.toString();
+const pad = (num: string | number | undefined, size = 2) => {
+  let _num = (num ?? 0).toString();
 
   while (_num.length < size) _num = '0' + _num;
 
