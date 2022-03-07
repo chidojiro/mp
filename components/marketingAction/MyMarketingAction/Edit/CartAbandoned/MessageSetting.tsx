@@ -1,6 +1,6 @@
 import { Form, Icon } from '@/components';
 import { RadioGroup } from '@/components/common';
-import { useVisibilityControl, VisibilityControl } from '@/hooks';
+import { useVisibilityControl } from '@/hooks';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { useWatch } from 'react-hook-form';
@@ -71,6 +71,11 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
               body={firstMessage?.text_email}
               showMobileVersion={true}
             />
+            <PreviewModal
+              headlines={firstMessage?.headLines_email}
+              body={firstMessage?.text_email}
+              control={previewMessageControl}
+            />
           </div>
         </div>
       </div>
@@ -121,13 +126,6 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
       <div className='w-2/3 mt-7'>
         <div className='mb-2 font-semibold'>{t('colorSettings')}</div>
         <ColorGroup name='first_message.colors' />
-      </div>
-      <div>
-        {/* <PreviewModal
-          headlines={headlinesEmail}
-          body={textEmail}
-          control={useVisibilityControl(false)}
-        /> */}
       </div>
     </>
   );

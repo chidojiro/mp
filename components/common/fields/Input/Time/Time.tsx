@@ -27,6 +27,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, Props>(
     useEffect(() => {
       const _value = `${displayValue(hour)}:${displayValue(minute)}`;
       setValue(_value);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [hour, minute, displayValue]);
 
     const handleInputHour = (event: React.ChangeEvent<HTMLInputElement>) => {
