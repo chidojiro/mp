@@ -24,7 +24,7 @@ export const SideMenuItem = ({ isOpenAccordion, data }: Props) => {
               onClickItem?.();
             }}
             className={classNames(
-              'text-ellipsis overflow-hidden whitespace-nowrap hover:border hover:border-dark-gray items-center px-[18px] py-1.5 hover:bg-gray-light text-gray-dark w-full rounded-full cursor-pointer font-bold text-medium px-[18px] mb-2.5 py-[6px]',
+              'text-ellipsis overflow-hidden whitespace-nowrap border border-white hover:border-dark-gray items-center px-[18px] py-1.5 hover:bg-gray-light text-gray-dark w-full rounded-full cursor-pointer font-bold text-medium px-[18px] mb-2.5 py-[6px]',
               {
                 'bg-gray-light border border-dark-gray ': isActive,
               }
@@ -41,7 +41,7 @@ export const SideMenuItem = ({ isOpenAccordion, data }: Props) => {
       <Accordion.Title>
         <div
           className={classNames(
-            'cursor-pointer rounded-full flex text-medium font-bold text-gray-dark hover:border hover:border-dark-gray items-center px-[18px] py-1.5 hover:bg-gray-light mb-2.5'
+            'cursor-pointer rounded-full flex text-medium font-bold text-gray-dark border border-white hover:border-dark-gray items-center px-[18px] py-1.5 hover:bg-gray-light mb-2.5'
           )}
         >
           {label}
