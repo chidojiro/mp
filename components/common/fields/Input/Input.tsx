@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import React from 'react';
 import { useStateToggle, useControllable } from '@/hooks';
 import { HTMLInputProps } from '@/types';
-import { TimeInput } from './Time';
 import { NumberInput } from './Number';
 
 type BaseInputProps = Omit<HTMLInputProps, 'ref' | 'type'> & {
@@ -23,7 +22,7 @@ export type Props = BaseInputProps & {
   allowNegative?: boolean;
   onEnterPress?: () => void;
   pattern?: string;
-  periods?: string[];
+  pad?: number;
 };
 
 export const Input = React.forwardRef(
@@ -42,7 +41,6 @@ export const Input = React.forwardRef(
       value: valueProp,
       onChange: onChangeProp,
       trimOnBlur = true,
-      periods = ['AM', 'PM'],
       onEnterPress,
       onKeyDown,
       ...props
@@ -84,6 +82,7 @@ export const Input = React.forwardRef(
 
     const renderInput = () => {
       const inputClassName = classNames(
+        'mp-input__native',
         'h-full w-full m-0 px-4 py-2 bg-transparent',
         'outline-none border-none'
       );
@@ -96,21 +95,9 @@ export const Input = React.forwardRef(
             {...props}
             value={value}
             onChange={setValue}
+            onFocus={handleFocus}
             onBlur={handleBlur}
-          />
-        );
-      }
-
-      if (type === 'time') {
-        return (
-          <TimeInput
-            ref={ref}
-            className='w-4 h-full py-2 m-0 bg-transparent border-none outline-none'
-            {...props}
-            value={value}
-            periods={periods}
-            onChange={setValue}
-            onBlur={handleBlur}
+            onKeyDown={handleKeydown}
           />
         );
       }
@@ -160,7 +147,7 @@ export const Input = React.forwardRef(
         )}
       >
         {!!label && <label htmlFor={name}>{label}</label>}
-        <div className={classNames('w-full flex relative')}>
+        <div className={classNames('flex relative')}>
           {addonBefore && (
             <div
               className={classNames(

@@ -1,10 +1,13 @@
 import { Form, Icon } from '@/components';
-import { Button, RadioGroup } from '@/components/common';
+import { RadioGroup } from '@/components/common';
+import { useVisibilityControl } from '@/hooks';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { useWatch } from 'react-hook-form';
 import { ColorGroup } from './ColorGroup';
-import { DateTime } from './DateTime';
+import { DateTimeDelivery } from './DateTimeDelivery';
+import { PreviewMessage } from './PreviewMessage';
+import { PreviewModal } from './PreviewModal';
 
 type Props = {
   showLineSettings: boolean;
@@ -12,22 +15,23 @@ type Props = {
 
 export const MessageSetting = ({ showLineSettings }: Props) => {
   const { t } = useTranslation('marketingAction');
+  const previewMessageControl = useVisibilityControl();
 
   const textMessageOptions = [
     { value: 'text_message', label: t('displayMsg') },
     { value: 'no_text_message', label: t('noDisplay') },
   ];
-  const showLineMsg = useWatch({ name: 'line_message_display' }) === textMessageOptions[0].value;
-  const headlinesEmail = useWatch({ name: 'headlines_email' });
-  const textEmail = useWatch({ name: 'text_email' });
+
+  const firstMessage = useWatch({ name: 'first_message' });
+  const showLineMsg = firstMessage?.line_option === textMessageOptions[0].value;
 
   return (
     <>
       <div className='px-10 -mx-10 border-b-4 border-white pb-7'>
-        <DateTime
+        <DateTimeDelivery
           fromTheDateText={t('fromTheDateCartAbandoned')}
-          inputDateName='date_cart_abandoned'
-          inputTimeName='time_cart_abandoned'
+          inputDateName='first_message.delivery_date'
+          inputTimeName='first_message.delivery_time'
         />
       </div>
       <div className='px-10 -mx-10 border-b-4 border-white mt-7'>
@@ -41,7 +45,7 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
               <div className='mb-2.5 font-semibold text-secondary text-medium'>
                 {t('headLines')}
               </div>
-              <Form.TextArea name='headlines_email' />
+              <Form.TextArea name='first_message.headlines_email' />
             </div>
             <div className='mb-4'>
               <div className='mb-2.5 font-semibold text-secondary text-medium'>{t('bodyText')}</div>
@@ -49,25 +53,29 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
                 <Icon name='variable' className='w-4 h-3.5 mr-1' />
                 <span className='text-medium text-gray-dark'>{t('variable')}</span>
               </div>
-              <Form.TextArea name='text_email' />
+              <Form.TextArea name='first_message.text_email' />
             </div>
           </div>
           <div>
             <div className='flex justify-between mb-2 text-medium'>
-              <span className='text-secondary'>{t('preview')}</span>
-              <span className='text-gray-700 underline cursor-pointer'>{t('openPreview')}</span>
+              <span className='text-secondary'>{t('previewMobile')}</span>
+              <span
+                className='text-gray-700 underline cursor-pointer'
+                onClick={previewMessageControl.open}
+              >
+                {t('openPreview')}
+              </span>
             </div>
-            <div className='w-[335px] rounded bg-white h-fit p-5 border border-input'>
-              <h2 className='mb-4 text-center text-secondary'>Brand Logo</h2>
-              <div className='flex justify-center w-full'>
-                <h3 className='w-[160px] mb-4 whitespace-pre-line text-gray-dark text-center'>
-                  {headlinesEmail}
-                </h3>
-              </div>
-              <div className='mb-3 font-semibold'>山田 太郎 様</div>
-              <div className='mb-3 text-gray-dark'>{textEmail}</div>
-              <Button className='w-full text-center'>{t('viewShoppingCart')}</Button>
-            </div>
+            <PreviewMessage
+              headlines={firstMessage?.headlines_email}
+              body={firstMessage?.text_email}
+              showMobileVersion={true}
+            />
+            <PreviewModal
+              headlines={firstMessage?.headLines_email}
+              body={firstMessage?.text_email}
+              control={previewMessageControl}
+            />
           </div>
         </div>
       </div>
@@ -83,7 +91,7 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
                 <div className='mb-2.5 font-semibold text-secondary text-medium'>
                   {t('textMessage')}
                 </div>
-                <Form.RadioGroup name='line_message_display'>
+                <Form.RadioGroup name='first_message.line_option'>
                   {textMessageOptions.map(option => (
                     <RadioGroup.Option
                       colorScheme='secondary'
@@ -106,7 +114,7 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
                         <span className='text-medium text-gray-dark'>{t('variable')}</span>
                       </div>
                     </div>
-                    <Form.TextArea name='text_line' />
+                    <Form.TextArea name='first_message.text_line' />
                   </>
                 )}
               </div>
@@ -117,7 +125,7 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
       )}
       <div className='w-2/3 mt-7'>
         <div className='mb-2 font-semibold'>{t('colorSettings')}</div>
-        <ColorGroup name='colors' />
+        <ColorGroup name='first_message.colors' />
       </div>
     </>
   );

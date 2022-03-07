@@ -11,6 +11,7 @@ type Props = Children & {
   title?: string;
   control: VisibilityControl;
   showCloseButton?: boolean;
+  className?: string;
   onBackdropClick?: () => void;
 };
 
@@ -20,6 +21,7 @@ export const Overlay = ({
   control,
   title,
   showCloseButton = true,
+  className,
   onBackdropClick,
 }: Props) => {
   useScrollDisable(control.visible);
@@ -30,7 +32,7 @@ export const Overlay = ({
     <div
       className={classNames(
         'mp-overlay',
-        'absolute top-0 left-0 z-50',
+        'fixed bottom-0 right-0 z-50',
         'flex items-center justify-center'
       )}
       style={{ width: `calc(100vw - ${sidebarWidth})`, height: `calc(100vh - ${headerHeight})` }}
@@ -47,14 +49,14 @@ export const Overlay = ({
           'flex items-center justify-between'
         )}
       >
-        <div>{title}</div>
+        <h5>{title}</h5>
         {!!showCloseButton && (
           <div className='w-4 h-4 cursor-pointer' onClick={control.close}>
             X
           </div>
         )}
       </div>
-      <div className='z-50'>{children}</div>
+      <div className={classNames('z-50', className)}>{children}</div>
     </div>
   );
 };

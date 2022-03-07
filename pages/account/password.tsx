@@ -27,19 +27,19 @@ const Password = ({}: Props) => {
         <Section>
           <Section.Title>{t('oldPassword')}</Section.Title>
           <Section.Content className='flex items-center justify-between'>
-            <Form.Password name='oldPassword' className='w-[480px]' />
+            <Form.PasswordInput name='oldPassword' className='w-[480px]' />
           </Section.Content>
         </Section>
         <Section>
           <Section.Title>{t('newPassword')}</Section.Title>
           <Section.Content className='flex items-center justify-between'>
-            <Form.Password name='newPassword' className='w-[480px]' />
+            <Form.PasswordInput name='newPassword' className='w-[480px]' />
           </Section.Content>
         </Section>
         <Section>
           <Section.Title>{t('newPasswordConfirmation')}</Section.Title>
           <Section.Content className='flex items-center justify-between'>
-            <Form.Password name='newPasswordConfirmation' className='w-[480px]' />
+            <Form.PasswordInput name='newPasswordConfirmation' className='w-[480px]' />
           </Section.Content>
         </Section>
         <div className='flex justify-center gap-5 h-[52px] mt-10'>

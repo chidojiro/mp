@@ -1,21 +1,30 @@
 import { Form, RadioGroup } from '@/components';
-import { Button } from '@/components/common';
+import { Button, Modal } from '@/components/common';
 import { ActionContainer } from '@/components/marketingAction';
 import { Step } from '@/constants';
+import { useVisibilityControl } from '@/hooks';
 import { useTranslation } from 'next-i18next';
-import React from 'react';
+import Link from 'next/link';
+import React, { useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { Steps } from '../Steps';
-import { DateTime } from './DateTime';
+import { DateTimeDelivery } from './DateTimeDelivery';
 import { MessageSetting } from './MessageSetting';
 import { TargetCustomerGroup } from './TargetCustomerGroup';
 
 export const CartAbandoned = () => {
   const { t } = useTranslation('marketingAction');
   const methods = useForm();
+  const { handleSubmit } = methods;
   const { control } = methods;
+  const modalControl = useVisibilityControl();
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [isSaveAsDraft, setIsSaveAsDraft] = useState(false);
+
   const isUseLine = useWatch({ name: 'is_use_line', control });
   const targetCustomers = useWatch({ name: 'target_customers', control });
+  const firstMessage = useWatch({ name: 'first_message', control });
+  const secondMessage = useWatch({ name: 'second_message', control });
 
   const lineOptions = [
     { value: 'yes', label: t('lineOption') },
@@ -25,6 +34,24 @@ export const CartAbandoned = () => {
   const onSubmit = (data: any) => {
     // handle change
     console.log('submit', data);
+  };
+
+  const showModal = () => {
+    setIsCompleted(false);
+    setIsSaveAsDraft(false);
+    modalControl.open();
+  };
+
+  const onExecuteMA = () => {
+    handleSubmit(onSubmit)();
+    setIsCompleted(true);
+  };
+
+  const onSaveAsDraft = () => {
+    modalControl.open();
+    handleSubmit(onSubmit)();
+    setIsCompleted(false);
+    setIsSaveAsDraft(true);
   };
 
   const renderStep1 = () => {
@@ -61,7 +88,7 @@ export const CartAbandoned = () => {
       <div>
         <div className='px-10 pb-5 -mx-10 border-b-4 border-white mb-7'>
           <div className='font-bold text-gray-dark mb-2.5'>{t('msg2Option')}</div>
-          <Form.RadioGroup name='second_message'>
+          <Form.RadioGroup name='second_message.second_message_option'>
             {msg2DeliveryOptions.map(option => (
               <RadioGroup.Option
                 colorScheme='secondary'
@@ -74,8 +101,15 @@ export const CartAbandoned = () => {
           </Form.RadioGroup>
         </div>
         <div className='px-10 pb-5 -mx-10 border-b-4 border-white mb-7'>
+          <DateTimeDelivery
+            fromTheDateText={t('fromTheDateCartAbandoned')}
+            inputDateName='second_message.delivery_date'
+            inputTimeName='second_message.delivery_time'
+          />
+        </div>
+        <div>
           <div className='font-bold text-gray-dark mb-2.5'>{t('contentHasChanged')}</div>
-          <Form.RadioGroup name='same_message_delivery'>
+          <Form.RadioGroup name='second_message.same_message_delivery'>
             {deliverMessageOptions.map(option => (
               <RadioGroup.Option
                 colorScheme='secondary'
@@ -87,15 +121,20 @@ export const CartAbandoned = () => {
             ))}
           </Form.RadioGroup>
         </div>
-        <div>
-          <DateTime
-            fromTheDateText={t('fromTheDateCartAbandoned')}
-            inputDateName='date_cart_abandoned_2'
-            inputTimeName='time_cart_abandoned_2'
-          />
-        </div>
       </div>
     );
+  };
+
+  const onConfirmLineSending = () => {
+    // TODO
+  };
+
+  const isStep2Done = () => {
+    return firstMessage && Object.keys(firstMessage).every(field => firstMessage[field]);
+  };
+
+  const isStep3Done = () => {
+    return secondMessage && Object.keys(secondMessage).every(field => secondMessage[field]);
   };
 
   const steps: Step[] = [
@@ -103,14 +142,17 @@ export const CartAbandoned = () => {
       name: t('useLine'),
       isDone: isUseLine,
       children: renderStep1(),
+      onConfirm: onConfirmLineSending,
     },
     {
       name: t('msgSetting1'),
+      isDone: isStep2Done(),
       children: <MessageSetting showLineSettings={isUseLine === lineOptions[0].value} />,
       showPreviewBtn: true,
     },
     {
       name: t('msgSetting2'),
+      isDone: isStep3Done(),
       children: renderStep3(),
       showPreviewBtn: true,
     },
@@ -122,8 +164,21 @@ export const CartAbandoned = () => {
     },
   ];
 
+  const modalDesc = () => {
+    let desc = 'executeTemplate';
+    if (isSaveAsDraft) {
+      desc = 'alertAfterSaveAsDraft';
+    } else if (isCompleted) {
+      desc = 'alertAfterExecuting';
+    }
+    return t(desc, { template: t('cartAbandoned') });
+  };
+
+  const isGotoMABtn = isCompleted || isSaveAsDraft;
+  const gotoMyMAUrl = `/organizations/1/projects/1/actions/${isCompleted ? 'active' : 'draft'}`;
+
   return (
-    <div>
+    <div className='relative'>
       <ActionContainer
         showUseTemplateBtn={false}
         iconName='cart'
@@ -132,18 +187,46 @@ export const CartAbandoned = () => {
         descriptionImageUrl='/images/cart-abandoned-description.png'
         flowImgUrl='/images/cart-abandoned-flow.png'
       ></ActionContainer>
-      <Form methods={methods} onSubmit={onSubmit} className='mt-[60px]'>
+      <Form methods={methods} className='mt-[60px]'>
         <Steps steps={steps} />
+        <div className='flex justify-center'>
+          <Button
+            colorScheme='negative'
+            className='mr-5 min-w-[240px] h-[52px]'
+            onClick={onSaveAsDraft}
+          >
+            {t('saveDraft')}
+          </Button>
+          <Button colorScheme='negative' className='mr-5 min-w-[240px] h-[52px]'>
+            {t('stopEditing')}
+          </Button>
+          <Button onClick={showModal} className='min-w-[480px] h-[52px]'>
+            {t('implementTemplate')}
+          </Button>
+        </div>
       </Form>
-      <div className='flex justify-center'>
-        <Button className='mr-5 min-w-[240px] h-[52px] bg-input-focus border-none'>
-          {t('saveDraft')}
-        </Button>
-        <Button className='mr-5 min-w-[240px] h-[52px] bg-input-focus border-none'>
-          {t('stopEditing')}
-        </Button>
-        <Button className='min-w-[480px] h-[52px]'>{t('implementTemplate')}</Button>
-      </div>
+
+      <Modal control={modalControl}>
+        <div className='text-center text-gray-dark'>
+          <Modal.Body className='leading-loose whitespace-pre-line'>{modalDesc()}</Modal.Body>
+          <Modal.Footer className='text-medium'>
+            {isGotoMABtn ? (
+              <Link passHref href={gotoMyMAUrl}>
+                <Modal.FooterButton colorScheme='negative' onClick={modalControl.close}>
+                  {t('gotoMyMA')}
+                </Modal.FooterButton>
+              </Link>
+            ) : (
+              <>
+                <Modal.FooterButton colorScheme='negative' onClick={modalControl.close}>
+                  {t('cancel')}
+                </Modal.FooterButton>
+                <Modal.FooterButton onClick={onExecuteMA}>{t('executeTest')}</Modal.FooterButton>
+              </>
+            )}
+          </Modal.Footer>
+        </div>
+      </Modal>
     </div>
   );
 };

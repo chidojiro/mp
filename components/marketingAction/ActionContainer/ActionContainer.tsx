@@ -2,6 +2,8 @@ import { Button, Icon, IconName, Tag } from '@/components';
 import { ClassName } from '@/types';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Label } from './Label';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -25,6 +27,10 @@ export const ActionContainer = ({
 }: Props) => {
   const { t } = useTranslation('marketingAction');
   const { t: tCommon } = useTranslation('common');
+  const {
+    query: { marketingActionName },
+  } = useRouter();
+  const prefixUrl = `/organizations/1/projects/1/actions/edit/${marketingActionName}`;
 
   return (
     <div className={classNames('p-10', 'rounded-lg border border-solid border-gray-500')}>
@@ -82,7 +88,9 @@ export const ActionContainer = ({
         </div>
       )}
       {showUseTemplateBtn && (
-        <Button className='w-[360px] !block mx-auto mt-6'>{t('useThisTemplate')}</Button>
+        <Link passHref href={prefixUrl}>
+          <Button className='w-[360px] !block mx-auto mt-6'>{t('useThisTemplate')}</Button>
+        </Link>
       )}
     </div>
   );

@@ -103,3 +103,18 @@
 .mp-table-head .mp-table-cell:not(:last-of-type) {
   border-right-color: theme('colors.white');
 }
+
+.mp-scroll::-webkit-scrollbar {
+  position: absolute;
+  right: 0;
+  width: 6px;
+}
+
+.mp-scroll::-webkit-scrollbar-thumb {
+  @apply bg-input-focus;
+  border-radius: 3px;
+}
+
+.mp-scroll:hover .mp-scroll::-webkit-scrollbar {
+  @apply bg-input-focus;
+}
