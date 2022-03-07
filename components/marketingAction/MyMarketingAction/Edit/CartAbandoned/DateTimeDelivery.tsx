@@ -7,7 +7,7 @@ type Props = {
   inputTimeName: string;
 };
 
-export const DateTime = ({ fromTheDateText, inputDateName, inputTimeName }: Props) => {
+export const DateTimeDelivery = ({ fromTheDateText, inputDateName, inputTimeName }: Props) => {
   const { t } = useTranslation('marketingAction');
 
   return (

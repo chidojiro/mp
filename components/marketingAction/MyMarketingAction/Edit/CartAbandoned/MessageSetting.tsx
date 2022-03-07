@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { useWatch } from 'react-hook-form';
 import { ColorGroup } from './ColorGroup';
-import { DateTime } from './DateTime';
+import { DateTimeDelivery } from './DateTimeDelivery';
 import { PreviewMessage } from './PreviewMessage';
 import { PreviewModal } from './PreviewModal';
 
@@ -28,7 +28,7 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
   return (
     <>
       <div className='px-10 -mx-10 border-b-4 border-white pb-7'>
-        <DateTime
+        <DateTimeDelivery
           fromTheDateText={t('fromTheDateCartAbandoned')}
           inputDateName='first_message.delivery_date'
           inputTimeName='first_message.delivery_time'

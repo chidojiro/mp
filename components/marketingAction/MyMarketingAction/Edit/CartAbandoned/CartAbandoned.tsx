@@ -5,17 +5,12 @@ import { Step } from '@/constants';
 import { useVisibilityControl } from '@/hooks';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { Steps } from '../Steps';
-import { DateTime } from './DateTime';
+import { DateTimeDelivery } from './DateTimeDelivery';
 import { MessageSetting } from './MessageSetting';
 import { TargetCustomerGroup } from './TargetCustomerGroup';
-
-const ACTION = {
-  SAVE_DRAFT: 'save_as_draft',
-  EXECUTE_TEMPLATE: 'execute_template',
-};
 
 export const CartAbandoned = () => {
   const { t } = useTranslation('marketingAction');
@@ -106,7 +101,7 @@ export const CartAbandoned = () => {
           </Form.RadioGroup>
         </div>
         <div className='px-10 pb-5 -mx-10 border-b-4 border-white mb-7'>
-          <DateTime
+          <DateTimeDelivery
             fromTheDateText={t('fromTheDateCartAbandoned')}
             inputDateName='second_message.delivery_date'
             inputTimeName='second_message.delivery_time'
@@ -196,12 +191,13 @@ export const CartAbandoned = () => {
         <Steps steps={steps} />
         <div className='flex justify-center'>
           <Button
-            className='mr-5 min-w-[240px] h-[52px] bg-input-focus border-none'
+            colorScheme='negative'
+            className='mr-5 min-w-[240px] h-[52px]'
             onClick={onSaveAsDraft}
           >
             {t('saveDraft')}
           </Button>
-          <Button className='mr-5 min-w-[240px] h-[52px] bg-input-focus border-none'>
+          <Button colorScheme='negative' className='mr-5 min-w-[240px] h-[52px]'>
             {t('stopEditing')}
           </Button>
           <Button onClick={showModal} className='min-w-[480px] h-[52px]'>
@@ -213,27 +209,19 @@ export const CartAbandoned = () => {
       <Modal control={modalControl}>
         <div className='text-center text-gray-dark'>
           <Modal.Body className='leading-loose whitespace-pre-line'>{modalDesc()}</Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className='text-medium'>
             {isGotoMABtn ? (
               <Link passHref href={gotoMyMAUrl}>
-                <Button
-                  className='text-medium mr-5 min-w-[240px] bg-input-focus border-none'
-                  onClick={modalControl.close}
-                >
+                <Modal.FooterButton colorScheme='negative' onClick={modalControl.close}>
                   {t('gotoMyMA')}
-                </Button>
+                </Modal.FooterButton>
               </Link>
             ) : (
               <>
-                <Button
-                  className='text-medium mr-5 min-w-[240px] bg-input-focus border-none'
-                  onClick={modalControl.close}
-                >
+                <Modal.FooterButton colorScheme='negative' onClick={modalControl.close}>
                   {t('cancel')}
-                </Button>
-                <Button className='text-medium min-w-[240px]' onClick={onExecuteMA}>
-                  {t('executeTest')}
-                </Button>
+                </Modal.FooterButton>
+                <Modal.FooterButton onClick={onExecuteMA}>{t('executeTest')}</Modal.FooterButton>
               </>
             )}
           </Modal.Footer>

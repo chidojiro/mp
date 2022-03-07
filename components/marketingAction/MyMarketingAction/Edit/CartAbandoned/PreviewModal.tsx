@@ -28,21 +28,21 @@ export const PreviewModal = ({ control, headlines, body }: Props) => {
     { label: 'PC', value: 'pc' },
   ];
 
-  const onChangeType = () => {
+  const handleTypeChange = () => {
     // TODO
     console.log('on change type');
   };
 
-  const onChangeDevices = () => {
+  const handleDevicesChange = () => {
     setShowMobileVersion(prevState => !prevState);
   };
 
-  const onTestDelivery = () => {
+  const handleDeliveryTest = () => {
     control.close();
     modalControl.open();
   };
 
-  const onExecuteTest = () => {
+  const handleExecuteTest = () => {
     if (email) {
       // TODO send
       modalControl.close();
@@ -54,9 +54,9 @@ export const PreviewModal = ({ control, headlines, body }: Props) => {
       <Overlay control={control} title={t('preview')} className='flex flex-col items-center'>
         <PreviewMessage headlines={headlines} body={body} showMobileVersion={showMobileVersion} />
         <div className='mt-[53px] w-[600px] flex justify-between items-center'>
-          <SwitchButtons onChange={onChangeType} items={types}></SwitchButtons>
-          <SwitchButtons onChange={onChangeDevices} items={devices}></SwitchButtons>
-          <Button className='w-[240px]' onClick={onTestDelivery}>
+          <SwitchButtons onChange={handleTypeChange} items={types}></SwitchButtons>
+          <SwitchButtons onChange={handleDevicesChange} items={devices}></SwitchButtons>
+          <Button className='w-[240px]' onClick={handleDeliveryTest}>
             {t('testDelivery')}
           </Button>
         </div>
@@ -68,16 +68,11 @@ export const PreviewModal = ({ control, headlines, body }: Props) => {
           <div className='text-secondary mb-2.5 font-bold text-medium'>{t('emailAddForTest')}</div>
           <Input name='email_for_test' onChange={event => setEmail(event.target.value)} />
         </Modal.Body>
-        <Modal.Footer>
-          <Button
-            className='text-medium mr-5 min-w-[240px] bg-input-focus border-none'
-            onClick={modalControl.close}
-          >
+        <Modal.Footer className='text-medium'>
+          <Modal.FooterButton colorScheme='negative' onClick={modalControl.close}>
             {t('cancel')}
-          </Button>
-          <Button className='text-medium min-w-[240px]' onClick={onExecuteTest}>
-            {t('executeTest')}
-          </Button>
+          </Modal.FooterButton>
+          <Modal.FooterButton onClick={handleExecuteTest}>{t('executeTest')}</Modal.FooterButton>
         </Modal.Footer>
       </Modal>
     </>
