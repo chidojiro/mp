@@ -1,19 +1,31 @@
 import { Form, RadioGroup } from '@/components';
-import { Button } from '@/components/common';
+import { Button, Modal } from '@/components/common';
 import { ActionContainer } from '@/components/marketingAction';
 import { Step } from '@/constants';
+import { useVisibilityControl } from '@/hooks';
 import { useTranslation } from 'next-i18next';
-import React from 'react';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { Steps } from '../Steps';
 import { DateTime } from './DateTime';
 import { MessageSetting } from './MessageSetting';
 import { TargetCustomerGroup } from './TargetCustomerGroup';
 
+const ACTION = {
+  SAVE_DRAFT: 'save_as_draft',
+  EXECUTE_TEMPLATE: 'execute_template',
+};
+
 export const CartAbandoned = () => {
   const { t } = useTranslation('marketingAction');
   const methods = useForm();
+  const { handleSubmit } = methods;
   const { control } = methods;
+  const modalControl = useVisibilityControl();
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [isSaveAsDraft, setIsSaveAsDraft] = useState(false);
+
   const isUseLine = useWatch({ name: 'is_use_line', control });
   const targetCustomers = useWatch({ name: 'target_customers', control });
   const firstMessage = useWatch({ name: 'first_message', control });
@@ -27,6 +39,24 @@ export const CartAbandoned = () => {
   const onSubmit = (data: any) => {
     // handle change
     console.log('submit', data);
+  };
+
+  const showModal = () => {
+    setIsCompleted(false);
+    setIsSaveAsDraft(false);
+    modalControl.open();
+  };
+
+  const onExecuteMA = () => {
+    handleSubmit(onSubmit)();
+    setIsCompleted(true);
+  };
+
+  const onSaveAsDraft = () => {
+    modalControl.open();
+    handleSubmit(onSubmit)();
+    setIsCompleted(false);
+    setIsSaveAsDraft(true);
   };
 
   const renderStep1 = () => {
@@ -139,6 +169,19 @@ export const CartAbandoned = () => {
     },
   ];
 
+  const modalDesc = () => {
+    let desc = 'executeTemplate';
+    if (isSaveAsDraft) {
+      desc = 'alertAfterSaveAsDraft';
+    } else if (isCompleted) {
+      desc = 'alertAfterExecuting';
+    }
+    return t(desc, { template: t('cartAbandoned') });
+  };
+
+  const isGotoMABtn = isCompleted || isSaveAsDraft;
+  const gotoMyMAUrl = `/organizations/1/projects/1/actions/${isCompleted ? 'active' : 'draft'}`;
+
   return (
     <div className='relative'>
       <ActionContainer
@@ -149,20 +192,53 @@ export const CartAbandoned = () => {
         descriptionImageUrl='/images/cart-abandoned-description.png'
         flowImgUrl='/images/cart-abandoned-flow.png'
       ></ActionContainer>
-      <Form methods={methods} onSubmit={onSubmit} className='mt-[60px]'>
+      <Form methods={methods} className='mt-[60px]'>
         <Steps steps={steps} />
         <div className='flex justify-center'>
-          <Button className='mr-5 min-w-[240px] h-[52px] bg-input-focus border-none'>
+          <Button
+            className='mr-5 min-w-[240px] h-[52px] bg-input-focus border-none'
+            onClick={onSaveAsDraft}
+          >
             {t('saveDraft')}
           </Button>
           <Button className='mr-5 min-w-[240px] h-[52px] bg-input-focus border-none'>
             {t('stopEditing')}
           </Button>
-          <Button type='submit' className='min-w-[480px] h-[52px]'>
+          <Button onClick={showModal} className='min-w-[480px] h-[52px]'>
             {t('implementTemplate')}
           </Button>
         </div>
       </Form>
+
+      <Modal control={modalControl}>
+        <div className='text-center text-gray-dark'>
+          <Modal.Body className='leading-loose whitespace-pre-line'>{modalDesc()}</Modal.Body>
+          <Modal.Footer>
+            {isGotoMABtn ? (
+              <Link passHref href={gotoMyMAUrl}>
+                <Button
+                  className='text-medium mr-5 min-w-[240px] bg-input-focus border-none'
+                  onClick={modalControl.close}
+                >
+                  {t('gotoMyMA')}
+                </Button>
+              </Link>
+            ) : (
+              <>
+                <Button
+                  className='text-medium mr-5 min-w-[240px] bg-input-focus border-none'
+                  onClick={modalControl.close}
+                >
+                  {t('cancel')}
+                </Button>
+                <Button className='text-medium min-w-[240px]' onClick={onExecuteMA}>
+                  {t('executeTest')}
+                </Button>
+              </>
+            )}
+          </Modal.Footer>
+        </div>
+      </Modal>
     </div>
   );
 };

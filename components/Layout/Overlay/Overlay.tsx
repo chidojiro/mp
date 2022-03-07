@@ -35,18 +35,21 @@ export const Overlay = ({
         'fixed bottom-0 right-0 z-50',
         'flex items-center justify-center'
       )}
-      style={{ width: `calc(100vw - ${sidebarWidth})`, height: `calc(100vh - ${headerHeight})` }}>
+      style={{ width: `calc(100vw - ${sidebarWidth})`, height: `calc(100vh - ${headerHeight})` }}
+    >
       <div
         onClick={onBackdropClick}
-        className='absolute w-full h-full bg-[#222222] opacity-80'></div>
+        className='absolute w-full h-full bg-[#222222] opacity-80'
+      ></div>
       <div
         className={classNames(
           'w-full px-5 py-2',
           'text-white text-h5',
           'absolute top-0 left-0',
           'flex items-center justify-between'
-        )}>
-        <h6>{title}</h6>
+        )}
+      >
+        <h5>{title}</h5>
         {!!showCloseButton && (
           <div className='w-4 h-4 cursor-pointer' onClick={control.close}>
             X

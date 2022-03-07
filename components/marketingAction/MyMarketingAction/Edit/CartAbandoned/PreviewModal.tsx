@@ -1,6 +1,6 @@
-import { Button, SwitchButtons } from '@/components/common';
+import { Button, Input, Modal, SwitchButtons } from '@/components/common';
 import { Overlay } from '@/components/Layout';
-import { VisibilityControl } from '@/hooks';
+import { useVisibilityControl, VisibilityControl } from '@/hooks';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 import { PreviewMessage } from './PreviewMessage';
@@ -14,6 +14,9 @@ type Props = {
 export const PreviewModal = ({ control, headlines, body }: Props) => {
   const { t } = useTranslation('marketingAction');
   const [showMobileVersion, setShowMobileVersion] = useState(true);
+  const [email, setEmail] = useState('');
+
+  const modalControl = useVisibilityControl();
 
   const types = [
     { label: 'LINE', value: 'line' },
@@ -34,14 +37,49 @@ export const PreviewModal = ({ control, headlines, body }: Props) => {
     setShowMobileVersion(prevState => !prevState);
   };
 
+  const onTestDelivery = () => {
+    control.close();
+    modalControl.open();
+  };
+
+  const onExecuteTest = () => {
+    if (email) {
+      // TODO send
+      modalControl.close();
+    }
+  };
+
   return (
-    <Overlay control={control} title={t('preview')} className='flex flex-col items-center'>
-      <PreviewMessage headlines={headlines} body={body} showMobileVersion={showMobileVersion} />
-      <div className='mt-[53px] w-[600px] flex justify-between items-center'>
-        <SwitchButtons onChange={onChangeType} items={types}></SwitchButtons>
-        <SwitchButtons onChange={onChangeDevices} items={devices}></SwitchButtons>
-        <Button className='w-[240px] '>{t('testDelivery')}</Button>
-      </div>
-    </Overlay>
+    <>
+      <Overlay control={control} title={t('preview')} className='flex flex-col items-center'>
+        <PreviewMessage headlines={headlines} body={body} showMobileVersion={showMobileVersion} />
+        <div className='mt-[53px] w-[600px] flex justify-between items-center'>
+          <SwitchButtons onChange={onChangeType} items={types}></SwitchButtons>
+          <SwitchButtons onChange={onChangeDevices} items={devices}></SwitchButtons>
+          <Button className='w-[240px]' onClick={onTestDelivery}>
+            {t('testDelivery')}
+          </Button>
+        </div>
+      </Overlay>
+      <Modal control={modalControl}>
+        <Modal.Header>{t('testDeliveryEmail')}</Modal.Header>
+        <Modal.Body className='text-gray-dark'>
+          <div className='mb-5'>{t('testDeliveryEmailDesc')}</div>
+          <div className='text-secondary mb-2.5 font-bold text-medium'>{t('emailAddForTest')}</div>
+          <Input name='email_for_test' onChange={event => setEmail(event.target.value)} />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            className='text-medium mr-5 min-w-[240px] bg-input-focus border-none'
+            onClick={modalControl.close}
+          >
+            {t('cancel')}
+          </Button>
+          <Button className='text-medium min-w-[240px]' onClick={onExecuteTest}>
+            {t('executeTest')}
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 };

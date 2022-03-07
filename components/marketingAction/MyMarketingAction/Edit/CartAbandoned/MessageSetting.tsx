@@ -58,7 +58,7 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
           </div>
           <div>
             <div className='flex justify-between mb-2 text-medium'>
-              <span className='text-secondary'>{t('preview')}</span>
+              <span className='text-secondary'>{t('previewMobile')}</span>
               <span
                 className='text-gray-700 underline cursor-pointer'
                 onClick={previewMessageControl.open}
