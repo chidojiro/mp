@@ -5,7 +5,7 @@ import { Step } from '@/constants';
 import { useVisibilityControl } from '@/hooks';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { Steps } from '../Steps';
 import { DateTimeDelivery } from './DateTimeDelivery';
@@ -125,44 +125,69 @@ export const CartAbandoned = () => {
     );
   };
 
-  const onConfirmLineSending = () => {
-    // TODO
+  const setStepDone = (stepId: number, done: boolean) => {
+    setSteps(prevState =>
+      prevState.map(step => {
+        return step.id === stepId ? { ...step, isDone: done } : step;
+      })
+    );
   };
 
-  const isStep2Done = () => {
+  const onConfirm = (stepId: number) => {
+    if (
+      (stepId === 1 && isUseLine) ||
+      (stepId === 2 && isStep2Done()) ||
+      (stepId === 3 && isStep3Done()) ||
+      (stepId === 4 && targetCustomers?.length)
+    ) {
+      setStepDone(stepId, true);
+    }
+  };
+
+  const isStep2Done = useCallback(() => {
     return firstMessage && Object.keys(firstMessage).every(field => firstMessage[field]);
-  };
+  }, [firstMessage]);
 
-  const isStep3Done = () => {
+  const isStep3Done = useCallback(() => {
     return secondMessage && Object.keys(secondMessage).every(field => secondMessage[field]);
-  };
+  }, [secondMessage]);
 
-  const steps: Step[] = [
+  const [steps, setSteps] = useState<Step[]>([
     {
+      id: 1,
       name: t('useLine'),
-      isDone: isUseLine,
       children: renderStep1(),
-      onConfirm: onConfirmLineSending,
     },
     {
+      id: 2,
       name: t('msgSetting1'),
-      isDone: isStep2Done(),
       children: <MessageSetting showLineSettings={isUseLine === lineOptions[0].value} />,
       showPreviewBtn: true,
     },
     {
+      id: 3,
       name: t('msgSetting2'),
-      isDone: isStep3Done(),
       children: renderStep3(),
       showPreviewBtn: true,
     },
     {
+      id: 4,
       name: t('targetSetting'),
       children: <TargetCustomerGroup />,
-      showPreviewBtn: true,
-      isDone: targetCustomers?.length,
     },
-  ];
+  ]);
+
+  useEffect(() => {
+    if (!isStep2Done()) {
+      setStepDone(2, false);
+    }
+    if (!isStep3Done()) {
+      setStepDone(3, false);
+    }
+    if (!targetCustomers?.length) {
+      setStepDone(4, false);
+    }
+  }, [isStep2Done, isStep3Done, targetCustomers]);
 
   const modalDesc = () => {
     let desc = 'executeTemplate';
@@ -176,6 +201,7 @@ export const CartAbandoned = () => {
 
   const isGotoMABtn = isCompleted || isSaveAsDraft;
   const gotoMyMAUrl = `/organizations/1/projects/1/actions/${isCompleted ? 'active' : 'draft'}`;
+  const unSavedSteps = steps.filter(step => !step.isDone).length;
 
   return (
     <div className='relative'>
@@ -188,19 +214,15 @@ export const CartAbandoned = () => {
         flowImgUrl='/images/cart-abandoned-flow.png'
       ></ActionContainer>
       <Form methods={methods} className='mt-[60px]'>
-        <Steps steps={steps} />
-        <div className='flex justify-center'>
-          <Button
-            colorScheme='negative'
-            className='mr-5 min-w-[240px] h-[52px]'
-            onClick={onSaveAsDraft}
-          >
+        <Steps steps={steps} onConfirm={onConfirm} />
+        <div className='flex justify-center mt-[60px]'>
+          <Button className='mr-5 min-w-[240px] h-[52px] bg-[#FF7F5C]' onClick={onSaveAsDraft}>
             {t('saveDraft')}
           </Button>
           <Button colorScheme='negative' className='mr-5 min-w-[240px] h-[52px]'>
             {t('stopEditing')}
           </Button>
-          <Button onClick={showModal} className='min-w-[480px] h-[52px]'>
+          <Button onClick={showModal} className='min-w-[480px] h-[52px]' disabled={!!unSavedSteps}>
             {t('implementTemplate')}
           </Button>
         </div>

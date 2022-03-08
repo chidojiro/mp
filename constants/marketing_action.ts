@@ -4,12 +4,11 @@ export enum HeaderTab {
   Draft = 'draft',
 }
 export interface Step {
+  id: number;
   name: string;
   showPreviewBtn?: boolean;
   isDone?: boolean;
   children?: React.ReactNode;
-  onConfirm?: () => void;
-  onShowPreview?: () => void;
 }
 
 export enum MESSAGE_TYPE {
