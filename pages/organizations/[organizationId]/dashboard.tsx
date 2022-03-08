@@ -86,7 +86,9 @@ const placeholder = [
 function Dashboard(props: any) {
   const { t } = useTranslation('dashboard');
 
-  const data = placeholder;
+  const { data } = useSWR('/api/user', ReportApi.rfm_report, {
+    fallbackData: placeholder,
+  });
 
   return (
     <ServerSidePropsProvider props={props}>
