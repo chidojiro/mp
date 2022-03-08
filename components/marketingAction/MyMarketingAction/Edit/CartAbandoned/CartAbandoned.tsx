@@ -5,7 +5,7 @@ import { Step } from '@/constants';
 import { useVisibilityControl } from '@/hooks';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { Steps } from '../Steps';
 import { DateTimeDelivery } from './DateTimeDelivery';
@@ -144,13 +144,13 @@ export const CartAbandoned = () => {
     }
   };
 
-  const isStep2Done = useCallback(() => {
+  const isStep2Done = () => {
     return firstMessage && Object.keys(firstMessage).every(field => firstMessage[field]);
-  }, [firstMessage]);
+  };
 
-  const isStep3Done = useCallback(() => {
+  const isStep3Done = () => {
     return secondMessage && Object.keys(secondMessage).every(field => secondMessage[field]);
-  }, [secondMessage]);
+  };
 
   const [steps, setSteps] = useState<Step[]>([
     {
@@ -219,7 +219,7 @@ export const CartAbandoned = () => {
       ></ActionContainer>
       <Form methods={methods} className='mt-[60px]'>
         <Steps steps={steps} onConfirm={onConfirm} />
-        <div className='flex justify-center mt-[60px]'>
+        <div className='flex justify-center mt-10'>
           <Button className='mr-5 min-w-[240px] h-[52px] bg-[#FF7F5C]' onClick={onSaveAsDraft}>
             {t('saveDraft')}
           </Button>
