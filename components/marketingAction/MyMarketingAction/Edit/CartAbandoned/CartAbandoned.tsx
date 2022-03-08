@@ -178,16 +178,20 @@ export const CartAbandoned = () => {
   ]);
 
   useEffect(() => {
-    if (!isStep2Done()) {
-      setStepDone(2, false);
-    }
-    if (!isStep3Done()) {
-      setStepDone(3, false);
-    }
-    if (!targetCustomers?.length) {
-      setStepDone(4, false);
-    }
-  }, [isStep2Done, isStep3Done, targetCustomers]);
+    setStepDone(1, false);
+  }, [isUseLine]);
+
+  useEffect(() => {
+    setStepDone(2, false);
+  }, [firstMessage]);
+
+  useEffect(() => {
+    setStepDone(3, false);
+  }, [secondMessage]);
+
+  useEffect(() => {
+    setStepDone(4, false);
+  }, [targetCustomers]);
 
   const modalDesc = () => {
     let desc = 'executeTemplate';
