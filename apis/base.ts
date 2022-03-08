@@ -49,7 +49,8 @@ myAxios.interceptors.response.use(
     return response?.data?.result ?? response?.data?.results ?? response?.data;
   },
   function (error) {
-    if (error.response.status === 401 && !NextUtils.isServer()) location.href = '/login';
+    if (error.response.status === 401 && !NextUtils.isServer() && location.pathname !== '/login')
+      location.href = '/login';
     return Promise.reject(error);
   }
 );

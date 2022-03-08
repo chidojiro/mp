@@ -49,9 +49,15 @@ const FormTimeInput = (props: FieldProps & Omit<TimeInputProps, keyof FieldProps
 );
 
 const FormErrorMessage = ({ name, className, ...restProps }: HTMLDivProps & { name: string }) => (
-  <p className={classNames('text-danger', className)} {...restProps}>
-    <ErrorMessage name={name}></ErrorMessage>
-  </p>
+  <ErrorMessage name={name}>
+    {message =>
+      message ? (
+        <p className={classNames('text-danger', className)} {...restProps}>
+          {message}
+        </p>
+      ) : null
+    }
+  </ErrorMessage>
 );
 
 Form.Input = FormInput;

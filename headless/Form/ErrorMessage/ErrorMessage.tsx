@@ -5,9 +5,10 @@ import React from 'react';
 export type Props = {
   name: string | string[];
   className?: string;
+  children: (message: string) => React.ReactNode;
 };
 
-export const ErrorMessage = ({ name }: Props) => {
+export const ErrorMessage = ({ name, children }: Props) => {
   const {
     formState: { errors },
   } = useFormContext();
@@ -18,5 +19,5 @@ export const ErrorMessage = ({ name }: Props) => {
     if (errorMessage) break;
   }
 
-  return <>{errorMessage}</>;
+  return <>{children(errorMessage)}</>;
 };

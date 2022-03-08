@@ -10,3 +10,4 @@ export * from './SideMenu';
 export * from './Icon';
 export * from './SwitchButtons';
 export * from './Modal';
+export * from './ErrorMessage';
