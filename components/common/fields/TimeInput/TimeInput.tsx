@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import React from 'react';
 import { Icon } from '../../Icon';
 import { Input, InputProps } from '../Input';
-import styles from './TimeInput.module.scss';
+import styles from './TimeInput.module.css';
 
 export type Props = Omit<InputProps, 'ref'>;
 

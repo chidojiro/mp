@@ -7,42 +7,21 @@ export type ServerSidePropsState = Partial<Record<ServerSidePropNames, any>>;
 
 type ServerSidePropsProviderValue = {
   props: ServerSidePropsState;
-  registerProps: (props: ServerSidePropsState) => void;
 };
 
-export const ServerSidePropsContext = React.createContext<ServerSidePropsProviderValue>(
-  null as any
-);
+export const ServerSidePropsContext = React.createContext<ServerSidePropsProviderValue>({
+  props: {},
+});
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-type Props = Children & {};
+type Props = Children & { props: Partial<ServerSidePropsState> };
 
-export const ServerSidePropsProvider = ({ children }: Props) => {
-  const [serverSideProps, setServerSideProps] = React.useState<ServerSidePropsState>({});
-
-  const registerProps = React.useCallback((props: Partial<ServerSidePropsState>) => {
-    setServerSideProps(prev => ({ ...prev, ...props }));
-  }, []);
-
-  const value = React.useMemo(
-    () => ({ registerProps, props: serverSideProps }),
-    [registerProps, serverSideProps]
-  );
+export const ServerSidePropsProvider = ({ children, props = {} }: Props) => {
+  const value = React.useMemo(() => ({ props }), [props]);
 
   return (
     <ServerSidePropsContext.Provider value={value}>{children}</ServerSidePropsContext.Provider>
   );
 };
 
-export const useServerSidePropsContext = (serverSideProps?: any) => {
-  const { registerProps, props } = React.useContext(ServerSidePropsContext);
-
-  React.useEffect(() => {
-    if (serverSideProps) {
-      registerProps(serverSideProps);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return React.useMemo(() => ({ props }), [props]);
-};
+export const useServerSidePropsContext = () => React.useContext(ServerSidePropsContext);
