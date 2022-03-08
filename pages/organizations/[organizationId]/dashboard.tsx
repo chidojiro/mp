@@ -85,17 +85,8 @@ const placeholder = [
 
 function Dashboard(props: any) {
   const { t } = useTranslation('dashboard');
-  const [report, setReport] = useState(null);
-  const { data, error } = useSWR('/api/user', ReportApi.rfm_report, {
-    fallbackData: placeholder,
-  });
-  // useEffect(() => {
-  //     const loadData = async () => {
-  //       const result = await ReportApi.rfm_report();
-  //       setReport(result.data.result)
-  //     }
-  //     loadData()
-  //   }, [report])
+
+  const data = placeholder;
 
   return (
     <ServerSidePropsProvider props={props}>
