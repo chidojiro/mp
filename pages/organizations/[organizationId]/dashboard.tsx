@@ -7,10 +7,12 @@ import { ServerSidePropsProvider } from '@/contexts';
 import { NextUtils } from '@/utils/next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useState } from 'react';
 import useSWR from 'swr';
 
-export const getServerSideProps = NextUtils.withProps('profile')(async ({ locale }, result) => {
+export const getServerSideProps = NextUtils.withProps(
+  'profile',
+  'rfmReport'
+)(async ({ locale }, result) => {
   return {
     ...result,
     props: {
@@ -20,75 +22,10 @@ export const getServerSideProps = NextUtils.withProps('profile')(async ({ locale
   };
 });
 
-const placeholder = [
-  {
-    target: 'f0',
-    numOfCustomers: '',
-    members: '234',
-    other: '9,203',
-    average: '',
-    total: '',
-    f1Sleep: '',
-    loyalSleep: '',
-  },
-  {
-    target: 'f1',
-    numOfCustomers: '19,404',
-    members: '',
-    other: '',
-    average: '2,277',
-    total: '4,180,440',
-    f1Sleep: '',
-    loyalSleep: '',
-  },
-  {
-    target: 'f2',
-    numOfCustomers: '8,022',
-    members: '',
-    other: '',
-    average: '2,612',
-    total: '2,329,001',
-    f1Sleep: '',
-    lSleep: '',
-  },
-  {
-    target: 'semi-loyal',
-    numOfCustomers: '8,022',
-    members: '',
-    other: '',
-    average: '2,612',
-    total: '2,329,001',
-    f1Sleep: '',
-    loyalSleep: '',
-  },
-  {
-    target: 'loyal',
-    numOfCustomers: '19,404',
-    members: '',
-    other: '',
-    average: '32,277',
-    total: '4,180,440',
-    f1Sleep: '',
-    loyalSleep: '',
-  },
-  {
-    target: 'sleep',
-    numOfCustomers: '154',
-    members: '',
-    other: '',
-    average: '',
-    total: '',
-    f1Sleep: '124',
-    loyalSleep: '30',
-  },
-];
-
 function Dashboard(props: any) {
   const { t } = useTranslation('dashboard');
 
-  const { data } = useSWR('/api/user', ReportApi.rfm_report, {
-    fallbackData: placeholder,
-  });
+  const { data } = useSWR('/api/user', ReportApi.rfm_report, { fallbackData: props.rfmReport });
 
   return (
     <ServerSidePropsProvider props={props}>

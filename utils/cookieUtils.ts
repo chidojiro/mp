@@ -25,9 +25,19 @@ const remove = (key: string, options: CookieAttributes = {}) => {
   Cookies.remove(key, { ...options, secure: !IS_DEV });
 };
 
+const parse = (cookie: string) =>
+  cookie
+    ?.split(';')
+    .map(v => v.split('='))
+    .reduce((acc, v) => {
+      acc[decodeURIComponent(v[0].trim())] = decodeURIComponent(v[1].trim());
+      return acc;
+    }, {} as Record<string, string>) ?? {};
+
 export const CookiesUtils = {
   set,
   get,
+  parse,
   remove,
   getKeyWithPrefix,
 };

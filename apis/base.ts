@@ -23,8 +23,12 @@ axiosRetry(myAxios, {
 myAxios.interceptors.request.use(
   function (config: any) {
     // Do something before request is sent
-    if (CookiesUtils.get(ACCESS_TOKEN_KEY)) {
-      config.headers.Authorization = `Bearer ${CookiesUtils.get(ACCESS_TOKEN_KEY)}`;
+    const cookiesFromReq = CookiesUtils.parse(config.headers.cookie);
+    const accessTokenFromReq = cookiesFromReq[ACCESS_TOKEN_KEY];
+    const accessToken = accessTokenFromReq ?? CookiesUtils.get(ACCESS_TOKEN_KEY);
+
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
     // config.headers['X-Frontend-Version'] = `${APP_VERSION}_${BUILD_NUMBER}`
     config.headers['X-Request-Id'] = nanoid(32);

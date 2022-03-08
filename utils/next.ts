@@ -1,9 +1,10 @@
-import { ACCESS_TOKEN_KEY } from '@/constants';
 import { ProfileApis } from '../apis/profile';
+import { ReportApi } from '../apis/report';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 
 const withPropsMap = {
   profile: ProfileApis.get,
+  rfmReport: ReportApi.rfm_report,
 };
 
 const withProps =
@@ -16,12 +17,10 @@ const withProps =
         const propsMetaCollection = await Promise.all(
           propNames.map(async name => {
             const { cookie } = context.req.headers;
-            const accessToken = context.req.cookies[ACCESS_TOKEN_KEY];
 
             const value = await withPropsMap[name]({
               headers: {
-                cookie: cookie as any,
-                ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
+                cookie: cookie as string,
               },
             });
 

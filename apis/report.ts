@@ -1,8 +1,8 @@
-import { RestApi } from './base';
+import { RestApi, RestApiConfig } from './base';
 
 export const ReportApi = {
-  rfm_report: async (): Promise<any> => {
-    const data = await RestApi.get('rfm_matrix_dashboard/');
+  rfm_report: async (config: RestApiConfig): Promise<any> => {
+    const data = await RestApi.get('/rfm_matrix_dashboard', config);
 
     return [
       {
