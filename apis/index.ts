@@ -3,3 +3,4 @@ export * from './auth';
 export * from './user';
 export * from './conversion_rate';
 export * from './report';
+export * from './profile';

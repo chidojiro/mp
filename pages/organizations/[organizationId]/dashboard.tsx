@@ -3,10 +3,22 @@ import { Icon, Layout } from '@/components';
 import { CSVButton } from '@/components/CSVButton/CSVButton';
 import { CustomerReportButton } from '@/components/CustomerReportButton/CustomerReportButton';
 import { CustomerSegmentTable } from '@/components/CustomerSegmentTable/CustomerSegmentTable';
+import { useServerSidePropsContext } from '@/contexts';
+import { NextUtils } from '@/utils/next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useState } from 'react';
 import useSWR from 'swr';
+
+export const getServerSideProps = NextUtils.withProps('profile')(async ({ locale }, result) => {
+  return {
+    ...result,
+    props: {
+      ...result.props,
+      ...(await serverSideTranslations(locale!)),
+    },
+  };
+});
 
 const placeholder = [
   {
@@ -71,13 +83,13 @@ const placeholder = [
   },
 ];
 
-function Dashboard() {
+function Dashboard(props: any) {
+  useServerSidePropsContext(props);
   const { t } = useTranslation('dashboard');
   const [report, setReport] = useState(null);
   const { data, error } = useSWR('/api/user', ReportApi.rfm_report, {
     fallbackData: placeholder,
   });
-  console.log(data);
   // useEffect(() => {
   //     const loadData = async () => {
   //       const result = await ReportApi.rfm_report();
@@ -139,11 +151,5 @@ function Dashboard() {
     </Layout>
   );
 }
-
-export const getServerSideProps = async ({ locale }: any) => ({
-  props: {
-    ...(await serverSideTranslations(locale)),
-  },
-});
 
 export default Dashboard;

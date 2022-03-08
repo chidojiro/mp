@@ -1,3 +1,4 @@
+import { ServerSidePropsProvider } from '@/contexts';
 import { appWithTranslation } from 'next-i18next';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -11,7 +12,9 @@ function CustomApp({ Component, pageProps }: AppProps) {
         <title>MP</title>
       </Head>
       <div>
-        <Component {...pageProps} />
+        <ServerSidePropsProvider>
+          <Component {...pageProps} />
+        </ServerSidePropsProvider>
       </div>
     </>
   );

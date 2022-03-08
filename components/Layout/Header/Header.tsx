@@ -1,7 +1,10 @@
+import { useProfile } from '@/hooks';
 import classNames from 'classnames';
 import Link from 'next/link';
 
 export const Header = () => {
+  const { data } = useProfile();
+
   return (
     <div
       className={classNames(
@@ -16,7 +19,7 @@ export const Header = () => {
         <img src='/images/mp.png' alt='' className='h-7' />
       </div>
       <Link href='/account' passHref>
-        <a className='font-semibold text-medium'>demo@gmail.com</a>
+        <a className='font-semibold text-medium'>{data?.email}</a>
       </Link>
     </div>
   );

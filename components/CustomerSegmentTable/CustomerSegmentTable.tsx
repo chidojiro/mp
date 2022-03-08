@@ -155,22 +155,22 @@ export const CustomerSegmentTable = ({
   const SLData = (data: any) => {
     return (
       <>
-        <div className='flex items-center container justify-between my-2'>
-          <div className='text-left ml-6 bg-primary rounded-full text-white h-4 w-4 flex justify-center text-medium-sm'>
+        <div className='container flex items-center justify-between my-2'>
+          <div className='flex justify-center w-4 h-4 ml-6 text-left text-white rounded-full bg-primary text-medium-sm'>
             S
           </div>
-          <div className='text-right mr-6'>
+          <div className='mr-6 text-right'>
             {data.webUsers}
             {t('labelPeople')} ({data.webPercentage}
             {t('labelPercent')})
           </div>
         </div>
 
-        <div className='flex items-center container justify-between my-2'>
+        <div className='container flex items-center justify-between my-2'>
           <div className='text-left ml-6 bg-[#06C755] rounded-full text-white h-4 w-4 flex justify-center text-medium-sm'>
             L
           </div>
-          <div className='text-right mr-6'>
+          <div className='mr-6 text-right'>
             {data.lineUsers}
             {t('labelPeople')} ({data.linePercentage}
             {t('labelPercent')})
@@ -183,12 +183,11 @@ export const CustomerSegmentTable = ({
   return (
     <div className='flex' {...props}>
       {data.map((dataSet, index) => {
-        console.log('dataset:', dataSet);
         return (
           <div className='flex flex-col flex-1' key={dataSet.target}>
             <div className={dashboardCardHeaderClasses(dataSet.target, index, data.length)}>
               <div className='absolute -top-4'>
-                <Icon name={iconSource(dataSet.target)} className='h-10 w-10' />
+                <Icon name={iconSource(dataSet.target)} className='w-10 h-10' />
               </div>
               <div className='text-regular'>{t(dataSet.target)}</div>
               <div className='text-medium-sm'>{t(dataSet.target + 'Subtext')}</div>
@@ -201,18 +200,18 @@ export const CustomerSegmentTable = ({
                     : 'flex items-center justify-center h-full w-full relative'
                 }
               >
-                <div className='text-medium w-full'>
+                <div className='w-full text-medium'>
                   {dataSet.target !== 'f0' ? (
-                    <div className='flex items-center container justify-end text-right my-2'>
+                    <div className='container flex items-center justify-end my-2 text-right'>
                       <div className='mr-6 font-bold text-regular'>
                         {dataSet.numOfCustomers}
                         {t('labelPeople')}
                       </div>
                     </div>
                   ) : (
-                    <div className='flex items-center container justify-between my-2'>
-                      <div className='text-left ml-6'>{t('labelMember')}</div>
-                      <div className='text-right mr-6 font-bold text-regular'>
+                    <div className='container flex items-center justify-between my-2'>
+                      <div className='ml-6 text-left'>{t('labelMember')}</div>
+                      <div className='mr-6 font-bold text-right text-regular'>
                         {dataSet.members}
                         {t('labelPeople')}
                       </div>
@@ -222,9 +221,9 @@ export const CustomerSegmentTable = ({
                   {SLData(dataSet)}
 
                   {dataSet.target !== 'f0' ? (
-                    <div className='flex items-center container justify-between my-2'>
-                      <div className='text-left ml-6'>{getFirstLabel(dataSet.target)}</div>
-                      <div className='text-right mr-6'>
+                    <div className='container flex items-center justify-between my-2'>
+                      <div className='ml-6 text-left'>{getFirstLabel(dataSet.target)}</div>
+                      <div className='mr-6 text-right'>
                         {getFirstDataPoint(dataSet)}
                         {getEndLabel(dataSet.target)}
                       </div>
@@ -233,8 +232,8 @@ export const CustomerSegmentTable = ({
                     ''
                   )}
 
-                  <div className='flex items-center container justify-between my-2'>
-                    <div className='text-left ml-6'>{getSecondLabel(dataSet.target)}</div>
+                  <div className='container flex items-center justify-between my-2'>
+                    <div className='ml-6 text-left'>{getSecondLabel(dataSet.target)}</div>
                     <div
                       className={
                         dataSet.target !== 'f0'
@@ -252,7 +251,7 @@ export const CustomerSegmentTable = ({
                     className={getTriangleClasses(dataSet.target)}
                     onClick={() => onClick(dataSet.target)}
                   >
-                    <Icon name='triangle-right' className='h-7 w-5' />
+                    <Icon name='triangle-right' className='w-5 h-7' />
                   </div>
                 ) : (
                   ''

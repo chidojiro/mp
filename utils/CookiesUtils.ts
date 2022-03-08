@@ -3,7 +3,12 @@ import { isSafari } from 'react-device-detect';
 import { IS_DEV } from '@/constants';
 
 export const getKeyWithPrefix = (key: string, isSecure?: boolean) => {
-  const prefix = IS_DEV ? '' : isSecure ? '__Secure-' : '__Host-';
+  const prefix = (() => {
+    if (IS_DEV) return '';
+
+    return isSecure ? '__Secure-' : '__Host-';
+  })();
+
   return `${prefix}${key}`;
 };
 

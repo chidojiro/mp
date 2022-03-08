@@ -1,16 +1,18 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import axiosRetry, { isNetworkOrIdempotentRequestError } from 'axios-retry';
 import { nanoid } from 'nanoid';
-import { API_URI, AUTH_TOKEN } from '@/constants';
+import { API_URI, ACCESS_TOKEN_KEY } from '@/constants';
 import { CookiesUtils } from '@/utils';
 
-axios.defaults.baseURL = API_URI;
-axios.defaults.withCredentials = false;
-axios.defaults.headers.common = {
-  'Content-Type': 'application/json',
-};
+const myAxios = axios.create({
+  baseURL: API_URI,
+  withCredentials: false,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
 
-axiosRetry(axios, {
+axiosRetry(myAxios, {
   retries: 5,
   retryCondition: e => {
     return isNetworkOrIdempotentRequestError(e) || e.response?.status === 502;
@@ -18,17 +20,18 @@ axiosRetry(axios, {
   retryDelay: axiosRetry.exponentialDelay,
 });
 
-axios.interceptors.request.use(
+myAxios.interceptors.request.use(
   function (config: any) {
     // Do something before request is sent
-    if (CookiesUtils.get(AUTH_TOKEN)) {
-      config.headers.Authorization = `Bearer ${CookiesUtils.get(AUTH_TOKEN)}`;
+    if (CookiesUtils.get(ACCESS_TOKEN_KEY)) {
+      config.headers.Authorization = `Bearer ${CookiesUtils.get(ACCESS_TOKEN_KEY)}`;
     }
     // config.headers['X-Frontend-Version'] = `${APP_VERSION}_${BUILD_NUMBER}`
     config.headers['X-Request-Id'] = nanoid(32);
     if (config.method === 'post') {
       config.headers['X-Idempotent-Key'] = nanoid(32);
     }
+
     return config;
   },
   function (error) {
@@ -37,7 +40,16 @@ axios.interceptors.request.use(
   }
 );
 
-axios.interceptors.response.use();
+myAxios.interceptors.response.use(
+  function (response) {
+    return response?.data?.result ?? response?.data?.results ?? response?.data;
+  },
+  function (error) {
+    if (error.response.status === 401) location.href = '/login';
+    return Promise.reject(error);
+  }
+);
 
-export default axios;
-export const RestApi = axios;
+export const RestApi = myAxios;
+
+export type RestApiConfig = AxiosRequestConfig;
