@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import axiosRetry, { isNetworkOrIdempotentRequestError } from 'axios-retry';
 import { nanoid } from 'nanoid';
 import { API_URI, ACCESS_TOKEN_KEY } from '@/constants';
-import { CookiesUtils } from '@/utils';
+import { CookiesUtils, NextUtils } from '@/utils';
 
 const myAxios = axios.create({
   baseURL: API_URI,
@@ -45,7 +45,7 @@ myAxios.interceptors.response.use(
     return response?.data?.result ?? response?.data?.results ?? response?.data;
   },
   function (error) {
-    if (error.response.status === 401) location.href = '/login';
+    if (error.response.status === 401 && !NextUtils.isServer()) location.href = '/login';
     return Promise.reject(error);
   }
 );

@@ -45,6 +45,9 @@ const withProps =
     };
   };
 
+const isServer = () => typeof window === 'undefined';
+
 export const NextUtils = {
   withProps,
+  isServer,
 };
