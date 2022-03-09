@@ -161,7 +161,7 @@ export const CartAbandoned = () => {
     {
       id: 2,
       name: t('msgSetting1'),
-      children: <MessageSetting showLineSettings={isUseLine === lineOptions[0].value} />,
+      children: <MessageSetting optionLine={lineOptions[0].value} />,
       showPreviewBtn: true,
     },
     {
@@ -215,8 +215,7 @@ export const CartAbandoned = () => {
         title={t('cartAbandoned')}
         description={t('cartAbandonedDescription')}
         descriptionImageUrl='/images/cart-abandoned-description.png'
-        flowImgUrl='/images/cart-abandoned-flow.png'
-      ></ActionContainer>
+        flowImgUrl='/images/cart-abandoned-flow.png'></ActionContainer>
       <Form methods={methods} className='mt-[60px]'>
         <Steps steps={steps} onConfirm={onConfirm} />
         <div className='flex justify-center mt-10'>

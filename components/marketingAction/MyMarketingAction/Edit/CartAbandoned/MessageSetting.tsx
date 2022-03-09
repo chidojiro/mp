@@ -10,10 +10,10 @@ import { PreviewMessage } from './PreviewMessage';
 import { PreviewModal } from './PreviewModal';
 
 type Props = {
-  showLineSettings: boolean;
+  optionLine: string;
 };
 
-export const MessageSetting = ({ showLineSettings }: Props) => {
+export const MessageSetting = ({ optionLine }: Props) => {
   const { t } = useTranslation('marketingAction');
   const previewMessageControl = useVisibilityControl();
 
@@ -21,6 +21,8 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
     { value: 'text_message', label: t('displayMsg') },
     { value: 'no_text_message', label: t('noDisplay') },
   ];
+
+  const showLineSettings = useWatch({ name: 'is_use_line' }) === optionLine;
 
   const firstMessage = useWatch({ name: 'first_message' });
   const showLineMsg = firstMessage?.line_option === textMessageOptions[0].value;
@@ -61,8 +63,7 @@ export const MessageSetting = ({ showLineSettings }: Props) => {
               <span className='text-secondary'>{t('previewMobile')}</span>
               <span
                 className='text-gray-700 underline cursor-pointer'
-                onClick={previewMessageControl.open}
-              >
+                onClick={previewMessageControl.open}>
                 {t('openPreview')}
               </span>
             </div>
