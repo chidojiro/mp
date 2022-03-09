@@ -63,10 +63,6 @@ export const PreviewModal = ({ type, control, headline, messageEmail, messageLin
     }
   };
 
-  const handleClose = () => {
-    setCurrType(type);
-  };
-
   const isEmail = MESSAGE_TYPE.EMAIL === currType;
 
   return (
@@ -74,7 +70,7 @@ export const PreviewModal = ({ type, control, headline, messageEmail, messageLin
       <Overlay
         control={control}
         title={t('preview')}
-        onClose={handleClose}
+        onClose={() => setCurrType(type)}
         className='flex flex-col items-center'
       >
         {isEmail ? (
