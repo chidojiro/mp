@@ -63,7 +63,8 @@ export const MessageSetting = ({ optionLine }: Props) => {
               <span className='text-secondary'>{t('previewMobile')}</span>
               <span
                 className='text-gray-700 underline cursor-pointer'
-                onClick={previewMessageControl.open}>
+                onClick={previewMessageControl.open}
+              >
                 {t('openPreview')}
               </span>
             </div>

@@ -21,10 +21,11 @@ export const CartAbandoned = () => {
   const [isCompleted, setIsCompleted] = useState(false);
   const [isSaveAsDraft, setIsSaveAsDraft] = useState(false);
 
-  const isUseLine = useWatch({ name: 'is_use_line', control });
+  const isStep1Done = useWatch({ name: 'is_use_line', control });
   const targetCustomers = useWatch({ name: 'target_customers', control });
   const firstMessage = useWatch({ name: 'first_message', control });
   const secondMessage = useWatch({ name: 'second_message', control });
+  const isStep4Done = !!targetCustomers?.length;
 
   const lineOptions = [
     { value: 'yes', label: t('lineOption') },
@@ -134,12 +135,17 @@ export const CartAbandoned = () => {
   };
 
   const onConfirm = (stepId: number) => {
-    if (
-      (stepId === 1 && isUseLine) ||
-      (stepId === 2 && isStep2Done()) ||
-      (stepId === 3 && isStep3Done()) ||
-      (stepId === 4 && targetCustomers?.length)
-    ) {
+    if (stepId === 1 && isStep1Done) {
+      // TODO save step 1
+      setStepDone(stepId, true);
+    } else if (stepId === 2 && isStep2Done()) {
+      // TODO save step 2
+      setStepDone(stepId, true);
+    } else if (stepId === 3 && isStep3Done()) {
+      // TODO save step 3
+      setStepDone(stepId, true);
+    } else if (stepId === 4 && isStep4Done) {
+      // TODO save step 4
       setStepDone(stepId, true);
     }
   };
@@ -179,7 +185,7 @@ export const CartAbandoned = () => {
 
   useEffect(() => {
     setStepDone(1, false);
-  }, [isUseLine]);
+  }, [isStep1Done]);
 
   useEffect(() => {
     setStepDone(2, false);
@@ -215,7 +221,8 @@ export const CartAbandoned = () => {
         title={t('cartAbandoned')}
         description={t('cartAbandonedDescription')}
         descriptionImageUrl='/images/cart-abandoned-description.png'
-        flowImgUrl='/images/cart-abandoned-flow.png'></ActionContainer>
+        flowImgUrl='/images/cart-abandoned-flow.png'
+      ></ActionContainer>
       <Form methods={methods} className='mt-[60px]'>
         <Steps steps={steps} onConfirm={onConfirm} />
         <div className='flex justify-center mt-10'>
