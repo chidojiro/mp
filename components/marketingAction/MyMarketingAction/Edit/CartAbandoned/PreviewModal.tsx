@@ -4,7 +4,7 @@ import { useVisibilityControl, VisibilityControl } from '@/hooks';
 import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 import { PreviewLine } from './PreviewLine';
-import { PreviewMessage } from './PreviewMessage';
+import { PreviewEmail } from './PreviewEmail';
 
 export const MESSAGE_TYPE = {
   EMAIL: 'email',
@@ -74,7 +74,7 @@ export const PreviewModal = ({ type, control, headline, messageEmail, messageLin
         className='flex flex-col items-center'
       >
         {isEmail ? (
-          <PreviewMessage
+          <PreviewEmail
             headline={headline}
             body={messageEmail}
             showMobileVersion={showMobileVersion}

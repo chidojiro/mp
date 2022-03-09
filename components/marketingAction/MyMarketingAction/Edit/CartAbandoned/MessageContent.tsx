@@ -7,7 +7,7 @@ import { useWatch } from 'react-hook-form';
 import { OPTIONS } from './CartAbandoned';
 import { ColorGroup } from './ColorGroup';
 import { PreviewLine } from './PreviewLine';
-import { PreviewMessage } from './PreviewMessage';
+import { PreviewEmail } from './PreviewEmail';
 import { MESSAGE_TYPE, PreviewModal } from './PreviewModal';
 
 type Props = {
@@ -68,7 +68,7 @@ export const MessageContent = ({ messageNum }: Props) => {
                 {t('openPreview')}
               </span>
             </div>
-            <PreviewMessage
+            <PreviewEmail
               headline={message?.headline_email}
               body={message?.text_email}
               showMobileVersion={true}
@@ -111,7 +111,7 @@ export const MessageContent = ({ messageNum }: Props) => {
                         <span className='text-medium text-gray-dark'>{t('variable')}</span>
                       </div>
                     </div>
-                    <Form.TextArea name={`${messageNum}.text_line`} />
+                    <Form.TextArea name={`${messageNum}.text_line`} maxLength={500} />
                   </>
                 )}
               </div>

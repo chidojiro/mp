@@ -24,7 +24,7 @@ for (let i = 0; i < 2; i++) {
   });
 }
 
-export const PreviewMessage = ({
+export const PreviewEmail = ({
   headline,
   body,
   showMobileVersion,
