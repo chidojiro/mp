@@ -5,7 +5,7 @@ import Link from 'next/link';
 import React from 'react';
 
 type Props = {
-  headlines: string;
+  headline: string;
   body: string;
   showMobileVersion?: boolean;
   isPreview?: boolean;
@@ -24,8 +24,8 @@ for (let i = 0; i < 2; i++) {
   });
 }
 
-export const PreviewMessage = ({
-  headlines,
+export const PreviewEmail = ({
+  headline,
   body,
   showMobileVersion,
   isPreview,
@@ -45,7 +45,7 @@ export const PreviewMessage = ({
         <h2 className='mb-4 text-center text-secondary'>Brand Logo</h2>
         <div className='flex justify-center w-full'>
           <h3 className='w-[160px] mb-4 whitespace-pre-line text-gray-dark text-center'>
-            {headlines}
+            {headline}
           </h3>
         </div>
         <div className='mb-3 font-semibold'>山田 太郎 様</div>

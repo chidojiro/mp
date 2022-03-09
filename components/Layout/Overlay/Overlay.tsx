@@ -13,6 +13,7 @@ type Props = Children & {
   showCloseButton?: boolean;
   className?: string;
   onBackdropClick?: () => void;
+  onClose?: () => void;
 };
 
 // eslint-disable-next-line no-empty-pattern
@@ -23,10 +24,16 @@ export const Overlay = ({
   showCloseButton = true,
   className,
   onBackdropClick,
+  onClose,
 }: Props) => {
   useScrollDisable(control.visible);
 
   if (!control.visible) return null;
+
+  const handleClose = () => {
+    control.close();
+    onClose?.();
+  };
 
   return (
     <div
@@ -51,7 +58,7 @@ export const Overlay = ({
       >
         <h5>{title}</h5>
         {!!showCloseButton && (
-          <div className='w-4 h-4 cursor-pointer' onClick={control.close}>
+          <div className='w-4 h-4 cursor-pointer' onClick={handleClose}>
             X
           </div>
         )}
