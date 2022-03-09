@@ -9,9 +9,10 @@ type Props = {
   step: Step;
   isLastStep: boolean;
   onConfirm: (stepId: number) => void;
+  onShowPreview: (stepId: number) => void;
 };
 
-export const StepForm = ({ step, isLastStep, onConfirm }: Props) => {
+export const StepForm = ({ step, isLastStep, onConfirm, onShowPreview }: Props) => {
   const { t } = useTranslation('marketingAction');
   const { id, name, isDone, showPreviewBtn, children } = step;
 
@@ -42,6 +43,7 @@ export const StepForm = ({ step, isLastStep, onConfirm }: Props) => {
             <Button
               className='h-9 border-none bg-input-focus min-w-[240px] mr-2.5'
               variant='outline'
+              onClick={() => onShowPreview?.(id)}
             >
               {t('viewPreview')}
             </Button>

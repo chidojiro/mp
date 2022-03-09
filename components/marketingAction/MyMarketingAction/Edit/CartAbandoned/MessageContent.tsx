@@ -2,40 +2,40 @@ import { Form, Icon } from '@/components';
 import { RadioGroup } from '@/components/common';
 import { useVisibilityControl } from '@/hooks';
 import { useTranslation } from 'next-i18next';
-import React from 'react';
+import React, { useState } from 'react';
 import { useWatch } from 'react-hook-form';
+import { OPTIONS } from './CartAbandoned';
 import { ColorGroup } from './ColorGroup';
-import { DateTimeDelivery } from './DateTimeDelivery';
+import { PreviewLine } from './PreviewLine';
 import { PreviewMessage } from './PreviewMessage';
-import { PreviewModal } from './PreviewModal';
+import { MESSAGE_TYPE, PreviewModal } from './PreviewModal';
 
 type Props = {
-  optionLine: string;
+  messageNum: string;
 };
 
-export const MessageSetting = ({ optionLine }: Props) => {
+export const MessageContent = ({ messageNum }: Props) => {
   const { t } = useTranslation('marketingAction');
   const previewMessageControl = useVisibilityControl();
+  const [currType, setCurrType] = useState(MESSAGE_TYPE.EMAIL);
 
   const textMessageOptions = [
     { value: 'text_message', label: t('displayMsg') },
     { value: 'no_text_message', label: t('noDisplay') },
   ];
 
-  const showLineSettings = useWatch({ name: 'is_use_line' }) === optionLine;
+  const showLineSettings = useWatch({ name: 'is_use_line' }) === OPTIONS.YES;
 
-  const firstMessage = useWatch({ name: 'first_message' });
-  const showLineMsg = firstMessage?.line_option === textMessageOptions[0].value;
+  const message = useWatch({ name: `${messageNum}` });
+  const showLineMsg = message?.line_option === textMessageOptions[0].value;
+
+  const onShowModal = (type: string) => {
+    setCurrType(type);
+    previewMessageControl.open();
+  };
 
   return (
-    <>
-      <div className='px-10 -mx-10 border-b-4 border-white pb-7'>
-        <DateTimeDelivery
-          fromTheDateText={t('fromTheDateCartAbandoned')}
-          inputDateName='first_message.delivery_date'
-          inputTimeName='first_message.delivery_time'
-        />
-      </div>
+    <div className='px-10 -mx-10 border-t-4 border-white mt-7 pb-7'>
       <div className='px-10 -mx-10 border-b-4 border-white mt-7'>
         <div className='flex items-center'>
           <Icon name='mail' className='mr-2' size={18} />
@@ -47,7 +47,7 @@ export const MessageSetting = ({ optionLine }: Props) => {
               <div className='mb-2.5 font-semibold text-secondary text-medium'>
                 {t('headLines')}
               </div>
-              <Form.TextArea name='first_message.headlines_email' />
+              <Form.TextArea name={`${messageNum}.headline_email`} />
             </div>
             <div className='mb-4'>
               <div className='mb-2.5 font-semibold text-secondary text-medium'>{t('bodyText')}</div>
@@ -55,7 +55,7 @@ export const MessageSetting = ({ optionLine }: Props) => {
                 <Icon name='variable' className='w-4 h-3.5 mr-1' />
                 <span className='text-medium text-gray-dark'>{t('variable')}</span>
               </div>
-              <Form.TextArea name='first_message.text_email' />
+              <Form.TextArea name={`${messageNum}.text_email`} />
             </div>
           </div>
           <div>
@@ -63,20 +63,15 @@ export const MessageSetting = ({ optionLine }: Props) => {
               <span className='text-secondary'>{t('previewMobile')}</span>
               <span
                 className='text-gray-700 underline cursor-pointer'
-                onClick={previewMessageControl.open}
+                onClick={() => onShowModal(MESSAGE_TYPE.EMAIL)}
               >
                 {t('openPreview')}
               </span>
             </div>
             <PreviewMessage
-              headlines={firstMessage?.headlines_email}
-              body={firstMessage?.text_email}
+              headline={message?.headline_email}
+              body={message?.text_email}
               showMobileVersion={true}
-            />
-            <PreviewModal
-              headlines={firstMessage?.headLines_email}
-              body={firstMessage?.text_email}
-              control={previewMessageControl}
             />
           </div>
         </div>
@@ -93,7 +88,7 @@ export const MessageSetting = ({ optionLine }: Props) => {
                 <div className='mb-2.5 font-semibold text-secondary text-medium'>
                   {t('textMessage')}
                 </div>
-                <Form.RadioGroup name='first_message.line_option'>
+                <Form.RadioGroup name={`${messageNum}.line_option`}>
                   {textMessageOptions.map(option => (
                     <RadioGroup.Option
                       colorScheme='secondary'
@@ -116,19 +111,37 @@ export const MessageSetting = ({ optionLine }: Props) => {
                         <span className='text-medium text-gray-dark'>{t('variable')}</span>
                       </div>
                     </div>
-                    <Form.TextArea name='first_message.text_line' />
+                    <Form.TextArea name={`${messageNum}.text_line`} />
                   </>
                 )}
               </div>
             </div>
-            <div className='w-[335px] rounded bg-white h-fit'>preview</div>
+            <div>
+              <div className='flex justify-between mb-2 text-medium'>
+                <span className='text-secondary'>{t('preview')}</span>
+                <span
+                  className='text-gray-700 underline cursor-pointer'
+                  onClick={() => onShowModal(MESSAGE_TYPE.LINE)}
+                >
+                  {t('openPreview')}
+                </span>
+              </div>
+              <PreviewLine body={message?.text_line} />
+            </div>
           </div>
         </div>
       )}
       <div className='w-2/3 mt-7'>
         <div className='mb-2 font-semibold'>{t('colorSettings')}</div>
-        <ColorGroup name='first_message.colors' />
+        <ColorGroup name={`${messageNum}.color`} />
       </div>
-    </>
+      <PreviewModal
+        type={currType}
+        headline={message?.headline_email}
+        messageEmail={message?.text_email}
+        messageLine={message?.text_line}
+        control={previewMessageControl}
+      />
+    </div>
   );
 };

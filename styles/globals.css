@@ -105,9 +105,10 @@
 }
 
 .mp-scroll::-webkit-scrollbar {
-  position: absolute;
-  right: 0;
   width: 6px;
+  height: 6px;
+  @apply bg-gray;
+  border-radius: 3px;
 }
 
 .mp-scroll::-webkit-scrollbar-thumb {
@@ -115,6 +116,18 @@
   border-radius: 3px;
 }
 
-.mp-scroll:hover .mp-scroll::-webkit-scrollbar {
+.mp-scroll::-webkit-scrollbar:horizontal {
+  background: transparent;
+}
+
+.mp-scroll::-webkit-scrollbar-thumb:horizontal {
+  background: transparent;
+}
+
+.mp-scroll:hover::-webkit-scrollbar-thumb {
   @apply bg-input-focus;
+}
+
+.mp-scroll:hover::-webkit-scrollbar {
+  @apply bg-gray;
 }

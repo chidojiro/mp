@@ -2,25 +2,39 @@ import { Button, Input, Modal, SwitchButtons } from '@/components/common';
 import { Overlay } from '@/components/Layout';
 import { useVisibilityControl, VisibilityControl } from '@/hooks';
 import { useTranslation } from 'next-i18next';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { PreviewLine } from './PreviewLine';
 import { PreviewMessage } from './PreviewMessage';
 
-type Props = {
-  control: VisibilityControl;
-  headlines: string;
-  body: string;
+export const MESSAGE_TYPE = {
+  EMAIL: 'email',
+  LINE: 'line',
 };
 
-export const PreviewModal = ({ control, headlines, body }: Props) => {
+type Props = {
+  type: string;
+  control: VisibilityControl;
+  headline: string;
+  messageEmail: string;
+  messageLine: string;
+};
+
+export const PreviewModal = ({ type, control, headline, messageEmail, messageLine }: Props) => {
   const { t } = useTranslation('marketingAction');
   const [showMobileVersion, setShowMobileVersion] = useState(true);
   const [email, setEmail] = useState('');
+  const [currType, setCurrType] = useState<number | string>(type);
+  const [currMode, setCurrMode] = useState<number | string>('mobile');
+
+  useEffect(() => {
+    setCurrType(type);
+  }, [type]);
 
   const modalControl = useVisibilityControl();
 
   const types = [
-    { label: 'LINE', value: 'line' },
-    { label: t('email'), value: 'email' },
+    { label: 'LINE', value: MESSAGE_TYPE.LINE },
+    { label: t('email'), value: MESSAGE_TYPE.EMAIL },
   ];
 
   const devices = [
@@ -28,12 +42,12 @@ export const PreviewModal = ({ control, headlines, body }: Props) => {
     { label: 'PC', value: 'pc' },
   ];
 
-  const handleTypeChange = () => {
-    // TODO
-    console.log('on change type');
+  const handleTypeChange = (value: string | number) => {
+    setCurrType(value);
   };
 
-  const handleDevicesChange = () => {
+  const handleDevicesChange = (value: string | number) => {
+    setCurrMode(value);
     setShowMobileVersion(prevState => !prevState);
   };
 
@@ -49,13 +63,44 @@ export const PreviewModal = ({ control, headlines, body }: Props) => {
     }
   };
 
+  const handleClose = () => {
+    setCurrType(type);
+  };
+
+  const isEmail = MESSAGE_TYPE.EMAIL === currType;
+
   return (
     <>
-      <Overlay control={control} title={t('preview')} className='flex flex-col items-center'>
-        <PreviewMessage headlines={headlines} body={body} showMobileVersion={showMobileVersion} />
-        <div className='mt-[53px] w-[600px] flex justify-between items-center'>
-          <SwitchButtons onChange={handleTypeChange} items={types}></SwitchButtons>
-          <SwitchButtons onChange={handleDevicesChange} items={devices}></SwitchButtons>
+      <Overlay
+        control={control}
+        title={t('preview')}
+        onClose={handleClose}
+        className='flex flex-col items-center'
+      >
+        {isEmail ? (
+          <PreviewMessage
+            headline={headline}
+            body={messageEmail}
+            showMobileVersion={showMobileVersion}
+          />
+        ) : (
+          <PreviewLine body={messageLine} />
+        )}
+        <div className='mt-[53px] w-full flex items-center'>
+          <SwitchButtons
+            value={currType}
+            className='mr-5'
+            onChange={handleTypeChange}
+            items={types}
+          ></SwitchButtons>
+          {isEmail && (
+            <SwitchButtons
+              value={currMode}
+              className='mr-5'
+              onChange={handleDevicesChange}
+              items={devices}
+            ></SwitchButtons>
+          )}
           <Button className='w-[240px]' onClick={handleDeliveryTest}>
             {t('testDelivery')}
           </Button>

@@ -8,9 +8,15 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { Steps } from '../Steps';
-import { DateTimeDelivery } from './DateTimeDelivery';
-import { MessageSetting } from './MessageSetting';
+import { Message1Settings } from './Message1Settings';
+import { Message2Settings } from './Message2Settings';
+import { MESSAGE_TYPE, PreviewModal } from './PreviewModal';
 import { TargetCustomerGroup } from './TargetCustomerGroup';
+
+export const OPTIONS = {
+  YES: 'yes',
+  NO: 'no',
+};
 
 export const CartAbandoned = () => {
   const { t } = useTranslation('marketingAction');
@@ -20,16 +26,18 @@ export const CartAbandoned = () => {
   const modalControl = useVisibilityControl();
   const [isCompleted, setIsCompleted] = useState(false);
   const [isSaveAsDraft, setIsSaveAsDraft] = useState(false);
+  const [messagePreview, setMessagePreview] = useState<any>();
 
   const isStep1Done = useWatch({ name: 'is_use_line', control });
   const targetCustomers = useWatch({ name: 'target_customers', control });
   const firstMessage = useWatch({ name: 'first_message', control });
   const secondMessage = useWatch({ name: 'second_message', control });
   const isStep4Done = !!targetCustomers?.length;
+  const previewMessageControl = useVisibilityControl();
 
   const lineOptions = [
-    { value: 'yes', label: t('lineOption') },
-    { value: 'no', label: t('noLine') },
+    { value: OPTIONS.YES, label: t('lineOption') },
+    { value: OPTIONS.NO, label: t('noLine') },
   ];
 
   const onSubmit = (data: any) => {
@@ -74,58 +82,6 @@ export const CartAbandoned = () => {
     );
   };
 
-  const renderStep3 = () => {
-    const msg2DeliveryOptions = [
-      { value: 'second_message_on', label: t('msg2On') },
-      { value: 'second_message_off', label: t('msg2Off') },
-    ];
-
-    const deliverMessageOptions = [
-      { value: 'deliver_same_message', label: t('deliverFirstMsg') },
-      { value: 'deliver_different_message', label: t('deliverDifferentMsg') },
-    ];
-
-    return (
-      <div>
-        <div className='px-10 pb-5 -mx-10 border-b-4 border-white mb-7'>
-          <div className='font-bold text-gray-dark mb-2.5'>{t('msg2Option')}</div>
-          <Form.RadioGroup name='second_message.second_message_option'>
-            {msg2DeliveryOptions.map(option => (
-              <RadioGroup.Option
-                colorScheme='secondary'
-                key={option.value}
-                className='mb-2.5 text-gray-dark text-medium'
-                label={option.label}
-                value={option.value}
-              />
-            ))}
-          </Form.RadioGroup>
-        </div>
-        <div className='px-10 pb-5 -mx-10 border-b-4 border-white mb-7'>
-          <DateTimeDelivery
-            fromTheDateText={t('fromTheDateCartAbandoned')}
-            inputDateName='second_message.delivery_date'
-            inputTimeName='second_message.delivery_time'
-          />
-        </div>
-        <div>
-          <div className='font-bold text-gray-dark mb-2.5'>{t('contentHasChanged')}</div>
-          <Form.RadioGroup name='second_message.same_message_delivery'>
-            {deliverMessageOptions.map(option => (
-              <RadioGroup.Option
-                colorScheme='secondary'
-                key={option.value}
-                className='mb-2.5 text-gray-dark text-medium'
-                label={option.label}
-                value={option.value}
-              />
-            ))}
-          </Form.RadioGroup>
-        </div>
-      </div>
-    );
-  };
-
   const setStepDone = (stepId: number, done: boolean) => {
     setSteps(prevState =>
       prevState.map(step => {
@@ -167,13 +123,13 @@ export const CartAbandoned = () => {
     {
       id: 2,
       name: t('msgSetting1'),
-      children: <MessageSetting optionLine={lineOptions[0].value} />,
+      children: <Message1Settings />,
       showPreviewBtn: true,
     },
     {
       id: 3,
       name: t('msgSetting2'),
-      children: renderStep3(),
+      children: <Message2Settings />,
       showPreviewBtn: true,
     },
     {
@@ -209,6 +165,19 @@ export const CartAbandoned = () => {
     return t(desc, { template: t('cartAbandoned') });
   };
 
+  const onShowPreview = (stepId: number) => {
+    let message = firstMessage;
+    if (stepId === 3 && secondMessage?.same_message_content === OPTIONS.NO) {
+      message = secondMessage;
+    }
+    setMessagePreview({
+      headline: message?.headline_email,
+      messageEmail: message?.text_email,
+      messageLine: message?.text_line,
+    });
+    previewMessageControl.open();
+  };
+
   const isGotoMABtn = isCompleted || isSaveAsDraft;
   const gotoMyMAUrl = `/organizations/1/projects/1/actions/${isCompleted ? 'active' : 'draft'}`;
   const unSavedSteps = steps.filter(step => !step.isDone).length;
@@ -224,7 +193,7 @@ export const CartAbandoned = () => {
         flowImgUrl='/images/cart-abandoned-flow.png'
       ></ActionContainer>
       <Form methods={methods} className='mt-[60px]'>
-        <Steps steps={steps} onConfirm={onConfirm} />
+        <Steps steps={steps} onConfirm={onConfirm} onShowPreview={onShowPreview} />
         <div className='flex justify-center mt-10'>
           <Button className='mr-5 min-w-[240px] h-[52px] bg-[#FF7F5C]' onClick={onSaveAsDraft}>
             {t('saveDraft')}
@@ -237,6 +206,14 @@ export const CartAbandoned = () => {
           </Button>
         </div>
       </Form>
+
+      <PreviewModal
+        type={MESSAGE_TYPE.EMAIL}
+        headline={messagePreview?.headline}
+        messageEmail={messagePreview?.messageEmail}
+        messageLine={messagePreview?.messageLine}
+        control={previewMessageControl}
+      />
 
       <Modal control={modalControl}>
         <div className='text-center text-gray-dark'>
