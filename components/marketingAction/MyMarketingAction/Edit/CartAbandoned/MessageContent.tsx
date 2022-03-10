@@ -20,15 +20,15 @@ export const MessageContent = ({ messageNum }: Props) => {
   const previewMessageControl = useVisibilityControl();
   const [currType, setCurrType] = useState<MessageContentPreviewType>('mail');
 
-  const textMessageOptions = [
-    { value: 'text_message', label: t('displayMsg') },
-    { value: 'no_text_message', label: t('noDisplay') },
+  const lineTextOptions = [
+    { value: OPTIONS.YES, label: t('displayMsg') },
+    { value: OPTIONS.NO, label: t('noDisplay') },
   ];
 
   const showLineSettings = useWatch({ name: 'is_use_line' }) === OPTIONS.YES;
 
   const message = useWatch({ name: `${messageNum}` });
-  const showLineMsg = message?.line_option === textMessageOptions[0].value;
+  const showLineMsg = message?.text_option === OPTIONS.YES;
 
   const onShowModal = (type: MessageContentPreviewType) => {
     setCurrType(type);
@@ -89,8 +89,8 @@ export const MessageContent = ({ messageNum }: Props) => {
                 <div className='mb-2.5 font-semibold text-secondary text-medium'>
                   {t('textMessage')}
                 </div>
-                <Form.RadioGroup name={`${messageNum}.line_option`}>
-                  {textMessageOptions.map(option => (
+                <Form.RadioGroup name={`${messageNum}.text_option`}>
+                  {lineTextOptions.map(option => (
                     <RadioGroup.Option
                       colorScheme='secondary'
                       key={option.value}

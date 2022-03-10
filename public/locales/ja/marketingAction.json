@@ -128,5 +128,6 @@
   "fromTheFirstDeliveryDate": "1通目配信日から",
   "brandName": "ブランド名",
   "targetAndTimePeriodSetting": "ターゲット・期間設定",
-  "pleaseFillInAllFields": "すべての項目を入力してください。"
+  "pleaseFillInAllFields": "すべての項目を入力してください。",
+  "alertConfirm": "入力内容を確認し、問題がなければクリックしてください"
 }

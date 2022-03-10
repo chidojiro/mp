@@ -20,7 +20,7 @@ export const Message2Settings = () => {
     { value: OPTIONS.NO, label: t('deliverDifferentMsg') },
   ];
 
-  const isNewMessage = secondMessage?.same_message_content === deliverMessageOptions[1].value;
+  const isNewMessage = secondMessage?.same_message_content === OPTIONS.NO;
 
   return (
     <>
