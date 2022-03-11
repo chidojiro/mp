@@ -24,14 +24,15 @@ for (let i = 0; i < 2; i++) {
 export const LinePreview = ({ body, desktop = false }: Props) => {
   const { t } = useTranslation('marketingAction');
 
-  const bodyNodes = body
+  const parsedBody = body
     ?.split(MentionValuePattern)
     .map(segment => {
-      return [<span key={segment + 'variable'}>○○○</span>, <span key={segment}>{segment}</span>];
+      return '○○○' + segment;
     })
     .flat()
+    .join('')
     // omit the redundant variable at first node
-    .slice(1);
+    .slice(3);
 
   return (
     <div className='rounded bg-[#95A6C9] opacity-100 border border-input h-[667px] w-[335px] py-4 px-1.5'>
@@ -45,10 +46,10 @@ export const LinePreview = ({ body, desktop = false }: Props) => {
                 className={classNames(
                   'mb-3 py-2 px-3 mt-1.5 max-w-[200px]',
                   'leading-snug rounded-lg bg-white text-[#222222] text-regular-sm ',
-                  'break-words whitespace-pre'
+                  'break-words whitespace-pre-wrap'
                 )}
               >
-                {bodyNodes}
+                {parsedBody}
               </div>
             </div>
           </div>

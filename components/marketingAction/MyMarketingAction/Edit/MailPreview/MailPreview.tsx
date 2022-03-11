@@ -34,14 +34,15 @@ export const MailPreview = ({
 }: Props) => {
   const { t } = useTranslation('marketingAction');
 
-  const bodyNodes = body
+  const parsedBody = body
     ?.split(MentionValuePattern)
     .map(segment => {
-      return [<span key={segment + 'variable'}>○○○</span>, <span key={segment}>{segment}</span>];
+      return '○○○' + segment;
     })
     .flat()
+    .join('')
     // omit the redundant variable at first node
-    .slice(1);
+    .slice(3);
 
   return (
     <div
@@ -59,7 +60,7 @@ export const MailPreview = ({
           </h3>
         </div>
         <div className='mb-3 font-semibold'>山田 太郎 様</div>
-        <div className='mb-8 break-words whitespace-pre text-gray-dark'>{bodyNodes}</div>
+        <div className='mb-8 break-words whitespace-pre-wrap text-gray-dark'>{parsedBody}</div>
         {showViewShoppingCartButton && (
           <div className='w-full text-center'>
             <Button className='h-11 max-w-[360px] w-full font-bold text-center mb-[60px]'>

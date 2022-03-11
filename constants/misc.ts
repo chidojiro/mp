@@ -1,1 +1,1 @@
-export const MentionValuePattern = /@\[.+\]\(.+\)/;
+export const MentionValuePattern = /@\[[^\(\)\[\]]+\]\([^\(\)\[\]]+\)/;
