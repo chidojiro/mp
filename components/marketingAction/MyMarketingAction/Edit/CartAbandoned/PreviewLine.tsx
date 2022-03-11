@@ -31,7 +31,7 @@ export const PreviewLine = ({ body }: Props) => {
               <div className='text-[8px]'>○○○ストア</div>
               <div
                 className={classNames(
-                  'relative mb-3 leading-snug	 mt-1.5 max-w-[200px] rounded-lg bg-white text-gray-dark text-[#222222] text-regular-sm py-2 px-3',
+                  'relative mb-3 leading-snug whitespace-pre-line mt-1.5 max-w-[200px] rounded-lg bg-white text-gray-dark text-[#222222] text-regular-sm py-2 px-3',
                   "before:content-[''] before:absolute before:border-white before:top-0 before:left-[-7px]",
                   'before:w-[11px] before:h-[11px] before:border-b-[7px] before:rounded-bl-[40px_40px]'
                 )}
