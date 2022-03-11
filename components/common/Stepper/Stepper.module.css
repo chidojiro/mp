@@ -1,0 +1,5 @@
+.mp-stepper {
+  :global(.mp-stepper-item:last-of-type .mp-stepper-item--content) {
+    @apply border-l-0;
+  }
+}

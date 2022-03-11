@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { SideMenu, SideMenuGroup } from '../../common/SideMenu';
 import { ActionContainer } from '../ActionContainer';
+import { CartAbandonedOverview } from './CartAbandonedOverview';
+import { DeliveryAfterPurchaseOverview } from './DeliveryAfterPurchaseOverview';
 import { UpdateInformation } from './UpdateInformation';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -23,15 +25,7 @@ export const NewMarketingAction = ({}: Props) => {
       label: t('messageDelivery'),
       items: [
         {
-          content: (
-            <ActionContainer
-              iconName='cart'
-              title={t('cartAbandoned')}
-              description={t('cartAbandonedDescription')}
-              descriptionImageUrl='/images/cart-abandoned-description.png'
-              flowImgUrl='/images/cart-abandoned-flow.png'
-            ></ActionContainer>
-          ),
+          content: <CartAbandonedOverview />,
           label: (
             <Link href={{ pathname, query: { ...query, marketingActionName: 'cart-abandoned' } }}>
               {t('cartAbandoned')}
@@ -40,15 +34,7 @@ export const NewMarketingAction = ({}: Props) => {
           value: 'cart-abandoned',
         },
         {
-          content: (
-            <ActionContainer
-              iconName='mails'
-              title={t('stepDeliveryAfterPurchase')}
-              description={t('stepDeliveryAfterPurchaseDescription')}
-              descriptionImageUrl='/images/step-delivery-after-purchase-description.png'
-              flowImgUrl='/images/step-delivery-after-purchase-flow.png'
-            ></ActionContainer>
-          ),
+          content: <DeliveryAfterPurchaseOverview />,
           label: (
             <Link
               href={{

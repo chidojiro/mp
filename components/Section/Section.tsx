@@ -11,7 +11,7 @@ export const Section = ({ className, children }: Props) => {
       className={classNames(
         'px-10 py-8',
         ' bg-gray-100',
-        'first:rounded-tl-lg last:rounded-br-lg',
+        'first:rounded-t-lg last:rounded-b-lg',
         'mb-2 last:mb-0',
         className
       )}
@@ -22,7 +22,13 @@ export const Section = ({ className, children }: Props) => {
 };
 
 const Title = ({ children, className }: Children & ClassName) => (
-  <div className={classNames('font-bold mb-2', className)}>{children}</div>
+  <div className={classNames('font-bold mb-2', 'flex items-center gap-2', className)}>
+    {children}
+  </div>
+);
+
+const Description = ({ children, className }: Children & ClassName) => (
+  <div className={classNames('text-gray-700 text-medium mb-5', className)}>{children}</div>
 );
 
 const Content = ({ children, className }: Children & ClassName) => (
@@ -31,3 +37,4 @@ const Content = ({ children, className }: Children & ClassName) => (
 
 Section.Title = Title;
 Section.Content = Content;
+Section.Description = Description;

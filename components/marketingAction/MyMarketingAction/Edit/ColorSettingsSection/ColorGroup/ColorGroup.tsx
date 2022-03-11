@@ -1,12 +1,7 @@
 import { Form } from '@/components';
 import { useTranslation } from 'next-i18next';
 import { ColorOption } from './ColorOption';
-
-export interface Color {
-  label: string;
-  value: string;
-  color: string;
-}
+import { Color } from './ColorOption/ColorOption';
 
 type Props = {
   name: string;
@@ -58,7 +53,7 @@ export const ColorGroup = ({ name }: Props) => {
   ];
 
   return (
-    <Form.RadioGroup name={name}>
+    <Form.RadioGroup name={name} rules={{ required: true }}>
       <div className='grid grid-cols-4'>
         {colors.map(color => (
           <ColorOption key={color.value} color={color} />

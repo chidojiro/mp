@@ -7,10 +7,10 @@ import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
+import { PreviewOverlay } from '../PreviewOverlay';
 import { Steps } from '../Steps';
 import { Message1Settings } from './Message1Settings';
 import { Message2Settings } from './Message2Settings';
-import { MESSAGE_TYPE, PreviewModal } from './PreviewModal';
 import { TargetCustomerGroup } from './TargetCustomerGroup';
 
 export const OPTIONS = {
@@ -207,11 +207,11 @@ export const CartAbandoned = () => {
         </div>
       </Form>
 
-      <PreviewModal
-        type={MESSAGE_TYPE.EMAIL}
-        headline={messagePreview?.headline}
-        messageEmail={messagePreview?.messageEmail}
-        messageLine={messagePreview?.messageLine}
+      <PreviewOverlay
+        defaultType='mail'
+        mailHeadline={messagePreview?.headline}
+        mailBody={messagePreview?.messageEmail}
+        lineBody={messagePreview?.messageLine}
         control={previewMessageControl}
       />
 

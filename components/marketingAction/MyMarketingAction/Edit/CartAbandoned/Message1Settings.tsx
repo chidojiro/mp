@@ -1,6 +1,7 @@
+import { Section } from '@/components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { DateTimeDelivery } from './DateTimeDelivery';
+import { DeliveryDateTimeInput } from '../DeliveryDateTimeInput';
 import { MessageContent } from './MessageContent';
 
 export const Message1Settings = () => {
@@ -8,8 +9,9 @@ export const Message1Settings = () => {
 
   return (
     <>
-      <DateTimeDelivery
-        fromTheDateText={t('fromTheDateCartAbandoned')}
+      <Section.Title>{t('timeDelivery')}</Section.Title>
+      <DeliveryDateTimeInput
+        headingLabel={t('fromTheDateCartAbandoned')}
         inputDateName='first_message.delivery_date'
         inputTimeName='first_message.delivery_time'
       />

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type Option<T = any> = {
+export type Option<T = any, P = React.ReactNode> = {
   value: T;
-  label: React.ReactNode;
+  label: P;
 };

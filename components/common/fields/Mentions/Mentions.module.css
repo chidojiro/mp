@@ -1,0 +1,21 @@
+.mp-mentions {
+  :global(textarea) {
+    @apply p-2 outline-none;
+  }
+
+  :global(.w-full__suggestions) {
+    @apply !mt-5;
+  }
+
+  :global(strong) {
+    @apply inline-block transform scale-x-90 rounded-full bg-secondary;
+  }
+
+  :global(.w-full__highlighter) {
+    @apply z-50 p-2 pointer-events-none;
+
+    :global(strong) {
+      @apply !text-white;
+    }
+  }
+}

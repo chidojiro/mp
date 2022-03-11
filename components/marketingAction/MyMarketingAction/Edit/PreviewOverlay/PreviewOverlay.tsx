@@ -1,54 +1,59 @@
 import { Button, Input, Modal, SwitchButtons } from '@/components/common';
 import { Overlay } from '@/components/Layout';
 import { useVisibilityControl, VisibilityControl } from '@/hooks';
+import { Option } from '@/types';
 import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
-import { PreviewLine } from './PreviewLine';
-import { PreviewEmail } from './PreviewEmail';
-
-export const MESSAGE_TYPE = {
-  EMAIL: 'email',
-  LINE: 'line',
-};
+import { LinePreview } from '../LinePreview';
+import { MailPreview } from '../MailPreview';
+import { MessageContentPreviewType } from '../MessageContentPreview';
 
 type Props = {
-  type: string;
+  defaultType: MessageContentPreviewType;
   control: VisibilityControl;
-  headline: string;
-  messageEmail: string;
-  messageLine: string;
+  mailHeadline: string;
+  mailBody: string;
+  lineBody: string;
 };
 
-export const PreviewModal = ({ type, control, headline, messageEmail, messageLine }: Props) => {
+type Device = 'mobile' | 'desktop';
+
+export const PreviewOverlay = ({
+  defaultType,
+  control,
+  mailHeadline,
+  mailBody,
+  lineBody,
+}: Props) => {
   const { t } = useTranslation('marketingAction');
-  const [showMobileVersion, setShowMobileVersion] = useState(true);
   const [email, setEmail] = useState('');
-  const [currType, setCurrType] = useState<number | string>(type);
-  const [currMode, setCurrMode] = useState<number | string>('mobile');
+  const [selectedType, setSelectedType] = useState<MessageContentPreviewType>(defaultType);
+  const [selectedDevice, setDevice] = useState<Device>('mobile');
 
   useEffect(() => {
-    setCurrType(type);
-  }, [type]);
+    if (control.visible) {
+      setSelectedType(defaultType);
+    }
+  }, [control.visible, defaultType]);
 
   const modalControl = useVisibilityControl();
 
-  const types = [
-    { label: 'LINE', value: MESSAGE_TYPE.LINE },
-    { label: t('email'), value: MESSAGE_TYPE.EMAIL },
+  const types: Option<MessageContentPreviewType>[] = [
+    { label: 'LINE', value: 'line' },
+    { label: t('email'), value: 'mail' },
   ];
 
   const devices = [
     { label: t('mobile'), value: 'mobile' },
-    { label: 'PC', value: 'pc' },
+    { label: 'PC', value: 'desktop' },
   ];
 
-  const handleTypeChange = (value: string | number) => {
-    setCurrType(value);
+  const handleTypeChange = (value: string) => {
+    setSelectedType(value as MessageContentPreviewType);
   };
 
-  const handleDevicesChange = (value: string | number) => {
-    setCurrMode(value);
-    setShowMobileVersion(prevState => !prevState);
+  const handleDeviceChange = (value: string) => {
+    setDevice(value as Device);
   };
 
   const handleDeliveryTest = () => {
@@ -63,37 +68,32 @@ export const PreviewModal = ({ type, control, headline, messageEmail, messageLin
     }
   };
 
-  const isEmail = MESSAGE_TYPE.EMAIL === currType;
+  const isMail = selectedType === 'mail';
 
   return (
     <>
-      <Overlay
-        control={control}
-        title={t('preview')}
-        onClose={() => setCurrType(type)}
-        className='flex flex-col items-center'
-      >
-        {isEmail ? (
-          <PreviewEmail
-            headline={headline}
-            body={messageEmail}
-            showMobileVersion={showMobileVersion}
+      <Overlay control={control} title={t('preview')} className='flex flex-col items-center'>
+        {isMail ? (
+          <MailPreview
+            headline={mailHeadline}
+            body={mailBody}
+            desktop={selectedDevice === 'desktop'}
           />
         ) : (
-          <PreviewLine body={messageLine} />
+          <LinePreview body={lineBody} desktop={selectedDevice === 'desktop'} />
         )}
         <div className='mt-[53px] w-full flex items-center'>
           <SwitchButtons
-            value={currType}
+            value={selectedType}
             className='mr-5'
             onChange={handleTypeChange}
             items={types}
           ></SwitchButtons>
-          {isEmail && (
+          {isMail && (
             <SwitchButtons
-              value={currMode}
+              value={selectedDevice}
               className='mr-5'
-              onChange={handleDevicesChange}
+              onChange={handleDeviceChange}
               items={devices}
             ></SwitchButtons>
           )}

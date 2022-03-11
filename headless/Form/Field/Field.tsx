@@ -49,7 +49,8 @@ export const Field = <T,>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const errorMessage = get(errors, name)?.message;
+  const error = get(errors, name);
+  const errorMessage = error?.message;
 
   const hasGroupError = errorGroup.reduce((acc, cur) => acc && get(errors, cur)?.message, false);
 
@@ -104,7 +105,7 @@ export const Field = <T,>({
     /* eslint-enable react-hooks/exhaustive-deps */
   );
 
-  const hasError = !!errorMessage || hasGroupError;
+  const hasError = !!error || hasGroupError;
 
   return (
     <Component
