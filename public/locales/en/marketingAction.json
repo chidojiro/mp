@@ -128,5 +128,6 @@
   "fromTheFirstDeliveryDate": "From the first delivery date",
   "brandName": "Brand name",
   "targetAndTimePeriodSetting": "arget and time period setting",
-  "pleaseFillInAllFields": "Please fill in all fields."
+  "pleaseFillInAllFields": "Please fill in all fields.",
+  "alertConfirm": "Please check the information you have entered and click if you are satisfied with the information."
 }

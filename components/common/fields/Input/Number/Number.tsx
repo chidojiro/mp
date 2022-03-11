@@ -67,7 +67,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, Props>(
       setValue(e);
     };
 
-    const _value = focusControl.visible ? value : NumberUtils.pad(value, pad ?? 1);
+    const _value = focusControl.visible || !pad ? value : NumberUtils.pad(value, pad);
 
     return (
       <input

@@ -5,8 +5,10 @@ import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 import { useWatch } from 'react-hook-form';
 import { ColorGroup } from '../ColorSettingsSection/ColorGroup';
+import { EmojiSign } from '../EmojiSign';
 import { MessageContentPreviewType } from '../MessageContentPreview';
 import { PreviewOverlay } from '../PreviewOverlay';
+import { VariableSign } from '../VariableSign';
 import { OPTIONS } from './CartAbandoned';
 import { PreviewEmail } from './PreviewEmail';
 import { PreviewLine } from './PreviewLine';
@@ -20,15 +22,15 @@ export const MessageContent = ({ messageNum }: Props) => {
   const previewMessageControl = useVisibilityControl();
   const [currType, setCurrType] = useState<MessageContentPreviewType>('mail');
 
-  const textMessageOptions = [
-    { value: 'text_message', label: t('displayMsg') },
-    { value: 'no_text_message', label: t('noDisplay') },
+  const lineTextOptions = [
+    { value: OPTIONS.YES, label: t('displayMsg') },
+    { value: OPTIONS.NO, label: t('noDisplay') },
   ];
 
   const showLineSettings = useWatch({ name: 'is_use_line' }) === OPTIONS.YES;
 
   const message = useWatch({ name: `${messageNum}` });
-  const showLineMsg = message?.line_option === textMessageOptions[0].value;
+  const showLineMsg = message?.text_option === OPTIONS.YES;
 
   const onShowModal = (type: MessageContentPreviewType) => {
     setCurrType(type);
@@ -52,11 +54,18 @@ export const MessageContent = ({ messageNum }: Props) => {
             </div>
             <div className='mb-4'>
               <div className='mb-2.5 font-semibold text-secondary text-medium'>{t('bodyText')}</div>
-              <div className='w-fit bg-white py-2 mb-2.5 px-2.5 flex items-center rounded border border-input'>
-                <Icon name='variable' className='w-4 h-3.5 mr-1' />
-                <span className='text-medium text-gray-dark'>{t('variable')}</span>
-              </div>
-              <Form.TextArea name={`${messageNum}.text_email`} />
+
+              <Form.Mentions
+                options={[{ label: t('brandName'), value: 'brandName' }]}
+                name={`${messageNum}.text_email`}
+                className='mt-5'
+                label={
+                  <div className='flex gap-2 mb-2'>
+                    <VariableSign />
+                  </div>
+                }
+                rules={{ required: true }}
+              />
             </div>
           </div>
           <div>
@@ -89,8 +98,8 @@ export const MessageContent = ({ messageNum }: Props) => {
                 <div className='mb-2.5 font-semibold text-secondary text-medium'>
                   {t('textMessage')}
                 </div>
-                <Form.RadioGroup name={`${messageNum}.line_option`}>
-                  {textMessageOptions.map(option => (
+                <Form.RadioGroup name={`${messageNum}.text_option`}>
+                  {lineTextOptions.map(option => (
                     <RadioGroup.Option
                       colorScheme='secondary'
                       key={option.value}
@@ -101,19 +110,18 @@ export const MessageContent = ({ messageNum }: Props) => {
                   ))}
                 </Form.RadioGroup>
                 {showLineMsg && (
-                  <>
-                    <div className='flex mb-2.5 text-medium text-gray-dark'>
-                      <div className='w-fit bg-white py-2 px-2.5 mr-2.5 flex items-center rounded border border-input'>
-                        <Icon name='emoji' className='w-4 h-3.5 mr-1' />
-                        <span className='text-medium text-gray-dark'>{t('emoji')}</span>
+                  <Form.Mentions
+                    options={[{ label: t('brandName'), value: 'brandName' }]}
+                    name={`${messageNum}.text_line`}
+                    className='mt-5'
+                    label={
+                      <div className='flex gap-2 mb-2'>
+                        <EmojiSign />
+                        <VariableSign />
                       </div>
-                      <div className='w-fit bg-white py-2 px-2.5 flex items-center rounded border border-input'>
-                        <Icon name='variable' className='w-4 h-3.5 mr-1' />
-                        <span className='text-medium text-gray-dark'>{t('variable')}</span>
-                      </div>
-                    </div>
-                    <Form.TextArea name={`${messageNum}.text_line`} maxLength={500} />
-                  </>
+                    }
+                    rules={{ required: true }}
+                  />
                 )}
               </div>
             </div>
