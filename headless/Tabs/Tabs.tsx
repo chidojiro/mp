@@ -7,21 +7,21 @@ import { Item } from './Item';
 
 type Value = number | string;
 
-export type Props = Children & {
-  value?: Value;
-  onChange?: (value: Value) => void;
+export type Props<T extends Value = Value> = Children & {
+  value?: T;
+  onChange?: (value: T) => void;
 };
 
-type TabsProvider = {
-  handleChange: (value: Value) => void;
-  value?: Value;
+type TabsProvider<T> = {
+  handleChange: (value: T) => void;
+  value?: T;
   content?: React.ReactNode;
   setContent: React.Dispatch<React.SetStateAction<React.ReactNode>>;
   tabsCount: number;
   increaseTabsCount: () => number;
 };
 
-export const TabsContext = React.createContext<TabsProvider>({
+export const TabsContext = React.createContext<TabsProvider<any>>({
   value: undefined,
   handleChange: noop,
   content: undefined,
@@ -30,8 +30,8 @@ export const TabsContext = React.createContext<TabsProvider>({
   increaseTabsCount: () => -1,
 });
 
-export const Tabs = ({ value: valueProp, onChange, children }: Props) => {
-  const [value, setValue] = useControllable({ value: valueProp, onChange, defaultValue: 0 });
+export const Tabs = <T extends Value>({ value: valueProp, onChange, children }: Props<T>) => {
+  const [value, setValue] = useControllable({ value: valueProp, onChange, defaultValue: 0 as T });
   const [content, setContent] = React.useState<React.ReactNode>();
   const tabsCountRef = React.useRef(-1);
 
@@ -41,7 +41,7 @@ export const Tabs = ({ value: valueProp, onChange, children }: Props) => {
     return tabsCountRef.current;
   }, []);
 
-  const providerValue: TabsProvider = React.useMemo(
+  const providerValue: TabsProvider<T> = React.useMemo(
     () => ({
       value,
       handleChange: setValue,

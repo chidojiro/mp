@@ -45,7 +45,7 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
 
     return (
       <label
-        className={classNames('mp-radio', 'flex items-center', className)}
+        className={classNames('mp-radio', 'cursor-pointer', 'flex items-center', className)}
         role='switch'
         aria-checked={checked}
       >
@@ -55,7 +55,7 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
             'flex items-center justify-center',
             'border border-solid rounded-full',
             {
-              'border-input-focus bg-white': !checked,
+              'border-input bg-white': !checked,
               [activeBackground]: checked,
               [activeBorder]: checked,
             }

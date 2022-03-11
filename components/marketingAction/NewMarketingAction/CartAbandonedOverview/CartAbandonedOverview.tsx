@@ -5,7 +5,7 @@ import { ActionContainer } from '../../ActionContainer';
 type Props = {};
 
 // eslint-disable-next-line no-empty-pattern
-export const CartAbandoned = ({}: Props) => {
+export const CartAbandonedOverview = ({}: Props) => {
   const { t } = useTranslation('marketingAction');
 
   return (
@@ -13,8 +13,8 @@ export const CartAbandoned = ({}: Props) => {
       iconName='cart'
       title={t('cartAbandoned')}
       description={t('cartAbandonedDescription')}
-      descriptionImageUrl='/image/'
-      flowImgUrl=''
+      descriptionImageUrl='/images/cart-abandoned-description.png'
+      flowImgUrl='/images/cart-abandoned-flow.png'
     ></ActionContainer>
   );
 };

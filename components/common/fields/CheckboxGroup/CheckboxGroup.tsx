@@ -19,8 +19,14 @@ const Option = ({ children, value, shouldChange, ...restProps }: OptionProps) =>
 
   return (
     <HeadlessCheckboxGroup.Option value={value} shouldChange={shouldChange}>
-      {({ handleChange, isChecked, value }) => (
-        <Checkbox checked={isChecked} value={value} onChange={handleChange} {...restProps} />
+      {({ handleChange, isChecked, value, error }) => (
+        <Checkbox
+          checked={isChecked}
+          value={value}
+          onChange={handleChange}
+          error={error}
+          {...restProps}
+        />
       )}
     </HeadlessCheckboxGroup.Option>
   );

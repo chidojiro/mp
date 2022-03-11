@@ -167,10 +167,11 @@ export const Button = React.forwardRef<HTMLElement, Props>(
     ref: any
   ) => {
     const backgroundColor = backgroundColors[colorScheme][variant];
-
     const borderColor = borderColors[colorScheme][variant];
-
     const textColor = textColors[colorScheme][variant];
+    const underline = variant === 'link' && 'underline';
+    const fontWeigh = variant !== 'link' && 'font-semibold';
+    const padding = variant !== 'link' && 'px-6 py-2';
 
     return (
       <button
@@ -178,11 +179,13 @@ export const Button = React.forwardRef<HTMLElement, Props>(
         {...restProps}
         type={type}
         className={classNames(
-          'inline-flex justify-center items-center border rounded select-none font-semibold',
-          'px-6 py-2',
+          'inline-flex justify-center items-center border rounded select-none',
+          padding,
           textColor,
           backgroundColor,
           borderColor,
+          underline,
+          fontWeigh,
           {
             disabled,
           },

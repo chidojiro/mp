@@ -1,9 +1,9 @@
-import { Form, RadioGroup } from '@/components';
+import { Form, RadioGroup, Section } from '@/components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { useWatch } from 'react-hook-form';
+import { DeliveryDateTimeInput } from '../DeliveryDateTimeInput';
 import { OPTIONS } from './CartAbandoned';
-import { DateTimeDelivery } from './DateTimeDelivery';
 import { MessageContent } from './MessageContent';
 
 export const Message2Settings = () => {
@@ -39,8 +39,9 @@ export const Message2Settings = () => {
         </Form.RadioGroup>
       </div>
       <div className='px-10 pb-5 -mx-10 border-b-4 border-white mb-7'>
-        <DateTimeDelivery
-          fromTheDateText={t('fromTheDateCartAbandoned')}
+        <Section.Title>{t('timeDelivery')}</Section.Title>
+        <DeliveryDateTimeInput
+          headingLabel={t('fromTheDateCartAbandoned')}
           inputDateName='second_message.delivery_date'
           inputTimeName='second_message.delivery_time'
         />

@@ -1,0 +1,1 @@
+export { EmojiSign } from './EmojiSign';

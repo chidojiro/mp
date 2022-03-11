@@ -1,10 +1,11 @@
 import React, { ChangeEvent } from 'react';
 import { CheckboxGroupContext, CheckboxGroupProvider } from '../CheckboxGroup';
 
-type RenderPropState = {
+export type RenderPropState = {
   value: string;
   isChecked: boolean;
   handleChange: React.ChangeEventHandler<HTMLInputElement>;
+  error: boolean;
 };
 
 export type Props = {
@@ -16,7 +17,10 @@ export type Props = {
   children?: (state: RenderPropState) => React.ReactNode;
 };
 
-export const Option = ({ value, shouldChange: shouldChangeProp, children }: Props) => {
+export const Option = (
+  { value, shouldChange: shouldChangeProp, children }: Props,
+  ref: React.ForwardedRef<HTMLInputElement>
+) => {
   const groupProviderValue = React.useContext<CheckboxGroupProvider>(CheckboxGroupContext);
 
   const isChecked = groupProviderValue.value.includes(value);
@@ -32,5 +36,9 @@ export const Option = ({ value, shouldChange: shouldChangeProp, children }: Prop
     }
   };
 
-  return <>{children?.({ value, isChecked, handleChange })}</>;
+  return (
+    <>
+      {children?.({ value, isChecked, handleChange, error: !!groupProviderValue.groupProps.error })}
+    </>
+  );
 };

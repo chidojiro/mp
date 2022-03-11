@@ -1,11 +1,16 @@
 import classNames from 'classnames';
 import { HTMLInputProps } from '@/types';
 import React from 'react';
+import { Icon } from '../../Icon';
 
 type ColorScheme = 'primary' | 'secondary';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export type Props = Omit<HTMLInputProps, 'ref'> & { label?: string; colorScheme?: ColorScheme };
+export type Props = Omit<HTMLInputProps, 'ref'> & {
+  label?: React.ReactNode;
+  colorScheme?: ColorScheme;
+  error?: boolean;
+};
 
 const activeBackgrounds: { [key in ColorScheme]: string } = {
   primary: 'bg-primary',
@@ -22,6 +27,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, Props>(
       label,
       defaultChecked,
       colorScheme = 'primary',
+      error,
       ...restProps
     }: Props,
     ref: any
@@ -47,12 +53,17 @@ export const Checkbox = React.forwardRef<HTMLInputElement, Props>(
           className={classNames(
             'w-4 h-4',
             'border border-solid border-input-focus focus:border-gray-400 rounded-sm',
+            'flex items-center justify-center',
+            'cursor-pointer',
             {
               'bg-white': !checked,
               [`${activeBackground} border-none`]: checked,
+              '!border-danger': error,
             }
           )}
-        ></div>
+        >
+          <Icon name='check' className='text-white' size={12} />
+        </div>
         <input
           className='minimized'
           type='checkbox'

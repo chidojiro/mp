@@ -1,4 +1,5 @@
 import { Button, Icon, IconName, Tag } from '@/components';
+import { AspectRatio } from '@/headless';
 import { ClassName } from '@/types';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
@@ -30,7 +31,8 @@ export const ActionContainer = ({
   const {
     query: { marketingActionName },
   } = useRouter();
-  const prefixUrl = `/organizations/1/projects/1/actions/edit/${marketingActionName}`;
+
+  const editUrl = `/organizations/1/projects/1/actions/edit/${marketingActionName}`;
 
   return (
     <div className={classNames('p-10', 'rounded-lg border border-solid border-gray-500')}>
@@ -38,8 +40,8 @@ export const ActionContainer = ({
         <Icon size={50} name={iconName} />
         <h3 className='text-gray-800'>{title}</h3>
       </div>
-      <div className='flex'>
-        <div>
+      <div className='grid grid-cols-10 gap-6'>
+        <div className='col-span-7'>
           <div className='text-gray-800'>{description}</div>
           <div className='flex flex-wrap gap-8 mt-5'>
             <div className='flex'>
@@ -68,7 +70,7 @@ export const ActionContainer = ({
           </div>
           <div className='flex mt-5'>
             <Label>{t('recommendedCustomer')}</Label>
-            <div className='flex gap-1'>
+            <div className='flex flex-wrap gap-1'>
               <Tag>{tCommon('f0member')}</Tag>
               <Tag>{tCommon('f0others')}</Tag>
               <Tag>{tCommon('semiLoyal')}</Tag>
@@ -78,17 +80,19 @@ export const ActionContainer = ({
               <Tag>{tCommon('loyalDormant')}</Tag>
             </div>
           </div>
+          {!!flowImgUrl && (
+            <div className='mt-5'>
+              <Label>{t('policyFlow')}</Label>
+              <img className='mt-3' alt='' src={flowImgUrl} />
+            </div>
+          )}
         </div>
-        <img className='ml-10 w-[240px]' alt='' src={descriptionImageUrl} />
+        <AspectRatio ratio='1-1' className='col-span-3 shrink-0'>
+          <img alt='' src={descriptionImageUrl} />
+        </AspectRatio>
       </div>
-      {!!flowImgUrl && (
-        <div className='mt-5'>
-          <Label>{t('policyFlow')}</Label>
-          <img className='mt-3' alt='' src={flowImgUrl} />
-        </div>
-      )}
       {showUseTemplateBtn && (
-        <Link passHref href={prefixUrl}>
+        <Link passHref href={editUrl}>
           <Button className='w-[360px] !block mx-auto mt-6'>{t('useThisTemplate')}</Button>
         </Link>
       )}

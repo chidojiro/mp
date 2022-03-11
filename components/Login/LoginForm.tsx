@@ -71,7 +71,7 @@ export const LoginForm = () => {
         <Button type='submit' className='w-full mt-4 font-bold'>
           {t('login')}
         </Button>
-        <Button variant='link' className='!block mx-auto underline'>
+        <Button variant='link' className='!block mx-auto'>
           {t('forgotPassword')}
         </Button>
       </Form>

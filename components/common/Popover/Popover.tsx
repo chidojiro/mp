@@ -1,33 +1,49 @@
-import React from 'react';
-import { Icon } from '@/components';
+import { ConditionalWrapper, Portal } from '@/headless';
+import { useVisibilityControl, VisibilityControl } from '@/hooks';
+import { Children } from '@/types';
+import React, { useState } from 'react';
+import { PopperProps, usePopper } from 'react-popper';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export type Props = PopoverProps;
+export type Props = Pick<PopperProps<any>, 'placement'> &
+  Children & {
+    usePortal?: boolean;
+    trigger: JSX.Element;
+    control?: VisibilityControl;
+  };
 
-export type PopoverProps = {
-  onClick?: (value: any) => void;
-  text: string;
-  contentToHover: any;
+export const Popover = ({
+  children,
+  usePortal = true,
+  trigger,
+  control: controlProp,
+  placement,
+}: Props) => {
+  const [triggerElement, setTriggerElement] = useState(null);
+  const popoverRef = React.useRef(null);
+
+  const { styles, attributes } = usePopper(triggerElement, popoverRef.current, { placement });
+
+  const ownControl = useVisibilityControl();
+  const control = controlProp ?? ownControl;
+
+  const clonedTrigger = React.useMemo(
+    () =>
+      React.cloneElement(trigger, {
+        ref: setTriggerElement,
+        onClick: !controlProp && ownControl.toggle,
+      }),
+    [controlProp, ownControl.toggle, trigger]
+  );
+
+  return (
+    <>
+      {clonedTrigger}
+      <ConditionalWrapper active={usePortal} component={Portal as any}>
+        <div ref={popoverRef} style={styles.popper} {...attributes.popper}>
+          {!!control.visible && children}
+        </div>
+      </ConditionalWrapper>
+    </>
+  );
 };
-
-export const Popover = ({ onClick, text, contentToHover, ...props }: PopoverProps) => (
-  <div className='relative' onClick={onClick} {...props}>
-    <div className='absolute top-[-42px] left-[-18px]'>
-      <div className='relative bg-primary text-white rounded-full w-fit text-regular font-bold py-1 px-4 shadow-lg'>
-        {text}
-        <div className='absolute cursor-pointer top-[-5px] right-[-7px]'>
-          <Icon name='popover-close' className='h-[18px] w-[18px] popover-shadow rounded-full' />
-        </div>
-        <div className='absolute bottom-[-12px] left-[30px]'>
-          <Icon name='popover-tail' className='w-[42px] h-[14px]' />
-        </div>
-      </div>
-    </div>
-    <div>{contentToHover}</div>
-  </div>
-);
-
-export default Popover;
-
-// Example
-// <Popover text="入力内容を確認し、問題がなければチェックを入れてください" contentToHover={"この内容でOK！"} />

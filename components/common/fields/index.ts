@@ -6,3 +6,4 @@ export * from './RadioGroup';
 export * from './Select';
 export * from './PasswordInput';
 export * from './TimeInput';
+export * from './Mentions';

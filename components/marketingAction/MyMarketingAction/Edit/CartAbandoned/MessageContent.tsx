@@ -4,11 +4,12 @@ import { useVisibilityControl } from '@/hooks';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 import { useWatch } from 'react-hook-form';
+import { ColorGroup } from '../ColorSettingsSection/ColorGroup';
+import { MessageContentPreviewType } from '../MessageContentPreview';
+import { PreviewOverlay } from '../PreviewOverlay';
 import { OPTIONS } from './CartAbandoned';
-import { ColorGroup } from './ColorGroup';
-import { PreviewLine } from './PreviewLine';
 import { PreviewEmail } from './PreviewEmail';
-import { MESSAGE_TYPE, PreviewModal } from './PreviewModal';
+import { PreviewLine } from './PreviewLine';
 
 type Props = {
   messageNum: string;
@@ -17,7 +18,7 @@ type Props = {
 export const MessageContent = ({ messageNum }: Props) => {
   const { t } = useTranslation('marketingAction');
   const previewMessageControl = useVisibilityControl();
-  const [currType, setCurrType] = useState(MESSAGE_TYPE.EMAIL);
+  const [currType, setCurrType] = useState<MessageContentPreviewType>('mail');
 
   const textMessageOptions = [
     { value: 'text_message', label: t('displayMsg') },
@@ -29,7 +30,7 @@ export const MessageContent = ({ messageNum }: Props) => {
   const message = useWatch({ name: `${messageNum}` });
   const showLineMsg = message?.line_option === textMessageOptions[0].value;
 
-  const onShowModal = (type: string) => {
+  const onShowModal = (type: MessageContentPreviewType) => {
     setCurrType(type);
     previewMessageControl.open();
   };
@@ -63,7 +64,7 @@ export const MessageContent = ({ messageNum }: Props) => {
               <span className='text-secondary'>{t('previewMobile')}</span>
               <span
                 className='text-gray-700 underline cursor-pointer'
-                onClick={() => onShowModal(MESSAGE_TYPE.EMAIL)}
+                onClick={() => onShowModal('mail')}
               >
                 {t('openPreview')}
               </span>
@@ -121,7 +122,7 @@ export const MessageContent = ({ messageNum }: Props) => {
                 <span className='text-secondary'>{t('preview')}</span>
                 <span
                   className='text-gray-700 underline cursor-pointer'
-                  onClick={() => onShowModal(MESSAGE_TYPE.LINE)}
+                  onClick={() => onShowModal('line')}
                 >
                   {t('openPreview')}
                 </span>
@@ -135,11 +136,11 @@ export const MessageContent = ({ messageNum }: Props) => {
         <div className='mb-2 font-semibold'>{t('colorSettings')}</div>
         <ColorGroup name={`${messageNum}.color`} />
       </div>
-      <PreviewModal
-        type={currType}
-        headline={message?.headline_email}
-        messageEmail={message?.text_email}
-        messageLine={message?.text_line}
+      <PreviewOverlay
+        defaultType={currType}
+        mailHeadline={message?.headline_email}
+        mailBody={message?.text_email}
+        lineBody={message?.text_line}
         control={previewMessageControl}
       />
     </div>
