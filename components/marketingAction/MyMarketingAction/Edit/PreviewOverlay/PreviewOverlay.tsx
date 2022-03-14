@@ -1,7 +1,7 @@
 import { Button, Input, Modal, SwitchButtons } from '@/components/common';
 import { Overlay } from '@/components/Layout';
 import { useVisibilityControl, VisibilityControl } from '@/hooks';
-import { Option } from '@/types';
+import { Device, Option } from '@/types';
 import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 import { LinePreview } from '../LinePreview';
@@ -15,8 +15,6 @@ type Props = {
   mailBody: string;
   lineBody: string;
 };
-
-type Device = 'mobile' | 'desktop';
 
 export const PreviewOverlay = ({
   defaultType,

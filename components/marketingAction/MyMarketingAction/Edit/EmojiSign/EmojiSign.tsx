@@ -13,7 +13,7 @@ export const EmojiSign = ({ className }: Props) => {
   return (
     <div
       className={classNames(
-        'w-20 bg-white py-2 px-2.5 flex items-center rounded border border-input',
+        'w-fit bg-white py-2 px-2.5 flex items-center rounded border border-input',
         className
       )}
     >

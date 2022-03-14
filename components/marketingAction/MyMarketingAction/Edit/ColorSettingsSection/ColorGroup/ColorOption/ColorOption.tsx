@@ -4,7 +4,6 @@ import classNames from 'classnames';
 export interface Color {
   label: string;
   value: string;
-  color: string;
 }
 
 type Props = {
@@ -24,11 +23,11 @@ export const ColorOption = ({ color }: Props) => {
                 'border-danger': error,
               }
             )}
-            style={{ borderColor: isChecked ? color.color : '' }}
+            style={{ borderColor: isChecked ? color.value : '' }}
           >
             <div
               className={classNames('w-full h-full rounded ')}
-              style={{ backgroundColor: color.color }}
+              style={{ backgroundColor: color.value }}
             ></div>
           </div>
           <input

@@ -13,6 +13,7 @@ export type Props = ClassName & {
   label?: React.ReactNode;
   name?: string;
   error?: boolean;
+  singleLine?: boolean;
 };
 
 // eslint-disable-next-line no-empty-pattern
@@ -25,6 +26,7 @@ export const Mentions = ({
   className,
   name,
   error,
+  singleLine = false,
 }: Props) => {
   return (
     <div className={classNames('mp-mentions', className, style['mp-mentions'])}>
@@ -35,10 +37,12 @@ export const Mentions = ({
       )}
       <MentionsInput
         className={classNames(
-          'w-full rounded min-h-[100px] bg-white',
+          'w-full rounded bg-white',
           'border border-solid',
-          error ? 'border-danger' : 'border-input'
+          error ? 'border-danger' : 'border-input',
+          singleLine ? 'w-[480px] h-10 mr-2 mb-1' : 'min-h-[100px]'
         )}
+        singleLine={singleLine}
         value={value}
         onChange={e => {
           onChange(e.target.value);

@@ -1,3 +1,4 @@
+import { Icon } from '@/components/common';
 import { useScrollDisable, VisibilityControl } from '@/hooks';
 import { Children } from '@/types';
 import classNames from 'classnames';
@@ -44,10 +45,7 @@ export const Overlay = ({
       )}
       style={{ width: `calc(100vw - ${sidebarWidth})`, height: `calc(100vh - ${headerHeight})` }}
     >
-      <div
-        onClick={onBackdropClick}
-        className='absolute w-full h-full bg-[#222222] opacity-80'
-      ></div>
+      <div onClick={onBackdropClick} className='absolute w-full h-full bg-[#222222]/80'></div>
       <div
         className={classNames(
           'w-full px-5 py-2',
@@ -58,9 +56,7 @@ export const Overlay = ({
       >
         <h5>{title}</h5>
         {!!showCloseButton && (
-          <div className='w-4 h-4 cursor-pointer' onClick={handleClose}>
-            X
-          </div>
+          <Icon name='close' className='w-4 h-4 cursor-pointer' onClick={handleClose} />
         )}
       </div>
       <div className={classNames('z-50', className)}>{children}</div>

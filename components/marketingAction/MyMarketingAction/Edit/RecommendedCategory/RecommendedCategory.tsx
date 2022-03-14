@@ -1,4 +1,4 @@
-import { Form, RadioGroup } from '@/components';
+import { Form } from '@/components';
 import { Button, Modal } from '@/components/common';
 import { ActionContainer } from '@/components/marketingAction';
 import { Step } from '@/constants';
@@ -7,41 +7,42 @@ import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
-import { PreviewOverlay } from '../PreviewOverlay';
 import { Steps } from '../Steps';
-import { Message1Settings } from './Message1Settings';
-import { Message2Settings } from './Message2Settings';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';
+import { ChatOverlay } from './ChatOverlay';
+import { Step1Settings } from './Step1Settings';
+import { Step2Settings } from './Step2Settings';
+import { Step3Settings } from './Step3Settings';
 
-export const OPTIONS = {
-  YES: 'yes',
-  NO: 'no',
-};
-
-export const CartAbandoned = () => {
+export const RecommendedCategory = () => {
   const { t } = useTranslation('marketingAction');
-  const methods = useForm();
-  const { handleSubmit } = methods;
+  const methods = useForm({
+    defaultValues: {
+      step3: {
+        color: '#E63E28',
+        pc_appearance_time: '0',
+        mobile_appearance_time: '0',
+        pc_position: '0',
+        mobile_position: '0',
+        pc_unit: 'px',
+        mobile_unit: 'px',
+      },
+    },
+  } as any);
+  const { handleSubmit, watch } = methods;
   const { control } = methods;
   const modalControl = useVisibilityControl();
   const [isCompleted, setIsCompleted] = useState(false);
   const [isSaveAsDraft, setIsSaveAsDraft] = useState(false);
-  const [messagePreview, setMessagePreview] = useState<any>();
 
-  const isStep1Done = useWatch({ name: 'is_use_line', control });
+  const step1 = useWatch({ name: 'aggregation_period', control });
   const targetCustomers = useWatch({ name: 'target_customers', control });
-  const firstMessage = useWatch({ name: 'first_message', control });
-  const secondMessage = useWatch({ name: 'second_message', control });
+  const step2 = useWatch({ name: 'step2', control });
+  const step3 = useWatch({ name: 'step3', control });
   const isStep4Done = !!targetCustomers?.length;
-  const previewMessageControl = useVisibilityControl();
-
-  const lineOptions = [
-    { value: OPTIONS.YES, label: t('lineOption') },
-    { value: OPTIONS.NO, label: t('noLine') },
-  ];
+  const chatPreviewControl = useVisibilityControl();
 
   const onSubmit = (data: any) => {
-    // handle change
     console.log('submit', data);
   };
 
@@ -52,6 +53,7 @@ export const CartAbandoned = () => {
   };
 
   const onExecuteMA = () => {
+    console.log('aaa');
     handleSubmit(onSubmit)();
     setIsCompleted(true);
   };
@@ -63,25 +65,6 @@ export const CartAbandoned = () => {
     setIsSaveAsDraft(true);
   };
 
-  const renderStep1 = () => {
-    return (
-      <>
-        <div className='font-bold text-gray-dark mb-2.5'>{t('useLine')}</div>
-        <Form.RadioGroup name='is_use_line'>
-          {lineOptions.map(option => (
-            <RadioGroup.Option
-              colorScheme='secondary'
-              key={option.value}
-              className='mb-2.5 text-gray-dark text-medium'
-              label={option.label}
-              value={option.value}
-            />
-          ))}
-        </Form.RadioGroup>
-      </>
-    );
-  };
-
   const setStepDone = (stepId: number, done: boolean) => {
     setSteps(prevState =>
       prevState.map(step => {
@@ -91,7 +74,7 @@ export const CartAbandoned = () => {
   };
 
   const onConfirm = (stepId: number) => {
-    if (stepId === 1 && isStep1Done) {
+    if (stepId === 1 && step1) {
       // TODO save step 1
       setStepDone(stepId, true);
     } else if (stepId === 2 && isStep2Done()) {
@@ -107,49 +90,48 @@ export const CartAbandoned = () => {
   };
 
   const isStep2Done = () => {
-    return firstMessage && Object.keys(firstMessage).every(field => firstMessage[field]);
+    return step2 && Object.keys(step2).every(field => step2[field]);
   };
 
   const isStep3Done = () => {
-    return secondMessage && Object.keys(secondMessage).every(field => secondMessage[field]);
+    return step3 && Object.keys(step3).every(field => step3[field]);
   };
 
   const [steps, setSteps] = useState<Step[]>([
     {
       id: 1,
-      name: t('useLine'),
-      children: renderStep1(),
+      name: t('aggregationPeriodSettings'),
+      children: <Step1Settings />,
     },
     {
       id: 2,
-      name: t('msgSetting1'),
-      children: <Message1Settings />,
-      showPreviewBtn: true,
+      name: t('carouselDisplaySettings'),
+      children: <Step2Settings />,
     },
     {
       id: 3,
-      name: t('msgSetting2'),
-      children: <Message2Settings />,
+      name: t('chatWindowSettings'),
+      children: <Step3Settings />,
       showPreviewBtn: true,
     },
     {
       id: 4,
       name: t('targetSetting'),
-      children: <TargetCustomerGroup />,
+      children: <TargetCustomerGroup isNonMember={true} />,
     },
   ]);
 
   useEffect(() => {
     setStepDone(1, false);
-  }, [isStep1Done]);
+  }, [step1]);
 
   useEffect(() => {
     setStepDone(2, false);
-  }, [firstMessage]);
+  }, [step2]);
 
   useEffect(() => {
     setStepDone(3, false);
-  }, [secondMessage]);
+  }, [step3]);
 
   useEffect(() => {
     setStepDone(4, false);
@@ -162,20 +144,11 @@ export const CartAbandoned = () => {
     } else if (isCompleted) {
       desc = 'alertAfterExecuting';
     }
-    return t(desc, { template: t('cartAbandoned') });
+    return t(desc, { template: t('rankingByCategoryBasedOnOverallPurchaseHistory') });
   };
 
   const onShowPreview = (stepId: number) => {
-    let message = firstMessage;
-    if (stepId === 3 && secondMessage?.same_message_content === OPTIONS.NO) {
-      message = secondMessage;
-    }
-    setMessagePreview({
-      headline: message?.headline_email,
-      messageEmail: message?.text_email,
-      messageLine: message?.text_line,
-    });
-    previewMessageControl.open();
+    chatPreviewControl.open();
   };
 
   const isGotoMABtn = isCompleted || isSaveAsDraft;
@@ -207,13 +180,7 @@ export const CartAbandoned = () => {
         </div>
       </Form>
 
-      <PreviewOverlay
-        defaultType='mail'
-        mailHeadline={messagePreview?.headline}
-        mailBody={messagePreview?.messageEmail}
-        lineBody={messagePreview?.messageLine}
-        control={previewMessageControl}
-      />
+      <ChatOverlay color={step3.color} control={chatPreviewControl} />
 
       <Modal control={modalControl}>
         <div className='text-center text-gray-dark'>

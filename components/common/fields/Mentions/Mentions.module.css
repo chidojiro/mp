@@ -1,5 +1,6 @@
 .mp-mentions {
-  :global(textarea) {
+  :global(textarea),
+  :global(input) {
     @apply p-2 outline-none;
   }
 
