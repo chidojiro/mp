@@ -31,5 +31,6 @@
   "editor": "施策エディタ",
   "cartAbandonedNoti": "カゴ落ち通知",
   "csvDownload": "CSVダウンロード",
-  "change": "変更する"
+  "change": "変更する",
+  "f0NonMember": "F0(非会員)"
 }

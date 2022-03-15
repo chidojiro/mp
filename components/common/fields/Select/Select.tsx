@@ -14,6 +14,7 @@ export type SelectProps = {
   name?: string;
   value?: string;
   onChange?: (value: string) => void;
+  className?: string;
 };
 
 const getStylesByActiveStatus = (active: boolean) => {
@@ -32,6 +33,7 @@ export const Select = React.forwardRef<HTMLInputElement, Props>(
       onChange: onChangeProp,
       name,
       options,
+      className,
       ...props
     }: SelectProps,
     ref
@@ -50,9 +52,12 @@ export const Select = React.forwardRef<HTMLInputElement, Props>(
         <div>
           <Menu.Button
             {...props}
-            className='inline-flex items-center justify-between w-[200px] px-2.5 py-1.5 text-sm text-gray-dark bg-white border border-input rounded shadow-sm text-medium hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100'
+            className={classNames(
+              'inline-flex items-center justify-between w-[200px] px-2.5 py-1.5 text-sm text-gray-dark bg-white border border-input rounded shadow-sm text-medium hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100',
+              className
+            )}
           >
-            {selectedOption?.label}
+            <div>{selectedOption?.label}</div>
             <ChevronDownIcon className='w-5 h-5 ml-2 -mr-1 bg text-secondary' aria-hidden='true' />
           </Menu.Button>
         </div>
@@ -66,7 +71,7 @@ export const Select = React.forwardRef<HTMLInputElement, Props>(
           leaveFrom='transform opacity-100 scale-100'
           leaveTo='transform opacity-0 scale-95'
         >
-          <Menu.Items className='absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white rounded shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+          <Menu.Items className='absolute right-0 z-10 w-full mt-2 origin-top-right bg-white rounded shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
             <div className='py-1'>
               {options.map((option, id) => {
                 return (

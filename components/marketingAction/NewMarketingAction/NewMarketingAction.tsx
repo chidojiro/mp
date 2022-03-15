@@ -129,14 +129,14 @@ export const NewMarketingAction = ({}: Props) => {
                 pathname,
                 query: {
                   ...query,
-                  marketingActionName: 'ranking-by-category-based-on-overall-purchase-history',
+                  marketingActionName: 'ranking-by-category',
                 },
               }}
             >
               {t('rankingByCategoryBasedOnOverallPurchaseHistory')}
             </Link>
           ),
-          value: 'ranking-by-category-based-on-overall-purchase-history',
+          value: 'ranking-by-category',
         },
       ],
     },
