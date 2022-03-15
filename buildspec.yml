@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: latest
+    commands:
+      - echo Installing dependency...
+      - pwd
+      - node -v
+      - npm -v
+      - yarn -v
+  pre_build:
+    commands:
+      - printenv > .env
+  build:
+    commands:
+      - echo Update Env Vars
+      - yarn install
+      - echo Compiling the Node.js code
+      - yarn build
+  post_build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+  files:
+    - '**/*'
