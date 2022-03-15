@@ -161,5 +161,16 @@
   "saleRankingPastMonth": "Sales ranking position in the past month",
   "productName": "Product name",
   "amountIncludingTax": "Amount including tax",
-  "productDetails": "Product Details"
+  "productDetails": "Product Details",
+  "popupSettings": "Popup Settings",
+  "freeShippingAmountLabel": "Amount until free shipping",
+  "freeShippingPriceEndLabel": "円 (including tax) - Purchases over this amount ship for free",
+  "conditionLabel": "Conditions",
+  "conditionSubtext": "Set the timing of the chatbot's appearance and display position. The default settings can be left as is.",
+  "afterOpeningPage": "Chatbot opens",
+  "secondsUntilOpens": "seconds after opening page",
+  "indicatesLocation": "Indicates location",
+  "screenLeft": "Left end of screen",
+  "screenRight": "Right end of screen",
+  "upFromDefaultPosition": "Up from the default position"
 }

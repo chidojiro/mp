@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { CartAbandoned } from './CartAbandoned';
 import { DeliveryAfterPurchase } from './DeliveryAfterPurchase';
 import { RecommendedCategory } from './RecommendedCategory';
+import { FreeShipping } from './FreeShipping';
 
 export const Edit = () => {
   const { t } = useTranslation('marketingAction');
@@ -18,6 +19,8 @@ export const Edit = () => {
         return <DeliveryAfterPurchase />;
       case 'ranking-by-category':
         return <RecommendedCategory />;
+      case 'conditional-free-shipping':
+        return <FreeShipping />;
       default:
         return null;
     }

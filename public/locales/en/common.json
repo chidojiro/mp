@@ -22,6 +22,7 @@
   "sat": "Sat",
   "sun": "Sun",
   "f0member": "F0 (Member)",
+  "f0nonmember": "F0(None-Member)",
   "f0others": "F0 (Others)",
   "semiLoyal": "Semi-loyal",
   "loyal": "Loyal",

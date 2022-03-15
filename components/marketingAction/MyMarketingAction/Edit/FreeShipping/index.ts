@@ -1,0 +1,1 @@
+export { FreeShipping } from './FreeShipping';

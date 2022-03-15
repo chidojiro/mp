@@ -161,5 +161,16 @@
   "saleRankingPastMonth": "過去1ヶ月の売上ランキング順位",
   "productName": "商品名",
   "amountIncludingTax": "税込金額",
-  "productDetails": "商品詳細"
+  "productDetails": "商品詳細",
+  "popupSettings": "ポップアップ設定",
+  "freeShippingAmountLabel": "送料無料になる金額",
+  "freeShippingPriceEndLabel": "円（税抜）以上購入で送料無料",
+  "conditionLabel": "出現条件",
+  "conditionSubtext": "チャットボットの出現するタイミングと表示位置を設定します。デフォルト設定のままでも問題ありません。",
+  "afterOpeningPage": "ページを開いてから",
+  "secondsUntilOpens": "秒後に出現させる",
+  "indicatesLocation": "表示位置",
+  "screenLeft": "画面左端",
+  "screenRight": "画面右端",
+  "upFromDefaultPosition": "デフォルトの位置から上に"
 }
