@@ -159,11 +159,10 @@ export const RecommendedCategory = () => {
     <div className='relative'>
       <ActionContainer
         showUseTemplateBtn={false}
-        iconName='cart'
-        title={t('cartAbandoned')}
-        description={t('cartAbandonedDescription')}
-        descriptionImageUrl='/images/cart-abandoned-description.png'
-        flowImgUrl='/images/cart-abandoned-flow.png'
+        iconName='ranking'
+        title={t('rankingByCategoryBasedOnOverallPurchaseHistory')}
+        description={t('rankingByCategoryBasedOnOverallPurchaseHistoryDescription')}
+        descriptionImageUrl='/images/ranking-description.png'
       ></ActionContainer>
       <Form methods={methods} className='mt-[60px]'>
         <Steps steps={steps} onConfirm={onConfirm} onShowPreview={onShowPreview} />
