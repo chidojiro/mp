@@ -13,12 +13,21 @@ type Props = {
 export const PopupSetting = ({}: Props) => {
   const { t } = useTranslation('marketingAction');
 
+  const measurementTypes: any = {
+    px: 'px',
+    cm: 'cm',
+  };
+
   const getSelectBox = () => {
+    const selectBox = Object.keys(measurementTypes).map((optionItem: any) => {
+      return { value: optionItem, label: measurementTypes[optionItem] };
+    });
+
     return (
       <Form.Select
-        options={[{ value: 'px', label: 'px' }]}
+        defaultValue={selectBox[0].value}
+        options={selectBox}
         name='measurement-select'
-        defaultValue='px'
         className='w-20 mx-2'
       />
     );
