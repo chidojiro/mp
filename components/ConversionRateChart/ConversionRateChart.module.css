@@ -1,0 +1,5 @@
+.conversion-rate-chart {
+  :global(.recharts-cartesian-axis-tick text) {
+    fill: #464646 !important;
+  }
+}

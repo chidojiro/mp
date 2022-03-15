@@ -31,5 +31,20 @@
   "colon": ":",
   "cvUuRate": "Number of CV UUs (%)",
   "yearMonth": "Year Month",
-  "numberOfUUsDelivered": "Number of UUs delivered"
+  "numberOfUUsDelivered": "Number of UUs delivered",
+  "numberOfF1Customers": "Number of F1 customers",
+  "numberOfF2Customers": "Number of F2 customers",
+  "f2ConversionRate": "F2 conversion rate",
+  "measuresThatContributedToReturnOfLoyalDormantCustomers": "Measures that contributed to return of loyal dormant customers",
+  "postPurchaseStepDelivery": "Post-purchase step delivery",
+  "mostRecentContribution": "[ Most recent contribution: {{amount}} yen ]",
+  "periodicDeliveryRecommendation": "Periodic delivery (recommendation)",
+  "birthdayCoupon": "Birthday Coupon",
+  "viewReport": "View Report",
+  "": "",
+  "": "",
+  "": "",
+  "": "",
+  "": "",
+  "": ""
 }
