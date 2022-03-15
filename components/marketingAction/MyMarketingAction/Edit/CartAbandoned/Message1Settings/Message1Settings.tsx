@@ -1,8 +1,8 @@
 import { Section } from '@/components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { DeliveryDateTimeInput } from '../DeliveryDateTimeInput';
-import { MessageContent } from './MessageContent';
+import { DeliveryDateTimeInput } from '../../DeliveryDateTimeInput';
+import { MessageContent } from '../MessageContent';
 
 export const Message1Settings = () => {
   const { t } = useTranslation('marketingAction');

@@ -6,12 +6,12 @@ import React, { useState } from 'react';
 import { useWatch } from 'react-hook-form';
 import { ColorGroup } from '../ColorSettingsSection/ColorGroup';
 import { EmojiSign } from '../EmojiSign';
+import { LinePreview } from '../LinePreview';
+import { MailPreview } from '../MailPreview';
 import { MessageContentPreviewType } from '../MessageContentPreview';
 import { PreviewOverlay } from '../PreviewOverlay';
 import { VariableSign } from '../VariableSign';
 import { OPTIONS } from './CartAbandoned';
-import { PreviewEmail } from './PreviewEmail';
-import { PreviewLine } from './PreviewLine';
 
 type Props = {
   messageNum: string;
@@ -78,10 +78,10 @@ export const MessageContent = ({ messageNum }: Props) => {
                 {t('openPreview')}
               </span>
             </div>
-            <PreviewEmail
+            <MailPreview
               headline={message?.headline_email}
               body={message?.text_email}
-              showMobileVersion={true}
+              desktop={false}
             />
           </div>
         </div>
@@ -135,7 +135,7 @@ export const MessageContent = ({ messageNum }: Props) => {
                   {t('openPreview')}
                 </span>
               </div>
-              <PreviewLine body={message?.text_line} />
+              <LinePreview body={message?.text_line} />
             </div>
           </div>
         </div>

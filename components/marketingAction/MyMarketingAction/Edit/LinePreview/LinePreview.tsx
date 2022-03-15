@@ -35,18 +35,18 @@ export const LinePreview = ({ body, desktop = false }: Props) => {
     .slice(3);
 
   return (
-    <div className='rounded bg-[#95A6C9] opacity-100 border border-input h-[667px] w-[335px] py-4 px-1.5'>
+    <div className='rounded bg-[#95A6C9] opacity-100 h-fit border border-input h-[667px] w-[335px] py-4 px-1.5'>
       <div className='w-full h-full overflow-y-scroll mp-scroll'>
         {!!body && (
           <div className='flex'>
-            <div className='mr-2 bg-gray-500 rounded-full w-7 h-7'></div>
+            <div className='mr-3 bg-gray-500 rounded-full w-7 h-7'></div>
             <div className=''>
               <div className='text-[8px]'>○○○ストア</div>
               <div
                 className={classNames(
-                  'mb-3 py-2 px-3 mt-1.5 max-w-[200px]',
-                  'leading-snug rounded-lg bg-white text-[#222222] text-regular-sm ',
-                  'break-words whitespace-pre-wrap'
+                  'relative mb-3 leading-snug whitespace-pre-line mt-1.5 max-w-[200px] rounded-lg bg-white text-gray-dark text-[#222222] text-regular-sm py-2 px-3',
+                  "before:content-[''] before:absolute before:border-white before:top-0 before:left-[-7px]",
+                  'before:w-[11px] before:h-[11px] before:border-b-[7px] before:rounded-bl-[40px_40px]'
                 )}
               >
                 {parsedBody}

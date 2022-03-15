@@ -2,17 +2,17 @@ import { Form, RadioGroup, Section } from '@/components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { useWatch } from 'react-hook-form';
-import { DeliveryDateTimeInput } from '../DeliveryDateTimeInput';
-import { OPTIONS } from './CartAbandoned';
-import { MessageContent } from './MessageContent';
+import { DeliveryDateTimeInput } from '../../DeliveryDateTimeInput';
+import { OPTIONS } from '../CartAbandoned';
+import { MessageContent } from '../MessageContent';
 
 export const Message2Settings = () => {
   const { t } = useTranslation('marketingAction');
   const secondMessage = useWatch({ name: 'second_message' });
 
   const msg2DeliveryOptions = [
-    { value: 'second_message_on', label: t('msg2On') },
-    { value: 'second_message_off', label: t('msg2Off') },
+    { value: OPTIONS.YES, label: t('msg2On') },
+    { value: OPTIONS.NO, label: t('msg2Off') },
   ];
 
   const deliverMessageOptions = [

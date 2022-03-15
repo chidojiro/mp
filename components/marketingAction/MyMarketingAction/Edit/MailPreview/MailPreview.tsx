@@ -47,12 +47,12 @@ export const MailPreview = ({
   return (
     <div
       className={classNames(
-        'rounded bg-white opacity-100 border border-input h-[667px]',
+        'rounded bg-white opacity-100 border border-input h-[667px] pr-2.5',
         className,
         !desktop ? 'w-[335px] p-5' : 'w-[600px] p-10'
       )}
     >
-      <div className={classNames('h-full pr-1 overflow-y-scroll')}>
+      <div className='h-full pr-1 overflow-y-scroll mp-scroll'>
         <h2 className='mb-4 text-center text-secondary'>Brand Logo</h2>
         <div className='flex justify-center w-full'>
           <h3 className='w-[160px] mb-4 whitespace-pre-line text-gray-dark text-center'>
