@@ -21,6 +21,8 @@ const withProps =
             const value = await withPropsMap[name]({
               headers: {
                 cookie: cookie as string,
+                'X-Organization-Id': '00000000000040008000000000000000',
+                'X-Project-Id': '00000000000040008000000000000000',
               },
             });
 

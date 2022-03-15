@@ -35,6 +35,8 @@ myAxios.interceptors.request.use(
     if (config.method === 'post') {
       config.headers['X-Idempotent-Key'] = nanoid(32);
     }
+    config.headers['X-Organization-Id'] = '00000000000040008000000000000000';
+    config.headers['X-Project-Id'] = '00000000000040008000000000000000';
 
     return config;
   },
