@@ -23,12 +23,14 @@ export const TargetCustomerGroup = ({ isNonMember }: Props) => {
 
   const targetCustomers = (() => {
     if (isNonMember) {
-      const _customers = [...customers];
-      _customers.splice(1, 0, {
-        label: t('f0NonMember'),
-        value: 'f0_non_memeber',
-      });
-      return _customers;
+      return [
+        customers[0],
+        {
+          label: t('f0NonMember'),
+          value: 'f0_non_memeber',
+        },
+        ...customers.slice(1),
+      ];
     }
     return customers;
   })();
