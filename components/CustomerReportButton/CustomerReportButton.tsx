@@ -35,14 +35,16 @@ export const CustomerReportButton = ({
     {...props}
   >
     <div className='flex items-center'>
-      <div className='mx-5 h-full flex items-center'>{featuredIcon}</div>
-      <div className='text-sm font-bold mx-1'>{label}</div>
-      <div className='text-xs mx-3'>{subtext}</div>
+      <div className='flex items-center h-full mx-5'>{featuredIcon}</div>
+      <div className='flex flex-wrap items-center gap-2'>
+        <div className='flex-shrink-0 text-sm font-bold'>{label}</div>
+        <div className='flex-shrink-0 text-xs'>{subtext}</div>
+      </div>
     </div>
     <div className='flex items-center'>
-      <div className='text-xs mx-1 text-gray-600'>{clickActionText}</div>
+      <div className='mx-1 text-xs text-gray-600'>{clickActionText}</div>
       <div className='mr-3'>
-        <ChevronRightIcon className='-mr-1 ml-2 h-5 w-5 bg text-secondary' aria-hidden='true' />
+        <ChevronRightIcon className='w-5 h-5 ml-2 -mr-1 bg text-secondary' aria-hidden='true' />
       </div>
     </div>
   </div>

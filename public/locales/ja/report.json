@@ -31,5 +31,21 @@
   "colon": "：",
   "cvUuRate": "CV UU数（率）",
   "yearMonth": "年月",
-  "numberOfUUsDelivered": "配信UU数"
+  "numberOfUUsDelivered": "配信UU数",
+  "numberOfF1Customers": "F1顧客数",
+  "numberOfF2Customers": "F2顧客数",
+  "f2ConversionRate": "F2転換率",
+  "measuresThatContributedToReturnOfLoyalDormantCustomers": "ロイヤル休眠顧客復帰に貢献した施策",
+  "postPurchaseStepDelivery": "購入後ステップ配信",
+  "mostRecentContribution": "[ 直近の貢献：{{amount}}円 ]",
+  "periodicDeliveryRecommendation": "定期配信(レコメンド)",
+  "birthdayCoupon": "バースデークーポン",
+  "viewReport": "レポートを見る",
+  "": "",
+  "": "",
+  "": "",
+  "": "",
+  "": "",
+  "": "",
+  "": ""
 }
