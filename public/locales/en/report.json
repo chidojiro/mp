@@ -41,10 +41,12 @@
   "periodicDeliveryRecommendation": "Periodic delivery (recommendation)",
   "birthdayCoupon": "Birthday Coupon",
   "viewReport": "View Report",
-  "": "",
-  "": "",
-  "": "",
-  "": "",
-  "": "",
-  "": ""
+  "numberOfLoyalDormantCustomers": "Number of Loyal Dormant Customers",
+  "numberOfReturns": "Number of returns",
+  "returnRate": "Return rate",
+  "measuresThatContributedToF2Conversion": "Measures that contributed to F2 conversion",
+  "numberOfLoyalCustomers": "Number of loyal customers",
+  "numberOfSemiLoyalCustomers": "Number of Semi-Loyal Customers",
+  "loyalDormantCustomers": "Loyal Dormant Customers",
+  "measuresContributingToLoyaltyConversion": "Measures Contributing to Loyalty Conversion"
 }

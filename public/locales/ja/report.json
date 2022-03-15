@@ -41,11 +41,12 @@
   "periodicDeliveryRecommendation": "定期配信(レコメンド)",
   "birthdayCoupon": "バースデークーポン",
   "viewReport": "レポートを見る",
-  "": "",
-  "": "",
-  "": "",
-  "": "",
-  "": "",
-  "": "",
-  "": ""
+  "numberOfLoyalDormantCustomers": "ロイヤル休眠顧客数",
+  "numberOfReturns": "復帰数",
+  "returnRate": "復帰率",
+  "measuresThatContributedToF2Conversion": "F2転換に貢献した施策",
+  "numberOfLoyalCustomers": "ロイヤル顧客数",
+  "numberOfSemiLoyalCustomers": "準ロイヤル顧客数",
+  "loyalDormantCustomers": "ロイヤル休眠顧客数",
+  "measuresContributingToLoyaltyConversion": "ロイヤル転換に貢献した施策"
 }
