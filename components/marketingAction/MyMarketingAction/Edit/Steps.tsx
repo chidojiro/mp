@@ -48,7 +48,8 @@ export const Steps = ({ steps }: Props) => {
                     {t('viewPreview')}
                   </Button>
                   <Button
-                    className='font-semibold border-none bg-mint-green min-w-[240px]'
+                    colorScheme='green'
+                    className='font-semibold min-w-[240px] border-2'
                     variant='outline'
                   >
                     {t('confirm')}
@@ -56,9 +57,8 @@ export const Steps = ({ steps }: Props) => {
                 </>
               ) : (
                 <Button
-                  colorScheme='green'
                   variant='outline'
-                  className='font-semibold min-w-[240px] border-2'
+                  className='font-semibold min-w-[240px] border-none bg-mint-green'
                 >
                   {t('confirm')}
                 </Button>

@@ -111,5 +111,18 @@
   "testDeliveryEmail": "テスト配信（メール）",
   "testDeliveryEmailDesc": "以下の入力欄に受信用に使用したいメールアドレスを入力後、「テスト配信を実行する」ボタンを押してください。",
   "emailAddForTest": "テスト配信用メールアドレス",
-  "executeTest": "テスト配信を実行する"
+  "executeTest": "テスト配信を実行する",
+  "popupSettings": "ポップアップ設定",
+  "freeShippingAmountLabel": "送料無料になる金額",
+  "freeShippingPriceEndLabel": "円（税抜）以上購入で送料無料",
+  "conditionLabel": "出現条件",
+  "conditionSubtext": "チャットボットの出現するタイミングと表示位置を設定します。デフォルト設定のままでも問題ありません。",
+  "templateSelection": "テンプレートの選択",
+  "appearanceTiming": "出現タイミング",
+  "afterOpeningPage": "ページを開いてから",
+  "secondsUntilOpens": "秒後に出現させる",
+  "indicatesLocation": "表示位置",
+  "screenLeft": "画面左端",
+  "screenRight": "画面右端",
+  "upFromDefaultPosition": "デフォルトの位置から上に"
 }

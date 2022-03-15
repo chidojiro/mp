@@ -110,5 +110,18 @@
   "testDeliveryEmail": "Test delivery (e-mail)",
   "testDeliveryEmailDesc": "Please enter the e-mail address you would like to use for reception in the field below, then press the \"Execute Test Delivery\" button.",
   "emailAddForTest": "E-mail address for test delivery",
-  "executeTest": "Execute test delivery"
+  "executeTest": "Execute test delivery",
+  "popupSettings": "Popup Settings",
+  "freeShippingAmountLabel": "Amount until free shipping",
+  "freeShippingPriceEndLabel": "円 (including tax) - Purchases over this amount ship for free",
+  "conditionLabel": "Conditions",
+  "conditionSubtext": "Set the timing of the chatbot's appearance and display position. The default settings can be left as is.",
+  "templateSelection": "Template Selection",
+  "appearanceTiming": "Appearance Timing",
+  "afterOpeningPage": "Chatbot opens",
+  "secondsUntilOpens": "seconds after opening page",
+  "indicatesLocation": "Indicates location",
+  "screenLeft": "Left end of screen",
+  "screenRight": "Right end of screen",
+  "upFromDefaultPosition": "Up from the default position"
 }
