@@ -1,7 +1,7 @@
 import { Form } from '@/components';
+import { Option } from '@/types';
 import { useTranslation } from 'next-i18next';
 import { ColorOption } from './ColorOption';
-import { Color } from './ColorOption/ColorOption';
 
 type Props = {
   name: string;
@@ -11,7 +11,7 @@ type Props = {
 
 export const ColorGroup = ({ name, cols = 4, isFull = false }: Props) => {
   const { t } = useTranslation('marketingAction');
-  const messageColors: Color[] = [
+  const messageColors: Option<string>[] = [
     { label: t('orange'), value: '#ffba00' },
     { label: t('skyBlue'), value: '#55c5d9' },
     { label: t('pink'), value: '#F594AE' },
@@ -22,7 +22,7 @@ export const ColorGroup = ({ name, cols = 4, isFull = false }: Props) => {
     { label: t('brown'), value: '#81563C' },
   ];
 
-  const chatColors: Color[] = [
+  const chatColors: Option<string>[] = [
     { label: t('red'), value: '#E63E28' },
     { label: t('skyBlue'), value: '#55c5d9' },
     { label: t('orange'), value: '#ED6A00' },

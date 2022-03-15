@@ -1,13 +1,14 @@
 import { CheckboxGroup } from '@/components';
 import { Icon } from '@/components';
+import { Option } from '@/types';
 import classNames from 'classnames';
 
 type Props = {
-  label: string;
-  value: string;
+  option: Option<string>;
 };
 
-export const TargetCustomer = ({ label, value }: Props) => {
+export const TargetCustomer = ({ option }: Props) => {
+  const { label, value } = option;
   return (
     <CheckboxGroup.Option value={value}>
       {({ handleChange, isChecked, value }) => (

@@ -34,7 +34,7 @@ import Chatbot2 from './icons/chatbot2.svg';
 import Popup from './icons/popup.svg';
 import Variable from './icons/variable.svg';
 import Emoji from './icons/emoji.svg';
-import Ranking2 from './icons/ranking2.svg';
+import PopularityRanking from './icons/popularity-ranking.svg';
 import Home from './icons/home.svg';
 import Close from './icons/close.svg';
 import ChevronRightCircle from './icons/chevron-right-circle.svg';
@@ -75,7 +75,7 @@ const ICONS = {
   popup: Popup,
   variable: Variable,
   emoji: Emoji,
-  ranking2: Ranking2,
+  'popularity-ranking': PopularityRanking,
   home: Home,
   close: Close,
   'chevron-right-circle': ChevronRightCircle,

@@ -18,7 +18,7 @@ export const Step2Settings = () => {
           ]}
           name='step2.carousel_title'
           className='flex flex-row-reverse items-center mt-2 mb-4'
-          singleLine={true}
+          singleLine
           label={<VariableSign />}
           rules={{ required: true }}
         />
@@ -30,7 +30,7 @@ export const Step2Settings = () => {
           ]}
           name='step2.carousel_note'
           className='flex flex-row-reverse items-center mt-2'
-          singleLine={true}
+          singleLine
           label={<VariableSign />}
           rules={{ required: true }}
         />

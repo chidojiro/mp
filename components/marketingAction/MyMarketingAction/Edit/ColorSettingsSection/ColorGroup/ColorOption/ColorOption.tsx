@@ -1,13 +1,9 @@
 import { RadioGroup } from '@/components';
+import { Option } from '@/types';
 import classNames from 'classnames';
 
-export interface Color {
-  label: string;
-  value: string;
-}
-
 type Props = {
-  color: Color;
+  color: Option<string>;
 };
 
 export const ColorOption = ({ color }: Props) => {

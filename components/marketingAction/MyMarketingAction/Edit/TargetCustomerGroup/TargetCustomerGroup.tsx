@@ -1,12 +1,7 @@
 import { Form } from '@/components';
+import { Option } from '@/types';
 import { useTranslation } from 'next-i18next';
-import { useEffect, useState } from 'react';
 import { TargetCustomer } from './TargetCustomer';
-
-export interface TargetCustomer {
-  label: string;
-  value: string;
-}
 
 type Props = {
   isNonMember?: boolean;
@@ -16,7 +11,7 @@ export const TargetCustomerGroup = ({ isNonMember }: Props) => {
   const { t } = useTranslation('common');
   const { t: tMA } = useTranslation('marketingAction');
 
-  const customers: TargetCustomer[] = [
+  const customers: Option<string>[] = [
     { label: t('f0member'), value: 'f0_member' },
     { label: 'F1', value: 'f1' },
     { label: 'F2', value: 'f2' },
@@ -28,10 +23,12 @@ export const TargetCustomerGroup = ({ isNonMember }: Props) => {
 
   const targetCustomers = (() => {
     if (isNonMember) {
-      customers.splice(1, 0, {
+      const _customers = [...customers];
+      _customers.splice(1, 0, {
         label: t('f0NonMember'),
         value: 'f0_non_memeber',
       });
+      return _customers;
     }
     return customers;
   })();
@@ -42,7 +39,7 @@ export const TargetCustomerGroup = ({ isNonMember }: Props) => {
       <div className='grid grid-cols-4'>
         <Form.CheckboxGroup name='target_customers'>
           {targetCustomers.map(option => (
-            <TargetCustomer key={option.value} label={option.label} value={option.value} />
+            <TargetCustomer key={option.value} option={option} />
           ))}
         </Form.CheckboxGroup>
       </div>

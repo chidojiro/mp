@@ -1,9 +1,10 @@
 import { Form, RadioGroup } from '@/components/common';
+import { Option } from '@/types';
 import { useTranslation } from 'next-i18next';
 
 export const AppearanceCond = () => {
   const { t } = useTranslation('marketingAction');
-  const unitOptions = [
+  const unitOptions: Option<string>[] = [
     { label: 'px', value: 'px' },
     { label: '%', value: 'percentage' },
     { label: 'vh', value: 'vh' },

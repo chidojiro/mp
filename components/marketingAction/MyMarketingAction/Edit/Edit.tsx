@@ -16,7 +16,7 @@ export const Edit = () => {
         return <CartAbandoned />;
       case 'step-delivery-after-purchase':
         return <DeliveryAfterPurchase />;
-      case 'ranking-by-category-based-on-overall-purchase-history':
+      case 'ranking-by-category':
         return <RecommendedCategory />;
       default:
         return null;
@@ -26,7 +26,7 @@ export const Edit = () => {
   const subTitleKeys: Record<string, string> = {
     'step-delivery-after-purchase': 'stepDeliveryAfterPurchase',
     'cart-abandoned': 'cartAbandoned',
-    'ranking-by-category-based-on-overall-purchase-history': 'rankingBasedOnOverallPurchaseHistory',
+    'ranking-by-category': 'rankingBasedOnOverallPurchaseHistory',
   };
 
   return (

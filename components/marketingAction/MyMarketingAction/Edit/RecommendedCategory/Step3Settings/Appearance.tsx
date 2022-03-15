@@ -28,7 +28,7 @@ export const Appearance = () => {
             )}
             style={{ backgroundColor: color }}
           >
-            <Icon name='ranking2' className='w-5 h-4 mr-2.5' />
+            <Icon name='popularity-ranking' className='w-5 h-4 mr-2.5' />
             <span>{t('popularityRank')}</span>
           </div>
         </div>
@@ -44,7 +44,7 @@ export const Appearance = () => {
             style={{ backgroundColor: color }}
           >
             <span className='mb-1 whitespace-pre-line'>{t('popularityRank')}</span>
-            <Icon name='ranking2' className='w-5 h-4' />
+            <Icon name='popularity-ranking' className='w-5 h-4' />
           </div>
         </div>
       </div>
