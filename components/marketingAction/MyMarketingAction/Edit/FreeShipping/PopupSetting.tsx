@@ -2,7 +2,7 @@
 import { Form } from '@/components/common';
 import { Radio } from '@/components/common/fields/Radio/Radio';
 import { useTranslation } from 'next-i18next';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { TemplateSelector } from './TemplateSelector';
 
@@ -12,13 +12,15 @@ type Props = {
 
 export const PopupSetting = ({}: Props) => {
   const { t } = useTranslation('marketingAction');
+  const [pcPosition, setPcPosition] = useState('left');
+  const [mobilePosition, setMobilePosition] = useState('left');
 
   const measurementTypes: any = {
     px: 'px',
     cm: 'cm',
   };
 
-  const getSelectBox = () => {
+  const getSelectBox = (device: string) => {
     const selectBox = Object.keys(measurementTypes).map((optionItem: any) => {
       return { value: optionItem, label: measurementTypes[optionItem] };
     });
@@ -27,7 +29,7 @@ export const PopupSetting = ({}: Props) => {
       <Form.Select
         defaultValue={selectBox[0].value}
         options={selectBox}
-        name='measurement-select'
+        name={'measurement-select-' + device}
         className='w-20 mx-2'
       />
     );
@@ -83,6 +85,8 @@ export const PopupSetting = ({}: Props) => {
                   id='pc-left'
                   value='pc-left'
                   className='mr-2.5'
+                  onChange={() => setPcPosition('left')}
+                  checked={pcPosition === 'left'}
                 />
                 <span>{t('screenLeft')}</span>
               </div>
@@ -93,6 +97,8 @@ export const PopupSetting = ({}: Props) => {
                   id='pc-left'
                   value='pc-left'
                   className='mr-2.5'
+                  onChange={() => setPcPosition('right')}
+                  checked={pcPosition === 'right'}
                 />
                 <span>{t('screenRight')}</span>
               </div>
@@ -103,7 +109,7 @@ export const PopupSetting = ({}: Props) => {
             <div className='flex items-center'>
               <span>{t('upFromDefaultPosition')}</span>
               <Form.Input type='number' name={'pcDefaultPosition'} className='w-20 mx-2' />
-              <div className='mx-2.5'>{getSelectBox()}</div>
+              <div className='mx-2.5'>{getSelectBox('pc')}</div>
             </div>
           </div>
           <div className='flex items-start'>
@@ -116,6 +122,8 @@ export const PopupSetting = ({}: Props) => {
                   id='mobile-left'
                   value='pc-left'
                   className='mr-2.5'
+                  onChange={() => setMobilePosition('left')}
+                  checked={mobilePosition === 'left'}
                 />
                 <span>{t('screenLeft')}</span>
               </div>
@@ -126,6 +134,8 @@ export const PopupSetting = ({}: Props) => {
                   id='mobile-right'
                   value='pc-left'
                   className='mr-2.5'
+                  onChange={() => setMobilePosition('right')}
+                  checked={mobilePosition === 'right'}
                 />
                 <span>{t('screenRight')}</span>
               </div>
@@ -136,7 +146,7 @@ export const PopupSetting = ({}: Props) => {
             <div className='flex items-center'>
               <span>{t('upFromDefaultPosition')}</span>
               <Form.Input type='number' name={'mobileDefaultPosition'} className='w-20 mx-2' />
-              <div className='mx-2.5'>{getSelectBox()}</div>
+              <div className='mx-2.5'>{getSelectBox('mobile')}</div>
             </div>
           </div>
         </div>
