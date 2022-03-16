@@ -1,4 +1,4 @@
-import { Form, RadioGroup } from '@/components';
+import { Form } from '@/components';
 import { Button, Modal } from '@/components/common';
 import { ActionContainer } from '@/components/marketingAction';
 import { Step } from '@/constants';
@@ -9,9 +9,10 @@ import React, { useEffect, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { PreviewOverlay } from '../PreviewOverlay';
 import { Steps } from '../Steps';
+import { TargetCustomerGroup } from '../TargetCustomerGroup';
+import { LineSettings } from './LineSettings';
 import { Message1Settings } from './Message1Settings';
 import { Message2Settings } from './Message2Settings';
-import { TargetCustomerGroup } from '../TargetCustomerGroup';
 
 export const OPTIONS = {
   YES: 'yes',
@@ -20,29 +21,36 @@ export const OPTIONS = {
 
 export const CartAbandoned = () => {
   const { t } = useTranslation('marketingAction');
-  const methods = useForm();
-  const { handleSubmit } = methods;
+  const methods = useForm({
+    defaultValues: {
+      first_message: {
+        delivery_date: '0',
+        delivery_time: '12:00',
+      },
+      second_message: {
+        second_message_option: OPTIONS.YES,
+        delivery_date: '0',
+        delivery_time: '12:00',
+        same_message_content: OPTIONS.YES,
+      },
+    } as any,
+  });
+  const { handleSubmit, reset } = methods;
   const { control } = methods;
   const modalControl = useVisibilityControl();
   const [isCompleted, setIsCompleted] = useState(false);
   const [isSaveAsDraft, setIsSaveAsDraft] = useState(false);
   const [messagePreview, setMessagePreview] = useState<any>();
 
-  const isStep1Done = useWatch({ name: 'is_use_line', control });
+  const step1 = useWatch({ name: 'is_use_line', control });
   const targetCustomers = useWatch({ name: 'target_customers', control });
   const firstMessage = useWatch({ name: 'first_message', control });
   const secondMessage = useWatch({ name: 'second_message', control });
   const isStep4Done = !!targetCustomers?.length;
   const previewMessageControl = useVisibilityControl();
 
-  const lineOptions = [
-    { value: OPTIONS.YES, label: t('lineOption') },
-    { value: OPTIONS.NO, label: t('noLine') },
-  ];
-
   const onSubmit = (data: any) => {
-    // handle change
-    console.log('submit', data);
+    reset(data);
   };
 
   const showModal = () => {
@@ -63,25 +71,6 @@ export const CartAbandoned = () => {
     setIsSaveAsDraft(true);
   };
 
-  const renderStep1 = () => {
-    return (
-      <>
-        <div className='font-bold text-gray-dark mb-2.5'>{t('useLine')}</div>
-        <Form.RadioGroup name='is_use_line'>
-          {lineOptions.map(option => (
-            <RadioGroup.Option
-              colorScheme='secondary'
-              key={option.value}
-              className='mb-2.5 text-gray-dark text-medium'
-              label={option.label}
-              value={option.value}
-            />
-          ))}
-        </Form.RadioGroup>
-      </>
-    );
-  };
-
   const setStepDone = (stepId: number, done: boolean) => {
     setSteps(prevState =>
       prevState.map(step => {
@@ -91,7 +80,7 @@ export const CartAbandoned = () => {
   };
 
   const onConfirm = (stepId: number) => {
-    if (stepId === 1 && isStep1Done) {
+    if (stepId === 1 && step1) {
       // TODO save step 1
       setStepDone(stepId, true);
     } else if (stepId === 2 && isStep2Done()) {
@@ -105,20 +94,33 @@ export const CartAbandoned = () => {
       setStepDone(stepId, true);
     }
   };
-
   const isStep2Done = () => {
-    return firstMessage && Object.keys(firstMessage).every(field => firstMessage[field]);
+    const _firstMessage = { ...firstMessage };
+    if (step1 === OPTIONS.NO) {
+      delete _firstMessage.text_option;
+      delete _firstMessage.text_line;
+    } else {
+      if (firstMessage?.text_option === OPTIONS.NO) {
+        delete _firstMessage.text_line;
+      }
+    }
+    return firstMessage && Object.keys(_firstMessage).every(field => _firstMessage[field]);
   };
 
   const isStep3Done = () => {
-    return secondMessage && Object.keys(secondMessage).every(field => secondMessage[field]);
+    const _secondMessage = { ...secondMessage };
+    if (step1 === OPTIONS.NO && _secondMessage.same_message_content === OPTIONS.NO) {
+      delete _secondMessage.line_option;
+      delete _secondMessage.text_line;
+    }
+    return secondMessage && Object.keys(_secondMessage).every(field => _secondMessage[field]);
   };
 
   const [steps, setSteps] = useState<Step[]>([
     {
       id: 1,
       name: t('useLine'),
-      children: renderStep1(),
+      children: <LineSettings />,
     },
     {
       id: 2,
@@ -141,7 +143,24 @@ export const CartAbandoned = () => {
 
   useEffect(() => {
     setStepDone(1, false);
-  }, [isStep1Done]);
+    if (
+      step1 === OPTIONS.YES &&
+      (!firstMessage?.text_option ||
+        (firstMessage?.text_option === OPTIONS.YES && !firstMessage?.text_line))
+    ) {
+      setStepDone(2, false);
+    }
+    if (
+      step1 === OPTIONS.YES &&
+      secondMessage?.same_message_content === OPTIONS.NO &&
+      (!secondMessage.headline_email ||
+        !secondMessage.text_email ||
+        !secondMessage?.text_option ||
+        (secondMessage?.text_option === OPTIONS.YES && !secondMessage?.text_line))
+    ) {
+      setStepDone(3, false);
+    }
+  }, [step1, firstMessage, secondMessage]);
 
   useEffect(() => {
     setStepDone(2, false);

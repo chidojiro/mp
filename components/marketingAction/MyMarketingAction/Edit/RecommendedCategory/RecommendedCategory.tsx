@@ -27,8 +27,8 @@ export const RecommendedCategory = () => {
         pc_unit: 'px',
         mobile_unit: 'px',
       },
-    },
-  } as any);
+    } as any,
+  });
   const { handleSubmit, watch } = methods;
   const { control } = methods;
   const modalControl = useVisibilityControl();
