@@ -153,10 +153,6 @@ export const CustomerSegmentTable = ({
   };
 
   const SLData = (data: any) => {
-    console.log('webUsers: ', data.webUsers);
-    console.log('webPercentage: ', data.webPercentage);
-    console.log('ineUsers: ', data.lineUsers);
-    console.log('linePercentage: ', data.linePercentage);
     return (
       <>
         <div className='container flex items-center justify-between my-2'>
