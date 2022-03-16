@@ -161,7 +161,8 @@ export const CustomerSegmentTable = ({
           </div>
           <div className='mr-6 text-right flex items-center justify-center'>
             <div className='mr-2'>
-              {data.webUsers === undefined ? '0' : data.webUsers}
+              {/* {data.webUsers === undefined ? '0' : data.webUsers} */}
+              127
               {t('labelPeople')}
             </div>
             <div>
@@ -178,7 +179,8 @@ export const CustomerSegmentTable = ({
           </div>
           <div className='mr-6 text-right flex items-center justify-center'>
             <div className='mr-2'>
-              {data.lineUsers === undefined ? '0' : data.lineUsers}
+              {/* {data.lineUsers === undefined ? '0' : data.lineUsers} */}
+              59
               {t('labelPeople')}
             </div>
             <div>
