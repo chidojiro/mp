@@ -46,7 +46,7 @@ export const PopupSetting = ({}: Props) => {
       <div className='px-10 -mx-10 border-b-4 border-white pb-7 mt-[40px]'>
         <div className='mb-2 font-semibold'>{t('freeShippingAmountLabel')}</div>
         <div className='flex items-center'>
-          <Form.Input type='number' name={'inputName'} className='w-20' />
+          <Form.Input type='number' name={'freeShippingCost'} className='w-20' />
           <span className=' mx-2.5'>{t('freeShippingPriceEndLabel')}</span>
         </div>
       </div>
@@ -60,13 +60,13 @@ export const PopupSetting = ({}: Props) => {
           <div className='flex items-center my-2.5'>
             <span className='w-20 mr-10'>PC：</span>
             <span>{t('afterOpeningPage')}</span>
-            <Form.Input type='number' name={'inputName'} className='w-20 mx-2' />
+            <Form.Input type='number' name={'pcOpenSetting'} className='w-20 mx-2' />
             <span>{t('secondsUntilOpens')}</span>
           </div>
           <div className='flex items-center my-2.5'>
             <span className='w-20 mr-10'>{t('mobile')}：</span>
             <span>{t('afterOpeningPage')}</span>
-            <Form.Input type='number' name={'inputName'} className='w-20 mx-2' />
+            <Form.Input type='number' name={'mobileOpenSetting'} className='w-20 mx-2' />
             <span>{t('secondsUntilOpens')}</span>
           </div>
         </div>
@@ -77,11 +77,23 @@ export const PopupSetting = ({}: Props) => {
             <span className='w-20 mr-10 my-2.5'>PC：</span>
             <div className='flex-col'>
               <div className='flex items-center my-2.5'>
-                <Radio colorScheme='secondary' className='mr-2.5' />
+                <Radio
+                  colorScheme='secondary'
+                  name='pc-position'
+                  id='pc-left'
+                  value='pc-left'
+                  className='mr-2.5'
+                />
                 <span>{t('screenLeft')}</span>
               </div>
               <div className='flex items-center my-2.5'>
-                <Radio colorScheme='secondary' className='mr-2.5' />
+                <Radio
+                  colorScheme='secondary'
+                  name='pc-position'
+                  id='pc-left'
+                  value='pc-left'
+                  className='mr-2.5'
+                />
                 <span>{t('screenRight')}</span>
               </div>
             </div>
@@ -90,7 +102,7 @@ export const PopupSetting = ({}: Props) => {
             <span className='w-20 mr-10 my-2.5'></span>
             <div className='flex items-center'>
               <span>{t('upFromDefaultPosition')}</span>
-              <Form.Input type='number' name={'inputName'} className='w-20 mx-2' />
+              <Form.Input type='number' name={'pcDefaultPosition'} className='w-20 mx-2' />
               <div className='mx-2.5'>{getSelectBox()}</div>
             </div>
           </div>
@@ -98,11 +110,23 @@ export const PopupSetting = ({}: Props) => {
             <span className='w-20 mr-10 my-2.5'>{t('mobile')}：</span>
             <div className='flex-col'>
               <div className='flex items-center my-2.5'>
-                <Radio colorScheme='secondary' className='mr-2.5' />
+                <Radio
+                  colorScheme='secondary'
+                  name='mobile-position'
+                  id='mobile-left'
+                  value='pc-left'
+                  className='mr-2.5'
+                />
                 <span>{t('screenLeft')}</span>
               </div>
               <div className='flex items-center my-2.5'>
-                <Radio colorScheme='secondary' className='mr-2.5' />
+                <Radio
+                  colorScheme='secondary'
+                  name='mobile-position'
+                  id='mobile-right'
+                  value='pc-left'
+                  className='mr-2.5'
+                />
                 <span>{t('screenRight')}</span>
               </div>
             </div>
@@ -111,7 +135,7 @@ export const PopupSetting = ({}: Props) => {
             <span className='w-20 mr-10 my-2.5'></span>
             <div className='flex items-center'>
               <span>{t('upFromDefaultPosition')}</span>
-              <Form.Input type='number' name={'inputName'} className='w-20 mx-2' />
+              <Form.Input type='number' name={'mobileDefaultPosition'} className='w-20 mx-2' />
               <div className='mx-2.5'>{getSelectBox()}</div>
             </div>
           </div>
