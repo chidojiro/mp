@@ -10,7 +10,7 @@ export const Action = () => {
     query: { marketingActionStatus },
   } = useRouter();
 
-  const url = '/organizations/1/projects/1/reports/policy-report/line-email';
+  const url = '/organizations/1/projects/1/reports/action-reports/line-email';
   const btn = marketingActionStatus === HeaderTab.Draft ? t('editInEditor') : t('policyReport');
 
   return (

@@ -19,7 +19,7 @@ export const ReportList = ({}: Props) => {
   const { t } = useTranslation('report');
   const { query } = useRouter();
 
-  const policyTypeOptions = React.useMemo<Option<ReportListPageSlug>[]>(
+  const actionTypeOptions = React.useMemo<Option<ReportListPageSlug>[]>(
     () => [
       { label: t('lineEmail'), value: 'line-email' },
       { label: t('chatbot'), value: 'chatbot' },
@@ -28,7 +28,7 @@ export const ReportList = ({}: Props) => {
     [t]
   );
 
-  const policyType = query.policyType as string;
+  const actionType = query.actionType as string;
 
   return (
     <Layout title={t('measureReport')} subTitle={t('list')}>
@@ -39,17 +39,17 @@ export const ReportList = ({}: Props) => {
         </div>
         <TargetFilter />
         <div className='flex items-center gap-8'>
-          <div className='font-bold'>{t('policyType')}</div>
+          <div className='font-bold'>{t('actionType')}</div>
           <div className='flex items-center gap-2'>
-            <RadioGroup value={policyType}>
-              {policyTypeOptions.map(({ value, label }) => (
+            <RadioGroup value={actionType}>
+              {actionTypeOptions.map(({ value, label }) => (
                 <RadioTag value={value} label={label} key={value} />
               ))}
             </RadioGroup>
           </div>
         </div>
       </div>
-      <ReportsTable policyType={policyType} className='mt-10' />
+      <ReportsTable actionType={actionType} className='mt-10' />
     </Layout>
   );
 };

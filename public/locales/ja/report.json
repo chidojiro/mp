@@ -13,7 +13,7 @@
   "dormant": "休眠",
   "f1dormant": "F1休眠",
   "loyalDormant": "ロイヤル休眠",
-  "policyType": "施策タイプ",
+  "actionType": "施策タイプ",
   "email": "メール",
   "lineEmail": "LINE・メール",
   "slashDot": "・",
