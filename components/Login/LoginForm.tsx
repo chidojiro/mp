@@ -57,7 +57,7 @@ export const LoginForm = () => {
         {!!isInvalid && (
           <ErrorMessage className='mt-1'>{t('incorrectEmailOrPassword')}</ErrorMessage>
         )}
-        <Button type='submit' className='w-full mt-4 font-bold'>
+        <Button type='submit' className='w-full my-4 font-bold'>
           {t('login')}
         </Button>
         <Button variant='link' className='!block mx-auto'>

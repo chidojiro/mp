@@ -7,15 +7,12 @@ export const Login = () => {
     <div className='grid h-screen grid-cols-2 overflow-hidden'>
       <div className='relative flex items-center justify-center'>
         <img src='/images/login2.svg' alt='' className='absolute top-[-250px] left-[-85px]' />
-        <img src='/images/login1.svg' alt='' className='absolute bottom-[-215px] left-[-136px]' />
-        <img src='/images/login3.svg' alt='' className='absolute bottom-[-215px] right-[-136px]' />
-        <div className='flex flex-col items-start px-28'>
-          <img src='/images/GMP_givery.png' alt='' className='w-24 ml-1' />
+        <img src='/images/login1.svg' alt='' className='absolute bottom-[-155px] left-[-136px]' />
+        <img src='/images/login3.svg' alt='' className='absolute bottom-[-155px] right-[-175px]' />
+        <div className='flex flex-col items-start font-semibold px-28 text-gray-dark'>
+          <div>{t('logoTitle')}</div>
           <img src='/images/logoMP.png' alt='' className='w-[475px]' />
-          <div className='mt-2 mb-24 font-medium text-gray-700'>{t('titleMP')}</div>
-          <div className='font-semibold text-gray-800 whitespace-pre-line text-h4'>
-            {t('description')}
-          </div>
+          <h3 className='font-semibold whitespace-pre-line'>{t('description')}</h3>
         </div>
       </div>
       <div className='z-10 flex items-center justify-center bg-gray-light'>

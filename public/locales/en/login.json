@@ -4,6 +4,7 @@
   "password": "Password",
   "forgotPassword": "Forgot your password?",
   "titleMP": "Givery Marketing Platform",
-  "description": "Integrated customer data management \nand optimal communication based on data \nfor unprecedented maximum marketing effectiveness. (tentative)",
-  "incorrectEmailOrPassword": "Incorrect email or password"
+  "incorrectEmailOrPassword": "Incorrect email or password",
+  "logoTitle": "Web customer service automation tool [Scenario EC]",
+  "description": "Anyone can use it, right away. \nEC marketing tools are here."
 }
