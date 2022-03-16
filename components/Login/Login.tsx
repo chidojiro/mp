@@ -1,5 +1,4 @@
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
 import { LoginForm } from './LoginForm';
 
 export const Login = () => {

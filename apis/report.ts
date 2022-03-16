@@ -1,11 +1,74 @@
 import { RestApi, RestApiConfig } from './base';
 
+const mockData = [
+  {
+    target: 'f0',
+    numOfCustomers: '',
+    members: '234',
+    other: '9,203',
+    average: '',
+    total: '',
+    f1Sleep: '',
+    loyalSleep: '',
+  },
+  {
+    target: 'f1',
+    numOfCustomers: '19,404',
+    members: '',
+    other: '',
+    average: '2,277',
+    total: '4,180,440',
+    f1Sleep: '',
+    loyalSleep: '',
+  },
+  {
+    target: 'f2',
+    numOfCustomers: '8,022',
+    members: '',
+    other: '',
+    average: '2,612',
+    total: '2,329,001',
+    f1Sleep: '',
+    lSleep: '',
+  },
+  {
+    target: 'semi-loyal',
+    numOfCustomers: '8,022',
+    members: '',
+    other: '',
+    average: '2,612',
+    total: '2,329,001',
+    f1Sleep: '',
+    loyalSleep: '',
+  },
+  {
+    target: 'loyal',
+    numOfCustomers: '19,404',
+    members: '',
+    other: '',
+    average: '32,277',
+    total: '4,180,440',
+    f1Sleep: '',
+    loyalSleep: '',
+  },
+  {
+    target: 'sleep',
+    numOfCustomers: '154',
+    members: '',
+    other: '',
+    average: '',
+    total: '',
+    f1Sleep: '124',
+    loyalSleep: '30',
+  },
+];
+
 export const ReportApi = {
   rfm_report: async (config: RestApiConfig): Promise<any> => {
+    return mockData;
     const result = await RestApi.get('/rfm_matrix_dashboard', config);
 
     const data = result.data;
-    console.log('data from api:', JSON.stringify(data));
 
     return [
       {
