@@ -153,16 +153,25 @@ export const CustomerSegmentTable = ({
   };
 
   const SLData = (data: any) => {
+    console.log('webUsers: ', data.webUsers);
+    console.log('webPercentage: ', data.webPercentage);
+    console.log('ineUsers: ', data.lineUsers);
+    console.log('linePercentage: ', data.linePercentage);
     return (
       <>
         <div className='container flex items-center justify-between my-2'>
           <div className='flex justify-center w-4 h-4 ml-6 text-left text-white rounded-full bg-primary text-medium-sm'>
             S
           </div>
-          <div className='mr-6 text-right'>
-            {data.webUsers}
-            {t('labelPeople')} ({data.webPercentage}
-            {t('labelPercent')})
+          <div className='mr-6 text-right flex items-center justify-center'>
+            <div className='mr-2'>
+              {data.webUsers === undefined ? '0' : data.webUsers}
+              {t('labelPeople')}
+            </div>
+            <div>
+              ({data.webPercentage === undefined ? '0' : data.webPercentage.toFixed(1)}
+              {t('labelPercent')})
+            </div>
           </div>
         </div>
 
@@ -170,10 +179,15 @@ export const CustomerSegmentTable = ({
           <div className='text-left ml-6 bg-[#06C755] rounded-full text-white h-4 w-4 flex justify-center text-medium-sm'>
             L
           </div>
-          <div className='mr-6 text-right'>
-            {data.lineUsers}
-            {t('labelPeople')} ({data.linePercentage}
-            {t('labelPercent')})
+          <div className='mr-6 text-right flex items-center justify-center'>
+            <div className='mr-2'>
+              {data.lineUsers === undefined ? '0' : data.lineUsers}
+              {t('labelPeople')}
+            </div>
+            <div>
+              ({data.linePercentage === undefined ? '0' : data.linePercentage.toFixed(1)}
+              {t('labelPercent')})
+            </div>
           </div>
         </div>
       </>
@@ -196,11 +210,11 @@ export const CustomerSegmentTable = ({
               <div
                 className={
                   dataSet.target === 'f0'
-                    ? 'flex items-start my-[5px] justify-center h-full w-full relative'
+                    ? 'flex items-center justify-center h-full w-full relative'
                     : 'flex items-center justify-center h-full w-full relative'
                 }
               >
-                <div className='w-full text-medium'>
+                <div className='w-full text-medium h-full'>
                   {dataSet.target !== 'f0' ? (
                     <div className='container flex items-center justify-end my-2 text-right'>
                       <div className='mr-6 font-bold text-regular'>
