@@ -5,7 +5,8 @@
   "draftTab": "Editing",
   "targetCustomer": "Target Customer",
   "period": "Implementation period",
-  "policyReport": "Policy Report",
+  "viewReport": "Policy Report",
+  "editInEditor": "Edit in the Measure Editor",
   "notSet": "Not Set",
   "useLine": "Line sending",
   "msgSetting1": "Message 1 setting",
@@ -161,5 +162,6 @@
   "saleRankingPastMonth": "Sales ranking position in the past month",
   "productName": "Product name",
   "amountIncludingTax": "Amount including tax",
-  "productDetails": "Product Details"
+  "productDetails": "Product Details",
+  "suspendTemplate": "Suspend Template"
 }

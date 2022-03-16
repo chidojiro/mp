@@ -32,7 +32,7 @@ export const SideMenu = ({ value, className, onChange, groups }: Props) => {
   return (
     <HeadlessTabs value={value} onChange={onChange}>
       <div className={classNames('flex w-full', className)}>
-        <div className={classNames('mr-7 w-[220px]')}>
+        <div className={classNames('mr-7 w-[200px]')}>
           <nav className='flex flex-col items-center w-full -mb-px'>
             {groups.map((group, id) => (
               <div key={id} className='w-full'>
