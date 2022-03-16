@@ -15,12 +15,13 @@ phases:
       - printenv > .env
   build:
     commands:
-      - echo Update Env Vars
-      - yarn install
-      - echo Compiling the Node.js code
+      - echo Build started on `date`
+      - yarn install --frozen-lockfile
       - yarn build
   post_build:
     commands:
+      - echo Entered the post_build phase...
+      - rm -rf **/node_modules
       - echo Build completed on `date`
 artifacts:
   files:
