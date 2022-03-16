@@ -5,8 +5,8 @@
   "draftTab": "編集中",
   "targetCustomer": "ターゲット顧客",
   "period": "実施期間",
-  "policyReport": "施策レポート",
-  "editInEditor": "施策エディタで編集",
+  "viewReport": "施策レポートを見る",
+  "editInEditor": "施策エディタで編集する",
   "notSet": "未設定",
   "useLine": "LINE送信の有無",
   "msgSetting1": "メッセージ１設定",
@@ -161,5 +161,6 @@
   "saleRankingPastMonth": "過去1ヶ月の売上ランキング順位",
   "productName": "商品名",
   "amountIncludingTax": "税込金額",
-  "productDetails": "商品詳細"
+  "productDetails": "商品詳細",
+  "suspendTemplate": "施策を中断する"
 }

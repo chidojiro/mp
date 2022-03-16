@@ -2,7 +2,7 @@ import { Value } from 'classnames';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { SideMenu, SideMenuGroup, SideMenuItem } from '../../../../common';
 import { TargetFilter } from '../../../../report';
 import { MarketingAction } from './MarketingAction';
@@ -16,11 +16,16 @@ export const Detail = () => {
   };
 
   // example
-  const listMenu: SideMenuItem[] = [
+  const messageMenu: SideMenuItem[] = [
     {
       value: '1',
       label: (
-        <Link href={{ pathname, query: { ...query, marketingActionId: '1', date: 'all' } }}>
+        <Link
+          href={{
+            pathname,
+            query: { ...query, marketingActionId: '1', date: 'all' },
+          }}
+        >
           カゴ落ち通知
         </Link>
       ),
@@ -55,11 +60,35 @@ export const Detail = () => {
         },
       ],
     },
+  ];
+
+  const chatbotMenu: SideMenuItem[] = [
     {
       value: '3',
       label: (
-        <Link href={{ pathname, query: { ...query, marketingActionId: '3', date: 'all' } }}>
+        <Link
+          href={{
+            pathname,
+            query: { ...query, marketingActionId: '3', date: 'all' },
+          }}
+        >
           レコメンド診断ボット（静的）
+        </Link>
+      ),
+      content: <MarketingAction />,
+    },
+  ];
+  const popupMenu: SideMenuItem[] = [
+    {
+      value: '4',
+      label: (
+        <Link
+          href={{
+            pathname,
+            query: { ...query, marketingActionId: '4', date: 'all' },
+          }}
+        >
+          条件付き送料無料
         </Link>
       ),
       content: <MarketingAction />,
@@ -70,7 +99,17 @@ export const Detail = () => {
     {
       icon: 'mail',
       label: t('messageDelivery'),
-      items: listMenu,
+      items: messageMenu,
+    },
+    {
+      icon: 'chatbot2',
+      label: t('chatbot'),
+      items: chatbotMenu,
+    },
+    {
+      icon: 'popup',
+      label: t('popup'),
+      items: popupMenu,
     },
   ];
 
