@@ -11,7 +11,7 @@ export const Login = () => {
         <img src='/images/login3.svg' alt='' className='absolute bottom-[-155px] right-[-175px]' />
         <div className='flex flex-col items-start font-semibold px-28 text-gray-dark'>
           <div>{t('logoTitle')}</div>
-          <img src='/images/logoMP.png' alt='' className='w-[475px]' />
+          <img src='/images/synalio.svg' alt='' className='w-[440px] h-[100px] mt-2 mb-5' />
           <h3 className='font-semibold whitespace-pre-line'>{t('description')}</h3>
         </div>
       </div>

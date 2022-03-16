@@ -15,8 +15,7 @@ export const Header = () => {
       )}
     >
       <div className='flex items-center h-full'>
-        <img src='/images/GMP_givery.png' alt='' className='w-25 h-7' />
-        <img src='/images/mp.png' alt='' className='h-7' />
+        <img src='/images/synalio_header.svg' alt='logo' className='h-6 w-[177px]' />
       </div>
       <Link href='/account' passHref>
         <a className='font-semibold text-medium'>{data?.email}</a>
