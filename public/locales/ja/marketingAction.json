@@ -5,8 +5,8 @@
   "draftTab": "編集中",
   "targetCustomer": "ターゲット顧客",
   "period": "実施期間",
-  "policyReport": "施策レポート",
-  "editInEditor": "施策エディタで編集",
+  "viewReport": "施策レポートを見る",
+  "editInEditor": "施策エディタで編集する",
   "notSet": "未設定",
   "useLine": "LINE送信の有無",
   "msgSetting1": "メッセージ１設定",
@@ -173,4 +173,5 @@
   "screenLeft": "画面左端",
   "screenRight": "画面右端",
   "upFromDefaultPosition": "デフォルトの位置から上に"
+  "suspendTemplate": "施策を中断する"
 }

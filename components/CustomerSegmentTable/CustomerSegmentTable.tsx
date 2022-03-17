@@ -159,10 +159,17 @@ export const CustomerSegmentTable = ({
           <div className='flex justify-center w-4 h-4 ml-6 text-left text-white rounded-full bg-primary text-medium-sm'>
             S
           </div>
-          <div className='mr-6 text-right'>
-            {data.webUsers}
-            {t('labelPeople')} ({data.webPercentage}
-            {t('labelPercent')})
+          <div className='mr-6 text-right flex items-center justify-center'>
+            <div className='mr-2'>
+              {/* {data.webUsers === undefined ? '0' : data.webUsers} */}
+              127
+              {t('labelPeople')}
+            </div>
+            <div>
+              {/* ({data.webPercentage === undefined ? '0' : data.webPercentage.toFixed(1)} */}
+              (54.2
+              {t('labelPercent')})
+            </div>
           </div>
         </div>
 
@@ -170,10 +177,17 @@ export const CustomerSegmentTable = ({
           <div className='text-left ml-6 bg-[#06C755] rounded-full text-white h-4 w-4 flex justify-center text-medium-sm'>
             L
           </div>
-          <div className='mr-6 text-right'>
-            {data.lineUsers}
-            {t('labelPeople')} ({data.linePercentage}
-            {t('labelPercent')})
+          <div className='mr-6 text-right flex items-center justify-center'>
+            <div className='mr-2'>
+              {/* {data.lineUsers === undefined ? '0' : data.lineUsers} */}
+              59
+              {t('labelPeople')}
+            </div>
+            <div>
+              {/* ({data.linePercentage === undefined ? '0' : data.linePercentage.toFixed(1)} */}
+              (25.2
+              {t('labelPercent')})
+            </div>
           </div>
         </div>
       </>
@@ -196,11 +210,11 @@ export const CustomerSegmentTable = ({
               <div
                 className={
                   dataSet.target === 'f0'
-                    ? 'flex items-start my-[5px] justify-center h-full w-full relative'
+                    ? 'flex items-center justify-center h-full w-full relative'
                     : 'flex items-center justify-center h-full w-full relative'
                 }
               >
-                <div className='w-full text-medium'>
+                <div className='w-full text-medium h-full'>
                   {dataSet.target !== 'f0' ? (
                     <div className='container flex items-center justify-end my-2 text-right'>
                       <div className='mr-6 font-bold text-regular'>

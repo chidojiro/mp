@@ -13,9 +13,8 @@ export type LoginResponse = {
 };
 
 const login = async (payload: LoginPayload) => {
-  const { access_token } = await RestApi.post<LoginResponse>('/auth/login', payload);
-
-  cookies.set(ACCESS_TOKEN_KEY, access_token);
+  // const { access_token } = await RestApi.post<LoginResponse>('/auth/login', payload);
+  // cookies.set(ACCESS_TOKEN_KEY, access_token);
 };
 
 export const AuthApi = { login };

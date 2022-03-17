@@ -1,7 +1,7 @@
 import { Redirect } from '@/components';
 
 export const IndexPage = () => {
-  return <Redirect href='/organizations/1/dashboard' method='replace' />;
+  return <Redirect href='/login' method='replace' />;
 };
 
 export default IndexPage;

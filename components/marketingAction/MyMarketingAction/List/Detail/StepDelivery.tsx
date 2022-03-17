@@ -1,23 +1,75 @@
+import { Button } from '@/components/common';
+import { useVisibilityControl } from '@/hooks';
+import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
+import { PreviewOverlay } from '../../Edit/PreviewOverlay';
+import style from './StepDelivery.module.css';
 
-export const StepDelivery = () => {
+type Props = {
+  steps: any[];
+};
+
+export const StepDelivery = ({ steps }: Props) => {
   const { t } = useTranslation('marketingAction');
+  const previewMessageControl = useVisibilityControl();
 
   return (
     <div className='rounded-bl-lg rounded-br-lg bg-gray-light'>
-      <div className='p-10 pb-6 border-b-4 border-white'>
-        <h5 className='text-secondary'>{t('useLine')}</h5>
-        <div className='my-2 font-bold text-gray-dark'>{t('useLine')}</div>
-        <div className='text-medium text-gray-dark'>{'value'}</div>
-      </div>
-      <div className='p-10 pt-7'>
-        <h5 className='text-secondary'>{t('msgSetting1')}</h5>
-        <div className='my-2 font-bold text-gray-dark'>{t('timeDelivery')}</div>
-        <div className='text-medium text-gray-dark'>カゴ落ち発生日から3日後の午後 12:00</div>
-        <div className='mt-4 mb-2 font-bold text-gray-dark'>{t('msgContentEmail')}</div>
-        <div className='mt-4 mb-2 font-bold text-gray-dark'>{t('msgContentLine')}</div>
-        <div className='text-medium text-gray-dark'>[{t('lineMsg', { number: 1 })}]</div>
-      </div>
+      {steps.map((step, index) => (
+        <div
+          key={index}
+          className={classNames('p-10 pb-6', {
+            'border-b-4 border-white': index !== steps.length - 1,
+          })}
+        >
+          <h5 className='text-gray-dark'>{step.name}</h5>
+          {step.questions.map((question: any, idx: number) => (
+            <div className='text-medium' key={idx}>
+              <div className='my-2 font-bold text-secondary'>{question.question}</div>
+              <div className='mb-4 text-gray-dark'>
+                {question.answer ? (
+                  <div className='flex items-center'>
+                    {!!question.color && (
+                      <div className='w-[34px] h-[34px] p-1 mr-2 rounded flex items-center border bg-white border-input'>
+                        <div
+                          className={classNames('w-full h-full rounded ')}
+                          style={{ backgroundColor: question.color }}
+                        ></div>
+                      </div>
+                    )}
+                    <span>{question.answer}</span>
+                  </div>
+                ) : (
+                  question.answers?.map((answer: any, id: number) => (
+                    <div className={classNames('mb-2', style['message-response'])} key={id}>
+                      <div className='mb-2'>[{answer.question}]</div>
+                      <div dangerouslySetInnerHTML={{ __html: answer.response }}></div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+          ))}
+          {step.showPreview && (
+            <div className='text-center'>
+              <Button
+                colorScheme='negative'
+                className=' w-[240px]'
+                onClick={previewMessageControl.open}
+              >
+                {t('viewPreview')}
+              </Button>
+            </div>
+          )}
+        </div>
+      ))}
+      <PreviewOverlay
+        defaultType='mail'
+        mailHeadline='お買い忘れはございませんか？'
+        mailBody='いつもブランド名をご利用いただきありがとうございます。以下の商品がショッピングカートに保存されたままになっています。売り切れになってしまう前に、ぜひ購入をご検討くださいませ。'
+        lineBody='いつもブランド名をご利用いただきありがとうございます。以下の商品がショッピングカートに保存されたままになっています。売り切れになってしまう前に、ぜひ購入をご検討くださいませ。'
+        control={previewMessageControl}
+      />
     </div>
   );
 };

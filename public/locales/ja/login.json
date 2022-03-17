@@ -4,6 +4,7 @@
   "password": "パスワード",
   "forgotPassword": "パスワードを忘れた方",
   "titleMP": "ギブリー マーケティングプラットフォーム",
-  "description": "統合的な顧客データ管理と \nデータに基づく最適なコミュニケーションで、\n今までにない最大限のマーケティング効果を。（仮）",
-  "incorrectEmailOrPassword": "メールアドレスまたはパスワードが異なります"
+  "incorrectEmailOrPassword": "メールアドレスまたはパスワードが異なります",
+  "logoTitle": "Web接客自動化ツール［シナリオEC］",
+  "description": "誰でも、すぐに、使いこなせる。 \nECマーケティングツール、登場。"
 }

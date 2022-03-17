@@ -18,18 +18,18 @@ export const Sidebar = () => {
       label: t('menuReport'),
       children: [
         {
-          path: `${projectPrefix}/reports/policy-report/line-email`,
+          path: `${projectPrefix}/reports/action-reports/line-email`,
           label: t('policyReport'),
           matches: [
-            '/organizations/[organizationId]/projects/[projectId]/reports/policy-report/[policyType]',
-            '/organizations/[organizationId]/projects/[projectId]/reports/policy-report/[policyType]/[projectId]',
+            '/organizations/[organizationId]/projects/[projectId]/reports/action-reports/[actionType]',
+            '/organizations/[organizationId]/projects/[projectId]/reports/action-reports/[actionType]/[projectId]',
           ],
         },
         {
-          path: `${projectPrefix}/reports/f2-conversion-rate-trends`,
+          path: `${projectPrefix}/reports/f2-conversion-rate`,
           label: t('f2ConversionRateTrends'),
           matches: [
-            '/organizations/[organizationId]/projects/[projectId]/reports/f2-conversion-rate-trends',
+            '/organizations/[organizationId]/projects/[projectId]/reports/f2-conversion-rate',
           ],
         },
         {
