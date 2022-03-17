@@ -125,10 +125,5 @@ export const NewMarketingAction = ({}: Props) => {
     },
   ];
 
-  return (
-    <div>
-      <UpdateInformation />
-      <SideMenu value={marketingActionName as string} groups={groups} />
-    </div>
-  );
+  return <SideMenu value={marketingActionName as string} groups={groups} />;
 };
