@@ -26,8 +26,8 @@ export const TargetCustomerGroup = ({ isNonMember }: Props) => {
       return [
         customers[0],
         {
-          label: t('f0NonMember'),
-          value: 'f0_non_memeber',
+          label: t('f0others'),
+          value: 'f0others',
         },
         ...customers.slice(1),
       ];

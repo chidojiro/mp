@@ -22,7 +22,6 @@
   "sat": "土",
   "sun": "日",
   "f0member": "F0(会員)",
-  "f0nonmember": "F0(非会員)",
   "f0others": "F0(その他)",
   "semiLoyal": "準ロイヤル",
   "loyal": "ロイヤル",
@@ -32,6 +31,5 @@
   "editor": "施策エディタ",
   "cartAbandonedNoti": "カゴ落ち通知",
   "csvDownload": "CSVダウンロード",
-  "change": "変更する",
-  "f0NonMember": "F0(非会員)"
+  "change": "変更する"
 }

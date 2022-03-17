@@ -22,7 +22,6 @@
   "sat": "Sat",
   "sun": "Sun",
   "f0member": "F0 (Member)",
-  "f0nonmember": "F0(None-Member)",
   "f0others": "F0 (Others)",
   "semiLoyal": "Semi-loyal",
   "loyal": "Loyal",
@@ -32,6 +31,5 @@
   "editor": "Marketing Action Editor",
   "cartAbandonedNoti": "Basket drop notification",
   "csvDownload": "Download CSV",
-  "change": "Change",
-  "f0NonMember": "F0(Non-member)"
+  "change": "Change"
 }
