@@ -5,10 +5,8 @@ type Props = {
   preselectedTemplate?: string;
 };
 
-export const TemplateSelector = ({ preselectedTemplate }: Props) => {
-  const [selectedTemplate, setSelectedTemplate] = React.useState(
-    preselectedTemplate ? preselectedTemplate : ''
-  );
+export const TemplateSelector = ({ preselectedTemplate = '' }: Props) => {
+  const [selectedTemplate, setSelectedTemplate] = React.useState(preselectedTemplate);
 
   return (
     <>
