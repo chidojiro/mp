@@ -24,7 +24,7 @@ export const SideMenuItem = ({ isOpenAccordion, data }: Props) => {
               onClickItem?.();
             }}
             className={classNames(
-              'text-ellipsis overflow-hidden whitespace-nowrap border border-white hover:border-dark-gray items-center px-[18px] py-1.5 hover:bg-gray-light text-gray-dark w-full rounded-full cursor-pointer font-bold text-medium px-[18px] mb-2.5 py-[6px]',
+              'text-ellipsis overflow-hidden whitespace-nowrap px-[18px] py-1.5 border border-white hover:border-dark-gray items-center hover:bg-gray-light text-gray-dark w-full rounded-full cursor-pointer font-bold text-medium mb-2.5',
               {
                 'bg-gray-light border border-dark-gray ': isActive,
               }
@@ -58,7 +58,7 @@ export const SideMenuItem = ({ isOpenAccordion, data }: Props) => {
                   item.onClick?.();
                 }}
                 className={classNames(
-                  'text-ellipsis overflow-hidden whitespace-nowrap text-gray-dark w-full rounded-full cursor-pointer text-medium px-[18px] mb-2.5 py-[6px]',
+                  'text-ellipsis overflow-hidden whitespace-nowrap text-gray-dark w-full rounded-full hover:border cursor-pointer text-medium px-[18px] mb-2.5 py-1.5 hover:border-dark-gray items-center hover:bg-gray-light',
                   {
                     'bg-gray-light border border-dark-gray rounded-full': isActive,
                   }

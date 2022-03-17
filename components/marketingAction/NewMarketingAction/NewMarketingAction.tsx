@@ -17,7 +17,15 @@ export const NewMarketingAction = ({}: Props) => {
 
   const {
     query: { marketingActionName },
+    push,
   } = useRouter();
+
+  const handleMAChange = (marketingActionName: string) => {
+    push({
+      pathname,
+      query: { ...query, marketingActionName },
+    });
+  };
 
   const groups: SideMenuGroup[] = [
     {
@@ -26,25 +34,14 @@ export const NewMarketingAction = ({}: Props) => {
       items: [
         {
           content: <CartAbandonedOverview />,
-          label: (
-            <Link href={{ pathname, query: { ...query, marketingActionName: 'cart-abandoned' } }}>
-              {t('cartAbandoned')}
-            </Link>
-          ),
+          label: t('cartAbandoned'),
+          onClick: () => handleMAChange('cart-abandoned'),
           value: 'cart-abandoned',
         },
         {
           content: <DeliveryAfterPurchaseOverview />,
-          label: (
-            <Link
-              href={{
-                pathname,
-                query: { ...query, marketingActionName: 'step-delivery-after-purchase' },
-              }}
-            >
-              {t('stepDeliveryAfterPurchase')}
-            </Link>
-          ),
+          label: t('stepDeliveryAfterPurchase'),
+          onClick: () => handleMAChange('step-delivery-after-purchase'),
           value: 'step-delivery-after-purchase',
         },
       ],
@@ -62,11 +59,8 @@ export const NewMarketingAction = ({}: Props) => {
               descriptionImageUrl='/images/cart-page-faq-description.png'
             ></ActionContainer>
           ),
-          label: (
-            <Link href={{ pathname, query: { ...query, marketingActionName: 'cart-page-faq' } }}>
-              {t('cartPageFaq')}
-            </Link>
-          ),
+          label: t('cartPageFaq'),
+          onClick: () => handleMAChange('cart-page-faq'),
           value: 'cart-page-faq',
         },
         {
@@ -78,16 +72,8 @@ export const NewMarketingAction = ({}: Props) => {
               descriptionImageUrl='/images/recommendation-diagnosis-bot-description.png'
             ></ActionContainer>
           ),
-          label: (
-            <Link
-              href={{
-                pathname,
-                query: { ...query, marketingActionName: 'recommendation-diagnosis-bot' },
-              }}
-            >
-              {t('recommendationDiagnosisBotStatic')}
-            </Link>
-          ),
+          onClick: () => handleMAChange('recommendation-diagnosis-bot'),
+          label: t('recommendationDiagnosisBotStatic'),
           value: 'recommendation-diagnosis-bot',
         },
         {
@@ -99,19 +85,8 @@ export const NewMarketingAction = ({}: Props) => {
               descriptionImageUrl='/images/ranking-description.png'
             ></ActionContainer>
           ),
-          label: (
-            <Link
-              href={{
-                pathname,
-                query: {
-                  ...query,
-                  marketingActionName: 'ranking-based-on-overall-purchase-history',
-                },
-              }}
-            >
-              {t('rankingBasedOnOverallPurchaseHistory')}
-            </Link>
-          ),
+          onClick: () => handleMAChange('ranking-based-on-overall-purchase-history'),
+          label: t('rankingBasedOnOverallPurchaseHistory'),
           value: 'ranking-based-on-overall-purchase-history',
         },
         {
@@ -123,19 +98,8 @@ export const NewMarketingAction = ({}: Props) => {
               descriptionImageUrl='/images/ranking-description.png'
             ></ActionContainer>
           ),
-          label: (
-            <Link
-              href={{
-                pathname,
-                query: {
-                  ...query,
-                  marketingActionName: 'ranking-by-category',
-                },
-              }}
-            >
-              {t('rankingByCategoryBasedOnOverallPurchaseHistory')}
-            </Link>
-          ),
+          onClick: () => handleMAChange('ranking-by-category'),
+          label: t('rankingByCategoryBasedOnOverallPurchaseHistory'),
           value: 'ranking-by-category',
         },
       ],
@@ -153,26 +117,13 @@ export const NewMarketingAction = ({}: Props) => {
               descriptionImageUrl='/images/conditional-free-shipping-description.png'
             ></ActionContainer>
           ),
-          label: (
-            <Link
-              href={{
-                pathname,
-                query: { ...query, marketingActionName: 'conditional-free-shipping' },
-              }}
-            >
-              {t('conditionalFreeShipping')}
-            </Link>
-          ),
+          onClick: () => handleMAChange('conditional-free-shipping'),
+          label: t('conditionalFreeShipping'),
           value: 'conditional-free-shipping',
         },
       ],
     },
   ];
 
-  return (
-    <div>
-      <UpdateInformation />
-      <SideMenu value={marketingActionName as string} groups={groups} />
-    </div>
-  );
+  return <SideMenu value={marketingActionName as string} groups={groups} />;
 };

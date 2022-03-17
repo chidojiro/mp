@@ -8,27 +8,26 @@ import { TargetFilter } from '../../../../report';
 import { MarketingAction } from './MarketingAction';
 
 export const Detail = () => {
-  const { query, pathname } = useRouter();
+  const { query, pathname, push } = useRouter();
   const { t } = useTranslation('marketingAction');
 
   const onChange = (value: Value) => {
     // TODO
   };
 
+  const handleMAChange = (queryParams: any) => {
+    push({
+      pathname,
+      query: { ...query, ...queryParams },
+    });
+  };
+
   // example
   const messageMenu: SideMenuItem[] = [
     {
       value: '1',
-      label: (
-        <Link
-          href={{
-            pathname,
-            query: { ...query, marketingActionId: '1', date: 'all' },
-          }}
-        >
-          カゴ落ち通知
-        </Link>
-      ),
+      onClick: () => handleMAChange({ marketingActionId: '1', date: 'all' }),
+      label: t('cartAbandoned'),
       content: <MarketingAction />,
     },
     {
@@ -37,25 +36,14 @@ export const Detail = () => {
       children: [
         {
           value: '2021_12_15',
-
-          label: (
-            <Link
-              href={{ pathname, query: { ...query, marketingActionId: '2', date: '2021_12_15' } }}
-            >
-              2022年12月15日(水) 〜
-            </Link>
-          ),
+          onClick: () => handleMAChange({ marketingActionId: '2', date: '2021_12_15' }),
+          label: '2022年12月15日(水) 〜',
           content: <MarketingAction />,
         },
         {
           value: '2021_11_09',
-          label: (
-            <Link
-              href={{ pathname, query: { ...query, marketingActionId: '2', date: '2021_11_09' } }}
-            >
-              2022年11月09日(月) 〜
-            </Link>
-          ),
+          onClick: () => handleMAChange({ marketingActionId: '2', date: '2021_11_09' }),
+          label: '2022年11月09日(月) 〜',
           content: <MarketingAction />,
         },
       ],
@@ -65,32 +53,16 @@ export const Detail = () => {
   const chatbotMenu: SideMenuItem[] = [
     {
       value: '3',
-      label: (
-        <Link
-          href={{
-            pathname,
-            query: { ...query, marketingActionId: '3', date: 'all' },
-          }}
-        >
-          レコメンド診断ボット（静的）
-        </Link>
-      ),
+      onClick: () => handleMAChange({ marketingActionId: '3', date: 'all' }),
+      label: t('recommendationDiagnosisBotStatic'),
       content: <MarketingAction />,
     },
   ];
   const popupMenu: SideMenuItem[] = [
     {
       value: '4',
-      label: (
-        <Link
-          href={{
-            pathname,
-            query: { ...query, marketingActionId: '4', date: 'all' },
-          }}
-        >
-          条件付き送料無料
-        </Link>
-      ),
+      onClick: () => handleMAChange({ marketingActionId: '4', date: 'all' }),
+      label: t('conditionalFreeShipping'),
       content: <MarketingAction />,
     },
   ];
