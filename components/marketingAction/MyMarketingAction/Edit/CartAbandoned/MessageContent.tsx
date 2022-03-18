@@ -82,6 +82,7 @@ export const MessageContent = ({ messageNum }: Props) => {
               headline={message?.headline_email}
               body={message?.text_email}
               desktop={false}
+              color={message.color}
             />
           </div>
         </div>
@@ -135,7 +136,7 @@ export const MessageContent = ({ messageNum }: Props) => {
                   {t('openPreview')}
                 </span>
               </div>
-              <LinePreview body={message?.text_line} />
+              <LinePreview body={message?.text_line} color={message.color} />
             </div>
           </div>
         </div>
@@ -150,6 +151,7 @@ export const MessageContent = ({ messageNum }: Props) => {
         mailBody={message?.text_email}
         lineBody={message?.text_line}
         control={previewMessageControl}
+        color={message.color}
       />
     </div>
   );

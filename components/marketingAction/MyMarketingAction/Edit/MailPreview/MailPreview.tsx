@@ -11,26 +11,35 @@ type Props = ClassName & {
   body?: string;
   desktop?: boolean;
   showViewShoppingCartButton?: boolean;
+  color?: string;
+  isOverlay?: boolean;
 };
 
 //example test message
 const products: any[] = [];
-for (let i = 0; i < 2; i++) {
-  products.push({
-    image:
-      'https://cdn.tgdd.vn/2021/03/CookProduct/Bbq-la-gi-nguon-goc-va-cac-cach-tu-lam-bbq-tai-nha-vo-cung-don-gian-0-1200x676.jpg',
-    id: i,
-    name: 'ブルーベリーケーキ　6個セット',
-    price: '1,200円（税込）',
-  });
-}
+products.push({
+  image: '/images/product_example1.png',
+  id: 1,
+  name: 'ブルーベリーケーキ　6個セット',
+  price: '1,200円（税込）',
+});
+products.push({
+  image: '/images/product_example2.png',
+  id: 2,
+  name: 'マカロン　ローズ　24個セット',
+  price: '3,600円（税込）',
+});
+
+const btnHeightWithMargin = '85px';
 
 export const MailPreview = ({
   headline,
   body,
   desktop,
   className,
-  showViewShoppingCartButton,
+  showViewShoppingCartButton = true,
+  color,
+  isOverlay,
 }: Props) => {
   const { t } = useTranslation('marketingAction');
 
@@ -47,10 +56,11 @@ export const MailPreview = ({
   return (
     <div
       className={classNames(
-        'rounded bg-white opacity-100 border border-input h-[667px] pr-2.5',
+        'rounded bg-white opacity-100 border h-[667px] border-input pr-2.5',
         className,
         !desktop ? 'w-[335px] p-5' : 'w-[600px] p-10'
       )}
+      style={{ height: isOverlay ? `calc(100% - ${btnHeightWithMargin})` : '667px' }}
     >
       <div className='h-full pr-1 overflow-y-scroll mp-scroll'>
         <h2 className='mb-4 text-center text-secondary'>Brand Logo</h2>
@@ -63,7 +73,10 @@ export const MailPreview = ({
         <div className='mb-8 break-words whitespace-pre-wrap text-gray-dark'>{parsedBody}</div>
         {showViewShoppingCartButton && (
           <div className='w-full text-center'>
-            <Button className='h-11 max-w-[360px] w-full font-bold text-center mb-[60px]'>
+            <Button
+              className='h-11 max-w-[360px] w-full font-bold text-center mb-[60px]'
+              style={{ backgroundColor: color }}
+            >
               {t('viewShoppingCart')}
             </Button>
           </div>
@@ -82,7 +95,9 @@ export const MailPreview = ({
               <div>
                 <h5 className='mt-4 mb-2 text-gray-dark'>{product.name}</h5>
                 <div className='mb-5 text-medium text-gray-dark'>{product.price}</div>
-                <Button className='w-full font-bold text-center'>{t('viewThisItem')}</Button>
+                <Button className='w-full font-bold text-center' style={{ backgroundColor: color }}>
+                  {t('viewThisItem')}
+                </Button>
               </div>
             </div>
           ))}
@@ -90,7 +105,9 @@ export const MailPreview = ({
         <div className='mt-7'>
           <div className='mt-4 mb-1.5 text-gray-dark'>○○○ストア</div>
           <Link href='https://www.google.com/'>
-            <a className='underline text-medium text-primary'>www.sample.com</a>
+            <a className='underline text-medium' style={{ color: color }}>
+              www.sample.com
+            </a>
           </Link>
           <div className='mt-1 text-medium text-gray-dark'>0123-45-6789（平日 9:00〜18:00）</div>
         </div>

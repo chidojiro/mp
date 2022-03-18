@@ -52,7 +52,7 @@
   "rankingByCategoryBasedOnOverallPurchaseHistory": "Ranking by category based on overall purchase history (dynamic)",
   "rankingBasedOnOverallPurchaseHistoryDescription": "The psychology (stress and anxiety) that hinders the purchase of a product is \"the more products there are, the more troublesome it is to search for them\" and \"I don't want to make a mistake in purchasing a product. Therefore, displaying rankings \"makes it easier to grasp the number of products and have customers choose from the ones that everyone else has selected\" is expected to relieve customers' stress and anxiety and improve their willingness to purchase.",
   "rankingByCategoryBasedOnOverallPurchaseHistoryDescription": "（The psychology (stress and anxiety) that hinders the purchase of a product is \"the more products there are, the more troublesome it is to search for them\" and \"I don't want to make a mistake in purchasing a product. Therefore, displaying rankings \"makes it easier to grasp the number of products and have customers choose from the ones that everyone else has selected\" is expected to relieve customers' stress and anxiety and improve their willingness to purchase.",
-  "fromTheDateCartAbandoned": "From the date of the drop in the basket",
+  "fromTheDateCartAbandoned": "From the first delivery date",
   "daysAfter": "days after",
   "logo": "Logo image",
   "dragNdrop": "Drag and drop to upload",
@@ -174,5 +174,7 @@
   "screenLeft": "Left end of screen",
   "screenRight": "Right end of screen",
   "upFromDefaultPosition": "Up from the default position",
-  "suspendTemplate": "Suspend Template"
+  "suspendTemplate": "Suspend Template",
+  "defaultHeadline": "Did you forget\nto buy anything?",
+  "defaultTextEmail": "Thank you for visiting @[ brandName ](brandName). The following items are still stored in your shopping cart. Please consider purchasing them before they are sold out."
 }

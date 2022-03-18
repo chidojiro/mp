@@ -52,7 +52,7 @@
   "rankingByCategoryBasedOnOverallPurchaseHistory": "全体の購入履歴に基づくカテゴリーごとのランキング（動的）",
   "rankingBasedOnOverallPurchaseHistoryDescription": "商品購入を妨げる心理（ストレス・不安）として、「商品数が多いのほど探すのが面倒くさい」「商品購入に失敗したくない」があります。そのため、ランキングを表示することで「商品数を把握しやすくし、みんなが選んだものから選んでもらうこと」で、顧客のストレス・不安の解消を図り、購入意欲を向上させる効果が期待できます。",
   "rankingByCategoryBasedOnOverallPurchaseHistoryDescription": "（仮）商品購入を妨げる心理（ストレス・不安）として、「商品数が多いのほど探すのが面倒くさい」「商品購入に失敗したくない」があります。そのため、ランキングを表示することで「商品数を把握しやすくし、みんなが選んだものから選んでもらうこと」で、顧客のストレス・不安の解消を図り、購入意欲を向上させる効果が期待できます。",
-  "fromTheDateCartAbandoned": "カゴ落ち発生日から",
+  "fromTheDateCartAbandoned": "1通目配信日から",
   "daysAfter": "日後の",
   "logo": "ロゴ画像",
   "dragNdrop": "ドラッグ＆ドロップでアップロード",
@@ -173,5 +173,7 @@
   "screenLeft": "画面左端",
   "screenRight": "画面右端",
   "upFromDefaultPosition": "デフォルトの位置から上に",
-  "suspendTemplate": "施策を中断する"
+  "suspendTemplate": "施策を中断する",
+  "defaultHeadline": "お買い忘れは\nございませんか？",
+  "defaultTextEmail": "いつも@[   ブランド名   ](brandName)をご利用いただきありがとうございます。以下の商品がショッピングカートに保存されたままになっています。売り切れになってしまう前に、是非購入をご検討くださいませ。"
 }

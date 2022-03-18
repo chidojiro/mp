@@ -3,7 +3,7 @@ import { Button } from '@/components/common';
 import { Step } from '@/constants';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 type Props = {
   step: Step;
@@ -16,10 +16,19 @@ export const StepForm = ({ step, isLastStep, onConfirm, onShowPreview }: Props) 
   const { t } = useTranslation('marketingAction');
   const { id, name, isDone, showPreviewBtn, children } = step;
   const [showAlert, setShowAlert] = useState(true);
+  const scrollRef = useRef<any>(null);
+
+  useEffect(() => {
+    setShowAlert(!isDone);
+  }, [isDone]);
 
   const handleConfirm = (stepId: number) => {
     onConfirm(stepId);
-    setShowAlert(true);
+    setShowAlert(false);
+  };
+
+  const executeScroll = () => {
+    scrollRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -37,8 +46,8 @@ export const StepForm = ({ step, isLastStep, onConfirm, onShowPreview }: Props) 
       >
         <Icon name='check' className='w-[17px] h-[13px] text-white' />
       </div>
-      <div className='flex flex-col w-full '>
-        <div className='flex mb-5'>
+      <div className='flex flex-col w-full' ref={scrollRef}>
+        <div className='flex mb-5 cursor-pointer' onClick={executeScroll}>
           <h3 className='text-secondary mr-2.5'>STEP {id}</h3>
           <h3 className='text-gray-dark'>{name}</h3>
         </div>
@@ -59,6 +68,14 @@ export const StepForm = ({ step, isLastStep, onConfirm, onShowPreview }: Props) 
               variant='outline'
               className='relative h-9 min-w-[240px] border-2 text-white'
             >
+              <div>{t('confirm')}</div>
+            </Button>
+          ) : (
+            <Button
+              onClick={() => handleConfirm(id)}
+              className='relative h-9 border-none bg-mint-green min-w-[240px]'
+            >
+              <div>{t('confirm')}</div>
               <div className={classNames('absolute', { hidden: !showAlert })}>
                 <div
                   className={classNames(
@@ -66,24 +83,16 @@ export const StepForm = ({ step, isLastStep, onConfirm, onShowPreview }: Props) 
                     "before:content-[''] before:absolute before:bottom-[-14px] before:right-1/2 before:border-primary",
                     'before:w-6 before:h-[15px] before:shadow-[4px_4px_6px_0px_#00000029] before:border-r-[16px] before:border-b-[3px] before:rounded-br-[80px_50px]'
                   )}
+                  onClick={e => e.stopPropagation()}
                 >
                   <Icon
                     onClick={() => setShowAlert(false)}
                     name='popover-close'
                     className='absolute right-[-2px] top-[-5px] w-[18px] rounded-full h-[18px]'
                   />
-
                   <div className='font-bold text-white text-regular'>{t('alertConfirm')}</div>
                 </div>
               </div>
-              <div>{t('confirm')}</div>
-            </Button>
-          ) : (
-            <Button
-              onClick={() => handleConfirm(id)}
-              className='h-9 border-none bg-mint-green min-w-[240px]'
-            >
-              {t('confirm')}
             </Button>
           )}
         </div>
