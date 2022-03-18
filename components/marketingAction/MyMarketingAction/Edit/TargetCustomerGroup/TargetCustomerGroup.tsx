@@ -19,6 +19,7 @@ export const TargetCustomerGroup = ({ isNonMember }: Props) => {
     { label: t('loyal'), value: 'loyal' },
     { label: t('f1dormant'), value: 'f1_dormant' },
     { label: t('loyalDormant'), value: 'loyal_dormant' },
+    { label: t('otherDormant'), value: 'other_dormant' },
   ];
 
   const targetCustomers = (() => {

@@ -1,3 +1,4 @@
+import { Button } from '@/components/common';
 import { MentionValuePattern } from '@/constants';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
@@ -6,22 +7,30 @@ import React from 'react';
 type Props = {
   body?: string;
   desktop?: boolean;
+  color?: string;
+  isOverlay?: boolean;
 };
 
 //example test message
 const products: any[] = [];
-for (let i = 0; i < 2; i++) {
-  products.push({
-    image:
-      'https://cdn.tgdd.vn/2021/03/CookProduct/Bbq-la-gi-nguon-goc-va-cac-cach-tu-lam-bbq-tai-nha-vo-cung-don-gian-0-1200x676.jpg',
-    id: i,
-    name: 'ブルーベリーケーキ　6個セット',
-    description: 'ここに商品説明が入ります。ここに商品説明が入ります。ここに商品説明が入ります。',
-    price: '1,200円',
-  });
-}
+products.push({
+  image: '/images/product_example1.png',
+  id: 1,
+  name: 'ブルーベリーケーキ　6個セット',
+  description: 'ここに商品説明が入ります。ここに商品説明が入ります。ここに商品説明が入ります。',
+  price: '1,200円',
+});
+products.push({
+  image: '/images/product_example2.png',
+  id: 2,
+  name: 'マカロン　ローズ　24個セット',
+  description: 'ここに商品説明が入ります。ここに商品説明が入ります。ここに商品説明が入ります。',
+  price: '3,600円（税込）',
+});
 
-export const LinePreview = ({ body, desktop = false }: Props) => {
+const btnHeightWithMargin = '85px';
+
+export const LinePreview = ({ body, desktop = false, color, isOverlay = false }: Props) => {
   const { t } = useTranslation('marketingAction');
 
   const parsedBody = body
@@ -35,8 +44,13 @@ export const LinePreview = ({ body, desktop = false }: Props) => {
     .slice(3);
 
   return (
-    <div className='rounded bg-[#95A6C9] opacity-100 h-fit border border-input h-[667px] w-[335px] py-4 px-1.5'>
-      <div className='w-full h-full overflow-y-scroll mp-scroll'>
+    <div
+      className={classNames(
+        'rounded bg-[#95A6C9] opacity-100 border border-input w-[335px] py-4 px-1.5'
+      )}
+      style={{ height: isOverlay ? `calc(100% - ${btnHeightWithMargin})` : '667px' }}
+    >
+      <div className='w-full h-full overflow-auto mp-scroll'>
         {!!body && (
           <div className='flex'>
             <div className='mr-3 bg-gray-500 rounded-full w-7 h-7'></div>
@@ -54,13 +68,13 @@ export const LinePreview = ({ body, desktop = false }: Props) => {
             </div>
           </div>
         )}
-        <div className='flex flex-col h-full'>
+        <div className='flex flex-col flex-1'>
           <div className='mr-2 bg-gray-500 rounded-full w-7 h-7'></div>
-          <div className='mt-1.5 w-full flex overflow-x-scroll pb-5 mp-scroll'>
+          <div className='mt-1.5 w-full flex flex-1'>
             {products.map(product => (
               <div
                 key={product.id}
-                className='w-[254px] bg-white mr-2 border-2 rounded-lg border-dashed border-secondary'
+                className='w-[254px] bg-white mr-2 border-2 h-fit rounded-lg border-dashed border-secondary'
               >
                 <img alt='' src={product.image} className='rounded-t-lg w-full h-[170px]' />
                 <div className='p-3.5 text-gray-dark'>
@@ -69,7 +83,13 @@ export const LinePreview = ({ body, desktop = false }: Props) => {
                   </div>
                   <div className='mb-1 text-regular-sm'>{product.description}</div>
                   <h3 className='mb-5 font-semibold text-right'>{product.price}</h3>
-                  <div className='text-[#6490CB] text-[15px] text-center'>{t('viewThisItem')}</div>
+                  <Button
+                    variant='link'
+                    className='w-full font-semibold text-center no-underline'
+                    style={{ color: color }}
+                  >
+                    {t('viewThisItem')}
+                  </Button>
                 </div>
               </div>
             ))}

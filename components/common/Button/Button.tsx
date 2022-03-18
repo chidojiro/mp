@@ -150,6 +150,7 @@ export type Props = Children &
     colorScheme?: ColorScheme;
     icon?: React.ReactNode;
     // loading?: boolean;
+    style?: any;
   };
 
 export const Button = React.forwardRef<HTMLElement, Props>(
@@ -162,6 +163,7 @@ export const Button = React.forwardRef<HTMLElement, Props>(
       type = 'button',
       disabled,
       icon,
+      style,
       ...restProps
     },
     ref: any
@@ -191,6 +193,7 @@ export const Button = React.forwardRef<HTMLElement, Props>(
           },
           className
         )}
+        style={style}
       >
         {!!icon && <div className='mr-3'>{icon}</div>}
         {children}

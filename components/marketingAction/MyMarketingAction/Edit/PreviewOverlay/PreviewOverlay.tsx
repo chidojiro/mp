@@ -14,6 +14,7 @@ type Props = {
   mailHeadline: string;
   mailBody: string;
   lineBody: string;
+  color?: string;
 };
 
 export const PreviewOverlay = ({
@@ -22,6 +23,7 @@ export const PreviewOverlay = ({
   mailHeadline,
   mailBody,
   lineBody,
+  color,
 }: Props) => {
   const { t } = useTranslation('marketingAction');
   const [email, setEmail] = useState('');
@@ -70,17 +72,28 @@ export const PreviewOverlay = ({
 
   return (
     <>
-      <Overlay control={control} title={t('preview')} className='flex flex-col items-center'>
+      <Overlay
+        control={control}
+        title={t('preview')}
+        className='flex flex-col items-center justify-between h-4/5'
+      >
         {isMail ? (
           <MailPreview
             headline={mailHeadline}
             body={mailBody}
             desktop={selectedDevice === 'desktop'}
+            color={color}
+            isOverlay
           />
         ) : (
-          <LinePreview body={lineBody} desktop={selectedDevice === 'desktop'} />
+          <LinePreview
+            isOverlay
+            body={lineBody}
+            desktop={selectedDevice === 'desktop'}
+            color={color}
+          />
         )}
-        <div className='mt-[53px] w-full flex items-center'>
+        <div className='mt-[50px] w-full flex items-center'>
           <SwitchButtons
             value={selectedType}
             className='mr-5'

@@ -23,16 +23,31 @@ export const CartAbandoned = () => {
   const { t } = useTranslation('marketingAction');
   const methods = useForm({
     defaultValues: {
+      is_use_line: OPTIONS.YES,
       first_message: {
-        delivery_date: '0',
-        delivery_time: '12:00',
+        delivery_date: '1',
+        delivery_time: '10:00',
+        headline_email: t('defaultHeadline'),
+        text_email: t('defaultTextEmail'),
+        text_option: OPTIONS.NO,
+        color: '#55c5d9',
       },
       second_message: {
         second_message_option: OPTIONS.YES,
-        delivery_date: '0',
-        delivery_time: '12:00',
+        delivery_date: '3',
+        delivery_time: '10:00',
         same_message_content: OPTIONS.YES,
       },
+      target_customers: [
+        'f0_member',
+        'f1',
+        'f2',
+        'semi_loyal',
+        'loyal',
+        'f1_dormant',
+        'loyal_dormant',
+        'other_dormant',
+      ],
     } as any,
   });
   const { handleSubmit, reset } = methods;

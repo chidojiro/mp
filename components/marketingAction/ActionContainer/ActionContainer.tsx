@@ -65,7 +65,7 @@ export const ActionContainer = ({
             </div>
             <div className='flex'>
               <Label>{t('estimatedTimeRequired')}</Label>
-              <Tag>00{t('minute')}</Tag>
+              <Tag>10{t('minute')}</Tag>
             </div>
           </div>
           <div className='flex mt-5'>
