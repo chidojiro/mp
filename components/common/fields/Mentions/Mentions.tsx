@@ -1,7 +1,7 @@
 import { ClassName, Option } from '@/types';
 import classNames from 'classnames';
 import React from 'react';
-import { MentionsInput, Mention } from 'react-mentions';
+import { MentionsInput, Mention, SuggestionDataItem } from 'react-mentions';
 import style from './Mentions.module.css';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -21,13 +21,32 @@ export const Mentions = ({
   value,
   onChange,
   placeholder,
-  options,
+  options: optionsProp,
   label,
   className,
   name,
   error,
   singleLine = false,
 }: Props) => {
+  // the whitespace is to workaround padding
+  const options =
+    optionsProp?.map(({ value, label }) => ({ id: value, display: `   ${label}   ` })) ?? [];
+
+  const renderSuggestion = (suggestion: SuggestionDataItem, isFocused: boolean) => (
+    <div
+      className={classNames(
+        'px-2',
+        'border-b border-solid border-input last-of-type:border-0',
+        'first:rounded-t-xs last:rounded-b-xs',
+        {
+          'bg-secondary text-white': isFocused,
+        }
+      )}
+    >
+      {suggestion.display?.trim()}
+    </div>
+  );
+
   return (
     <div className={classNames('mp-mentions', className, style['mp-mentions'])}>
       {!!label && (
@@ -51,24 +70,17 @@ export const Mentions = ({
       >
         <Mention
           trigger='@'
-          data={
-            // the whitespace is to workaround padding
-            options?.map(({ value, label }) => ({ id: value, display: `   ${label}   ` })) ?? []
+          data={options}
+          renderSuggestion={(suggestion, _, __, ___, isFocused) =>
+            renderSuggestion(suggestion, isFocused)
           }
-          renderSuggestion={(suggestion, _, __, ___, isFocused) => (
-            <div
-              className={classNames(
-                'px-2',
-                'border-b border-solid border-input last-of-type:border-0',
-                'first:rounded-t-xs last:rounded-b-xs',
-                {
-                  'bg-secondary text-white': isFocused,
-                }
-              )}
-            >
-              {suggestion.display?.trim()}
-            </div>
-          )}
+        />
+        <Mention
+          trigger='＠'
+          data={options}
+          renderSuggestion={(suggestion, _, __, ___, isFocused) =>
+            renderSuggestion(suggestion, isFocused)
+          }
         />
       </MentionsInput>
     </div>

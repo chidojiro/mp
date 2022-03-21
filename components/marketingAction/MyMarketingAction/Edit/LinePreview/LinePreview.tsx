@@ -33,15 +33,7 @@ const btnHeightWithMargin = '85px';
 export const LinePreview = ({ body, desktop = false, color, isOverlay = false }: Props) => {
   const { t } = useTranslation('marketingAction');
 
-  const parsedBody = body
-    ?.split(MentionValuePattern)
-    .map(segment => {
-      return '○○○' + segment;
-    })
-    .flat()
-    .join('')
-    // omit the redundant variable at first node
-    .slice(3);
+  const parsedBody = body?.replaceAll(MentionValuePattern, '○○○');
 
   return (
     <div
