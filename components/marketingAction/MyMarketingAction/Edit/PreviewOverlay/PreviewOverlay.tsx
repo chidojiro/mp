@@ -83,7 +83,7 @@ export const PreviewOverlay = ({
         onClose={() => setIsFromTestModal(false)}
         control={control}
         title={t('preview')}
-        className='flex flex-col items-center justify-between h-[90%]'
+        className='flex flex-col items-center justify-between h-[95%] w-[65%]'
       >
         {isMail ? (
           <MailPreview
@@ -101,7 +101,7 @@ export const PreviewOverlay = ({
             color={color}
           />
         )}
-        <div className='flex items-center justify-center w-full mt-8'>
+        <div className='flex items-center justify-center w-full'>
           <SwitchButtons
             value={selectedType}
             className='mr-5'
