@@ -85,9 +85,10 @@ export const ReportTable = ({ className }: Props) => {
       <Table.Head>
         <Table.Row>
           <Table.Cell>{t('yearMonth')}</Table.Cell>
-          <Table.Cell>{t('numberOfUUsDisplayed')}</Table.Cell>
+          <Table.Cell>{t('deliveryType')}</Table.Cell>
+          <Table.Cell>{t('numberOfUUsDelivered')}</Table.Cell>
           <Table.Cell>{t('openUuRate')}</Table.Cell>
-          <Table.Cell>{t('usedUuRate')}</Table.Cell>
+          <Table.Cell>{t('clickedUuRate')}</Table.Cell>
           <Table.Cell>{t('cvUuRate')}</Table.Cell>
         </Table.Row>
       </Table.Head>
@@ -96,6 +97,7 @@ export const ReportTable = ({ className }: Props) => {
           <React.Fragment key={item.id}>
             <Table.Row>
               <Table.Header rowSpan={2}>{item.time}</Table.Header>
+              <Table.Cell className='text-right'>LINE</Table.Cell>
               <Table.Cell className='text-right'>{item.first.numberOfUUsDisplayed}</Table.Cell>
               <Table.Cell className='text-right'>{item.first.openUuRate}</Table.Cell>
               <Table.Cell className='text-right'>{item.first.usedUuRate}</Table.Cell>
@@ -107,6 +109,7 @@ export const ReportTable = ({ className }: Props) => {
               </Table.Cell>
             </Table.Row>
             <Table.Row>
+              <Table.Cell className='text-right'>{t('email')}</Table.Cell>
               <Table.Cell className='text-right'>{item.second.numberOfUUsDisplayed}</Table.Cell>
               <Table.Cell className='text-right'>{item.second.openUuRate}</Table.Cell>
               <Table.Cell className='text-right'>{item.second.usedUuRate}</Table.Cell>

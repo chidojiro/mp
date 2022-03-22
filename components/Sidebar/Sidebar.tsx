@@ -18,7 +18,7 @@ export const Sidebar = () => {
       label: t('menuReport'),
       children: [
         {
-          path: `${projectPrefix}/reports/action-reports/line-email`,
+          path: `${projectPrefix}/reports/action-reports/line-email?targets=all`,
           label: t('policyReport'),
           matches: [
             '/organizations/[organizationId]/projects/[projectId]/reports/action-reports/[actionType]',

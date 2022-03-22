@@ -12,7 +12,7 @@ export const ReportDetails = ({}: Props) => {
   const { t } = useTranslation('report');
 
   return (
-    <Layout title={t('measureReport')} subTitle={t('カートページFAQ')}>
+    <Layout title={t('measureReport')} subTitle={t('cartAbandoned')}>
       <div className='space-y-5'>
         <div className='flex items-center gap-5'>
           <div className='font-bold'>{t('period')}</div>

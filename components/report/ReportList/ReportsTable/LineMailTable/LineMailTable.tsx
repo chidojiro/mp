@@ -142,7 +142,10 @@ type Props = ClassName & {};
 // eslint-disable-next-line no-empty-pattern
 export const LineMailTable = ({ className }: Props) => {
   const { t } = useTranslation('report');
-  const { asPath, query } = useRouter();
+  const {
+    query: { organizationId, projectId, actionType },
+    pathname,
+  } = useRouter();
 
   return (
     <Table className={className}>
@@ -164,7 +167,13 @@ export const LineMailTable = ({ className }: Props) => {
                 {item.name === 'all' ? (
                   t('all')
                 ) : (
-                  <Link passHref href={`${asPath}/${item.id}`}>
+                  <Link
+                    passHref
+                    href={{
+                      pathname: `${pathname}/${item.id}`,
+                      query: { organizationId, projectId, actionType, targets: ['all'] },
+                    }}
+                  >
                     <a className='underline text-primary'>{item.name}</a>
                   </Link>
                 )}

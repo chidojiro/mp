@@ -85,8 +85,8 @@ export const ChatbotTable = ({ className }: Props) => {
       <Table.Head>
         <Table.Row>
           <Table.Cell>{t('measure')}</Table.Cell>
-          <Table.Cell>{t('numberOfUUsDelivered')}</Table.Cell>
-          <Table.Cell>{t('openUuRate')}</Table.Cell>
+          <Table.Cell>{t('numberOfUUsDisplayed')}</Table.Cell>
+          <Table.Cell>{t('openUUsRate')}</Table.Cell>
           <Table.Cell>{t('usedUuRate')}</Table.Cell>
           <Table.Cell>{t('cvUuRate')}</Table.Cell>
         </Table.Row>

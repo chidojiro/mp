@@ -27,6 +27,7 @@
   "intermediateCv": "Intermediate CV",
   "finalCv": "Final CV",
   "numberOfUUsDisplayed": "Number of UUs displayed",
+  "openUUsRate": "Number of open UUs (%)",
   "usedUuRate": "Number of UUs used (%)",
   "colon": ":",
   "cvUuRate": "Number of CV UUs (%)",
@@ -48,5 +49,6 @@
   "numberOfLoyalCustomers": "Number of loyal customers",
   "numberOfSemiLoyalCustomers": "Number of Semi-Loyal Customers",
   "loyalDormantCustomers": "Loyal Dormant Customers",
-  "measuresContributingToLoyaltyConversion": "Measures Contributing to Loyalty Conversion"
+  "measuresContributingToLoyaltyConversion": "Measures Contributing to Loyalty Conversion",
+  "cartAbandoned": "Failed Notifications"
 }

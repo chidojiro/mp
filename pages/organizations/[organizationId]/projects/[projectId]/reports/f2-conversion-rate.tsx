@@ -95,7 +95,7 @@ function F2ConversionRateTrends(props: any) {
 
   return (
     <ServerSidePropsProvider props={props}>
-      <Layout title={tCommon('loyalDormantCustomersReturn')}>
+      <Layout title={tCommon('f2ConversionRateTrends')}>
         <ConversionRateChart
           line={{ dataKey: 'f2_conversion_rate', title: t('f2ConversionRate') }}
           bar1={{ dataKey: 'f1_uu', title: t('numberOfF1Customers') }}

@@ -82,7 +82,7 @@ export const PopupTable = ({ className }: Props) => {
         <Table.Row>
           <Table.Cell>{t('measure')}</Table.Cell>
           <Table.Cell>{t('numberOfUUsDisplayed')}</Table.Cell>
-          <Table.Cell>{t('openUuRate')}</Table.Cell>
+          <Table.Cell>{t('clickedUuRate')}</Table.Cell>
           <Table.Cell>{t('cvUuRate')}</Table.Cell>
         </Table.Row>
       </Table.Head>
