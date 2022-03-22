@@ -270,7 +270,9 @@ export const CartAbandoned = () => {
                 <Modal.FooterButton colorScheme='negative' onClick={modalControl.close}>
                   {t('cancel')}
                 </Modal.FooterButton>
-                <Modal.FooterButton onClick={onExecuteMA}>{t('executeTest')}</Modal.FooterButton>
+                <Modal.FooterButton onClick={onExecuteMA}>
+                  {t('implementTemplate')}
+                </Modal.FooterButton>
               </>
             )}
           </Modal.Footer>
