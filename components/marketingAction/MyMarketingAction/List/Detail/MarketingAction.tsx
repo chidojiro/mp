@@ -1,6 +1,7 @@
 import { Button } from '@/components/common';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Action } from './Action';
 import { StepDelivery } from './StepDelivery';
 
@@ -14,8 +15,44 @@ export const MarketingAction = () => {
   const { t } = useTranslation('marketingAction');
   const { t: tCommon } = useTranslation('common');
 
+  const {
+    query: { date, marketingActionId },
+  } = useRouter();
+
   // example marketing action
-  const marketingAction = {
+  const marketingActions: any[] = [
+    {
+      value: '1',
+      date: 'all',
+      label: t('cartAbandoned'),
+      date_range: '2022年12月15日(水) 〜 2022年12月25日(金)',
+    },
+    {
+      value: '2',
+      date: '2021_12_15',
+      label: t('stepDeliveryAfterPurchase'),
+      date_range: '2022年12月15日(水) 〜',
+    },
+    {
+      value: '2',
+      date: '2021_11_09',
+      label: t('stepDeliveryAfterPurchase'),
+      date_range: '2022年11月09日(月) 〜',
+    },
+    {
+      value: '3',
+      date: 'all',
+      label: t('recommendationDiagnosisBotStatic'),
+      date_range: '2022年12月15日(水) 〜 2022年12月25日(金)',
+    },
+    {
+      value: '4',
+      date: 'all',
+      label: t('conditionalFreeShipping'),
+      date_range: '2022年12月15日(水) 〜 2022年12月25日(金)',
+    },
+  ];
+  const marketingActionDetail = {
     name: 'cart-abandoned',
     targetCustomers: [
       tCommon('f0member'),
@@ -26,7 +63,6 @@ export const MarketingAction = () => {
       tCommon('f1dormant'),
       tCommon('loyalDormant'),
     ],
-    date: '2022年12月15日(水) 〜',
     settings: [
       {
         name: t('useLine'),
@@ -66,19 +102,27 @@ export const MarketingAction = () => {
       },
     ],
   };
+
+  const marketingAction = marketingActions.filter(
+    ma => ma.value === marketingActionId && ma.date === date
+  )[0];
   return (
     <div>
       <div className='h-full border rounded-lg border-gray'>
         <Action
-          name={marketingAction.name}
-          targetCustomers={marketingAction.targetCustomers}
-          date={marketingAction.date}
+          path={marketingActionDetail.name}
+          name={marketingAction.label}
+          targetCustomers={marketingActionDetail.targetCustomers}
+          date={marketingAction.date_range}
         />
-        <StepDelivery steps={marketingAction.settings} />
+        <StepDelivery steps={marketingActionDetail.settings} />
       </div>
       <div className='flex justify-center pt-10'>
         <Button className='mr-5 min-w-[240px] bg-[#FF7F5C]'>{t('suspendTemplate')}</Button>
-        <Link passHref href={`/organizations/1/projects/1/actions/edit/${marketingAction.name}`}>
+        <Link
+          passHref
+          href={`/organizations/1/projects/1/actions/edit/${marketingActionDetail.name}`}
+        >
           <Button colorScheme='negative' className='mr-5 min-w-[240px]'>
             {t('editInEditor')}
           </Button>

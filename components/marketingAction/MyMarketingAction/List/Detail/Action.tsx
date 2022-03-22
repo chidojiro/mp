@@ -6,12 +6,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 type Props = {
+  path: string;
   name: string;
   targetCustomers: string[];
   date?: string;
 };
 
-export const Action = ({ name, targetCustomers, date }: Props) => {
+export const Action = ({ name, path, targetCustomers, date }: Props) => {
   const { t } = useTranslation('marketingAction');
 
   const {
@@ -21,8 +22,8 @@ export const Action = ({ name, targetCustomers, date }: Props) => {
   const prefixUrl = '/organizations/1/projects/1/';
   const url =
     marketingActionStatus === HeaderTab.Draft
-      ? `actions/edit/${name}`
-      : 'reports/policy-report/line-email';
+      ? `actions/edit/${path}`
+      : 'reports/action-reports/line-email/1?targets=all';
 
   const btn = marketingActionStatus === HeaderTab.Draft ? t('editInEditor') : t('viewReport');
 
@@ -30,7 +31,7 @@ export const Action = ({ name, targetCustomers, date }: Props) => {
     <div className='p-10'>
       <div className='flex items-center'>
         <Icon name='cart' className='w-14 h-14' />
-        <h3 className='font-bold ml-7 text-gray-dark'>カゴ落ち通知</h3>
+        <h3 className='font-bold ml-7 text-gray-dark'>{name}</h3>
       </div>
       <div className='flex justify-between'>
         <div className='flex-1'>

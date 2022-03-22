@@ -32,7 +32,7 @@ export const Detail = () => {
     },
     {
       value: '2',
-      label: '購入後ステップ配信',
+      label: t('stepDeliveryAfterPurchase'),
       children: [
         {
           value: '2021_12_15',
