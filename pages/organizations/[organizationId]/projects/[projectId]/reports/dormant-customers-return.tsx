@@ -97,9 +97,9 @@ function ReturnOfDormantCustomers(props: any) {
     <ServerSidePropsProvider props={props}>
       <Layout title={tCommon('returnOfDormantCustomers')}>
         <ConversionRateChart
-          line={{ dataKey: 'f2_conversion_rate', title: t('f2ConversionRate') }}
-          bar1={{ dataKey: 'f1_uu', title: t('numberOfF1Customers') }}
-          bar2={{ dataKey: 'f2_uu', title: t('numberOfF2Customers') }}
+          line={{ dataKey: 'f2_conversion_rate', title: t('returnRate') }}
+          bar1={{ dataKey: 'f1_uu', title: t('numberOfDormantCustomers') }}
+          bar2={{ dataKey: 'f2_uu', title: t('numberOfReturns') }}
           data={data}
         />
         <h5 className='text-gray-600 mt-[60px]'>
