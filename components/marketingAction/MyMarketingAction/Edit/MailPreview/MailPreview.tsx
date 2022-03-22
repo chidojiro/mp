@@ -30,7 +30,7 @@ products.push({
   price: '3,600円（税込）',
 });
 
-const btnHeightWithMargin = '85px';
+const btnHeightWithMargin = '65px';
 
 export const MailPreview = ({
   headline,
@@ -56,9 +56,9 @@ export const MailPreview = ({
   return (
     <div
       className={classNames(
-        'rounded bg-white opacity-100 border h-[667px] border-input pr-2.5',
+        'rounded bg-white opacity-100 border h-[667px] border-input',
         className,
-        !desktop ? 'w-[335px] p-5' : 'w-[600px] p-10'
+        desktop ? 'w-[70%] p-10 pr-5' : 'w-[335px] p-5 pr-2.5'
       )}
       style={{ height: isOverlay ? `calc(100% - ${btnHeightWithMargin})` : '667px' }}
     >

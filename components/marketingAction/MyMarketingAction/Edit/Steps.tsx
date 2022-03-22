@@ -1,5 +1,5 @@
 import { Step } from '@/constants';
-import React from 'react';
+import React, { useState } from 'react';
 import { StepForm } from './StepForm';
 
 type Props = {
@@ -9,7 +9,8 @@ type Props = {
 };
 
 export const Steps = ({ steps, onConfirm, onShowPreview }: Props) => {
-  const idLastStep = steps.length - 1;
+  const idLastStep = steps.length;
+  const [currAlertId, setCurrAlertId] = useState(1);
 
   const refs = steps.reduce((acc: any, step: Step) => {
     acc[step.id] = React.createRef();
@@ -19,6 +20,7 @@ export const Steps = ({ steps, onConfirm, onShowPreview }: Props) => {
   const handleConfirm = (stepId: number) => {
     onConfirm(stepId);
     if (stepId !== idLastStep) {
+      setCurrAlertId(stepId + 1);
       refs[stepId + 1]?.current.scrollIntoView({
         behavior: 'smooth',
       });
@@ -30,11 +32,12 @@ export const Steps = ({ steps, onConfirm, onShowPreview }: Props) => {
       {steps.map((step: Step, idx: number) => (
         <StepForm
           step={step}
-          isLastStep={idx !== idLastStep}
+          isLastStep={idx !== idLastStep - 1}
           key={step.id}
           onConfirm={handleConfirm}
           onShowPreview={onShowPreview}
           ref={refs[step.id]}
+          isAlert={currAlertId === step.id}
         />
       ))}
     </>

@@ -8,19 +8,20 @@ import React, { useEffect, useState } from 'react';
 type Props = {
   step: Step;
   isLastStep: boolean;
+  isAlert: boolean;
   onConfirm: (stepId: number) => void;
   onShowPreview: (stepId: number) => void;
 };
 
 export const StepForm = React.forwardRef<HTMLDivElement, Props>(
-  ({ step, isLastStep, onConfirm, onShowPreview }, ref) => {
+  ({ step, isLastStep, isAlert, onConfirm, onShowPreview }, ref) => {
     const { t } = useTranslation('marketingAction');
     const { id, name, isDone, showPreviewBtn, children } = step;
-    const [showAlert, setShowAlert] = useState(true);
+    const [showAlert, setShowAlert] = useState(isAlert);
 
     useEffect(() => {
-      setShowAlert(!isDone);
-    }, [isDone]);
+      setShowAlert(!isDone && isAlert);
+    }, [isDone, isAlert]);
 
     const handleConfirm = (stepId: number) => {
       onConfirm(stepId);

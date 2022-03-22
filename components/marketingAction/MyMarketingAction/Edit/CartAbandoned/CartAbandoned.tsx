@@ -21,22 +21,25 @@ export const OPTIONS = {
 
 export const CartAbandoned = () => {
   const { t } = useTranslation('marketingAction');
+  const defaultMessageSettings = {
+    delivery_time: '10:00',
+    headline_email: t('defaultHeadline'),
+    text_email: t('defaultTextEmail'),
+    text_option: OPTIONS.NO,
+    color: '#55c5d9',
+  };
   const methods = useForm({
     defaultValues: {
       is_use_line: OPTIONS.YES,
       first_message: {
         delivery_date: '1',
-        delivery_time: '10:00',
-        headline_email: t('defaultHeadline'),
-        text_email: t('defaultTextEmail'),
-        text_option: OPTIONS.NO,
-        color: '#55c5d9',
+        ...defaultMessageSettings,
       },
       second_message: {
         second_message_option: OPTIONS.YES,
         delivery_date: '3',
-        delivery_time: '10:00',
         same_message_content: OPTIONS.YES,
+        ...defaultMessageSettings,
       },
       target_customers: [
         'f0_member',
@@ -158,6 +161,9 @@ export const CartAbandoned = () => {
 
   useEffect(() => {
     setStepDone(1, false);
+  }, [step1]);
+
+  useEffect(() => {
     if (
       step1 === OPTIONS.YES &&
       (!firstMessage?.text_option ||
