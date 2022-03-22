@@ -68,6 +68,11 @@ export const PreviewOverlay = ({
     }
   };
 
+  const onCloseModal = () => {
+    modalControl.close();
+    control.open();
+  };
+
   const isMail = selectedType === 'mail';
 
   return (
@@ -75,7 +80,7 @@ export const PreviewOverlay = ({
       <Overlay
         control={control}
         title={t('preview')}
-        className='flex flex-col items-center justify-between h-4/5'
+        className='flex flex-col items-center justify-between h-[90%]'
       >
         {isMail ? (
           <MailPreview
@@ -93,7 +98,7 @@ export const PreviewOverlay = ({
             color={color}
           />
         )}
-        <div className='mt-[50px] w-full flex items-center'>
+        <div className='flex items-center justify-center w-full mt-8'>
           <SwitchButtons
             value={selectedType}
             className='mr-5'
@@ -121,7 +126,7 @@ export const PreviewOverlay = ({
           <Input name='email_for_test' onChange={event => setEmail(event.target.value)} />
         </Modal.Body>
         <Modal.Footer className='text-medium'>
-          <Modal.FooterButton colorScheme='negative' onClick={modalControl.close}>
+          <Modal.FooterButton colorScheme='negative' onClick={onCloseModal}>
             {t('cancel')}
           </Modal.FooterButton>
           <Modal.FooterButton onClick={handleExecuteTest}>{t('executeTest')}</Modal.FooterButton>
