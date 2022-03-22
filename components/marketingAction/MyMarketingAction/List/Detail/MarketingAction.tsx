@@ -111,9 +111,9 @@ export const MarketingAction = () => {
       <div className='h-full border rounded-lg border-gray'>
         <Action
           path={marketingActionDetail.name}
-          name={marketingAction.label}
+          name={marketingAction?.label}
           targetCustomers={marketingActionDetail.targetCustomers}
-          date={marketingAction.date_range}
+          date={marketingAction?.date_range}
         />
         <StepDelivery steps={marketingActionDetail.settings} />
       </div>
