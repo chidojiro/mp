@@ -30,7 +30,6 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
 
     return (
       <div
-        ref={ref}
         className={classNames('flex relative', {
           'before:ml-3.5 before:border before:h-full before:absolute': isLastStep,
           'before:border-mint-green': isDone,
@@ -45,7 +44,7 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
           <Icon name='check' className='w-[17px] h-[13px] text-white' />
         </div>
         <div className='flex flex-col w-full'>
-          <div className='flex mb-5 cursor-pointer'>
+          <div className='flex mb-5 cursor-pointer' ref={ref}>
             <h3 className='text-secondary mr-2.5'>STEP {id}</h3>
             <h3 className='text-gray-dark'>{name}</h3>
           </div>

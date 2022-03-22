@@ -29,12 +29,13 @@ export const PreviewOverlay = ({
   const [email, setEmail] = useState('');
   const [selectedType, setSelectedType] = useState<MessageContentPreviewType>(defaultType);
   const [selectedDevice, setDevice] = useState<Device>('mobile');
+  const [isFromTestModal, setIsFromTestModal] = useState(false);
 
   useEffect(() => {
-    if (control.visible) {
+    if (control.visible && !isFromTestModal) {
       setSelectedType(defaultType);
     }
-  }, [control.visible, defaultType]);
+  }, [control.visible, isFromTestModal, defaultType]);
 
   const modalControl = useVisibilityControl();
 
@@ -70,6 +71,7 @@ export const PreviewOverlay = ({
 
   const onCloseModal = () => {
     modalControl.close();
+    setIsFromTestModal(true);
     control.open();
   };
 
@@ -78,6 +80,7 @@ export const PreviewOverlay = ({
   return (
     <>
       <Overlay
+        onClose={() => setIsFromTestModal(false)}
         control={control}
         title={t('preview')}
         className='flex flex-col items-center justify-between h-[90%]'
