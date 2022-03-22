@@ -52,5 +52,6 @@
   "measuresContributingToLoyaltyConversion": "ロイヤル転換に貢献した施策",
   "cartAbandoned": "カゴ落ち通知",
   "measuresThatContributedToTheReturnOfDormantCustomers": "休眠顧客復帰に貢献した施策",
-  "numberOfDormantCustomers": "休眠顧客数"
+  "numberOfDormantCustomers": "休眠顧客数",
+  "returnToList": "一覧に戻る"
 }

@@ -52,5 +52,6 @@
   "measuresContributingToLoyaltyConversion": "Measures Contributing to Loyalty Conversion",
   "cartAbandoned": "Failed Notifications",
   "measuresThatContributedToTheReturnOfDormantCustomers": "Measures that contributed to the return of dormant customers",
-  "numberOfDormantCustomers": "Number of dormant customers"
+  "numberOfDormantCustomers": "Number of dormant customers",
+  "returnToList": "Return to list"
 }
