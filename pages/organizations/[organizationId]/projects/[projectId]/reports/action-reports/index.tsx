@@ -5,7 +5,7 @@ import React from 'react';
 const Reports = () => {
   const { asPath } = useRouter();
 
-  return <Redirect href={`${asPath}/line-email`} />;
+  return <Redirect href={`${asPath}/line-email`} method='replace' />;
 };
 
 export default Reports;

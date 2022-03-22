@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 function MarketingActions() {
   const { asPath } = useRouter();
 
-  return <Redirect href={`${asPath}/${HeaderTab.Active}`} />;
+  return <Redirect href={`${asPath}/${HeaderTab.Active}`} method='replace' />;
 }
 
 export default MarketingActions;
