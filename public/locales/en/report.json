@@ -50,5 +50,6 @@
   "numberOfSemiLoyalCustomers": "Number of Semi-Loyal Customers",
   "loyalDormantCustomers": "Loyal Dormant Customers",
   "measuresContributingToLoyaltyConversion": "Measures Contributing to Loyalty Conversion",
-  "cartAbandoned": "Failed Notifications"
+  "cartAbandoned": "Failed Notifications",
+  "measuresThatContributedToTheReturnOfDormantCustomers": "Measures that contributed to the return of dormant customers"
 }

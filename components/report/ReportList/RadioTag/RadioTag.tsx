@@ -16,10 +16,7 @@ export const RadioTag = ({ value, label }: Props) => {
   return (
     <RadioGroup.Option value={value}>
       {({ handleChange, isChecked, value }) => (
-        <Link
-          href={{ pathname, query: { ...query, actionType: value, targets: ['all'] } }}
-          passHref
-        >
+        <Link href={{ pathname, query: { ...query, actionType: value } }} passHref>
           <label
             className={classNames(
               'rounded-full px-4 py-1.5 font-bold cursor-pointer text-medium',

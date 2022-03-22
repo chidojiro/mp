@@ -50,5 +50,6 @@
   "numberOfSemiLoyalCustomers": "準ロイヤル顧客数",
   "loyalDormantCustomers": "ロイヤル休眠顧客数",
   "measuresContributingToLoyaltyConversion": "ロイヤル転換に貢献した施策",
-  "cartAbandoned": "カゴ落ち通知"
+  "cartAbandoned": "カゴ落ち通知",
+  "measuresThatContributedToTheReturnOfDormantCustomers": "休眠顧客復帰に貢献した施策"
 }
