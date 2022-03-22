@@ -219,7 +219,9 @@ export const CartAbandoned = () => {
   };
 
   const isGotoMABtn = isCompleted || isSaveAsDraft;
-  const gotoMyMAUrl = `/organizations/1/projects/1/actions/${isCompleted ? 'active' : 'draft'}`;
+  const gotoMyMAUrl = `/organizations/1/projects/1/actions/${
+    isCompleted ? 'active' : 'draft'
+  }/1?targets=all&date=all`;
   const unSavedSteps = steps.filter(step => !step.isDone).length;
 
   return (
