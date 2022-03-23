@@ -14,14 +14,18 @@ export const MessageBodyInput = ({ name, showEmoji = true }: Props) => {
     MentionUtils.insert(option);
   };
 
+  const handleEmojiSelect = (emoji: string) => {
+    document.execCommand('insertHTML', false, emoji);
+  };
+
   return (
     <Form.Mentions
       name={name}
       className='mt-5'
       label={
-        <div className='flex mb-2 space-x-2'>
-          {showEmoji && <EmojiSign />}
+        <div className='flex items-center justify-between w-full'>
           <VariableSign onSelect={handleVariableSelect} />
+          {showEmoji && <EmojiSign onSelect={handleEmojiSelect} />}
         </div>
       }
       rules={{ required: true }}
