@@ -162,7 +162,7 @@ export const RecommendedCategory = () => {
         iconName='ranking'
         title={t('rankingByCategoryBasedOnOverallPurchaseHistory')}
         description={t('rankingByCategoryBasedOnOverallPurchaseHistoryDescription')}
-        descriptionImageUrl='/images/ranking-description.png'
+        descriptionImageUrl='/images/ranking-category.png'
       ></ActionContainer>
       <Form methods={methods} className='mt-[60px]'>
         <Steps steps={steps} onConfirm={onConfirm} onShowPreview={onShowPreview} />

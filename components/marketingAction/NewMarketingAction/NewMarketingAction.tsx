@@ -82,7 +82,7 @@ export const NewMarketingAction = ({}: Props) => {
               iconName='ranking'
               title={t('rankingBasedOnOverallPurchaseHistory')}
               description={t('rankingBasedOnOverallPurchaseHistoryDescription')}
-              descriptionImageUrl='/images/ranking-description.png'
+              descriptionImageUrl='/images/ranking-purchase.png'
             ></ActionContainer>
           ),
           onClick: () => handleMAChange('ranking-based-on-overall-purchase-history'),
@@ -95,7 +95,7 @@ export const NewMarketingAction = ({}: Props) => {
               iconName='ranking'
               title={t('rankingByCategoryBasedOnOverallPurchaseHistory')}
               description={t('rankingByCategoryBasedOnOverallPurchaseHistoryDescription')}
-              descriptionImageUrl='/images/ranking-description.png'
+              descriptionImageUrl='/images/ranking-category.png'
             ></ActionContainer>
           ),
           onClick: () => handleMAChange('ranking-by-category'),

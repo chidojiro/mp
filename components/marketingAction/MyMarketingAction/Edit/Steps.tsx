@@ -21,8 +21,10 @@ export const Steps = ({ steps, onConfirm, onShowPreview }: Props) => {
     onConfirm(stepId);
     if (stepId !== idLastStep) {
       setCurrAlertId(stepId + 1);
-      refs[stepId + 1]?.current.scrollIntoView({
+      const el = refs[stepId + 1]?.current;
+      window.scrollTo({
         behavior: 'smooth',
+        top: el.getBoundingClientRect().top + window.pageYOffset - 80,
       });
     }
   };

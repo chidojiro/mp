@@ -50,7 +50,7 @@ export const MailPreview = ({
       className={classNames(
         'rounded bg-white opacity-100 border h-[667px] border-input',
         className,
-        desktop ? 'w-[70%] p-10 pr-5' : 'w-[335px] p-5 pr-2.5'
+        desktop ? 'w-full p-10 pr-5' : 'w-[335px] p-5 pr-2.5'
       )}
       style={{ height: isOverlay ? `calc(100% - ${btnHeightWithMargin})` : '667px' }}
     >
