@@ -132,7 +132,6 @@
   "1Month": "1ヶ月",
   "1Week": "1週間",
   "fromTheFirstDeliveryDate": "1通目配信日から",
-  "brandName": "ブランド名",
   "targetAndTimePeriodSetting": "ターゲット・期間設定",
   "pleaseFillInAllFields": "すべての項目を入力してください。",
   "alertConfirm": "入力内容を確認し、問題がなければクリックしてください",
@@ -175,5 +174,15 @@
   "upFromDefaultPosition": "デフォルトの位置から上に",
   "suspendTemplate": "施策を中断する",
   "defaultHeadline": "お買い忘れは\nございませんか？",
-  "defaultTextEmail": "いつも<span contenteditable=\"false\" class=\"mention-item\" data-value=\"brandName\">ブランド名</span>&ZeroWidthSpace;をご利用いただきありがとうございます。以下の商品がショッピングカートに保存されたままになっています。 売り切れになってしまう前に、是非購入をご検討くださいませ。"
+  "defaultTextEmail": "いつも<span contenteditable=\"false\" class=\"mention-item\" data-value=\"brandName\">ブランド名</span>&ZeroWidthSpace;をご利用いただきありがとうございます。以下の商品がショッピングカートに保存されたままになっています。 売り切れになってしまう前に、是非購入をご検討くださいませ。",
+  "customerName": "顧客名",
+  "brandName": "ブランド名",
+  "businessHours": "営業時間",
+  "emailAddressForInquiries": "問い合わせ用メールアドレス",
+  "telephoneNumberForInquiry": "問い合わせ用電話番号",
+  "topPageUrl": "TOPページURL",
+  "thanksPageUrl": "サンクスページURL",
+  "cartPageUrl": "カートページURL",
+  "productDetailPageUrl": "商品詳細ページURL",
+  "categoryPageUrl": "カテゴリページURL"
 }

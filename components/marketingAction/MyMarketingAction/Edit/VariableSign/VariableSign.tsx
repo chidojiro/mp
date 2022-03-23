@@ -12,7 +12,18 @@ type Props = ClassName & { onSelect?: (option: Option) => void };
 export const VariableSign = ({ className, onSelect }: Props) => {
   const { t } = useTranslation('marketingAction');
 
-  const options = [{ label: t('brandName'), value: 'brandName' }];
+  const options = [
+    { label: t('customerName'), value: 'customerName' },
+    { label: t('brandName'), value: 'brandName' },
+    { label: t('businessHours'), value: 'businessHours' },
+    { label: t('emailAddressForInquiries'), value: 'emailAddressForInquiries' },
+    { label: t('telephoneNumberForInquiry'), value: 'telephoneNumberForInquiry' },
+    { label: t('topPageUrl'), value: 'topPageUrl' },
+    { label: t('thanksPageUrl'), value: 'thanksPageUrl' },
+    { label: t('cartPageUrl'), value: 'cartPageUrl' },
+    { label: t('productDetailPageUrl'), value: 'productDetailPageUrl' },
+    { label: t('categoryPageUrl'), value: 'categoryPageUrl' },
+  ];
 
   const popoverControl = useVisibilityControl();
 

@@ -133,7 +133,6 @@
   "1Month": "1 month",
   "1Week": "1 week",
   "fromTheFirstDeliveryDate": "From the first delivery date",
-  "brandName": "Brand name",
   "targetAndTimePeriodSetting": "arget and time period setting",
   "pleaseFillInAllFields": "Please fill in all fields.",
   "alertConfirm": "Please check the information you have entered and click if you are satisfied with the information.",
@@ -176,5 +175,15 @@
   "upFromDefaultPosition": "Up from the default position",
   "suspendTemplate": "Suspend Template",
   "defaultHeadline": "Did you forget\nto buy anything?",
-  "defaultTextEmail": "Thank you for visiting @[ brandName ](brandName). The following items are still stored in your shopping cart. Please consider purchasing them before they are sold out."
+  "defaultTextEmail": "Thank you for visiting @[ brandName ](brandName). The following items are still stored in your shopping cart. Please consider purchasing them before they are sold out.",
+  "customerName": "Customer name",
+  "brandName": "Brand name",
+  "businessHours": "Business hours",
+  "emailAddressForInquiries": "Email address for inquiries",
+  "telephoneNumberForInquiry": "Telephone number for inquiry",
+  "topPageUrl": "TOP page URL",
+  "thanksPageUrl": "Thanks Page URL",
+  "cartPageUrl": "Cart page URL",
+  "productDetailPageUrl": "Product detail page URL",
+  "categoryPageUrl": "Category page URL"
 }
