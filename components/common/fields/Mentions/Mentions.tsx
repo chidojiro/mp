@@ -46,10 +46,7 @@ export const Mentions = React.forwardRef(
     return (
       <div className={classNames('mp-mentions', className, style['mp-mentions'])}>
         {!!label && (
-          <label
-            htmlFor={name}
-            className='block bg-gray-200 border-t rounded-t border-x border-dark-gray text-gray-5'
-          >
+          <label htmlFor={name} className='block mb-1 text-gray-5'>
             {label}
           </label>
         )}
@@ -58,7 +55,7 @@ export const Mentions = React.forwardRef(
           className={classNames(
             'w-full p-2',
             'bg-white',
-            'border-x border-b border-dark-gray outline-none rounded-b',
+            'border border-solid outline-none rounded',
             error ? 'border-danger' : 'border-input',
             singleLine ? 'w-[480px] h-10 mr-2 mb-1' : 'min-h-[100px]'
           )}

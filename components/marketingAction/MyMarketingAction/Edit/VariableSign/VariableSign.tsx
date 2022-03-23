@@ -36,8 +36,15 @@ export const VariableSign = ({ className, onSelect }: Props) => {
     <Popover
       control={popoverControl}
       trigger={
-        <div className={classNames('py-2 px-2.5', 'select-none', className)}>
-          <span className='text-medium text-gray-dark'>{t('variableText')}</span>
+        <div
+          className={classNames(
+            'w-fit bg-white py-2 px-2.5 flex items-center rounded border border-input',
+            'select-none',
+            className
+          )}
+        >
+          <Icon name='variable' className='w-4 h-3.5 mr-1' />
+          <span className='text-medium text-gray-dark'>{t('variable')}</span>
         </div>
       }
     >

@@ -23,9 +23,9 @@ export const MessageBodyInput = ({ name, showEmoji = true }: Props) => {
       name={name}
       className='mt-5'
       label={
-        <div className='flex items-center justify-between w-full'>
-          <VariableSign onSelect={handleVariableSelect} />
+        <div className='flex mb-2 space-x-2'>
           {showEmoji && <EmojiSign onSelect={handleEmojiSelect} />}
+          <VariableSign onSelect={handleVariableSelect} />
         </div>
       }
       rules={{ required: true }}

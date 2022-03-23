@@ -26,11 +26,17 @@ export const EmojiSign = ({ className, onSelect }: Props) => {
 
   return (
     <Popover
-      placement='right-start'
+      placement='top-start'
       control={popoverControl}
       trigger={
-        <div className={classNames('py-2 px-2.5', 'select-none', className)}>
-          <Icon name='emoji' className='w-[15px] h-[15px] mr-1 text-gray-700' />
+        <div
+          className={classNames(
+            'w-fit cursor-pointer bg-white py-2 px-2.5 flex items-center rounded border border-input select-none',
+            className
+          )}
+        >
+          <Icon name='emoji' className='w-4 h-3.5 mr-1 text-secondary' />
+          <span className='text-medium text-gray-dark'>{t('emoji')}</span>
         </div>
       }
     >
