@@ -174,7 +174,7 @@
   "upFromDefaultPosition": "デフォルトの位置から上に",
   "suspendTemplate": "施策を中断する",
   "defaultHeadline": "お買い忘れは\nございませんか？",
-  "defaultTextEmail": "いつも<span contenteditable=\"false\" class=\"mention-item\" data-value=\"brandName\">ブランド名</span>&ZeroWidthSpace;をご利用いただきありがとうございます。以下の商品がショッピングカートに保存されたままになっています。 売り切れになってしまう前に、是非購入をご検討くださいませ。",
+  "defaultTextEmail": "いつも<span contenteditable=\"false\" class=\"mention-item\" data-value=\"brandName\">ブランド名</span>&#8203;をご利用いただきありがとうございます。以下の商品がショッピングカートに保存されたままになっています。 売り切れになってしまう前に、是非購入をご検討くださいませ。",
   "customerName": "顧客名",
   "brandName": "ブランド名",
   "businessHours": "営業時間",

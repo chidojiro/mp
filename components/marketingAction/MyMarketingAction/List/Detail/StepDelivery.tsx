@@ -66,8 +66,8 @@ export const StepDelivery = ({ steps }: Props) => {
       <PreviewOverlay
         defaultType='mail'
         mailHeadline='お買い忘れはございませんか？'
-        mailBody='いつも<span contenteditable="false" class="mention-item" data-value="brandName">ブランド名</span>&ZeroWidthSpace;をご利用いただきありがとうございます。以下の商品がショッピングカートに保存されたままになっています。 売り切れになってしまう前に、是非購入をご検討くださいませ。'
-        lineBody='いつも<span contenteditable="false" class="mention-item" data-value="brandName">ブランド名</span>&ZeroWidthSpace;をご利用いただきありがとうございます。以下の商品がショッピングカートに保存されたままになっています。 売り切れになってしまう前に、是非購入をご検討くださいませ。'
+        mailBody='いつも<span contenteditable="false" class="mention-item" data-value="brandName">ブランド名</span>&#8203;をご利用いただきありがとうございます。以下の商品がショッピングカートに保存されたままになっています。 売り切れになってしまう前に、是非購入をご検討くださいませ。'
+        lineBody='いつも<span contenteditable="false" class="mention-item" data-value="brandName">ブランド名</span>&#8203;をご利用いただきありがとうございます。以下の商品がショッピングカートに保存されたままになっています。 売り切れになってしまう前に、是非購入をご検討くださいませ。'
         control={previewMessageControl}
       />
     </div>
