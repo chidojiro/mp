@@ -1,9 +1,8 @@
 import { Form, Icon, RadioGroup, Section } from '@/components';
 import { useTranslation } from 'next-i18next';
-import { VariableSign } from '../VariableSign';
 import { MessageContentPreview } from '../MessageContentPreview';
 import { useWatch } from 'react-hook-form';
-import { EmojiSign } from '../EmojiSign';
+import { MessageBodyInput } from '../MessageBodyInput';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {
@@ -38,18 +37,7 @@ export const LineMessageContentSection = ({ namePrefix, onPreviewClick }: Props)
               </div>
             </Form.RadioGroup>
           </div>
-          <Form.Mentions
-            options={[{ label: t('brandName'), value: 'brandName' }]}
-            name={bodyName}
-            className='mt-5'
-            label={
-              <div className='flex gap-2 mb-2'>
-                <EmojiSign />
-                <VariableSign />
-              </div>
-            }
-            rules={{ required: true }}
-          />
+          <MessageBodyInput name={bodyName} showEmoji={false} />
         </div>
         <MessageContentPreview type='line' body={body} onPreviewClick={onPreviewClick} />
       </div>

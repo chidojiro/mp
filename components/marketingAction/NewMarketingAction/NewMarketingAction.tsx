@@ -5,7 +5,6 @@ import { SideMenu, SideMenuGroup } from '../../common/SideMenu';
 import { ActionContainer } from '../ActionContainer';
 import { CartAbandonedOverview } from './CartAbandonedOverview';
 import { DeliveryAfterPurchaseOverview } from './DeliveryAfterPurchaseOverview';
-import { UpdateInformation } from './UpdateInformation';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};

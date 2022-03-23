@@ -1,5 +1,5 @@
 import { ConditionalWrapper, Portal } from '@/headless';
-import { useVisibilityControl, VisibilityControl } from '@/hooks';
+import { useOnClickOutside, useVisibilityControl, VisibilityControl } from '@/hooks';
 import { Children } from '@/types';
 import React, { useState } from 'react';
 import { PopperProps, usePopper } from 'react-popper';
@@ -17,12 +17,22 @@ export const Popover = ({
   usePortal = true,
   trigger,
   control: controlProp,
-  placement,
+  placement = 'bottom-start',
 }: Props) => {
   const [triggerElement, setTriggerElement] = useState(null);
   const popoverRef = React.useRef(null);
 
-  const { styles, attributes } = usePopper(triggerElement, popoverRef.current, { placement });
+  const { styles, attributes } = usePopper(triggerElement, popoverRef.current, {
+    placement,
+    modifiers: [
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 4],
+        },
+      },
+    ],
+  });
 
   const ownControl = useVisibilityControl();
   const control = controlProp ?? ownControl;
@@ -31,10 +41,12 @@ export const Popover = ({
     () =>
       React.cloneElement(trigger, {
         ref: setTriggerElement,
-        onClick: !controlProp && ownControl.toggle,
+        onClick: control.toggle,
       }),
-    [controlProp, ownControl.toggle, trigger]
+    [control, trigger]
   );
+
+  useOnClickOutside([popoverRef, triggerElement], control.close);
 
   return (
     <>

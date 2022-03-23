@@ -1,5 +1,5 @@
 import { Button } from '@/components/common';
-import { MentionValuePattern } from '@/constants';
+import { MentionUtils } from '@/utils';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
@@ -33,7 +33,7 @@ const btnHeightWithMargin = '85px';
 export const LinePreview = ({ body, desktop = false, color, isOverlay = false }: Props) => {
   const { t } = useTranslation('marketingAction');
 
-  const parsedBody = body?.replaceAll(MentionValuePattern, '○○○');
+  const parsedBody = MentionUtils.toPreviewString(body ?? '');
 
   return (
     <div

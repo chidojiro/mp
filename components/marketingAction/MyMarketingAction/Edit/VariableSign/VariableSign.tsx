@@ -1,24 +1,56 @@
 import { Icon } from '@/components';
-import { ClassName } from '@/types';
+import { Popover } from '@/components/common';
+import { useVisibilityControl } from '@/hooks';
+import { ClassName, Option } from '@/types';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-type Props = ClassName & {};
+type Props = ClassName & { onSelect?: (option: Option) => void };
 
 // eslint-disable-next-line no-empty-pattern
-export const VariableSign = ({ className }: Props) => {
+export const VariableSign = ({ className, onSelect }: Props) => {
   const { t } = useTranslation('marketingAction');
 
+  const options = [{ label: t('brandName'), value: 'brandName' }];
+
+  const popoverControl = useVisibilityControl();
+
+  const handleSelect = (option: Option) => {
+    onSelect?.(option);
+    popoverControl.close();
+  };
+
   return (
-    <div
-      className={classNames(
-        'w-fit bg-white py-2 px-2.5 flex items-center rounded border border-input',
-        className
-      )}
+    <Popover
+      control={popoverControl}
+      trigger={
+        <div
+          className={classNames(
+            'w-fit bg-white py-2 px-2.5 flex items-center rounded border border-input',
+            'select-none',
+            className
+          )}
+        >
+          <Icon name='variable' className='w-4 h-3.5 mr-1' />
+          <span className='text-medium text-gray-dark'>{t('variable')}</span>
+        </div>
+      }
     >
-      <Icon name='variable' className='w-4 h-3.5 mr-1' />
-      <span className='text-medium text-gray-dark'>{t('variable')}</span>
-    </div>
+      <div className='bg-white border border-solid rounded border-input'>
+        {options.map(option => (
+          <div
+            onClick={e => {
+              e.preventDefault();
+              handleSelect(option);
+            }}
+            key={option.value}
+            className='px-2 py-1 border-b border-solid cursor-pointer select-none border-input last:border-0 hover:bg-secondary hover:text-white text-medium'
+          >
+            {option.label}
+          </div>
+        ))}
+      </div>
+    </Popover>
   );
 };

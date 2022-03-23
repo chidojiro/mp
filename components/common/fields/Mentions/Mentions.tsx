@@ -1,88 +1,77 @@
-import { ClassName, Option } from '@/types';
+import { useControllable, useVisibilityControl } from '@/hooks';
+import { ClassName } from '@/types';
 import classNames from 'classnames';
 import React from 'react';
-import { MentionsInput, Mention, SuggestionDataItem } from 'react-mentions';
 import style from './Mentions.module.css';
+import ContentEditable, { ContentEditableEvent } from 'react-contenteditable';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Props = ClassName & {
   value?: string;
-  onChange: (v: string) => void;
+  onChange?: (v: string) => void;
   placeholder?: string;
-  options?: Option<string, string>[];
   label?: React.ReactNode;
   name?: string;
   error?: boolean;
   singleLine?: boolean;
+  ref?: any;
 };
 
 // eslint-disable-next-line no-empty-pattern
-export const Mentions = ({
-  value,
-  onChange,
-  placeholder,
-  options: optionsProp,
-  label,
-  className,
-  name,
-  error,
-  singleLine = false,
-}: Props) => {
-  // the whitespace is to workaround padding
-  const options =
-    optionsProp?.map(({ value, label }) => ({ id: value, display: `   ${label}   ` })) ?? [];
+export const Mentions = React.forwardRef(
+  (
+    {
+      value: valueProp,
+      onChange,
+      placeholder,
+      label,
+      className,
+      name,
+      error,
+      singleLine = false,
+    }: Props,
+    ref: any
+  ) => {
+    const [value, setValue] = useControllable({ value: valueProp, onChange });
+    const composingControl = useVisibilityControl();
+    const internalRef = React.useRef<HTMLDivElement>(null);
 
-  const renderSuggestion = (suggestion: SuggestionDataItem, isFocused: boolean) => (
-    <div
-      className={classNames(
-        'px-2',
-        'border-b border-solid border-input last-of-type:border-0',
-        'first:rounded-t-xs last:rounded-b-xs',
-        {
-          'bg-secondary text-white': isFocused,
-        }
-      )}
-    >
-      {suggestion.display?.trim()}
-    </div>
-  );
+    React.useImperativeHandle(ref, () => internalRef.current);
 
-  return (
-    <div className={classNames('mp-mentions', className, style['mp-mentions'])}>
-      {!!label && (
-        <label htmlFor={name} className='block mb-1 text-gray-5'>
-          {label}
-        </label>
-      )}
-      <MentionsInput
-        className={classNames(
-          'w-full rounded bg-white',
-          'border border-solid',
-          error ? 'border-danger' : 'border-input',
-          singleLine ? 'w-[480px] h-10 mr-2 mb-1' : 'min-h-[100px]'
+    const handleKeydown: React.KeyboardEventHandler<HTMLDivElement> = e => {
+      if (!composingControl.visible && e.code === 'Enter')
+        document.execCommand('insertHTML', false, '<br>');
+    };
+
+    return (
+      <div className={classNames('mp-mentions', className, style['mp-mentions'])}>
+        {!!label && (
+          <label htmlFor={name} className='block mb-1 text-gray-5'>
+            {label}
+          </label>
         )}
-        singleLine={singleLine}
-        value={value}
-        onChange={e => {
-          onChange(e.target.value);
-        }}
-        placeholder={placeholder}
-      >
-        <Mention
-          trigger='@'
-          data={options}
-          renderSuggestion={(suggestion, _, __, ___, isFocused) =>
-            renderSuggestion(suggestion, isFocused)
-          }
+        <ContentEditable
+          data-ph={placeholder}
+          className={classNames(
+            'w-full p-2',
+            'bg-white',
+            'border border-solid outline-none rounded',
+            error ? 'border-danger' : 'border-input',
+            singleLine ? 'w-[480px] h-10 mr-2 mb-1' : 'min-h-[100px]'
+          )}
+          innerRef={internalRef}
+          html={value || ''}
+          onChange={(event: ContentEditableEvent) => {
+            setValue(event.target.value);
+          }}
+          spellCheck={false}
+          onCompositionStart={composingControl.open}
+          onCompositionEnd={composingControl.close}
+          onKeyDown={handleKeydown}
         />
-        <Mention
-          trigger='＠'
-          data={options}
-          renderSuggestion={(suggestion, _, __, ___, isFocused) =>
-            renderSuggestion(suggestion, isFocused)
-          }
-        />
-      </MentionsInput>
-    </div>
-  );
-};
+      </div>
+    );
+  }
+);
+
+Mentions.displayName = 'Mentions';

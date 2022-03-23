@@ -1,22 +1,14 @@
 .mp-mentions {
-  :global(textarea),
-  :global(input) {
-    @apply p-2 outline-none;
+  :global(* *) {
+    @apply inline-block;
   }
 
-  :global(.w-full__suggestions) {
-    @apply !mt-5;
+  :global(.mention-item) {
+    @apply inline-block py-0.5 px-2 text-white bg-secondary rounded-full text-medium-sm;
   }
 
-  :global(strong) {
-    @apply inline-block transform scale-x-90 rounded-full bg-secondary;
-  }
-
-  :global(.w-full__highlighter) {
-    @apply z-50 p-2 pointer-events-none;
-
-    :global(strong) {
-      @apply !text-white;
-    }
+  :global([contentEditable='true']:empty:not(:focus)::before) {
+    content: attr(data-ph);
+    @apply text-gray-500;
   }
 }

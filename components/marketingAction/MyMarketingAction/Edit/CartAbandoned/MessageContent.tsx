@@ -5,12 +5,11 @@ import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 import { useWatch } from 'react-hook-form';
 import { ColorGroup } from '../ColorSettingsSection/ColorGroup';
-import { EmojiSign } from '../EmojiSign';
 import { LinePreview } from '../LinePreview';
 import { MailPreview } from '../MailPreview';
+import { MessageBodyInput } from '../MessageBodyInput';
 import { MessageContentPreviewType } from '../MessageContentPreview';
 import { PreviewOverlay } from '../PreviewOverlay';
-import { VariableSign } from '../VariableSign';
 import { OPTIONS } from './CartAbandoned';
 
 type Props = {
@@ -55,17 +54,7 @@ export const MessageContent = ({ messageNum }: Props) => {
             <div className='mb-4'>
               <div className='mb-2.5 font-semibold text-secondary text-medium'>{t('bodyText')}</div>
 
-              <Form.Mentions
-                options={[{ label: t('brandName'), value: 'brandName' }]}
-                name={`${messageNum}.text_email`}
-                className='mt-5'
-                label={
-                  <div className='flex gap-2 mb-2'>
-                    <VariableSign />
-                  </div>
-                }
-                rules={{ required: true }}
-              />
+              <MessageBodyInput showEmoji={false} name={`${messageNum}.text_email`} />
             </div>
           </div>
           <div>
@@ -110,20 +99,7 @@ export const MessageContent = ({ messageNum }: Props) => {
                     />
                   ))}
                 </Form.RadioGroup>
-                {showLineMsg && (
-                  <Form.Mentions
-                    options={[{ label: t('brandName'), value: 'brandName' }]}
-                    name={`${messageNum}.text_line`}
-                    className='mt-5'
-                    label={
-                      <div className='flex gap-2 mb-2'>
-                        <EmojiSign />
-                        <VariableSign />
-                      </div>
-                    }
-                    rules={{ required: true }}
-                  />
-                )}
+                {showLineMsg && <MessageBodyInput name={`${messageNum}.text_line`} />}
               </div>
             </div>
             <div>

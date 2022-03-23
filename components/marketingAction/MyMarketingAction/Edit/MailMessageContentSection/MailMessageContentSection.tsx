@@ -1,8 +1,8 @@
 import { Form, Icon, Section } from '@/components';
 import { useTranslation } from 'next-i18next';
-import { VariableSign } from '../VariableSign';
 import { MessageContentPreview } from '../MessageContentPreview';
 import { useWatch } from 'react-hook-form';
+import { MessageBodyInput } from '../MessageBodyInput';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {
@@ -34,18 +34,7 @@ export const MailMessageContentSection = ({ namePrefix, onPreviewClick }: Props)
             label={<span className='text-secondary text-medium'>{t('headLines')}</span>}
             rules={{ required: true }}
           />
-          <Form.Mentions
-            options={[{ label: t('brandName'), value: 'brandName' }]}
-            name={bodyName}
-            className='mt-5'
-            label={
-              <div>
-                <span className='text-secondary text-medium'>{t('bodyText')}</span>
-                <VariableSign className='mt-2' />
-              </div>
-            }
-            rules={{ required: true }}
-          />
+          <MessageBodyInput name={bodyName} />
         </div>
         <MessageContentPreview body={body} headline={headline} onPreviewClick={onPreviewClick} />
       </div>

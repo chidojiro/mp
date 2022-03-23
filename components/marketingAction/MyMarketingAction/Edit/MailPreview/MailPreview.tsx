@@ -1,6 +1,6 @@
 import { Button } from '@/components/common';
-import { MentionValuePattern } from '@/constants';
 import { ClassName } from '@/types';
+import { MentionUtils } from '@/utils';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
@@ -43,7 +43,7 @@ export const MailPreview = ({
 }: Props) => {
   const { t } = useTranslation('marketingAction');
 
-  const parsedBody = body?.replaceAll(MentionValuePattern, '○○○');
+  const parsedBody = MentionUtils.toPreviewString(body ?? '');
 
   return (
     <div
