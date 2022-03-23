@@ -16,6 +16,8 @@ const insert = ({ value, label }: Option<string>) => {
 };
 
 const toPreviewString = (value: string) => {
+  if (typeof value !== 'string') return '';
+
   return value
     .replaceAll('<br>', '\n')
     .replaceAll('<div>', '')
