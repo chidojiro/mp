@@ -65,8 +65,8 @@ export const Mentions = React.forwardRef(
             setValue(event.target.value);
           }}
           spellCheck={false}
-          onCompositionStart={composingControl.open}
-          onCompositionEnd={composingControl.close}
+          onCompositionStart={() => composingControl.open()}
+          onCompositionEnd={() => composingControl.close()}
           onKeyDown={handleKeydown}
         />
       </div>
