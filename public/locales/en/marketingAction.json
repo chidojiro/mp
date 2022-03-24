@@ -185,5 +185,6 @@
   "thanksPageUrl": "Thanks Page URL",
   "cartPageUrl": "Cart page URL",
   "productDetailPageUrl": "Product detail page URL",
-  "categoryPageUrl": "Category page URL"
+  "categoryPageUrl": "Category page URL",
+  "variableText": "You can enter variables by pressing the @ key"
 }

@@ -184,5 +184,6 @@
   "thanksPageUrl": "サンクスページURL",
   "cartPageUrl": "カートページURL",
   "productDetailPageUrl": "商品詳細ページURL",
-  "categoryPageUrl": "カテゴリページURL"
+  "categoryPageUrl": "カテゴリページURL",
+  "variableText": "@キーを押して変数を入力できます"
 }
