@@ -17,10 +17,9 @@ export const EmojiSign = ({ className, onSelect }: Props) => {
   const { t } = useTranslation('marketingAction');
   const popoverControl = useVisibilityControl();
 
-  const onSelectEmoji = (emoji: BaseEmoji) => {
+  const handleEmojiSelect = (emoji: BaseEmoji) => {
     const sym = emoji.unified.split('-');
-    const codesArray: any = [];
-    sym.forEach((el: any) => codesArray.push('0x' + el));
+    const codesArray: any[] = sym.map((el: any) => '0x' + el);
     onSelect?.(String.fromCodePoint(...codesArray));
   };
 
@@ -40,7 +39,7 @@ export const EmojiSign = ({ className, onSelect }: Props) => {
         </div>
       }
     >
-      <Picker title=':grinning:' emoji='grinning' onSelect={onSelectEmoji} />
+      <Picker title=':grinning:' emoji='grinning' onSelect={handleEmojiSelect} />
     </Popover>
   );
 };
