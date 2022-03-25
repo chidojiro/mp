@@ -1,10 +1,6 @@
 .mp-mentions {
-  :global(* *) {
-    @apply inline-block;
-  }
-
-  :global(.mention-item) {
-    @apply inline-block py-0.5 px-2 text-white bg-secondary rounded-full text-medium-sm;
+  :global(.mention-item--inner) {
+    @apply inline-block py-0.5 px-2 mx-1 text-white bg-secondary rounded-full text-medium-sm;
   }
 
   :global([contentEditable='true']:empty:not(:focus)::before) {

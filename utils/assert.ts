@@ -5,7 +5,7 @@ import ldIsUndefined from 'lodash/isUndefined';
 import React from 'react';
 
 const isRef = <T = Element>(target: unknown): target is React.RefObject<T> =>
-  Object.prototype.hasOwnProperty.call(target, 'current');
+  !!target && Object.prototype.hasOwnProperty.call(target, 'current');
 
 const isArray = ldIsArray;
 const isNull = ldIsNull;

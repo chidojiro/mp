@@ -8,8 +8,9 @@ import { PopperProps, usePopper } from 'react-popper';
 export type Props = Pick<PopperProps<any>, 'placement'> &
   Children & {
     usePortal?: boolean;
-    trigger: JSX.Element;
+    trigger: JSX.Element | HTMLElement;
     control?: VisibilityControl;
+    offset?: [number, number];
   };
 
 export const Popover = ({
@@ -18,33 +19,47 @@ export const Popover = ({
   trigger,
   control: controlProp,
   placement = 'bottom-start',
+  offset = [0, 4],
 }: Props) => {
   const [triggerElement, setTriggerElement] = useState(null);
   const popoverRef = React.useRef(null);
 
-  const { styles, attributes } = usePopper(triggerElement, popoverRef.current, {
-    placement,
-    modifiers: [
-      {
-        name: 'offset',
-        options: {
-          offset: [0, 4],
+  const isHTMLElementTrigger = !!(trigger as HTMLElement)?.tagName;
+
+  const { styles, attributes, forceUpdate } = usePopper(
+    isHTMLElementTrigger ? (trigger as any) : triggerElement,
+    popoverRef.current,
+    {
+      placement,
+      modifiers: [
+        {
+          name: 'offset',
+          options: {
+            offset,
+          },
         },
-      },
-    ],
-  });
+      ],
+    }
+  );
+
+  React.useEffect(() => {
+    if (isHTMLElementTrigger) {
+      forceUpdate?.();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trigger, forceUpdate, (trigger as HTMLElement)?.innerHTML]);
 
   const ownControl = useVisibilityControl();
   const control = controlProp ?? ownControl;
 
-  const clonedTrigger = React.useMemo(
-    () =>
-      React.cloneElement(trigger, {
-        ref: setTriggerElement,
-        onClick: control.toggle,
-      }),
-    [control, trigger]
-  );
+  const clonedTrigger = React.useMemo(() => {
+    if (isHTMLElementTrigger || !trigger) return null;
+
+    return React.cloneElement(trigger as any, {
+      ref: setTriggerElement,
+      onClick: control.toggle,
+    });
+  }, [control.toggle, isHTMLElementTrigger, trigger]);
 
   useOnClickOutside([popoverRef, triggerElement], control.close);
 
