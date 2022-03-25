@@ -38,7 +38,7 @@ const dashboardCardHeaderClasses = (status: string, index: number, length: numbe
     'rounded-tl-[10px]': index === 0,
     'rounded-tr-[10px]': index === length - 1,
     'border-r': index < length - 1,
-    'flex flex-col text-white relative min-w-44 w-full h-20 flex items-center justify-end py-3 border-white':
+    'flex flex-col text-white relative min-w-44 w-full min-h-[5.6rem] h-[5.6rem] flex items-center justify-end p-3 border-white':
       true,
   });
 
@@ -48,7 +48,7 @@ const dashboardCardBodyClasses = (index: number, length: number) =>
 
     'rounded-br-[10px]': index === length - 1,
 
-    'flex flex-col min-w-44 w-full h-40 border-r border-b border-gray-500': true,
+    'flex flex-col min-w-44 w-full min-h-[10rem] h-full border-r border-b border-gray-500': true,
   });
 
 const getTriangleClasses = (dataSet: string) =>
@@ -156,11 +156,11 @@ export const CustomerSegmentTable = ({
     return (
       <>
         <div className='container flex items-center justify-between my-2'>
-          <div className='flex justify-center w-4 h-4 ml-6 text-left text-white rounded-full bg-primary text-medium-sm'>
+          <div className='flex justify-center w-4 h-4 ml-6 mr-2 text-left text-white rounded-full bg-primary text-medium-sm'>
             S
           </div>
           <div className='mr-6 text-right flex items-center justify-center'>
-            <div className='mr-2'>
+            <div className='mr-2 whitespace-nowrap'>
               {/* {data.webUsers === undefined ? '0' : data.webUsers} */}
               127
               {t('labelPeople')}
@@ -174,11 +174,11 @@ export const CustomerSegmentTable = ({
         </div>
 
         <div className='container flex items-center justify-between my-2'>
-          <div className='text-left ml-6 bg-[#06C755] rounded-full text-white h-4 w-4 flex justify-center text-medium-sm'>
+          <div className='text-left ml-6 mr-2 bg-[#06C755] rounded-full text-white h-4 w-4 flex justify-center text-medium-sm'>
             L
           </div>
           <div className='mr-6 text-right flex items-center justify-center'>
-            <div className='mr-2'>
+            <div className='mr-2 whitespace-nowrap'>
               {/* {data.lineUsers === undefined ? '0' : data.lineUsers} */}
               59
               {t('labelPeople')}
@@ -217,7 +217,7 @@ export const CustomerSegmentTable = ({
                 <div className='w-full text-medium h-full'>
                   {dataSet.target !== 'f0' ? (
                     <div className='container flex items-center justify-end my-2 text-right'>
-                      <div className='mr-6 font-bold text-regular'>
+                      <div className='mr-6 font-bold text-regular whitespace-nowrap'>
                         {dataSet.numOfCustomers}
                         {t('labelPeople')}
                       </div>
@@ -225,7 +225,7 @@ export const CustomerSegmentTable = ({
                   ) : (
                     <div className='container flex items-center justify-between my-2'>
                       <div className='ml-6 text-left'>{t('labelMember')}</div>
-                      <div className='mr-6 font-bold text-right text-regular'>
+                      <div className='mr-6 font-bold text-right text-regular whitespace-nowrap'>
                         {dataSet.members}
                         {t('labelPeople')}
                       </div>
@@ -237,7 +237,7 @@ export const CustomerSegmentTable = ({
                   {dataSet.target !== 'f0' ? (
                     <div className='container flex items-center justify-between my-2'>
                       <div className='ml-6 text-left'>{getFirstLabel(dataSet.target)}</div>
-                      <div className='mr-6 text-right'>
+                      <div className='mr-6 text-right whitespace-nowrap'>
                         {getFirstDataPoint(dataSet)}
                         {getEndLabel(dataSet.target)}
                       </div>
@@ -247,12 +247,14 @@ export const CustomerSegmentTable = ({
                   )}
 
                   <div className='container flex items-center justify-between my-2'>
-                    <div className='ml-6 text-left'>{getSecondLabel(dataSet.target)}</div>
+                    <div className='ml-6 text-left whitespace-nowrap'>
+                      {getSecondLabel(dataSet.target)}
+                    </div>
                     <div
                       className={
                         dataSet.target !== 'f0'
-                          ? 'text-right mr-6'
-                          : 'text-right mr-6 font-bold text-regular'
+                          ? 'text-right mr-6 whitespace-nowrap'
+                          : 'text-right mr-6 font-bold text-regular whitespace-nowrap'
                       }
                     >
                       {getSecondDataPoint(dataSet)}
