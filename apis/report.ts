@@ -1,6 +1,6 @@
 import { RestApi, RestApiConfig } from './base';
 
-const mockData = [
+export const mockData = [
   {
     target: 'f0',
     numOfCustomers: '',
