@@ -1,5 +1,5 @@
 .mp-mentions {
-  :global(.mention-item--inner) {
+  :global(.mention-item) {
     @apply inline-block py-0.5 px-2 mx-1 text-white bg-secondary rounded-full text-medium-sm;
   }
 
