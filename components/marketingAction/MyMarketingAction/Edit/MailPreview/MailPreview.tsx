@@ -44,6 +44,7 @@ export const MailPreview = ({
   const { t } = useTranslation('marketingAction');
 
   const parsedBody = MentionUtils.toPreviewString(body ?? '');
+  const parsedHeadline = MentionUtils.toPreviewString(headline ?? '');
 
   return (
     <div
@@ -58,7 +59,7 @@ export const MailPreview = ({
         <h2 className='mb-4 text-center text-secondary'>Brand Logo</h2>
         <div className='flex justify-center w-full'>
           <h3 className='w-[160px] mb-4 whitespace-pre-line text-gray-dark text-center'>
-            {headline}
+            {parsedHeadline}
           </h3>
         </div>
         <div className='mb-3 font-semibold'>山田 太郎 様</div>

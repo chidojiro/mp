@@ -76,7 +76,7 @@ export const MarketingAction = () => {
           {
             question: t('msgContentEmail'),
             answers: [
-              { question: t('headLines'), response: 'お買い忘れはございませんか？' },
+              { question: t('headLines'), response: 'お買い忘れはございませんか？<br>' },
               {
                 question: t('bodyText'),
                 response:

@@ -1,6 +1,7 @@
 import { Form, Icon } from '@/components';
 import { RadioGroup } from '@/components/common';
 import { useVisibilityControl } from '@/hooks';
+import { Option } from '@/types';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 import { useWatch } from 'react-hook-form';
@@ -36,6 +37,11 @@ export const MessageContent = ({ messageNum }: Props) => {
     previewMessageControl.open();
   };
 
+  const headingMentionOptions: Option[] = [
+    { label: t('customerName'), value: 'customerName' },
+    { label: t('brandName'), value: 'brandName' },
+  ];
+
   return (
     <div className='px-10 -mx-10 border-t-4 border-white mt-7 pb-7'>
       <div className='px-10 -mx-10 border-b-4 border-white mt-7'>
@@ -49,7 +55,10 @@ export const MessageContent = ({ messageNum }: Props) => {
               <div className='mb-2.5 font-semibold text-secondary text-medium'>
                 {t('headLines')}
               </div>
-              <Form.TextArea name={`${messageNum}.headline_email`} />
+              <Form.Mentions
+                options={headingMentionOptions}
+                name={`${messageNum}.headline_email`}
+              />
             </div>
             <div className='mb-4'>
               <div className='mb-2.5 font-semibold text-secondary text-medium'>{t('bodyText')}</div>
