@@ -17,14 +17,22 @@ export const Dropdown = ({ options = [], onSelect, control: controlProp, ...rest
   const ownControl = useVisibilityControl();
   const control = controlProp ?? ownControl;
 
+  const handleSelect = React.useCallback(
+    (value: string) => {
+      onSelect?.(value);
+      control.close();
+    },
+    [control, onSelect]
+  );
+
   const keydownHandlers: Record<string, any> = React.useMemo(
     () => ({
       ArrowDown: () => setFocusedIndex(prev => Math.min(prev + 1, options.length - 1)),
       ArrowUp: () => setFocusedIndex(prev => Math.max(prev - 1, 0)),
-      Enter: () => onSelect?.(options[focusedIndex].value),
+      Enter: () => handleSelect(options[focusedIndex].value),
       Escape: () => control.close(),
     }),
-    [control, focusedIndex, onSelect, options]
+    [control, focusedIndex, handleSelect, options]
   );
 
   const handleArrowNavigation = React.useCallback(
@@ -58,7 +66,7 @@ export const Dropdown = ({ options = [], onSelect, control: controlProp, ...rest
       <div className={classNames('mp-dropdown', 'p-2.5', 'bg-white', 'rounded', 'shadow-md')}>
         {options.map(({ label, value }, idx) => (
           <div
-            onClick={() => onSelect?.(value)}
+            onClick={() => handleSelect(value)}
             onMouseEnter={() => setFocusedIndex(idx)}
             className={classNames(
               'mp-dropdown-option',

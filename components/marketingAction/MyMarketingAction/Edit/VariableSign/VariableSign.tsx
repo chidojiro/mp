@@ -1,5 +1,5 @@
 import { Icon } from '@/components';
-import { Popover } from '@/components/common';
+import { Dropdown } from '@/components';
 import { useVisibilityControl } from '@/hooks';
 import { ClassName, Option } from '@/types';
 import classNames from 'classnames';
@@ -27,14 +27,15 @@ export const VariableSign = ({ className, onSelect }: Props) => {
 
   const popoverControl = useVisibilityControl();
 
-  const handleSelect = (option: Option) => {
-    onSelect?.(option);
-    popoverControl.close();
+  const handleSelect = (selectedValue: string) => {
+    onSelect?.(options.find(({ value }) => value === selectedValue)!);
   };
 
   return (
-    <Popover
+    <Dropdown
       control={popoverControl}
+      options={options}
+      onSelect={handleSelect}
       trigger={
         <div
           className={classNames(
@@ -47,21 +48,6 @@ export const VariableSign = ({ className, onSelect }: Props) => {
           <span className='text-medium text-gray-dark'>{t('variable')}</span>
         </div>
       }
-    >
-      <div className='bg-white border border-solid rounded border-input'>
-        {options.map(option => (
-          <div
-            onClick={e => {
-              e.preventDefault();
-              handleSelect(option);
-            }}
-            key={option.value}
-            className='px-2 py-1 border-b border-solid cursor-pointer select-none border-input last:border-0 hover:bg-secondary hover:text-white text-medium'
-          >
-            {option.label}
-          </div>
-        ))}
-      </div>
-    </Popover>
+    />
   );
 };
