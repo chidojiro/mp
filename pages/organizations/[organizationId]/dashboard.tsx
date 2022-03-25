@@ -1,15 +1,13 @@
-import { ReportApi, mockData } from '@/apis';
+import { mockData } from '@/apis';
 import { Icon, Layout } from '@/components';
 import { CSVButton } from '@/components/CSVButton/CSVButton';
 import { CustomerReportButton } from '@/components/CustomerReportButton/CustomerReportButton';
 import { CustomerSegmentTable } from '@/components/CustomerSegmentTable/CustomerSegmentTable';
-import { ServerSidePropsProvider } from '@/contexts';
 import { NextUtils } from '@/utils/next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import useSWR from 'swr';
 
-export const getServerSideProps = async ({ locale }: any) => {
+export const getServerSideProps = async ({ locale = 'ja' }: any) => {
   return {
     props: {
       ...(await serverSideTranslations(locale!)),
