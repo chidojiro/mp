@@ -1,4 +1,4 @@
-import { ReportApi } from '@/apis';
+import { ReportApi, mockData } from '@/apis';
 import { Icon, Layout } from '@/components';
 import { CSVButton } from '@/components/CSVButton/CSVButton';
 import { CustomerReportButton } from '@/components/CustomerReportButton/CustomerReportButton';
@@ -9,23 +9,18 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import useSWR from 'swr';
 
-export const getServerSideProps = NextUtils.withProps(
-  'profile',
-  'rfmReport'
-)(async ({ locale }, result) => {
+export const getServerSideProps = async ({ locale }: any) => {
   return {
-    ...result,
     props: {
-      ...result.props,
       ...(await serverSideTranslations(locale!)),
     },
   };
-});
+};
 
 function Dashboard(props: any) {
   const { t } = useTranslation('dashboard');
 
-  const { data } = useSWR('/api/user', ReportApi.rfm_report, { fallbackData: props.rfmReport });
+  const data = mockData;
 
   return (
     <ServerSidePropsProvider props={props}>
