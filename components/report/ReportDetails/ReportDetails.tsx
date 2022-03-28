@@ -1,9 +1,7 @@
 import { Layout } from '@/components';
-import { Button } from '@/components/common';
 import { ChevronRightIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React from 'react';
 import { TargetFilter } from '../TargetFilter';
 import { ReportTable } from './ReportTable';
@@ -14,7 +12,6 @@ type Props = {};
 // eslint-disable-next-line no-empty-pattern
 export const ReportDetails = ({}: Props) => {
   const { t } = useTranslation('report');
-  const { pathname, query } = useRouter();
 
   return (
     <Layout title={t('measureReport')} subTitle={t('cartAbandoned')}>
@@ -31,7 +28,7 @@ export const ReportDetails = ({}: Props) => {
         href='/organizations/1/projects/1/reports/action-reports/line-email?targets=all'
       >
         <a className='flex justify-end mt-5'>
-          <div className='flex text-gray-600 items-center transform translate-x-2'>
+          <div className='flex items-center text-gray-600 transform translate-x-2'>
             {t('returnToList')}
             <ChevronRightIcon
               scale={12}
