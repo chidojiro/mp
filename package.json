@@ -10,7 +10,8 @@
     "lint": "next lint",
     "prettify": "prettier --write .",
     "prepare": "husky install",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "analyze": "ANALYZE=true yarn build"
   },
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.23",
@@ -51,6 +52,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^12.1.1",
     "@storybook/addon-actions": "^6.4.18",
     "@storybook/addon-essentials": "^6.4.18",
     "@storybook/addon-links": "^6.4.18",
