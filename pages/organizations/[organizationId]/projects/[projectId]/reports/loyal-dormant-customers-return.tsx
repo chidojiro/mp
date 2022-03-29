@@ -1,10 +1,10 @@
 import { ConversionRateChart, CustomerReportButton, Icon, Layout } from '@/components';
 import { ServerSidePropsProvider } from '@/contexts';
-import { NextUtils } from '@/utils';
+import { SSR } from '@/ssr';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-export const getServerSideProps = NextUtils.withProps('profile')(async ({ locale }, result) => {
+export const getServerSideProps = SSR.withProps('profile')(async ({ locale }, result) => {
   return {
     ...result,
     props: {

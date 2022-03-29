@@ -1,4 +1,4 @@
-import { NextUtils } from '@/utils';
+import { DomUtils } from '@/utils';
 import React from 'react';
 import {
   Bar,
@@ -27,7 +27,7 @@ export type ChartInfo = {
 };
 
 export const ConversionRateChart = ({ bar1, bar2, bar3, line, data }: ConversionRateChartProps) => {
-  if (NextUtils.isServer()) return <div></div>;
+  if (DomUtils.isServer()) return <div></div>;
 
   const barWidth = bar3 ? 16 : 24;
 

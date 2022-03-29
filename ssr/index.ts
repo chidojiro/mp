@@ -1,9 +1,9 @@
-import { ProfileApis } from '@/apis/profile';
-import { ReportApi } from '@/apis/report';
+import { ProfileApis, ReportApi } from '@/apis';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 
 const withPropsMap = {
   profile: ProfileApis.get,
+  rfmReport: ReportApi.rfm_report,
 };
 
 const withProps =
@@ -45,9 +45,6 @@ const withProps =
     };
   };
 
-const isServer = () => typeof window === 'undefined';
-
-export const NextUtils = {
+export const SSR = {
   withProps,
-  isServer,
 };

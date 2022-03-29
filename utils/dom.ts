@@ -24,4 +24,6 @@ const getCoords = (elem: Element) => {
   };
 };
 
-export const DomUtils = { getCoords };
+const isServer = () => typeof window === 'undefined';
+
+export const DomUtils = { getCoords, isServer };
