@@ -1,5 +1,5 @@
-import { ProfileApis } from '../apis/profile';
-import { ReportApi } from '../apis/report';
+import { ProfileApis } from '@/apis/profile';
+import { ReportApi } from '@/apis/report';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 
 const withPropsMap = {
