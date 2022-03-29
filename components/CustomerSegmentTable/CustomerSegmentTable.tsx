@@ -161,13 +161,11 @@ export const CustomerSegmentTable = ({
           </div>
           <div className='mr-6 text-right flex items-center justify-center'>
             <div className='mr-2 whitespace-nowrap'>
-              {/* {data.webUsers === undefined ? '0' : data.webUsers} */}
-              127
+              {data.webUsers === undefined ? '0' : data.webUsers}
               {t('labelPeople')}
             </div>
             <div>
-              {/* ({data.webPercentage === undefined ? '0' : data.webPercentage.toFixed(1)} */}
-              (54.2
+              {data.webPercentage === undefined ? '0' : data.webPercentage.toFixed(1)}
               {t('labelPercent')})
             </div>
           </div>
@@ -179,13 +177,11 @@ export const CustomerSegmentTable = ({
           </div>
           <div className='mr-6 text-right flex items-center justify-center'>
             <div className='mr-2 whitespace-nowrap'>
-              {/* {data.lineUsers === undefined ? '0' : data.lineUsers} */}
-              59
+              {data.lineUsers === undefined ? '0' : data.lineUsers}
               {t('labelPeople')}
             </div>
             <div>
-              {/* ({data.linePercentage === undefined ? '0' : data.linePercentage.toFixed(1)} */}
-              (25.2
+              ({data.linePercentage === undefined ? '0' : data.linePercentage.toFixed(1)}
               {t('labelPercent')})
             </div>
           </div>
