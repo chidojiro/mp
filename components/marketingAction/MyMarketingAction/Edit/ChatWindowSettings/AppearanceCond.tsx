@@ -20,7 +20,11 @@ export const AppearanceCond = () => {
           <span className='w-20'>PC:</span>
           <div className='flex items-center'>
             <div>{t('afterOpening')}</div>
-            <Form.Input type='number' className='w-20 mx-2.5' name='step3.pc_appearance_time' />
+            <Form.Input
+              type='number'
+              className='w-20 mx-2.5'
+              name='chat_settings.pc_appearance_time'
+            />
             <span>{t('secondsAfterAprearance')}</span>
           </div>
         </div>
@@ -28,7 +32,11 @@ export const AppearanceCond = () => {
           <span className='w-20'>{t('mobile')}:</span>
           <div className='flex items-center'>
             <div>{t('afterOpening')}</div>
-            <Form.Input type='number' className='w-20 mx-2.5' name='step3.mobile_appearance_time' />
+            <Form.Input
+              type='number'
+              className='w-20 mx-2.5'
+              name='chat_settings.mobile_appearance_time'
+            />
             <span>{t('secondsAfterAprearance')}</span>
           </div>
         </div>
@@ -38,7 +46,7 @@ export const AppearanceCond = () => {
         <div className='flex mb-2'>
           <span className='w-20'>PC:</span>
           <div>
-            <Form.RadioGroup name='step3.pc_display_position'>
+            <Form.RadioGroup name='chat_settings.pc_display_position'>
               <RadioGroup.Option
                 colorScheme='secondary'
                 className='mb-2.5'
@@ -54,15 +62,15 @@ export const AppearanceCond = () => {
             </Form.RadioGroup>
             <div className='flex items-center'>
               <span>{t('upFromDefaultPos')}</span>
-              <Form.Input type='number' className='w-20 mx-2.5' name='step3.pc_position' />
-              <Form.Select options={unitOptions} className='w-20' name='step3.pc_unit' />
+              <Form.Input type='number' className='w-20 mx-2.5' name='chat_settings.pc_position' />
+              <Form.Select options={unitOptions} className='w-20' name='chat_settings.pc_unit' />
             </div>
           </div>
         </div>
         <div className='flex mb-2'>
           <span className='w-20'>{t('mobile')}</span>
           <div>
-            <Form.RadioGroup name='step3.mobile_display_position'>
+            <Form.RadioGroup name='chat_settings.mobile_display_position'>
               <RadioGroup.Option
                 colorScheme='secondary'
                 className='mb-2.5'
@@ -78,8 +86,16 @@ export const AppearanceCond = () => {
             </Form.RadioGroup>
             <div className='flex items-center'>
               <span>{t('upFromDefaultPos')}</span>
-              <Form.Input type='number' className='w-20 mx-2.5' name='step3.mobile_position' />
-              <Form.Select options={unitOptions} className='w-20' name='step3.mobile_unit' />
+              <Form.Input
+                type='number'
+                className='w-20 mx-2.5'
+                name='chat_settings.mobile_position'
+              />
+              <Form.Select
+                options={unitOptions}
+                className='w-20'
+                name='chat_settings.mobile_unit'
+              />
             </div>
           </div>
         </div>

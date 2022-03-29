@@ -4,7 +4,7 @@ import { VisibilityControl } from '@/hooks';
 import { Device } from '@/types';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
-import { ChatPreview } from '../ChatPreview';
+import { ChatPreview } from './ChatPreview';
 
 type Props = {
   color: string;

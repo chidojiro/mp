@@ -186,5 +186,9 @@
   "cartPageUrl": "Cart page URL",
   "productDetailPageUrl": "Product detail page URL",
   "categoryPageUrl": "Category page URL",
-  "variableText": "You can enter variables by pressing the @ key"
+  "variableText": "You can enter variables by pressing the @ key",
+  "csvFileUpload": "CSV file upload",
+  "downloadTemplate": "Download Template",
+  "downloadTemplateDesc": "Download the template and enter your recommendation diagnostic content.",
+  "download": "Download"
 }
