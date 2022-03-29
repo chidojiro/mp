@@ -3,8 +3,9 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { CartAbandoned } from './CartAbandoned';
 import { DeliveryAfterPurchase } from './DeliveryAfterPurchase';
-import { RecommendedCategory } from './RecommendedCategory';
+import { RankingByCategory } from './RankingByCategory';
 import { FreeShipping } from './FreeShipping';
+import { RecommendedBot } from './RecommendedBot';
 
 export const Edit = () => {
   const { t } = useTranslation('marketingAction');
@@ -18,9 +19,11 @@ export const Edit = () => {
       case 'step-delivery-after-purchase':
         return <DeliveryAfterPurchase />;
       case 'ranking-by-category':
-        return <RecommendedCategory />;
+        return <RankingByCategory />;
       case 'conditional-free-shipping':
         return <FreeShipping />;
+      case 'recommendation-diagnosis-bot':
+        return <RecommendedBot />;
       default:
         return null;
     }
@@ -30,6 +33,7 @@ export const Edit = () => {
     'step-delivery-after-purchase': 'stepDeliveryAfterPurchase',
     'cart-abandoned': 'cartAbandoned',
     'ranking-by-category': 'rankingBasedOnOverallPurchaseHistory',
+    'recommendation-diagnosis-bot': 'recommendationDiagnosisBotStatic',
   };
 
   return (

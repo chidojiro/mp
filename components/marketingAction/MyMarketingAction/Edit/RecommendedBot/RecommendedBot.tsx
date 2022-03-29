@@ -7,18 +7,18 @@ import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
+import { ChatOverlay } from '../ChatOverlay';
 import { Steps } from '../Steps';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';
-import { ChatOverlay } from './ChatOverlay';
+// import { ChatOverlay } from './ChatOverlay';
 import { Step1Settings } from './Step1Settings';
 import { Step2Settings } from './Step2Settings';
-import { Step3Settings } from './Step3Settings';
 
-export const RecommendedCategory = () => {
+export const RecommendedBot = () => {
   const { t } = useTranslation('marketingAction');
   const methods = useForm({
     defaultValues: {
-      step3: {
+      chat_settings: {
         color: '#E63E28',
         pc_appearance_time: '0',
         mobile_appearance_time: '0',
@@ -37,9 +37,8 @@ export const RecommendedCategory = () => {
 
   const step1 = useWatch({ name: 'aggregation_period', control });
   const targetCustomers = useWatch({ name: 'target_customers', control });
-  const step2 = useWatch({ name: 'step2', control });
-  const step3 = useWatch({ name: 'step3', control });
-  const isStep4Done = !!targetCustomers?.length;
+  const step2 = useWatch({ name: 'chat_settings', control });
+  const isStep3Done = !!targetCustomers?.length;
   const chatPreviewControl = useVisibilityControl();
 
   const onSubmit = (data: any) => {
@@ -80,11 +79,8 @@ export const RecommendedCategory = () => {
     } else if (stepId === 2 && isStep2Done()) {
       // TODO save step 2
       setStepDone(stepId, true);
-    } else if (stepId === 3 && isStep3Done()) {
+    } else if (stepId === 3 && isStep3Done) {
       // TODO save step 3
-      setStepDone(stepId, true);
-    } else if (stepId === 4 && isStep4Done) {
-      // TODO save step 4
       setStepDone(stepId, true);
     }
   };
@@ -93,31 +89,22 @@ export const RecommendedCategory = () => {
     return step2 && Object.keys(step2).every(field => step2[field]);
   };
 
-  const isStep3Done = () => {
-    return step3 && Object.keys(step3).every(field => step3[field]);
-  };
-
   const [steps, setSteps] = useState<Step[]>([
     {
       id: 1,
-      name: t('aggregationPeriodSettings'),
+      name: t('csvFileUpload'),
       children: <Step1Settings />,
     },
     {
       id: 2,
-      name: t('carouselDisplaySettings'),
-      children: <Step2Settings />,
-    },
-    {
-      id: 3,
       name: t('chatWindowSettings'),
-      children: <Step3Settings />,
+      children: <Step2Settings />,
       showPreviewBtn: true,
     },
     {
-      id: 4,
+      id: 3,
       name: t('targetSetting'),
-      children: <TargetCustomerGroup isNonMember={true} />,
+      children: <TargetCustomerGroup />,
     },
   ]);
 
@@ -128,10 +115,6 @@ export const RecommendedCategory = () => {
   useEffect(() => {
     setStepDone(2, false);
   }, [step2]);
-
-  useEffect(() => {
-    setStepDone(3, false);
-  }, [step3]);
 
   useEffect(() => {
     setStepDone(4, false);
@@ -159,10 +142,10 @@ export const RecommendedCategory = () => {
     <div className='relative'>
       <ActionContainer
         showUseTemplateBtn={false}
-        iconName='ranking'
-        title={t('rankingByCategoryBasedOnOverallPurchaseHistory')}
-        description={t('rankingByCategoryBasedOnOverallPurchaseHistoryDescription')}
-        descriptionImageUrl='/images/ranking-category.png'
+        iconName='chatbot'
+        title={t('recommendationDiagnosisBotStatic')}
+        description={t('recommendationDiagnosisBotStaticDescription')}
+        descriptionImageUrl='/images/recommendation-diagnosis-bot-description.png'
       ></ActionContainer>
       <Form methods={methods} className='mt-[60px]'>
         <Steps steps={steps} onConfirm={onConfirm} onShowPreview={onShowPreview} />
@@ -179,7 +162,7 @@ export const RecommendedCategory = () => {
         </div>
       </Form>
 
-      <ChatOverlay color={step3.color} control={chatPreviewControl} />
+      <ChatOverlay color={step2.color} control={chatPreviewControl} />
 
       <Modal control={modalControl}>
         <div className='text-center text-gray-dark'>

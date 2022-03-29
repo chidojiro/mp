@@ -3,12 +3,12 @@ import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { useWatch } from 'react-hook-form';
-import { ColorGroup } from '../../ColorSettingsSection/ColorGroup';
-import { ChatPreview } from '../ChatPreview';
+import { ColorGroup } from '../ColorSettingsSection/ColorGroup';
+import { ChatPreview } from '../ChatOverlay/ChatPreview';
 
 export const Appearance = () => {
   const { t } = useTranslation('marketingAction');
-  const color = useWatch({ name: 'step3.color' });
+  const color = useWatch({ name: 'chat_settings.color' });
   const textColor = color === '#FFFFFF' ? 'text-gray-dark' : 'text-white';
 
   return (
@@ -52,7 +52,7 @@ export const Appearance = () => {
       <div className='mb-3 text-gray-700 text-medium'>{t('selectColorTheme')}</div>
       <div className='mb-3 flex grid grid-cols-2 gap-2.5'>
         <div className=''>
-          <ColorGroup isFull={true} name='step3.color' cols={3} />
+          <ColorGroup isFull={true} name='chat_settings.color' cols={3} />
         </div>
         <div className='py-10 relative flex items-center justify-center min-h-[320px] rounded px-5 py-3.5 gap-2.5 bg-white'>
           <ChatPreview color={color} />
