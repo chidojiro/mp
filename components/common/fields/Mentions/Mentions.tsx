@@ -1,11 +1,11 @@
 import { useControllable, useVisibilityControl } from '@/hooks';
 import { ClassName, Option } from '@/types';
+import { MentionUtils } from '@/utils';
 import classNames from 'classnames';
 import React from 'react';
-import style from './Mentions.module.css';
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable';
 import { Dropdown } from '../../Dropdown';
-import { MentionUtils } from '@/utils';
+import style from './Mentions.module.css';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Props = ClassName & {
@@ -21,7 +21,6 @@ export type Props = ClassName & {
 };
 
 const mentionTriggerClassName = 'mention-trigger';
-const alphabetAtCode = 50;
 const japaneseAtCode = 229;
 
 // eslint-disable-next-line no-empty-pattern
@@ -41,21 +40,15 @@ export const Mentions = React.forwardRef(
     ref: any
   ) => {
     const [value, setValue] = useControllable({ value: valueProp, onChange });
-    const composingControl = useVisibilityControl();
     const internalRef = React.useRef<HTMLDivElement>(null);
     const dropdownControl = useVisibilityControl(true);
     const [mentionTriggerNode, setMentionTriggerNode] = React.useState<Element | null>(null);
-    const [previousKeystroke, setPreviousKeystore] = React.useState<
-      'ArrowLeft' | 'ArrowRight' | 'Backspace' | 'Delete' | null
-    >(null);
 
     React.useImperativeHandle(ref, () => internalRef.current);
 
     const handleKeydown: React.KeyboardEventHandler<HTMLDivElement> = e => {
-      if (['ArrowLeft', 'ArrowRight', 'Backspace', 'Delete'].includes(e.key)) {
-        setPreviousKeystore(e.key as any);
-        return;
-      }
+      const isComposing = (e.nativeEvent as any).isComposing;
+
       const containingNode = (window.getSelection() as any)?.baseNode.parentElement as Element;
 
       if (['Delete', 'Backspace'].includes(e.key)) {
@@ -66,7 +59,8 @@ export const Mentions = React.forwardRef(
 
         return;
       }
-      if ([alphabetAtCode].includes(e.keyCode)) {
+
+      if (e.key === '@' && e.keyCode !== japaneseAtCode) {
         e.preventDefault();
 
         document.execCommand(
@@ -74,11 +68,14 @@ export const Mentions = React.forwardRef(
           false,
           `<span class="${mentionTriggerClassName}">@</span>`
         );
-      } else if (e.key === ' ' && !(e.nativeEvent as any).isComposing) {
+        return;
+      }
+
+      if (e.key === ' ' && !isComposing) {
         e.preventDefault();
 
-        // make sure next words are separated from mention span
         document.execCommand('insertHTML', false, '<span>&nbsp;</span>');
+        return;
       }
     };
 
@@ -142,8 +139,6 @@ export const Mentions = React.forwardRef(
           html={value || ''}
           onChange={handleChange}
           spellCheck={false}
-          onCompositionStart={() => composingControl.open()}
-          onCompositionEnd={() => composingControl.close()}
           onKeyDown={handleKeydown}
           onSelect={handleEditContentSelect}
         />
