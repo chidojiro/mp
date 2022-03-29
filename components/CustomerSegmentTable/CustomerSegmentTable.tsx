@@ -165,7 +165,7 @@ export const CustomerSegmentTable = ({
               {t('labelPeople')}
             </div>
             <div>
-              {data.webPercentage === undefined ? '0' : data.webPercentage.toFixed(1)}
+              ({data.webPercentage === undefined ? '0' : data.webPercentage.toFixed(1)}
               {t('labelPercent')})
             </div>
           </div>
