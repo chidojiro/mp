@@ -74,7 +74,7 @@ export const Mentions = React.forwardRef(
           false,
           `<span class="${mentionTriggerClassName}">@</span>`
         );
-      } else if (e.key === ' ') {
+      } else if (e.key === ' ' && !(e.nativeEvent as any).isComposing) {
         e.preventDefault();
 
         // make sure next words are separated from mention span
