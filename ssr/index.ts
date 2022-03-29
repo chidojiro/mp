@@ -38,7 +38,7 @@ const withProps =
 
         return wrappedGetServerSideProps(context, { props });
       } catch (e: any) {
-        if (e?.response?.status === 401) {
+        if ([401, 403].includes(e?.response?.status)) {
           return { redirect: { destination: '/login' } };
         } else throw e;
       }

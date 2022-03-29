@@ -1,15 +1,23 @@
 import { Button, Form, Layout, Section } from '@/components';
+import { SSR } from '@/ssr';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-type Props = {};
+export const getServerSideProps = SSR.withProps('profile')(async ({ locale }, result) => {
+  return {
+    ...result,
+    props: {
+      ...result.props,
+      ...(await serverSideTranslations(locale!, ['common', 'account'])),
+    },
+  };
+});
 
-// eslint-disable-next-line no-empty-pattern
-const Password = ({}: Props) => {
+const Password = (props: any) => {
   const { t } = useTranslation('account');
   const router = useRouter();
 
@@ -27,19 +35,31 @@ const Password = ({}: Props) => {
         <Section>
           <Section.Title>{t('oldPassword')}</Section.Title>
           <Section.Content className='flex items-center justify-between'>
-            <Form.PasswordInput name='oldPassword' className='w-[480px]' />
+            <Form.PasswordInput
+              name='oldPassword'
+              className='w-[480px]'
+              rules={{ required: true }}
+            />
           </Section.Content>
         </Section>
         <Section>
           <Section.Title>{t('newPassword')}</Section.Title>
           <Section.Content className='flex items-center justify-between'>
-            <Form.PasswordInput name='newPassword' className='w-[480px]' />
+            <Form.PasswordInput
+              name='newPassword'
+              className='w-[480px]'
+              rules={{ required: true }}
+            />
           </Section.Content>
         </Section>
         <Section>
           <Section.Title>{t('newPasswordConfirmation')}</Section.Title>
           <Section.Content className='flex items-center justify-between'>
-            <Form.PasswordInput name='newPasswordConfirmation' className='w-[480px]' />
+            <Form.PasswordInput
+              name='newPasswordConfirmation'
+              className='w-[480px]'
+              rules={{ required: true }}
+            />
           </Section.Content>
         </Section>
         <div className='flex justify-center gap-5 h-[52px] mt-10'>
@@ -58,9 +78,3 @@ const Password = ({}: Props) => {
 };
 
 export default Password;
-
-export const getServerSideProps = async ({ locale }: any) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ['common', 'account'])),
-  },
-});

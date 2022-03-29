@@ -48,10 +48,14 @@ myAxios.interceptors.request.use(
 
 myAxios.interceptors.response.use(
   function (response) {
-    return response?.data?.result ?? response?.data?.results ?? response?.data;
+    return response.data.result ?? response.data.results ?? response.data.data ?? response.data;
   },
   function (error) {
-    if (error.response.status === 401 && !DomUtils.isServer() && location.pathname !== '/login')
+    if (
+      [401, 403].includes(error?.response?.status) &&
+      !DomUtils.isServer() &&
+      location.pathname !== '/login'
+    )
       location.href = '/login';
     return Promise.reject(error);
   }
