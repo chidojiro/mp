@@ -3,7 +3,6 @@ import { Icon, Layout } from '@/components';
 import { CSVButton } from '@/components/CSVButton/CSVButton';
 import { CustomerReportButton } from '@/components/CustomerReportButton/CustomerReportButton';
 import { CustomerSegmentTable } from '@/components/CustomerSegmentTable/CustomerSegmentTable';
-import { NextUtils } from '@/utils/next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
