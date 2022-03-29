@@ -4,7 +4,6 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 
 const withPropsMap = {
   profile: ProfileApis.get,
-  rfmReport: ReportApi.rfm_report,
 };
 
 const withProps =
