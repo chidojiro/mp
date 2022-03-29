@@ -185,5 +185,9 @@
   "cartPageUrl": "カートページURL",
   "productDetailPageUrl": "商品詳細ページURL",
   "categoryPageUrl": "カテゴリページURL",
-  "variableText": "@キーを押して変数を入力できます"
+  "variableText": "@キーを押して変数を入力できます",
+  "csvFileUpload": "CSVファイルアップロード",
+  "downloadTemplate": "テンプレートのダウンロード",
+  "downloadTemplateDesc": "テンプレートをダウンロードして、レコメンド診断コンテンツを入力してください。",
+  "download": "ダウンロード"
 }

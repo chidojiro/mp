@@ -2,7 +2,7 @@ import { useTranslation } from 'next-i18next';
 import { Appearance } from './Appearance';
 import { AppearanceCond } from './AppearanceCond';
 
-export const Step3Settings = () => {
+export const ChatWindowSettings = () => {
   const { t } = useTranslation('marketingAction');
   return (
     <>

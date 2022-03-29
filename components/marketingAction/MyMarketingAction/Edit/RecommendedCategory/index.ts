@@ -1,1 +1,0 @@
-export { RecommendedCategory } from './RecommendedCategory';
