@@ -80,7 +80,16 @@ export const Mentions = React.forwardRef(
     };
 
     const handleChange = (e: ContentEditableEvent) => {
-      setValue(e.target.value);
+      const value = e.target.value
+        .replaceAll(
+          '<br><span class="mention-item"',
+          '<br><span class="caret-holder"></span><span class="mention-item"'
+        )
+        .replaceAll(
+          /<span class="caret\-holder">(<br>)+<\/span>/g,
+          '<br><span class="caret-holder"></span>'
+        );
+      setValue(value);
     };
 
     const handleEditContentSelect: React.ReactEventHandler<HTMLDivElement> = e => {
