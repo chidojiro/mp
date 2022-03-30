@@ -5,11 +5,7 @@ const insert = ({ value, label }: Option<string>) => {
   document.execCommand(
     'insertHTML',
     false,
-    `
-    <span class='mention-item--left-zww'>&#8203</span>
-    <span class='mention-item' contenteditable=false data-value=${value}>${label}</span>
-    <span class='mention-item--right-zww'>&#8203</span>
-    `
+    `<span class='caret-holder'></span><span class='mention-item' contenteditable=false data-value=${value}>${label}</span><br>`
   );
 };
 
