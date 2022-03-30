@@ -16,75 +16,75 @@ export const getServerSideProps = SSR.withProps('profile')(async ({ locale }, re
 
 const data = [
   {
-    f1_uu: 232,
-    f2_uu: 48,
-    f2_conversion_rate: 20.7,
+    f1_uu: 3053,
+    f2_uu: 226,
+    f2_conversion_rate: 7.4,
     created_at: '2021/6',
   },
   {
-    f1_uu: 322,
-    f2_uu: 78,
-    f2_conversion_rate: 24.2,
+    f1_uu: 2335,
+    f2_uu: 176,
+    f2_conversion_rate: 7.5,
     created_at: '2021/7',
   },
   {
-    f1_uu: 289,
-    f2_uu: 70,
-    f2_conversion_rate: 24.2,
+    f1_uu: 2286,
+    f2_uu: 207,
+    f2_conversion_rate: 9.1,
     created_at: '2021/8',
   },
   {
-    f1_uu: 423,
-    f2_uu: 120,
-    f2_conversion_rate: 25.3,
+    f1_uu: 2070,
+    f2_uu: 138,
+    f2_conversion_rate: 6.7,
     created_at: '2021/9',
   },
   {
-    f1_uu: 399,
-    f2_uu: 101,
-    f2_conversion_rate: 28.4,
+    f1_uu: 1752,
+    f2_uu: 123,
+    f2_conversion_rate: 7.0,
     created_at: '2021/10',
   },
   {
-    f1_uu: 402,
-    f2_uu: 118,
-    f2_conversion_rate: 29.4,
+    f1_uu: 1929,
+    f2_uu: 148,
+    f2_conversion_rate: 7.7,
     created_at: '2021/11',
   },
   {
-    f1_uu: 411,
-    f2_uu: 120,
-    f2_conversion_rate: 29.2,
+    f1_uu: 2374,
+    f2_uu: 210,
+    f2_conversion_rate: 8.8,
     created_at: '2021/12',
   },
   {
-    f1_uu: 398,
-    f2_uu: 112,
-    f2_conversion_rate: 28.1,
+    f1_uu: 1997,
+    f2_uu: 167,
+    f2_conversion_rate: 8.4,
     created_at: '2022/1',
   },
   {
-    f1_uu: 422,
-    f2_uu: 129,
-    f2_conversion_rate: 30.6,
+    f1_uu: 1765,
+    f2_uu: 131,
+    f2_conversion_rate: 7.4,
     created_at: '2022/2',
   },
   {
-    f1_uu: 411,
-    f2_uu: 120,
-    f2_conversion_rate: 29.2,
+    f1_uu: 1629,
+    f2_uu: 118,
+    f2_conversion_rate: 7.2,
     created_at: '2022/3',
   },
   {
-    f1_uu: 398,
-    f2_uu: 112,
-    f2_conversion_rate: 28.1,
+    f1_uu: 1704,
+    f2_uu: 138,
+    f2_conversion_rate: 8.1,
     created_at: '2022/4',
   },
   {
-    f1_uu: 422,
-    f2_uu: 129,
-    f2_conversion_rate: 30.6,
+    f1_uu: 1811,
+    f2_uu: 154,
+    f2_conversion_rate: 8.5,
     created_at: '2022/5',
   },
 ];
@@ -106,20 +106,20 @@ function F2ConversionRateTrends(props: any) {
         <div className='grid grid-cols-2 gap-4 mt-6'>
           <CustomerReportButton
             featuredIcon={<Icon name='mails' size={30} />}
-            label={t('postPurchaseStepDelivery')}
-            subtext={t('mostRecentContribution', { amount: '256,000' })}
+            label='購入後ステップ配信'
+            subtext={t('mostRecentContribution', { amount: '556,000' })}
             clickActionText={t('viewReport')}
           />
           <CustomerReportButton
             featuredIcon={<Icon name='cart' size={30} />}
-            label={t('periodicDeliveryRecommendation')}
-            subtext={t('mostRecentContribution', { amount: '256,000' })}
+            label='かご落ち通知'
+            subtext={t('mostRecentContribution', { amount: '351,000' })}
             clickActionText={t('viewReport')}
           />
           <CustomerReportButton
             featuredIcon={<Icon name='chatbot' size={30} />}
-            label={t('birthdayCoupon')}
-            subtext={t('mostRecentContribution', { amount: '256,000' })}
+            label='レコメンド診断ボット（静的）'
+            subtext={t('mostRecentContribution', { amount: '216,000' })}
             clickActionText={t('viewReport')}
           />
         </div>

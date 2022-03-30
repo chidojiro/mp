@@ -107,19 +107,19 @@ function F2ConversionRateTrends(props: any) {
           <CustomerReportButton
             featuredIcon={<Icon name='mails' size={30} />}
             label={t('postPurchaseStepDelivery')}
-            subtext={t('mostRecentContribution', { amount: '256,000' })}
+            subtext={t('mostRecentContribution', { amount: '356,000' })}
             clickActionText={t('viewReport')}
           />
           <CustomerReportButton
             featuredIcon={<Icon name='cart' size={30} />}
-            label={t('periodicDeliveryRecommendation')}
-            subtext={t('mostRecentContribution', { amount: '256,000' })}
+            label='条件付き送料無料'
+            subtext={t('mostRecentContribution', { amount: '273,000' })}
             clickActionText={t('viewReport')}
           />
           <CustomerReportButton
             featuredIcon={<Icon name='chatbot' size={30} />}
-            label={t('birthdayCoupon')}
-            subtext={t('mostRecentContribution', { amount: '256,000' })}
+            label='レコメンド診断ボット（静的）'
+            subtext={t('mostRecentContribution', { amount: '216,000' })}
             clickActionText={t('viewReport')}
           />
         </div>
