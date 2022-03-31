@@ -41,25 +41,17 @@ export const Mentions = React.forwardRef(
   ) => {
     const [value, setValue] = useControllable({ value: valueProp, onChange });
     const internalRef = React.useRef<HTMLDivElement>(null);
-    const dropdownControl = useVisibilityControl(true);
+    const dropdownControl = useVisibilityControl();
     const [mentionTriggerNode, setMentionTriggerNode] = React.useState<Element | null>(null);
 
     React.useImperativeHandle(ref, () => internalRef.current);
 
     const handleKeydown: React.KeyboardEventHandler<HTMLDivElement> = e => {
-      const isComposing = (e.nativeEvent as any).isComposing;
-
-      const containingNode = (window.getSelection() as any)?.baseNode.parentElement as Element;
-
-      if (['Delete', 'Backspace'].includes(e.key)) {
-        if (containingNode.tagName === 'SPAN' && containingNode.className === 'mention-item') {
-          e.preventDefault();
-          containingNode.remove();
-        }
+      if (e.key === 'Enter' && mentionTriggerNode) {
+        e.preventDefault();
 
         return;
       }
-
       if (e.key === '@' && e.keyCode !== japaneseAtCode) {
         e.preventDefault();
 
@@ -70,35 +62,18 @@ export const Mentions = React.forwardRef(
         );
         return;
       }
-
-      if (e.key === ' ' && !isComposing) {
-        e.preventDefault();
-
-        document.execCommand('insertHTML', false, '<span>&nbsp;</span>');
-        return;
-      }
     };
 
     const handleChange = (e: ContentEditableEvent) => {
-      const value = e.target.value
-        .replaceAll(
-          '<br><span class="mention-item"',
-          '<br><span class="caret-holder"></span><span class="mention-item"'
-        )
-        .replaceAll(
-          /<span class="caret\-holder">(<br>)+<\/span>/g,
-          '<br><span class="caret-holder"></span>'
-        );
+      const value = e.target.value;
+
       setValue(value);
     };
 
     const handleEditContentSelect: React.ReactEventHandler<HTMLDivElement> = e => {
       const containingNode = (window.getSelection() as any)?.baseNode.parentElement as Element;
 
-      if (
-        containingNode.tagName == 'SPAN' &&
-        containingNode.className === mentionTriggerClassName
-      ) {
+      if (window.getSelection()?.focusNode?.textContent?.startsWith('@')) {
         setMentionTriggerNode(containingNode);
         dropdownControl.open();
       } else {
@@ -137,7 +112,6 @@ export const Mentions = React.forwardRef(
         <ContentEditable
           data-ph={placeholder}
           className={classNames(
-            'inline-block',
             'w-full p-2',
             'bg-white',
             'border border-solid outline-none rounded',

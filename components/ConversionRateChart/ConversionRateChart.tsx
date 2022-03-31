@@ -25,7 +25,9 @@ export type ChartInfo = {
   dataKey: string;
   title: string;
 };
-
+function numberWithCommas(x: number) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
 export const ConversionRateChart = ({ bar1, bar2, bar3, line, data }: ConversionRateChartProps) => {
   if (DomUtils.isServer()) return <div></div>;
 
@@ -86,16 +88,34 @@ export const ConversionRateChart = ({ bar1, bar2, bar3, line, data }: Conversion
             orientation='right'
           />
           <Bar dataKey={bar1.dataKey} barSize={barWidth} fill='#FFBA00' textAnchor='start'>
-            <LabelList dataKey={bar1.dataKey} position='top' stroke='#FFBA00' fontSize={10} />
+            <LabelList
+              dataKey={bar1.dataKey}
+              formatter={(v: string) => numberWithCommas(parseInt(v))}
+              position='top'
+              stroke='#FFBA00'
+              fontSize={10}
+            />
           </Bar>
           {!!bar2 && (
             <Bar dataKey={bar2.dataKey} barSize={barWidth} fill='#55C5D9' textAnchor='start'>
-              <LabelList dataKey={bar2.dataKey} position='top' stroke='#55C5D9' fontSize={10} />
+              <LabelList
+                dataKey={bar2.dataKey}
+                position='top'
+                stroke='#55C5D9'
+                fontSize={10}
+                formatter={(v: string) => numberWithCommas(parseInt(v))}
+              />
             </Bar>
           )}
           {!!bar3 && (
             <Bar dataKey={bar3.dataKey} barSize={barWidth} fill='#FF7F5C' textAnchor='start'>
-              <LabelList dataKey={bar3.dataKey} position='top' stroke='#FF7F5C' fontSize={10} />
+              <LabelList
+                dataKey={bar3.dataKey}
+                position='top'
+                formatter={(v: string) => numberWithCommas(parseInt(v))}
+                stroke='#FF7F5C'
+                fontSize={10}
+              />
             </Bar>
           )}
           {!!line && (

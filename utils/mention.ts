@@ -5,7 +5,7 @@ const insert = ({ value, label }: Option<string>) => {
   document.execCommand(
     'insertHTML',
     false,
-    `<span class='caret-holder'></span><span class='mention-item' contenteditable=false data-value=${value}>${label}</span><br>`
+    `<span class='caret-holder'></span><span class='mention-item' contenteditable=false data-value=${value}>${label}</span><span class='caret-holder'></span>`
   );
 };
 
