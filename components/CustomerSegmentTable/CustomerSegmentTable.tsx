@@ -157,7 +157,7 @@ export const CustomerSegmentTable = ({
       <>
         <div className='container flex items-center justify-between my-2'>
           <div className='flex justify-center w-4 h-4 ml-6 mr-2 text-left text-white rounded-full bg-primary text-medium-sm'>
-            S
+            W
           </div>
           <div className='mr-6 text-right flex items-center justify-center'>
             <div className='mr-2 whitespace-nowrap'>
