@@ -17,13 +17,13 @@ export const FreeShipping = () => {
   const { t } = useTranslation('marketingAction');
   const methods = useForm();
   const { handleSubmit, reset } = methods;
-  const { control } = methods;
+  // const { control } = methods;
   const modalControl = useVisibilityControl();
   const [isCompleted, setIsCompleted] = useState(false);
   const [isSaveAsDraft, setIsSaveAsDraft] = useState(false);
 
-  const isStep1Done = useWatch({ name: 'is_use_popup', control });
-  const firstMessage = useWatch({ name: 'first_message', control });
+  // const isStep1Done = useWatch({ name: 'is_use_popup', control });
+  // const firstMessage = useWatch({ name: 'first_message', control });
   const previewMessageControl = useVisibilityControl();
 
   const onSubmit = (data: any) => {
@@ -58,17 +58,13 @@ export const FreeShipping = () => {
   };
 
   const onConfirm = (stepId: number) => {
-    if (stepId === 1 && isStep1Done) {
+    if (stepId === 1) {
       // TODO save step 1
       setStepDone(stepId, true);
-    } else if (stepId === 2 && isStep2Done()) {
+    } else if (stepId === 2) {
       // TODO save step 2
       setStepDone(stepId, true);
     }
-  };
-
-  const isStep2Done = () => {
-    return firstMessage && Object.keys(firstMessage).every(field => firstMessage[field]);
   };
 
   const [steps, setSteps] = useState<Step[]>([
@@ -87,13 +83,13 @@ export const FreeShipping = () => {
     },
   ]);
 
-  useEffect(() => {
-    setStepDone(1, false);
-  }, [isStep1Done]);
+  // useEffect(() => {
+  //   setStepDone(1, false);
+  // }, [isStep1Done]);
 
-  useEffect(() => {
-    setStepDone(2, false);
-  }, [firstMessage]);
+  // useEffect(() => {
+  //   setStepDone(2, false);
+  // }, [firstMessage]);
 
   const modalDesc = () => {
     let desc = 'executeTemplate';
