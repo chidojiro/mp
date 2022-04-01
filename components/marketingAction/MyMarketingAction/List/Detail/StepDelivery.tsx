@@ -7,21 +7,17 @@ import style from './StepDelivery.module.css';
 
 type Props = {
   steps: any[];
+  targetSettings: string;
 };
 
-export const StepDelivery = ({ steps }: Props) => {
+export const StepDelivery = ({ steps, targetSettings }: Props) => {
   const { t } = useTranslation('marketingAction');
   const previewMessageControl = useVisibilityControl();
 
   return (
     <div className='rounded-bl-lg rounded-br-lg bg-gray-light'>
       {steps.map((step, index) => (
-        <div
-          key={index}
-          className={classNames('p-10 pb-6', {
-            'border-b-4 border-white': index !== steps.length - 1,
-          })}
-        >
+        <div key={index} className='p-10 pb-6 border-b-4 border-white'>
           <h5 className='text-gray-dark'>{step.name}</h5>
           {step.questions.map((question: any, idx: number) => (
             <div className='text-medium' key={idx}>
@@ -63,6 +59,11 @@ export const StepDelivery = ({ steps }: Props) => {
           )}
         </div>
       ))}
+      <div className='p-10 pb-6'>
+        <h5 className='text-gray-dark'>{t('targetSetting')}</h5>
+        <div className='my-2 font-bold text-medium text-secondary'>{t('targetCustomer')}</div>
+        <div className='mb-4 text-medium text-gray-dark'>{targetSettings}</div>
+      </div>
       <PreviewOverlay
         defaultType='mail'
         mailHeadline='お買い忘れはございませんか？<br>'

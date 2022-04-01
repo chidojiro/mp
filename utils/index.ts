@@ -8,3 +8,5 @@ export { AssertUtils } from './assert';
 export { Logger } from './Logger';
 export { CookiesUtils } from './cookieUtils';
 export { ContentEditableUtils } from './contentEditable';
+export { LanguageUtils } from './language';
+export { TargetFilterUtils } from './targetFilter';

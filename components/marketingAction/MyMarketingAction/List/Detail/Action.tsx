@@ -1,6 +1,7 @@
 import { Icon } from '@/components';
 import { Button, Tag } from '@/components/common';
 import { HeaderTab } from '@/constants';
+import { TargetSegment } from '@/types';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -8,7 +9,7 @@ import { useRouter } from 'next/router';
 type Props = {
   path: string;
   name: string;
-  targetCustomers: string[];
+  targetCustomers: TargetSegment[];
   date?: string;
 };
 
@@ -39,7 +40,7 @@ export const Action = ({ name, path, targetCustomers, date }: Props) => {
             <span className='mr-2 font-bold text-secondary'>{t('targetCustomer')}</span>
             <div className='flex flex-wrap gap-1'>
               {targetCustomers.map(customer => (
-                <Tag key={customer}>{customer}</Tag>
+                <Tag key={customer.segment}>{customer.segment}</Tag>
               ))}
             </div>
           </div>

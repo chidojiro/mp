@@ -1,8 +1,11 @@
-import { Value } from 'classnames';
+import { MarketingActionAPI } from '@/apis';
+import { HeaderTab } from '@/constants';
+import { TargetFilterUtils } from '@/utils';
 import { useTranslation } from 'next-i18next';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import useSWR from 'swr';
+import { MAStatus, TYPE } from 'types';
 import { SideMenu, SideMenuGroup, SideMenuItem } from '../../../../common';
 import { TargetFilter } from '../../../../report';
 import { MarketingAction } from './MarketingAction';
@@ -10,9 +13,69 @@ import { MarketingAction } from './MarketingAction';
 export const Detail = () => {
   const { query, pathname, push } = useRouter();
   const { t } = useTranslation('marketingAction');
+  const [filter, setFilter] = useState({});
 
-  const onChange = (value: Value) => {
-    // TODO
+  useEffect(() => {
+    let _targets = query.targets || [];
+    if (typeof _targets === 'string') {
+      _targets = [_targets];
+    }
+    if (_targets.length) {
+      const _targetSegments = _targets.map((target: string) =>
+        TargetFilterUtils.getTargetFilterObj(target)
+      );
+      setFilter(prevState => {
+        return { ...prevState, target_segments: JSON.stringify(_targetSegments) };
+      });
+    }
+  }, [query.targets]);
+
+  const getStatus = () => {
+    const _status = query.marketingActionStatus;
+    if (_status === HeaderTab.Active) {
+      return MAStatus.RUNNING;
+    } else if (_status === HeaderTab.Terminated) {
+      return MAStatus.COMPLETE;
+    }
+    return MAStatus.DRAFT;
+  };
+
+  const maStatus = getStatus();
+
+  const { data } = useSWR(['/actions', filter], () => MarketingActionAPI.list({ params: filter }), {
+    fallbackData: {},
+  });
+
+  const marketingActions = data?.[maStatus] || [];
+
+  useEffect(() => {
+    if (marketingActions.length) {
+      handleMAChange({ marketingActionId: marketingActions[0].id });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [marketingActions]);
+
+  const convertToTree = (marketingActions: any) => {
+    const maTypes = marketingActions.reduce(
+      (prev: any, curr: any) => {
+        const _idx = prev.ids.indexOf(curr.marketing_action_type_id);
+        if (_idx === -1) {
+          prev.array.push({
+            ...curr.marketing_action_type,
+            id: curr.marketing_action_type_id,
+            children: [curr],
+          });
+
+          prev.ids.push(curr.marketing_action_type_id);
+        } else {
+          prev.array[_idx].children.push(curr);
+        }
+        return prev;
+      },
+      { array: [], ids: [] }
+    );
+
+    return maTypes.array;
   };
 
   const handleMAChange = (queryParams: any) => {
@@ -22,77 +85,79 @@ export const Detail = () => {
     });
   };
 
-  // example
-  const messageMenu: SideMenuItem[] = [
-    {
-      value: '1',
-      onClick: () => handleMAChange({ marketingActionId: '1', date: 'all' }),
-      label: t('cartAbandoned'),
-      content: <MarketingAction />,
-    },
-    {
-      value: '2',
-      label: t('stepDeliveryAfterPurchase'),
-      children: [
-        {
-          value: '2021_12_15',
-          onClick: () => handleMAChange({ marketingActionId: '2', date: '2021_12_15' }),
-          label: '2022年12月15日(水) 〜',
-          content: <MarketingAction />,
-        },
-        {
-          value: '2021_11_09',
-          onClick: () => handleMAChange({ marketingActionId: '2', date: '2021_11_09' }),
-          label: '2022年11月09日(月) 〜',
-          content: <MarketingAction />,
-        },
-      ],
-    },
-  ];
+  const getMenu = (maType: any) => {
+    const menu: any = {
+      value: maType.id,
+      label: maType.name,
+    };
+    if (maType.children.length > 1) {
+      const children = maType.children.map((ma: any) => {
+        return {
+          value: ma.id,
+          onClick: () => handleMAChange({ marketingActionId: ma.id }),
+          label: ma.description,
+          content: <MarketingAction marketingAction={ma} />,
+        };
+      });
+      return { ...menu, children };
+    }
+    const ma = maType.children[0];
+    return {
+      ...menu,
+      value: ma.id,
+      onClick: () => handleMAChange({ marketingActionId: ma.id }),
+      content: <MarketingAction marketingAction={ma} />,
+    };
+  };
 
-  const chatbotMenu: SideMenuItem[] = [
-    {
-      value: '3',
-      onClick: () => handleMAChange({ marketingActionId: '3', date: 'all' }),
-      label: t('recommendationDiagnosisBotStatic'),
-      content: <MarketingAction />,
-    },
-  ];
-  const popupMenu: SideMenuItem[] = [
-    {
-      value: '4',
-      onClick: () => handleMAChange({ marketingActionId: '4', date: 'all' }),
-      label: t('conditionalFreeShipping'),
-      content: <MarketingAction />,
-    },
-  ];
+  const getListMenu = (type: TYPE) => {
+    const maTypes = convertToTree(marketingActions);
+    return maTypes
+      .filter((maType: any) => maType.type === type)
+      .reduce((_arr: SideMenuItem[], maType: any) => {
+        _arr.push(getMenu(maType));
+        return _arr;
+      }, []);
+  };
 
   const groups: SideMenuGroup[] = [
     {
       icon: 'mail',
       label: t('messageDelivery'),
-      items: messageMenu,
+      items: getListMenu(TYPE.NOTIFICATION),
     },
     {
       icon: 'chatbot2',
       label: t('chatbot'),
-      items: chatbotMenu,
+      items: getListMenu(TYPE.CHATBOT),
     },
     {
       icon: 'popup',
       label: t('popup'),
-      items: popupMenu,
+      items: getListMenu(TYPE.POPUP),
     },
   ];
 
-  const value = (query.date !== 'all' ? query.date : query.marketingActionId) as string;
+  const renderEmpty = () => {
+    return <div>empty state</div>;
+  };
+
+  const isEmpty = !marketingActions.length;
+
+  const [value, setValue] = useState(marketingActions[0]?.id || '');
+
+  useEffect(() => {
+    if (query.marketingActionId) {
+      setValue(query.marketingActionId as string);
+    }
+  }, [query.marketingActionId, query]);
 
   return (
     <div className='flex flex-col w-full h-full mt-7'>
       <div className='mb-[60px]'>
         <TargetFilter />
       </div>
-      <SideMenu groups={groups} onChange={onChange} value={value} />
+      {isEmpty ? renderEmpty() : <SideMenu groups={groups} value={value} />}
     </div>
   );
 };

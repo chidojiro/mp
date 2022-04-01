@@ -75,7 +75,7 @@ export const Sidebar = () => {
       ],
     },
     {
-      path: `${projectPrefix}/actions/active/1?targets=all&date=all`,
+      path: `${projectPrefix}/actions/active/1?targets=all`,
       label: t('menuMyMarketingAction'),
       matches: [
         '/organizations/[organizationId]/projects/[projectId]/actions',
