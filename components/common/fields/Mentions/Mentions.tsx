@@ -112,6 +112,7 @@ export const Mentions = React.forwardRef(
         <ContentEditable
           data-ph={placeholder}
           className={classNames(
+            'inline-block',
             'w-full p-2',
             'bg-white',
             'border border-solid outline-none rounded',

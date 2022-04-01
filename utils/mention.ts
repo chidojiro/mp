@@ -13,13 +13,13 @@ const toPreviewString = (value: string) => {
   if (typeof value !== 'string') return '';
 
   return value
-    .replaceAll(/\s*\n\s*/g, '')
-    .replaceAll('<br>', '\n')
-    .replaceAll('&#8203;', '')
-    .replaceAll('&nbsp;', ' ')
-    .replaceAll(MentionValuePattern, '○○○')
-    .replaceAll(/<span[^<]*>/g, '')
-    .replaceAll(/<\/span[^<]*>/g, '');
+    .replace(/\s*\n\s*/g, '')
+    .replace(/<br>/g, '\n')
+    .replace(/&#8203;/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(MentionValuePattern, '○○○')
+    .replace(/<span[^<]*>/g, '')
+    .replace(/<\/span[^<]*>/g, '');
 };
 
 export const MentionUtils = { insert, toPreviewString };
