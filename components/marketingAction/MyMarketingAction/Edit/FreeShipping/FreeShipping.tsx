@@ -4,6 +4,7 @@ import { ActionContainer } from '@/components/marketingAction';
 import { Step } from '@/constants';
 import { useVisibilityControl } from '@/hooks';
 import { useTranslation } from 'next-i18next';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { Steps } from '../Steps';
@@ -15,19 +16,19 @@ import { TemplatePreviewOverlay } from './TemplatePreviewOverlay';
 export const FreeShipping = () => {
   const { t } = useTranslation('marketingAction');
   const methods = useForm();
-  const { handleSubmit } = methods;
-  const { control } = methods;
+  const { handleSubmit, reset } = methods;
+  // const { control } = methods;
   const modalControl = useVisibilityControl();
   const [isCompleted, setIsCompleted] = useState(false);
   const [isSaveAsDraft, setIsSaveAsDraft] = useState(false);
 
-  const isStep1Done = useWatch({ name: 'is_use_popup', control });
-  const firstMessage = useWatch({ name: 'first_message', control });
+  // const isStep1Done = useWatch({ name: 'is_use_popup', control });
+  // const firstMessage = useWatch({ name: 'first_message', control });
   const previewMessageControl = useVisibilityControl();
 
   const onSubmit = (data: any) => {
-    // handle change
     console.log('submit', data);
+    reset(data);
   };
 
   const showModal = () => {
@@ -57,17 +58,13 @@ export const FreeShipping = () => {
   };
 
   const onConfirm = (stepId: number) => {
-    if (stepId === 1 && isStep1Done) {
+    if (stepId === 1) {
       // TODO save step 1
       setStepDone(stepId, true);
-    } else if (stepId === 2 && isStep2Done()) {
+    } else if (stepId === 2) {
       // TODO save step 2
       setStepDone(stepId, true);
     }
-  };
-
-  const isStep2Done = () => {
-    return firstMessage && Object.keys(firstMessage).every(field => firstMessage[field]);
   };
 
   const [steps, setSteps] = useState<Step[]>([
@@ -86,17 +83,33 @@ export const FreeShipping = () => {
     },
   ]);
 
-  useEffect(() => {
-    setStepDone(1, false);
-  }, [isStep1Done]);
+  // useEffect(() => {
+  //   setStepDone(1, false);
+  // }, [isStep1Done]);
 
-  useEffect(() => {
-    setStepDone(2, false);
-  }, [firstMessage]);
+  // useEffect(() => {
+  //   setStepDone(2, false);
+  // }, [firstMessage]);
+
+  const modalDesc = () => {
+    let desc = 'executeTemplate';
+    if (isSaveAsDraft) {
+      desc = 'alertAfterSaveAsDraft';
+    } else if (isCompleted) {
+      desc = 'alertAfterExecuting';
+    }
+    return t(desc, { template: t('conditionalFreeShipping') });
+  };
 
   const onShowPreview = (stepId: number) => {
     previewMessageControl.open();
   };
+
+  const isGotoMABtn = isCompleted || isSaveAsDraft;
+  const gotoMyMAUrl = `/organizations/1/projects/1/actions/${
+    isCompleted ? 'active' : 'draft'
+  }/1?targets=all&date=all`;
+  const unSavedSteps = steps.filter(step => !step.isDone).length;
 
   return (
     <div className='relative'>
@@ -120,7 +133,7 @@ export const FreeShipping = () => {
           <Button colorScheme='negative' className='mr-5 min-w-[240px] h-[52px]'>
             {t('stopEditing')}
           </Button>
-          <Button onClick={showModal} className='min-w-[480px] h-[52px]'>
+          <Button onClick={showModal} className='min-w-[480px] h-[52px]' disabled={!!unSavedSteps}>
             {t('implementTemplate')}
           </Button>
         </div>
@@ -130,9 +143,25 @@ export const FreeShipping = () => {
 
       <Modal control={modalControl}>
         <div className='text-center text-gray-dark'>
-          <Modal.Body className='leading-loose whitespace-pre-line'>
-            To do (Missing from design spec)
-          </Modal.Body>
+          <Modal.Body className='leading-loose whitespace-pre-line'>{modalDesc()}</Modal.Body>
+          <Modal.Footer className='text-medium'>
+            {isGotoMABtn ? (
+              <Link passHref href={gotoMyMAUrl}>
+                <Modal.FooterButton colorScheme='negative' onClick={modalControl.close}>
+                  {t('gotoMyMA')}
+                </Modal.FooterButton>
+              </Link>
+            ) : (
+              <>
+                <Modal.FooterButton colorScheme='negative' onClick={modalControl.close}>
+                  {t('cancel')}
+                </Modal.FooterButton>
+                <Modal.FooterButton onClick={onExecuteMA}>
+                  {t('implementTemplate')}
+                </Modal.FooterButton>
+              </>
+            )}
+          </Modal.Footer>
         </div>
       </Modal>
     </div>
