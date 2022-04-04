@@ -1,3 +1,4 @@
+import { Form, RadioGroup } from '@/components';
 import classNames from 'classnames';
 import React from 'react';
 
@@ -8,6 +9,7 @@ type Props = {
 export const TemplateSelector = ({ preselectedTemplate = '' }: Props) => {
   const [selectedTemplate, setSelectedTemplate] = React.useState(preselectedTemplate);
 
+  console.log('TEMPLATE: ', selectedTemplate);
   return (
     <>
       <div className='flex items-center'>
@@ -35,6 +37,21 @@ export const TemplateSelector = ({ preselectedTemplate = '' }: Props) => {
         >
           <img src='http://placehold.jp/128x128.png' alt='placeholder image' />
         </div>
+
+        <Form.RadioGroup name='template-selection'>
+          <RadioGroup.Option
+            key='template1'
+            className='hidden'
+            value='template1'
+            checked={selectedTemplate === 'template1' ? true : false}
+          />
+          <RadioGroup.Option
+            key='template2'
+            className='hidden'
+            value='template2'
+            checked={selectedTemplate === 'template2' ? true : false}
+          />
+        </Form.RadioGroup>
       </div>
     </>
   );

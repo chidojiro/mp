@@ -189,5 +189,11 @@
   "csvFileUpload": "CSVファイルアップロード",
   "downloadTemplate": "テンプレートのダウンロード",
   "downloadTemplateDesc": "テンプレートをダウンロードして、レコメンド診断コンテンツを入力してください。",
-  "download": "ダウンロード"
+  "download": "ダウンロード",
+  "faqContentCreation": "FAQコンテンツ作成",
+  "faqContentSettingsDescription": "チャットボットに表示するFAQコンテンツをCSV形式で作成し、インポートします。",
+  "faqTemplateDownloadDescription": "こちらのボタンでCSVファイルのテンプレートをダウンロードして、FAQを入力してください。詳しい作成方法はテンプレート内に記載があります。",
+  "faqCSVUploadDescription": "作成したCSVファイルをこちらからアップロードしてください。正常にアップロードできたらSTEP1は終了です。",
+  "faqChatWindowSettingsDescription": "チャットボットの外観の作成と挙動の設定を行います。",
+  "exterior": "外観"
 }
