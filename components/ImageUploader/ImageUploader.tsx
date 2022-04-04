@@ -54,7 +54,7 @@ export const ImageUploader = ({ originalUrl, className }: Props) => {
   );
 
   return (
-    <div>
+    <div className='w-full'>
       <Dropzone
         onDrop={handleDrop}
         accept='image/*'

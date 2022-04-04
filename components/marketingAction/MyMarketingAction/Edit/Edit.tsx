@@ -5,6 +5,7 @@ import { CartAbandoned } from './CartAbandoned';
 import { DeliveryAfterPurchase } from './DeliveryAfterPurchase';
 import { RankingByCategory } from './RankingByCategory';
 import { FreeShipping } from './FreeShipping';
+import { CartFAQ } from './CartFAQ/CartFAQ';
 import { RecommendedBot } from './RecommendedBot';
 
 export const Edit = () => {
@@ -24,6 +25,8 @@ export const Edit = () => {
         return <FreeShipping />;
       case 'recommendation-diagnosis-bot':
         return <RecommendedBot />;
+      case 'cart-page-faq':
+        return <CartFAQ />;
       default:
         return null;
     }

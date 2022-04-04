@@ -190,5 +190,11 @@
   "csvFileUpload": "CSV file upload",
   "downloadTemplate": "Download Template",
   "downloadTemplateDesc": "Download the template and enter your recommendation diagnostic content.",
-  "download": "Download"
+  "download": "Download",
+  "faqContentCreation": "FAQ Content Creation",
+  "faqContentSettingsDescription": "Create and import the FAQ content to be displayed in the chatbot in CSV format.",
+  "faqTemplateDownloadDescription": "Click this button to download the CSV file template and enter the FAQ. The detailed creation method is described in the template.",
+  "faqCSVUploadDescription": "Please upload the created CSV file from here. If you can upload successfully, STEP1 is finished.",
+  "faqChatWindowSettingsDescription": "Create the appearance and behavior of the chatbot.",
+  "exterior": "Exterior"
 }
