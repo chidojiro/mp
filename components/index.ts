@@ -6,6 +6,8 @@ export * from './ImageUploader';
 export * from './ConversionRateChart';
 export * from './CSVButton';
 export * from './CustomerReportButton';
+export * from './ImageUploader';
 
 export * from './report';
 export * from './marketingAction';
+export * from './settings';

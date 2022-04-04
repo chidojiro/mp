@@ -83,7 +83,7 @@ export const Input = React.forwardRef(
     const renderInput = () => {
       const inputClassName = classNames(
         'mp-input__native',
-        'h-full w-full m-0 px-4 py-2 bg-transparent',
+        'h-full w-full m-0 px-4 py-2 bg-transparent text-medium',
         'outline-none border-none'
       );
 

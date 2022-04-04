@@ -14,7 +14,7 @@ export interface ImageType extends File {
 }
 
 export const ImageUploader = ({ originalUrl, className }: Props) => {
-  const { t } = useTranslation('marketingAction');
+  const { t } = useTranslation();
   const [uploading, setUploading] = useState(false);
 
   const [image, setImage] = useState<ImageType>();

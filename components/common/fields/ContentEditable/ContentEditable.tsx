@@ -1,11 +1,11 @@
 import { useControllable, useVisibilityControl } from '@/hooks';
 import { ClassName, Option } from '@/types';
-import { MentionUtils } from '@/utils';
+import { ContentEditableUtils } from '@/utils';
 import classNames from 'classnames';
 import React from 'react';
-import ContentEditable, { ContentEditableEvent } from 'react-contenteditable';
+import BaseContentEditable, { ContentEditableEvent } from 'react-contenteditable';
 import { Dropdown } from '../../Dropdown';
-import style from './Mentions.module.css';
+import style from './ContentEditable.module.css';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Props = ClassName & {
@@ -24,7 +24,7 @@ const mentionTriggerClassName = 'mention-trigger';
 const japaneseAtCode = 229;
 
 // eslint-disable-next-line no-empty-pattern
-export const Mentions = React.forwardRef(
+export const ContentEditable = React.forwardRef(
   (
     {
       value: valueProp,
@@ -44,9 +44,13 @@ export const Mentions = React.forwardRef(
     const dropdownControl = useVisibilityControl();
     const [mentionTriggerNode, setMentionTriggerNode] = React.useState<Element | null>(null);
 
+    const shouldUseMention = !!options.length;
+
     React.useImperativeHandle(ref, () => internalRef.current);
 
     const handleKeydown: React.KeyboardEventHandler<HTMLDivElement> = e => {
+      if (!shouldUseMention) return;
+
       if (e.key === 'Enter' && mentionTriggerNode) {
         e.preventDefault();
 
@@ -87,7 +91,7 @@ export const Mentions = React.forwardRef(
 
       if (foundOption) {
         mentionTriggerNode?.remove();
-        MentionUtils.insert(foundOption);
+        ContentEditableUtils.insert(foundOption);
       }
 
       dropdownControl.close();
@@ -95,7 +99,7 @@ export const Mentions = React.forwardRef(
     };
 
     return (
-      <div className={classNames('mp-mentions', className, style['mp-mentions'])}>
+      <div className={classNames('mp-content-editable', className, style['mp-content-editable'])}>
         {!!label && (
           <label htmlFor={name} className='block mb-1 text-gray-5'>
             {label}
@@ -109,7 +113,7 @@ export const Mentions = React.forwardRef(
           offset={[0, 8]}
           onSelect={handleDropdownSelect}
         />
-        <ContentEditable
+        <BaseContentEditable
           data-ph={placeholder}
           className={classNames(
             'inline-block',
@@ -131,4 +135,4 @@ export const Mentions = React.forwardRef(
   }
 );
 
-Mentions.displayName = 'Mentions';
+ContentEditable.displayName = 'ContentEditable';

@@ -11,7 +11,7 @@ export const Step2Settings = () => {
       <div>
         <div className='mb-1 font-bold text-gray-dark'>{t('carouselDisplay')}</div>
         <div className='font-bold text-medium text-secondary'>{t('title')}</div>
-        <Form.Mentions
+        <Form.ContentEditable
           name='step2.carousel_title'
           className='flex flex-row-reverse items-center mt-2 mb-4'
           singleLine
@@ -19,7 +19,7 @@ export const Step2Settings = () => {
           rules={{ required: true }}
         />
         <div className='font-bold text-medium text-secondary'>{t('note')}</div>
-        <Form.Mentions
+        <Form.ContentEditable
           name='step2.carousel_note'
           className='flex flex-row-reverse items-center mt-2'
           singleLine

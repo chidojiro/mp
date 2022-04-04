@@ -8,8 +8,8 @@ import {
   CheckboxProps,
   Input,
   InputProps,
-  Mentions,
-  MentionsProps,
+  ContentEditable,
+  ContentEditableProps,
   PasswordInput,
   PasswordInputProps,
   RadioGroup,
@@ -49,8 +49,8 @@ const FormPasswordInput = (props: FieldProps & Omit<PasswordInputProps, keyof Fi
 const FormTimeInput = (props: FieldProps & Omit<TimeInputProps, keyof FieldProps>) => (
   <Field {...props} component={TimeInput} emptyValue='00:00' />
 );
-const FormMentions = (props: FieldProps & Omit<MentionsProps, keyof FieldProps>) => (
-  <Field {...props} component={Mentions} />
+const FormContentEditable = (props: FieldProps & Omit<ContentEditableProps, keyof FieldProps>) => (
+  <Field {...props} component={ContentEditable} />
 );
 
 const FormErrorMessage = ({ name, className, ...restProps }: HTMLDivProps & { name: string }) => (
@@ -73,5 +73,5 @@ Form.RadioGroup = FormRadioGroup;
 Form.Select = FormSelect;
 Form.PasswordInput = FormPasswordInput;
 Form.TimeInput = FormTimeInput;
-Form.Mentions = FormMentions;
+Form.ContentEditable = FormContentEditable;
 Form.ErrorMessage = FormErrorMessage;

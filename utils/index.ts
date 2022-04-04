@@ -7,4 +7,4 @@ export { NumberUtils } from './number';
 export { AssertUtils } from './assert';
 export { Logger } from './Logger';
 export { CookiesUtils } from './cookieUtils';
-export { MentionUtils } from './mention';
+export { ContentEditableUtils } from './contentEditable';

@@ -32,5 +32,7 @@
   "editor": "施策エディタ",
   "cartAbandonedNoti": "カゴ落ち通知",
   "csvDownload": "CSVダウンロード",
-  "change": "変更する"
+  "change": "変更する",
+  "dragNdrop": "ドラッグ＆ドロップでアップロード",
+  "selectFile": "ファイルを選択"
 }

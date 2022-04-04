@@ -1,5 +1,5 @@
 import get from 'lodash/get';
-import React from 'react';
+import React, { RefObject } from 'react';
 import { RegisterOptions, useController, useFormContext } from 'react-hook-form';
 
 export type Props<T = any> = {
@@ -13,6 +13,7 @@ export type Props<T = any> = {
   emptyValue?: any;
   componentType?: 'checkbox' | 'radio' | 'common';
   component: React.ComponentType<T>;
+  inputRef?: RefObject<any>;
 };
 
 export const Field = <T,>({
@@ -26,6 +27,7 @@ export const Field = <T,>({
   errorGroup = [],
   emptyValue = '',
   componentType = 'common',
+  inputRef,
   ...restProps
 }: Props<T>) => {
   const Component = component;
@@ -39,7 +41,7 @@ export const Field = <T,>({
   } = useFormContext();
 
   const {
-    field: { onChange, onBlur, value, ...restField },
+    field: { onChange, onBlur, value, ref: fieldRef, ...restField },
   } = useController({ name, rules });
 
   React.useEffect(() => {
@@ -115,6 +117,7 @@ export const Field = <T,>({
       className={className}
       value={resolveValue()}
       checked={isCheckboxOrRadio ? !!value : false}
+      ref={inputRef ?? fieldRef}
       {...restField}
       {...(restProps as any)}
     />

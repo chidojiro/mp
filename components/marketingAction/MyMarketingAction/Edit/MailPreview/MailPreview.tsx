@@ -1,6 +1,6 @@
 import { Button } from '@/components/common';
 import { ClassName } from '@/types';
-import { MentionUtils } from '@/utils';
+import { ContentEditableUtils } from '@/utils';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
@@ -43,8 +43,8 @@ export const MailPreview = ({
 }: Props) => {
   const { t } = useTranslation('marketingAction');
 
-  const parsedBody = MentionUtils.toPreviewString(body ?? '');
-  const parsedHeadline = MentionUtils.toPreviewString(headline ?? '');
+  const parsedBody = ContentEditableUtils.toPreviewString(body ?? '');
+  const parsedHeadline = ContentEditableUtils.toPreviewString(headline ?? '');
 
   return (
     <div

@@ -1,6 +1,6 @@
 import { Form } from '@/components';
 import { Option } from '@/types';
-import { MentionUtils } from '@/utils';
+import { ContentEditableUtils } from '@/utils';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { EmojiSign } from '../EmojiSign';
@@ -21,7 +21,7 @@ export const MessageBodyInput = ({ name, showEmoji = true }: Props) => {
 
   const handleVariableSelect = (option: Option) => {
     if (mentionContainsSelection()) {
-      MentionUtils.insert(option);
+      ContentEditableUtils.insert(option);
     }
   };
 
@@ -46,7 +46,7 @@ export const MessageBodyInput = ({ name, showEmoji = true }: Props) => {
 
   return (
     <div ref={mentionRef}>
-      <Form.Mentions
+      <Form.ContentEditable
         name={name}
         className='mt-5'
         options={options}

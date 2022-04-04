@@ -32,5 +32,7 @@
   "editor": "Marketing Action Editor",
   "cartAbandonedNoti": "Basket drop notification",
   "csvDownload": "Download CSV",
-  "change": "Change"
+  "change": "Change",
+  "dragNdrop": "Drag and drop to upload",
+  "selectFile": "Select File"
 }

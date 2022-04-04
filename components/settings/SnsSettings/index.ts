@@ -1,0 +1,1 @@
+export { SnsSettings } from './SnsSettings';

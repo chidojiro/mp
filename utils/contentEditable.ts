@@ -1,5 +1,12 @@
 import { MentionValuePattern } from '@/constants';
 import { Option } from '@/types';
+import React from 'react';
+
+const fieldContainsSelection = (ref: React.RefObject<any>) => {
+  const target = window.getSelection()?.anchorNode?.parentNode;
+
+  return ref.current?.contains(target as Node);
+};
 
 const insert = ({ value, label }: Option<string>) => {
   document.execCommand(
@@ -22,4 +29,10 @@ const toPreviewString = (value: string) => {
     .replace(/<\/span[^<]*>/g, '');
 };
 
-export const MentionUtils = { insert, toPreviewString };
+const underline = (fieldRef: React.RefObject<any>) => {
+  if (!fieldContainsSelection(fieldRef)) return;
+
+  document.execCommand('underline');
+};
+
+export const ContentEditableUtils = { insert, toPreviewString, underline };

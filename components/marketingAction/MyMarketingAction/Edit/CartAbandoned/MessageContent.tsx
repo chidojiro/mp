@@ -55,7 +55,7 @@ export const MessageContent = ({ messageNum }: Props) => {
               <div className='mb-2.5 font-semibold text-secondary text-medium'>
                 {t('headLines')}
               </div>
-              <Form.Mentions
+              <Form.ContentEditable
                 options={headingMentionOptions}
                 name={`${messageNum}.headline_email`}
               />
