@@ -139,7 +139,7 @@ export const Detail = () => {
   ];
 
   const renderEmpty = () => {
-    return <div>empty state</div>;
+    return <div>{t('emptyMarketingAction')}</div>;
   };
 
   const isEmpty = !marketingActions.length;

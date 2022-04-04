@@ -10,7 +10,7 @@ import { InProgress } from './InProgress';
 
 export const List = () => {
   const { t } = useTranslation(['marketingAction']);
-  const { pathname, query, push } = useRouter();
+  const { pathname, query } = useRouter();
 
   const tabs = [
     {
