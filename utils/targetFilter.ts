@@ -1,4 +1,4 @@
-import { MASegment, TARGET } from '@/types';
+import { MarketingActionSegment as MASegment, TARGET } from '@/types';
 
 const getTargetFilterObj = (target: string) => {
   switch (target) {

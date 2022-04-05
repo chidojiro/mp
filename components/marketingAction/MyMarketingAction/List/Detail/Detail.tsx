@@ -1,11 +1,10 @@
 import { MarketingActionAPI } from '@/apis';
-import { HeaderTab } from '@/constants';
 import { TargetFilterUtils } from '@/utils';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import useSWR from 'swr';
-import { MAStatus, TYPE } from 'types';
+import { MarketingActionStatus as MAStatus, MarketingActionTypeMessage as TYPE } from 'types';
 import { SideMenu, SideMenuGroup, SideMenuItem } from '../../../../common';
 import { TargetFilter } from '../../../../report';
 import { MarketingAction } from './MarketingAction';
@@ -16,13 +15,10 @@ export const Detail = () => {
   const [filter, setFilter] = useState({});
 
   useEffect(() => {
-    let _targets = query.targets || [];
-    if (typeof _targets === 'string') {
-      _targets = [_targets];
-    }
+    const _targets = [query.targets].flat().filter(Boolean);
     if (_targets.length) {
-      const _targetSegments = _targets.map((target: string) =>
-        TargetFilterUtils.getTargetFilterObj(target)
+      const _targetSegments = _targets.map(target =>
+        TargetFilterUtils.getTargetFilterObj(target as string)
       );
       setFilter(prevState => {
         return { ...prevState, target_segments: JSON.stringify(_targetSegments) };
@@ -30,17 +26,7 @@ export const Detail = () => {
     }
   }, [query.targets]);
 
-  const getStatus = () => {
-    const _status = query.marketingActionStatus;
-    if (_status === HeaderTab.Active) {
-      return MAStatus.RUNNING;
-    } else if (_status === HeaderTab.Terminated) {
-      return MAStatus.COMPLETE;
-    }
-    return MAStatus.DRAFT;
-  };
-
-  const maStatus = getStatus();
+  const maStatus = (query.marketingActionStatus as string) || MAStatus.RUNNING;
 
   const { data } = useSWR(['/actions', filter], () => MarketingActionAPI.list({ params: filter }), {
     fallbackData: {},

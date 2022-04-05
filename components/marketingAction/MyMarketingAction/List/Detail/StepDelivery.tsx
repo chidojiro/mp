@@ -1,5 +1,5 @@
 import { useVisibilityControl } from '@/hooks';
-import { MAAlias } from '@/types';
+import { MarketingActionAlias as MAAlias } from '@/types';
 import { useTranslation } from 'next-i18next';
 import { PreviewOverlay } from '../../Edit/PreviewOverlay';
 import { CartAbandoned } from './CartAbandoned';

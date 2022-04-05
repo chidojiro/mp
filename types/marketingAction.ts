@@ -1,11 +1,11 @@
-export enum MAStatus {
+export enum MarketingActionStatus {
   DRAFT = 'draft',
   RUNNING = 'running',
   SUSPEND = 'suspend',
   COMPLETE = 'complete',
 }
 
-export enum MAAlias {
+export enum MarketingActionAlias {
   CART_LEFT_NOTIFICATION = 'CART_LEFT_NOTIFICATION',
   AFTER_PURCHASE = 'AFTER_PURCHASE',
   CART_PAGE_FAQ = 'CART_PAGE_FAQ',
@@ -26,7 +26,7 @@ export enum TARGET {
   LOYAL_DORMANT = 'loyalDormant',
 }
 
-export enum MASegment {
+export enum MarketingActionSegment {
   F0 = 'F0',
   F1 = 'F1',
   F2 = 'F2',
@@ -34,14 +34,14 @@ export enum MASegment {
   LOYAL = 'loyal',
 }
 
-export enum TYPE {
+export enum MarketingActionTypeMessage {
   NOTIFICATION = 'notification',
   CHATBOT = 'chatbot',
   POPUP = 'popup',
 }
 
 export type TargetSegment = {
-  segment: MASegment;
+  segment: MarketingActionSegment;
   is_member?: boolean;
   is_sleep?: boolean;
 };
@@ -49,7 +49,7 @@ export type TargetSegment = {
 export type MarketingActionType = {
   id: number;
   name: string;
-  type: TYPE;
+  type: MarketingActionTypeMessage;
   cv_measure_start_event?: string;
   cv_measure_end_event?: string;
   created_at: string;
@@ -66,7 +66,7 @@ export type MarketingActionRes = {
   start_at: string;
   end_at?: string;
   settings?: string;
-  status: MAStatus;
+  status: MarketingActionStatus;
   target_segments?: TargetSegment[];
   created_at?: string;
   ended_at?: string;

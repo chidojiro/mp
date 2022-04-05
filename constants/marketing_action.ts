@@ -1,8 +1,3 @@
-export enum HeaderTab {
-  Active = 'active',
-  Terminated = 'terminated',
-  Draft = 'draft',
-}
 export interface Step {
   id: number;
   name: string;
