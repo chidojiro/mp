@@ -1,5 +1,5 @@
 import { useControllable } from 'hooks';
-import noop from 'lodash/noop';
+import { noop } from 'lodash-es';
 import React from 'react';
 import { Children } from 'types';
 import { Content } from './Content';

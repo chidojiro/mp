@@ -1,4 +1,4 @@
-import get from 'lodash/get';
+import { get } from 'lodash-es';
 import React, { RefObject } from 'react';
 import { RegisterOptions, useController, useFormContext } from 'react-hook-form';
 

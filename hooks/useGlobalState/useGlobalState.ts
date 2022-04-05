@@ -1,5 +1,5 @@
 import { AssertUtils } from 'utils';
-import isEqual from 'lodash/isEqual';
+import { isEqual } from 'lodash-es';
 import React from 'react';
 
 export const useGlobalState = <T = any>(
