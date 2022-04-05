@@ -1,6 +1,7 @@
-import { useProfile } from '@/hooks';
 import classNames from 'classnames';
 import Link from 'next/link';
+
+import { useProfile } from '@/hooks';
 
 export const Header = () => {
   const { data } = useProfile();

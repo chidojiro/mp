@@ -1,7 +1,8 @@
+import classNames from 'classnames';
+
 import { CheckboxGroup } from '@/components';
 import { Icon } from '@/components';
 import { Option } from '@/types';
-import classNames from 'classnames';
 
 type Props = {
   option: Option<string>;

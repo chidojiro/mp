@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { ComponentStory } from '@storybook/react';
 
 import { useNotification, Notification } from '.';

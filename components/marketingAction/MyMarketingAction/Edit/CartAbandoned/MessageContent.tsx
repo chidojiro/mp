@@ -1,10 +1,13 @@
+import React, { useState } from 'react';
+
+import { useTranslation } from 'next-i18next';
+import { useWatch } from 'react-hook-form';
+
 import { Form, Icon } from '@/components';
 import { RadioGroup } from '@/components/common';
 import { useVisibilityControl } from '@/hooks';
 import { Option } from '@/types';
-import { useTranslation } from 'next-i18next';
-import React, { useState } from 'react';
-import { useWatch } from 'react-hook-form';
+
 import { ColorGroup } from '../ColorSettingsSection/ColorGroup';
 import { LinePreview } from '../LinePreview';
 import { MailPreview } from '../MailPreview';

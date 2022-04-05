@@ -1,5 +1,6 @@
-import classNames from 'classnames';
 import { ReactNode } from 'react';
+
+import classNames from 'classnames';
 
 type Props = {
   title: string;

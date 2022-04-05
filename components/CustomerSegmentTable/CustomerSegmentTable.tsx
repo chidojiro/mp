@@ -1,7 +1,9 @@
-import classNames from 'classnames';
 import React from 'react';
-import { Icon } from '@/components';
+
+import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
+
+import { Icon } from '@/components';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Props = CustomerSegmentTableProps;

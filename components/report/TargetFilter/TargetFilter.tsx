@@ -1,9 +1,12 @@
 import React from 'react';
 import { Option, TARGET } from '@/types';
 import { useTranslation } from 'next-i18next';
-import { CheckboxGroup } from '@/components';
-import { CheckboxTag } from './CheckboxTag';
 import { useRouter } from 'next/router';
+
+import { CheckboxGroup } from '@/components';
+import { Option } from '@/types';
+
+import { CheckboxTag } from './CheckboxTag';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};

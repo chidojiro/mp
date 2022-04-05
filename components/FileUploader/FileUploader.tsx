@@ -1,5 +1,6 @@
 import { useTranslation } from 'next-i18next';
 import Dropzone from 'react-dropzone';
+
 import { Icon } from '../common';
 
 export const FileUploader = () => {

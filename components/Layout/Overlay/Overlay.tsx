@@ -1,8 +1,10 @@
+import React from 'react';
+
+import classNames from 'classnames';
+
 import { Icon } from '@/components';
 import { useScrollDisable, VisibilityControl } from '@/hooks';
 import { Children } from '@/types';
-import classNames from 'classnames';
-import React from 'react';
 
 const headerHeight = '48px';
 const sidebarWidth = '200px';

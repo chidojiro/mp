@@ -1,11 +1,13 @@
-import { Layout } from '@/components';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+
+import { Layout } from '@/components';
+
 import { CartAbandoned } from './CartAbandoned';
-import { DeliveryAfterPurchase } from './DeliveryAfterPurchase';
-import { RankingByCategory } from './RankingByCategory';
-import { FreeShipping } from './FreeShipping';
 import { CartFAQ } from './CartFAQ/CartFAQ';
+import { DeliveryAfterPurchase } from './DeliveryAfterPurchase';
+import { FreeShipping } from './FreeShipping';
+import { RankingByCategory } from './RankingByCategory';
 import { RecommendedBot } from './RecommendedBot';
 
 export const Edit = () => {

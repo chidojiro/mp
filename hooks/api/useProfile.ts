@@ -1,8 +1,10 @@
-import { useServerSidePropsContext } from '@/contexts';
-import { ProfileApis } from '@/apis';
-import useSWR from 'swr';
-import { Profile } from '@/types';
 import React from 'react';
+
+import useSWR from 'swr';
+
+import { ProfileApis } from '@/apis';
+import { useServerSidePropsContext } from '@/contexts';
+import { Profile } from '@/types';
 
 export function useProfile(fallbackData?: Profile) {
   const { props } = useServerSidePropsContext();

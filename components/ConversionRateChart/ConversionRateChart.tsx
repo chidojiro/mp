@@ -1,5 +1,5 @@
-import { DomUtils } from '@/utils';
 import React from 'react';
+
 import {
   Bar,
   CartesianGrid,
@@ -10,6 +10,9 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+
+import { DomUtils } from '@/utils';
+
 import { CSVButton } from '../CSVButton';
 import styles from './ConversionRateChart.module.css';
 

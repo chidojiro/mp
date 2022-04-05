@@ -1,6 +1,7 @@
+import React from 'react';
+
 import { MentionValuePattern } from '@/constants';
 import { Option } from '@/types';
-import React from 'react';
 
 const fieldContainsSelection = (ref: React.RefObject<any>) => {
   const target = window.getSelection()?.anchorNode?.parentNode;

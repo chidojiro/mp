@@ -1,7 +1,10 @@
-import classNames from 'classnames';
 import React from 'react';
+
+import classNames from 'classnames';
+
 import { useStateToggle, useControllable } from '@/hooks';
 import { HTMLInputProps } from '@/types';
+
 import { NumberInput } from './Number';
 
 type BaseInputProps = Omit<HTMLInputProps, 'ref' | 'type'> & {

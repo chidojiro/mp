@@ -1,7 +1,9 @@
+import classNames from 'classnames';
+
 import { Overlay } from '@/components';
 import { VisibilityControl } from '@/hooks';
 import { Children, ClassName } from '@/types';
-import classNames from 'classnames';
+
 import { Button, ButtonProps } from '..';
 
 // eslint-disable-next-line @typescript-eslint/ban-types

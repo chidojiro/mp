@@ -1,4 +1,5 @@
 import { Profile } from '@/types';
+
 import { RestApi, RestApiConfig } from './base';
 
 const get = (config?: RestApiConfig) => {

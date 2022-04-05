@@ -1,7 +1,9 @@
+import React from 'react';
+
+import { noop } from 'lodash-es';
+
 import { useVisibilityControl, VisibilityControl } from '@/hooks';
 import { Children, ClassName } from '@/types';
-import React from 'react';
-import { noop } from 'lodash-es';
 
 const Context = React.createContext<{ control: VisibilityControl }>({
   control: { open: noop, close: noop, toggle: noop, visible: false },

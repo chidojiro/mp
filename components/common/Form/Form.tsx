@@ -1,6 +1,8 @@
+import classNames from 'classnames';
+
 import { ErrorMessage, Field, FieldProps, Form as HeadlessForm, FormProps } from '@/headless';
 import { HTMLDivProps } from '@/types';
-import classNames from 'classnames';
+
 import {
   Checkbox,
   CheckboxGroup,

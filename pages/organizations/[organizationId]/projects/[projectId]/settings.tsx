@@ -1,6 +1,7 @@
-import { Layout, Settings } from '@/components';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
+import { Layout, Settings } from '@/components';
 
 export const getServerSideProps = async ({ locale }: any) => ({
   props: {

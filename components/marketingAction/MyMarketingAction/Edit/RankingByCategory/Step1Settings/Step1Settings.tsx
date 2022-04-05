@@ -1,5 +1,6 @@
-import { Form, RadioGroup } from '@/components/common';
 import { useTranslation } from 'next-i18next';
+
+import { Form, RadioGroup } from '@/components/common';
 
 export const Step1Settings = () => {
   const { t } = useTranslation('marketingAction');

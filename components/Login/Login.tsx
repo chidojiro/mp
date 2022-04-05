@@ -1,4 +1,5 @@
 import { useTranslation } from 'next-i18next';
+
 import { LoginForm } from './LoginForm';
 
 export const Login = () => {

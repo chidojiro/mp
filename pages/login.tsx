@@ -1,5 +1,6 @@
-import { Login } from '@/components';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
+import { Login } from '@/components/Login';
 
 const LoginPage = () => {
   return <Login />;

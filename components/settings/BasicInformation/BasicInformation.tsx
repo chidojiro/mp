@@ -1,7 +1,9 @@
+import { useTranslation } from 'next-i18next';
+
+import { ImageUploader } from '@/components';
+
 import { Form } from '../../common';
 import { Section } from '../../Section';
-import { useTranslation } from 'next-i18next';
-import { ImageUploader } from '@/components';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};

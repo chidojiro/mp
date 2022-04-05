@@ -1,4 +1,5 @@
 import { Icon } from '@/components/common';
+
 import { Message } from './Message';
 
 type Props = {

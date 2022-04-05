@@ -1,8 +1,10 @@
 import React from 'react';
+
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { OverlayingLoader } from '.';
 import { lorem } from '@/constants';
+
+import { OverlayingLoader } from '.';
 
 export default {
   title: 'Components/OverlayingLoader',

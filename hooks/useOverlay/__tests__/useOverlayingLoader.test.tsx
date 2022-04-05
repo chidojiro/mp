@@ -1,6 +1,8 @@
+import React from 'react';
+
 import { screen } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
-import React from 'react';
+
 import { useOverlay } from '..';
 
 it('should show overlaying loader', () => {

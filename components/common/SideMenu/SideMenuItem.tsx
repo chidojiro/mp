@@ -1,6 +1,8 @@
+import classNames from 'classnames';
+
 import { Tabs as HeadlessTabs } from '@/headless';
 import { useVisibilityControl } from '@/hooks';
-import classNames from 'classnames';
+
 import { Accordion } from '../Accordion';
 import { Item } from './SideMenu';
 

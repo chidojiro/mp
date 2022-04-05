@@ -1,6 +1,7 @@
-import { ClassName } from '@/types';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
+
+import { ClassName } from '@/types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = ClassName & {};

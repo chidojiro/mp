@@ -1,5 +1,6 @@
-import { usePagination, UsePaginationProps } from '..';
 import { act, renderHook, RenderResult } from '@testing-library/react-hooks';
+
+import { usePagination, UsePaginationProps } from '..';
 import { PaginationItem, UsePaginationReturn, ShowingPaginationRange } from '..';
 
 const getItemPrevious = (result: RenderResult<UsePaginationReturn>) =>

@@ -1,6 +1,8 @@
+import classNames from 'classnames';
+
 import { Tabs as HeadlessTabs, TabsProps as HeadlessTabsProps } from '@/headless';
 import { ClassName } from '@/types';
-import classNames from 'classnames';
+
 import { Icon, IconName } from '../Icon';
 import { SideMenuItem } from './SideMenuItem';
 

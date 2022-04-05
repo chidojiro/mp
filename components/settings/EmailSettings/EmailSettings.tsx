@@ -1,10 +1,13 @@
+import React from 'react';
+
+import { useTranslation } from 'next-i18next';
+
+import { ImageUploader } from '@/components';
+import { ContentEditableUtils } from '@/utils';
+
 import { Form } from '../../common';
 import { Section } from '../../Section';
-import { useTranslation } from 'next-i18next';
-import { ImageUploader } from '@/components';
 import { LinkButton } from '../LinkButton';
-import React from 'react';
-import { ContentEditableUtils } from '@/utils';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};

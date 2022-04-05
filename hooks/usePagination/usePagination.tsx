@@ -1,5 +1,6 @@
-import { useControllable } from '../../hooks';
 import React from 'react';
+
+import { useControllable } from '../../hooks';
 
 export interface Item {
   type: 'page' | 'next' | 'previous' | 'ellipsis';

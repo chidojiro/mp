@@ -1,5 +1,6 @@
-import { Icon } from '@/components/common';
 import classNames from 'classnames';
+
+import { Icon } from '@/components/common';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {

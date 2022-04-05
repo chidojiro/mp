@@ -1,13 +1,15 @@
+import React from 'react';
+
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+
 import { Layout, Section } from '@/components';
 import { ServerSidePropsProvider } from '@/contexts';
 import { useVisibilityControl } from '@/hooks';
 import { SSR } from '@/ssr';
 import { Profile } from '@/types';
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React from 'react';
 
 export const getServerSideProps = SSR.withProps('profile')(async ({ locale }, result) => {
   return {

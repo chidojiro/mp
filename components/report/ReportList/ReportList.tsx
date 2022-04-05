@@ -1,11 +1,14 @@
+import React from 'react';
+
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+
 import { Layout, RadioGroup } from '@/components';
 import { Option } from '@/types';
-import { useTranslation } from 'next-i18next';
-import React from 'react';
-import { RadioTag } from './RadioTag';
+
 import { TargetFilter } from '../TargetFilter';
+import { RadioTag } from './RadioTag';
 import { ReportsTable } from './ReportsTable';
-import { useRouter } from 'next/router';
 
 type ReportListPageSlug = 'line-email' | 'chatbot' | 'popup';
 

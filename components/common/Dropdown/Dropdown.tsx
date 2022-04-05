@@ -1,7 +1,10 @@
+import React from 'react';
+
+import classNames from 'classnames';
+
 import { useVisibilityControl } from '@/hooks';
 import { Option } from '@/types';
-import classNames from 'classnames';
-import React from 'react';
+
 import { Popover, PopoverProps } from '../Popover';
 
 // eslint-disable-next-line @typescript-eslint/ban-types

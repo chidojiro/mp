@@ -1,8 +1,10 @@
-import { Accordion, Icon } from '@/components';
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+
+import { Accordion, Icon } from '@/components';
 import { useVisibilityControl } from '@/hooks';
+
 import { NavItemData } from '.';
 
 export type Data = {

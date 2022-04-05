@@ -1,8 +1,9 @@
 import React from 'react';
+
 import { render, screen, act, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { RadioGroup, RadioGroupProps } from '..';
-import userEvent from '@testing-library/user-event';
 
 const renderRadioGroup = (props?: Partial<RadioGroupProps>) =>
   render(

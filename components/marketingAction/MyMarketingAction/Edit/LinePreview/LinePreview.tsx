@@ -1,8 +1,10 @@
-import { Button } from '@/components/common';
-import { ContentEditableUtils } from '@/utils';
+import React from 'react';
+
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
-import React from 'react';
+
+import { Button } from '@/components/common';
+import { ContentEditableUtils } from '@/utils';
 
 type Props = {
   body?: string;

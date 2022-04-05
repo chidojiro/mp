@@ -1,5 +1,6 @@
-import { Children, ClassName } from '@/types';
 import classNames from 'classnames';
+
+import { Children, ClassName } from '@/types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = ClassName & Children & { size?: 'md' | 'lg' };

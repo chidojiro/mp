@@ -1,8 +1,11 @@
+import React from 'react';
+
+import { useTranslation } from 'next-i18next';
+
 import { Form } from '@/components';
 import { Option } from '@/types';
 import { ContentEditableUtils } from '@/utils';
-import { useTranslation } from 'next-i18next';
-import React from 'react';
+
 import { EmojiSign } from '../EmojiSign';
 import { VariableSign } from '../VariableSign';
 

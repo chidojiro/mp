@@ -1,10 +1,12 @@
-import { Button, Icon, IconName, Tag } from '@/components';
-import { AspectRatio } from '@/headless';
-import { ClassName } from '@/types';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+
+import { Button, Icon, IconName, Tag } from '@/components';
+import { AspectRatio } from '@/headless';
+import { ClassName } from '@/types';
+
 import { Label } from './Label';
 
 // eslint-disable-next-line @typescript-eslint/ban-types

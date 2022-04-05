@@ -1,9 +1,16 @@
 import { Icon } from '@/components';
 import { Button, Tag } from '@/components/common';
 import { MarketingActionStatus as MAStatus, TargetSegment } from '@/types';
+import { Icon } from '@/components';
+import { Button, Tag } from '@/components/common';
+import { HeaderTab } from '@/constants';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+
+import { Icon } from '@/components';
+import { Button, Tag } from '@/components/common';
+import { HeaderTab } from '@/constants';
 
 type Props = {
   path: string;

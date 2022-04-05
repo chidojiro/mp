@@ -1,6 +1,8 @@
-import { useVisibilityControl } from '@/hooks';
 import { EyeOffIcon } from '@heroicons/react/outline';
 import { EyeIcon } from '@heroicons/react/solid';
+
+import { useVisibilityControl } from '@/hooks';
+
 import { Input, InputProps } from '..';
 
 // eslint-disable-next-line @typescript-eslint/ban-types

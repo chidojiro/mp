@@ -1,8 +1,11 @@
-import { Layout } from '@/components';
+import React from 'react';
+
 import { ChevronRightIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
-import React from 'react';
+
+import { Layout } from '@/components';
+
 import { TargetFilter } from '../TargetFilter';
 import { ReportTable } from './ReportTable';
 

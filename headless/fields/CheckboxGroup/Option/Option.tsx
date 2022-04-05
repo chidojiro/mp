@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from 'react';
+
 import { CheckboxGroupContext, CheckboxGroupProvider } from '../CheckboxGroup';
 
 export type RenderPropState = {

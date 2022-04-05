@@ -1,6 +1,8 @@
-import classNames from 'classnames';
-import { Tabs as HeadlessTabs, TabsProps as HeadlessTabsProps } from '@/headless';
 import React from 'react';
+
+import classNames from 'classnames';
+
+import { Tabs as HeadlessTabs, TabsProps as HeadlessTabsProps } from '@/headless';
 import { ClassName } from '@/types';
 
 export type Tab = {

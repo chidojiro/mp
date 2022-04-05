@@ -1,6 +1,7 @@
-import { ClassName } from '@/types';
 import classNames from 'classnames';
+
 import { Tabs as HeadlessTabs, TabsProps as HeadlessTabsProps } from '@/headless';
+import { ClassName } from '@/types';
 
 type Item = {
   label: React.ReactNode;

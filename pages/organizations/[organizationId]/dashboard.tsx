@@ -1,11 +1,12 @@
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import { mockData } from '@/apis';
 import { Icon, Layout } from '@/components';
 import { CSVButton } from '@/components/CSVButton/CSVButton';
 import { CustomerReportButton } from '@/components/CustomerReportButton/CustomerReportButton';
 import { CustomerSegmentTable } from '@/components/CustomerSegmentTable/CustomerSegmentTable';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   return {
