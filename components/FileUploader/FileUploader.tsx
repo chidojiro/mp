@@ -7,7 +7,6 @@ export const FileUploader = () => {
 
   const handleDrop = (acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
-    console.log(file);
   };
 
   return (
