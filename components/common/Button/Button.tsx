@@ -154,8 +154,8 @@ export type Props = Children &
     // loading?: boolean;
     style?: any;
   };
-
-export const Button = React.forwardRef<HTMLElement, Props>(
+type Ref = HTMLButtonElement;
+export const Button = React.forwardRef<Ref, Props>(
   (
     {
       variant = 'solid',
@@ -168,7 +168,7 @@ export const Button = React.forwardRef<HTMLElement, Props>(
       style,
       ...restProps
     },
-    ref: any
+    ref
   ) => {
     const backgroundColor = backgroundColors[colorScheme][variant];
     const borderColor = borderColors[colorScheme][variant];
