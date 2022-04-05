@@ -3,14 +3,14 @@ import { Icon, Layout } from '@/components';
 import { CSVButton } from '@/components/CSVButton/CSVButton';
 import { CustomerReportButton } from '@/components/CustomerReportButton/CustomerReportButton';
 import { CustomerSegmentTable } from '@/components/CustomerSegmentTable/CustomerSegmentTable';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+export const getStaticProps: GetStaticProps = async ({ locale = 'ja' }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale!)),
+      ...(await serverSideTranslations(locale)),
     },
   };
 };
