@@ -100,8 +100,8 @@
   "previewMobile": "プレビュー（モバイル）",
   "openPreview": "プレビューを開く",
   "viewShoppingCart": "ショッピングカートを見る",
-  "am": "午前",
-  "pm": "午後",
+  "amTime": "午前 {{time}}",
+  "pmTime": "午後 {{time}}",
   "messageDelivery": "メッセージ配信",
   "chatbot": "チャットボット",
   "popup": "ポップアップ",
@@ -196,5 +196,6 @@
   "faqCSVUploadDescription": "作成したCSVファイルをこちらからアップロードしてください。正常にアップロードできたらSTEP1は終了です。",
   "faqChatWindowSettingsDescription": "チャットボットの外観の作成と挙動の設定を行います。",
   "exterior": "外観",
-  "emptyMarketingAction": "実施中の施策はありません。"
+  "emptyMarketingAction": "実施中の施策はありません。",
+  "timeDeliverySettings": "{{from_the_date_text}}{{days}}日後の{{time}}"
 }

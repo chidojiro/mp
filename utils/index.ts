@@ -10,3 +10,5 @@ export { CookiesUtils } from './cookieUtils';
 export { ContentEditableUtils } from './contentEditable';
 export { LanguageUtils } from './language';
 export { TargetFilterUtils } from './targetFilter';
+export { TimeUtils } from './time';
+export { ColorUtils } from './color';

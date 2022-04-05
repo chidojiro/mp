@@ -100,8 +100,8 @@
   "previewMobile": "Preview (Mobile)",
   "openPreview": "Open Preview",
   "viewShoppingCart": "View Shopping Cart",
-  "am": "A.M",
-  "pm": "P.M",
+  "amTime": "{{time}} a.m",
+  "pmTime": "{{time}} p.m",
   "messageDelivery": "Message Delivery",
   "chatbot": "Chatbots",
   "popup": "Pop-ups",
@@ -197,5 +197,6 @@
   "faqCSVUploadDescription": "Please upload the created CSV file from here. If you can upload successfully, STEP1 is finished.",
   "faqChatWindowSettingsDescription": "Create the appearance and behavior of the chatbot.",
   "exterior": "Exterior",
-  "emptyMarketingAction": "There are no measures under implementation."
+  "emptyMarketingAction": "There are no measures under implementation.",
+  "timeDeliverySettings": "{{time}} {{days}} days {{from_the_date_text}}"
 }

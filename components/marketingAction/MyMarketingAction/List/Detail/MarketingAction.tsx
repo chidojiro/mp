@@ -80,7 +80,7 @@ export const MarketingAction = ({ marketingAction }: Props) => {
           targetCustomers={marketingAction.target_segments || []}
           date={getRange()}
         />
-        <StepDelivery steps={marketingActionDetail.settings} targetSettings={targetSettings()} />
+        <StepDelivery settings={marketingAction.settings} targetSettings={targetSettings()} />
       </div>
       <div className='flex justify-center pt-10'>
         <Button className='mr-5 min-w-[240px] bg-[#FF7F5C]'>{t('suspendTemplate')}</Button>
