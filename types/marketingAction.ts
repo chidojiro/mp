@@ -49,11 +49,12 @@ export type TargetSegment = {
 export type MarketingActionType = {
   id: number;
   name: string;
+  alias: MarketingActionAlias;
   type: MarketingActionTypeMessage;
   cv_measure_start_event?: string;
   cv_measure_end_event?: string;
-  created_at: string;
-  ended_at: string;
+  created_at?: string;
+  ended_at?: string;
 };
 
 export type MarketingActionRes = {

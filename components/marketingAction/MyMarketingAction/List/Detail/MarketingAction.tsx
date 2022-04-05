@@ -1,5 +1,5 @@
 import { Button } from '@/components/common';
-import { MarketingActionRes } from '@/types';
+import { MarketingActionAlias, MarketingActionRes } from '@/types';
 import { LanguageUtils, TargetFilterUtils } from '@/utils';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
@@ -80,7 +80,14 @@ export const MarketingAction = ({ marketingAction }: Props) => {
           targetCustomers={marketingAction.target_segments || []}
           date={getRange()}
         />
-        <StepDelivery settings={marketingAction.settings} targetSettings={targetSettings()} />
+        <StepDelivery
+          settings={marketingAction.settings}
+          targetSettings={targetSettings()}
+          alias={
+            marketingAction.marketing_action_type?.alias ||
+            MarketingActionAlias.CART_LEFT_NOTIFICATION
+          }
+        />
       </div>
       <div className='flex justify-center pt-10'>
         <Button className='mr-5 min-w-[240px] bg-[#FF7F5C]'>{t('suspendTemplate')}</Button>

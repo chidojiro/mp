@@ -12,6 +12,7 @@ import { StepDeliveryAfterPurchase } from './StepDeliveryAfterPurchase';
 type Props = {
   targetSettings: string;
   settings: any;
+  alias: MAAlias;
 };
 
 const MARKETING_ACTION_STEP_MESSAGE: { [key: string]: any } = {
@@ -24,14 +25,12 @@ const MARKETING_ACTION_STEP_MESSAGE: { [key: string]: any } = {
   [MAAlias.CONDITIONAL_FREE_SHIPPING]: ConditionalFreeShipping,
 };
 
-export const StepDelivery = ({ settings, targetSettings }: Props) => {
+export const StepDelivery = ({ settings, targetSettings, alias }: Props) => {
   const { t } = useTranslation('marketingAction');
   const previewMessageControl = useVisibilityControl();
 
   const renderStepMessage = () => {
-    const Component = settings.alias
-      ? MARKETING_ACTION_STEP_MESSAGE[settings.alias]
-      : CartAbandoned;
+    const Component = MARKETING_ACTION_STEP_MESSAGE[alias];
     return <Component settings={settings} />;
   };
 
