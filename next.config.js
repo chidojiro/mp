@@ -36,12 +36,10 @@ module.exports = withBundleAnalyzer({
       ],
     });
 
-    if (!isServer) {
-      config.module.rules.push({
-        test: /.+\/index\.ts/i,
-        sideEffects: false,
-      });
-    }
+    config.module.rules.push({
+      test: /.+\/index\.ts/i,
+      sideEffects: false,
+    });
 
     return config;
   },
