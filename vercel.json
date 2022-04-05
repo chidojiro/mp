@@ -1,6 +1,6 @@
 {
   "functions": {
-    "*": {
+    "ja/organizations/*": {
       "memory": 3008,
       "maxDuration": 60
     }
