@@ -1,6 +1,6 @@
 {
   "functions": {
-    "ja/organizations/[organizationId]/dashboard": {
+    "pages/**/*": {
       "memory": 3008,
       "maxDuration": 60
     }
