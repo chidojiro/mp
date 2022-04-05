@@ -1,6 +1,7 @@
 export * from './marketing_action';
 export * from './env';
 export * from './misc';
+export * from './auth';
 
 export const lorem = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
 magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
