@@ -1,13 +1,9 @@
-import { useVisibilityControl } from '@/hooks';
-import { MarketingActionAlias as MAAlias } from '@/types';
-import { Button } from '@/components/common';
-import { useVisibilityControl } from '@/hooks';
-import classNames from 'classnames';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 
-import { Button } from '@/components/common';
 import { useVisibilityControl } from '@/hooks';
+import { MarketingActionAlias as MAAlias } from '@/types';
+import { Button } from '@/components/common';
 
 import { PreviewOverlay } from '../../Edit/PreviewOverlay';
 import { CartAbandoned } from './CartAbandoned';

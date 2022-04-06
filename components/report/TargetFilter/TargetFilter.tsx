@@ -1,10 +1,10 @@
 import React from 'react';
-import { Option, TARGET } from '@/types';
+
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 
+import { Option, TARGET } from '@/types';
 import { CheckboxGroup } from '@/components';
-import { Option } from '@/types';
 
 import { CheckboxTag } from './CheckboxTag';
 

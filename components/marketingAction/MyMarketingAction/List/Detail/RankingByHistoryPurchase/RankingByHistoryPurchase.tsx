@@ -1,5 +1,7 @@
-import { ColorUtils } from '@/utils';
 import { useTranslation } from 'next-i18next';
+
+import { ColorUtils } from '@/utils';
+
 import { Answer, Color, StepBlock } from '../StepBlock';
 
 type Props = {

@@ -152,7 +152,7 @@ export type Props = Children &
     colorScheme?: ColorScheme;
     icon?: React.ReactNode;
     // loading?: boolean;
-    style?: any;
+    style?: React.CSSProperties;
   };
 type Ref = HTMLButtonElement;
 export const Button = React.forwardRef<Ref, Props>(

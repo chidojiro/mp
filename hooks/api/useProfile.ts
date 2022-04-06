@@ -2,8 +2,8 @@ import React from 'react';
 
 import useSWR from 'swr';
 
-import { ProfileApis } from '@/apis';
-import { useServerSidePropsContext } from '@/contexts';
+import { ProfileApis } from '@/apis/profile';
+import { useServerSidePropsContext } from '@/contexts/ServerSidePropsContext';
 import { Profile } from '@/types';
 
 export function useProfile(fallbackData?: Profile) {

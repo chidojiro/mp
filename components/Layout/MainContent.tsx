@@ -1,14 +1,8 @@
-import { ReactNode } from 'react';
-
 import classNames from 'classnames';
 
-type Props = {
-  title: string;
-  subTitle?: string;
-  children?: ReactNode;
-};
+import { MainContentProps } from './Layout.types';
 
-export const MainContent = ({ title, subTitle, children }: Props) => {
+export const MainContent = ({ title, subTitle, children }: MainContentProps) => {
   return (
     <div className={classNames('relative flex flex-col flex-1 p-10', 'ml-[200px] mt-12')}>
       <div className='flex mb-10'>

@@ -1,7 +1,3 @@
-import { Layout, Tabs } from '@/components';
-import { MarketingActionStatus as MAStatus } from '@/types';
-import { Layout, Tabs } from '@/components';
-import { HeaderTab } from '@/constants';
 import React from 'react';
 
 import { useTranslation } from 'next-i18next';
@@ -9,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { Layout, Tabs } from '@/components';
-import { HeaderTab } from '@/constants';
+import { MarketingActionStatus as MAStatus } from '@/types';
 
 import { Draft } from './Draft';
 import { End } from './End';

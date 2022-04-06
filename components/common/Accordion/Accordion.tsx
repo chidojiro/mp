@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { noop } from 'lodash-es';
+import noop from 'lodash-es/noop';
 
 import { useVisibilityControl, VisibilityControl } from '@/hooks';
 import { Children, ClassName } from '@/types';

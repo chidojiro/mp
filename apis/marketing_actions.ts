@@ -1,4 +1,5 @@
 import { MarketingActionRes } from '@/types';
+
 import { RestApi, RestApiConfig } from './base';
 
 const list = (config: RestApiConfig) => {

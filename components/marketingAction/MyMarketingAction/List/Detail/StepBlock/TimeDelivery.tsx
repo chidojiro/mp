@@ -1,5 +1,7 @@
-import { TimeUtils } from '@/utils';
 import { useTranslation } from 'next-i18next';
+
+import { TimeUtils } from '@/utils';
+
 import { Answer } from './Answer';
 
 type Props = {

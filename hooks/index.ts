@@ -11,5 +11,7 @@ export * from './useGlobalState';
 export * from './useIsoMorphicEffect';
 export * from './useClipboard';
 export * from './useStateToggle';
+export * from './useNavigator';
+export * from './useAuth';
 
 export * from './api';

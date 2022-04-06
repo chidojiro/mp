@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useTranslation } from 'next-i18next';
 
-import { Icon } from '@/components';
+import { Icon } from '@/components/common/Icon';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Props = CSVButtonProps;
@@ -11,7 +11,7 @@ export type CSVButtonProps = {
   /**
    * Function to call on click.
    */
-  onClick?: (value: any) => void;
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
 };
 
 export const CSVButton = ({ onClick, ...props }: CSVButtonProps) => {
