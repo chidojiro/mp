@@ -1,5 +1,5 @@
 import { Layout, Tabs } from '@/components';
-import { HeaderTab } from '@/constants';
+import { MarketingActionStatus as MAStatus } from '@/types';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -10,17 +10,17 @@ import { InProgress } from './InProgress';
 
 export const List = () => {
   const { t } = useTranslation(['marketingAction']);
-  const { pathname, query, push } = useRouter();
+  const { pathname, query } = useRouter();
 
   const tabs = [
     {
-      value: HeaderTab.Active,
+      value: MAStatus.RUNNING,
       label: (
         <Link
           passHref
           href={{
             pathname,
-            query: { ...query, marketingActionStatus: HeaderTab.Active, marketingActionId: 1 },
+            query: { ...query, marketingActionStatus: MAStatus.RUNNING, marketingActionId: 1 },
           }}
         >
           <a className='block'>{t('inProgressTab')}</a>
@@ -29,13 +29,13 @@ export const List = () => {
       content: <InProgress />,
     },
     {
-      value: HeaderTab.Terminated,
+      value: MAStatus.COMPLETE,
       label: (
         <Link
           passHref
           href={{
             pathname,
-            query: { ...query, marketingActionStatus: HeaderTab.Terminated, marketingActionId: 1 },
+            query: { ...query, marketingActionStatus: MAStatus.COMPLETE, marketingActionId: 1 },
           }}
         >
           <a className='block'>{t('finishedTab')}</a>
@@ -44,13 +44,13 @@ export const List = () => {
       content: <End />,
     },
     {
-      value: HeaderTab.Draft,
+      value: MAStatus.DRAFT,
       label: (
         <Link
           passHref
           href={{
             pathname,
-            query: { ...query, marketingActionStatus: HeaderTab.Draft, marketingActionId: 1 },
+            query: { ...query, marketingActionStatus: MAStatus.DRAFT, marketingActionId: 1 },
           }}
         >
           <a className='block'>{t('draftTab')}</a>

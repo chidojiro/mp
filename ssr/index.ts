@@ -1,9 +1,10 @@
-import { ProfileApis, ReportApi } from '@/apis';
+import { ProfileApis, ReportApi, MarketingActionAPI } from '@/apis';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 
 const withPropsMap = {
   profile: ProfileApis.get,
   rfmReport: ReportApi.rfm_report,
+  actions: MarketingActionAPI.list,
 };
 
 const withProps =

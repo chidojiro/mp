@@ -1,6 +1,6 @@
 import { Icon } from '@/components';
 import { Button, Tag } from '@/components/common';
-import { HeaderTab } from '@/constants';
+import { MarketingActionStatus as MAStatus, TargetSegment } from '@/types';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 type Props = {
   path: string;
   name: string;
-  targetCustomers: string[];
+  targetCustomers: TargetSegment[];
   date?: string;
 };
 
@@ -21,11 +21,11 @@ export const Action = ({ name, path, targetCustomers, date }: Props) => {
 
   const prefixUrl = '/organizations/1/projects/1/';
   const url =
-    marketingActionStatus === HeaderTab.Draft
+    marketingActionStatus === MAStatus.DRAFT
       ? `actions/edit/${path}`
       : 'reports/action-reports/line-email/1?targets=all';
 
-  const btn = marketingActionStatus === HeaderTab.Draft ? t('editInEditor') : t('viewReport');
+  const btn = marketingActionStatus === MAStatus.DRAFT ? t('editInEditor') : t('viewReport');
 
   return (
     <div className='p-10'>
@@ -39,7 +39,7 @@ export const Action = ({ name, path, targetCustomers, date }: Props) => {
             <span className='mr-2 font-bold text-secondary'>{t('targetCustomer')}</span>
             <div className='flex flex-wrap gap-1'>
               {targetCustomers.map(customer => (
-                <Tag key={customer}>{customer}</Tag>
+                <Tag key={customer.segment}>{customer.segment}</Tag>
               ))}
             </div>
           </div>

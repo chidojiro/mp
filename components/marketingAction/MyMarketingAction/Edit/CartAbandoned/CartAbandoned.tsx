@@ -26,7 +26,7 @@ export const CartAbandoned = () => {
     headline_email: t('defaultHeadline'),
     text_email: t('defaultTextEmail'),
     text_option: OPTIONS.NO,
-    color: '#55c5d9',
+    color: '#55C5D9',
   };
   const methods = useForm({
     defaultValues: {

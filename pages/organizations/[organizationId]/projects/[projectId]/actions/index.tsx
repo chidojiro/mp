@@ -1,11 +1,11 @@
 import { Redirect } from '@/components';
-import { HeaderTab } from '@/constants';
+import { MarketingActionStatus } from '@/types';
 import { useRouter } from 'next/router';
 
 function MarketingActions() {
   const { asPath } = useRouter();
 
-  return <Redirect href={`${asPath}/${HeaderTab.Active}`} method='replace' />;
+  return <Redirect href={`${asPath}/${MarketingActionStatus.RUNNING}`} method='replace' />;
 }
 
 export default MarketingActions;
