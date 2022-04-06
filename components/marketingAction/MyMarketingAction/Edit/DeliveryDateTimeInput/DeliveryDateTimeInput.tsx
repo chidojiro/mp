@@ -1,5 +1,6 @@
-import { Form } from '@/components/common';
 import { useTranslation } from 'next-i18next';
+
+import { Form } from '@/components/common';
 
 type Props = {
   headingLabel: string;

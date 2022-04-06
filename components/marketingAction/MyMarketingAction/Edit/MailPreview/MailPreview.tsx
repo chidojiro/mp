@@ -1,10 +1,12 @@
-import { Button } from '@/components/common';
-import { ClassName } from '@/types';
-import { ContentEditableUtils } from '@/utils';
+import React from 'react';
+
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
-import React from 'react';
+
+import { Button } from '@/components/common';
+import { ClassName } from '@/types';
+import { ContentEditableUtils } from '@/utils';
 
 type Props = ClassName & {
   headline?: string;

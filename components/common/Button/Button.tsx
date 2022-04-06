@@ -1,5 +1,7 @@
 import React from 'react';
+
 import classNames from 'classnames';
+
 import { Children, ClassName, HTMLButtonProps } from 'types';
 
 type Variant = 'link' | 'outline' | 'solid';
@@ -150,10 +152,10 @@ export type Props = Children &
     colorScheme?: ColorScheme;
     icon?: React.ReactNode;
     // loading?: boolean;
-    style?: any;
+    style?: React.CSSProperties;
   };
-
-export const Button = React.forwardRef<HTMLElement, Props>(
+type Ref = HTMLButtonElement;
+export const Button = React.forwardRef<Ref, Props>(
   (
     {
       variant = 'solid',
@@ -166,7 +168,7 @@ export const Button = React.forwardRef<HTMLElement, Props>(
       style,
       ...restProps
     },
-    ref: any
+    ref
   ) => {
     const backgroundColor = backgroundColors[colorScheme][variant];
     const borderColor = borderColors[colorScheme][variant];

@@ -1,6 +1,7 @@
-import { Layout } from '@/components';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
+import { Layout } from '@/components';
 
 function ReturnOfF1DormantCustomers() {
   const { t } = useTranslation();

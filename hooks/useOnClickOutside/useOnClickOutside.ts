@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { AssertUtils } from '../../utils';
 
 export const useOnClickOutside = (

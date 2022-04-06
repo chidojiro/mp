@@ -1,7 +1,9 @@
+import { useTranslation } from 'next-i18next';
+
 import { Form } from '@/components';
 import { CHAT_COLORS, MESSAGE_COLORS } from '@/constants';
 import { Option } from '@/types';
-import { useTranslation } from 'next-i18next';
+
 import { ColorOption } from './ColorOption';
 
 type Props = {

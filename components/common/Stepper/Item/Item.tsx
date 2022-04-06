@@ -1,6 +1,9 @@
-import { Children } from '@/types';
-import classNames from 'classnames';
 import React from 'react';
+
+import classNames from 'classnames';
+
+import { Children } from '@/types';
+
 import { Icon } from '../../Icon';
 import { StepperContext } from '../Stepper';
 

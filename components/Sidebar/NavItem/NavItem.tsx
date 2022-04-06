@@ -1,19 +1,15 @@
-import { Accordion, Icon } from '@/components';
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { useVisibilityControl } from '@/hooks';
-import { NavItemData } from '.';
+import { useRouter } from 'next/router';
 
-export type Data = {
-  path?: string;
-  label: string;
-  children?: Data[];
-  matches?: string[];
-};
+import { Accordion } from '@/components/common/Accordion';
+import { Icon } from '@/components/common/Icon';
+import { useVisibilityControl } from '@/hooks/useVisibilityControl';
+
+import { NavItemData } from './NavItem.types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-type Props = { data: Data };
+type Props = { data: NavItemData };
 
 // eslint-disable-next-line no-empty-pattern
 export const NavItem = ({ data }: Props) => {
@@ -29,7 +25,7 @@ export const NavItem = ({ data }: Props) => {
 
   if (path)
     return (
-      <Link passHref href={path}>
+      <Link passHref href={path} prefetch={false}>
         <a
           className={classNames('flex text-medium items-center px-6 py-2.5 hover:bg-dark-gray', {
             'bg-dark-gray': isMatched(data),
@@ -55,7 +51,7 @@ export const NavItem = ({ data }: Props) => {
       </Accordion.Title>
       <Accordion.Content>
         {children.map(item => (
-          <Link passHref href={item.path || ''} key={item.label}>
+          <Link passHref href={item.path || ''} key={item.label} prefetch={false}>
             <a
               className={classNames(
                 'block text-medium items-center pl-12 pr-6 py-2.5 hover:bg-dark-gray truncate',

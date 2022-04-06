@@ -1,4 +1,5 @@
 import { User } from '@/types';
+
 import { RestApi } from './base';
 
 export const UserApi = {

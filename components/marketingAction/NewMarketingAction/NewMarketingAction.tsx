@@ -1,6 +1,7 @@
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+
 import { SideMenu, SideMenuGroup } from '../../common/SideMenu';
 import { ActionContainer } from '../ActionContainer';
 import { CartAbandonedOverview } from './CartAbandonedOverview';

@@ -1,6 +1,7 @@
+import classNames from 'classnames';
+
 import { RadioGroup } from '@/components';
 import { Option } from '@/types';
-import classNames from 'classnames';
 
 type Props = {
   color: Option<string>;

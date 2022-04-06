@@ -1,12 +1,15 @@
+import React, { useEffect, useState } from 'react';
+
+import { useTranslation } from 'next-i18next';
+import Link from 'next/link';
+import { useForm, useWatch } from 'react-hook-form';
+
 import { Form } from '@/components';
 import { Button, Modal } from '@/components/common';
 import { ActionContainer } from '@/components/marketingAction';
 import { Step } from '@/constants';
 import { useVisibilityControl } from '@/hooks';
-import { useTranslation } from 'next-i18next';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import { useForm, useWatch } from 'react-hook-form';
+
 import { PreviewOverlay } from '../PreviewOverlay';
 import { Steps } from '../Steps';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';

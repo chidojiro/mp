@@ -1,6 +1,8 @@
+import { useTranslation } from 'next-i18next';
+
 import { Form } from '@/components';
 import { Option } from '@/types';
-import { useTranslation } from 'next-i18next';
+
 import { TargetCustomer } from './TargetCustomer';
 
 type Props = {

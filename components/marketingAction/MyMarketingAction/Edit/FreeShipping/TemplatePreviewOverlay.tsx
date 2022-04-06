@@ -1,9 +1,11 @@
+import React, { useState } from 'react';
+
+import { useTranslation } from 'next-i18next';
+
 import { SwitchButtons } from '@/components/common';
 import { Overlay } from '@/components/Layout';
 import { VisibilityControl } from '@/hooks';
 import { Device } from '@/types';
-import { useTranslation } from 'next-i18next';
-import React, { useState } from 'react';
 
 type Props = {
   control: VisibilityControl;

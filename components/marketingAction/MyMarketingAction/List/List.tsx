@@ -1,9 +1,12 @@
-import { Layout, Tabs } from '@/components';
-import { MarketingActionStatus as MAStatus } from '@/types';
+import React from 'react';
+
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+
+import { Layout, Tabs } from '@/components';
+import { MarketingActionStatus as MAStatus } from '@/types';
+
 import { Draft } from './Draft';
 import { End } from './End';
 import { InProgress } from './InProgress';

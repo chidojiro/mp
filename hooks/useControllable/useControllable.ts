@@ -1,6 +1,8 @@
-import { isFunction } from 'lodash-es';
-import { Fn } from 'types';
 import React from 'react';
+
+import { isFunction } from 'lodash-es';
+
+import { Fn } from 'types';
 
 export type UseControllableProps<T = any> = {
   value?: T;

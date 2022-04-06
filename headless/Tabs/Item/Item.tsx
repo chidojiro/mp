@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { HTMLDivProps } from 'types';
+
 import { TabsContext } from '../Tabs';
 
 type TabItemRenderProp = (props: { onClick: () => void; isActive: boolean }) => React.ReactNode;

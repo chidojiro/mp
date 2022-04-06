@@ -1,5 +1,6 @@
 import Cookies, { CookieAttributes } from 'js-cookie';
 import { isSafari } from 'react-device-detect';
+
 import { IS_DEV } from '@/constants';
 
 const getKeyWithPrefix = (key: string, isSecure?: boolean) => {

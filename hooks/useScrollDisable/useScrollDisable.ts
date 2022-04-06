@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useIsoMorphicEffect } from '../useIsoMorphicEffect';
 
 export const useScrollDisable = (disable: boolean) => {

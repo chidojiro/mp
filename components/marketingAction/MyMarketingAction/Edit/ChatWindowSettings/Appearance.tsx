@@ -1,10 +1,13 @@
-import { Icon } from '@/components/common';
+import React from 'react';
+
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
-import React from 'react';
 import { useWatch } from 'react-hook-form';
-import { ColorGroup } from '../ColorSettingsSection/ColorGroup';
+
+import { Icon } from '@/components/common';
+
 import { ChatPreview } from '../ChatOverlay/ChatPreview';
+import { ColorGroup } from '../ColorSettingsSection/ColorGroup';
 
 export const Appearance = () => {
   const { t } = useTranslation('marketingAction');

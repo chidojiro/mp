@@ -1,6 +1,8 @@
-import classNames from 'classnames';
-import { HTMLTextAreaProps } from '@/types';
 import React from 'react';
+
+import classNames from 'classnames';
+
+import { HTMLTextAreaProps } from '@/types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Props = HTMLTextAreaProps & {

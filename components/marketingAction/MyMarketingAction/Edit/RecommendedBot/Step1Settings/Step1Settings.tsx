@@ -1,6 +1,7 @@
+import { useTranslation } from 'next-i18next';
+
 import { Button } from '@/components/common';
 import { FileUploader } from '@/components/FileUploader';
-import { useTranslation } from 'next-i18next';
 
 export const Step1Settings = () => {
   const { t } = useTranslation('marketingAction');

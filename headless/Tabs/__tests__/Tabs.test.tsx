@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { act, render, screen } from '@testing-library/react';
 
 import { Tabs, TabsProps } from '..';

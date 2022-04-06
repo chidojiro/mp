@@ -1,7 +1,9 @@
-import { Form } from '@/components/common';
 import { useTranslation } from 'next-i18next';
-import { VariableSign } from '../../VariableSign';
+
+import { Form } from '@/components/common';
+
 import { Message } from '../../ChatOverlay/Message';
+import { VariableSign } from '../../VariableSign';
 
 export const Step2Settings = () => {
   const { t } = useTranslation('marketingAction');

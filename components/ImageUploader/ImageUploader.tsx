@@ -1,7 +1,9 @@
+import { useState } from 'react';
+
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
 import Dropzone from 'react-dropzone';
+
 import { Icon } from '../common';
 
 type Props = {

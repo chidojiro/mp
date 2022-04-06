@@ -1,5 +1,7 @@
-import { Form, RadioGroup } from '@/components/common';
 import { useTranslation } from 'next-i18next';
+
+import { Form, RadioGroup } from '@/components/common';
+
 import { OPTIONS } from '../CartAbandoned';
 
 export const LineSettings = () => {

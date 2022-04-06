@@ -1,10 +1,14 @@
-import { MarketingActionAPI } from '@/apis';
-import { TargetFilterUtils } from '@/utils';
+import React, { useEffect, useState } from 'react';
+
+import { Value } from 'classnames';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
 import useSWR from 'swr';
+
+import { TargetFilterUtils } from '@/utils';
+import { MarketingActionAPI } from '@/apis';
 import { MarketingActionStatus as MAStatus, MarketingActionTypeMessage as TYPE } from 'types';
+
 import { SideMenu, SideMenuGroup, SideMenuItem } from '../../../../common';
 import { TargetFilter } from '../../../../report';
 import { MarketingAction } from './MarketingAction';

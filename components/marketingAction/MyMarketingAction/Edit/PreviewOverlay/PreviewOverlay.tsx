@@ -1,9 +1,12 @@
+import React, { useEffect, useState } from 'react';
+
+import { useTranslation } from 'next-i18next';
+
 import { Button, Input, Modal, SwitchButtons } from '@/components/common';
 import { Overlay } from '@/components/Layout';
 import { useVisibilityControl, VisibilityControl } from '@/hooks';
 import { Device, Option } from '@/types';
-import { useTranslation } from 'next-i18next';
-import React, { useEffect, useState } from 'react';
+
 import { LinePreview } from '../LinePreview';
 import { MailPreview } from '../MailPreview';
 import { MessageContentPreviewType } from '../MessageContentPreview';

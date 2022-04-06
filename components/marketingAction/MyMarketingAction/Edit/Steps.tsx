@@ -1,5 +1,7 @@
-import { Step } from '@/constants';
 import React, { useState } from 'react';
+
+import { Step } from '@/constants';
+
 import { StepForm } from './StepForm';
 
 type Props = {

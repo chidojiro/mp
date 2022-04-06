@@ -1,11 +1,20 @@
-import { mockData } from '@/apis';
-import { Icon, Layout } from '@/components';
-import { CSVButton } from '@/components/CSVButton/CSVButton';
-import { CustomerReportButton } from '@/components/CustomerReportButton/CustomerReportButton';
-import { CustomerSegmentTable } from '@/components/CustomerSegmentTable/CustomerSegmentTable';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import dynamic from 'next/dynamic';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
+import { mockData } from '@/apis/report';
+import { Icon } from '@/components/common/Icon';
+import { Layout } from '@/components/Layout';
+import { CSVButton } from '@/components/CSVButton/CSVButton';
+import { CustomerReportButton } from '@/components/CustomerReportButton/CustomerReportButton';
+import { CustomerSegmentTableProps } from '@/components/CustomerSegmentTable/CustomerSegmentTable.types';
+
+const CustomerSegmentTable = dynamic<CustomerSegmentTableProps>(() =>
+  import('@/components/CustomerSegmentTable/CustomerSegmentTable').then(
+    module => module.CustomerSegmentTable
+  )
+);
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   return {
@@ -21,8 +30,9 @@ export const getStaticProps: GetStaticProps = async ({ locale = 'ja' }) => {
     },
   };
 };
-
-function Dashboard(props: any) {
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface DashboardProps {}
+function Dashboard({}: DashboardProps) {
   const { t } = useTranslation('dashboard');
 
   const data = mockData;

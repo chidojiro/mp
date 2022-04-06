@@ -1,11 +1,13 @@
-import { Button, Form, Layout, Section } from '@/components';
-import { SSR } from '@/ssr';
+import React from 'react';
+
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { useForm } from 'react-hook-form';
+
+import { Button, Form, Layout, Section } from '@/components';
+import { SSR } from '@/ssr';
 
 export const getServerSideProps = SSR.withProps('profile')(async ({ locale }, result) => {
   return {

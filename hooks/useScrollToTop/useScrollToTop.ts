@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+
 import { useIsoMorphicEffect } from '../useIsoMorphicEffect';
 
 export const useScrollToTop = (deps: any[]) => {

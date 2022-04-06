@@ -1,7 +1,9 @@
+import { useTranslation } from 'next-i18next';
+
 import { Button } from '@/components/common';
 import { useVisibilityControl } from '@/hooks';
 import { ColorUtils } from '@/utils';
-import { useTranslation } from 'next-i18next';
+
 import { PreviewOverlay } from '../../../Edit/PreviewOverlay';
 import { Answer } from './Answer';
 import { Color } from './Color';

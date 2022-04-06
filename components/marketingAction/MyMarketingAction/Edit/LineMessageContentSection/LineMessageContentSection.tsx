@@ -1,8 +1,10 @@
-import { Form, Icon, RadioGroup, Section } from '@/components';
 import { useTranslation } from 'next-i18next';
-import { MessageContentPreview } from '../MessageContentPreview';
 import { useWatch } from 'react-hook-form';
+
+import { Form, Icon, RadioGroup, Section } from '@/components';
+
 import { MessageBodyInput } from '../MessageBodyInput';
+import { MessageContentPreview } from '../MessageContentPreview';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {

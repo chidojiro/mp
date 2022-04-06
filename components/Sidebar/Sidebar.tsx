@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
+
 import { NavItem, NavItemData } from './NavItem';
 
 export const Sidebar = () => {

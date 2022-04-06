@@ -1,12 +1,15 @@
-import classNames from 'classnames';
 import React from 'react';
+
+import classNames from 'classnames';
+
 import { Children, ClassName } from 'types';
+
 import { Body } from './Body';
 import { Cell } from './Cell';
 import { Footer } from './Footer';
 import { Head } from './Head';
-import { Row } from './Row';
 import { Header } from './Header';
+import { Row } from './Row';
 
 type Size = 'sm' | 'md';
 

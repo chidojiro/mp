@@ -1,7 +1,8 @@
-import { RadioGroup } from '@/components';
 import classNames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+
+import { RadioGroup } from '@/components';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {

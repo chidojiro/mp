@@ -1,7 +1,9 @@
-import { ComponentStory } from '@storybook/react';
 import React from 'react';
-import { usePagination, UsePaginationProps } from '.';
+
+import { ComponentStory } from '@storybook/react';
 import classNames from 'classnames';
+
+import { usePagination, UsePaginationProps } from '.';
 
 export default {
   title: 'Hooks/usePagination',

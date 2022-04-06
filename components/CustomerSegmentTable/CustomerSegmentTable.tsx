@@ -1,30 +1,14 @@
-import classNames from 'classnames';
 import React from 'react';
-import { Icon } from '@/components';
+
+import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
+
+import { Icon } from '@/components';
+
+import { CustomerSegmentTableProps } from './CustomerSegmentTable.types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Props = CustomerSegmentTableProps;
-
-export type CustomerSegmentTableProps = {
-  /**
-   * Array of data for generating cards. Array format is: [{
-    target: 'f0', 
-    numOfCustomers: '', 
-    members: '234', 
-    other: '9,203', 
-    average: '', 
-    total: '', 
-    f1Sleep: '', 
-    loyalSleep: '',
-  }]
-  */
-  data: any[];
-  semiLoyalSubtext?: string;
-  loyalSubtext?: string;
-  sleepSubtext?: string;
-  onClick: (value: any) => void;
-};
 
 const dashboardCardHeaderClasses = (status: string, index: number, length: number) =>
   classNames({

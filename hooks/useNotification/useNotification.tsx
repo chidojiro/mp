@@ -1,10 +1,13 @@
 import React from 'react';
+
+import { cloneDeep } from 'lodash-es';
 import ReactDOM from 'react-dom';
 import { v4 as UUID } from 'uuid';
-import { AssertUtils } from 'utils';
+
 import { useGlobalState } from 'hooks';
+import { AssertUtils } from 'utils';
+
 import { NotificationList } from './NotificationList';
-import { cloneDeep } from 'lodash-es';
 
 type VerticalAlignment = 'top' | 'bottom';
 type HorizontalAlignment = 'left' | 'right' | 'center';

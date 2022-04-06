@@ -1,9 +1,12 @@
+import React from 'react';
+
+import classNames from 'classnames';
+import BaseContentEditable, { ContentEditableEvent } from 'react-contenteditable';
+
 import { useControllable, useVisibilityControl } from '@/hooks';
 import { ClassName, Option } from '@/types';
 import { ContentEditableUtils } from '@/utils';
-import classNames from 'classnames';
-import React from 'react';
-import BaseContentEditable, { ContentEditableEvent } from 'react-contenteditable';
+
 import { Dropdown } from '../../Dropdown';
 import style from './ContentEditable.module.css';
 

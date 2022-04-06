@@ -1,6 +1,7 @@
+import React from 'react';
+
 import { get } from 'lodash-es';
 import { useFormContext } from 'react-hook-form';
-import React from 'react';
 
 export type Props = {
   name: string | string[];

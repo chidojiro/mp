@@ -1,3 +1,11 @@
+import React from 'react';
+
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+
 import { ProfileApis } from '@/apis';
 import { Button, Form, Layout, Section } from '@/components';
 import { EmailPattern } from '@/constants';
@@ -5,12 +13,6 @@ import { ServerSidePropsProvider } from '@/contexts';
 import { useProfile } from '@/hooks';
 import { SSR } from '@/ssr';
 import { Profile } from '@/types';
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React from 'react';
-import { useForm } from 'react-hook-form';
 
 export const getServerSideProps = SSR.withProps('profile')(async ({ locale }, result) => {
   return {
