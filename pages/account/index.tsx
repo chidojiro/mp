@@ -5,9 +5,10 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { Layout, Section } from '@/components';
-import { ServerSidePropsProvider } from '@/contexts';
-import { useVisibilityControl } from '@/hooks';
+import { Layout } from '@/components/Layout';
+import { Section } from '@/components/Section';
+import { ServerSidePropsProvider } from '@/contexts/ServerSidePropsContext';
+import { useVisibilityControl } from '@/hooks/useVisibilityControl';
 import { SSR } from '@/ssr';
 import { Profile } from '@/types';
 
