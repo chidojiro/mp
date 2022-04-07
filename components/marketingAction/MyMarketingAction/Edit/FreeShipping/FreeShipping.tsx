@@ -12,25 +12,37 @@ import { useVisibilityControl } from '@/hooks';
 
 import { Steps } from '../Steps';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';
-import { PopupSetting } from './PopupSetting';
+import { Step1Settings } from './Step1Settings';
 import { TemplatePreviewOverlay } from './TemplatePreviewOverlay';
 
 export const FreeShipping = () => {
   const { t } = useTranslation('marketingAction');
-  const methods = useForm();
-  const { handleSubmit, reset } = methods;
-  // const { control } = methods;
+  const methods = useForm({
+    defaultValues: {
+      chat_settings: {
+        color: '#E63E28',
+        pc_appearance_time: '0',
+        mobile_appearance_time: '0',
+        pc_position: '0',
+        mobile_position: '0',
+        pc_unit: 'px',
+        mobile_unit: 'px',
+      },
+    } as any,
+  });
+  const { handleSubmit, watch } = methods;
+  const { control } = methods;
   const modalControl = useVisibilityControl();
   const [isCompleted, setIsCompleted] = useState(false);
   const [isSaveAsDraft, setIsSaveAsDraft] = useState(false);
 
-  // const isStep1Done = useWatch({ name: 'is_use_popup', control });
-  // const firstMessage = useWatch({ name: 'first_message', control });
-  const previewMessageControl = useVisibilityControl();
+  const step1 = useWatch({ name: 'popup_setting_creation', control });
+  const targetCustomers = useWatch({ name: 'target_customers', control });
+  const isStep2Done = !!targetCustomers?.length;
+  const chatPreviewControl = useVisibilityControl();
 
   const onSubmit = (data: any) => {
     console.log('submit', data);
-    reset(data);
   };
 
   const showModal = () => {
@@ -63,8 +75,8 @@ export const FreeShipping = () => {
     if (stepId === 1) {
       // TODO save step 1
       setStepDone(stepId, true);
-    } else if (stepId === 2) {
-      // TODO save step 2
+    } else if (stepId === 2 && isStep2Done) {
+      // TODO save step 3
       setStepDone(stepId, true);
     }
   };
@@ -73,25 +85,23 @@ export const FreeShipping = () => {
     {
       id: 1,
       name: t('popupSettings'),
-      children: <PopupSetting />,
+      children: <Step1Settings />,
       showPreviewBtn: true,
     },
     {
       id: 2,
       name: t('targetSetting'),
-      children: <TargetCustomerGroup />,
-      showPreviewBtn: false,
-      // isDone: targetCustomers?.length,
+      children: <TargetCustomerGroup isNonMember={true} />,
     },
   ]);
 
-  // useEffect(() => {
-  //   setStepDone(1, false);
-  // }, [isStep1Done]);
+  useEffect(() => {
+    setStepDone(1, false);
+  }, [step1]);
 
-  // useEffect(() => {
-  //   setStepDone(2, false);
-  // }, [firstMessage]);
+  useEffect(() => {
+    setStepDone(2, false);
+  }, [targetCustomers]);
 
   const modalDesc = () => {
     let desc = 'executeTemplate';
@@ -104,13 +114,11 @@ export const FreeShipping = () => {
   };
 
   const onShowPreview = (stepId: number) => {
-    previewMessageControl.open();
+    chatPreviewControl.open();
   };
 
   const isGotoMABtn = isCompleted || isSaveAsDraft;
-  const gotoMyMAUrl = `/organizations/1/projects/1/actions/${
-    isCompleted ? 'active' : 'draft'
-  }/1?targets=all&date=all`;
+  const gotoMyMAUrl = `/organizations/1/projects/1/actions/${isCompleted ? 'active' : 'draft'}`;
   const unSavedSteps = steps.filter(step => !step.isDone).length;
 
   return (
@@ -125,11 +133,7 @@ export const FreeShipping = () => {
       <Form methods={methods} className='mt-[60px]'>
         <Steps steps={steps} onConfirm={onConfirm} onShowPreview={onShowPreview} />
         <div className='flex justify-center mt-10'>
-          <Button
-            colorScheme='negative'
-            className='mr-5 min-w-[240px] h-[52px]'
-            onClick={onSaveAsDraft}
-          >
+          <Button className='mr-5 min-w-[240px] h-[52px] bg-[#FF7F5C]' onClick={onSaveAsDraft}>
             {t('saveDraft')}
           </Button>
           <Button colorScheme='negative' className='mr-5 min-w-[240px] h-[52px]'>
@@ -141,7 +145,7 @@ export const FreeShipping = () => {
         </div>
       </Form>
 
-      <TemplatePreviewOverlay control={previewMessageControl} />
+      <TemplatePreviewOverlay control={chatPreviewControl} />
 
       <Modal control={modalControl}>
         <div className='text-center text-gray-dark'>
@@ -158,9 +162,7 @@ export const FreeShipping = () => {
                 <Modal.FooterButton colorScheme='negative' onClick={modalControl.close}>
                   {t('cancel')}
                 </Modal.FooterButton>
-                <Modal.FooterButton onClick={onExecuteMA}>
-                  {t('implementTemplate')}
-                </Modal.FooterButton>
+                <Modal.FooterButton onClick={onExecuteMA}>{t('executeTest')}</Modal.FooterButton>
               </>
             )}
           </Modal.Footer>
