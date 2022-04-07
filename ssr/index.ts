@@ -1,6 +1,7 @@
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 
 import { ProfileApis, ReportApi, MarketingActionAPI } from '@/apis';
+import { ACCESS_TOKEN_KEY } from '@/constants';
 
 const withPropsMap = {
   profile: ProfileApis.get,
@@ -19,11 +20,17 @@ const withProps =
           propNames.map(async name => {
             const { cookie } = context.req.headers;
 
+            const parsedCookies = Object.fromEntries(
+              (cookie as string).split(/; */).map(c => {
+                const [key, ...v] = c.split('=');
+                return [key, decodeURIComponent(v.join('='))];
+              })
+            );
+
             const value = await withPropsMap[name]({
               headers: {
-                cookie: cookie as string,
-                'X-Organization-Id': '00000000000040008000000000000000',
-                'X-Project-Id': '00000000000040008000000000000000',
+                ...parsedCookies,
+                Authorization: `Bearer ${parsedCookies[ACCESS_TOKEN_KEY]}`,
               },
             });
 
@@ -40,6 +47,7 @@ const withProps =
 
         return wrappedGetServerSideProps(context, { props });
       } catch (e: any) {
+        console.error('Error from api:', JSON.stringify(e));
         if ([401, 403].includes(e?.response?.status)) {
           return { redirect: { destination: '/login' } };
         } else throw e;

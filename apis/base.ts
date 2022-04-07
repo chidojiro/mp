@@ -42,8 +42,13 @@ myAxios.interceptors.request.use(
     if (config.method === 'post') {
       config.headers['X-Idempotent-Key'] = nanoid(32);
     }
-    config.headers[ORANIZATION_HEADER] = CookiesUtils.get(ORANIZATION_HEADER);
-    config.headers[PROJECT_HEADER] = CookiesUtils.get(PROJECT_HEADER);
+
+    if (CookiesUtils.get(ORANIZATION_HEADER)) {
+      config.headers[ORANIZATION_HEADER] = CookiesUtils.get(ORANIZATION_HEADER);
+    }
+    if (CookiesUtils.get(PROJECT_HEADER)) {
+      config.headers[PROJECT_HEADER] = CookiesUtils.get(PROJECT_HEADER);
+    }
 
     return config;
   },
