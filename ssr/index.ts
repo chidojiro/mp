@@ -1,4 +1,5 @@
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import axios, { AxiosError } from 'axios';
 
 import { ProfileApis, ReportApi, MarketingActionAPI } from '@/apis';
 import { ACCESS_TOKEN_KEY } from '@/constants';
@@ -16,28 +17,39 @@ const withProps =
   ): GetServerSideProps => {
     return async (context: GetServerSidePropsContext) => {
       try {
+        const { cookie } = context.req.headers;
+
+        const parsedCookies = Object.fromEntries(
+          (cookie as string).split(/; */).map(c => {
+            const [key, ...v] = c.split('=');
+            return [key, decodeURIComponent(v.join('='))];
+          })
+        );
         const propsMetaCollection = await Promise.all(
           propNames.map(async name => {
-            const { cookie } = context.req.headers;
+            try {
+              const value = await withPropsMap[name]({
+                headers: {
+                  ...parsedCookies,
+                  Authorization: `Bearer ${parsedCookies[ACCESS_TOKEN_KEY]}`,
+                },
+              });
 
-            const parsedCookies = Object.fromEntries(
-              (cookie as string).split(/; */).map(c => {
-                const [key, ...v] = c.split('=');
-                return [key, decodeURIComponent(v.join('='))];
-              })
-            );
-
-            const value = await withPropsMap[name]({
-              headers: {
-                ...parsedCookies,
-                Authorization: `Bearer ${parsedCookies[ACCESS_TOKEN_KEY]}`,
-              },
-            });
-
-            return {
-              name,
-              value,
-            };
+              return {
+                name,
+                value,
+              };
+            } catch (e) {
+              if (axios.isAxiosError(e)) {
+                if ((e as AxiosError).response?.status === 404) {
+                  return {
+                    name,
+                    value: null,
+                  };
+                }
+              }
+              throw e;
+            }
           })
         );
 

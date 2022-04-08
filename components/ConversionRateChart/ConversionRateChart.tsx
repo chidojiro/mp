@@ -11,9 +11,9 @@ import {
   YAxis,
 } from 'recharts';
 
-import { DomUtils } from '@/utils';
+import { DomUtils } from '@/utils/dom';
+import { CSVButton } from '@/components/common/Button';
 
-import { CSVButton } from '../CSVButton';
 import styles from './ConversionRateChart.module.css';
 
 export type ConversionRateChartProps = {
