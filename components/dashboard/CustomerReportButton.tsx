@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ChevronRightIcon } from '@heroicons/react/solid';
 
-import { CustomerReportButtonProps } from './CustomerReportButton.types';
+import { CustomerReportButtonProps } from './dashboard.types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Props = CustomerReportButtonProps;

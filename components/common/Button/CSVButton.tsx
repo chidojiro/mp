@@ -4,9 +4,6 @@ import { useTranslation } from 'next-i18next';
 
 import { Icon } from '@/components/common/Icon';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type Props = CSVButtonProps;
-
 export type CSVButtonProps = {
   /**
    * Function to call on click.
