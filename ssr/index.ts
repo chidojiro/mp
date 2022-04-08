@@ -16,15 +16,19 @@ const withProps =
     wrappedGetServerSideProps: (context: GetServerSidePropsContext, props: any) => any
   ): GetServerSideProps => {
     return async (context: GetServerSidePropsContext) => {
-      try {
-        const { cookie } = context.req.headers;
+      const { cookie } = context.req.headers;
 
-        const parsedCookies = Object.fromEntries(
-          (cookie as string).split(/; */).map(c => {
-            const [key, ...v] = c.split('=');
-            return [key, decodeURIComponent(v.join('='))];
-          })
-        );
+      const parsedCookies = Object.fromEntries(
+        (cookie as string).split(/; */).map(c => {
+          const [key, ...v] = c.split('=');
+          return [key, decodeURIComponent(v.join('='))];
+        })
+      );
+      // currently all endpoints requires authentication, so we redirect to login page if there is no access token
+      if (!parsedCookies[ACCESS_TOKEN_KEY]) {
+        return { redirect: { destination: '/login' } };
+      }
+      try {
         const propsMetaCollection = await Promise.all(
           propNames.map(async name => {
             try {
@@ -40,6 +44,7 @@ const withProps =
                 value,
               };
             } catch (e) {
+              console.error('error:', JSON.stringify(e));
               if (axios.isAxiosError(e)) {
                 if ((e as AxiosError).response?.status === 404) {
                   return {
