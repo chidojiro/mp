@@ -1,10 +1,12 @@
-import { Button, Modal } from '@/components/common';
-import { useVisibilityControl } from '@/hooks';
-import { MarketingActionStatus } from '@/types';
+import { useState } from 'react';
+
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+
+import { Button, Modal } from '@/components/common';
+import { useVisibilityControl } from '@/hooks';
+import { MarketingActionStatus } from '@/types';
 
 type Props = {
   disable: boolean;

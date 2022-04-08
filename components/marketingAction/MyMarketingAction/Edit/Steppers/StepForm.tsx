@@ -1,10 +1,12 @@
+import React, { useEffect, useState } from 'react';
+
+import classNames from 'classnames';
+import { useTranslation } from 'next-i18next';
+import { FormProvider } from 'react-hook-form';
+
 import { Icon } from '@/components';
 import { Button } from '@/components/common';
 import { Step } from '@/constants';
-import classNames from 'classnames';
-import { useTranslation } from 'next-i18next';
-import React, { useEffect, useState } from 'react';
-import { FormProvider } from 'react-hook-form';
 
 type Props = {
   step: Step;

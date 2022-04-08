@@ -1,14 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react';
+
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
+
 import { MarketingActionAPI } from '@/apis';
 import { Form } from '@/components';
 import { ActionContainer } from '@/components/marketingAction';
 import { useVisibilityControl } from '@/hooks';
 import { MarketingActionRes, MarketingActionStatus, TARGET } from '@/types';
-import { useRouter } from 'next/router';
-import useSWR from 'swr';
-import { TargetFilterUtils } from 'utils';
+import { TargetFilterUtils } from '@/utils';
+
 import { PreviewOverlay } from '../PreviewOverlay';
 import { Steppers } from '../Steppers';
 import SavingActions from '../Steppers/SavingActions';
@@ -268,7 +271,8 @@ export const CartAbandoned = () => {
         title={t('cartAbandoned')}
         description={t('cartAbandonedDescription')}
         descriptionImageUrl='/images/cart-abandoned-description.png'
-        flowImgUrl='/images/cart-abandoned-flow.png'></ActionContainer>
+        flowImgUrl='/images/cart-abandoned-flow.png'
+      ></ActionContainer>
       <Form methods={methods} className='mt-[60px]'>
         <Steppers steps={steps1} onShowPreview={onShowPreview} />
       </Form>
