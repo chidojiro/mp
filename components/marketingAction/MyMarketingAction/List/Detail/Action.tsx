@@ -1,10 +1,10 @@
-import { useTranslation } from 'next-i18next';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-
 import { Icon } from '@/components';
 import { Button, Tag } from '@/components/common';
 import { MarketingActionStatus as MAStatus, TargetSegment } from '@/types';
+import { TargetFilterUtils } from '@/utils';
+import { useTranslation } from 'next-i18next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 type Props = {
   path: string;
@@ -15,6 +15,7 @@ type Props = {
 
 export const Action = ({ name, path, targetCustomers, date }: Props) => {
   const { t } = useTranslation('marketingAction');
+  const { t: tCommon } = useTranslation('common');
 
   const {
     query: { marketingActionStatus },
@@ -39,8 +40,8 @@ export const Action = ({ name, path, targetCustomers, date }: Props) => {
           <div className='flex mt-4'>
             <span className='mr-2 font-bold text-secondary'>{t('targetCustomer')}</span>
             <div className='flex flex-wrap gap-1'>
-              {targetCustomers.map(customer => (
-                <Tag key={customer.segment}>{customer.segment}</Tag>
+              {targetCustomers.map(target => (
+                <Tag key={target.segment}>{tCommon(TargetFilterUtils.getTargetValue(target))}</Tag>
               ))}
             </div>
           </div>

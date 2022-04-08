@@ -14,7 +14,7 @@ export const LineSettings = () => {
   return (
     <>
       <div className='font-bold text-gray-dark mb-2.5'>{t('useLine')}</div>
-      <Form.RadioGroup name='is_use_line'>
+      <Form.RadioGroup name='enable_line'>
         {lineOptions.map(option => (
           <RadioGroup.Option
             colorScheme='secondary'

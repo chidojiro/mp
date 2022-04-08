@@ -4,6 +4,7 @@ export interface Step {
   showPreviewBtn?: boolean;
   isDone?: boolean;
   children?: React.ReactNode;
+  methods?: any;
 }
 
 export enum MESSAGE_TYPE {

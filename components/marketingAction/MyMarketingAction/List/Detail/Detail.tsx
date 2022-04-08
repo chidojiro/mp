@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
-
-import { Value } from 'classnames';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
-
 import { TargetFilterUtils } from '@/utils';
 import { MarketingActionAPI } from '@/apis';
 import { MarketingActionStatus as MAStatus, MarketingActionTypeMessage as TYPE } from 'types';
-
-import { SideMenu, SideMenuGroup, SideMenuItem } from '../../../../common';
-import { TargetFilter } from '../../../../report';
+import { SideMenu, SideMenuGroup, SideMenuItem } from '@/components/common';
+import { TargetFilter } from '@/components/report';
 import { MarketingAction } from './MarketingAction';
 
 export const Detail = () => {

@@ -17,10 +17,11 @@ import { PreviewOverlay } from '../PreviewOverlay';
 import { OPTIONS } from './CartAbandoned';
 
 type Props = {
-  messageNum: string;
+  messageNum?: string;
+  useLine?: boolean;
 };
 
-export const MessageContent = ({ messageNum }: Props) => {
+export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
   const { t } = useTranslation('marketingAction');
   const previewMessageControl = useVisibilityControl();
   const [currType, setCurrType] = useState<MessageContentPreviewType>('mail');
@@ -30,9 +31,7 @@ export const MessageContent = ({ messageNum }: Props) => {
     { value: OPTIONS.NO, label: t('noDisplay') },
   ];
 
-  const showLineSettings = useWatch({ name: 'is_use_line' }) === OPTIONS.YES;
-
-  const message = useWatch({ name: `${messageNum}` });
+  const message = useWatch() as any;
   const showLineMsg = message?.text_option === OPTIONS.YES;
 
   const onShowModal = (type: MessageContentPreviewType) => {
@@ -61,12 +60,13 @@ export const MessageContent = ({ messageNum }: Props) => {
               <Form.ContentEditable
                 options={headingMentionOptions}
                 name={`${messageNum}.headline_email`}
+                rules={{ required: true }}
               />
             </div>
             <div className='mb-4'>
               <div className='mb-2.5 font-semibold text-secondary text-medium'>{t('bodyText')}</div>
 
-              <MessageBodyInput showEmoji={false} name={`${messageNum}.text_email`} />
+              <MessageBodyInput name={`${messageNum}.text_email`} />
             </div>
           </div>
           <div>
@@ -88,7 +88,7 @@ export const MessageContent = ({ messageNum }: Props) => {
           </div>
         </div>
       </div>
-      {showLineSettings && (
+      {useLine && (
         <div className='px-10 -mx-10 border-b-4 border-white mt-7 pb-7'>
           <div className='flex items-center'>
             <Icon name='line' size={20} className='mr-2' />

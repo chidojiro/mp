@@ -197,5 +197,6 @@
   "faqChatWindowSettingsDescription": "チャットボットの外観の作成と挙動の設定を行います。",
   "exterior": "外観",
   "emptyMarketingAction": "実施中の施策はありません。",
-  "timeDeliverySettings": "{{from_the_date_text}}{{days}}日後の{{time}}"
+  "timeDeliverySettings": "{{from_the_date_text}}{{days}}日後の{{time}}",
+  "save": "保存する"
 }
