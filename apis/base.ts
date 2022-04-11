@@ -1,9 +1,9 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import axiosRetry, { isNetworkOrIdempotentRequestError } from 'axios-retry';
 import { nanoid } from 'nanoid';
 
 import { API_URI, ACCESS_TOKEN_KEY, ORANIZATION_HEADER, PROJECT_HEADER } from '@/constants';
-import { CookiesUtils, DomUtils } from '@/utils';
+import { CookiesUtils, DomUtils, Logger } from '@/utils';
 
 const myAxios = axios.create({
   baseURL: API_URI,
@@ -70,9 +70,10 @@ myAxios.interceptors.response.use(
     }
     return response.data.result ?? response.data.results ?? response.data.data ?? response.data;
   },
-  function (error) {
+  function (error: AxiosError) {
+    Logger.log('error:', JSON.stringify(error?.response?.data));
     if (
-      [401, 403].includes(error?.response?.status) &&
+      [401, 403].includes(error?.response?.status ?? 200) &&
       !DomUtils.isServer() &&
       location.pathname !== '/login'
     )

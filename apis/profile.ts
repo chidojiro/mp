@@ -1,4 +1,4 @@
-import { Profile } from '@/types';
+import { ChangePasswordPayload, Profile } from '@/types';
 
 import { RestApi, RestApiConfig } from './base';
 
@@ -10,4 +10,15 @@ const put = (payload: Profile) => {
   return RestApi.put<Profile>('/users/me', payload);
 };
 
-export const ProfileApis = { get, put };
+interface ChangePasswordData {
+  new_password: string;
+  old_password: string;
+}
+const changePassword = (data: ChangePasswordPayload) => {
+  return RestApi.put<Profile>('/users/me', {
+    new_password: data.newPassword,
+    old_password: data.oldPassword,
+  } as ChangePasswordData);
+};
+
+export const ProfileApis = { get, put, changePassword };

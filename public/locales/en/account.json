@@ -13,5 +13,6 @@
   "newPassword": "New Password",
   "newPasswordConfirmation": "New password (confirmation)",
   "save": "Save",
-  "passwordChangeHasBeenCompleted": "Password change has been completed."
+  "passwordChangeHasBeenCompleted": "Password change has been completed.",
+  "oldPassword.incorrect": "Old Password is incorrect"
 }

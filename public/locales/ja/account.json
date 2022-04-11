@@ -13,5 +13,6 @@
   "newPassword": "新パスワード",
   "newPasswordConfirmation": "新パスワード（確認）",
   "save": "保存する",
-  "passwordChangeHasBeenCompleted": "パスワードの変更が完了しました。"
+  "passwordChangeHasBeenCompleted": "パスワードの変更が完了しました。",
+  "oldPassword.incorrect": "Current Password is incorrect"
 }

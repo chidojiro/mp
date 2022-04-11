@@ -7,7 +7,6 @@ import { useRouter } from 'next/router';
 
 import { Layout } from '@/components/Layout';
 import { Section } from '@/components/Section';
-import { ServerSidePropsProvider } from '@/contexts/ServerSidePropsContext';
 import { useVisibilityControl } from '@/hooks/useVisibilityControl';
 import { SSR } from '@/ssr';
 import { Profile } from '@/types';
@@ -59,34 +58,32 @@ const Account = (props: any) => {
   }, []);
 
   return (
-    <ServerSidePropsProvider props={props}>
-      <Layout title={t('accountSettings')}>
-        {emailSuccessMessageControl.visible && (
-          <div className='mb-5'>{t('emailAddressChangeIsComplete')}</div>
-        )}
-        {passwordSuccessMessageControl.visible && (
-          <div className='mb-5'>{t('passwordChangeHasBeenCompleted')}</div>
-        )}
-        <Section>
-          <Section.Title>{t('emailAddressLoginId')}</Section.Title>
-          <Section.Content className='flex items-center justify-between'>
-            {profile.email}
-            <Link href='/account/email'>
-              <a className='underline text-primary'>{tCommon('change')}</a>
-            </Link>
-          </Section.Content>
-        </Section>
-        <Section>
-          <Section.Title>{t('password')}</Section.Title>
-          <Section.Content className='flex items-center justify-between'>
-            ********
-            <Link href='/account/password'>
-              <a className='underline text-primary'>{tCommon('change')}</a>
-            </Link>
-          </Section.Content>
-        </Section>
-      </Layout>
-    </ServerSidePropsProvider>
+    <Layout title={t('accountSettings')}>
+      {emailSuccessMessageControl.visible && (
+        <div className='mb-5'>{t('emailAddressChangeIsComplete')}</div>
+      )}
+      {passwordSuccessMessageControl.visible && (
+        <div className='mb-5'>{t('passwordChangeHasBeenCompleted')}</div>
+      )}
+      <Section>
+        <Section.Title>{t('emailAddressLoginId')}</Section.Title>
+        <Section.Content className='flex items-center justify-between'>
+          {profile.email}
+          <Link href='/account/email'>
+            <a className='underline text-primary'>{tCommon('change')}</a>
+          </Link>
+        </Section.Content>
+      </Section>
+      <Section>
+        <Section.Title>{t('password')}</Section.Title>
+        <Section.Content className='flex items-center justify-between'>
+          ********
+          <Link href='/account/password'>
+            <a className='underline text-primary'>{tCommon('change')}</a>
+          </Link>
+        </Section.Content>
+      </Section>
+    </Layout>
   );
 };
 

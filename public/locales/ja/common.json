@@ -34,5 +34,8 @@
   "csvDownload": "CSVダウンロード",
   "change": "変更する",
   "dragNdrop": "ドラッグ＆ドロップでアップロード",
-  "selectFile": "ファイルを選択"
+  "selectFile": "ファイルを選択",
+  "validation.field.required": "This field is required",
+  "validation.field.minLength": "This field requires more than {{value}} characters",
+  "validation.field.maxLength": "This field requires less than {{value}} characters"
 }
