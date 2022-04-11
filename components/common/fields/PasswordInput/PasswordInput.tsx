@@ -3,7 +3,7 @@ import { EyeIcon } from '@heroicons/react/solid';
 
 import { useVisibilityControl } from '@/hooks';
 
-import { Input, InputProps } from '..';
+import { Input, InputProps } from '../Input';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Props = Omit<InputProps, 'type'>;
@@ -17,7 +17,7 @@ export const PasswordInput = ({ ...restProps }: Props) => {
       className='w-full mb-1'
       type={showPasswordControl.visible ? 'text' : 'password'}
       innerRight={
-        <div className='cursor-pointer' onClick={showPasswordControl.toggle}>
+        <div className='cursor-pointer select-none' onClick={showPasswordControl.toggle}>
           {showPasswordControl.visible ? (
             <EyeIcon className='w-5 h-5' />
           ) : (

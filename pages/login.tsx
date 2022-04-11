@@ -17,7 +17,7 @@ const LoginPage = () => {
     if (auth.isAuthenticated) {
       navigator.openDashboard();
     }
-  }, []);
+  }, [navigator, auth]);
   return <Login />;
 };
 

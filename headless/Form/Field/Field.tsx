@@ -1,6 +1,6 @@
 import React, { RefObject } from 'react';
 
-import { get } from 'lodash-es';
+import get from 'lodash-es/get';
 import { RegisterOptions, useController, useFormContext } from 'react-hook-form';
 
 export type Props<T = any> = {
@@ -109,7 +109,6 @@ export const Field = <T,>({
   );
 
   const hasError = !!error || hasGroupError;
-
   return (
     <Component
       onChange={handleChange}
