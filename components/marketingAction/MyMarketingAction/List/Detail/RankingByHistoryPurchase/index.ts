@@ -1,0 +1,1 @@
+export { RankingByHistoryPurchase } from './RankingByHistoryPurchase';

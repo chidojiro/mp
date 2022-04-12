@@ -1,6 +1,7 @@
-import { RestApi } from './base';
-import cookies from 'js-cookie';
 import { ACCESS_TOKEN_KEY } from '@/constants';
+import { CookiesUtils } from '@/utils/cookieUtils';
+
+import { RestApi } from './base';
 
 export type LoginPayload = {
   email: string;
@@ -13,8 +14,8 @@ export type LoginResponse = {
 };
 
 const login = async (payload: LoginPayload) => {
-  // const { access_token } = await RestApi.post<LoginResponse>('/auth/login', payload);
-  // cookies.set(ACCESS_TOKEN_KEY, access_token);
+  const { access_token } = await RestApi.post<LoginResponse>('/auth/login', payload);
+  CookiesUtils.set(ACCESS_TOKEN_KEY, access_token);
 };
 
 export const AuthApi = { login };

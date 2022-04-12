@@ -1,6 +1,8 @@
-import classNames from 'classnames';
-import { HTMLTextAreaProps } from '@/types';
 import React from 'react';
+
+import classNames from 'classnames';
+
+import { HTMLTextAreaProps } from '@/types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Props = HTMLTextAreaProps & {
@@ -21,7 +23,7 @@ export const TextArea = React.forwardRef(
         <textarea
           ref={ref}
           className={classNames(
-            'w-full rounded min-h-[100px] outline-none p-2',
+            'w-full rounded min-h-[100px] outline-none p-2 text-medium',
             'border border-solid',
             error ? 'border-danger' : 'border-input focus:border-input-focus'
           )}

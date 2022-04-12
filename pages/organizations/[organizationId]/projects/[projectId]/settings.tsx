@@ -1,17 +1,22 @@
-import { Layout } from '@/components';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-const Settings = () => {
-  const { t } = useTranslation();
-
-  return <Layout title={t('menuSettings')}></Layout>;
-};
+import { Layout, Settings } from '@/components';
 
 export const getServerSideProps = async ({ locale }: any) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['common'])),
+    ...(await serverSideTranslations(locale, ['common', 'settings'])),
   },
 });
 
-export default Settings;
+const SettingsPage = () => {
+  const { t } = useTranslation('settings');
+
+  return (
+    <Layout title={t('menuSettings')}>
+      <Settings />
+    </Layout>
+  );
+};
+
+export default SettingsPage;

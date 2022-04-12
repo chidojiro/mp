@@ -1,5 +1,6 @@
-import { Children, ClassName } from '@/types';
 import classNames from 'classnames';
+
+import { Children, ClassName } from '@/types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = Children & ClassName & {};
@@ -11,7 +12,7 @@ export const Section = ({ className, children }: Props) => {
       className={classNames(
         'px-10 py-8',
         ' bg-gray-100',
-        'first:rounded-t-lg last:rounded-b-lg',
+        'first-of-type:rounded-t-lg last-of-type:rounded-b-lg',
         'mb-2 last:mb-0',
         className
       )}

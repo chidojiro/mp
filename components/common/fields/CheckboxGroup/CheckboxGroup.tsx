@@ -1,9 +1,11 @@
+import React from 'react';
+
 import {
   CheckboxGroup as HeadlessCheckboxGroup,
   CheckboxGroupOptionProps,
   CheckboxGroupProps as HeadlessCheckboxGroupProps,
 } from '@/headless';
-import React from 'react';
+
 import { Checkbox, CheckboxProps } from '../Checkbox';
 
 // eslint-disable-next-line @typescript-eslint/ban-types

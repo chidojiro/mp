@@ -1,9 +1,11 @@
-import { Table } from '@/components';
-import { ClassName } from '@/types';
+import React from 'react';
+
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+
+import { Table } from '@/components';
+import { ClassName } from '@/types';
 
 const data = [
   {

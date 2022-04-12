@@ -1,68 +1,51 @@
-import { Button } from '@/components/common';
-import { useVisibilityControl } from '@/hooks';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
+
+import { useVisibilityControl } from '@/hooks';
+import { MarketingActionAlias as MAAlias } from '@/types';
+import { Button } from '@/components/common';
+
 import { PreviewOverlay } from '../../Edit/PreviewOverlay';
-import style from './StepDelivery.module.css';
+import { CartAbandoned } from './CartAbandoned';
+import { CartPageFAQ } from './CartPageFAQ';
+import { ConditionalFreeShipping } from './ConditionalFreeShipping';
+import { RankingByHistoryPurchase } from './RankingByHistoryPurchase';
+import { RecommendDiagnosticBot } from './RecommendDiagnosticBot';
+import { StepDeliveryAfterPurchase } from './StepDeliveryAfterPurchase';
 
 type Props = {
-  steps: any[];
+  targetSettings: string;
+  settings: any;
+  alias: MAAlias;
 };
 
-export const StepDelivery = ({ steps }: Props) => {
+const MARKETING_ACTION_STEP_MESSAGE: { [key: string]: any } = {
+  [MAAlias.CART_LEFT_NOTIFICATION]: CartAbandoned,
+  [MAAlias.AFTER_PURCHASE]: StepDeliveryAfterPurchase,
+  [MAAlias.HISTORY_PURCHASE]: RankingByHistoryPurchase,
+  [MAAlias.HISTORY_PURCHASE_CATEGORY]: RankingByHistoryPurchase,
+  [MAAlias.CART_PAGE_FAQ]: CartPageFAQ,
+  [MAAlias.RECOMMEND_DIAGNOSTIC]: RecommendDiagnosticBot,
+  [MAAlias.CONDITIONAL_FREE_SHIPPING]: ConditionalFreeShipping,
+};
+
+export const StepDelivery = ({ settings, targetSettings, alias }: Props) => {
   const { t } = useTranslation('marketingAction');
   const previewMessageControl = useVisibilityControl();
 
+  const renderStepMessage = () => {
+    const Component = MARKETING_ACTION_STEP_MESSAGE[alias];
+    return <Component settings={settings} />;
+  };
+
   return (
     <div className='rounded-bl-lg rounded-br-lg bg-gray-light'>
-      {steps.map((step, index) => (
-        <div
-          key={index}
-          className={classNames('p-10 pb-6', {
-            'border-b-4 border-white': index !== steps.length - 1,
-          })}
-        >
-          <h5 className='text-gray-dark'>{step.name}</h5>
-          {step.questions.map((question: any, idx: number) => (
-            <div className='text-medium' key={idx}>
-              <div className='my-2 font-bold text-secondary'>{question.question}</div>
-              <div className='mb-4 text-gray-dark'>
-                {question.answer ? (
-                  <div className='flex items-center'>
-                    {!!question.color && (
-                      <div className='w-[34px] h-[34px] p-1 mr-2 rounded flex items-center border bg-white border-input'>
-                        <div
-                          className={classNames('w-full h-full rounded ')}
-                          style={{ backgroundColor: question.color }}
-                        ></div>
-                      </div>
-                    )}
-                    <span>{question.answer}</span>
-                  </div>
-                ) : (
-                  question.answers?.map((answer: any, id: number) => (
-                    <div className={classNames('mb-2', style['message-response'])} key={id}>
-                      <div className='mb-2'>[{answer.question}]</div>
-                      <div dangerouslySetInnerHTML={{ __html: answer.response }}></div>
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
-          ))}
-          {step.showPreview && (
-            <div className='text-center'>
-              <Button
-                colorScheme='negative'
-                className=' w-[240px]'
-                onClick={previewMessageControl.open}
-              >
-                {t('viewPreview')}
-              </Button>
-            </div>
-          )}
-        </div>
-      ))}
+      {renderStepMessage()}
+      <div className='p-10 pb-6'>
+        <h5 className='text-gray-dark'>{t('targetSetting')}</h5>
+        <div className='my-2 font-bold text-medium text-secondary'>{t('targetCustomer')}</div>
+        <div className='mb-4 text-medium text-gray-dark'>{targetSettings}</div>
+      </div>
       <PreviewOverlay
         defaultType='mail'
         mailHeadline='お買い忘れはございませんか？<br>'

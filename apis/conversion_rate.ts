@@ -1,4 +1,5 @@
 import { ConversionRate } from '@/types';
+
 import { RestApi } from './base';
 
 export const ConversionRateAPI = {

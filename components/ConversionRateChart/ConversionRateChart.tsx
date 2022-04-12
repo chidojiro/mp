@@ -1,16 +1,20 @@
-import { DomUtils } from '@/utils';
 import React from 'react';
+
 import {
   Bar,
   CartesianGrid,
   ComposedChart,
   LabelList,
   Line,
+  Tooltip,
   ResponsiveContainer,
   XAxis,
   YAxis,
 } from 'recharts';
-import { CSVButton } from '../CSVButton';
+
+import { DomUtils } from '@/utils/dom';
+import { CSVButton } from '@/components/common/Button';
+
 import styles from './ConversionRateChart.module.css';
 
 export type ConversionRateChartProps = {
@@ -87,7 +91,13 @@ export const ConversionRateChart = ({ bar1, bar2, bar3, line, data }: Conversion
             yAxisId='right'
             orientation='right'
           />
-          <Bar dataKey={bar1.dataKey} barSize={barWidth} fill='#FFBA00' textAnchor='start'>
+          <Bar
+            dataKey={bar1.dataKey}
+            name={bar1.title}
+            barSize={barWidth}
+            fill='#FFBA00'
+            textAnchor='start'
+          >
             <LabelList
               dataKey={bar1.dataKey}
               formatter={(v: string) => numberWithCommas(parseInt(v))}
@@ -97,7 +107,13 @@ export const ConversionRateChart = ({ bar1, bar2, bar3, line, data }: Conversion
             />
           </Bar>
           {!!bar2 && (
-            <Bar dataKey={bar2.dataKey} barSize={barWidth} fill='#55C5D9' textAnchor='start'>
+            <Bar
+              dataKey={bar2.dataKey}
+              name={bar2.title}
+              barSize={barWidth}
+              fill='#55C5D9'
+              textAnchor='start'
+            >
               <LabelList
                 dataKey={bar2.dataKey}
                 position='top'
@@ -108,7 +124,13 @@ export const ConversionRateChart = ({ bar1, bar2, bar3, line, data }: Conversion
             </Bar>
           )}
           {!!bar3 && (
-            <Bar dataKey={bar3.dataKey} barSize={barWidth} fill='#FF7F5C' textAnchor='start'>
+            <Bar
+              dataKey={bar3.dataKey}
+              name={bar3.title}
+              barSize={barWidth}
+              fill='#FF7F5C'
+              textAnchor='start'
+            >
               <LabelList
                 dataKey={bar3.dataKey}
                 position='top'
@@ -123,6 +145,8 @@ export const ConversionRateChart = ({ bar1, bar2, bar3, line, data }: Conversion
               yAxisId='right'
               type='monotone'
               dataKey={line.dataKey}
+              name={line.title}
+              unit='%'
               stroke='#FF7D58'
               activeDot={false}
             >
@@ -134,6 +158,7 @@ export const ConversionRateChart = ({ bar1, bar2, bar3, line, data }: Conversion
               />
             </Line>
           )}
+          <Tooltip />
         </ComposedChart>
       </ResponsiveContainer>
     </div>

@@ -1,6 +1,9 @@
-import { Form } from '@/components';
-import { Option } from '@/types';
 import { useTranslation } from 'next-i18next';
+
+import { Form } from '@/components';
+import { CHAT_COLORS, MESSAGE_COLORS } from '@/constants';
+import { Option } from '@/types';
+
 import { ColorOption } from './ColorOption';
 
 type Props = {
@@ -12,29 +15,29 @@ type Props = {
 export const ColorGroup = ({ name, cols = 4, isFull = false }: Props) => {
   const { t } = useTranslation('marketingAction');
   const messageColors: Option<string>[] = [
-    { label: t('orange'), value: '#ffba00' },
-    { label: t('skyBlue'), value: '#55c5d9' },
-    { label: t('pink'), value: '#F594AE' },
-    { label: t('mintGreen'), value: '#68CE97' },
-    { label: t('red'), value: '#E63E28' },
-    { label: t('blue'), value: '#2167C6' },
-    { label: t('navy'), value: '#273A71' },
-    { label: t('brown'), value: '#81563C' },
+    { label: t('orange'), value: MESSAGE_COLORS.orange },
+    { label: t('skyBlue'), value: MESSAGE_COLORS.skyBlue },
+    { label: t('pink'), value: MESSAGE_COLORS.pink },
+    { label: t('mintGreen'), value: MESSAGE_COLORS.mintGreen },
+    { label: t('red'), value: MESSAGE_COLORS.red },
+    { label: t('blue'), value: MESSAGE_COLORS.blue },
+    { label: t('navy'), value: MESSAGE_COLORS.navy },
+    { label: t('brown'), value: MESSAGE_COLORS.brown },
   ];
 
   const chatColors: Option<string>[] = [
-    { label: t('red'), value: '#E63E28' },
-    { label: t('skyBlue'), value: '#55c5d9' },
-    { label: t('orange'), value: '#ED6A00' },
-    { label: t('green'), value: '#4DAB16' },
-    { label: t('purple'), value: '#AA187C' },
-    { label: t('pink'), value: '#EC307B' },
-    { label: t('gray'), value: '#575656' },
-    { label: t('navy'), value: '#052274' },
-    { label: t('brown'), value: '#905900' },
-    { label: t('kaki'), value: '#838221' },
-    { label: t('yellow'), value: '#F9D616' },
-    { label: t('white'), value: '#FFFFFF' },
+    { label: t('red'), value: CHAT_COLORS.red },
+    { label: t('skyBlue'), value: CHAT_COLORS.skyBlue },
+    { label: t('orange'), value: CHAT_COLORS.orange },
+    { label: t('green'), value: CHAT_COLORS.green },
+    { label: t('purple'), value: CHAT_COLORS.purple },
+    { label: t('pink'), value: CHAT_COLORS.pink },
+    { label: t('gray'), value: CHAT_COLORS.gray },
+    { label: t('navy'), value: CHAT_COLORS.navy },
+    { label: t('brown'), value: CHAT_COLORS.brown },
+    { label: t('kaki'), value: CHAT_COLORS.kaki },
+    { label: t('yellow'), value: CHAT_COLORS.yellow },
+    { label: t('white'), value: CHAT_COLORS.white },
   ];
 
   const colors = isFull ? chatColors : messageColors;

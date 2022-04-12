@@ -1,4 +1,5 @@
 import { ClassName } from '@/types';
+
 import { ChatbotTable } from './ChatbotTable';
 import { LineMailTable } from './LineMailTable';
 import { PopupTable } from './PopupTable';

@@ -1,7 +1,10 @@
+import { useState } from 'react';
+
+import { useTranslation } from 'next-i18next';
+
 import { Button } from '@/components';
 import { Message, MESSAGE_TYPE } from '@/constants';
-import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
+
 import { LineMessageItem } from './LineMessageItem';
 
 const MAX_MESSAGE = 5;

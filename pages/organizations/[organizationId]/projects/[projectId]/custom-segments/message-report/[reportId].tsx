@@ -1,10 +1,12 @@
-import { Icon, Layout, Select, Table } from '@/components';
+import React from 'react';
+
 import { ChevronRightIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+
+import { Icon, Layout, Select, Table } from '@/components';
 
 export const getServerSideProps = async ({ locale = 'ja' }: any) => {
   return {

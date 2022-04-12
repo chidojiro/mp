@@ -1,8 +1,11 @@
-import ldIsFunction from 'lodash/isFunction';
-import ldIsArray from 'lodash/isArray';
-import ldIsNull from 'lodash/isNull';
-import ldIsUndefined from 'lodash/isUndefined';
 import React from 'react';
+
+import {
+  isFunction as ldIsFunction,
+  isArray as ldIsArray,
+  isNull as ldIsNull,
+  isUndefined as ldIsUndefined,
+} from 'lodash-es';
 
 const isRef = <T = Element>(target: unknown): target is React.RefObject<T> =>
   !!target && Object.prototype.hasOwnProperty.call(target, 'current');

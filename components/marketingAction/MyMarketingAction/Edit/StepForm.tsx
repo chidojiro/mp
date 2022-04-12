@@ -1,9 +1,11 @@
+import React, { useEffect, useState } from 'react';
+
+import classNames from 'classnames';
+import { useTranslation } from 'next-i18next';
+
 import { Icon } from '@/components';
 import { Button } from '@/components/common';
 import { Step } from '@/constants';
-import classNames from 'classnames';
-import { useTranslation } from 'next-i18next';
-import React, { useEffect, useState } from 'react';
 
 type Props = {
   step: Step;

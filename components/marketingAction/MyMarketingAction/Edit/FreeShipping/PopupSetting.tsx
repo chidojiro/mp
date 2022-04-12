@@ -1,8 +1,10 @@
 // import { Form, Icon } from '@/components';
-import { Form } from '@/components/common';
-import { Radio } from '@/components/common/fields/Radio/Radio';
-import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
+
+import { useTranslation } from 'next-i18next';
+
+import { Form, RadioGroup } from '@/components/common';
+import { Radio } from '@/components/common/fields/Radio/Radio';
 
 import { TemplateSelector } from './TemplateSelector';
 
@@ -12,12 +14,11 @@ type Props = {
 
 export const PopupSetting = ({}: Props) => {
   const { t } = useTranslation('marketingAction');
-  const [pcPosition, setPcPosition] = useState('left');
-  const [mobilePosition, setMobilePosition] = useState('left');
 
   const measurementTypes: any = {
     px: 'px',
-    cm: 'cm',
+    percent: '%',
+    vh: 'vh',
   };
 
   const getSelectBox = (device: string) => {
@@ -78,30 +79,22 @@ export const PopupSetting = ({}: Props) => {
           <div className='flex items-start'>
             <span className='w-20 mr-10 my-2.5'>PC：</span>
             <div className='flex-col'>
-              <div className='flex items-center my-2.5'>
-                <Radio
+              <Form.RadioGroup name='pc-position'>
+                <RadioGroup.Option
                   colorScheme='secondary'
-                  name='pc-position'
-                  id='pc-left'
-                  value='pc-left'
-                  className='mr-2.5'
-                  onChange={() => setPcPosition('left')}
-                  checked={pcPosition === 'left'}
+                  key='pc-left'
+                  className='mt-2.5 mr-2.5 mb-2.5 text-gray-dark text-regular'
+                  label={t('screenLeft')}
+                  value='left'
                 />
-                <span>{t('screenLeft')}</span>
-              </div>
-              <div className='flex items-center my-2.5'>
-                <Radio
+                <RadioGroup.Option
                   colorScheme='secondary'
-                  name='pc-position'
-                  id='pc-left'
-                  value='pc-left'
-                  className='mr-2.5'
-                  onChange={() => setPcPosition('right')}
-                  checked={pcPosition === 'right'}
+                  key='pc-right'
+                  className='mr-2.5 mb-2.5 text-gray-dark text-regular'
+                  label={t('screenRight')}
+                  value='right'
                 />
-                <span>{t('screenRight')}</span>
-              </div>
+              </Form.RadioGroup>
             </div>
           </div>
           <div className='flex items-start'>
@@ -115,30 +108,22 @@ export const PopupSetting = ({}: Props) => {
           <div className='flex items-start'>
             <span className='w-20 mr-10 my-2.5'>{t('mobile')}：</span>
             <div className='flex-col'>
-              <div className='flex items-center my-2.5'>
-                <Radio
+              <Form.RadioGroup name='mobile-position'>
+                <RadioGroup.Option
                   colorScheme='secondary'
-                  name='mobile-position'
-                  id='mobile-left'
-                  value='pc-left'
-                  className='mr-2.5'
-                  onChange={() => setMobilePosition('left')}
-                  checked={mobilePosition === 'left'}
+                  key='mobile-left'
+                  className='mt-2.5 mr-2.5 mb-2.5 text-gray-dark text-regular'
+                  label={t('screenLeft')}
+                  value='left'
                 />
-                <span>{t('screenLeft')}</span>
-              </div>
-              <div className='flex items-center my-2.5'>
-                <Radio
+                <RadioGroup.Option
                   colorScheme='secondary'
-                  name='mobile-position'
-                  id='mobile-right'
-                  value='pc-left'
-                  className='mr-2.5'
-                  onChange={() => setMobilePosition('right')}
-                  checked={mobilePosition === 'right'}
+                  key='mobile-right'
+                  className='mr-2.5 mb-2.5 text-gray-dark text-regular'
+                  label={t('screenRight')}
+                  value='right'
                 />
-                <span>{t('screenRight')}</span>
-              </div>
+              </Form.RadioGroup>
             </div>
           </div>
           <div className='flex items-start'>

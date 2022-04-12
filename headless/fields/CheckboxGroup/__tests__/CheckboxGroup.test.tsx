@@ -1,8 +1,9 @@
 import React from 'react';
+
 import { render, screen, act, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { CheckboxGroup, CheckboxGroupProps } from '..';
-import userEvent from '@testing-library/user-event';
 
 const renderCheckboxGroup = (props?: Partial<CheckboxGroupProps>) =>
   render(

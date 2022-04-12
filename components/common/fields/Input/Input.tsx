@@ -1,7 +1,10 @@
-import classNames from 'classnames';
 import React from 'react';
+
+import classNames from 'classnames';
+
 import { useStateToggle, useControllable } from '@/hooks';
 import { HTMLInputProps } from '@/types';
+
 import { NumberInput } from './Number';
 
 type BaseInputProps = Omit<HTMLInputProps, 'ref' | 'type'> & {
@@ -83,7 +86,7 @@ export const Input = React.forwardRef(
     const renderInput = () => {
       const inputClassName = classNames(
         'mp-input__native',
-        'h-full w-full m-0 px-4 py-2 bg-transparent',
+        'h-full w-full m-0 px-4 py-2 bg-transparent text-medium',
         'outline-none border-none'
       );
 

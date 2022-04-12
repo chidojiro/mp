@@ -1,16 +1,21 @@
-import { AuthApi, LoginPayload } from '@/apis';
-import { ErrorMessage, Form } from '@/components';
-import { useStateToggle } from '@/hooks';
+import React from 'react';
+
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Button } from '../common/Button';
+
+import { AuthApi, LoginPayload } from '@/apis/auth';
+import { Form } from '@/components/common/Form';
+import { ErrorMessage } from '@/components/common/ErrorMessage';
+import { Button } from '@/components/common/Button';
+import { useStateToggle } from '@/hooks/useStateToggle';
+import { useNavigator } from '@/hooks/useNavigator';
 
 export const LoginForm = () => {
   const { t } = useTranslation('login');
-  const router = useRouter();
+  const [isProcessing, setProcessing] = React.useState(false);
+  const navigator = useNavigator();
   const methods = useForm({
     mode: 'onTouched',
   });
@@ -21,11 +26,13 @@ export const LoginForm = () => {
 
   const onSubmit = async (val: LoginPayload) => {
     try {
+      setProcessing(true);
       await AuthApi.login(val);
-
-      router.push('/organizations/1/dashboard');
+      await navigator.openDashboard();
     } catch {
       setIsInvalid(true);
+    } finally {
+      setProcessing(false);
     }
   };
 
@@ -47,7 +54,7 @@ export const LoginForm = () => {
           type={showPwd ? 'text' : 'password'}
           placeholder={t('password')}
           innerRight={
-            <div className='cursor-pointer' onClick={() => toggleShowPwd()}>
+            <div className='cursor-pointer select-none' onClick={() => toggleShowPwd()}>
               {icon}
             </div>
           }
@@ -57,7 +64,7 @@ export const LoginForm = () => {
         {!!isInvalid && (
           <ErrorMessage className='mt-1'>{t('incorrectEmailOrPassword')}</ErrorMessage>
         )}
-        <Button type='submit' className='w-full my-4 font-bold'>
+        <Button type='submit' className='w-full my-4 font-bold' disabled={isProcessing}>
           {t('login')}
         </Button>
         <Button variant='link' className='!block mx-auto'>

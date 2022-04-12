@@ -1,7 +1,10 @@
-import classNames from 'classnames';
 import React from 'react';
+
+import classNames from 'classnames';
 import ReactDOM from 'react-dom';
+
 import { Children } from 'types';
+
 import { NotificationPlacement } from '.';
 
 // eslint-disable-next-line @typescript-eslint/ban-types

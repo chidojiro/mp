@@ -1,0 +1,1 @@
+export { CartPageFAQ } from './CartPageFAQ';

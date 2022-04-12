@@ -1,7 +1,10 @@
+import React from 'react';
+
+import classNames from 'classnames';
+
 import { useControllable, useVisibilityControl } from '@/hooks';
 import { NumberUtils } from '@/utils';
-import classNames from 'classnames';
-import React from 'react';
+
 import { Props as InputProps } from '../Input';
 
 type Props = Omit<InputProps, 'ref'>;

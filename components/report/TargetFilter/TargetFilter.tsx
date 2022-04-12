@@ -1,9 +1,12 @@
 import React from 'react';
-import { Option } from '@/types';
+
 import { useTranslation } from 'next-i18next';
-import { CheckboxGroup } from '@/components';
-import { CheckboxTag } from './CheckboxTag';
 import { useRouter } from 'next/router';
+
+import { Option, TARGET } from '@/types';
+import { CheckboxGroup } from '@/components';
+
+import { CheckboxTag } from './CheckboxTag';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};
@@ -16,14 +19,14 @@ export const TargetFilter = ({}: Props) => {
 
   const targetOptions = React.useMemo<Option[]>(
     () => [
-      { label: t('f0member'), value: 'f0member' },
-      { label: t('f0others'), value: 'f0others' },
-      { label: t('F1'), value: 'f1' },
-      { label: t('F2'), value: 'f2' },
-      { label: t('semiLoyal'), value: 'semiloyal' },
-      { label: t('loyal'), value: 'loyal' },
-      { label: t('f1dormant'), value: 'f1dormant' },
-      { label: t('loyalDormant'), value: 'loyaldormant' },
+      { label: t('f0member'), value: TARGET.F0_MEMBER },
+      { label: t('f0others'), value: TARGET.F0_OTHERS },
+      { label: t('F1'), value: TARGET.F1 },
+      { label: t('F2'), value: TARGET.F2 },
+      { label: t('semiLoyal'), value: TARGET.SEMI_LOYAL },
+      { label: t('loyal'), value: TARGET.LOYAL },
+      { label: t('f1dormant'), value: TARGET.F1_DORMANT },
+      { label: t('loyalDormant'), value: TARGET.LOYAL_DORMANT },
     ],
     [t]
   );

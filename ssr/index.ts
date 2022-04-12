@@ -1,9 +1,13 @@
-import { ProfileApis, ReportApi } from '@/apis';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import axios, { AxiosError } from 'axios';
+
+import { ProfileApis, ReportApi, MarketingActionAPI } from '@/apis';
+import { ACCESS_TOKEN_KEY } from '@/constants';
 
 const withPropsMap = {
   profile: ProfileApis.get,
   rfmReport: ReportApi.rfm_report,
+  actions: MarketingActionAPI.list,
 };
 
 const withProps =
@@ -12,23 +16,45 @@ const withProps =
     wrappedGetServerSideProps: (context: GetServerSidePropsContext, props: any) => any
   ): GetServerSideProps => {
     return async (context: GetServerSidePropsContext) => {
+      const { cookie } = context.req.headers;
+
+      const parsedCookies = Object.fromEntries(
+        (cookie as string).split(/; */).map(c => {
+          const [key, ...v] = c.split('=');
+          return [key, decodeURIComponent(v.join('='))];
+        })
+      );
+      // currently all endpoints requires authentication, so we redirect to login page if there is no access token
+      if (!parsedCookies[ACCESS_TOKEN_KEY]) {
+        return { redirect: { destination: '/login' } };
+      }
       try {
         const propsMetaCollection = await Promise.all(
           propNames.map(async name => {
-            const { cookie } = context.req.headers;
+            try {
+              const value = await withPropsMap[name]({
+                headers: {
+                  ...parsedCookies,
+                  Authorization: `Bearer ${parsedCookies[ACCESS_TOKEN_KEY]}`,
+                },
+              });
 
-            const value = await withPropsMap[name]({
-              headers: {
-                cookie: cookie as string,
-                'X-Organization-Id': '00000000000040008000000000000000',
-                'X-Project-Id': '00000000000040008000000000000000',
-              },
-            });
-
-            return {
-              name,
-              value,
-            };
+              return {
+                name,
+                value,
+              };
+            } catch (e) {
+              console.error('error:', JSON.stringify(e));
+              if (axios.isAxiosError(e)) {
+                if ((e as AxiosError).response?.status === 404) {
+                  return {
+                    name,
+                    value: null,
+                  };
+                }
+              }
+              throw e;
+            }
           })
         );
 
@@ -38,7 +64,8 @@ const withProps =
 
         return wrappedGetServerSideProps(context, { props });
       } catch (e: any) {
-        if (e?.response?.status === 401) {
+        console.error('Error from api:', JSON.stringify(e));
+        if ([401, 403].includes(e?.response?.status)) {
           return { redirect: { destination: '/login' } };
         } else throw e;
       }

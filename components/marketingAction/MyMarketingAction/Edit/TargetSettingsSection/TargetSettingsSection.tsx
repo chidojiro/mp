@@ -1,7 +1,8 @@
+import { useTranslation } from 'next-i18next';
+
 import { Section, Form } from '@/components';
 import { CheckboxGroup } from '@/components/common';
 import { Option } from '@/types';
-import { useTranslation } from 'next-i18next';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};

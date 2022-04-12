@@ -1,18 +1,18 @@
-import { ConversionRateChart, CustomerReportButton, Icon, Layout } from '@/components';
-import { ServerSidePropsProvider } from '@/contexts';
-import { SSR } from '@/ssr';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-export const getServerSideProps = SSR.withProps('profile')(async ({ locale }, result) => {
+import { ConversionRateChart } from '@/components/ConversionRateChart';
+import { Layout } from '@/components/Layout';
+import { Icon } from '@/components/common/Icon';
+import { CustomerReportButton } from '@/components/dashboard';
+
+export const getServerSideProps = async ({ locale = 'ja' }) => {
   return {
-    ...result,
     props: {
-      ...result.props,
       ...(await serverSideTranslations(locale!)),
     },
   };
-});
+};
 
 const data = [
   {
@@ -89,42 +89,40 @@ const data = [
   },
 ];
 
-function F2ConversionRateTrends(props: any) {
+function F2ConversionRateTrends() {
   const { t } = useTranslation('report');
   const { t: tCommon } = useTranslation('common');
 
   return (
-    <ServerSidePropsProvider props={props}>
-      <Layout title={tCommon('f2ConversionRateTrends')}>
-        <ConversionRateChart
-          line={{ dataKey: 'f2_conversion_rate', title: t('f2ConversionRate') }}
-          bar1={{ dataKey: 'f1_uu', title: t('numberOfF1Customers') }}
-          bar2={{ dataKey: 'f2_uu', title: t('numberOfF2Customers') }}
-          data={data}
+    <Layout title={tCommon('f2ConversionRateTrends')}>
+      <ConversionRateChart
+        line={{ dataKey: 'f2_conversion_rate', title: t('f2ConversionRate') }}
+        bar1={{ dataKey: 'f1_uu', title: t('numberOfF1Customers') }}
+        bar2={{ dataKey: 'f2_uu', title: t('numberOfF2Customers') }}
+        data={data}
+      />
+      <h5 className='text-gray-600 mt-[60px]'>{t('measuresThatContributedToF2Conversion')}</h5>
+      <div className='grid grid-cols-2 gap-4 mt-6'>
+        <CustomerReportButton
+          featuredIcon={<Icon name='mails' size={30} />}
+          label='購入後ステップ配信'
+          subtext={t('mostRecentContribution', { amount: '556,000' })}
+          clickActionText={t('viewReport')}
         />
-        <h5 className='text-gray-600 mt-[60px]'>{t('measuresThatContributedToF2Conversion')}</h5>
-        <div className='grid grid-cols-2 gap-4 mt-6'>
-          <CustomerReportButton
-            featuredIcon={<Icon name='mails' size={30} />}
-            label='購入後ステップ配信'
-            subtext={t('mostRecentContribution', { amount: '556,000' })}
-            clickActionText={t('viewReport')}
-          />
-          <CustomerReportButton
-            featuredIcon={<Icon name='cart' size={30} />}
-            label='かご落ち通知'
-            subtext={t('mostRecentContribution', { amount: '351,000' })}
-            clickActionText={t('viewReport')}
-          />
-          <CustomerReportButton
-            featuredIcon={<Icon name='chatbot' size={30} />}
-            label='レコメンド診断ボット（静的）'
-            subtext={t('mostRecentContribution', { amount: '216,000' })}
-            clickActionText={t('viewReport')}
-          />
-        </div>
-      </Layout>
-    </ServerSidePropsProvider>
+        <CustomerReportButton
+          featuredIcon={<Icon name='cart' size={30} />}
+          label='かご落ち通知'
+          subtext={t('mostRecentContribution', { amount: '351,000' })}
+          clickActionText={t('viewReport')}
+        />
+        <CustomerReportButton
+          featuredIcon={<Icon name='chatbot' size={30} />}
+          label='レコメンド診断ボット（静的）'
+          subtext={t('mostRecentContribution', { amount: '216,000' })}
+          clickActionText={t('viewReport')}
+        />
+      </div>
+    </Layout>
   );
 }
 

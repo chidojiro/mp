@@ -1,13 +1,17 @@
-import { Button, Icon, IconName, Tag } from '@/components';
-import { AspectRatio } from '@/headless';
-import { ClassName } from '@/types';
+import { useState, useEffect } from 'react';
+
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+
+import { Button, Icon, IconName, Tag } from '@/components/common';
+import { AspectRatio } from '@/headless/AspectRatio';
+import { ClassName } from '@/types';
+import { useAuth } from '@/hooks/useAuth';
+
 import { Label } from './Label';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 type Props = ClassName & {
   iconName: IconName;
   title: string;
@@ -17,7 +21,6 @@ type Props = ClassName & {
   showUseTemplateBtn?: boolean;
 };
 
-// eslint-disable-next-line no-empty-pattern
 export const ActionContainer = ({
   iconName,
   title,
@@ -32,7 +35,13 @@ export const ActionContainer = ({
     query: { marketingActionName },
   } = useRouter();
 
-  const editUrl = `/organizations/1/projects/1/actions/edit/${marketingActionName}`;
+  const auth = useAuth();
+  const [editUrl, setEditUrl] = useState('');
+  useEffect(() => {
+    setEditUrl(
+      `/organizations/${auth.organizationId}/projects/${auth.projectId}/actions/edit/${marketingActionName}`
+    );
+  }, [auth, marketingActionName]);
 
   return (
     <div className={classNames('p-10', 'rounded-lg border border-solid border-gray-500')}>
@@ -83,12 +92,12 @@ export const ActionContainer = ({
           {!!flowImgUrl && (
             <div className='mt-5'>
               <Label>{t('policyFlow')}</Label>
-              <img className='mt-3' alt='' src={flowImgUrl} />
+              <img className='mt-3' alt='flow-image' src={flowImgUrl} />
             </div>
           )}
         </div>
         <AspectRatio ratio='1-1' className='col-span-3 shrink-0'>
-          <img alt='' src={descriptionImageUrl} />
+          <img alt='preview-image' src={descriptionImageUrl} />
         </AspectRatio>
       </div>
       {showUseTemplateBtn && (

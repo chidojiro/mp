@@ -1,10 +1,17 @@
-import { Section } from '@/components';
-import { useTranslation } from 'next-i18next';
 import React from 'react';
+
+import { useTranslation } from 'next-i18next';
+
+import { Section } from '@/components';
+
 import { DeliveryDateTimeInput } from '../../DeliveryDateTimeInput';
 import { MessageContent } from '../MessageContent';
 
-export const Message1Settings = () => {
+type Props = {
+  useLine?: boolean;
+};
+
+export const Message1Settings = ({ useLine = true }: Props) => {
   const { t } = useTranslation('marketingAction');
 
   return (
@@ -12,10 +19,10 @@ export const Message1Settings = () => {
       <Section.Title>{t('timeDelivery')}</Section.Title>
       <DeliveryDateTimeInput
         headingLabel={t('fromTheDateCartAbandoned')}
-        inputDateName='first_message.delivery_date'
-        inputTimeName='first_message.delivery_time'
+        inputDateName='delivery_date'
+        inputTimeName='delivery_time'
       />
-      <MessageContent messageNum={'first_message'} />
+      <MessageContent useLine={useLine} />
     </>
   );
 };

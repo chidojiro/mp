@@ -1,6 +1,9 @@
-import { Children, ClassName } from '@/types';
-import classNames from 'classnames';
 import React from 'react';
+
+import classNames from 'classnames';
+
+import { Children, ClassName } from '@/types';
+
 import { Item } from './Item';
 import style from './Stepper.module.css';
 

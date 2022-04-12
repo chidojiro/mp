@@ -1,7 +1,10 @@
+import React from 'react';
+
+import classNames from 'classnames';
+
 import { useVisibilityControl } from '@/hooks';
 import { Option } from '@/types';
-import classNames from 'classnames';
-import React from 'react';
+
 import { Popover, PopoverProps } from '../Popover';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -63,24 +66,26 @@ export const Dropdown = ({ options = [], onSelect, control: controlProp, ...rest
 
   return (
     <Popover control={control} {...restProps}>
-      <div className={classNames('mp-dropdown', 'p-2.5', 'bg-white', 'rounded', 'shadow-md')}>
-        {options.map(({ label, value }, idx) => (
-          <div
-            onClick={() => handleSelect(value)}
-            onMouseEnter={() => setFocusedIndex(idx)}
-            className={classNames(
-              'mp-dropdown-option',
-              'block w-full text-left',
-              'outline-none',
-              'p-2.5 rounded focus:bg-gray-200 cursor-pointer select-none',
-              { 'bg-gray-200': focusedIndex === idx }
-            )}
-            key={value}
-          >
-            {label}
-          </div>
-        ))}
-      </div>
+      {!!options.length && (
+        <div className={classNames('mp-dropdown', 'p-2.5', 'bg-white', 'rounded', 'shadow-md')}>
+          {options.map(({ label, value }, idx) => (
+            <div
+              onClick={() => handleSelect(value)}
+              onMouseEnter={() => setFocusedIndex(idx)}
+              className={classNames(
+                'mp-dropdown-option',
+                'block w-full text-left',
+                'outline-none',
+                'p-2.5 rounded focus:bg-gray-200 cursor-pointer select-none',
+                { 'bg-gray-200': focusedIndex === idx }
+              )}
+              key={value}
+            >
+              {label}
+            </div>
+          ))}
+        </div>
+      )}
     </Popover>
   );
 };

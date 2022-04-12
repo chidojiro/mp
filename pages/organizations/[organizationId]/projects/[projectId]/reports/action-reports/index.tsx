@@ -1,6 +1,8 @@
-import { Redirect } from '@/components';
-import { useRouter } from 'next/router';
 import React from 'react';
+
+import { useRouter } from 'next/router';
+
+import { Redirect } from '@/components';
 
 const Reports = () => {
   const { asPath } = useRouter();

@@ -1,5 +1,9 @@
 import { useTranslation } from 'next-i18next';
+// import dynamic from 'next/dynamic';
+
+// import { LoginFormProps } from './LoginForm.types';
 import { LoginForm } from './LoginForm';
+// const LoginForm = dynamic<LoginFormProps>(() => import("./LoginForm").then(module => module.LoginForm));
 
 export const Login = () => {
   const { t } = useTranslation('login');

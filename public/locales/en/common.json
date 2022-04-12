@@ -36,5 +36,10 @@
   "segmentList": "Segment List",
   "messageList": "Message List",
   "messageReport": "Message Report",
-  "customSegments": "Custom Segments"
+  "customSegments": "Custom Segments",
+  "dragNdrop": "Drag and drop to upload",
+  "selectFile": "Select File",
+  "validation.field.required": "This field is required",
+  "validation.field.minLength": "This field requires more than {0} characters",
+  "validation.field.maxLength": "This field requires less than {0} characters"
 }

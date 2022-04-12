@@ -1,7 +1,10 @@
+import React from 'react';
+
 import ReactDOM from 'react-dom';
 import { v4 as UUID } from 'uuid';
+
 import { AssertUtils } from 'utils';
-import React from 'react';
+
 import { useIsoMorphicEffect } from '../useIsoMorphicEffect';
 
 export type Props = {

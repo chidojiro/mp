@@ -1,16 +1,12 @@
 import { useTranslation } from 'next-i18next';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { SideMenu, SideMenuGroup } from '../../common/SideMenu';
+
+import { SideMenu, SideMenuGroup } from '@/components/common/SideMenu';
+
 import { ActionContainer } from '../ActionContainer';
-import { CartAbandonedOverview } from './CartAbandonedOverview';
 import { DeliveryAfterPurchaseOverview } from './DeliveryAfterPurchaseOverview';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-type Props = {};
-
-// eslint-disable-next-line no-empty-pattern
-export const NewMarketingAction = ({}: Props) => {
+export const NewMarketingAction = () => {
   const { query, pathname } = useRouter();
   const { t } = useTranslation('marketingAction');
 
@@ -32,7 +28,15 @@ export const NewMarketingAction = ({}: Props) => {
       label: t('messageDelivery'),
       items: [
         {
-          content: <CartAbandonedOverview />,
+          content: (
+            <ActionContainer
+              iconName='cart'
+              title={t('cartAbandoned')}
+              description={t('cartAbandonedDescription')}
+              descriptionImageUrl='/images/cart-abandoned-description.png'
+              flowImgUrl='/images/cart-abandoned-flow.png'
+            ></ActionContainer>
+          ),
           label: t('cartAbandoned'),
           onClick: () => handleMAChange('cart-abandoned'),
           value: 'cart-abandoned',

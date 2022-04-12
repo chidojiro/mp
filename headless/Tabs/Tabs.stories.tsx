@@ -1,8 +1,9 @@
 import React from 'react';
+
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import classNames from 'classnames';
 
 import { Tabs } from '.';
-import classNames from 'classnames';
 
 export default {
   title: 'Components/Tabs',

@@ -1,14 +1,21 @@
-import { Form, RadioGroup, Section } from '@/components';
-import { useTranslation } from 'next-i18next';
 import React from 'react';
+
+import { useTranslation } from 'next-i18next';
 import { useWatch } from 'react-hook-form';
+
+import { Form, RadioGroup, Section } from '@/components';
+
 import { DeliveryDateTimeInput } from '../../DeliveryDateTimeInput';
 import { OPTIONS } from '../CartAbandoned';
 import { MessageContent } from '../MessageContent';
 
-export const Message2Settings = () => {
+type Props = {
+  useLine?: boolean;
+};
+
+export const Message2Settings = ({ useLine }: Props) => {
   const { t } = useTranslation('marketingAction');
-  const secondMessage = useWatch({ name: 'second_message' });
+  const secondMessage = useWatch() as any;
 
   const msg2DeliveryOptions = [
     { value: OPTIONS.YES, label: t('msg2On') },
@@ -27,7 +34,7 @@ export const Message2Settings = () => {
     <>
       <div className='text-gray-dark'>
         <div className='font-bold mb-2.5'>{t('msg2Option')}</div>
-        <Form.RadioGroup name='second_message.second_message_option'>
+        <Form.RadioGroup name='second_message_option'>
           {msg2DeliveryOptions.map(option => (
             <RadioGroup.Option
               colorScheme='secondary'
@@ -45,13 +52,13 @@ export const Message2Settings = () => {
             <Section.Title>{t('timeDelivery')}</Section.Title>
             <DeliveryDateTimeInput
               headingLabel={t('fromTheDateCartAbandoned')}
-              inputDateName='second_message.delivery_date'
-              inputTimeName='second_message.delivery_time'
+              inputDateName='delivery_date'
+              inputTimeName='delivery_time'
             />
           </div>
           <div>
             <div className='font-bold text-gray-dark mb-2.5'>{t('contentHasChanged')}</div>
-            <Form.RadioGroup name='second_message.same_message_content'>
+            <Form.RadioGroup name='same_message_content'>
               {deliverMessageOptions.map(option => (
                 <RadioGroup.Option
                   colorScheme='secondary'
@@ -63,7 +70,7 @@ export const Message2Settings = () => {
               ))}
             </Form.RadioGroup>
           </div>
-          {isNewMessage && <MessageContent messageNum={'second_message'} />}
+          {isNewMessage && <MessageContent useLine={useLine} />}
         </>
       )}
     </>

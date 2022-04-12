@@ -1,7 +1,9 @@
+import { useState } from 'react';
+
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
 import Dropzone from 'react-dropzone';
+
 import { Icon } from '../common';
 
 type Props = {
@@ -14,7 +16,7 @@ export interface ImageType extends File {
 }
 
 export const ImageUploader = ({ originalUrl, className }: Props) => {
-  const { t } = useTranslation('marketingAction');
+  const { t } = useTranslation();
   const [uploading, setUploading] = useState(false);
 
   const [image, setImage] = useState<ImageType>();

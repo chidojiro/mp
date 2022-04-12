@@ -1,10 +1,13 @@
+import React from 'react';
+
+import classNames from 'classnames';
+
 import {
   RadioGroup as HeadlessRadioGroup,
   RadioGroupOptionProps,
   RadioGroupProps as HeadlessRadioGroupProps,
 } from '@/headless';
-import classNames from 'classnames';
-import React from 'react';
+
 import { Radio, RadioProps } from '../Radio';
 
 // eslint-disable-next-line @typescript-eslint/ban-types

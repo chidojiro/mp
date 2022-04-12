@@ -1,5 +1,7 @@
-import { Section } from '@/components';
 import { useTranslation } from 'next-i18next';
+
+import { Section } from '@/components';
+
 import { ColorGroup } from './ColorGroup';
 
 // eslint-disable-next-line @typescript-eslint/ban-types

@@ -1,23 +1,38 @@
-import { mockData } from '@/apis';
-import { Icon, Layout } from '@/components';
-import { CSVButton } from '@/components/CSVButton/CSVButton';
-import { CustomerReportButton } from '@/components/CustomerReportButton/CustomerReportButton';
-import { CustomerSegmentTable } from '@/components/CustomerSegmentTable/CustomerSegmentTable';
+import dynamic from 'next/dynamic';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-export const getServerSideProps = async ({ locale = 'ja' }: any) => {
+import { Icon } from '@/components/common/Icon';
+import { Layout } from '@/components/Layout';
+import { CustomerReportButtonProps, RfmSegmentTableProps } from '@/components/dashboard';
+import { CSVButton } from '@/components/common/Button';
+import { SSR } from '@/ssr';
+import { useReportData } from '@/hooks/api/useReportData';
+import { RfmReportDataItem } from '@/types/report';
+
+const RfmSegmentTable = dynamic<RfmSegmentTableProps>(() =>
+  import('@/components/dashboard').then(module => module.RfmSegmentTable)
+);
+const CustomerReportButton = dynamic<CustomerReportButtonProps>(() =>
+  import('@/components/dashboard').then(module => module.CustomerReportButton)
+);
+
+export const getServerSideProps = SSR.withProps('rfmReport')(async ({ locale = 'ja' }, result) => {
   return {
+    ...result,
     props: {
-      ...(await serverSideTranslations(locale!)),
+      ...result.props,
+      ...(await serverSideTranslations(locale)),
     },
   };
-};
-
-function Dashboard(props: any) {
+});
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface DashboardProps {
+  rfmReport: RfmReportDataItem[];
+}
+function Dashboard(props: DashboardProps) {
   const { t } = useTranslation('dashboard');
-
-  const data = mockData;
+  const { data } = useReportData('rfmReport', props.rfmReport);
 
   return (
     <Layout title={t('menuDashboard')}>
@@ -31,9 +46,7 @@ function Dashboard(props: any) {
         <CSVButton />
       </div>
 
-      <div className='w-full mb-12'>
-        {!!data && <CustomerSegmentTable data={data} onClick={() => console.log('click')} />}
-      </div>
+      <div className='w-full mb-12'>{!!data && <RfmSegmentTable data={data} />}</div>
 
       <h4 className='mb-5 text-gray-600'>{t('labelReport')}</h4>
 

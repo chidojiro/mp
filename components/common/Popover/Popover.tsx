@@ -1,8 +1,10 @@
+import React, { useState } from 'react';
+
+import { PopperProps, usePopper } from 'react-popper';
+
 import { ConditionalWrapper, Portal } from '@/headless';
 import { useOnClickOutside, useVisibilityControl, VisibilityControl } from '@/hooks';
 import { Children } from '@/types';
-import React, { useState } from 'react';
-import { PopperProps, usePopper } from 'react-popper';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Props = Pick<PopperProps<any>, 'placement'> &

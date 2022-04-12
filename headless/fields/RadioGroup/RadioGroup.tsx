@@ -1,7 +1,10 @@
-import { noop } from 'lodash';
 import React from 'react';
+
+import { noop } from 'lodash-es';
+
 import { useControllable } from 'hooks';
 import { Children } from 'types';
+
 import { Option } from './Option';
 
 export type Props = Children & {

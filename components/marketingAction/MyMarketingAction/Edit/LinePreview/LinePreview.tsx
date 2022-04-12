@@ -1,8 +1,10 @@
-import { Button } from '@/components/common';
-import { MentionUtils } from '@/utils';
+import React from 'react';
+
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
-import React from 'react';
+
+import { Button } from '@/components/common';
+import { ContentEditableUtils } from '@/utils';
 
 type Props = {
   body?: string;
@@ -33,7 +35,7 @@ const btnHeightWithMargin = '85px';
 export const LinePreview = ({ body, desktop = false, color, isOverlay = false }: Props) => {
   const { t } = useTranslation('marketingAction');
 
-  const parsedBody = MentionUtils.toPreviewString(body ?? '');
+  const parsedBody = ContentEditableUtils.toPreviewString(body ?? '');
 
   return (
     <div

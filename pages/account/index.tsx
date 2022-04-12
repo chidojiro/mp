@@ -1,19 +1,31 @@
-import { Layout, Section } from '@/components';
-import { useVisibilityControl } from '@/hooks';
+import React from 'react';
+
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-type Props = {};
+import { Layout } from '@/components/Layout';
+import { Section } from '@/components/Section';
+import { useVisibilityControl } from '@/hooks/useVisibilityControl';
+import { SSR } from '@/ssr';
+import { Profile } from '@/types';
 
-// eslint-disable-next-line no-empty-pattern
-const Account = ({}: Props) => {
+export const getServerSideProps = SSR.withProps('profile')(async ({ locale }, result) => {
+  return {
+    ...result,
+    props: {
+      ...result.props,
+      ...(await serverSideTranslations(locale!, ['common', 'account'])),
+    },
+  };
+});
+
+const Account = (props: any) => {
   const { t } = useTranslation('account');
-  const { t: tCommon } = useTranslation('account');
+  const { t: tCommon } = useTranslation();
   const router = useRouter();
+  const profile = props.profile as Profile;
 
   const emailSuccessMessageControl = useVisibilityControl();
   const passwordSuccessMessageControl = useVisibilityControl();
@@ -56,7 +68,7 @@ const Account = ({}: Props) => {
       <Section>
         <Section.Title>{t('emailAddressLoginId')}</Section.Title>
         <Section.Content className='flex items-center justify-between'>
-          sample@gmail.com
+          {profile.email}
           <Link href='/account/email'>
             <a className='underline text-primary'>{tCommon('change')}</a>
           </Link>
@@ -76,9 +88,3 @@ const Account = ({}: Props) => {
 };
 
 export default Account;
-
-export const getServerSideProps = async ({ locale }: any) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ['common', 'account'])),
-  },
-});

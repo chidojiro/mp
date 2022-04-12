@@ -1,6 +1,9 @@
-import classNames from 'classnames';
-import { HTMLInputProps } from '@/types';
 import React from 'react';
+
+import classNames from 'classnames';
+
+import { HTMLInputProps } from '@/types';
+
 import { Icon } from '../../Icon';
 
 type ColorScheme = 'primary' | 'secondary';

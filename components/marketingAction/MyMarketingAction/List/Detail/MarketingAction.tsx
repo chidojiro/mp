@@ -1,68 +1,26 @@
-import { Button } from '@/components/common';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+
+import { Button } from '@/components/common';
+import { MarketingActionAlias, MarketingActionRes } from '@/types';
+import { LanguageUtils, TargetFilterUtils } from '@/utils';
+
 import { Action } from './Action';
 import { StepDelivery } from './StepDelivery';
 
-export type MarketingAction = {
-  id?: string;
-  name: string;
-  icon?: string;
+type Props = {
+  marketingAction: MarketingActionRes;
 };
 
-export const MarketingAction = () => {
+export const MarketingAction = ({ marketingAction }: Props) => {
   const { t } = useTranslation('marketingAction');
   const { t: tCommon } = useTranslation('common');
 
-  const {
-    query: { date, marketingActionId },
-  } = useRouter();
+  const { locale } = useRouter();
 
-  // example marketing action
-  const marketingActions: any[] = [
-    {
-      value: '1',
-      date: 'all',
-      label: t('cartAbandoned'),
-      date_range: '2022年12月15日(水) 〜 2022年12月25日(金)',
-    },
-    {
-      value: '2',
-      date: '2021_12_15',
-      label: t('stepDeliveryAfterPurchase'),
-      date_range: '2022年12月15日(水) 〜',
-    },
-    {
-      value: '2',
-      date: '2021_11_09',
-      label: t('stepDeliveryAfterPurchase'),
-      date_range: '2022年11月09日(月) 〜',
-    },
-    {
-      value: '3',
-      date: 'all',
-      label: t('recommendationDiagnosisBotStatic'),
-      date_range: '2022年12月15日(水) 〜 2022年12月25日(金)',
-    },
-    {
-      value: '4',
-      date: 'all',
-      label: t('conditionalFreeShipping'),
-      date_range: '2022年12月15日(水) 〜 2022年12月25日(金)',
-    },
-  ];
   const marketingActionDetail = {
     name: 'cart-abandoned',
-    targetCustomers: [
-      tCommon('f0member'),
-      'F1',
-      'F2',
-      tCommon('semiLoyal'),
-      tCommon('loyal'),
-      tCommon('f1dormant'),
-      tCommon('loyalDormant'),
-    ],
     settings: [
       {
         name: t('useLine'),
@@ -96,26 +54,42 @@ export const MarketingAction = () => {
           { question: t('timeDelivery'), answer: '1通目配信日から3日後の午後 12:00' },
         ],
       },
-      {
-        name: t('targetSetting'),
-        questions: [{ question: t('targetCustomer'), answer: 'F0(会員)' }],
-      },
     ],
   };
 
-  const marketingAction = marketingActions.filter(
-    ma => ma.value === marketingActionId && ma.date === date
-  )[0];
+  const getRange = () => {
+    const _startAt = LanguageUtils.getDateFormat(marketingAction?.start_at, locale);
+    const _endAt = marketingAction.end_at
+      ? LanguageUtils.getDateFormat(marketingAction.end_at, locale)
+      : '';
+    return `${_startAt} 〜 ${_endAt}`;
+  };
+
+  const targetSettings = () => {
+    return (
+      marketingAction.target_segments
+        ?.map(target => tCommon(TargetFilterUtils.getTargetValue(target)))
+        .join(', ') || ''
+    );
+  };
+
   return (
     <div>
       <div className='h-full border rounded-lg border-gray'>
         <Action
           path={marketingActionDetail.name}
-          name={marketingAction?.label}
-          targetCustomers={marketingActionDetail.targetCustomers}
-          date={marketingAction?.date_range}
+          name={marketingAction?.description || ''}
+          targetCustomers={marketingAction.target_segments || []}
+          date={getRange()}
         />
-        <StepDelivery steps={marketingActionDetail.settings} />
+        <StepDelivery
+          settings={marketingAction.settings}
+          targetSettings={targetSettings()}
+          alias={
+            marketingAction.marketing_action_type?.alias ||
+            MarketingActionAlias.CART_LEFT_NOTIFICATION
+          }
+        />
       </div>
       <div className='flex justify-center pt-10'>
         <Button className='mr-5 min-w-[240px] bg-[#FF7F5C]'>{t('suspendTemplate')}</Button>

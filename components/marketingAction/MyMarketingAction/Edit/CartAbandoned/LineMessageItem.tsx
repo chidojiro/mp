@@ -1,6 +1,7 @@
+import { useTranslation } from 'next-i18next';
+
 import { Form, ImageUploader } from '@/components';
 import { Message, MESSAGE_TYPE } from '@/constants';
-import { useTranslation } from 'next-i18next';
 
 type Props = {
   message: Message;

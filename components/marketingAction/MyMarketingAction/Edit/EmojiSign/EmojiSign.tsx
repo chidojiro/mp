@@ -1,11 +1,13 @@
+import classNames from 'classnames';
+import { BaseEmoji, Picker } from 'emoji-mart';
+import { useTranslation } from 'next-i18next';
+
 import { Icon } from '@/components';
 import { Popover } from '@/components/common';
 import { useVisibilityControl } from '@/hooks';
 import { ClassName } from '@/types';
-import classNames from 'classnames';
-import { BaseEmoji, Picker } from 'emoji-mart';
+
 import 'emoji-mart/css/emoji-mart.css';
-import { useTranslation } from 'next-i18next';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = ClassName & {

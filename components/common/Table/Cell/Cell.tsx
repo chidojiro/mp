@@ -1,5 +1,6 @@
-import classNames from 'classnames';
 import React from 'react';
+
+import classNames from 'classnames';
 
 export type Props = React.DetailedHTMLProps<
   React.TdHTMLAttributes<HTMLTableDataCellElement>,

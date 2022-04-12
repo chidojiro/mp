@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Children } from 'types';
 
 type Props = Children & { unmountAfter?: number };

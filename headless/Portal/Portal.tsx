@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { createPortal } from 'react-dom';
+
 import { Children } from 'types';
 
 type Props = Children & {

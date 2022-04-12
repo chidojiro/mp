@@ -36,5 +36,10 @@
   "segmentList": "セグメント一覧",
   "messageList": "メッセージ一覧",
   "messageReport": "メッセージレポート",
-  "customSegments": "カスタムセグメント"
+  "customSegments": "カスタムセグメント",
+  "dragNdrop": "ドラッグ＆ドロップでアップロード",
+  "selectFile": "ファイルを選択",
+  "validation.field.required": "This field is required",
+  "validation.field.minLength": "This field requires more than {{value}} characters",
+  "validation.field.maxLength": "This field requires less than {{value}} characters"
 }
