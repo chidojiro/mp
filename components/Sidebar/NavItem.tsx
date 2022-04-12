@@ -8,10 +8,8 @@ import { useVisibilityControl } from '@/hooks/useVisibilityControl';
 
 import { NavItemData } from './NavItem.types';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 type Props = { data: NavItemData };
 
-// eslint-disable-next-line no-empty-pattern
 export const NavItem = ({ data }: Props) => {
   const { path, label, children = [] } = data;
 
@@ -25,7 +23,7 @@ export const NavItem = ({ data }: Props) => {
 
   if (path)
     return (
-      <Link passHref href={path} prefetch={false}>
+      <Link passHref href={path}>
         <a
           className={classNames('flex text-medium items-center px-6 py-2.5 hover:bg-dark-gray', {
             'bg-dark-gray': isMatched(data),
@@ -51,7 +49,7 @@ export const NavItem = ({ data }: Props) => {
       </Accordion.Title>
       <Accordion.Content>
         {children.map(item => (
-          <Link passHref href={item.path || ''} key={item.label} prefetch={false}>
+          <Link passHref href={item.path || ''} key={item.label}>
             <a
               className={classNames(
                 'block text-medium items-center pl-12 pr-6 py-2.5 hover:bg-dark-gray truncate',

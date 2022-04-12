@@ -1,13 +1,17 @@
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 
-import { NavItem, NavItemData } from './NavItem';
+import { useAuth } from '@/hooks/useAuth';
+
+import { NavItem } from './NavItem';
+import { NavItemData } from './NavItem.types';
 
 export const Sidebar = () => {
   const { t } = useTranslation();
+  const auth = useAuth();
 
-  const organizationPrefix = `/organizations/${1}`;
-  const projectPrefix = `${organizationPrefix}/projects/${1}`;
+  const organizationPrefix = `/organizations/${auth.organizationId}`;
+  const projectPrefix = `${organizationPrefix}/projects/${auth.projectId}`;
 
   const menu: NavItemData[] = [
     {
