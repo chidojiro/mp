@@ -32,5 +32,9 @@
   "editor": "Marketing Action Editor",
   "cartAbandonedNoti": "Basket drop notification",
   "csvDownload": "Download CSV",
-  "change": "Change"
+  "change": "Change",
+  "segmentList": "Segment List",
+  "messageList": "Message List",
+  "messageReport": "Message Report",
+  "customSegments": "Custom Segments"
 }

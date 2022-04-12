@@ -1,0 +1,21 @@
+{
+  "segmentMessageReport": "Segment Message Report",
+  "targetSegment": "Target segment",
+  "allSegments": "All Segments",
+  "messageName": "Message Name",
+  "deliveryDate": "Delivery Date",
+  "deliveryType": "Delivery Type",
+  "numberOfUUsDelivered": "Number of UUs delivered",
+  "openUUsRate": "Number (rate) of open UUs",
+  "viewByLinkUrl": "By Link URL",
+  "email": "Email",
+  "list": "List",
+  "summary": "Summary",
+  "linkUrl": "Link URL",
+  "totalClickUUsRate": "Link URL",
+  "totalCvUUsRate": "Total CV UUs (%)",
+  "clickUUsRate": "Number of click UUs (%)",
+  "cvUUsRate": "CV UUs (%)",
+  "returnToList": "Return to list",
+  "summaryDescription": "*The total number of click UUs and total number of CV UUs may not match the total number of click UUs and CV UUs per link."
+}

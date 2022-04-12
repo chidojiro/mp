@@ -32,5 +32,9 @@
   "editor": "施策エディタ",
   "cartAbandonedNoti": "カゴ落ち通知",
   "csvDownload": "CSVダウンロード",
-  "change": "変更する"
+  "change": "変更する",
+  "segmentList": "セグメント一覧",
+  "messageList": "メッセージ一覧",
+  "messageReport": "メッセージレポート",
+  "customSegments": "カスタムセグメント"
 }

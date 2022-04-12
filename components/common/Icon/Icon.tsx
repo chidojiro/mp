@@ -38,6 +38,7 @@ import PopularityRanking from './icons/popularity-ranking.svg';
 import Home from './icons/home.svg';
 import Close from './icons/close.svg';
 import ChevronRightCircle from './icons/chevron-right-circle.svg';
+import { ChevronRightIcon } from '@heroicons/react/solid';
 
 const ICONS = {
   group: Group,
@@ -79,6 +80,7 @@ const ICONS = {
   home: Home,
   close: Close,
   'chevron-right-circle': ChevronRightCircle,
+  'chevron-right': ChevronRightIcon,
 };
 
 export type Name = keyof typeof ICONS;

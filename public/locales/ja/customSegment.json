@@ -1,0 +1,21 @@
+{
+  "segmentMessageReport": "セグメントメッセージレポート",
+  "targetSegment": "対象セグメント",
+  "allSegments": "すべてのセグメント",
+  "messageName": "メッセージ名",
+  "deliveryDate": "配信日時",
+  "deliveryType": "配信種別",
+  "numberOfUUsDelivered": "配信UU数",
+  "openUUsRate": "開封UU数（率）",
+  "viewByLinkUrl": "リンクURLごとに見る",
+  "email": "メール",
+  "list": "一覧",
+  "summary": "サマリー",
+  "linkUrl": "リンクURL",
+  "totalClickUUsRate": "合計クリックUU数（率）",
+  "totalCvUUsRate": "合計CV UU数（率）",
+  "clickUUsRate": "クリックUU数（率）",
+  "cvUUsRate": "CV UU数（率）",
+  "returnToList": "一覧に戻る",
+  "summaryDescription": "※合計クリックUU数、合計CV UU数はリンクごとのクリックUU数、CV UU数の合計と一致しない場合があります。"
+}
