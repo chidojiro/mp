@@ -60,7 +60,7 @@ export const SideMenuItem = ({ isOpenAccordion, data }: Props) => {
                   item.onClick?.();
                 }}
                 className={classNames(
-                  'text-ellipsis overflow-hidden whitespace-nowrap text-gray-dark w-full rounded-full hover:border cursor-pointer text-medium px-[18px] mb-2.5 py-1.5 hover:border-dark-gray items-center hover:bg-gray-light',
+                  'text-ellipsis border border-white overflow-hidden whitespace-nowrap text-gray-dark w-full rounded-full cursor-pointer text-medium px-[18px] mb-2.5 py-1.5 hover:border-dark-gray items-center hover:bg-gray-light',
                   {
                     'bg-gray-light border border-dark-gray rounded-full': isActive,
                   }
