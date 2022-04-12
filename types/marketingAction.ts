@@ -24,6 +24,7 @@ export enum TARGET {
   LOYAL = 'loyal',
   F1_DORMANT = 'f1dormant',
   LOYAL_DORMANT = 'loyalDormant',
+  OTHER_DORMANT = 'otherDormant',
 }
 
 export enum MarketingActionSegment {
@@ -66,7 +67,7 @@ export type MarketingActionRes = {
   marketing_action_type?: MarketingActionType;
   start_at: string;
   end_at?: string;
-  settings?: string;
+  settings?: any;
   status: MarketingActionStatus;
   target_segments?: TargetSegment[];
   created_at?: string;

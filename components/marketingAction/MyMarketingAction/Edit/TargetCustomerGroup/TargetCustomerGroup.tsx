@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 
 import { Form } from '@/components';
-import { Option } from '@/types';
+import { Option, TARGET } from '@/types';
 
 import { TargetCustomer } from './TargetCustomer';
 
@@ -14,14 +14,14 @@ export const TargetCustomerGroup = ({ isNonMember }: Props) => {
   const { t: tMA } = useTranslation('marketingAction');
 
   const customers: Option<string>[] = [
-    { label: t('f0member'), value: 'f0_member' },
-    { label: 'F1', value: 'f1' },
-    { label: 'F2', value: 'f2' },
-    { label: t('semiLoyal'), value: 'semi_loyal' },
-    { label: t('loyal'), value: 'loyal' },
-    { label: t('f1dormant'), value: 'f1_dormant' },
-    { label: t('loyalDormant'), value: 'loyal_dormant' },
-    { label: t('otherDormant'), value: 'other_dormant' },
+    { label: t('f0member'), value: TARGET.F0_MEMBER },
+    { label: 'F1', value: TARGET.F1 },
+    { label: 'F2', value: TARGET.F2 },
+    { label: t('semiLoyal'), value: TARGET.SEMI_LOYAL },
+    { label: t('loyal'), value: TARGET.LOYAL },
+    { label: t('f1dormant'), value: TARGET.F1_DORMANT },
+    { label: t('loyalDormant'), value: TARGET.LOYAL_DORMANT },
+    { label: t('otherDormant'), value: TARGET.OTHER_DORMANT },
   ];
 
   const targetCustomers = (() => {

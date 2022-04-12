@@ -198,5 +198,6 @@
   "faqChatWindowSettingsDescription": "Create the appearance and behavior of the chatbot.",
   "exterior": "Exterior",
   "emptyMarketingAction": "There are no measures under implementation.",
-  "timeDeliverySettings": "{{time}} {{days}} days {{from_the_date_text}}"
+  "timeDeliverySettings": "{{time}} {{days}} days {{from_the_date_text}}",
+  "save": "Save"
 }
