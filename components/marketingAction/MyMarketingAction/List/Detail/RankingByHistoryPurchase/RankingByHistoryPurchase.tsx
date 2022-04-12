@@ -1,8 +1,7 @@
 import { useTranslation } from 'next-i18next';
 
-import { ColorUtils } from '@/utils';
-
-import { Answer, Color, StepBlock } from '../StepBlock';
+import { Answer, StepBlock } from '../StepBlock';
+import { ChatWindowSettings } from '../StepBlock/ChatWindowSettings';
 
 type Props = {
   settings: any;
@@ -25,14 +24,7 @@ export const RankingByHistoryPurchase = ({ settings }: Props) => {
           <div className='mt-2'>{settings.carousel[0].content}</div>
         </Answer>
       </StepBlock>
-      <StepBlock stepName={t('chatWindowSettings')}>
-        <Answer name={t('colorTheme')}>
-          <Color
-            color={settings.chat_window_color}
-            label={t(ColorUtils.getName(settings.chat_window_color))}
-          />
-        </Answer>
-      </StepBlock>
+      <ChatWindowSettings settings={settings} />
     </>
   );
 };

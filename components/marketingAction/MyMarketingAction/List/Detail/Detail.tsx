@@ -31,9 +31,13 @@ export const Detail = () => {
 
   const maStatus = (query.marketingActionStatus as string) || MAStatus.RUNNING;
 
-  const { data } = useSWR(['/actions', filter], () => MarketingActionAPI.list({ params: filter }), {
-    fallbackData: {},
-  });
+  const { data, mutate } = useSWR(
+    ['/actions', filter],
+    () => MarketingActionAPI.list({ params: filter }),
+    {
+      fallbackData: {},
+    }
+  );
 
   const marketingActions = data?.[maStatus] || [];
 
@@ -88,7 +92,7 @@ export const Detail = () => {
           value: ma.id,
           onClick: () => handleMAChange({ marketingActionId: ma.id }),
           label: ma.description,
-          content: <MarketingAction marketingAction={ma} />,
+          content: <MarketingAction marketingAction={ma} mutateMarketingActions={mutate} />,
         };
       });
       return { ...menu, children };
@@ -98,7 +102,7 @@ export const Detail = () => {
       ...menu,
       value: ma.id,
       onClick: () => handleMAChange({ marketingActionId: ma.id }),
-      content: <MarketingAction marketingAction={ma} />,
+      content: <MarketingAction marketingAction={ma} mutateMarketingActions={mutate} />,
     };
   };
 

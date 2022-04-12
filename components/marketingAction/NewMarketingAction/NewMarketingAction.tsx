@@ -95,7 +95,7 @@ export const NewMarketingAction = () => {
         {
           content: (
             <ActionContainer
-              iconName='ranking'
+              iconName='ranking-by-category'
               title={t('rankingByCategoryBasedOnOverallPurchaseHistory')}
               description={t('rankingByCategoryBasedOnOverallPurchaseHistoryDescription')}
               descriptionImageUrl='/images/ranking-category.png'

@@ -3,29 +3,30 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { Icon } from '@/components';
-import { Button, Tag } from '@/components/common';
+import { Button, IconName, Tag } from '@/components/common';
 import { MarketingActionStatus as MAStatus, TargetSegment } from '@/types';
 import { TargetFilterUtils } from '@/utils';
 
 type Props = {
   path: string;
   name: string;
+  icon: IconName;
   targetCustomers: TargetSegment[];
   date?: string;
 };
 
-export const Action = ({ name, path, targetCustomers, date }: Props) => {
+export const Action = ({ name, path, icon, targetCustomers, date }: Props) => {
   const { t } = useTranslation('marketingAction');
   const { t: tCommon } = useTranslation('common');
 
   const {
-    query: { marketingActionStatus },
+    query: { marketingActionStatus, marketingActionId },
   } = useRouter();
 
   const prefixUrl = '/organizations/1/projects/1/';
   const url =
     marketingActionStatus === MAStatus.DRAFT
-      ? `actions/edit/${path}`
+      ? `actions/edit/${path}/${marketingActionId}`
       : 'reports/action-reports/line-email/1?targets=all';
 
   const btn = marketingActionStatus === MAStatus.DRAFT ? t('editInEditor') : t('viewReport');
@@ -33,7 +34,7 @@ export const Action = ({ name, path, targetCustomers, date }: Props) => {
   return (
     <div className='p-10'>
       <div className='flex items-center'>
-        <Icon name='cart' className='w-14 h-14' />
+        <Icon name={icon} className='w-14 h-14' />
         <h3 className='font-bold ml-7 text-gray-dark'>{name}</h3>
       </div>
       <div className='flex justify-between'>
@@ -41,8 +42,8 @@ export const Action = ({ name, path, targetCustomers, date }: Props) => {
           <div className='flex mt-4'>
             <span className='mr-2 font-bold text-secondary'>{t('targetCustomer')}</span>
             <div className='flex flex-wrap gap-1'>
-              {targetCustomers.map(target => (
-                <Tag key={target.segment}>{tCommon(TargetFilterUtils.getTargetValue(target))}</Tag>
+              {targetCustomers.map((target, index) => (
+                <Tag key={index}>{tCommon(TargetFilterUtils.getTargetValue(target))}</Tag>
               ))}
             </div>
           </div>

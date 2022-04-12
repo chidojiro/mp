@@ -3,59 +3,27 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { Button } from '@/components/common';
-import { MarketingActionAlias, MarketingActionRes } from '@/types';
+import { MarketingActionAlias, MarketingActionRes, MarketingActionStatus } from '@/types';
 import { LanguageUtils, TargetFilterUtils } from '@/utils';
+import { MARKETING_ACTION_URL } from '@/constants';
+import { MarketingActionAPI } from '@/apis';
 
 import { Action } from './Action';
 import { StepDelivery } from './StepDelivery';
 
 type Props = {
   marketingAction: MarketingActionRes;
+  mutateMarketingActions?: () => void;
 };
 
-export const MarketingAction = ({ marketingAction }: Props) => {
+export const MarketingAction = ({ marketingAction, mutateMarketingActions }: Props) => {
   const { t } = useTranslation('marketingAction');
   const { t: tCommon } = useTranslation('common');
 
-  const { locale } = useRouter();
-
-  const marketingActionDetail = {
-    name: 'cart-abandoned',
-    settings: [
-      {
-        name: t('useLine'),
-        questions: [{ question: t('useLine'), answer: t('lineOption') }],
-      },
-      {
-        name: t('msgSetting1'),
-        showPreview: true,
-        questions: [
-          { question: t('timeDelivery'), answer: 'カゴ落ち発生日から3日後の午後 12:00' },
-          {
-            question: t('msgContentEmail'),
-            answers: [
-              { question: t('headLines'), response: 'お買い忘れはございませんか？<br>' },
-              {
-                question: t('bodyText'),
-                response:
-                  'いつも<span class="caret-holder"></span><span class="mention-item" contenteditable="false" data-value="brandName">ブランド名</span>をご利用いただきありがとうございます。以下の商品がショッピングカートに保存されたままになっています。 売り切れになってしまう前に、是非購入をご検討くださいませ。<br>',
-              },
-            ],
-          },
-          { question: t('colorSettings'), answer: 'スカイブルー', color: '#55C5D9' },
-        ],
-      },
-      {
-        name: t('msgSetting2'),
-        showPreview: true,
-        questions: [
-          { question: t('msg2Option'), answer: '2通目を配信する' },
-          { question: t('contentHasChanged'), answer: '1通目と同内容のメッセージを配信する' },
-          { question: t('timeDelivery'), answer: '1通目配信日から3日後の午後 12:00' },
-        ],
-      },
-    ],
-  };
+  const {
+    locale,
+    query: { marketingActionStatus },
+  } = useRouter();
 
   const getRange = () => {
     const _startAt = LanguageUtils.getDateFormat(marketingAction?.start_at, locale);
@@ -73,11 +41,27 @@ export const MarketingAction = ({ marketingAction }: Props) => {
     );
   };
 
+  const handleSuspendMA = () => {
+    MarketingActionAPI.update(marketingAction.id, {
+      ...marketingAction,
+      status: MarketingActionStatus.DRAFT,
+    });
+    mutateMarketingActions?.();
+  };
+
+  const aliasMAType =
+    marketingAction?.marketing_action_type?.alias || MarketingActionAlias.CART_LEFT_NOTIFICATION;
+  const marketingActionUrl = MARKETING_ACTION_URL[aliasMAType];
+
+  const showSuspendBtn = marketingActionStatus === MarketingActionStatus.RUNNING;
+  const btnFooter = showSuspendBtn || marketingActionStatus === MarketingActionStatus.DRAFT;
+
   return (
     <div>
       <div className='h-full border rounded-lg border-gray'>
         <Action
-          path={marketingActionDetail.name}
+          icon={marketingActionUrl.icon}
+          path={marketingActionUrl.path}
           name={marketingAction?.description || ''}
           targetCustomers={marketingAction.target_segments || []}
           date={getRange()}
@@ -92,15 +76,23 @@ export const MarketingAction = ({ marketingAction }: Props) => {
         />
       </div>
       <div className='flex justify-center pt-10'>
-        <Button className='mr-5 min-w-[240px] bg-[#FF7F5C]'>{t('suspendTemplate')}</Button>
-        <Link
-          passHref
-          href={`/organizations/1/projects/1/actions/edit/${marketingActionDetail.name}`}
-        >
-          <Button colorScheme='negative' className='mr-5 min-w-[240px]'>
-            {t('editInEditor')}
-          </Button>
-        </Link>
+        {!!btnFooter && (
+          <>
+            {!!showSuspendBtn && (
+              <Button onClick={handleSuspendMA} className='mr-5 min-w-[240px] bg-[#FF7F5C]'>
+                {t('suspendTemplate')}
+              </Button>
+            )}
+            <Link
+              passHref
+              href={`/organizations/1/projects/1/actions/edit/${marketingActionUrl.path}/${marketingAction.id}`}
+            >
+              <Button colorScheme='negative' className='mr-5 min-w-[240px]'>
+                {t('editInEditor')}
+              </Button>
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );

@@ -199,5 +199,6 @@
   "exterior": "Exterior",
   "emptyMarketingAction": "There are no measures under implementation.",
   "timeDeliverySettings": "{{time}} {{days}} days {{from_the_date_text}}",
-  "save": "Save"
+  "save": "Save",
+  "updateCSV": "Upload CSV file"
 }

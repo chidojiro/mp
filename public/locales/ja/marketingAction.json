@@ -198,5 +198,6 @@
   "exterior": "外観",
   "emptyMarketingAction": "実施中の施策はありません。",
   "timeDeliverySettings": "{{from_the_date_text}}{{days}}日後の{{time}}",
-  "save": "保存する"
+  "save": "保存する",
+  "updateCSV": "CSVファイルのアップロード"
 }
