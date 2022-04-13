@@ -1,14 +1,11 @@
 import { useEffect } from 'react';
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import dynamic from 'next/dynamic';
 import { GetStaticProps, GetStaticPropsContext } from 'next';
 
-import { LoginProps } from '@/components/Login/Login.types';
+import { Login } from '@/components/Login';
 import { useNavigator } from '@/hooks/useNavigator';
 import { useAuth } from '@/hooks/useAuth';
-
-const Login = dynamic<LoginProps>(() => import('@/components/Login').then(module => module.Login));
 
 const LoginPage = () => {
   const navigator = useNavigator();

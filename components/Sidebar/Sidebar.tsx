@@ -9,7 +9,7 @@ import { NavItemData } from './NavItem.types';
 export const Sidebar = () => {
   const { t } = useTranslation();
   const auth = useAuth();
-
+  // TODO: still got issue with serverside rendering
   const organizationPrefix = `/organizations/${auth.organizationId}`;
   const projectPrefix = `${organizationPrefix}/projects/${auth.projectId}`;
 
