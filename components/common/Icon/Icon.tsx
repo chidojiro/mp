@@ -42,6 +42,10 @@ import TriangleRight from './icons/triangle-right.svg';
 import Upload from './icons/upload.svg';
 import RankingByCategory from './icons/ranking-by-category.svg';
 import Variable from './icons/variable.svg';
+import Dashboard from './icons/dashboard.svg';
+import Settings from './icons/settings.svg';
+import Action from './icons/action.svg';
+import CustomSegment from './icons/custom-segment.svg';
 
 const ICONS = {
   group: Group,
@@ -85,6 +89,10 @@ const ICONS = {
   close: Close,
   'chevron-right-circle': ChevronRightCircle,
   'chevron-right': ChevronRightIcon,
+  dashboard: Dashboard,
+  settings: Settings,
+  action: Action,
+  'custom-segment': CustomSegment,
 };
 
 export type Name = keyof typeof ICONS;
