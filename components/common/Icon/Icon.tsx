@@ -40,6 +40,7 @@ import sleepReturned from './icons/sleep-returned.svg';
 import sleepIcon from './icons/sleep-status.svg';
 import TriangleRight from './icons/triangle-right.svg';
 import Upload from './icons/upload.svg';
+import RankingByCategory from './icons/ranking-by-category.svg';
 import Variable from './icons/variable.svg';
 
 const ICONS = {
@@ -57,6 +58,7 @@ const ICONS = {
   upload: Upload,
   check: Check,
   ranking: Ranking,
+  'ranking-by-category': RankingByCategory,
   'triangle-right': TriangleRight,
   'f0-status': f0Icon,
   'f1-status': f1Icon,

@@ -161,7 +161,7 @@ export const RankingByCategory = () => {
     <div className='relative'>
       <ActionContainer
         showUseTemplateBtn={false}
-        iconName='ranking'
+        iconName='ranking-by-category'
         title={t('rankingByCategoryBasedOnOverallPurchaseHistory')}
         description={t('rankingByCategoryBasedOnOverallPurchaseHistoryDescription')}
         descriptionImageUrl='/images/ranking-category.png'
