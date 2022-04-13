@@ -11,7 +11,7 @@ import { NavItemData } from './NavItem.types';
 type Props = { data: NavItemData };
 
 export const NavItem = ({ data }: Props) => {
-  const { path, label, children = [] } = data;
+  const { path, label, children = [], icon = 'group' } = data;
 
   const router = useRouter();
 
@@ -29,7 +29,7 @@ export const NavItem = ({ data }: Props) => {
             'bg-dark-gray': isMatched(data),
           })}
         >
-          <Icon name='group' className='w-4 h-4 mr-2 text-primary' />
+          <Icon name={icon} className='w-4 h-4 mr-2 text-primary' />
           {label}
         </a>
       </Link>
@@ -43,7 +43,7 @@ export const NavItem = ({ data }: Props) => {
             'cursor-pointer flex text-medium items-center px-6 py-2.5 hover:bg-dark-gray'
           )}
         >
-          <Icon name='group' size={16} className='mr-2 text-primary' />
+          <Icon name={icon} size={16} className='mr-2 text-primary' />
           {label}
         </div>
       </Accordion.Title>

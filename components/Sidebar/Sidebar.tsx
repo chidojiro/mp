@@ -21,9 +21,11 @@ export const Sidebar = () => {
       path: `${organizationPrefix}/dashboard`,
       label: t('menuDashboard'),
       matches: [`${organizationMatchPrefix}/dashboard`],
+      icon: 'dashboard',
     },
     {
       label: t('menuReport'),
+      icon: 'group',
       children: [
         {
           path: `${projectPrefix}/reports/action-reports/line-email?targets=all`,
@@ -73,6 +75,7 @@ export const Sidebar = () => {
     {
       path: `${projectPrefix}/actions/running/1?targets=all`,
       label: t('menuMyMarketingAction'),
+      icon: 'emoji',
       matches: [
         `${projectMatchPrefix}/actions`,
         `${projectMatchPrefix}/actions/[marketingActionStatus]/[marketingActionId]`,
@@ -83,13 +86,15 @@ export const Sidebar = () => {
     {
       path: `${projectPrefix}/actions/new/cart-abandoned`,
       label: t('menuCreateMeasure'),
+      icon: 'action',
       matches: [
         `${projectMatchPrefix}/actions/new`,
         `${projectMatchPrefix}/actions/new/[marketingActionName]`,
       ],
     },
     {
-      label: t('カスタムセグメント'),
+      label: t('customSegments'),
+      icon: 'custom-segment',
       children: [
         {
           label: t('segmentList'),
@@ -112,6 +117,7 @@ export const Sidebar = () => {
       path: `${projectPrefix}/settings`,
       label: t('menuSettings'),
       matches: [`${projectMatchPrefix}/settings`],
+      icon: 'settings',
     },
   ];
   return (
