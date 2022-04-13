@@ -89,17 +89,17 @@ export const ActionContainer = ({
               <Tag>{tCommon('loyalDormant')}</Tag>
             </div>
           </div>
-          {!!flowImgUrl && (
-            <div className='mt-5'>
-              <Label>{t('policyFlow')}</Label>
-              <img className='mt-3' alt='flow-image' src={flowImgUrl} />
-            </div>
-          )}
         </div>
         <AspectRatio ratio='1-1' className='col-span-3 shrink-0'>
           <img alt='preview-image' src={descriptionImageUrl} />
         </AspectRatio>
       </div>
+      {!!flowImgUrl && (
+        <div className='mt-5'>
+          <Label>{t('policyFlow')}</Label>
+          <img className='mt-3' alt='flow-image' src={flowImgUrl} />
+        </div>
+      )}
       {showUseTemplateBtn && (
         <Link passHref href={editUrl}>
           <Button className='w-[360px] !block mx-auto mt-6'>{t('useThisTemplate')}</Button>
