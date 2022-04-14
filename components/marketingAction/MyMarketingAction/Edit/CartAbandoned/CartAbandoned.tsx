@@ -70,7 +70,7 @@ export const CartAbandoned = () => {
     defaultValues: {
       send_order: 2,
       send_after_days: '3',
-      has_self_mail_content: true,
+      has_self_mail_content: false,
       ...messageDefaultSettings,
     },
   });
@@ -145,7 +145,7 @@ export const CartAbandoned = () => {
     }
   };
 
-  const steps1 = [
+  const steps = [
     {
       id: 1,
       name: t('useLine'),
@@ -213,7 +213,7 @@ export const CartAbandoned = () => {
         flowImgUrl='/images/cart-abandoned-flow.png'
       ></ActionContainer>
       <Form methods={methods} className='mt-[60px]'>
-        <Steppers steps={steps1} onShowPreview={onShowPreview} />
+        <Steppers steps={steps} onShowPreview={onShowPreview} />
       </Form>
       <PreviewOverlay
         defaultType='mail'
@@ -224,7 +224,7 @@ export const CartAbandoned = () => {
         control={previewMessageControl}
       />
       <SavingActions
-        disable={!!isDone}
+        disable={!isDone}
         onSaveMarketingAction={handleSaveMA}
         onCloseModal={handleCloseModal}
         marketingActionName={t('cartAbandoned')}
