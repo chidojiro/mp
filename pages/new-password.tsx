@@ -7,7 +7,7 @@ import { Login } from '@/components/Login';
 import { useNavigator } from '@/hooks/useNavigator';
 import { useAuth } from '@/hooks/useAuth';
 
-const LoginPage = () => {
+const NewPasswordPage = () => {
   const navigator = useNavigator();
   const auth = useAuth();
   useEffect(() => {
@@ -15,7 +15,7 @@ const LoginPage = () => {
       navigator.openDashboard();
     }
   }, [navigator, auth]);
-  return <Login view='login' />;
+  return <Login view='new-password' />;
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale = 'ja' }: GetStaticPropsContext) => {
@@ -26,4 +26,4 @@ export const getStaticProps: GetStaticProps = async ({ locale = 'ja' }: GetStati
   };
 };
 
-export default LoginPage;
+export default NewPasswordPage;

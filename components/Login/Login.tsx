@@ -3,9 +3,28 @@ import { useTranslation } from 'next-i18next';
 
 // import { LoginFormProps } from './LoginForm.types';
 import { LoginForm } from './LoginForm';
+import { PasswordResetForm } from './PasswordResetForm';
+import { NewPasswordForm } from './NewPasswordForm';
 // const LoginForm = dynamic<LoginFormProps>(() => import("./LoginForm").then(module => module.LoginForm));
 
-export const Login = () => {
+type Props = {
+  view: string;
+};
+
+// export const Action = ({ name, path, icon, targetCustomers, date }: Props) => {
+
+const filter = (view: string) => {
+  switch (view) {
+    case 'login':
+      return <LoginForm />;
+    case 'password-reset':
+      return <PasswordResetForm />;
+    case 'new-password':
+      return <NewPasswordForm />;
+  }
+};
+
+export const Login = ({ view }: Props) => {
   const { t } = useTranslation('login');
   return (
     <div className='grid h-screen grid-cols-2 overflow-hidden'>
@@ -19,9 +38,7 @@ export const Login = () => {
           <h3 className='font-semibold whitespace-pre-line'>{t('description')}</h3>
         </div>
       </div>
-      <div className='z-10 flex items-center justify-center bg-gray-light'>
-        <LoginForm />
-      </div>
+      <div className='z-10 flex items-center justify-center bg-gray-light'>{filter(view)}</div>
     </div>
   );
 };
