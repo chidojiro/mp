@@ -21,14 +21,15 @@ import { Message1Settings } from './Message1Settings';
 import { Message2Settings } from './Message2Settings';
 
 export const OPTIONS = {
-  YES: 'yes',
-  NO: 'no',
+  YES: 'true',
+  NO: 'false',
 };
 
 export const CartAbandoned = () => {
   const { t } = useTranslation('marketingAction');
   const methods = useForm();
   const [messagePreview, setMessagePreview] = useState<any>();
+  const [maId, setMaId] = useState('');
 
   const {
     push,
@@ -43,26 +44,33 @@ export const CartAbandoned = () => {
     () => MarketingActionAPI.get(marketingActionId as string)
   );
 
-  const step1Methods = useForm({ defaultValues: { enable_line: OPTIONS.YES } });
+  const step1Methods = useForm({ defaultValues: { enable_line: true } });
 
   const messageDefaultSettings = {
-    delivery_time: '10:00',
-    headline_email: t('defaultHeadline'),
-    text_email: t('defaultTextEmail'),
-    text_option: OPTIONS.NO,
+    send_at: '10:00',
+    mail_content: {
+      title: t('defaultHeadline'),
+      content: t('defaultTextEmail'),
+    },
+    line_messages: {
+      is_display: false,
+    },
     color: '#55C5D9',
+    send_flag: true,
+    content_verified: true,
   };
   const step2Methods = useForm({
     defaultValues: {
-      delivery_date: '1',
+      send_after_days: '1',
+      send_order: 1,
       ...messageDefaultSettings,
     },
   });
   const step3Methods = useForm({
     defaultValues: {
-      second_message_option: OPTIONS.YES,
-      delivery_date: '3',
-      same_message_content: OPTIONS.YES,
+      send_order: 2,
+      send_after_days: '3',
+      has_self_mail_content: true,
       ...messageDefaultSettings,
     },
   });
@@ -81,49 +89,21 @@ export const CartAbandoned = () => {
     },
   });
 
-  const resetMessage = useCallback((message: any) => {
-    return {
-      delivery_date: message.send_after_days,
-      delivery_time: message.send_at,
-      headline_email: message.mail_content?.title,
-      text_email: message.mail_content?.content,
-      color: message.color,
-      text_option: message.line_messages?.is_display ? OPTIONS.YES : OPTIONS.NO,
-      text_line: message.line_messages?.content,
-    };
-  }, []);
-
   const resetData = useCallback(
     (marketingAction: MarketingActionRes) => {
       const settings = marketingAction.settings;
-      // reset step 1
-      const _lineSettting = settings?.enable_line ? OPTIONS.YES : OPTIONS.NO;
-      step1Methods.reset({ enable_line: _lineSettting });
+      step1Methods.reset({ enable_line: settings?.enable_line });
 
-      // reset step 2
-      step2Methods.reset({
-        ...resetMessage(settings.step_messages[0]),
-      });
+      step2Methods.reset({ ...settings.step_messages[0] }, { keepDefaultValues: true });
 
-      // reset step 3
-      const _secondMsg = settings.step_messages[1];
-      const isSameContent = _secondMsg.has_self_mail_content;
-      let _secondMsgData = {
-        second_message_option: _secondMsg.send_flag ? OPTIONS.YES : OPTIONS.NO,
-        same_message_content: !isSameContent ? OPTIONS.YES : OPTIONS.NO,
-      };
-      if (_secondMsg.send_flag && !isSameContent) {
-        _secondMsgData = { ..._secondMsgData, ...resetMessage(_secondMsg) };
-      }
-      step3Methods.reset({ ..._secondMsgData }, { keepDefaultValues: true });
+      step3Methods.reset({ ...settings.step_messages[1] }, { keepDefaultValues: true });
 
-      // reset step 4
       const _targetSegments = marketingAction.target_segments?.map(target =>
         TargetFilterUtils.getTargetValue(target)
       );
       step4Methods.reset({ target_customers: _targetSegments || [] });
     },
-    [step1Methods, step2Methods, step3Methods, step4Methods, resetMessage]
+    [step1Methods, step2Methods, step3Methods, step4Methods]
   );
 
   useEffect(() => {
@@ -132,68 +112,23 @@ export const CartAbandoned = () => {
     }
   }, [marketingAction, resetData]);
 
-  const useLine = step1Methods.getValues('enable_line') === OPTIONS.YES;
+  const useLine = step1Methods.getValues('enable_line');
   const firstMessage: any = step2Methods.getValues();
   const secondMessage: any = step3Methods.getValues();
-
-  const getMessageData = (message: any) => {
-    return {
-      color: message.color,
-      mail_content: {
-        title: message.headline_email,
-        content: message.text_email,
-      },
-      line_messages: {
-        content: message.text_line || '',
-        is_display: message.text_option === OPTIONS.YES,
-      },
-    };
-  };
 
   const prepareData = (status: MarketingActionStatus) => {
     const _targetSegments = step4Methods
       .getValues('target_customers')
       .map(target => TargetFilterUtils.getTargetFilterObj(target as string));
 
-    const _firstMsg = {
-      content_verified: true,
-      send_flag: true,
-      send_order: 1,
-      send_after_days: firstMessage.delivery_date,
-      send_at: firstMessage.delivery_time,
-      ...getMessageData(firstMessage),
-    };
-
-    const isSend = secondMessage.second_message_option === OPTIONS.YES;
-    let _secondMsg: any = {
-      send_flag: isSend,
-      content_verified: true,
-      send_order: 2,
-    };
-    if (isSend) {
-      const isSameContent = secondMessage.same_message_content === OPTIONS.YES;
-      _secondMsg = {
-        ..._secondMsg,
-        has_self_mail_content: !isSameContent,
-        send_after_days: secondMessage.delivery_date,
-        send_at: secondMessage.delivery_time,
-      };
-      if (!isSameContent) {
-        _secondMsg = {
-          ..._secondMsg,
-          ...getMessageData(secondMessage),
-        };
-      }
-    }
-
     const data = {
       start_at: new Date().toISOString(), // TODO will remove once BE is update
-      description: t('cartAbandoned'),
+      description: 'カゴ落ち通知',
       marketing_action_type_id: 1,
       status,
       settings: {
         enable_line: useLine,
-        step_messages: [_firstMsg, _secondMsg],
+        step_messages: [firstMessage, secondMessage],
       },
       target_segments: _targetSegments,
     };
@@ -206,7 +141,7 @@ export const CartAbandoned = () => {
       await MarketingActionAPI.update(marketingActionId as string, data);
     } else {
       const res = await MarketingActionAPI.create(data);
-      push(`${asPath}/${res.id}`);
+      setMaId(res.id);
     }
   };
 
@@ -241,16 +176,20 @@ export const CartAbandoned = () => {
 
   const onShowPreview = (stepId: number) => {
     let message = firstMessage;
-    if (stepId === 3 && secondMessage?.same_message_content === OPTIONS.NO) {
+    if (stepId === 3 && secondMessage?.send_flag && secondMessage?.has_self_mail_content) {
       message = secondMessage;
     }
     setMessagePreview({
-      headline: message?.headline_email,
-      messageEmail: message?.text_email,
-      messageLine: message?.text_line,
+      headline: message?.mail_content.title,
+      messageEmail: message?.mail_content.content,
+      messageLine: message?.line_messages.content,
       color: message.color,
     });
     previewMessageControl.open();
+  };
+
+  const handleCloseModal = () => {
+    push(`${asPath}/${maId}`);
   };
 
   const isStepDone = (methods: any) => {
@@ -285,8 +224,9 @@ export const CartAbandoned = () => {
         control={previewMessageControl}
       />
       <SavingActions
-        disable={!isDone}
+        disable={!!isDone}
         onSaveMarketingAction={handleSaveMA}
+        onCloseModal={handleCloseModal}
         marketingActionName={t('cartAbandoned')}
       />
     </div>

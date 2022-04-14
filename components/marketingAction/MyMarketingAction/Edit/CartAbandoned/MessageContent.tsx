@@ -32,7 +32,8 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
   ];
 
   const message = useWatch() as any;
-  const showLineMsg = message?.text_option === OPTIONS.YES;
+
+  const showLineMsg = message?.line_messages?.is_display;
 
   const onShowModal = (type: MessageContentPreviewType) => {
     setCurrType(type);
@@ -59,14 +60,14 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
               </div>
               <Form.ContentEditable
                 options={headingMentionOptions}
-                name={`${messageNum}.headline_email`}
+                name={`${messageNum}.mail_content.title`}
                 rules={{ required: true }}
               />
             </div>
             <div className='mb-4'>
               <div className='mb-2.5 font-semibold text-secondary text-medium'>{t('bodyText')}</div>
 
-              <MessageBodyInput name={`${messageNum}.text_email`} />
+              <MessageBodyInput name={`${messageNum}.mail_content.content`} />
             </div>
           </div>
           <div>
@@ -80,8 +81,8 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
               </span>
             </div>
             <MailPreview
-              headline={message?.headline_email}
-              body={message?.text_email}
+              headline={message?.mail_content?.title}
+              body={message?.mail_content?.content}
               desktop={false}
               color={message.color}
             />
@@ -100,7 +101,7 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
                 <div className='mb-2.5 font-semibold text-secondary text-medium'>
                   {t('textMessage')}
                 </div>
-                <Form.RadioGroup name={`${messageNum}.text_option`}>
+                <Form.RadioGroup name={`${messageNum}.line_messages.is_display`}>
                   {lineTextOptions.map(option => (
                     <RadioGroup.Option
                       colorScheme='secondary'
@@ -111,7 +112,7 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
                     />
                   ))}
                 </Form.RadioGroup>
-                {showLineMsg && <MessageBodyInput name={`${messageNum}.text_line`} />}
+                {showLineMsg && <MessageBodyInput name={`${messageNum}.line_messages.content`} />}
               </div>
             </div>
             <div>
@@ -124,7 +125,7 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
                   {t('openPreview')}
                 </span>
               </div>
-              <LinePreview body={message?.text_line} color={message.color} />
+              <LinePreview body={message?.line_messages?.content} color={message.color} />
             </div>
           </div>
         </div>
@@ -135,9 +136,9 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
       </div>
       <PreviewOverlay
         defaultType={currType}
-        mailHeadline={message?.headline_email}
-        mailBody={message?.text_email}
-        lineBody={message?.text_line}
+        mailHeadline={message?.mail_content.title}
+        mailBody={message?.mail_content.content}
+        lineBody={message?.line_messages?.content}
         control={previewMessageControl}
         color={message.color}
       />

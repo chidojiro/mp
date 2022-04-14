@@ -18,6 +18,11 @@ export const Steppers = ({ steps, onShowPreview }: Props) => {
     return acc;
   }, {});
 
+  const handleConfirm = (stepId: number) => {
+    if (stepId !== idLastStep) {
+      setCurrAlertId(stepId + 1);
+    }
+  };
   return (
     <>
       {steps.map((step: Step, idx: number) => (
@@ -25,6 +30,7 @@ export const Steppers = ({ steps, onShowPreview }: Props) => {
           step={step}
           isLastStep={idx !== idLastStep - 1}
           key={step.id}
+          onConfirm={handleConfirm}
           onShowPreview={onShowPreview}
           ref={refs[step.id]}
           isAlert={currAlertId === step.id}

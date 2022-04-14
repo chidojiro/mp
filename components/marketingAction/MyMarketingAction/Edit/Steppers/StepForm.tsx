@@ -13,10 +13,11 @@ type Props = {
   isLastStep: boolean;
   isAlert: boolean;
   onShowPreview: (stepId: number) => void;
+  onConfirm: (stepId: number) => void;
 };
 
 export const StepForm = React.forwardRef<HTMLDivElement, Props>(
-  ({ step, isLastStep, isAlert, onShowPreview }, ref) => {
+  ({ step, isLastStep, isAlert, onShowPreview, onConfirm }, ref) => {
     const { t } = useTranslation('marketingAction');
     const { id, name, showPreviewBtn, children, methods } = step;
     const [showAlert, setShowAlert] = useState(isAlert);
@@ -37,6 +38,7 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
     const isComplete = isSubmitSuccessful && !isDirty;
 
     const onValidSubmit = (data: any) => {
+      onConfirm(id);
       reset(data);
     };
 
