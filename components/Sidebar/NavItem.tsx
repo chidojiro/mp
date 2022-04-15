@@ -11,7 +11,7 @@ import { NavItemData } from './NavItem.types';
 type Props = { data: NavItemData };
 
 export const NavItem = ({ data }: Props) => {
-  const { path, label, children = [], icon = 'group' } = data;
+  const { path, label, children: navChildren = [], icon = 'group' } = data;
 
   const router = useRouter();
 
@@ -19,7 +19,7 @@ export const NavItem = ({ data }: Props) => {
     return item.matches?.includes(router.pathname) || item.path === router.pathname;
   };
 
-  const accordionControl = useVisibilityControl(children.some(item => isMatched(item)));
+  const accordionControl = useVisibilityControl(navChildren.some(item => isMatched(item)));
 
   if (path)
     return (
@@ -45,10 +45,17 @@ export const NavItem = ({ data }: Props) => {
         >
           <Icon name={icon} size={16} className='mr-2 text-primary' />
           {label}
+          {navChildren && (
+            <Icon
+              name={accordionControl.visible ? 'chevron-up' : 'chevron-down'}
+              className='ml-auto text-gray-500'
+              size={20}
+            />
+          )}
         </div>
       </Accordion.Title>
       <Accordion.Content>
-        {children.map(item => (
+        {navChildren.map(item => (
           <Link passHref href={item.path || ''} key={item.label}>
             <a
               className={classNames(

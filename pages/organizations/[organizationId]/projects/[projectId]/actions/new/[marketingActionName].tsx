@@ -1,9 +1,7 @@
 import { useTranslation } from 'next-i18next';
-import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { Layout } from '@/components/Layout';
-import { NewMarketingAction } from '@/components/marketingAction';
+import { Layout, NewMarketingAction } from '@/components';
 
 function MarketingActions() {
   const { t } = useTranslation('marketingAction');
@@ -15,15 +13,10 @@ function MarketingActions() {
   );
 }
 
-export const getStaticProps: GetStaticProps = async ({ locale = 'ja' }) => ({
+export const getServerSideProps = async ({ locale }: any) => ({
   props: {
     ...(await serverSideTranslations(locale, ['common', 'marketingAction'])),
   },
 });
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true, // false or 'blocking'
-  };
-}
+
 export default MarketingActions;

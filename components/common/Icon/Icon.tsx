@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ChevronRightIcon } from '@heroicons/react/solid';
+import { ChevronRightIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 
 import CartQuestion from './icons/cart-question.svg';
 import Cart from './icons/cart.svg';
@@ -89,6 +89,8 @@ const ICONS = {
   close: Close,
   'chevron-right-circle': ChevronRightCircle,
   'chevron-right': ChevronRightIcon,
+  'chevron-down': ChevronDownIcon,
+  'chevron-up': ChevronUpIcon,
   dashboard: Dashboard,
   settings: Settings,
   action: Action,

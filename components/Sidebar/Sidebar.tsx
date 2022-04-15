@@ -92,27 +92,27 @@ export const Sidebar = () => {
         `${projectMatchPrefix}/actions/new/[marketingActionName]`,
       ],
     },
-    {
-      label: t('customSegments'),
-      icon: 'custom-segment',
-      children: [
-        {
-          label: t('segmentList'),
-          path: `${projectPrefix}/custom-segments/segment-list`,
-          matches: [`${projectMatchPrefix}/custom-segments/segment-list`],
-        },
-        {
-          label: t('messageList'),
-          path: `${projectPrefix}/custom-segments/message-list`,
-          matches: [`${projectMatchPrefix}/custom-segments/message-list`],
-        },
-        {
-          label: t('messageReport'),
-          path: `${projectPrefix}/custom-segments/message-report`,
-          matches: [`${projectMatchPrefix}/custom-segments/message-report`],
-        },
-      ],
-    },
+    // {
+    //   label: t('customSegments'),
+    //   icon: 'custom-segment',
+    //   children: [
+    //     {
+    //       label: t('segmentList'),
+    //       path: `${projectPrefix}/custom-segments/segment-list`,
+    //       matches: [`${projectMatchPrefix}/custom-segments/segment-list`],
+    //     },
+    //     {
+    //       label: t('messageList'),
+    //       path: `${projectPrefix}/custom-segments/message-list`,
+    //       matches: [`${projectMatchPrefix}/custom-segments/message-list`],
+    //     },
+    //     {
+    //       label: t('messageReport'),
+    //       path: `${projectPrefix}/custom-segments/message-report`,
+    //       matches: [`${projectMatchPrefix}/custom-segments/message-report`],
+    //     },
+    //   ],
+    // },
     {
       path: `${projectPrefix}/settings`,
       label: t('menuSettings'),
