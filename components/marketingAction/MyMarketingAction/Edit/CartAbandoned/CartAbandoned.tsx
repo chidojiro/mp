@@ -84,7 +84,7 @@ export const CartAbandoned = () => {
         TARGET.LOYAL,
         TARGET.F1_DORMANT,
         TARGET.LOYAL_DORMANT,
-        TARGET.OTHER_DORMANT, // will update later once BE is ready
+        TARGET.OTHER_DORMANT,
       ],
     },
   });
@@ -98,9 +98,8 @@ export const CartAbandoned = () => {
 
       step3Methods.reset({ ...settings.step_messages[1] }, { keepDefaultValues: true });
 
-      const _targetSegments = marketingAction.target_segments?.map(target =>
-        TargetFilterUtils.getTargetValue(target)
-      );
+      const _targetSegments = TargetFilterUtils.getTargetFilters(marketingAction.target_segments);
+
       step4Methods.reset({ target_customers: _targetSegments || [] });
     },
     [step1Methods, step2Methods, step3Methods, step4Methods]
@@ -117,9 +116,9 @@ export const CartAbandoned = () => {
   const secondMessage: any = step3Methods.getValues();
 
   const prepareData = (status: MarketingActionStatus) => {
-    const _targetSegments = step4Methods
-      .getValues('target_customers')
-      .map(target => TargetFilterUtils.getTargetFilterObj(target as string));
+    const _targetSegments = TargetFilterUtils.getTargetCustomers(
+      step4Methods.getValues('target_customers')
+    );
 
     const data = {
       start_at: new Date().toISOString(), // TODO will remove once BE is update

@@ -19,10 +19,8 @@ export const Detail = () => {
 
   useEffect(() => {
     const _targets = [query.targets].flat().filter(Boolean);
-    if (_targets.length) {
-      const _targetSegments = _targets.map(target =>
-        TargetFilterUtils.getTargetFilterObj(target as string)
-      );
+    if (_targets.length && _targets[0] !== 'all') {
+      const _targetSegments = TargetFilterUtils.getTargetCustomers(_targets as string[]);
       setFilter(prevState => {
         return { ...prevState, target_segments: JSON.stringify(_targetSegments) };
       });
