@@ -28,9 +28,9 @@
     "axios-retry": "^3.2.4",
     "classnames": "^2.3.1",
     "copy-to-clipboard": "^3.3.1",
-    "draft-js": "^0.11.7",
     "date-fns": "^2.28.0",
     "debug": "^4.3.4",
+    "draft-js": "^0.11.7",
     "emoji-mart": "^3.0.1",
     "history": "^5.2.0",
     "js-cookie": "^3.0.1",
@@ -55,6 +55,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "dependency-cruiser": "^11.5.0",
     "@next/bundle-analyzer": "^12.1.1",
     "@storybook/addon-actions": "^6.4.18",
     "@storybook/addon-essentials": "^6.4.18",
