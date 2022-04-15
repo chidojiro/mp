@@ -5,9 +5,9 @@ import { useWatch } from 'react-hook-form';
 
 import { Form, RadioGroup } from '@/components/common';
 import { Section } from '@/components/Section';
+import { OPTIONS } from '@/types';
 
 import { DeliveryDateTimeInput } from '../../DeliveryDateTimeInput';
-import { OPTIONS } from '../CartAbandoned';
 import { MessageContent } from '../MessageContent';
 
 type Props = {

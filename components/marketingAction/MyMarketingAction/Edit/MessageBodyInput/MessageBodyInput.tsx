@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useTranslation } from 'next-i18next';
 
-import { Form } from '@/components';
+import { Form } from '@/components/common';
 import { Option } from '@/types';
 import { ContentEditableUtils } from '@/utils';
 

@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next';
 
-import { Form } from '@/components';
+import { Form } from '@/components/common';
 import { CHAT_COLORS, MESSAGE_COLORS } from '@/constants';
 import { Option } from '@/types';
 

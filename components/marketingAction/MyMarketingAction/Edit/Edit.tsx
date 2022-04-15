@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 
-import { Layout } from '@/components';
+import { Layout } from '@/components/Layout';
 
 import { CartAbandoned } from './CartAbandoned';
 import { CartFAQ } from './CartFAQ/CartFAQ';

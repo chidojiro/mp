@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 
-import { Icon } from '@/components';
-import { Button } from '@/components/common';
+import { Button, Icon } from '@/components/common';
 import { Step } from '@/constants';
 
 type Props = {

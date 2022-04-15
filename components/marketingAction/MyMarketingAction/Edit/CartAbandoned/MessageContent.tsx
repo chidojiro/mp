@@ -3,10 +3,9 @@ import React, { useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useWatch } from 'react-hook-form';
 
-import { Form, Icon } from '@/components';
-import { RadioGroup } from '@/components/common';
+import { Form, Icon, RadioGroup } from '@/components/common';
 import { useVisibilityControl } from '@/hooks';
-import { Option } from '@/types';
+import { Option, OPTIONS } from '@/types';
 
 import { ColorGroup } from '../ColorSettingsSection/ColorGroup';
 import { LinePreview } from '../LinePreview';
@@ -14,7 +13,6 @@ import { MailPreview } from '../MailPreview';
 import { MessageBodyInput } from '../MessageBodyInput';
 import { MessageContentPreviewType } from '../MessageContentPreview';
 import { PreviewOverlay } from '../PreviewOverlay';
-import { OPTIONS } from './CartAbandoned';
 
 type Props = {
   messageNum?: string;

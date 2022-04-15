@@ -2,7 +2,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import { Form, RadioGroup } from '@/components';
+import { Form, RadioGroup } from '@/components/common';
 
 type Props = {
   preselectedTemplate?: string;

@@ -1,8 +1,7 @@
 import { useTranslation } from 'next-i18next';
 
 import { Form, RadioGroup } from '@/components/common';
-
-import { OPTIONS } from '../CartAbandoned';
+import { OPTIONS } from '@/types';
 
 export const LineSettings = () => {
   const { t } = useTranslation('marketingAction');

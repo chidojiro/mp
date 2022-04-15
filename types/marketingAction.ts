@@ -73,3 +73,8 @@ export type MarketingActionRes = {
   created_at?: string;
   ended_at?: string;
 };
+
+export const OPTIONS = {
+  YES: 'true',
+  NO: 'false',
+};

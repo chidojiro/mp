@@ -1,7 +1,8 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { Layout, NewMarketingAction } from '@/components';
+import { Layout } from '@/components/Layout';
+import { NewMarketingAction } from '@/components/marketingAction';
 
 function MarketingActions() {
   const { t } = useTranslation('marketingAction');

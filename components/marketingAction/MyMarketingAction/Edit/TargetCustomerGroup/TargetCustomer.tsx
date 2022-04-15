@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 
-import { CheckboxGroup } from '@/components';
-import { Icon } from '@/components';
+import { CheckboxGroup, Icon } from '@/components/common';
 import { Option } from '@/types';
 
 type Props = {

@@ -1,8 +1,7 @@
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 
-import { Icon } from '@/components';
-import { Dropdown } from '@/components';
+import { Icon, Dropdown } from '@/components/common';
 import { useVisibilityControl } from '@/hooks';
 import { ClassName, Option } from '@/types';
 

@@ -1,6 +1,6 @@
 export { CheckboxGroup } from './CheckboxGroup';
-export type { Props as CheckboxGroupProps } from './CheckboxGroup';
+export type { Props as CheckboxGroupProps } from './CheckboxGroupContext';
 export type {
-  OptionProps as CheckboxGroupOptionProps,
-  OptionRenderPropState as CheckboxGroupOptionRenderPropState,
+  Props as CheckboxGroupOptionProps,
+  RenderPropState as CheckboxGroupOptionRenderPropState,
 } from './Option';

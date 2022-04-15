@@ -1,13 +1,13 @@
 import { useTranslation } from 'next-i18next';
 
-import { Form, ImageUploader } from '@/components';
+import { Form } from '@/components/common';
+import { ImageUploader } from '@/components/ImageUploader';
 import { Message, MESSAGE_TYPE } from '@/constants';
 
 type Props = {
   message: Message;
   handleChangeType: (id: number, value: MESSAGE_TYPE) => void;
 };
-
 export const LineMessageItem = ({ message, handleChangeType }: Props) => {
   const { t } = useTranslation('marketingAction');
 

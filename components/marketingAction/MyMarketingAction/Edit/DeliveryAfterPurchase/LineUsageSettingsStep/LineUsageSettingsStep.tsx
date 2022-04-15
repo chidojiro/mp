@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { Stepper } from '@/components';
+import { Stepper } from '@/components/Stepper';
 
 import { LineUsageSection } from '../../LineUsageSection';
 import { StepActions } from '../../StepActions';

@@ -3,9 +3,9 @@ import React from 'react';
 import classNames from 'classnames';
 import ReactDOM from 'react-dom';
 
-import { Children } from 'types';
+import { Children } from '@/types';
 
-import { NotificationPlacement } from '.';
+import { Placement as NotificationPlacement } from './types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = Children & {

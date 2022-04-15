@@ -4,7 +4,8 @@ import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { Layout, Tabs } from '@/components';
+import { Layout } from '@/components/Layout';
+import { Tabs } from '@/components/common/Tabs';
 import { MarketingActionStatus as MAStatus } from '@/types';
 
 import { Draft } from './Draft';

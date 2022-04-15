@@ -5,3 +5,4 @@ set -e
 yarn typecheck
 npx lint-staged
 yarn lint
+yarn depcruise --config .dependency-cruiser.js components

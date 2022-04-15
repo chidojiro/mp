@@ -1,3 +1,3 @@
-export { useNotification } from './useNotification';
 export { Notification } from './Notification';
-export type { Placement as NotificationPlacement } from './useNotification';
+export { useNotification } from './useNotification';
+export type { Placement as NotificationPlacement } from './types';

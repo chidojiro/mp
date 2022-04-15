@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next';
 
-import { Section } from '@/components';
+import { Section } from '@/components/Section';
 
 import { ColorGroup } from './ColorGroup';
 

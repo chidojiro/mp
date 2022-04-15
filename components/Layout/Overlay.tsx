@@ -45,7 +45,8 @@ export const Overlay = ({
         'fixed bottom-0 right-0 z-50',
         'flex items-center justify-center'
       )}
-      style={{ width: `calc(100vw - ${sidebarWidth})`, height: `calc(100vh - ${headerHeight})` }}>
+      style={{ width: `calc(100vw - ${sidebarWidth})`, height: `calc(100vh - ${headerHeight})` }}
+    >
       <div onClick={onBackdropClick} className='absolute w-full h-full bg-[#222222]/80'></div>
       <div
         className={classNames(
@@ -53,7 +54,8 @@ export const Overlay = ({
           'text-white text-h5',
           'absolute top-0 left-0',
           'flex items-center justify-between'
-        )}>
+        )}
+      >
         <h5>{title}</h5>
         {!!showCloseButton && (
           <Icon name='close' className='w-4 h-4 cursor-pointer' onClick={handleClose} />

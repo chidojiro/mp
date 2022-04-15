@@ -6,7 +6,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { Icon, Layout, Select, Table } from '@/components';
+import { Select, Table } from '@/components/common';
+import { Layout } from '@/components/Layout';
 
 export const getServerSideProps = async ({ locale = 'ja' }: any) => {
   return {

@@ -1,6 +1,7 @@
 import { useTranslation } from 'next-i18next';
 
-import { Form, RadioGroup, Section } from '@/components';
+import { Form, RadioGroup } from '@/components/common';
+import { Section } from '@/components/Section';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};

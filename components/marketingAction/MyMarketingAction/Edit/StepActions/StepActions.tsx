@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next';
 
-import { Button } from '@/components';
+import { Button } from '@/components/common';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = { onPreviewClick?: () => void; onConfirmClick?: () => void; complete?: boolean };

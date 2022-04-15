@@ -1,7 +1,8 @@
 import { useTranslation } from 'next-i18next';
 import { useWatch } from 'react-hook-form';
 
-import { Form, Icon, RadioGroup, Section } from '@/components';
+import { Form, Icon, RadioGroup } from '@/components/common';
+import { Section } from '@/components/Section';
 
 import { MessageBodyInput } from '../MessageBodyInput';
 import { MessageContentPreview } from '../MessageContentPreview';

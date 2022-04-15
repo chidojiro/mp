@@ -8,7 +8,7 @@ import { TargetFilterUtils } from '@/utils';
 import { MarketingActionAPI } from '@/apis';
 import { MarketingActionStatus as MAStatus, MarketingActionTypeMessage as TYPE } from '@/types';
 import { SideMenu, SideMenuGroup, SideMenuItem } from '@/components/common';
-import { TargetFilter } from '@/components/report';
+import { TargetFilter } from '@/components/TargetFilter';
 
 import { MarketingAction } from './MarketingAction';
 

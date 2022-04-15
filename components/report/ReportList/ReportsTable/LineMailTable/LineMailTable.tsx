@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { Table } from '@/components';
+import { Table } from '@/components/common';
 import { ClassName } from '@/types';
 
 const data = [

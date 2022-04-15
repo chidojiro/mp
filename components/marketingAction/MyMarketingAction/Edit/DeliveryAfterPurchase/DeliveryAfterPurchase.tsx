@@ -3,10 +3,10 @@ import React from 'react';
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
 
-import { Button, DeliveryAfterPurchaseOverview, Form, Stepper } from '@/components';
-import { useVisibilityControl } from '@/hooks';
+import { Button, Form } from '@/components/common';
+import { DeliveryAfterPurchaseOverview } from '@/components/marketingAction/NewMarketingAction';
+import { Stepper } from '@/components/Stepper';
 
-import { LineUsageSection } from '../LineUsageSection';
 import { LineUsageSettingsStep } from './LineUsageSettingsStep';
 import { Message1SettingsStep } from './Message1SettingsStep';
 import { Message2SettingsStep } from './Message2SettingsStep';

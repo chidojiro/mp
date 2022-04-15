@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { BaseEmoji, Picker } from 'emoji-mart';
 import { useTranslation } from 'next-i18next';
 
-import { Icon } from '@/components';
+import { Icon } from '@/components/common/Icon';
 import { Popover } from '@/components/common';
 import { useVisibilityControl } from '@/hooks';
 import { ClassName } from '@/types';

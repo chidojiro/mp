@@ -1,10 +1,12 @@
 import React from 'react';
 
 import { useTranslation } from 'next-i18next';
-import { FormProvider, useForm, useFormContext } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 
-import { Form, RadioGroup, Section, Stepper } from '@/components';
+import { Form, RadioGroup } from '@/components/common';
 import { useVisibilityControl } from '@/hooks';
+import { Section } from '@/components/Section';
+import { Stepper } from '@/components/Stepper';
 
 import { ColorSettingSection } from '../../ColorSettingsSection';
 import { DeliveryDateTimeInput } from '../../DeliveryDateTimeInput';

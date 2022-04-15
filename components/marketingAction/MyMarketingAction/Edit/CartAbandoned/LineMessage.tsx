@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 
-import { Button } from '@/components';
+import { Button } from '@/components/common';
 import { Message, MESSAGE_TYPE } from '@/constants';
 
 import { LineMessageItem } from './LineMessageItem';

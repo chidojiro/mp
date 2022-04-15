@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next';
 
-import { Button } from '@/components';
+import { Button } from '@/components/common';
 
 import { LinePreview } from '../LinePreview';
 import { MailPreview } from '../MailPreview';

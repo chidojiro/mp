@@ -37,7 +37,8 @@ export const Item = ({ isOpenAccordion, data }: Props) => {
               {
                 'bg-gray-light border border-dark-gray ': isActive,
               }
-            )}>
+            )}
+          >
             {label}
           </div>
         )}
@@ -50,7 +51,8 @@ export const Item = ({ isOpenAccordion, data }: Props) => {
         <div
           className={classNames(
             'cursor-pointer rounded-full flex text-medium font-bold text-gray-dark border border-white hover:border-dark-gray items-center px-[18px] py-1.5 hover:bg-gray-light mb-2.5'
-          )}>
+          )}
+        >
           {label}
         </div>
       </Accordion.Title>
@@ -69,7 +71,8 @@ export const Item = ({ isOpenAccordion, data }: Props) => {
                   {
                     'bg-gray-light border border-dark-gray rounded-full': isActive,
                   }
-                )}>
+                )}
+              >
                 {item.label}
               </div>
             )}

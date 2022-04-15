@@ -1,18 +1,14 @@
 import React from 'react';
 
-import { cloneDeep } from 'lodash-es';
+import cloneDeep from 'lodash-es/cloneDeep';
 import ReactDOM from 'react-dom';
 import { v4 as UUID } from 'uuid';
 
-import { useGlobalState } from 'hooks';
-import { AssertUtils } from 'utils';
+import { AssertUtils } from '@/utils';
 
+import { useGlobalState } from '../useGlobalState';
 import { NotificationList } from './NotificationList';
-
-type VerticalAlignment = 'top' | 'bottom';
-type HorizontalAlignment = 'left' | 'right' | 'center';
-
-export type Placement = `${VerticalAlignment}-${HorizontalAlignment}`;
+import { Placement } from './types';
 
 export type Props = {
   closeOnUnmount?: boolean;

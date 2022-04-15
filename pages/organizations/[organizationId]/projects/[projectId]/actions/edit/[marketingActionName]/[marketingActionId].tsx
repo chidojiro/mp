@@ -1,6 +1,6 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { MyMarketingAction } from '@/components';
+import { MyMarketingAction } from '@/components/marketingAction';
 
 function MarketingActionEditPage() {
   return <MyMarketingAction />;

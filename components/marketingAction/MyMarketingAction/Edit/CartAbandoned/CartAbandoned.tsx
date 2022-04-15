@@ -6,8 +6,8 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
 import { MarketingActionAPI } from '@/apis';
-import { Form } from '@/components';
-import { ActionContainer } from '@/components/marketingAction';
+import { Form } from '@/components/common';
+import { ActionContainer } from '@/components/marketingAction/ActionContainer';
 import { useVisibilityControl } from '@/hooks';
 import { MarketingActionRes, MarketingActionStatus, TARGET } from '@/types';
 import { TargetFilterUtils } from '@/utils';
@@ -19,11 +19,6 @@ import { TargetCustomerGroup } from '../TargetCustomerGroup';
 import { LineSettings } from './LineSettings';
 import { Message1Settings } from './Message1Settings';
 import { Message2Settings } from './Message2Settings';
-
-export const OPTIONS = {
-  YES: 'true',
-  NO: 'false',
-};
 
 export const CartAbandoned = () => {
   const { t } = useTranslation('marketingAction');

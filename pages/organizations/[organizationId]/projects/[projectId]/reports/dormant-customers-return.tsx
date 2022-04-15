@@ -1,9 +1,12 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { ConversionRateChart, CustomerReportButton, Icon, Layout } from '@/components';
 import { ServerSidePropsProvider } from '@/contexts';
 import { SSR } from '@/ssr';
+import { CustomerReportButton } from '@/components/dashboard';
+import { Layout } from '@/components/Layout';
+import { Icon } from '@/components/common';
+import { ConversionRateChart } from '@/components/ConversionRateChart';
 
 export const getServerSideProps = SSR.withProps('profile')(async ({ locale }, result) => {
   return {

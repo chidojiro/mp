@@ -4,9 +4,8 @@ import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useForm, useWatch } from 'react-hook-form';
 
-import { Form } from '@/components';
-import { Button, Modal } from '@/components/common';
-import { ActionContainer } from '@/components/marketingAction';
+import { Button, Modal, Form } from '@/components/common';
+import { ActionContainer } from '@/components/marketingAction/ActionContainer';
 import { Step } from '@/constants';
 import { useVisibilityControl } from '@/hooks';
 
