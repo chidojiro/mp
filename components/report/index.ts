@@ -1,3 +1,3 @@
 export * from './ReportList';
 export * from './ReportDetails';
-export * from './TargetFilter';
+export { TargetFilter } from './TargetFilter';

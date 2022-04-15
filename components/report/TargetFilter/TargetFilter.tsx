@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 
 import { Option, TARGET } from '@/types';
-import { CheckboxGroup } from '@/components';
+import { CheckboxGroup } from '@/components/common';
 
 import { CheckboxTag } from './CheckboxTag';
 
@@ -66,8 +66,7 @@ export const TargetFilter = ({}: Props) => {
               ? allTargets
               : (selectedTargets.filter(Boolean) as string[])
           }
-          onChange={handleTargetChange}
-        >
+          onChange={handleTargetChange}>
           {targetOptions.map(({ value, label }) => (
             <CheckboxGroup.Option value={value} key={value}>
               {({ handleChange, isChecked, value }) => (

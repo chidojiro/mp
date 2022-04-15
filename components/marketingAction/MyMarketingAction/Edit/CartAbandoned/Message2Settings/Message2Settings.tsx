@@ -3,7 +3,8 @@ import React from 'react';
 import { useTranslation } from 'next-i18next';
 import { useWatch } from 'react-hook-form';
 
-import { Form, RadioGroup, Section } from '@/components';
+import { Form, RadioGroup } from '@/components/common';
+import { Section } from '@/components/Section';
 
 import { DeliveryDateTimeInput } from '../../DeliveryDateTimeInput';
 import { OPTIONS } from '../CartAbandoned';

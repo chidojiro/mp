@@ -16,6 +16,7 @@
     "@typescript-eslint/no-non-null-assertion": 0,
     "@next/next/no-img-element": 0,
     "no-nested-ternary": 2,
+    "import/no-cycle": "error",
     "import/order": [
       "error",
       {

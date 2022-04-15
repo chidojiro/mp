@@ -4,7 +4,7 @@ import { ChevronRightIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 
-import { Layout } from '@/components';
+import { Layout } from '@/components/Layout';
 
 import { TargetFilter } from '../TargetFilter';
 import { ReportTable } from './ReportTable';
@@ -28,8 +28,7 @@ export const ReportDetails = ({}: Props) => {
       <ReportTable className='mt-10' />
       <Link
         passHref
-        href='/organizations/1/projects/1/reports/action-reports/line-email?targets=all'
-      >
+        href='/organizations/1/projects/1/reports/action-reports/line-email?targets=all'>
         <a className='flex justify-end mt-5'>
           <div className='flex items-center text-gray-600 transform translate-x-2'>
             {t('returnToList')}

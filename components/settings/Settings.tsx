@@ -1,7 +1,8 @@
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
 
-import { Button, Form } from '../common';
+import { Button } from '../common/Button';
+import { Form } from '../common/Form';
 import { AdvancedSettings } from './AdvancedSettings';
 import { BasicInformation } from './BasicInformation';
 import { EmailSettings } from './EmailSettings';
@@ -22,7 +23,7 @@ export const Settings = ({}: Props) => {
         <BasicInformation />
         <UrlSettings />
         <SnsSettings />
-        <EmailSettings />
+        {/* <EmailSettings /> */}
         <AdvancedSettings />
       </div>
       <Button className='!block mx-auto w-[480px] mt-[60px]'>{t('save')}</Button>

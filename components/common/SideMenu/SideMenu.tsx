@@ -4,20 +4,12 @@ import { Tabs as HeadlessTabs, TabsProps as HeadlessTabsProps } from '@/headless
 import { ClassName } from '@/types';
 
 import { Icon, IconName } from '../Icon';
-import { SideMenuItem } from './SideMenuItem';
-
-export type Item = {
-  value: string;
-  label?: React.ReactNode;
-  content?: React.ReactNode;
-  children?: Item[];
-  onClick?: () => void;
-};
+import { Item, SideMenuItem } from './Item';
 
 export type GroupItem = {
   icon: IconName;
   label: string;
-  items: Item[];
+  items: SideMenuItem[];
 };
 
 export type Props = HeadlessTabsProps &
@@ -26,7 +18,7 @@ export type Props = HeadlessTabsProps &
   };
 
 export const SideMenu = ({ value, className, onChange, groups }: Props) => {
-  const isOpenAccordion = (item: Item, val: any) => {
+  const isOpenAccordion = (item: SideMenuItem, val: any) => {
     const _values = item.children?.map(_item => _item.value) || [];
     return _values.includes(val);
   };
@@ -47,8 +39,8 @@ export const SideMenu = ({ value, className, onChange, groups }: Props) => {
                       </span>
                     </div>
                     <div className='mt-2.5 mb-3'>
-                      {group.items.map((item: Item, idx: number) => (
-                        <SideMenuItem
+                      {group.items.map((item: SideMenuItem, idx: number) => (
+                        <Item
                           data={item}
                           key={item.value ?? idx}
                           isOpenAccordion={isOpenAccordion(item, value)}

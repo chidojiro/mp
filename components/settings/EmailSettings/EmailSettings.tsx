@@ -2,7 +2,6 @@ import React from 'react';
 
 import { useTranslation } from 'next-i18next';
 
-import { ImageUploader } from '@/components';
 import { ContentEditableUtils } from '@/utils';
 
 import { Form } from '../../common';
