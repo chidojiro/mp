@@ -12,9 +12,15 @@ type Props = {
   disable: boolean;
   marketingActionName: string;
   onSaveMarketingAction: (status: MarketingActionStatus) => void;
+  onCloseModal: () => void;
 };
 
-const SavingActions = ({ disable, marketingActionName, onSaveMarketingAction }: Props) => {
+const SavingActions = ({
+  disable,
+  marketingActionName,
+  onSaveMarketingAction,
+  onCloseModal,
+}: Props) => {
   const { t } = useTranslation('marketingAction');
   const modalControl = useVisibilityControl();
   const {
@@ -60,6 +66,10 @@ const SavingActions = ({ disable, marketingActionName, onSaveMarketingAction }: 
     isCompleted ? 'running' : 'draft'
   }/${marketingActionId}?target=all`;
 
+  const handleCloseModal = () => {
+    (isCompleted || isSaveAsDraft) && onCloseModal();
+  };
+
   return (
     <>
       <div className='flex justify-center mt-10'>
@@ -92,7 +102,7 @@ const SavingActions = ({ disable, marketingActionName, onSaveMarketingAction }: 
         )}
       </div>
 
-      <Modal control={modalControl}>
+      <Modal control={modalControl} onClose={handleCloseModal}>
         <div className='text-center text-gray-dark'>
           <Modal.Body className='leading-loose whitespace-pre-line'>{modalDesc()}</Modal.Body>
           <Modal.Footer className='text-medium'>

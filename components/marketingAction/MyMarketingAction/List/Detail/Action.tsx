@@ -30,7 +30,7 @@ export const Action = ({ name, path, icon, targetCustomers, date }: Props) => {
       : 'reports/action-reports/line-email/1?targets=all';
 
   const btn = marketingActionStatus === MAStatus.DRAFT ? t('editInEditor') : t('viewReport');
-
+  const targetFilters = TargetFilterUtils.getTargetFilters(targetCustomers);
   return (
     <div className='p-10'>
       <div className='flex items-center'>
@@ -42,8 +42,8 @@ export const Action = ({ name, path, icon, targetCustomers, date }: Props) => {
           <div className='flex mt-4'>
             <span className='mr-2 font-bold text-secondary'>{t('targetCustomer')}</span>
             <div className='flex flex-wrap gap-1'>
-              {targetCustomers.map((target, index) => (
-                <Tag key={index}>{tCommon(TargetFilterUtils.getTargetValue(target))}</Tag>
+              {targetFilters.map((target, index) => (
+                <Tag key={index}>{tCommon(target)}</Tag>
               ))}
             </div>
           </div>

@@ -19,8 +19,8 @@ export const Message1Settings = ({ useLine = true }: Props) => {
       <Section.Title>{t('timeDelivery')}</Section.Title>
       <DeliveryDateTimeInput
         headingLabel={t('fromTheDateCartAbandoned')}
-        inputDateName='delivery_date'
-        inputTimeName='delivery_time'
+        inputDateName='send_after_days'
+        inputTimeName='send_at'
       />
       <MessageContent useLine={useLine} />
     </>

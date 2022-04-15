@@ -34,11 +34,7 @@ export const MarketingAction = ({ marketingAction, mutateMarketingActions }: Pro
   };
 
   const targetSettings = () => {
-    return (
-      marketingAction.target_segments
-        ?.map(target => tCommon(TargetFilterUtils.getTargetValue(target)))
-        .join(', ') || ''
-    );
+    return TargetFilterUtils.getTargetFilters(marketingAction.target_segments).join(', ') || '';
   };
 
   const handleSuspendMA = () => {

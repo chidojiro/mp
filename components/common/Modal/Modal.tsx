@@ -10,6 +10,7 @@ import { Button, ButtonProps } from '..';
 type Props = ClassName &
   Children & {
     control: VisibilityControl;
+    onClose?: () => void;
   };
 
 const Header = ({ children, className }: ClassName & Children) => {
@@ -37,9 +38,14 @@ const FooterButton = (props: ButtonProps) => (
 );
 
 // eslint-disable-next-line no-empty-pattern
-export const Modal = ({ control, className, children }: Props) => {
+export const Modal = ({ control, className, children, onClose }: Props) => {
+  const handleClose = () => {
+    control.close();
+    onClose?.();
+  };
+
   return (
-    <Overlay control={control} showCloseButton={false} onBackdropClick={control.close}>
+    <Overlay control={control} showCloseButton={false} onBackdropClick={handleClose}>
       <div className={classNames('mp-modal', 'p-10 rounded-md bg-white w-[800px]', className)}>
         {children}
       </div>

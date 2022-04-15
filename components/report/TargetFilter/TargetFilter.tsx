@@ -27,6 +27,7 @@ export const TargetFilter = ({}: Props) => {
       { label: t('loyal'), value: TARGET.LOYAL },
       { label: t('f1dormant'), value: TARGET.F1_DORMANT },
       { label: t('loyalDormant'), value: TARGET.LOYAL_DORMANT },
+      { label: t('otherDormant'), value: TARGET.OTHER_DORMANT },
     ],
     [t]
   );
