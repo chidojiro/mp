@@ -23,7 +23,7 @@ export const Settings = ({}: Props) => {
         <BasicInformation />
         <UrlSettings />
         <SnsSettings />
-        {/* <EmailSettings /> */}
+        <EmailSettings />
         <AdvancedSettings />
       </div>
       <Button className='!block mx-auto w-[480px] mt-[60px]'>{t('save')}</Button>
