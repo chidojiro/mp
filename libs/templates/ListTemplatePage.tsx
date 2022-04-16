@@ -2,11 +2,9 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 
 import { SideMenu, SideMenuGroup } from '@/components/common/SideMenu';
+import { ActionContainer } from '@/components/ActionContainer';
 
-import { ActionContainer } from '../ActionContainer';
-import { DeliveryAfterPurchaseOverview } from './DeliveryAfterPurchaseOverview';
-
-export const NewMarketingAction = () => {
+export const ListTemplatePage = () => {
   const { query, pathname } = useRouter();
   const { t } = useTranslation('marketingAction');
 
@@ -42,7 +40,15 @@ export const NewMarketingAction = () => {
           value: 'cart-abandoned',
         },
         {
-          content: <DeliveryAfterPurchaseOverview />,
+          content: (
+            <ActionContainer
+              iconName='mails'
+              title={t('stepDeliveryAfterPurchase')}
+              description={t('stepDeliveryAfterPurchaseDescription')}
+              descriptionImageUrl='/images/step-delivery-after-purchase-description.png'
+              flowImgUrl='/images/step-delivery-after-purchase-flow.png'
+            ></ActionContainer>
+          ),
           label: t('stepDeliveryAfterPurchase'),
           onClick: () => handleMAChange('step-delivery-after-purchase'),
           value: 'step-delivery-after-purchase',

@@ -7,7 +7,7 @@ import useSWR from 'swr';
 
 import { MarketingActionAPI } from '@/apis';
 import { Form } from '@/components/common';
-import { ActionContainer } from '@/components/marketingAction/ActionContainer';
+import { ActionContainer } from '@/components/ActionContainer';
 import { useVisibilityControl } from '@/hooks';
 import { MarketingActionRes, MarketingActionStatus, TARGET } from '@/types';
 import { TargetFilterUtils } from '@/utils';

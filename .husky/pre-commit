@@ -2,7 +2,7 @@
 . "$(dirname "$0")/_/husky.sh"
 
 set -e
-yarn typecheck
-npx lint-staged
-yarn lint
-yarn depcruise --config .dependency-cruiser.js components
+npm run typecheck
+node_modules/.bin/lint-staged
+npm run lint
+npx depcruise --config .dependency-cruiser.js components

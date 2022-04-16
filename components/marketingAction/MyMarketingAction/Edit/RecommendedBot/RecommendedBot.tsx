@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useForm, useWatch } from 'react-hook-form';
 
 import { Button, Modal, Form } from '@/components/common';
-import { ActionContainer } from '@/components/marketingAction/ActionContainer';
+import { ActionContainer } from '@/components/ActionContainer';
 import { Step } from '@/constants';
 import { useVisibilityControl } from '@/hooks';
 

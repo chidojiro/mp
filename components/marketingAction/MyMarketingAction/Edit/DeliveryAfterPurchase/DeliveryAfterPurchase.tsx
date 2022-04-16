@@ -4,8 +4,8 @@ import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
 
 import { Button, Form } from '@/components/common';
-import { DeliveryAfterPurchaseOverview } from '@/components/marketingAction/NewMarketingAction';
 import { Stepper } from '@/components/Stepper';
+import { ActionContainer } from '@/components/ActionContainer';
 
 import { LineUsageSettingsStep } from './LineUsageSettingsStep';
 import { Message1SettingsStep } from './Message1SettingsStep';
@@ -23,7 +23,14 @@ export const DeliveryAfterPurchase = ({}: Props) => {
 
   return (
     <Form methods={methods}>
-      <DeliveryAfterPurchaseOverview showUseTemplateBtn={false} />
+      <ActionContainer
+        showUseTemplateBtn={false}
+        iconName='mails'
+        title={t('stepDeliveryAfterPurchase')}
+        description={t('stepDeliveryAfterPurchaseDescription')}
+        descriptionImageUrl='/images/step-delivery-after-purchase-description.png'
+        flowImgUrl='/images/step-delivery-after-purchase-flow.png'
+      ></ActionContainer>
       <Stepper className='mt-16'>
         <LineUsageSettingsStep />
         <Message1SettingsStep />
