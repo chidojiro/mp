@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 
 import { Select, Table } from '@/components/common';
 import { Layout } from '@/components/Layout';
+import { useProfile } from '@/hooks';
 
 export const getServerSideProps = async ({ locale = 'ja' }: any) => {
   return {
@@ -64,8 +65,7 @@ type Props = {};
 // eslint-disable-next-line no-empty-pattern
 export const MessageReportDetails = ({}: Props) => {
   const { t } = useTranslation('customSegment');
-  const { asPath } = useRouter();
-
+  const profile = useProfile();
   return (
     <Layout title={t('segmentMessageReport')} subTitle={t('list')}>
       <div className='space-y-5'>
@@ -149,7 +149,10 @@ export const MessageReportDetails = ({}: Props) => {
           </Table.Row>
         </Table.Body>
       </Table>
-      <Link passHref href='/organizations/1/projects/1/custom-segments/message-report'>
+      <Link
+        passHref
+        href={`/organizations/${profile.data?.organization_id}/projects/${profile.data?.project_id}/custom-segments/message-report`}
+      >
         <a className='flex justify-end mt-5'>
           <div className='flex items-center text-gray-600 transform translate-x-2'>
             {t('returnToList')}

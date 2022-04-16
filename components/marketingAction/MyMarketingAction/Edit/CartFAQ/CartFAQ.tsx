@@ -7,7 +7,7 @@ import { useForm, useWatch } from 'react-hook-form';
 import { Button, Modal, Form } from '@/components/common';
 import { ActionContainer } from '@/components/ActionContainer';
 import { Step } from '@/constants';
-import { useVisibilityControl } from '@/hooks';
+import { useProfile, useVisibilityControl } from '@/hooks';
 
 import { ChatOverlay } from '../ChatOverlay';
 import { Steps } from '../Steps';
@@ -137,9 +137,11 @@ export const CartFAQ = () => {
   const onShowPreview = (stepId: number) => {
     chatPreviewControl.open();
   };
-
+  const profile = useProfile();
   const isGotoMABtn = isCompleted || isSaveAsDraft;
-  const gotoMyMAUrl = `/organizations/1/projects/1/actions/${isCompleted ? 'active' : 'draft'}`;
+  const gotoMyMAUrl = `/organizations/${profile.data?.organization_id}/projects/${
+    profile.data?.project_id
+  }/actions/${isCompleted ? 'active' : 'draft'}`;
   const unSavedSteps = steps.filter(step => !step.isDone).length;
 
   return (

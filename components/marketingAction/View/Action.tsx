@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { Button, IconName, Icon, Tag } from '@/components/common';
 import { MarketingActionStatus as MAStatus, TargetSegment } from '@/types';
 import { TargetFilterUtils } from '@/utils';
+import { useProfile } from '@/hooks';
 
 type Props = {
   path: string;
@@ -21,8 +22,8 @@ export const Action = ({ name, path, icon, targetCustomers, date }: Props) => {
   const {
     query: { marketingActionStatus, marketingActionId },
   } = useRouter();
-
-  const prefixUrl = '/organizations/1/projects/1/';
+  const profile = useProfile();
+  const prefixUrl = `/organizations/${profile.data?.organization_id}/projects/${profile.data?.project_id}/`;
   const url =
     marketingActionStatus === MAStatus.DRAFT
       ? `actions/edit/${path}/${marketingActionId}`

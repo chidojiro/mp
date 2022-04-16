@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { Button, Modal } from '@/components/common';
-import { useVisibilityControl } from '@/hooks';
+import { useProfile, useVisibilityControl } from '@/hooks';
 import { MarketingActionStatus } from '@/types';
 
 type Props = {
@@ -60,11 +60,11 @@ const SavingActions = ({
     }
     return t(desc, { template: marketingActionName });
   };
-
+  const profile = useProfile();
   const isGotoMABtn = isCompleted || isSaveAsDraft;
-  const gotoMyMAUrl = `/organizations/1/projects/1/actions/${
-    isCompleted ? 'running' : 'draft'
-  }/${marketingActionId}?target=all`;
+  const gotoMyMAUrl = `/organizations/${profile.data?.organization_id}/projects/${
+    profile.data?.project_id
+  }/actions/${isCompleted ? 'running' : 'draft'}/${marketingActionId}?target=all`;
 
   const handleCloseModal = () => {
     (isCompleted || isSaveAsDraft) && onCloseModal();
