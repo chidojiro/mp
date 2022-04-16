@@ -1,1 +1,0 @@
-export { MyMarketingAction } from './MyMarketingAction';

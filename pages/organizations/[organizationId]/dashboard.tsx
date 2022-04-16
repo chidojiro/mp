@@ -3,11 +3,12 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { Icon } from '@/components/common/Icon';
 import { Layout } from '@/components/Layout';
-import { RfmSegmentTable, CustomerReportButton } from '@/components/dashboard';
+import { RfmSegmentTable } from '@/components/dashboard';
 import { CSVButton } from '@/components/common/Button';
 import { SSR } from '@/ssr';
 import { useReportData } from '@/hooks/api/useReportData';
 import { RfmReportDataItem } from '@/types/report';
+import { CustomerReportButton } from '@/components/CustomerReportButton';
 
 export const getServerSideProps = SSR.withProps('rfmReport')(async ({ locale = 'ja' }, result) => {
   return {

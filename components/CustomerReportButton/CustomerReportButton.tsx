@@ -2,10 +2,24 @@ import React from 'react';
 
 import { ChevronRightIcon } from '@heroicons/react/solid';
 
-import { CustomerReportButtonProps } from './dashboard.types';
-
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type Props = CustomerReportButtonProps;
+export type CustomerReportButtonProps = {
+  /**
+   * Primary button text
+   */
+  label?: string;
+  /**
+   * Subtext to be featured next to label text
+   */
+  subtext?: string;
+  /**
+   * Text to appear next to the click icon.
+   */
+  clickActionText?: string;
+  /**
+   * Main icon.
+   */
+  featuredIcon?: React.ReactNode;
+};
 
 export const CustomerReportButton = ({
   label,

@@ -1,9 +1,9 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { MyMarketingAction } from '@/components/marketingAction';
+import { Edit } from '@/components/marketingAction/Edit';
 
 function MarketingActionEditPage() {
-  return <MyMarketingAction />;
+  return <Edit />;
 }
 
 export const getServerSideProps = async ({ locale }: any) => ({

@@ -4,7 +4,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { ServerSidePropsProvider } from '@/contexts';
 import { SSR } from '@/ssr';
 import { Layout } from '@/components/Layout';
-import { CustomerReportButton } from '@/components/dashboard';
+import { CustomerReportButton } from '@/components/CustomerReportButton';
 import { Icon } from '@/components/common';
 import { ConversionRateChart } from '@/components/ConversionRateChart';
 
