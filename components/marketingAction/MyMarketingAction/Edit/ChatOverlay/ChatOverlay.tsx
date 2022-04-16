@@ -6,8 +6,7 @@ import { SwitchButtons } from '@/components/common';
 import { Overlay } from '@/components/Layout';
 import { VisibilityControl } from '@/hooks';
 import { Device } from '@/types';
-
-import { ChatPreview } from './ChatPreview';
+import { ChatPreview } from '@/components/marketingAction/ChatPreview';
 
 type Props = {
   color: string;

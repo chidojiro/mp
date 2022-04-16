@@ -1,17 +1,16 @@
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 
-import { useAuth } from '@/hooks/useAuth';
+import { useProfile } from '@/hooks/api/useProfile';
 
 import { NavItem } from './NavItem';
 import { NavItemData } from './NavItem.types';
 
 export const Sidebar = () => {
   const { t } = useTranslation();
-  const auth = useAuth();
-  // TODO: still got issue with serverside rendering
-  const organizationPrefix = `/organizations/${auth.organizationId}`;
-  const projectPrefix = `${organizationPrefix}/projects/${auth.projectId}`;
+  const profile = useProfile();
+  const organizationPrefix = `/organizations/${profile.data?.organization_id}`;
+  const projectPrefix = `${organizationPrefix}/projects/${profile.data?.project_id}`;
 
   const organizationMatchPrefix = '/organizations/[organizationId]';
   const projectMatchPrefix = `${organizationPrefix}/projects/[projectId]`;
@@ -73,7 +72,7 @@ export const Sidebar = () => {
       ],
     },
     {
-      path: `${projectPrefix}/actions/running/1?targets=all`,
+      path: `${projectPrefix}/actions/running/?targets=all`,
       label: t('menuMyMarketingAction'),
       icon: 'emoji',
       matches: [

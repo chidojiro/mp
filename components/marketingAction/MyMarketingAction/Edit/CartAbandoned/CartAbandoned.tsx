@@ -11,8 +11,8 @@ import { ActionContainer } from '@/components/ActionContainer';
 import { useVisibilityControl } from '@/hooks';
 import { MarketingActionRes, MarketingActionStatus, TARGET } from '@/types';
 import { TargetFilterUtils } from '@/utils';
+import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
 
-import { PreviewOverlay } from '../PreviewOverlay';
 import { Steppers } from '../Steppers';
 import SavingActions from '../Steppers/SavingActions';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';

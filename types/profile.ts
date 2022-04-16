@@ -4,6 +4,8 @@ export type Profile = {
   email: string;
   created_at: string;
   updated_at: string;
+  organization_id: string;
+  project_id: string;
 };
 
 export type ChangePasswordPayload = {

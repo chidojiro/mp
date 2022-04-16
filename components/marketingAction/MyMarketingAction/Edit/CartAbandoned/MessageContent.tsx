@@ -6,13 +6,13 @@ import { useWatch } from 'react-hook-form';
 import { Form, Icon, RadioGroup } from '@/components/common';
 import { useVisibilityControl } from '@/hooks';
 import { Option, OPTIONS } from '@/types';
+import { LinePreview } from '@/components/marketingAction/LinePreview';
+import { MailPreview } from '@/components/marketingAction/MailPreview';
+import { MessageContentPreviewType } from '@/components/marketingAction/MessageContentPreview';
+import { ColorGroup } from '@/components/marketingAction/ColorGroup';
+import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
 
-import { ColorGroup } from '../ColorSettingsSection/ColorGroup';
-import { LinePreview } from '../LinePreview';
-import { MailPreview } from '../MailPreview';
 import { MessageBodyInput } from '../MessageBodyInput';
-import { MessageContentPreviewType } from '../MessageContentPreview';
-import { PreviewOverlay } from '../PreviewOverlay';
 
 type Props = {
   messageNum?: string;

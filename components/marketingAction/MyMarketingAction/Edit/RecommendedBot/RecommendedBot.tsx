@@ -12,9 +12,8 @@ import { useVisibilityControl } from '@/hooks';
 import { ChatOverlay } from '../ChatOverlay';
 import { Steps } from '../Steps';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';
-// import { ChatOverlay } from './ChatOverlay';
 import { Step1Settings } from './Step1Settings';
-import { Step2Settings } from './Step2Settings';
+import { ChatWindowSettings } from '../ChatWindowSettings';
 
 export const RecommendedBot = () => {
   const { t } = useTranslation('marketingAction');
@@ -100,7 +99,7 @@ export const RecommendedBot = () => {
     {
       id: 2,
       name: t('chatWindowSettings'),
-      children: <Step2Settings />,
+      children: <ChatWindowSettings />,
       showPreviewBtn: true,
     },
     {

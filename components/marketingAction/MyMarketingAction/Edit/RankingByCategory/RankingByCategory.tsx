@@ -14,7 +14,7 @@ import { Steps } from '../Steps';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';
 import { Step1Settings } from './Step1Settings';
 import { Step2Settings } from './Step2Settings';
-import { Step3Settings } from './Step3Settings';
+import { ChatWindowSettings } from '../ChatWindowSettings';
 
 export const RankingByCategory = () => {
   const { t } = useTranslation('marketingAction');
@@ -112,7 +112,7 @@ export const RankingByCategory = () => {
     {
       id: 3,
       name: t('chatWindowSettings'),
-      children: <Step3Settings />,
+      children: <ChatWindowSettings />,
       showPreviewBtn: true,
     },
     {

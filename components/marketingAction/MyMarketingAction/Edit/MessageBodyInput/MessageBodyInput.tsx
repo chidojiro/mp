@@ -1,14 +1,15 @@
 import React from 'react';
 
 import { useTranslation } from 'next-i18next';
+import dynamic from 'next/dynamic';
 
 import { Form } from '@/components/common';
 import { Option } from '@/types';
 import { ContentEditableUtils } from '@/utils';
 
-import { EmojiSign } from '../EmojiSign';
 import { VariableSign } from '../VariableSign';
 
+const EmojiSign = dynamic<any>(() => import('../EmojiSign').then(module => module.EmojiSign));
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = { name: string; showEmoji?: boolean };
 

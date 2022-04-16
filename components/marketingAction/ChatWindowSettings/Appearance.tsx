@@ -3,16 +3,13 @@ import React from 'react';
 import { useTranslation } from 'next-i18next';
 import { useWatch } from 'react-hook-form';
 
-import { ChatPreview } from '@/components/marketingAction/ChatPreview';
-import { ColorGroup } from '@/components/marketingAction/ColorGroup';
-
+import { ColorGroup } from '../ColorGroup';
 import { ChatVisualImage } from './ChatVisualImage';
+import { ChatPreview } from '../ChatPreview';
 
 export const Appearance = () => {
   const { t } = useTranslation('marketingAction');
   const color = useWatch({ name: 'chat_settings.color' });
-  const textColor = color === '#FFFFFF' ? 'text-gray-dark' : 'text-white';
-
   return (
     <div className='px-10 py-5 -mx-10 border-b-4 border-white'>
       <div className='mb-2 font-bold text-gray-dark'>{t('appearance')}</div>

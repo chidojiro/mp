@@ -3,9 +3,9 @@ import { useWatch } from 'react-hook-form';
 
 import { Form, Icon, RadioGroup } from '@/components/common';
 import { Section } from '@/components/Section';
+import { MessageContentPreview } from '@/components/marketingAction/MessageContentPreview';
 
 import { MessageBodyInput } from '../MessageBodyInput';
-import { MessageContentPreview } from '../MessageContentPreview';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {
