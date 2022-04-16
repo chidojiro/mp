@@ -78,3 +78,29 @@ export const OPTIONS = {
   YES: 'true',
   NO: 'false',
 };
+
+export type Period = 'weekly' | 'monthly';
+
+export type MailContent = {
+  title: string;
+  content: string;
+};
+export type LineMessage = {
+  content: string;
+};
+export type StepMessage = {
+  send_flag: boolean;
+  report_period: Period;
+  template: string;
+  send_at: string;
+  send_after_days: number;
+  mail_content: MailContent;
+  line_messages?: LineMessage;
+  color: string;
+};
+export interface BaseSetting {
+  enable_line: boolean;
+}
+export interface StepDeliverySetting extends BaseSetting {
+  step_messages: StepMessage[];
+}

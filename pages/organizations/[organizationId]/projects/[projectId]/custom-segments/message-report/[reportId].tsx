@@ -4,7 +4,6 @@ import { ChevronRightIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 import { Select, Table } from '@/components/common';
 import { Layout } from '@/components/Layout';

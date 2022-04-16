@@ -49,6 +49,7 @@ specifiers:
   eslint-config-next: 12.0.10
   eslint-config-prettier: ^8.3.0
   eslint-plugin-prettier: ^4.0.0
+  eslint-plugin-unused-imports: ^2.0.0
   history: ^5.2.0
   husky: ^7.0.0
   jest: ^27.5.0
@@ -150,6 +151,7 @@ devDependencies:
   eslint-config-next: 12.0.10_a833109067da92148152ff2f5707ab26
   eslint-config-prettier: 8.5.0_eslint@8.8.0
   eslint-plugin-prettier: 4.0.0_21327ab770ec7f9ca88f726d00a5b14a
+  eslint-plugin-unused-imports: 2.0.0_bf7013c94b1348e22a3de67a10c6fca2
   husky: 7.0.4
   jest: 27.5.1
   lint-staged: 12.3.8
@@ -7756,6 +7758,26 @@ packages:
       resolve: 2.0.0-next.3
       semver: 6.3.0
       string.prototype.matchall: 4.0.7
+    dev: true
+
+  /eslint-plugin-unused-imports/2.0.0_bf7013c94b1348e22a3de67a10c6fca2:
+    resolution: {integrity: sha512-3APeS/tQlTrFa167ThtP0Zm0vctjr4M44HMpeg1P4bK6wItarumq0Ma82xorMKdFsWpphQBlRPzw/pxiVELX1A==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    peerDependencies:
+      '@typescript-eslint/eslint-plugin': ^5.0.0
+      eslint: ^8.0.0
+    peerDependenciesMeta:
+      '@typescript-eslint/eslint-plugin':
+        optional: true
+    dependencies:
+      '@typescript-eslint/eslint-plugin': 5.19.0_eslint@8.8.0+typescript@4.5.5
+      eslint: 8.8.0
+      eslint-rule-composer: 0.3.0
+    dev: true
+
+  /eslint-rule-composer/0.3.0:
+    resolution: {integrity: sha512-bt+Sh8CtDmn2OajxvNO+BX7Wn4CIWMpTRm3MaiKPCQcnnlm0CS2mhui6QaoeQugs+3Kj2ESKEEGJUdVafwhiCg==}
+    engines: {node: '>=4.0.0'}
     dev: true
 
   /eslint-scope/4.0.3:

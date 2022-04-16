@@ -1,11 +1,12 @@
 import { useTranslation } from 'next-i18next';
 
 import { TimeUtils } from '@/utils';
+import { StepMessage } from '@/types';
 
 import { Answer } from './Answer';
 
 type Props = {
-  message: any;
+  message: StepMessage;
   fromTheDateText: string;
 };
 

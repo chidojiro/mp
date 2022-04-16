@@ -1,9 +1,11 @@
 import { useTranslation } from 'next-i18next';
 
+import { StepDeliverySetting, StepMessage } from '@/types';
+
 import { Answer, Message, StepBlock, TimeDelivery } from '../StepBlock';
 
 type Props = {
-  settings: any;
+  settings: StepDeliverySetting;
 };
 
 export const StepDeliveryAfterPurchase = ({ settings }: Props) => {
@@ -14,7 +16,7 @@ export const StepDeliveryAfterPurchase = ({ settings }: Props) => {
   const firstMsg = messages[0];
   const secondMsg = settings.step_messages[1];
 
-  const getTemplateSelection = (message: any) => {
+  const getTemplateSelection = (message: StepMessage) => {
     return message.template === 'review' ? t('reviewPromotion') : t('rankingAppeal');
   };
 

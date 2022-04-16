@@ -3,13 +3,14 @@ import { useTranslation } from 'next-i18next';
 import { Button } from '@/components/common';
 import { useVisibilityControl } from '@/hooks';
 import { ColorUtils } from '@/utils';
+import { StepMessage } from '@/types';
 import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
 
 import { Answer } from './Answer';
 import { Color } from './Color';
 
 type Props = {
-  message: any;
+  message: StepMessage;
   enableLine?: boolean;
 };
 
@@ -35,7 +36,7 @@ export const Message = ({ message, enableLine = true }: Props) => {
           <div>[{t('textMessage')}]</div>
           <div className='mt-2'>{message.line_messages ? t('displayMsg') : t('noDisplay')}</div>
           <div
-            dangerouslySetInnerHTML={{ __html: message.line_messages?.content }}
+            dangerouslySetInnerHTML={{ __html: message.line_messages!.content! }}
             className='mt-2'
           ></div>
         </Answer>
@@ -53,7 +54,7 @@ export const Message = ({ message, enableLine = true }: Props) => {
         defaultType='mail'
         mailHeadline={message.mail_content.title}
         mailBody={message.mail_content.content}
-        lineBody={message.line_messages?.content}
+        lineBody={enableLine ? message.line_messages!.content! : ''}
         control={previewMessageControl}
       />
     </>
