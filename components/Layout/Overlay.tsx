@@ -2,7 +2,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import { Icon } from '@/components';
+import { Icon } from '@/components/common/Icon';
 import { useScrollDisable, VisibilityControl } from '@/hooks';
 import { Children } from '@/types';
 

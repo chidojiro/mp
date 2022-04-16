@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Children } from 'types';
+import { Children } from '@/types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = Children & {};

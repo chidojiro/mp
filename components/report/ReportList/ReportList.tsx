@@ -3,10 +3,11 @@ import React from 'react';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 
-import { Layout, RadioGroup } from '@/components';
+import { Layout } from '@/components/Layout';
+import { RadioGroup } from '@/components/common';
 import { Option } from '@/types';
+import { TargetFilter } from '@/components/TargetFilter';
 
-import { TargetFilter } from '../TargetFilter';
 import { RadioTag } from './RadioTag';
 import { ReportsTable } from './ReportsTable';
 

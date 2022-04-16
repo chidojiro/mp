@@ -1,1 +1,0 @@
-export { DeliveryAfterPurchaseOverview } from './DeliveryAfterPurchaseOverview';

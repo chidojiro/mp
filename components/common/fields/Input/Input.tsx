@@ -3,30 +3,9 @@ import React from 'react';
 import classNames from 'classnames';
 
 import { useStateToggle, useControllable } from '@/hooks';
-import { HTMLInputProps } from '@/types';
 
 import { NumberInput } from './Number';
-
-type BaseInputProps = Omit<HTMLInputProps, 'ref' | 'type'> & {
-  ref?: React.Ref<HTMLInputElement>;
-};
-
-type InputType = 'email' | 'file' | 'hidden' | 'number' | 'password' | 'tel' | 'text' | 'time';
-
-export type Props = BaseInputProps & {
-  label?: string;
-  error?: boolean;
-  addonBefore?: React.ReactNode;
-  addonAfter?: React.ReactNode;
-  innerLeft?: React.ReactNode;
-  innerRight?: React.ReactNode;
-  type?: InputType;
-  trimOnBlur?: boolean;
-  allowNegative?: boolean;
-  onEnterPress?: () => void;
-  pattern?: string;
-  pad?: number;
-};
+import { InputProps } from './types';
 
 export const Input = React.forwardRef(
   (
@@ -47,7 +26,7 @@ export const Input = React.forwardRef(
       onEnterPress,
       onKeyDown,
       ...props
-    }: Props,
+    }: InputProps,
     ref: React.Ref<HTMLInputElement>
   ) => {
     const [value, setValue] = useControllable({ value: valueProp, onChange: onChangeProp });

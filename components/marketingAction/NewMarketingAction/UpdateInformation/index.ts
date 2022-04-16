@@ -1,1 +1,0 @@
-export { UpdateInformation } from './UpdateInformation';

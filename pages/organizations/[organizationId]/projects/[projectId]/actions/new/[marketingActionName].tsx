@@ -1,14 +1,15 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { Layout, NewMarketingAction } from '@/components';
+import { Layout } from '@/components/Layout';
+import { ListTemplatePage } from '@/libs/templates';
 
 function MarketingActions() {
   const { t } = useTranslation('marketingAction');
 
   return (
     <Layout title={t('listOfPolicyTemplates')}>
-      <NewMarketingAction />
+      <ListTemplatePage />
     </Layout>
   );
 }

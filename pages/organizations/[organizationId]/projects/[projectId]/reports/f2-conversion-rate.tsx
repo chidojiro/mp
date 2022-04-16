@@ -4,7 +4,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { ConversionRateChart } from '@/components/ConversionRateChart';
 import { Layout } from '@/components/Layout';
 import { Icon } from '@/components/common/Icon';
-import { CustomerReportButton } from '@/components/dashboard';
+import { CustomerReportButton } from '@/components/CustomerReportButton';
 
 export const getServerSideProps = async ({ locale = 'ja' }) => {
   return {

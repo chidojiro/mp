@@ -1,0 +1,98 @@
+
+  warn no-orphans: components/Login/Login.types.ts
+  warn no-circular: hooks/useNotification/index.ts → 
+      hooks/useNotification/useNotification.tsx →
+      hooks/useNotification/NotificationList.tsx →
+      hooks/useNotification/index.ts
+  warn no-circular: hooks/index.ts → 
+      hooks/usePagination/index.ts →
+      hooks/usePagination/usePagination.tsx →
+      hooks/index.ts
+  warn no-circular: hooks/index.ts → 
+      hooks/useNotification/index.ts →
+      hooks/useNotification/useNotification.tsx →
+      hooks/index.ts
+  warn no-circular: headless/Tabs/Item/index.ts → 
+      headless/Tabs/Item/Item.tsx →
+      headless/Tabs/Tabs.tsx →
+      headless/Tabs/Item/index.ts
+  warn no-circular: headless/Tabs/Content/Content.tsx → 
+      headless/Tabs/Tabs.tsx →
+      headless/Tabs/Content/index.ts →
+      headless/Tabs/Content/Content.tsx
+  warn no-circular: headless/fields/RadioGroup/Option/index.ts → 
+      headless/fields/RadioGroup/Option/Option.tsx →
+      headless/fields/RadioGroup/RadioGroup.tsx →
+      headless/fields/RadioGroup/Option/index.ts
+  warn no-circular: headless/fields/CheckboxGroup/CheckboxGroup.tsx → 
+      headless/fields/CheckboxGroup/Option/index.ts →
+      headless/fields/CheckboxGroup/Option/Option.tsx →
+      headless/fields/CheckboxGroup/CheckboxGroup.tsx
+  warn no-circular: components/marketingAction/MyMarketingAction/Edit/Edit.tsx → 
+      components/marketingAction/MyMarketingAction/Edit/RecommendedBot/index.ts
+      →
+      components/marketingAction/MyMarketingAction/Edit/RecommendedBot/RecommendedBot.tsx
+      →
+      components/marketingAction/index.ts →
+      components/marketingAction/MyMarketingAction/index.tsx →
+      components/marketingAction/MyMarketingAction/MyMarketingAction.tsx →
+      components/marketingAction/MyMarketingAction/Edit/index.ts →
+      components/marketingAction/MyMarketingAction/Edit/Edit.tsx
+  warn no-circular: components/marketingAction/MyMarketingAction/Edit/Edit.tsx → 
+      components/marketingAction/MyMarketingAction/Edit/RankingByCategory/index.ts
+      →
+      components/marketingAction/MyMarketingAction/Edit/RankingByCategory/RankingByCategory.tsx
+      →
+      components/marketingAction/index.ts →
+      components/marketingAction/MyMarketingAction/index.tsx →
+      components/marketingAction/MyMarketingAction/MyMarketingAction.tsx →
+      components/marketingAction/MyMarketingAction/Edit/index.ts →
+      components/marketingAction/MyMarketingAction/Edit/Edit.tsx
+  warn no-circular: components/marketingAction/MyMarketingAction/Edit/Edit.tsx → 
+      components/marketingAction/MyMarketingAction/Edit/FreeShipping/index.ts
+      →
+      components/marketingAction/MyMarketingAction/Edit/FreeShipping/FreeShipping.tsx
+      →
+      components/marketingAction/index.ts →
+      components/marketingAction/MyMarketingAction/index.tsx →
+      components/marketingAction/MyMarketingAction/MyMarketingAction.tsx →
+      components/marketingAction/MyMarketingAction/Edit/index.ts →
+      components/marketingAction/MyMarketingAction/Edit/Edit.tsx
+  warn no-circular: components/marketingAction/MyMarketingAction/Edit/CartAbandoned/Message2Settings/Message2Settings.tsx → 
+      components/marketingAction/MyMarketingAction/Edit/CartAbandoned/MessageContent.tsx
+      →
+      components/marketingAction/MyMarketingAction/Edit/CartAbandoned/CartAbandoned.tsx
+      →
+      components/marketingAction/MyMarketingAction/Edit/CartAbandoned/Message2Settings/index.ts
+      →
+      components/marketingAction/MyMarketingAction/Edit/CartAbandoned/Message2Settings/Message2Settings.tsx
+  warn no-circular: components/marketingAction/MyMarketingAction/Edit/CartAbandoned/CartAbandoned.tsx → 
+      components/marketingAction/MyMarketingAction/Edit/CartAbandoned/Message2Settings/index.ts
+      →
+      components/marketingAction/MyMarketingAction/Edit/CartAbandoned/Message2Settings/Message2Settings.tsx
+      →
+      components/marketingAction/MyMarketingAction/Edit/CartAbandoned/CartAbandoned.tsx
+  warn no-circular: components/marketingAction/MyMarketingAction/Edit/CartAbandoned/CartAbandoned.tsx → 
+      components/marketingAction/MyMarketingAction/Edit/CartAbandoned/Message1Settings/index.ts
+      →
+      components/marketingAction/MyMarketingAction/Edit/CartAbandoned/Message1Settings/Message1Settings.tsx
+      →
+      components/marketingAction/MyMarketingAction/Edit/CartAbandoned/MessageContent.tsx
+      →
+      components/marketingAction/MyMarketingAction/Edit/CartAbandoned/CartAbandoned.tsx
+  warn no-circular: components/marketingAction/MyMarketingAction/Edit/CartAbandoned/CartAbandoned.tsx → 
+      components/marketingAction/MyMarketingAction/Edit/CartAbandoned/LineSettings/index.ts
+      →
+      components/marketingAction/MyMarketingAction/Edit/CartAbandoned/LineSettings/LineSettings.tsx
+      →
+      components/marketingAction/MyMarketingAction/Edit/CartAbandoned/CartAbandoned.tsx
+  warn no-circular: components/marketingAction/index.ts → 
+      components/marketingAction/MyMarketingAction/index.tsx →
+      components/marketingAction/MyMarketingAction/MyMarketingAction.tsx →
+      components/marketingAction/MyMarketingAction/Edit/index.ts →
+      components/marketingAction/MyMarketingAction/Edit/Edit.tsx →
+      components/marketingAction/MyMarketingAction/Edit/CartFAQ/CartFAQ.tsx →
+      components/marketingAction/index.ts
+
+✖ 16 dependency violations (0 errors, 16 warnings). 454 modules, 1173 dependencies cruised.
+

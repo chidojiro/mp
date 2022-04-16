@@ -1,7 +1,7 @@
-import { AssertUtils } from '.';
+import { AssertUtils } from './assert';
 
 const withDefaultValue =
-  <T = any>(defaultValues: T) =>
+  <T extends object>(defaultValues: T) =>
   (target: T): T => {
     const resolveCurrentValue = (target: any, defaultValues: any): any => {
       if ([null, undefined].includes(target)) return defaultValues;

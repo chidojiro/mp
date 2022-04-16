@@ -1,11 +1,14 @@
-import { useRouter } from 'next/router';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { Redirect } from '@/components';
+import { ListActionPage } from '@/libs/actions';
 
 function MyMarketingActionPage() {
-  const { asPath } = useRouter();
-
-  return <Redirect href={`${asPath}/${1}`} method='replace' />;
+  return <ListActionPage />;
 }
+export const getServerSideProps = async ({ locale }: any) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common', 'marketingAction', 'report'])),
+  },
+});
 
 export default MyMarketingActionPage;

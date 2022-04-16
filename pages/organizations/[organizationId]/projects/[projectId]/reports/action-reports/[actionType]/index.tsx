@@ -1,6 +1,6 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { ReportList } from '@/components';
+import { ReportList } from '@/components/report';
 
 const Reports = () => {
   return <ReportList />;
