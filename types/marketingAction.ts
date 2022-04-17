@@ -104,3 +104,19 @@ export interface BaseSetting {
 export interface StepDeliverySetting extends BaseSetting {
   step_messages: StepMessage[];
 }
+
+export interface DisplaySettingsData {
+  appear_time: number;
+  position: 'left' | 'right';
+  position_close_box: number;
+  position_close_box_unit: 'px' | '%' | 'vh';
+}
+export interface PopupSettingsData {
+  template_selection: string;
+  free_shipping_amount: number;
+  display_settings_pc: DisplaySettingsData;
+  display_settings_mobile: DisplaySettingsData;
+}
+export interface TargetCustomersData {
+  target_customers: TARGET[];
+}

@@ -5,11 +5,11 @@ import { Option } from '@/types';
 
 import { TemplateSelector } from './TemplateSelector';
 
-export const Step1Settings = () => {
+export const PopupSettings = () => {
   const { t } = useTranslation('marketingAction');
   const unitOptions: Option<string>[] = [
     { label: 'px', value: 'px' },
-    { label: '%', value: 'percentage' },
+    { label: '%', value: '%' },
     { label: 'vh', value: 'vh' },
   ];
 
@@ -20,13 +20,13 @@ export const Step1Settings = () => {
         <div className='mb-4 text-medium'>
           ここに説明文が入ります。ここに説明文が入ります。ここに説明文が入ります。ここに説明文が入ります。ここに説明文が入ります。
         </div>
-        <TemplateSelector preselectedTemplate='template1' />
+        <TemplateSelector />
       </div>
 
       <div className='px-10 -mx-10 border-b-4 border-white pb-7 mt-[40px]'>
         <div className='mb-2 font-semibold'>{t('freeShippingAmountLabel')}</div>
         <div className='flex items-center'>
-          <Form.Input type='number' name={'freeShippingCost'} className='w-20' />
+          <Form.Input type='number' name='free_shipping_amount' className='w-20' />
           <span className=' mx-2.5'>{t('freeShippingPriceEndLabel')}</span>
         </div>
       </div>
@@ -43,7 +43,7 @@ export const Step1Settings = () => {
               <Form.Input
                 type='number'
                 className='w-20 mx-2.5'
-                name='chat_settings.pc_appearance_time'
+                name='display_settings_pc.appear_time'
               />
               <span>{t('secondsAfterAprearance')}</span>
             </div>
@@ -55,7 +55,7 @@ export const Step1Settings = () => {
               <Form.Input
                 type='number'
                 className='w-20 mx-2.5'
-                name='chat_settings.mobile_appearance_time'
+                name='display_settings_mobile.appear_time'
               />
               <span>{t('secondsAfterAprearance')}</span>
             </div>
@@ -66,18 +66,18 @@ export const Step1Settings = () => {
           <div className='flex mb-2'>
             <span className='w-20'>PC:</span>
             <div>
-              <Form.RadioGroup name='chat_settings.pc_display_position'>
+              <Form.RadioGroup name='display_settings_pc.position'>
                 <RadioGroup.Option
                   colorScheme='secondary'
                   className='mb-2.5'
                   label={t('leftEdge')}
-                  value={'left_edge'}
+                  value={'left'}
                 />
                 <RadioGroup.Option
                   colorScheme='secondary'
                   className='mb-2.5'
                   label={t('rightEdge')}
-                  value={'right_edge'}
+                  value={'right'}
                 />
               </Form.RadioGroup>
               <div className='flex items-center'>
@@ -85,27 +85,31 @@ export const Step1Settings = () => {
                 <Form.Input
                   type='number'
                   className='w-20 mx-2.5'
-                  name='chat_settings.pc_position'
+                  name='display_settings_pc.position_close_box'
                 />
-                <Form.Select options={unitOptions} className='w-20' name='chat_settings.pc_unit' />
+                <Form.Select
+                  options={unitOptions}
+                  className='w-20'
+                  name='display_settings_pc.position_close_box_unit'
+                />
               </div>
             </div>
           </div>
           <div className='flex mb-2'>
             <span className='w-20'>{t('mobile')}</span>
             <div>
-              <Form.RadioGroup name='chat_settings.mobile_display_position'>
+              <Form.RadioGroup name='display_settings_mobile.position'>
                 <RadioGroup.Option
                   colorScheme='secondary'
                   className='mb-2.5'
                   label={t('leftEdge')}
-                  value={'left_edge'}
+                  value={'left'}
                 />
                 <RadioGroup.Option
                   colorScheme='secondary'
                   className='mb-2.5'
                   label={t('rightEdge')}
-                  value={'right_edge'}
+                  value={'right'}
                 />
               </Form.RadioGroup>
               <div className='flex items-center'>
@@ -113,12 +117,12 @@ export const Step1Settings = () => {
                 <Form.Input
                   type='number'
                   className='w-20 mx-2.5'
-                  name='chat_settings.mobile_position'
+                  name='display_settings_mobile.position_close_box'
                 />
                 <Form.Select
                   options={unitOptions}
                   className='w-20'
-                  name='chat_settings.mobile_unit'
+                  name='display_settings_mobile.position_close_box_unit'
                 />
               </div>
             </div>

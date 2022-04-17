@@ -1,124 +1,139 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
-import Link from 'next/link';
-import { useForm, useWatch } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+import useSWR from 'swr';
 
-import { Button, Modal, Form } from '@/components/common';
 import { ActionContainer } from '@/components/ActionContainer';
 import { Step } from '@/constants';
-import { useVisibilityControl } from '@/hooks';
+import { useProfile, useVisibilityControl } from '@/hooks';
+import {
+  MarketingActionAlias,
+  MarketingActionStatus,
+  PopupSettingsData,
+  TARGET,
+  TargetCustomersData,
+} from '@/types';
+import { MarketingActionAPI } from '@/apis/marketing_actions';
+import { TargetFilterUtils } from '@/utils/targetFilter';
 
-import { Steps } from '../Steps';
+import { Steppers } from '../Steppers';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';
-import { Step1Settings } from './Step1Settings';
+import { PopupSettings } from './PopupSettings';
 import { TemplatePreviewOverlay } from './TemplatePreviewOverlay';
+import SavingActions from '../Steppers/SavingActions';
 
 export const FreeShipping = () => {
   const { t } = useTranslation('marketingAction');
-  const methods = useForm({
-    defaultValues: {
-      chat_settings: {
-        color: '#E63E28',
-        pc_appearance_time: '0',
-        mobile_appearance_time: '0',
-        pc_position: '0',
-        mobile_position: '0',
-        pc_unit: 'px',
-        mobile_unit: 'px',
-      },
-    } as any,
-  });
-  const { handleSubmit, watch } = methods;
-  const { control } = methods;
-  const modalControl = useVisibilityControl();
-  const [isCompleted, setIsCompleted] = useState(false);
-  const [isSaveAsDraft, setIsSaveAsDraft] = useState(false);
-
-  const step1 = useWatch({ name: 'popup_setting_creation', control });
-  const targetCustomers = useWatch({ name: 'target_customers', control });
-  const isStep2Done = !!targetCustomers?.length;
-  const chatPreviewControl = useVisibilityControl();
-
-  const onSubmit = (data: any) => {
-    console.log('submit', data);
-  };
-
-  const showModal = () => {
-    setIsCompleted(false);
-    setIsSaveAsDraft(false);
-    modalControl.open();
-  };
-
-  const onExecuteMA = () => {
-    handleSubmit(onSubmit)();
-    setIsCompleted(true);
-  };
-
-  const onSaveAsDraft = () => {
-    modalControl.open();
-    handleSubmit(onSubmit)();
-    setIsCompleted(false);
-    setIsSaveAsDraft(true);
-  };
-
-  const setStepDone = (stepId: number, done: boolean) => {
-    setSteps(prevState =>
-      prevState.map(step => {
-        return step.id === stepId ? { ...step, isDone: done } : step;
-      })
+  const {
+    push,
+    query: { marketingActionId },
+  } = useRouter();
+  const [maId, setMaId] = useState('');
+  const { data: marketingAction } = useSWR(
+    marketingActionId ? ['/actions', marketingActionId] : null,
+    () => MarketingActionAPI.get(marketingActionId as string)
+  );
+  const prepareData = (status: MarketingActionStatus) => {
+    const _targetSegments = TargetFilterUtils.getTargetCustomers(
+      targetCustomerMethods.getValues('target_customers')
     );
+
+    const popupSettings = popupFormMethods.getValues();
+    const data = {
+      description: 'free_shipping',
+      marketing_action_type: {
+        alias: MarketingActionAlias.CONDITIONAL_FREE_SHIPPING,
+      },
+      status,
+      settings: {
+        ...popupSettings,
+      },
+      target_segments: _targetSegments,
+    };
+    return data;
   };
 
-  const onConfirm = (stepId: number) => {
-    if (stepId === 1) {
-      // TODO save step 1
-      setStepDone(stepId, true);
-    } else if (stepId === 2 && isStep2Done) {
-      // TODO save step 3
-      setStepDone(stepId, true);
+  const handleSaveMA = async (status: MarketingActionStatus) => {
+    const data = prepareData(status);
+    if (marketingActionId) {
+      await MarketingActionAPI.update(marketingActionId as string, data);
+    } else {
+      const res = await MarketingActionAPI.create(data);
+      setMaId(res.id);
     }
   };
+  const popupFormMethods = useForm<PopupSettingsData>({
+    defaultValues: {
+      template_selection: 'template2',
+      free_shipping_amount: 5000,
+      display_settings_pc: {
+        appear_time: 0,
+        position: 'right',
+        position_close_box: 0,
+        position_close_box_unit: 'px',
+      },
+      display_settings_mobile: {
+        appear_time: 0,
+        position: 'right',
+        position_close_box: 0,
+        position_close_box_unit: 'px',
+      },
+    },
+  });
+
+  const targetCustomerMethods = useForm<TargetCustomersData>({
+    defaultValues: {
+      target_customers: [
+        TARGET.F0_MEMBER,
+        TARGET.F0_OTHERS,
+        TARGET.F1,
+        TARGET.F2,
+        TARGET.SEMI_LOYAL,
+        TARGET.LOYAL,
+        TARGET.F1_DORMANT,
+        TARGET.LOYAL_DORMANT,
+        TARGET.OTHER_DORMANT,
+      ],
+    },
+  });
+
+  const isStepDone = (methods: any) => {
+    return methods.formState.isSubmitSuccessful && !methods.formState.isDirty;
+  };
+
+  const isDone = isStepDone(popupFormMethods) && isStepDone(targetCustomerMethods);
+
+  const chatPreviewControl = useVisibilityControl();
 
   const [steps, setSteps] = useState<Step[]>([
     {
       id: 1,
       name: t('popupSettings'),
-      children: <Step1Settings />,
+      children: <PopupSettings />,
+      methods: popupFormMethods,
       showPreviewBtn: true,
     },
     {
       id: 2,
       name: t('targetSetting'),
+      methods: targetCustomerMethods,
       children: <TargetCustomerGroup isNonMember={true} />,
     },
   ]);
-
-  useEffect(() => {
-    setStepDone(1, false);
-  }, [step1]);
-
-  useEffect(() => {
-    setStepDone(2, false);
-  }, [targetCustomers]);
-
-  const modalDesc = () => {
-    let desc = 'executeTemplate';
-    if (isSaveAsDraft) {
-      desc = 'alertAfterSaveAsDraft';
-    } else if (isCompleted) {
-      desc = 'alertAfterExecuting';
-    }
-    return t(desc, { template: t('conditionalFreeShipping') });
-  };
 
   const onShowPreview = (stepId: number) => {
     chatPreviewControl.open();
   };
 
-  const isGotoMABtn = isCompleted || isSaveAsDraft;
-  const gotoMyMAUrl = `/organizations/1/projects/1/actions/${isCompleted ? 'active' : 'draft'}`;
-  const unSavedSteps = steps.filter(step => !step.isDone).length;
+  const profile = useProfile();
+  const handleCloseModal = () => {
+    const gotoMyMAUrl = `/organizations/${profile.data?.organization_id}/projects/${
+      profile.data?.project_id
+    }/actions/${isDone ? 'active' : 'draft'}`;
+    push(gotoMyMAUrl);
+  };
 
   return (
     <div className='relative'>
@@ -129,44 +144,16 @@ export const FreeShipping = () => {
         description={t('conditionalFreeShippingDescription')}
         descriptionImageUrl='/images/conditional-free-shipping-description.png'
       ></ActionContainer>
-      <Form methods={methods} className='mt-[60px]'>
-        <Steps steps={steps} onConfirm={onConfirm} onShowPreview={onShowPreview} />
-        <div className='flex justify-center mt-10'>
-          <Button className='mr-5 min-w-[240px] h-[52px] bg-[#FF7F5C]' onClick={onSaveAsDraft}>
-            {t('saveDraft')}
-          </Button>
-          <Button colorScheme='negative' className='mr-5 min-w-[240px] h-[52px]'>
-            {t('stopEditing')}
-          </Button>
-          <Button onClick={showModal} className='min-w-[480px] h-[52px]' disabled={!!unSavedSteps}>
-            {t('implementTemplate')}
-          </Button>
-        </div>
-      </Form>
-
+      <div className='mt-[60px]'>
+        <Steppers steps={steps} onShowPreview={onShowPreview} />
+        <SavingActions
+          disable={!isDone}
+          onSaveMarketingAction={handleSaveMA}
+          onCloseModal={handleCloseModal}
+          marketingActionName={t('conditionalFreeShipping')}
+        />
+      </div>
       <TemplatePreviewOverlay control={chatPreviewControl} />
-
-      <Modal control={modalControl}>
-        <div className='text-center text-gray-dark'>
-          <Modal.Body className='leading-loose whitespace-pre-line'>{modalDesc()}</Modal.Body>
-          <Modal.Footer className='text-medium'>
-            {isGotoMABtn ? (
-              <Link passHref href={gotoMyMAUrl}>
-                <Modal.FooterButton colorScheme='negative' onClick={modalControl.close}>
-                  {t('gotoMyMA')}
-                </Modal.FooterButton>
-              </Link>
-            ) : (
-              <>
-                <Modal.FooterButton colorScheme='negative' onClick={modalControl.close}>
-                  {t('cancel')}
-                </Modal.FooterButton>
-                <Modal.FooterButton onClick={onExecuteMA}>{t('executeTest')}</Modal.FooterButton>
-              </>
-            )}
-          </Modal.Footer>
-        </div>
-      </Modal>
     </div>
   );
 };
