@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -8,7 +8,13 @@ import useSWR from 'swr';
 import { ActionContainer } from '@/components/ActionContainer';
 import { Step } from '@/constants';
 import { useProfile, useVisibilityControl } from '@/hooks';
-import { MarketingActionStatus, PopupSettingsData, TARGET, TargetCustomersData } from '@/types';
+import {
+  MarketingActionStatus,
+  PopupSettingsData,
+  TARGET,
+  TargetCustomersData,
+  MarketingActionRes,
+} from '@/types';
 import { MarketingActionAPI } from '@/apis/marketing_actions';
 import { TargetFilterUtils } from '@/utils/targetFilter';
 
@@ -64,7 +70,7 @@ export const FreeShipping = () => {
   const popupFormMethods = useForm<PopupSettingsData>({
     defaultValues: {
       template_selection: 'template1',
-      free_shipping_amount: 5000,
+      free_shipping_amount: 1000,
       display_settings_pc: {
         appear_time: 0,
         position: 'right',
@@ -131,6 +137,42 @@ export const FreeShipping = () => {
     }/actions/${isDone ? 'active' : 'draft'}`;
     push(gotoMyMAUrl);
   };
+
+  const resetData = useCallback(
+    (marketingAction: MarketingActionRes) => {
+      const settings = marketingAction?.settings;
+      console.log('DATA: ', settings);
+      console.log('marketingAction: ', marketingAction);
+
+      popupFormMethods.reset({
+        template_selection: settings?.template_selection,
+        free_shipping_amount: settings?.free_shipping_amount,
+        display_settings_pc: {
+          appear_time: settings?.display_settings_pc?.appear_time,
+          position: settings?.display_settings_pc?.position,
+          position_close_box: settings?.display_settings_pc?.position_close_box,
+          position_close_box_unit: settings?.display_settings_pc?.position_close_box_unit,
+        },
+        display_settings_mobile: {
+          appear_time: settings?.display_settings_mobile?.appear_time,
+          position: settings?.display_settings_mobile?.position,
+          position_close_box: settings?.display_settings_mobile?.position_close_box,
+          position_close_box_unit: settings?.display_settings_mobile?.position_close_box_unit,
+        },
+      });
+
+      const _targetSegments = TargetFilterUtils.getTargetFilters(marketingAction.target_segments);
+
+      targetCustomerMethods.reset({ target_customers: _targetSegments || [] });
+    },
+    [popupFormMethods, targetCustomerMethods]
+  );
+
+  useEffect(() => {
+    if (marketingAction) {
+      resetData(marketingAction);
+    }
+  }, [marketingAction, resetData]);
 
   return (
     <div className='relative'>
