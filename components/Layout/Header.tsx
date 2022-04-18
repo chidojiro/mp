@@ -1,7 +1,8 @@
 import classNames from 'classnames';
-import Link from 'next/link';
 
 import { useProfile } from '@/hooks/api/useProfile';
+
+import { ProfileDropdown } from './ProfileDropdown';
 
 export const Header = () => {
   const { data } = useProfile();
@@ -18,9 +19,7 @@ export const Header = () => {
       <div className='flex items-center h-full'>
         <img src='/images/synalio_header.svg' alt='logo' className='h-6 w-[177px]' />
       </div>
-      <Link href='/account' passHref>
-        <a className='font-semibold text-medium'>{data?.email}</a>
-      </Link>
+      <ProfileDropdown text={data?.email} />
     </div>
   );
 };
