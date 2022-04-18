@@ -141,8 +141,6 @@ export const FreeShipping = () => {
   const resetData = useCallback(
     (marketingAction: MarketingActionRes) => {
       const settings = marketingAction?.settings;
-      console.log('DATA: ', settings);
-      console.log('marketingAction: ', marketingAction);
 
       popupFormMethods.reset({
         template_selection: settings?.template_selection,
