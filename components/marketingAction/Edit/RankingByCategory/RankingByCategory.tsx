@@ -105,8 +105,6 @@ export const RankingByCategory = () => {
     },
   ];
 
-  const modalControl = useVisibilityControl();
-
   const { data: marketingAction } = useSWR(
     marketingActionId ? ['/actions', marketingActionId] : null,
     () => MarketingActionAPI.get(marketingActionId as string)
