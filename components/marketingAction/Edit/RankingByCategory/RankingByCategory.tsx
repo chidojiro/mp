@@ -8,9 +8,10 @@ import { useRouter } from 'next/router';
 import { Form } from '@/components/common';
 import { ActionContainer } from '@/components/ActionContainer';
 import { useVisibilityControl } from '@/hooks';
-import { MarketingActionRes, MarketingActionStatus, TARGET } from '@/types';
+import { MarketingActionAlias, MarketingActionRes, MarketingActionStatus, TARGET } from '@/types';
 import { MarketingActionAPI } from '@/apis';
 import { TargetFilterUtils } from '@/utils';
+import { MARKETING_ACTION_URL } from '@/constants';
 
 import { ChatOverlay } from '../ChatOverlay';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';
@@ -25,9 +26,13 @@ export const RankingByCategory = () => {
   const [maId, setMaId] = useState('');
   const {
     push,
-    query: { marketingActionId },
+    query: { marketingActionId, marketingActionName },
     asPath,
   } = useRouter();
+
+  const isRankingByCategory =
+    marketingActionName ===
+    MARKETING_ACTION_URL[MarketingActionAlias.HISTORY_PURCHASE_CATEGORY].path;
 
   const methods = useForm();
   const chatPreviewControl = useVisibilityControl();
@@ -137,10 +142,18 @@ export const RankingByCategory = () => {
       step4Methods.getValues('target_customers')
     );
 
+    const alias = isRankingByCategory
+      ? MarketingActionAlias.HISTORY_PURCHASE_CATEGORY
+      : MarketingActionAlias.HISTORY_PURCHASE;
+
+    const description = isRankingByCategory
+      ? '全体の購入履歴に基づくカテゴリーごとのランキング（動的）'
+      : '全体の購入履歴に基づくランキング（動的）';
+
     const data = {
       start_at: new Date().toISOString(),
-      description: '全体の購入履歴に基づくカテゴリーごとのランキング（動的）',
-      marketing_action_type_id: 6,
+      description,
+      marketing_action_type_alias: alias,
       status,
       settings: {
         report_period: reportPeriod,
@@ -185,13 +198,23 @@ export const RankingByCategory = () => {
 
   return (
     <div className='relative'>
-      <ActionContainer
-        showUseTemplateBtn={false}
-        iconName='ranking-by-category'
-        title={t('rankingByCategoryBasedOnOverallPurchaseHistory')}
-        description={t('rankingByCategoryBasedOnOverallPurchaseHistoryDescription')}
-        descriptionImageUrl='/images/ranking-category.png'
-      ></ActionContainer>
+      {isRankingByCategory ? (
+        <ActionContainer
+          showUseTemplateBtn={false}
+          iconName='ranking-by-category'
+          title={t('rankingByCategoryBasedOnOverallPurchaseHistory')}
+          description={t('rankingByCategoryBasedOnOverallPurchaseHistoryDescription')}
+          descriptionImageUrl='/images/ranking-category.png'
+        ></ActionContainer>
+      ) : (
+        <ActionContainer
+          showUseTemplateBtn={false}
+          iconName='ranking'
+          title={t('rankingBasedOnOverallPurchaseHistory')}
+          description={t('rankingBasedOnOverallPurchaseHistoryDescription')}
+          descriptionImageUrl='/images/ranking-purchase.png'
+        ></ActionContainer>
+      )}
       <Form methods={methods} className='mt-[60px]'>
         <Steppers steps={steps} onShowPreview={onShowPreview} />
       </Form>

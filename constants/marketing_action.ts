@@ -56,7 +56,7 @@ export const MARKETING_ACTION_URL: { [key: string]: any } = {
     icon: 'mails',
   },
   [MAAlias.HISTORY_PURCHASE]: {
-    path: 'ranking-history',
+    path: 'ranking-based-on-overall-purchase-history',
     icon: 'ranking',
   },
   [MAAlias.HISTORY_PURCHASE_CATEGORY]: {
