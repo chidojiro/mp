@@ -8,13 +8,7 @@ import useSWR from 'swr';
 import { ActionContainer } from '@/components/ActionContainer';
 import { Step } from '@/constants';
 import { useProfile, useVisibilityControl } from '@/hooks';
-import {
-  MarketingActionAlias,
-  MarketingActionStatus,
-  PopupSettingsData,
-  TARGET,
-  TargetCustomersData,
-} from '@/types';
+import { MarketingActionStatus, PopupSettingsData, TARGET, TargetCustomersData } from '@/types';
 import { MarketingActionAPI } from '@/apis/marketing_actions';
 import { TargetFilterUtils } from '@/utils/targetFilter';
 
@@ -30,11 +24,15 @@ export const FreeShipping = () => {
     push,
     query: { marketingActionId },
   } = useRouter();
+
+  // TODO: get latest data of current action from API
   const [maId, setMaId] = useState('');
   const { data: marketingAction } = useSWR(
     marketingActionId ? ['/actions', marketingActionId] : null,
     () => MarketingActionAPI.get(marketingActionId as string)
   );
+
+  // Prepare data before post
   const prepareData = (status: MarketingActionStatus) => {
     const _targetSegments = TargetFilterUtils.getTargetCustomers(
       targetCustomerMethods.getValues('target_customers')
@@ -42,10 +40,9 @@ export const FreeShipping = () => {
 
     const popupSettings = popupFormMethods.getValues();
     const data = {
-      description: 'free_shipping',
-      marketing_action_type: {
-        alias: MarketingActionAlias.CONDITIONAL_FREE_SHIPPING,
-      },
+      start_at: new Date().toISOString(), // TODO will remove once BE is update
+      description: t('conditionalFreeShipping'),
+      marketing_action_type_id: 7,
       status,
       settings: {
         ...popupSettings,
@@ -66,7 +63,7 @@ export const FreeShipping = () => {
   };
   const popupFormMethods = useForm<PopupSettingsData>({
     defaultValues: {
-      template_selection: 'template2',
+      template_selection: 'template1',
       free_shipping_amount: 5000,
       display_settings_pc: {
         appear_time: 0,

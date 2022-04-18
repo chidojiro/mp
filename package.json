@@ -54,6 +54,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "eslint-plugin-unused-imports": "2.0.0",
     "dependency-cruiser": "^11.5.0",
     "@next/bundle-analyzer": "^12.1.1",
     "@storybook/addon-actions": "^6.4.18",
