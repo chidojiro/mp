@@ -28,6 +28,7 @@ export const ListTemplatePage = () => {
         {
           content: (
             <ActionContainer
+              key='cartAbandoned'
               iconName='cart'
               title={t('cartAbandoned')}
               description={t('cartAbandonedDescription')}
@@ -42,6 +43,7 @@ export const ListTemplatePage = () => {
         {
           content: (
             <ActionContainer
+              key='stepDeliveryAfterPurchase'
               iconName='mails'
               title={t('stepDeliveryAfterPurchase')}
               description={t('stepDeliveryAfterPurchaseDescription')}
@@ -62,6 +64,7 @@ export const ListTemplatePage = () => {
         {
           content: (
             <ActionContainer
+              key='cartPageFaqDescription'
               iconName='cart-question'
               title={t('cartPageFaq')}
               description={t('cartPageFaqDescription')}
@@ -75,6 +78,7 @@ export const ListTemplatePage = () => {
         {
           content: (
             <ActionContainer
+              key='recommendationDiagnosisBotStatic'
               iconName='chatbot'
               title={t('recommendationDiagnosisBotStatic')}
               description={t('recommendationDiagnosisBotStaticDescription')}
@@ -88,6 +92,7 @@ export const ListTemplatePage = () => {
         {
           content: (
             <ActionContainer
+              key='rankingBasedOnOverallPurchaseHistory'
               iconName='ranking'
               title={t('rankingBasedOnOverallPurchaseHistory')}
               description={t('rankingBasedOnOverallPurchaseHistoryDescription')}
@@ -101,6 +106,7 @@ export const ListTemplatePage = () => {
         {
           content: (
             <ActionContainer
+              key='rankingByCategoryBasedOnOverallPurchaseHistory'
               iconName='ranking-by-category'
               title={t('rankingByCategoryBasedOnOverallPurchaseHistory')}
               description={t('rankingByCategoryBasedOnOverallPurchaseHistoryDescription')}
@@ -120,6 +126,7 @@ export const ListTemplatePage = () => {
         {
           content: (
             <ActionContainer
+              key='conditionalFreeShipping'
               iconName='free-shipping'
               title={t('conditionalFreeShipping')}
               description={t('conditionalFreeShippingDescription')}

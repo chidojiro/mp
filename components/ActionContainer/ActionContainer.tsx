@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
