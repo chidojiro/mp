@@ -153,6 +153,7 @@ export type Props = Children &
     icon?: React.ReactNode;
     // loading?: boolean;
     style?: React.CSSProperties;
+    font?: string;
   };
 type Ref = HTMLButtonElement;
 export const Button = React.forwardRef<Ref, Props>(
@@ -166,6 +167,7 @@ export const Button = React.forwardRef<Ref, Props>(
       disabled,
       icon,
       style,
+      font,
       ...restProps
     },
     ref
@@ -174,7 +176,7 @@ export const Button = React.forwardRef<Ref, Props>(
     const borderColor = borderColors[colorScheme][variant];
     const textColor = textColors[colorScheme][variant];
     const underline = variant === 'link' && 'underline';
-    const fontWeigh = variant !== 'link' && 'font-semibold';
+    const fontWeigh = font ? font : variant !== 'link' && 'font-bold';
     const padding = variant !== 'link' && 'px-6 py-2';
 
     return (

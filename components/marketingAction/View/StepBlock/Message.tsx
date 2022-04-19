@@ -48,7 +48,11 @@ export const Message = ({ message, enableLine = true }: Props) => {
         <Color color={message.color} label={t(ColorUtils.getName(message.color))} />
       </Answer>
       <div className='text-center'>
-        <Button colorScheme='negative' className=' w-[240px]' onClick={previewMessageControl.open}>
+        <Button
+          colorScheme='negative'
+          className='text-medium w-[240px]'
+          onClick={previewMessageControl.open}
+        >
           {t('viewPreview')}
         </Button>
       </div>

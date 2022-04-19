@@ -52,6 +52,11 @@ export const MarketingAction = ({ marketingAction, mutateMarketingActions }: Pro
     mutateMarketingActions?.();
   };
 
+  const handleDeleteMA = () => {
+    MarketingActionAPI.remove(marketingAction.id);
+    mutateMarketingActions?.();
+  };
+
   const aliasMAType =
     marketingAction?.marketing_action_type?.alias || MarketingActionAlias.CART_LEFT_NOTIFICATION;
   const marketingActionUrl = MARKETING_ACTION_URL[aliasMAType];
@@ -81,18 +86,28 @@ export const MarketingAction = ({ marketingAction, mutateMarketingActions }: Pro
       <div className='flex justify-center pt-10'>
         {!!btnFooter && (
           <>
-            {!!showSuspendBtn && (
-              <Button onClick={handleSuspendMA} className='mr-5 min-w-[240px] bg-[#FF7F5C]'>
+            {showSuspendBtn ? (
+              <Button
+                onClick={handleSuspendMA}
+                className='text-medium mr-5 min-w-[240px] bg-[#FF7F5C]'
+              >
                 {t('suspendTemplate')}
               </Button>
+            ) : (
+              <Button
+                onClick={handleDeleteMA}
+                className='text-medium mr-5 min-w-[240px]'
+                colorScheme='negative'
+              >
+                {t('delete')}
+              </Button>
             )}
+
             <Link
               passHref
               href={`/organizations/${profile.data?.organization_id}/projects/${profile.data?.project_id}/actions/edit/${marketingActionUrl.path}/${marketingAction.id}`}
             >
-              <Button colorScheme='negative' className='mr-5 min-w-[240px]'>
-                {t('editInEditor')}
-              </Button>
+              <Button className='text-medium mr-5 min-w-[240px]'>{t('editInEditor')}</Button>
             </Link>
           </>
         )}

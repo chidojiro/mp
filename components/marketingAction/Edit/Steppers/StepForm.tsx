@@ -41,6 +41,28 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
       reset(data);
     };
 
+    const btnConfirm = () => {
+      return (
+        <div className='flex items-center'>
+          <div
+            className={classNames(
+              'flex items-center justify-center w-5 h-5 mr-2 rounded-full',
+              isComplete ? 'bg-gray' : ' bg-white'
+            )}
+          >
+            <Icon
+              name='check'
+              className={classNames(
+                'w-[10px] h-[8px]',
+                isComplete ? 'text-white' : 'text-mint-green'
+              )}
+            />
+          </div>
+          {t('confirm')}
+        </div>
+      );
+    };
+
     return (
       <FormProvider {...methods}>
         <div
@@ -52,8 +74,9 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
         >
           <div
             className={classNames(
-              'flex z-10 items-center justify-center mr-5 border-2 rounded-full w-[30px] h-7 border-mint-green',
-              isComplete ? 'bg-mint-green' : 'bg-gray'
+              'flex z-10 items-center justify-center mr-5 border-2 rounded-full w-[30px] h-7',
+              isComplete ? 'bg-mint-green border-mint-green' : 'bg-gray',
+              id == 1 || showAlert ? 'border-mint-green' : 'border-gray'
             )}
           >
             <Icon name='check' className='w-[17px] h-[13px] text-white' />
@@ -80,14 +103,14 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
                   variant='outline'
                   className='relative h-9 min-w-[240px] border-2 text-white'
                 >
-                  <div>{t('confirm')}</div>
+                  {btnConfirm()}
                 </Button>
               ) : (
                 <Button
                   onClick={handleSubmit(onValidSubmit, onInvalidSubmit)}
                   className='relative h-9 border-none bg-mint-green min-w-[240px]'
                 >
-                  <div>{t('confirm')}</div>
+                  {btnConfirm()}
                   <div className={classNames('absolute', { hidden: !showAlert })}>
                     <div
                       className={classNames(
