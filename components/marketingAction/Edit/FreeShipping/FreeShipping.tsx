@@ -48,7 +48,7 @@ export const FreeShipping = () => {
     const data = {
       start_at: new Date().toISOString(), // TODO will remove once BE is update
       description: t('conditionalFreeShipping'),
-      marketing_action_type_id: 7,
+      marketing_action_type_alias: 7,
       status,
       settings: {
         ...popupSettings,
