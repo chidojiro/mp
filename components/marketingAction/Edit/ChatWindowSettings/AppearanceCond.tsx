@@ -7,7 +7,7 @@ export const AppearanceCond = () => {
   const { t } = useTranslation('marketingAction');
   const unitOptions: Option<string>[] = [
     { label: 'px', value: 'px' },
-    { label: '%', value: 'percentage' },
+    { label: '%', value: '%' },
     { label: 'vh', value: 'vh' },
   ];
 
