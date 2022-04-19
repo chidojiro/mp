@@ -14,6 +14,7 @@ import {
   TARGET,
   TargetCustomersData,
   MarketingActionRes,
+  MarketingActionAlias,
 } from '@/types';
 import { MarketingActionAPI } from '@/apis/marketing_actions';
 import { TargetFilterUtils } from '@/utils/targetFilter';
@@ -48,7 +49,7 @@ export const FreeShipping = () => {
     const data = {
       start_at: new Date().toISOString(), // TODO will remove once BE is update
       description: t('conditionalFreeShipping'),
-      marketing_action_type_alias: 7,
+      marketing_action_type_alias: MarketingActionAlias.CONDITIONAL_FREE_SHIPPING,
       status,
       settings: {
         ...popupSettings,
