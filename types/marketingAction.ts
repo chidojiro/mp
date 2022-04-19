@@ -96,6 +96,11 @@ export type StepMessage = {
   content_verified: boolean;
 };
 
+export type Carousel = {
+  title: string;
+  content: string;
+};
+
 export type MarketingActionRes = {
   id: string;
   organization_id?: string;
@@ -106,8 +111,18 @@ export type MarketingActionRes = {
   start_at: string;
   end_at?: string;
   settings: {
-    step_messages: StepMessage[];
-    enable_line: boolean;
+    step_messages?: StepMessage[];
+    enable_line?: boolean;
+    faq_source?: string;
+    chat_visuals?: string[];
+    chat_window_color?: string;
+    display_settings_pc?: DisplaySettingsData;
+    display_settings_mobile?: DisplaySettingsData;
+    recommend_source?: string;
+    template_selection?: string;
+    free_shipping_amount?: number;
+    report_period?: 'weekly' | 'monthly';
+    carousel?: Carousel[];
   };
   status: MarketingActionStatus;
   target_segments?: TargetSegment[];

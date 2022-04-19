@@ -10,11 +10,24 @@ import { ContentEditableUtils } from '@/utils';
 import { VariableSign } from '../VariableSign';
 
 const EmojiSign = dynamic<any>(() => import('../EmojiSign').then(module => module.EmojiSign));
-// eslint-disable-next-line @typescript-eslint/ban-types
-type Props = { name: string; showEmoji?: boolean; shouldValidate?: boolean };
 
-// eslint-disable-next-line no-empty-pattern
-export const MessageBodyInput = ({ name, showEmoji = true, shouldValidate }: Props) => {
+type Props = {
+  name: string;
+  showEmoji?: boolean;
+  shouldValidate?: boolean;
+  singleLine?: boolean;
+  className?: string;
+  defaultOptions?: Option[];
+};
+
+export const MessageBodyInput = ({
+  name,
+  showEmoji = true,
+  shouldValidate,
+  singleLine = false,
+  className,
+  defaultOptions,
+}: Props) => {
   const { t } = useTranslation('marketingAction');
   const mentionRef = React.useRef<HTMLDivElement>(null);
 
@@ -35,7 +48,7 @@ export const MessageBodyInput = ({ name, showEmoji = true, shouldValidate }: Pro
     }
   };
 
-  const options = [
+  const options = defaultOptions || [
     { label: t('customerName'), value: 'customerName' },
     { label: t('brandName'), value: 'brandName' },
     { label: t('businessHours'), value: 'businessHours' },
@@ -48,16 +61,19 @@ export const MessageBodyInput = ({ name, showEmoji = true, shouldValidate }: Pro
     { label: t('categoryPageUrl'), value: 'categoryPageUrl' },
   ];
 
+  const classLabel = showEmoji ? 'flex mb-2 space-x-2' : '';
+
   return (
     <div ref={mentionRef}>
       <Form.ContentEditable
         name={name}
-        className='mt-5'
+        className={className || 'mt-5'}
         options={options}
+        singleLine={singleLine}
         label={
-          <div className='flex mb-2 space-x-2'>
+          <div className={classLabel}>
             {showEmoji && <EmojiSign onSelect={handleEmojiSelect} />}
-            <VariableSign onSelect={handleVariableSelect} />
+            <VariableSign onSelect={handleVariableSelect} defaultOptions={options} />
           </div>
         }
         rules={shouldValidate ? { required: true } : undefined}

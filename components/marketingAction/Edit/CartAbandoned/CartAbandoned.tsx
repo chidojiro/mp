@@ -9,7 +9,7 @@ import { MarketingActionAPI } from '@/apis';
 import { Form } from '@/components/common';
 import { ActionContainer } from '@/components/ActionContainer';
 import { useVisibilityControl } from '@/hooks';
-import { MarketingActionRes, MarketingActionStatus, TARGET } from '@/types';
+import { MarketingActionAlias, MarketingActionStatus, TARGET } from '@/types';
 import { TargetFilterUtils } from '@/utils';
 import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
 
@@ -48,7 +48,7 @@ export const CartAbandoned = () => {
       content: t('defaultTextEmail'),
     },
     line_messages: {
-      is_display: false,
+      text_msg_display: false,
     },
     color: '#55C5D9',
     send_flag: true,
@@ -85,13 +85,13 @@ export const CartAbandoned = () => {
   });
 
   const resetData = useCallback(
-    (marketingAction: MarketingActionRes) => {
+    marketingAction => {
       const settings = marketingAction.settings;
       step1Methods.reset({ enable_line: settings?.enable_line });
 
-      step2Methods.reset({ ...settings.step_messages[0] }, { keepDefaultValues: true });
+      step2Methods.reset({ ...settings?.step_messages?.[0] }, { keepDefaultValues: true });
 
-      step3Methods.reset({ ...settings.step_messages[1] }, { keepDefaultValues: true });
+      step3Methods.reset({ ...settings?.step_messages?.[1] }, { keepDefaultValues: true });
 
       const _targetSegments = TargetFilterUtils.getTargetFilters(marketingAction.target_segments);
 
@@ -118,7 +118,7 @@ export const CartAbandoned = () => {
     const data = {
       start_at: new Date().toISOString(), // TODO will remove once BE is update
       description: 'カゴ落ち通知',
-      marketing_action_type_id: 1,
+      marketing_action_type_alias: MarketingActionAlias.CART_LEFT_NOTIFICATION,
       status,
       settings: {
         enable_line: useLine,
@@ -204,7 +204,8 @@ export const CartAbandoned = () => {
         title={t('cartAbandoned')}
         description={t('cartAbandonedDescription')}
         descriptionImageUrl='/images/cart-abandoned-description.png'
-        flowImgUrl='/images/cart-abandoned-flow.png'></ActionContainer>
+        flowImgUrl='/images/cart-abandoned-flow.png'
+      ></ActionContainer>
       <Form methods={methods} className='mt-[60px]'>
         <Steppers steps={steps} onShowPreview={onShowPreview} />
       </Form>

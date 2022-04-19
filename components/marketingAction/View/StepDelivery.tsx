@@ -12,6 +12,7 @@ import { ConditionalFreeShipping } from './ConditionalFreeShipping';
 import { RankingByHistoryPurchase } from './RankingByHistoryPurchase';
 import { RecommendDiagnosticBot } from './RecommendDiagnosticBot';
 import { StepDeliveryAfterPurchase } from './StepDeliveryAfterPurchase';
+import style from './StepDelivery.module.css';
 
 type Props = {
   targetSettings: string;
@@ -40,7 +41,7 @@ export const StepDelivery = ({ settings, targetSettings, alias }: Props) => {
 
   return (
     <div className='rounded-bl-lg rounded-br-lg bg-gray-light'>
-      {renderStepMessage()}
+      <div className={style['message-response']}>{renderStepMessage()}</div>
       <div className='p-10 pb-6'>
         <h5 className='text-gray-dark'>{t('targetSetting')}</h5>
         <div className='my-2 font-bold text-medium text-secondary'>{t('targetCustomer')}</div>

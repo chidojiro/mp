@@ -6,13 +6,13 @@ import { useVisibilityControl } from '@/hooks';
 import { ClassName, Option } from '@/types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-type Props = ClassName & { onSelect?: (option: Option) => void };
+type Props = ClassName & { defaultOptions?: Option[]; onSelect?: (option: Option) => void };
 
 // eslint-disable-next-line no-empty-pattern
-export const VariableSign = ({ className, onSelect }: Props) => {
+export const VariableSign = ({ className, defaultOptions, onSelect }: Props) => {
   const { t } = useTranslation('marketingAction');
 
-  const options = [
+  const options = defaultOptions || [
     { label: t('customerName'), value: 'customerName' },
     { label: t('brandName'), value: 'brandName' },
     { label: t('businessHours'), value: 'businessHours' },

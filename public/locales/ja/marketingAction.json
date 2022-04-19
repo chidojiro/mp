@@ -199,5 +199,9 @@
   "emptyMarketingAction": "実施中の施策はありません。",
   "timeDeliverySettings": "{{from_the_date_text}}{{days}}日後の{{time}}",
   "save": "保存する",
-  "updateCSV": "CSVファイルのアップロード"
+  "updateCSV": "CSVファイルのアップロード",
+  "rankPosPastMonth": "過去1ヶ月の売上ランキング順位",
+  "rankPosPastWeek": "過去1週間の売上ランキング順位",
+  "carouselTitle": "【第 <span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"rankPosPastMonth\">過去1ヶ月の売上ランキング順位</span>  位】<span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"productName\">商品名</span>",
+  "carouselContent": "<span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"amountIncludingTax\">税込金額</span>（税込）/<span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"productDetail\">商品詳細</span>"
 }

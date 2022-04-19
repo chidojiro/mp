@@ -34,9 +34,11 @@ export const Message = ({ message, enableLine = true }: Props) => {
       {enableLine && (
         <Answer name={t('msgContentLine')}>
           <div>[{t('textMessage')}]</div>
-          <div className='mt-2'>{message.line_messages ? t('displayMsg') : t('noDisplay')}</div>
+          <div className='mt-2'>
+            {message.line_messages.text_msg_display ? t('displayMsg') : t('noDisplay')}
+          </div>
           <div
-            dangerouslySetInnerHTML={{ __html: message.line_messages!.content! }}
+            dangerouslySetInnerHTML={{ __html: message.line_messages!.text_msg_content! }}
             className='mt-2'
           ></div>
         </Answer>
@@ -54,7 +56,7 @@ export const Message = ({ message, enableLine = true }: Props) => {
         defaultType='mail'
         mailHeadline={message.mail_content.title}
         mailBody={message.mail_content.content}
-        lineBody={enableLine ? message.line_messages!.content! : ''}
+        lineBody={enableLine ? message.line_messages!.text_msg_content! : ''}
         control={previewMessageControl}
       />
     </>

@@ -1,32 +1,46 @@
 import { useTranslation } from 'next-i18next';
 
-import { Form } from '@/components/common';
 import { Message } from '@/components/marketingAction/ChatPreview/Message';
 
-import { VariableSign } from '../VariableSign';
+import { MessageBodyInput } from '../MessageBodyInput';
 
-export const Step2Settings = () => {
+type Props = {
+  isMonthly: boolean;
+};
+
+export const Step2Settings = ({ isMonthly }: Props) => {
   const { t } = useTranslation('marketingAction');
+
+  const rankingOptions = isMonthly
+    ? { label: t('rankPosPastMonth'), value: 'rankPosPastMonth' }
+    : { label: t('rankPosPastWeek'), value: 'rankPosPastWeek' };
+
+  const titleOptions = [rankingOptions, { label: t('productName'), value: 'productName' }];
+
+  const contentOptions = [
+    { label: t('amountIncludingTax'), value: 'amountIncludingTax' },
+    { label: t('productDetails'), value: 'productDetail' },
+  ];
 
   return (
     <div className='flex justify-between'>
       <div>
         <div className='mb-1 font-bold text-gray-dark'>{t('carouselDisplay')}</div>
         <div className='font-bold text-medium text-secondary'>{t('title')}</div>
-        <Form.ContentEditable
-          name='step2.carousel_title'
+        <MessageBodyInput
+          name='carousel.title'
+          singleLine={true}
+          showEmoji={false}
+          defaultOptions={titleOptions}
           className='flex flex-row-reverse items-center mt-2 mb-4'
-          singleLine
-          label={<VariableSign />}
-          rules={{ required: true }}
         />
         <div className='font-bold text-medium text-secondary'>{t('note')}</div>
-        <Form.ContentEditable
-          name='step2.carousel_note'
+        <MessageBodyInput
+          name='carousel.content'
+          singleLine={true}
+          showEmoji={false}
+          defaultOptions={contentOptions}
           className='flex flex-row-reverse items-center mt-2'
-          singleLine
-          label={<VariableSign />}
-          rules={{ required: true }}
         />
       </div>
       <div className='p-10 w-[350px] bg-white rounded'>
