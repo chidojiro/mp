@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetStaticProps, GetStaticPropsContext } from 'next';
 
-import { Login } from '@/components/Login';
+import { PublicLayout, LoginForm } from '@/components/Login';
 import { useNavigator } from '@/hooks/useNavigator';
 import { useAuth } from '@/hooks/useAuth';
 
@@ -15,7 +15,11 @@ const LoginPage = () => {
       navigator.openDashboard();
     }
   }, [navigator, auth]);
-  return <Login view='login' />;
+  return (
+    <PublicLayout>
+      <LoginForm />
+    </PublicLayout>
+  );
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale = 'ja' }: GetStaticPropsContext) => {

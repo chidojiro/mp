@@ -2,7 +2,6 @@ import React from 'react';
 
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
 import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
 import { AuthApi, LoginPayload } from '@/apis/auth';

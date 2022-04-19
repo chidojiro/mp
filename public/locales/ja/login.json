@@ -13,5 +13,11 @@
   "NewPasswordSetting": "新パスワード設定",
   "newPassword": "新パスワード",
   "newPasswordConfirm": "新パスワード（確認）",
-  "change": "変更する"
+  "change": "変更する",
+  "email.required": "メールアドレスを入力してください",
+  "email.invalid": "Email is invalid format",
+  "email.notFound": "Email does not exist",
+  "password.required": "パスワードを入力してください",
+  "passwordRecovery.emailSent": "An Email sent to your email. Please check and follow the instruction",
+  "passwordRecovery.gotoLogin": "Go to Login"
 }

@@ -1,8 +1,19 @@
 import { ACCESS_TOKEN_KEY } from '@/constants';
 import { CookiesUtils } from '@/utils/cookieUtils';
+import axios, { AxiosError } from 'axios';
 
 import { RestApi } from './base';
 
+export type PasswordRecoverPayload = {
+  email: string;
+};
+export type PasswordRecoveryResponse = {
+  status: 'error' | 'success';
+  error?: {
+    code: string;
+    msg: string;
+  };
+};
 export type LoginPayload = {
   email: string;
   password: string;
@@ -17,5 +28,36 @@ const login = async (payload: LoginPayload) => {
   const { access_token } = await RestApi.post<LoginResponse>('/auth/login', payload);
   CookiesUtils.set(ACCESS_TOKEN_KEY, access_token);
 };
+const recoverPassword = async (payload: PasswordRecoverPayload) => {
+  try {
+    await RestApi.post('/auth/password/recovery', payload);
+    return {
+      status: 'success',
+    };
+  } catch (error) {
+    console.error(error);
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError;
+      if (axiosError.response?.status === 400) {
+        // invalid email
+        return axiosError.response.data as PasswordRecoveryResponse;
+      }
+      return {
+        status: 'error',
+        error: {
+          msg: 'unknownError',
+        },
+      };
+    }
+  }
+};
 
-export const AuthApi = { login };
+const verifyToken = async (token: string) => {
+  try {
+    await RestApi.get(`/auth/password/reset?token=${token}`);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+export const AuthApi = { login, recoverPassword, verifyToken };

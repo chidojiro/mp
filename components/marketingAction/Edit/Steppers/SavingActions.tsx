@@ -62,9 +62,8 @@ const SavingActions = ({
   };
   const profile = useProfile();
   const isGotoMABtn = isCompleted || isSaveAsDraft;
-  const gotoMyMAUrl = `/organizations/${profile.data?.organization_id}/projects/${
-    profile.data?.project_id
-  }/actions/${isCompleted ? 'running' : 'draft'}/${marketingActionId}?target=all`;
+  const gotoMyMAUrl = `/organizations/${profile.data?.organization_id}/projects/${profile.data?.project_id
+    }/actions/${isCompleted ? 'running' : 'draft'}/${marketingActionId}?target=all`;
 
   const handleCloseModal = () => {
     (isCompleted || isSaveAsDraft) && onCloseModal();

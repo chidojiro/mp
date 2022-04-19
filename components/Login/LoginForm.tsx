@@ -3,6 +3,7 @@ import React from 'react';
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
+import Link from 'next/link';
 
 import { AuthApi, LoginPayload } from '@/apis/auth';
 import { Form } from '@/components/common/Form';
@@ -13,6 +14,7 @@ import { useNavigator } from '@/hooks/useNavigator';
 
 export const LoginForm = () => {
   const { t } = useTranslation('login');
+  const { t: tCommon } = useTranslation('common');
   const [isProcessing, setProcessing] = React.useState(false);
   const navigator = useNavigator();
   const methods = useForm({
@@ -25,16 +27,51 @@ export const LoginForm = () => {
 
   const onSubmit = async (val: LoginPayload) => {
     try {
+      methods.clearErrors();
       setProcessing(true);
       await AuthApi.login(val);
+      setProcessing(false);
       await navigator.openDashboard();
-    } catch {
+    } catch (error) {
+      console.error(error);
+      // show error message
       setIsInvalid(true);
+
+      // show error border on fields
+      methods.setError('email', { message: '' });
+      methods.setError('password', { message: '' });
+      // focus on email field
+      methods.setFocus('email');
     } finally {
       setProcessing(false);
     }
   };
 
+  const passwordRules = {
+    required: {
+      value: true,
+      message: t('password.required'),
+    },
+    minLength: {
+      value: 8,
+      message: tCommon('validation.field.minLength', { value: 8 }),
+    },
+    maxLength: {
+      value: 48,
+      message: tCommon('validation.field.maxLength', { value: 48 }),
+    },
+  };
+  const emailRules = {
+    required: {
+      value: true,
+      message: t('email.required'),
+    },
+    pattern: {
+      value:
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      message: t('email.invalidFormat'),
+    },
+  };
   return (
     <div className='w-[400px]'>
       <div className='mb-5 font-bold prose text-center text-h4'>{t('login')}</div>
@@ -44,9 +81,9 @@ export const LoginForm = () => {
           className='w-full'
           type='email'
           placeholder={t('email')}
-          onChange={() => setIsInvalid(false)}
-          rules={{ required: true }}
+          rules={emailRules}
         />
+        <Form.ErrorMessage name='email' />
         <Form.Input
           name='password'
           className='w-full mt-2'
@@ -57,18 +94,21 @@ export const LoginForm = () => {
               {icon}
             </div>
           }
-          onChange={() => setIsInvalid(false)}
-          rules={{ required: true }}
+          rules={passwordRules}
         />
-        {!!isInvalid && (
-          <ErrorMessage className='mt-1'>{t('incorrectEmailOrPassword')}</ErrorMessage>
-        )}
+        <Form.ErrorMessage name='password' />
+
+        <div className='mt-2'>
+          {isInvalid && <ErrorMessage>{t('incorrectEmailOrPassword')}</ErrorMessage>}
+        </div>
         <Button type='submit' className='w-full my-4 font-bold' disabled={isProcessing}>
           {t('login')}
         </Button>
-        <Button variant='link' className='!block mx-auto'>
-          {t('forgotPassword')}
-        </Button>
+        <Link href='/password/recover'>
+          <Button variant='link' className='!block mx-auto'>
+            {t('forgotPassword')}
+          </Button>
+        </Link>
       </Form>
     </div>
   );
