@@ -13,7 +13,7 @@ export const ColorSettingSection = ({}: Props) => {
   return (
     <Section>
       <Section.Title>{t('colorSettings')}</Section.Title>
-      <ColorGroup name='first_message.colors' />
+      <ColorGroup name='color' />
     </Section>
   );
 };

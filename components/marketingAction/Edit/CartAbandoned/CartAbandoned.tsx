@@ -176,7 +176,7 @@ export const CartAbandoned = () => {
     setMessagePreview({
       headline: message?.mail_content.title,
       messageEmail: message?.mail_content.content,
-      messageLine: message?.line_messages.content,
+      messageLine: message?.line_messages.text_msg_content,
       color: message.color,
     });
     previewMessageControl.open();
@@ -204,8 +204,7 @@ export const CartAbandoned = () => {
         title={t('cartAbandoned')}
         description={t('cartAbandonedDescription')}
         descriptionImageUrl='/images/cart-abandoned-description.png'
-        flowImgUrl='/images/cart-abandoned-flow.png'
-      ></ActionContainer>
+        flowImgUrl='/images/cart-abandoned-flow.png'></ActionContainer>
       <Form methods={methods} className='mt-[60px]'>
         <Steppers steps={steps} onShowPreview={onShowPreview} />
       </Form>

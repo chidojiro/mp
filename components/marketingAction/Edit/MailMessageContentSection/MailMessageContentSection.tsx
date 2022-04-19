@@ -9,7 +9,7 @@ import { MessageBodyInput } from '../MessageBodyInput';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {
-  namePrefix: string;
+  namePrefix?: string;
   onPreviewClick: () => void;
 };
 
@@ -17,8 +17,8 @@ type Props = {
 export const MailMessageContentSection = ({ namePrefix, onPreviewClick }: Props) => {
   const { t } = useTranslation('marketingAction');
 
-  const headlineName = [namePrefix, 'mail.headline'].join('.');
-  const bodyName = [namePrefix, 'mail.body'].join('.');
+  const headlineName = [namePrefix, 'mail_content.title'].filter(Boolean).join('.');
+  const bodyName = [namePrefix, 'mail_content.content'].filter(Boolean).join('.');
 
   const headline = useWatch({ name: headlineName });
   const body = useWatch({ name: bodyName });

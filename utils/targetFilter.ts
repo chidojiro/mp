@@ -74,6 +74,8 @@ const isOtherDormant = (targetSegment: any) => {
 };
 
 const getTargetFilters = (targetSegments: any) => {
+  if (!targetSegments) return [];
+
   let _targetSegments = [...targetSegments];
   let _filters: TARGET[] = [];
 

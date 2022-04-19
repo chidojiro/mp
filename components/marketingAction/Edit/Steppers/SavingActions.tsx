@@ -78,8 +78,7 @@ const SavingActions = ({
             <Button
               colorScheme='negative'
               onClick={onSuspend}
-              className='mr-5 min-w-[240px] h-[52px]  bg-[#FF7F5C]'
-            >
+              className='mr-5 min-w-[240px] h-[52px]  bg-[#FF7F5C]'>
               {t('suspendTemplate')}
             </Button>
             <Button onClick={onExecuteMA} className='min-w-[480px] h-[52px]'>
@@ -91,8 +90,7 @@ const SavingActions = ({
             <Button
               colorScheme='negative'
               onClick={onSaveAsDraft}
-              className='mr-5 min-w-[240px] h-[52px]'
-            >
+              className='mr-5 min-w-[240px] h-[52px]'>
               {t('saveDraft')}
             </Button>
             <Button onClick={showModal} className='min-w-[480px] h-[52px]' disabled={disable}>

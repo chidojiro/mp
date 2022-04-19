@@ -9,7 +9,7 @@ import { MessageBodyInput } from '../MessageBodyInput';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {
-  namePrefix: string;
+  namePrefix?: string;
   onPreviewClick: () => void;
 };
 
@@ -17,9 +17,10 @@ type Props = {
 export const LineMessageContentSection = ({ namePrefix, onPreviewClick }: Props) => {
   const { t } = useTranslation('marketingAction');
 
-  const bodyName = [namePrefix, 'line.body'].join('.');
+  const bodyName = [namePrefix, 'line_messages.text_msg_content'].filter(Boolean).join('.');
 
   const body = useWatch({ name: bodyName });
+  const displayLineMessage = useWatch({ name: 'line_messages.text_msg_display' });
 
   return (
     <Section>
@@ -33,14 +34,20 @@ export const LineMessageContentSection = ({ namePrefix, onPreviewClick }: Props)
         <div className='flex-1'>
           <div>
             <p className='mb-2 text-secondary'>{t('textMessage')}</p>
-            <Form.RadioGroup name='useLine' rules={{ required: true }}>
+            <Form.RadioGroup name='line_messages.text_msg_display'>
               <div className='flex flex-col gap-2'>
                 <RadioGroup.Option colorScheme='secondary' label={t('displayMsg')} value='true' />
                 <RadioGroup.Option colorScheme='secondary' label={t('noDisplay')} value='false' />
               </div>
             </Form.RadioGroup>
           </div>
-          <MessageBodyInput name={bodyName} showEmoji={false} />
+          {!!displayLineMessage && (
+            <MessageBodyInput
+              name={bodyName}
+              showEmoji={false}
+              shouldValidate={displayLineMessage}
+            />
+          )}
         </div>
         <MessageContentPreview type='line' body={body} onPreviewClick={onPreviewClick} />
       </div>

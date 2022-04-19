@@ -13,5 +13,6 @@ export * from './useClipboard';
 export * from './useStateToggle';
 export * from './useNavigator';
 export * from './useAuth';
+export * from './useHref';
 
 export * from './api';

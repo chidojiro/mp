@@ -31,7 +31,7 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
 
   const message = useWatch() as any;
 
-  const showLineMsg = message?.line_messages?.is_display;
+  const showLineMsg = message?.line_messages?.text_msg_display;
 
   const onShowModal = (type: MessageContentPreviewType) => {
     setCurrType(type);
@@ -73,8 +73,7 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
               <span className='text-secondary'>{t('previewMobile')}</span>
               <span
                 className='text-gray-700 underline cursor-pointer'
-                onClick={() => onShowModal('mail')}
-              >
+                onClick={() => onShowModal('mail')}>
                 {t('openPreview')}
               </span>
             </div>
@@ -99,7 +98,7 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
                 <div className='mb-2.5 font-semibold text-secondary text-medium'>
                   {t('textMessage')}
                 </div>
-                <Form.RadioGroup name={`${messageNum}.line_messages.is_display`}>
+                <Form.RadioGroup name={`${messageNum}.line_messages.text_msg_display`}>
                   {lineTextOptions.map(option => (
                     <RadioGroup.Option
                       colorScheme='secondary'
@@ -118,8 +117,7 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
                 <span className='text-secondary'>{t('preview')}</span>
                 <span
                   className='text-gray-700 underline cursor-pointer'
-                  onClick={() => onShowModal('line')}
-                >
+                  onClick={() => onShowModal('line')}>
                   {t('openPreview')}
                 </span>
               </div>

@@ -1,5 +1,7 @@
+import React from 'react';
+
 import { useTranslation } from 'next-i18next';
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, UseFormReturn } from 'react-hook-form';
 
 import { Stepper } from '@/components/Stepper';
 
@@ -7,35 +9,31 @@ import { StepActions } from '../StepActions';
 import { TargetSettingsSection } from '../TargetSettingsSection';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-type Props = {};
+type Props = { formMethods: UseFormReturn<any>; complete?: boolean };
 
 // eslint-disable-next-line no-empty-pattern
-export const TargetSettingsStep = ({}: Props) => {
+export const TargetSettingsStep = React.forwardRef(({ formMethods, complete }: Props, ref) => {
   const { t } = useTranslation('marketingAction');
 
-  const methods = useForm({ defaultValues: { useLine: true } });
-  const {
-    handleSubmit,
-    formState: { isSubmitSuccessful, isDirty },
-    reset,
-  } = methods;
+  const { handleSubmit, reset } = formMethods;
   const onValidSubmit = (v: any) => {
     reset(v);
   };
   const onInvalidSubmit = () => {
     window.alert(t('pleaseFillInAllFields'));
   };
-  const isComplete = isSubmitSuccessful && !isDirty;
 
   return (
-    <Stepper.Item label={t('targetAndTimePeriodSetting')} complete={isComplete}>
-      <FormProvider {...methods}>
+    <Stepper.Item label={t('targetAndTimePeriodSetting')} complete={complete} ref={ref}>
+      <FormProvider {...formMethods}>
         <TargetSettingsSection />
         <StepActions
           onConfirmClick={handleSubmit(onValidSubmit, onInvalidSubmit)}
-          complete={isComplete}
+          complete={complete}
         />
       </FormProvider>
     </Stepper.Item>
   );
-};
+});
+
+TargetSettingsStep.displayName = 'TargetSettingsStep';

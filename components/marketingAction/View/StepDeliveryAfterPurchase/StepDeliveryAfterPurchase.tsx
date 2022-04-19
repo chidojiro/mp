@@ -23,6 +23,16 @@ export const StepDeliveryAfterPurchase = ({ settings }: Props) => {
   const useMsg2 = secondMsg.send_flag ? t('performStep2') : t('doNotPerformStep2PerformStep1Only');
   const period = secondMsg.report_period === 'weekly' ? t('1Week') : t('1Month');
 
+  // const handleSaveMA = async (status: MarketingActionStatus) => {
+  //   const data = prepareData(status);
+  //   if (marketingActionId) {
+  //     await MarketingActionAPI.update(marketingActionId as string, data);
+  //   } else {
+  //     const res = await MarketingActionAPI.create(data);
+  //     push(`${asPath}/${res.id}`);
+  //   }
+  // };
+
   return (
     <>
       <StepBlock stepName={t('useLine')}>

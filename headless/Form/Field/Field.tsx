@@ -8,27 +8,28 @@ export type Props<T = any> = {
   name: string;
   errorGroup?: string[];
   className?: string;
-  onChange?: (e: any) => void;
   onBlur?: (e: any) => void;
   value?: any;
   emptyValue?: any;
   componentType?: 'checkbox' | 'radio' | 'common';
   component: React.ComponentType<T>;
   inputRef?: RefObject<any>;
+  valueAs?: (value: any) => any;
+  changeAs?: (value: any) => any;
 };
 
 export const Field = <T,>({
   component,
   name,
   rules,
-  onChange: onChangeProp,
   onBlur: onBlurProp,
   className,
   value: valueProp,
   errorGroup = [],
   emptyValue = '',
-  componentType = 'common',
   inputRef,
+  valueAs = (value: any) => value,
+  changeAs = (value: any) => value,
   ...restProps
 }: Props<T>) => {
   const Component = component;
@@ -69,8 +70,9 @@ export const Field = <T,>({
   }, [clearErrors, errorMessage, setError, ...errorGroup, ...values]);
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
-    onChange(e);
-    onChangeProp?.(e);
+    const _value = e.target?.value ?? (e as any) ?? emptyValue;
+
+    onChange(changeAs(_value));
   };
 
   const handleBlur: React.FocusEventHandler<HTMLInputElement> = e => {
@@ -78,33 +80,16 @@ export const Field = <T,>({
     onBlurProp?.(e);
   };
 
-  const isCheckboxOrRadio = ['checkbox', 'radio'].includes(componentType);
-
   const resolveValue = React.useCallback(
     () => {
-      if (isCheckboxOrRadio) return valueProp;
-
       if ([null, undefined].includes(value)) return emptyValue;
 
-      if (rules?.valueAsNumber) {
-        return +value;
-      }
-
-      if (rules?.valueAsDate) {
-        return new Date(value);
-      }
+      if (valueAs) return valueAs(value);
 
       return value;
     },
-    /* eslint-disable react-hooks/exhaustive-deps */
-    [
-      JSON.stringify(emptyValue),
-      JSON.stringify(value),
-      JSON.stringify(valueProp),
-      rules?.valueAsDate,
-      rules?.valueAsNumber,
-      componentType,
-    ]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [JSON.stringify(emptyValue), JSON.stringify(value), valueAs]
     /* eslint-enable react-hooks/exhaustive-deps */
   );
 
@@ -116,7 +101,6 @@ export const Field = <T,>({
       error={hasError || (undefined as any)}
       className={className}
       value={resolveValue()}
-      checked={isCheckboxOrRadio ? !!value : false}
       ref={inputRef ?? fieldRef}
       {...restField}
       {...(restProps as any)}

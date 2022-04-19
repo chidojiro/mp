@@ -41,6 +41,16 @@ export enum MarketingActionTypeMessage {
   POPUP = 'popup',
 }
 
+export enum StepMessageTemplate {
+  REVIEW = 'review',
+  RANKING = 'ranking',
+}
+
+export enum StepMessageReportPeriod {
+  WEEKLY = 'weekly',
+  MONTHLY = 'monthly',
+}
+
 export type TargetSegment = {
   segment: MarketingActionSegment;
   is_member?: boolean;
@@ -58,6 +68,34 @@ export type MarketingActionType = {
   ended_at?: string;
 };
 
+export type MailContent = {
+  title: string;
+  content: string;
+};
+
+export type LineMessages = {
+  text_msg_display: boolean;
+  text_msg_content: string;
+  flex_msg_image_ratio: '16:9';
+  flex_msg_head: string;
+  notify_msg_token_list?: string;
+};
+
+export type StepMessage = {
+  send_flag: boolean;
+  send_order: number;
+  time_condition: string;
+  send_after_days: number;
+  send_at: string;
+  report_period: StepMessageReportPeriod;
+  template?: StepMessageTemplate;
+  mail_content: MailContent;
+  line_messages: LineMessages;
+  color: string;
+  has_self_mail_content: boolean;
+  content_verified: boolean;
+};
+
 export type MarketingActionRes = {
   id: string;
   organization_id?: string;
@@ -67,7 +105,10 @@ export type MarketingActionRes = {
   marketing_action_type?: MarketingActionType;
   start_at: string;
   end_at?: string;
-  settings?: any;
+  settings: {
+    step_messages: StepMessage[];
+    enable_line: boolean;
+  };
   status: MarketingActionStatus;
   target_segments?: TargetSegment[];
   created_at?: string;
@@ -81,23 +122,6 @@ export const OPTIONS = {
 
 export type Period = 'weekly' | 'monthly';
 
-export type MailContent = {
-  title: string;
-  content: string;
-};
-export type LineMessage = {
-  content: string;
-};
-export type StepMessage = {
-  send_flag: boolean;
-  report_period: Period;
-  template: string;
-  send_at: string;
-  send_after_days: number;
-  mail_content: MailContent;
-  line_messages?: LineMessage;
-  color: string;
-};
 export interface BaseSetting {
   enable_line: boolean;
 }

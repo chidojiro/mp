@@ -11,10 +11,10 @@ import { VariableSign } from '../VariableSign';
 
 const EmojiSign = dynamic<any>(() => import('../EmojiSign').then(module => module.EmojiSign));
 // eslint-disable-next-line @typescript-eslint/ban-types
-type Props = { name: string; showEmoji?: boolean };
+type Props = { name: string; showEmoji?: boolean; shouldValidate?: boolean };
 
 // eslint-disable-next-line no-empty-pattern
-export const MessageBodyInput = ({ name, showEmoji = true }: Props) => {
+export const MessageBodyInput = ({ name, showEmoji = true, shouldValidate }: Props) => {
   const { t } = useTranslation('marketingAction');
   const mentionRef = React.useRef<HTMLDivElement>(null);
 
@@ -60,7 +60,7 @@ export const MessageBodyInput = ({ name, showEmoji = true }: Props) => {
             <VariableSign onSelect={handleVariableSelect} />
           </div>
         }
-        rules={{ required: true }}
+        rules={shouldValidate ? { required: true } : undefined}
       />
     </div>
   );

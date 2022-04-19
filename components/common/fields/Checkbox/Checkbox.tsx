@@ -48,10 +48,9 @@ export const Checkbox = React.forwardRef<HTMLInputElement, Props>(
 
     return (
       <label
-        className={classNames('mp-checkbox', 'flex items-center', className)}
+        className={classNames('mp-checkbox', 'flex items-center cursor-pointer', className)}
         role='switch'
-        aria-checked={checked}
-      >
+        aria-checked={checked}>
         <div
           className={classNames(
             'w-4 h-4',
@@ -63,8 +62,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, Props>(
               [`${activeBackground} border-none`]: checked,
               '!border-danger': error,
             }
-          )}
-        >
+          )}>
           <Icon name='check' className='text-white' size={12} />
         </div>
         <input

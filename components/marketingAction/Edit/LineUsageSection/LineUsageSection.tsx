@@ -14,7 +14,7 @@ export const LineUsageSection = ({}: Props) => {
     <Section>
       <Section.Title>{t('useLine')}</Section.Title>
       <Section.Description>{t('descriptionPlaceholder')}</Section.Description>
-      <Form.RadioGroup name='useLine'>
+      <Form.RadioGroup name='enable_line'>
         <div className='flex flex-col gap-2'>
           <RadioGroup.Option colorScheme='secondary' label={t('lineOption')} value='true' />
           <RadioGroup.Option colorScheme='secondary' label={t('noLine')} value='false' />

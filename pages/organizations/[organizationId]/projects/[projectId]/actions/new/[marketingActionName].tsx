@@ -35,8 +35,7 @@ export const ListTemplatePage = () => {
               title={t('cartAbandoned')}
               description={t('cartAbandonedDescription')}
               descriptionImageUrl='/images/cart-abandoned-description.png'
-              flowImgUrl='/images/cart-abandoned-flow.png'
-            ></ActionContainer>
+              flowImgUrl='/images/cart-abandoned-flow.png'></ActionContainer>
           ),
           label: t('cartAbandoned'),
           onClick: () => handleMAChange('cart-abandoned'),
@@ -50,8 +49,7 @@ export const ListTemplatePage = () => {
               title={t('stepDeliveryAfterPurchase')}
               description={t('stepDeliveryAfterPurchaseDescription')}
               descriptionImageUrl='/images/step-delivery-after-purchase-description.png'
-              flowImgUrl='/images/step-delivery-after-purchase-flow.png'
-            ></ActionContainer>
+              flowImgUrl='/images/step-delivery-after-purchase-flow.png'></ActionContainer>
           ),
           label: t('stepDeliveryAfterPurchase'),
           onClick: () => handleMAChange('step-delivery-after-purchase'),
@@ -70,8 +68,7 @@ export const ListTemplatePage = () => {
               iconName='cart-question'
               title={t('cartPageFaq')}
               description={t('cartPageFaqDescription')}
-              descriptionImageUrl='/images/cart-page-faq-description.png'
-            ></ActionContainer>
+              descriptionImageUrl='/images/cart-page-faq-description.png'></ActionContainer>
           ),
           label: t('cartPageFaq'),
           onClick: () => handleMAChange('cart-page-faq'),
@@ -84,8 +81,7 @@ export const ListTemplatePage = () => {
               iconName='chatbot'
               title={t('recommendationDiagnosisBotStatic')}
               description={t('recommendationDiagnosisBotStaticDescription')}
-              descriptionImageUrl='/images/recommendation-diagnosis-bot-description.png'
-            ></ActionContainer>
+              descriptionImageUrl='/images/recommendation-diagnosis-bot-description.png'></ActionContainer>
           ),
           onClick: () => handleMAChange('recommendation-diagnosis-bot'),
           label: t('recommendationDiagnosisBotStatic'),
@@ -98,8 +94,7 @@ export const ListTemplatePage = () => {
               iconName='ranking'
               title={t('rankingBasedOnOverallPurchaseHistory')}
               description={t('rankingBasedOnOverallPurchaseHistoryDescription')}
-              descriptionImageUrl='/images/ranking-purchase.png'
-            ></ActionContainer>
+              descriptionImageUrl='/images/ranking-purchase.png'></ActionContainer>
           ),
           onClick: () => handleMAChange('ranking-based-on-overall-purchase-history'),
           label: t('rankingBasedOnOverallPurchaseHistory'),
@@ -112,8 +107,7 @@ export const ListTemplatePage = () => {
               iconName='ranking-by-category'
               title={t('rankingByCategoryBasedOnOverallPurchaseHistory')}
               description={t('rankingByCategoryBasedOnOverallPurchaseHistoryDescription')}
-              descriptionImageUrl='/images/ranking-category.png'
-            ></ActionContainer>
+              descriptionImageUrl='/images/ranking-category.png'></ActionContainer>
           ),
           onClick: () => handleMAChange('ranking-by-category'),
           label: t('rankingByCategoryBasedOnOverallPurchaseHistory'),
@@ -132,8 +126,7 @@ export const ListTemplatePage = () => {
               iconName='free-shipping'
               title={t('conditionalFreeShipping')}
               description={t('conditionalFreeShippingDescription')}
-              descriptionImageUrl='/images/conditional-free-shipping-description.png'
-            ></ActionContainer>
+              descriptionImageUrl='/images/conditional-free-shipping-description.png'></ActionContainer>
           ),
           onClick: () => handleMAChange('conditional-free-shipping'),
           label: t('conditionalFreeShipping'),
