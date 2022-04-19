@@ -6,6 +6,12 @@ import { Layout } from '@/components/Layout';
 import { SideMenu, SideMenuGroup } from '@/components/common/SideMenu';
 import { ActionContainer } from '@/components/ActionContainer';
 
+export const getStaticProps = async ({ locale = 'ja' }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common', 'marketingAction'])),
+  },
+});
+
 export const ListTemplatePage = () => {
   const { query, pathname } = useRouter();
   const { t } = useTranslation('marketingAction');
@@ -148,11 +154,5 @@ function MarketingActions() {
     </Layout>
   );
 }
-
-export const getServerSideProps = async ({ locale }: any) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ['common', 'marketingAction'])),
-  },
-});
 
 export default MarketingActions;

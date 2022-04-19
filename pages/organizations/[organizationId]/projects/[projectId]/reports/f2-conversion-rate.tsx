@@ -6,7 +6,7 @@ import { Layout } from '@/components/Layout';
 import { Icon } from '@/components/common/Icon';
 import { CustomerReportButton } from '@/components/CustomerReportButton';
 
-export const getServerSideProps = async ({ locale = 'ja' }) => {
+export const getStaticProps = async ({ locale = 'ja' }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale!)),

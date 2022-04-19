@@ -10,6 +10,12 @@ import { Tabs } from '@/components/common/Tabs';
 import { MarketingActionStatus as MAStatus } from '@/types';
 import { Detail } from '@/components/marketingAction/View';
 
+export const getStaticProps = async ({ locale = 'ja' }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common', 'marketingAction', 'report'])),
+  },
+});
+
 export const ListActionPage = () => {
   const { t } = useTranslation(['marketingAction']);
   const { pathname, query } = useRouter();
@@ -23,8 +29,7 @@ export const ListActionPage = () => {
           href={{
             pathname,
             query: { ...query, marketingActionStatus: MAStatus.RUNNING, marketingActionId: 1 },
-          }}
-        >
+          }}>
           <a className='block'>{t('inProgressTab')}</a>
         </Link>
       ),
@@ -38,8 +43,7 @@ export const ListActionPage = () => {
           href={{
             pathname,
             query: { ...query, marketingActionStatus: MAStatus.COMPLETE, marketingActionId: 1 },
-          }}
-        >
+          }}>
           <a className='block'>{t('finishedTab')}</a>
         </Link>
       ),
@@ -53,8 +57,7 @@ export const ListActionPage = () => {
           href={{
             pathname,
             query: { ...query, marketingActionStatus: MAStatus.DRAFT, marketingActionId: 1 },
-          }}
-        >
+          }}>
           <a className='block'>{t('draftTab')}</a>
         </Link>
       ),
@@ -78,11 +81,5 @@ export const ListActionPage = () => {
 function MyMarketingActionPage() {
   return <ListActionPage />;
 }
-
-export const getServerSideProps = async ({ locale }: any) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ['common', 'marketingAction', 'report'])),
-  },
-});
 
 export default MyMarketingActionPage;

@@ -8,12 +8,19 @@ import { Layout } from '@/components/Layout';
 import { Icon } from '@/components/common';
 import { ConversionRateChart } from '@/components/ConversionRateChart';
 
-export const getServerSideProps = SSR.withProps('profile')(async ({ locale }, result) => {
+export const getStaticProps = async ({ locale = 'ja' }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale!)),
+    },
+  };
+};
+
+export const getServerSideProps = SSR.withProps('profile')(async (_, result) => {
   return {
     ...result,
     props: {
       ...result.props,
-      ...(await serverSideTranslations(locale!)),
     },
   };
 });

@@ -2,14 +2,14 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { ReportDetails } from '@/components/report';
 
-const Report = () => {
-  return <ReportDetails />;
-};
-
-export const getServerSideProps = async ({ locale }: any) => ({
+export const getStaticProps = async ({ locale = 'ja' }) => ({
   props: {
     ...(await serverSideTranslations(locale, ['common', 'report'])),
   },
 });
+
+const Report = () => {
+  return <ReportDetails />;
+};
 
 export default Report;

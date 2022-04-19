@@ -4,12 +4,11 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { GetServerSideProps } from 'next';
 
 import { Layout } from '@/components/Layout';
 import { Icon, Select, Table } from '@/components/common';
 
-export const getServerSideProps: GetServerSideProps = async ({ locale = 'ja' }) => {
+export const getStaticProps = async ({ locale = 'ja' }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale!, ['common', 'customSegment'])),
