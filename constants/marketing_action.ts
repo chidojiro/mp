@@ -32,7 +32,7 @@ export const MESSAGE_COLORS: { [key: string]: string } = {
 };
 
 export const CHAT_COLORS: { [key: string]: string } = {
-  red: '#81563C',
+  red: '#E22B2D',
   skyBlue: '#55C5D9',
   orange: '#ED6A00',
   green: '#4DAB16',
@@ -56,7 +56,7 @@ export const MARKETING_ACTION_URL: { [key: string]: any } = {
     icon: 'mails',
   },
   [MAAlias.HISTORY_PURCHASE]: {
-    path: 'ranking-history',
+    path: 'ranking-based-on-overall-purchase-history',
     icon: 'ranking',
   },
   [MAAlias.HISTORY_PURCHASE_CATEGORY]: {

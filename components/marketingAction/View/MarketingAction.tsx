@@ -7,6 +7,7 @@ import { MarketingActionAlias, MarketingActionRes, MarketingActionStatus } from 
 import { LanguageUtils, TargetFilterUtils } from '@/utils';
 import { MARKETING_ACTION_URL } from '@/constants';
 import { MarketingActionAPI } from '@/apis';
+import { useProfile } from '@/hooks';
 
 import { Action } from './Action';
 import { StepDelivery } from './StepDelivery';
@@ -25,6 +26,8 @@ export const MarketingAction = ({ marketingAction, mutateMarketingActions }: Pro
     query: { marketingActionStatus },
   } = useRouter();
 
+  const profile = useProfile();
+
   const getRange = () => {
     const _startAt = LanguageUtils.getDateFormat(marketingAction?.start_at, locale);
     const _endAt = marketingAction.end_at
@@ -34,7 +37,11 @@ export const MarketingAction = ({ marketingAction, mutateMarketingActions }: Pro
   };
 
   const targetSettings = () => {
-    return TargetFilterUtils.getTargetFilters(marketingAction.target_segments).join(', ') || '';
+    return (
+      TargetFilterUtils.getTargetFilters(marketingAction.target_segments)
+        .map(target => tCommon(target))
+        .join(', ') || ''
+    );
   };
 
   const handleSuspendMA = () => {
@@ -81,7 +88,7 @@ export const MarketingAction = ({ marketingAction, mutateMarketingActions }: Pro
             )}
             <Link
               passHref
-              href={`/organizations/1/projects/1/actions/edit/${marketingActionUrl.path}/${marketingAction.id}`}
+              href={`/organizations/${profile.data?.organization_id}/projects/${profile.data?.project_id}/actions/edit/${marketingActionUrl.path}/${marketingAction.id}`}
             >
               <Button colorScheme='negative' className='mr-5 min-w-[240px]'>
                 {t('editInEditor')}

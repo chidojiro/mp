@@ -19,9 +19,15 @@ export const RankingByHistoryPurchase = ({ settings }: Props) => {
       <StepBlock stepName={t('carouselDisplaySettings')}>
         <Answer name={t('carouselDisplay')}>
           <div>[{t('title')}]</div>
-          <div className='mt-2'>{settings.carousel[0].title}</div>
+          <div
+            dangerouslySetInnerHTML={{ __html: settings.carousel[0].title }}
+            className='mt-2'
+          ></div>
           <div className='mt-3'>[{t('note')}]</div>
-          <div className='mt-2'>{settings.carousel[0].content}</div>
+          <div
+            dangerouslySetInnerHTML={{ __html: settings.carousel[0].content }}
+            className='mt-2'
+          ></div>
         </Answer>
       </StepBlock>
       <ChatWindowSettings settings={settings} />

@@ -73,7 +73,8 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
               <span className='text-secondary'>{t('previewMobile')}</span>
               <span
                 className='text-gray-700 underline cursor-pointer'
-                onClick={() => onShowModal('mail')}>
+                onClick={() => onShowModal('mail')}
+              >
                 {t('openPreview')}
               </span>
             </div>
@@ -109,7 +110,9 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
                     />
                   ))}
                 </Form.RadioGroup>
-                {showLineMsg && <MessageBodyInput name={`${messageNum}.line_messages.content`} />}
+                {showLineMsg && (
+                  <MessageBodyInput name={`${messageNum}.line_messages.text_msg_content`} />
+                )}
               </div>
             </div>
             <div>
@@ -117,11 +120,12 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
                 <span className='text-secondary'>{t('preview')}</span>
                 <span
                   className='text-gray-700 underline cursor-pointer'
-                  onClick={() => onShowModal('line')}>
+                  onClick={() => onShowModal('line')}
+                >
                   {t('openPreview')}
                 </span>
               </div>
-              <LinePreview body={message?.line_messages?.content} color={message.color} />
+              <LinePreview body={message?.line_messages?.text_msg_content} color={message.color} />
             </div>
           </div>
         </div>
@@ -134,7 +138,7 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
         defaultType={currType}
         mailHeadline={message?.mail_content.title}
         mailBody={message?.mail_content.content}
-        lineBody={message?.line_messages?.content}
+        lineBody={message?.line_messages?.text_msg_content}
         control={previewMessageControl}
         color={message.color}
       />

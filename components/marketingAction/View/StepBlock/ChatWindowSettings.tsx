@@ -24,7 +24,7 @@ export const ChatWindowSettings = ({ settings }: Props) => {
       <Answer name={t('colorTheme')}>
         <Color
           color={settings.chat_window_color}
-          label={t(ColorUtils.getName(settings.chat_window_color))}
+          label={t(ColorUtils.getName(settings.chat_window_color, true))}
         />
       </Answer>
       <AppearanceCond settings={settings} />

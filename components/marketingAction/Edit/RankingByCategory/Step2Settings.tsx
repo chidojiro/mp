@@ -1,32 +1,48 @@
 import { useTranslation } from 'next-i18next';
 
-import { Form } from '@/components/common';
 import { Message } from '@/components/marketingAction/ChatPreview/Message';
 
-import { VariableSign } from '../VariableSign';
+import { MessageBodyInput } from '../MessageBodyInput';
 
-export const Step2Settings = () => {
+type Props = {
+  isMonthly: boolean;
+};
+
+export const Step2Settings = ({ isMonthly }: Props) => {
   const { t } = useTranslation('marketingAction');
+
+  const periodOption = isMonthly
+    ? { label: t('saleRankingPastMonth'), value: 'saleRankingPastMonth' }
+    : { label: t('saleRankingPastWeek'), value: 'saleRankingPastWeek' };
+
+  const options = [
+    { label: t('productName'), value: 'productName' },
+    { label: t('productDetails'), value: 'productDetail' },
+    { label: t('amountIncludingTax'), value: 'amountIncludingTax' },
+    { label: t('amountExcludingTax'), value: 'amountExcludingTax' },
+    { label: t('saleRankingPastYear'), value: 'saleRankingPastYear' },
+    periodOption,
+  ];
 
   return (
     <div className='flex justify-between'>
       <div>
         <div className='mb-1 font-bold text-gray-dark'>{t('carouselDisplay')}</div>
         <div className='font-bold text-medium text-secondary'>{t('title')}</div>
-        <Form.ContentEditable
-          name='step2.carousel_title'
+        <MessageBodyInput
+          name='carousel.title'
+          singleLine={true}
+          showEmoji={false}
+          defaultOptions={options}
           className='flex flex-row-reverse items-center mt-2 mb-4'
-          singleLine
-          label={<VariableSign />}
-          rules={{ required: true }}
         />
         <div className='font-bold text-medium text-secondary'>{t('note')}</div>
-        <Form.ContentEditable
-          name='step2.carousel_note'
+        <MessageBodyInput
+          name='carousel.content'
+          singleLine={true}
+          showEmoji={false}
+          defaultOptions={options}
           className='flex flex-row-reverse items-center mt-2'
-          singleLine
-          label={<VariableSign />}
-          rules={{ required: true }}
         />
       </div>
       <div className='p-10 w-[350px] bg-white rounded'>

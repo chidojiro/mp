@@ -130,8 +130,8 @@ export const DeliveryAfterPurchase = ({}: Props) => {
   React.useEffect(() => {
     if (data) {
       lineUsageSettingsStepMethods.reset({ enable_line: data.settings.enable_line });
-      message1SettingsStepMethods.reset(data.settings.step_messages[0]);
-      message2SettingsStepMethods.reset(data.settings.step_messages[1]);
+      message1SettingsStepMethods.reset(data.settings?.step_messages?.[0]);
+      message2SettingsStepMethods.reset(data.settings?.step_messages?.[1]);
       targetSettingsMethods.reset({ target_segments: data.target_segments });
     }
   }, [
@@ -227,7 +227,8 @@ export const DeliveryAfterPurchase = ({}: Props) => {
               marketingActionName: 'step-delivery-after-purchase',
             })
           )
-        }>
+        }
+      >
         <div className='text-center text-gray-dark'>
           <Modal.Body className='leading-loose whitespace-pre-line'>
             {t('alertAfterSaveAsDraft')}
@@ -238,7 +239,8 @@ export const DeliveryAfterPurchase = ({}: Props) => {
               href={getMyMarketingActionListHref({
                 marketingActionStatus: MarketingActionStatus.DRAFT,
                 marketingActionId: newMarketingActionId!,
-              })}>
+              })}
+            >
               <Modal.FooterButton colorScheme='negative' onClick={draftConfirmModalControl.close}>
                 {t('gotoMyMA')}
               </Modal.FooterButton>
@@ -255,7 +257,8 @@ export const DeliveryAfterPurchase = ({}: Props) => {
               marketingActionName: 'step-delivery-after-purchase',
             })
           )
-        }>
+        }
+      >
         <div className='text-center text-gray-dark'>
           <Modal.Body className='leading-loose whitespace-pre-line'>
             {t('alertAfterExecuting')}
@@ -266,10 +269,12 @@ export const DeliveryAfterPurchase = ({}: Props) => {
               href={getMyMarketingActionListHref({
                 marketingActionId: newMarketingActionId!,
                 marketingActionStatus: MarketingActionStatus.RUNNING,
-              })}>
+              })}
+            >
               <Modal.FooterButton
                 colorScheme='negative'
-                onClick={implementCompleteConfirmModalControl.close}>
+                onClick={implementCompleteConfirmModalControl.close}
+              >
                 {t('gotoMyMA')}
               </Modal.FooterButton>
             </Link>
@@ -298,7 +303,8 @@ export const DeliveryAfterPurchase = ({}: Props) => {
         title={t('stepDeliveryAfterPurchase')}
         description={t('stepDeliveryAfterPurchaseDescription')}
         descriptionImageUrl='/images/step-delivery-after-purchase-description.png'
-        flowImgUrl='/images/step-delivery-after-purchase-flow.png'></ActionContainer>
+        flowImgUrl='/images/step-delivery-after-purchase-flow.png'
+      ></ActionContainer>
       <Stepper className='mt-16'>
         <LineUsageSettingsStep
           formMethods={lineUsageSettingsStepMethods}
@@ -331,7 +337,8 @@ export const DeliveryAfterPurchase = ({}: Props) => {
             <Button
               colorScheme='negative'
               className='w-[240px]'
-              onClick={() => push(getMarketingActionListHref())}>
+              onClick={() => push(getMarketingActionListHref())}
+            >
               {t('stopEditing')}
             </Button>
           </>
@@ -343,7 +350,8 @@ export const DeliveryAfterPurchase = ({}: Props) => {
         <Button
           onClick={implementConfirmModalControl.open}
           className='w-[480px]'
-          disabled={!isComplete}>
+          disabled={!isComplete}
+        >
           {t('implementTemplate')}
         </Button>
       </div>

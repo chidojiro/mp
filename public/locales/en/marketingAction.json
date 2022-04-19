@@ -158,9 +158,12 @@
   "leftEdge": "Left edge of screen",
   "rightEdge": "Right edge of screen",
   "upFromDefaultPos": "Up from default position",
+  "saleRankingPastWeek": "Sales ranking position in the past week",
   "saleRankingPastMonth": "Sales ranking position in the past month",
+  "saleRankingPastYear": "Sales ranking position for the past year",
   "productName": "Product name",
   "amountIncludingTax": "Amount including tax",
+  "amountExcludingTax": "Amount excluding tax",
   "productDetails": "Product Details",
   "popupSettings": "Popup Settings",
   "freeShippingAmountLabel": "Amount until free shipping",
@@ -175,7 +178,7 @@
   "upFromDefaultPosition": "Up from the default position",
   "suspendTemplate": "Suspend Template",
   "defaultHeadline": "Did you forget\nto buy anything?",
-  "defaultTextEmail": "Thank you for visiting @[ brandName ](brandName). The following items are still stored in your shopping cart. Please consider purchasing them before they are sold out.",
+  "defaultTextEmail": "Thank you for visiting <span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"brandName\">Brand name</span>. The following items are still stored in your shopping cart. Please consider purchasing them before they are sold out.",
   "customerName": "Customer name",
   "brandName": "Brand name",
   "businessHours": "Business hours",
@@ -200,5 +203,7 @@
   "emptyMarketingAction": "There are no measures under implementation.",
   "timeDeliverySettings": "{{time}} {{days}} days {{from_the_date_text}}",
   "save": "Save",
-  "updateCSV": "Upload CSV file"
+  "updateCSV": "Upload CSV file",
+  "carouselTitle": "<span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"rankPosPastMonth\">Sales ranking position for the past month</span><span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"productName\">Product name</span>",
+  "carouselContent": "<span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"amountIncludingTax\">Amount including tax</span>(incl. tax)/<span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"productDetail\">Product details</span>"
 }

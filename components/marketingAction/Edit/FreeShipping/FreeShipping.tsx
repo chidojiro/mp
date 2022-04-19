@@ -16,7 +16,7 @@ import {
   MarketingActionRes,
   MarketingActionAlias,
 } from '@/types';
-import { MarketingActionAPI } from '@/apis/marketing_actions';
+import { MarketingActionAPI } from '@/apis';
 import { TargetFilterUtils } from '@/utils/targetFilter';
 
 import { Steppers } from '../Steppers';

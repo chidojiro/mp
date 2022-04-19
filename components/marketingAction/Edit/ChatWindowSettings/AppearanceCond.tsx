@@ -7,7 +7,7 @@ export const AppearanceCond = () => {
   const { t } = useTranslation('marketingAction');
   const unitOptions: Option<string>[] = [
     { label: 'px', value: 'px' },
-    { label: '%', value: 'percentage' },
+    { label: '%', value: '%' },
     { label: 'vh', value: 'vh' },
   ];
 
@@ -24,7 +24,7 @@ export const AppearanceCond = () => {
             <Form.Input
               type='number'
               className='w-20 mx-2.5'
-              name='chat_settings.pc_appearance_time'
+              name='display_settings_pc.appear_time'
             />
             <span>{t('secondsAfterAprearance')}</span>
           </div>
@@ -36,7 +36,7 @@ export const AppearanceCond = () => {
             <Form.Input
               type='number'
               className='w-20 mx-2.5'
-              name='chat_settings.mobile_appearance_time'
+              name='display_settings_mobile.appear_time'
             />
             <span>{t('secondsAfterAprearance')}</span>
           </div>
@@ -47,42 +47,18 @@ export const AppearanceCond = () => {
         <div className='flex mb-2'>
           <span className='w-20'>PC:</span>
           <div>
-            <Form.RadioGroup name='chat_settings.pc_display_position'>
+            <Form.RadioGroup name='display_settings_pc.position'>
               <RadioGroup.Option
                 colorScheme='secondary'
                 className='mb-2.5'
                 label={t('leftEdge')}
-                value={'left_edge'}
+                value={'left'}
               />
               <RadioGroup.Option
                 colorScheme='secondary'
                 className='mb-2.5'
                 label={t('rightEdge')}
-                value={'right_edge'}
-              />
-            </Form.RadioGroup>
-            <div className='flex items-center'>
-              <span>{t('upFromDefaultPos')}</span>
-              <Form.Input type='number' className='w-20 mx-2.5' name='chat_settings.pc_position' />
-              <Form.Select options={unitOptions} className='w-20' name='chat_settings.pc_unit' />
-            </div>
-          </div>
-        </div>
-        <div className='flex mb-2'>
-          <span className='w-20'>{t('mobile')}</span>
-          <div>
-            <Form.RadioGroup name='chat_settings.mobile_display_position'>
-              <RadioGroup.Option
-                colorScheme='secondary'
-                className='mb-2.5'
-                label={t('leftEdge')}
-                value={'left_edge'}
-              />
-              <RadioGroup.Option
-                colorScheme='secondary'
-                className='mb-2.5'
-                label={t('rightEdge')}
-                value={'right_edge'}
+                value={'right'}
               />
             </Form.RadioGroup>
             <div className='flex items-center'>
@@ -90,12 +66,44 @@ export const AppearanceCond = () => {
               <Form.Input
                 type='number'
                 className='w-20 mx-2.5'
-                name='chat_settings.mobile_position'
+                name='display_settings_pc.position_close_box'
               />
               <Form.Select
                 options={unitOptions}
                 className='w-20'
-                name='chat_settings.mobile_unit'
+                name='display_settings_pc.position_close_box_unit'
+              />
+            </div>
+          </div>
+        </div>
+        <div className='flex mb-2'>
+          <span className='w-20'>{t('mobile')}</span>
+          <div>
+            <Form.RadioGroup name='display_settings_mobile.position'>
+              <RadioGroup.Option
+                colorScheme='secondary'
+                className='mb-2.5'
+                label={t('leftEdge')}
+                value={'left'}
+              />
+              <RadioGroup.Option
+                colorScheme='secondary'
+                className='mb-2.5'
+                label={t('rightEdge')}
+                value={'right'}
+              />
+            </Form.RadioGroup>
+            <div className='flex items-center'>
+              <span>{t('upFromDefaultPos')}</span>
+              <Form.Input
+                type='number'
+                className='w-20 mx-2.5'
+                name='display_settings_mobile.position_close_box'
+              />
+              <Form.Select
+                options={unitOptions}
+                className='w-20'
+                name='display_settings_mobile.position_close_box_unit'
               />
             </div>
           </div>

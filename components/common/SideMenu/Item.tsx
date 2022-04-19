@@ -50,7 +50,7 @@ export const Item = ({ isOpenAccordion, data }: Props) => {
       <Accordion.Title>
         <div
           className={classNames(
-            'cursor-pointer rounded-full flex text-medium font-bold text-gray-dark border border-white hover:border-dark-gray items-center px-[18px] py-1.5 hover:bg-gray-light mb-2.5'
+            'text-ellipsis overflow-hidden whitespace-nowrap cursor-pointer rounded-full text-medium font-bold text-gray-dark border border-white hover:border-dark-gray items-center px-[18px] py-1.5 hover:bg-gray-light mb-2.5'
           )}
         >
           {label}

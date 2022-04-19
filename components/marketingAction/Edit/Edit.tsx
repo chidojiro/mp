@@ -21,6 +21,7 @@ export const Edit = () => {
         return <CartAbandoned />;
       case 'step-delivery-after-purchase':
         return <DeliveryAfterPurchase />;
+      case 'ranking-based-on-overall-purchase-history':
       case 'ranking-by-category':
         return <RankingByCategory />;
       case 'conditional-free-shipping':
