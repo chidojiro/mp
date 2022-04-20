@@ -4,7 +4,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Settings } from '@/components/settings';
 import { Layout } from '@/components/Layout';
 
-export const getStaticProps = async ({ locale = 'ja' }) => ({
+export const getServerSideProps = async ({ locale = 'ja' }) => ({
   props: {
     ...(await serverSideTranslations(locale, ['common', 'settings'])),
   },

@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { Layout } from '@/components/Layout';
 import { Icon, Select, Table } from '@/components/common';
 
-export const getStaticProps = async ({ locale = 'ja' }) => {
+export const getServerSideProps = async ({ locale = 'ja' }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale!, ['common', 'customSegment'])),

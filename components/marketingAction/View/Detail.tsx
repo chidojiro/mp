@@ -2,15 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
 
-import { TargetFilterUtils } from '@/utils';
-import { MarketingActionAPI } from '@/apis';
-import {
-  MarketingActionRes,
-  MarketingActionStatus as MAStatus,
-  MarketingActionTypeMessage as TYPE,
-} from '@/types';
+import { MarketingActionRes, MarketingActionTypeMessage as TYPE } from '@/types';
 import { SideMenu, SideMenuGroup, SideMenuItem } from '@/components/common';
 import { TargetFilter } from '@/components/TargetFilter';
 

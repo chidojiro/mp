@@ -13,7 +13,7 @@ import { Detail } from '@/components/marketingAction/View';
 import { MarketingActionAPI } from '@/apis';
 import { TargetFilterUtils } from '@/utils';
 
-export const getStaticProps = async ({ locale = 'ja' }) => ({
+export const getServerSideProps = async ({ locale = 'ja' }) => ({
   props: {
     ...(await serverSideTranslations(locale, ['common', 'marketingAction', 'report'])),
   },

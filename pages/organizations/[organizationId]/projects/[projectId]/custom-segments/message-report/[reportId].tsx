@@ -9,7 +9,7 @@ import { Select, Table } from '@/components/common';
 import { Layout } from '@/components/Layout';
 import { useProfile } from '@/hooks';
 
-export const getStaticProps = async ({ locale = 'ja' }) => {
+export const getServerSideProps = async ({ locale = 'ja' }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale!, ['common', 'customSegment'])),

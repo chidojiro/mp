@@ -6,7 +6,7 @@ import { Layout } from '@/components/Layout';
 import { SideMenu, SideMenuGroup } from '@/components/common/SideMenu';
 import { ActionContainer } from '@/components/ActionContainer';
 
-export const getStaticProps = async ({ locale = 'ja' }) => ({
+export const getServerSideProps = async ({ locale = 'ja' }) => ({
   props: {
     ...(await serverSideTranslations(locale, ['common', 'marketingAction'])),
   },

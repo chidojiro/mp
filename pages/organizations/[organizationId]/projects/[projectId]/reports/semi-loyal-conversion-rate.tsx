@@ -3,7 +3,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { Layout } from '@/components/Layout';
 
-export const getStaticProps = async ({ locale = 'ja' }) => ({
+export const getServerSideProps = async ({ locale = 'ja' }) => ({
   props: {
     ...(await serverSideTranslations(locale)),
   },
