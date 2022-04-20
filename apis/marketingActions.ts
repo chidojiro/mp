@@ -18,4 +18,8 @@ const get = (id: string) => {
   return RestApi.get<MarketingActionRes>(`/actions/${id}`);
 };
 
-export const MarketingActionAPI = { list, create, update, get };
+const remove = (id: string) => {
+  return RestApi.delete(`/actions/${id}`);
+};
+
+export const MarketingActionAPI = { list, create, update, get, remove };

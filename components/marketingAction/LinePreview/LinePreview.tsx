@@ -9,7 +9,6 @@ import { ContentEditableUtils } from '@/utils';
 type Props = {
   body?: string;
   desktop?: boolean;
-  color?: string;
   isOverlay?: boolean;
 };
 
@@ -32,7 +31,7 @@ products.push({
 
 const btnHeightWithMargin = '85px';
 
-export const LinePreview = ({ body, desktop = false, color, isOverlay = false }: Props) => {
+export const LinePreview = ({ body, isOverlay = false }: Props) => {
   const { t } = useTranslation('marketingAction');
 
   const parsedBody = ContentEditableUtils.toPreviewString(body ?? '');
@@ -77,11 +76,7 @@ export const LinePreview = ({ body, desktop = false, color, isOverlay = false }:
                   </div>
                   <div className='mb-1 text-regular-sm'>{product.description}</div>
                   <h3 className='mb-5 font-semibold text-right'>{product.price}</h3>
-                  <Button
-                    variant='link'
-                    className='w-full font-semibold text-center no-underline'
-                    style={{ color: color }}
-                  >
+                  <Button variant='link' className='w-full font-semibold text-center no-underline'>
                     {t('viewThisItem')}
                   </Button>
                 </div>

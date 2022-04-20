@@ -67,6 +67,10 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
 
               <MessageBodyInput name={`${messageNum}.mail_content.content`} />
             </div>
+            <div className='mt-7'>
+              <div className='mb-2 font-semibold text-secondary'>{t('colorSettingsForBtn')}</div>
+              <ColorGroup name={`${messageNum}.color`} />
+            </div>
           </div>
           <div>
             <div className='flex justify-between mb-2 text-medium'>
@@ -88,7 +92,7 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
         </div>
       </div>
       {useLine && (
-        <div className='px-10 -mx-10 border-b-4 border-white mt-7 pb-7'>
+        <div className='mt-7'>
           <div className='flex items-center'>
             <Icon name='line' size={20} className='mr-2' />
             <div className='font-semibold'>{t('msgContentLine')}</div>
@@ -125,15 +129,11 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
                   {t('openPreview')}
                 </span>
               </div>
-              <LinePreview body={message?.line_messages?.text_msg_content} color={message.color} />
+              <LinePreview body={message?.line_messages?.text_msg_content} />
             </div>
           </div>
         </div>
       )}
-      <div className='w-2/3 mt-7'>
-        <div className='mb-2 font-semibold'>{t('colorSettings')}</div>
-        <ColorGroup name={`${messageNum}.color`} />
-      </div>
       <PreviewOverlay
         defaultType={currType}
         mailHeadline={message?.mail_content.title}

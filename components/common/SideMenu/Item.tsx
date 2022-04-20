@@ -4,6 +4,7 @@ import { Tabs as HeadlessTabs } from '@/headless';
 import { useVisibilityControl } from '@/hooks';
 
 import { Accordion } from '../Accordion';
+import { Icon } from '../Icon';
 
 export type SideMenuItem = {
   value: string;
@@ -33,7 +34,7 @@ export const Item = ({ isOpenAccordion, data }: Props) => {
               onClickItem?.();
             }}
             className={classNames(
-              'text-ellipsis overflow-hidden whitespace-nowrap px-[18px] py-1.5 border border-white hover:border-dark-gray items-center hover:bg-gray-light text-gray-dark w-full rounded-full cursor-pointer font-bold text-medium mb-2.5',
+              'text-ellipsis overflow-hidden whitespace-nowrap hover:whitespace-normal px-[18px] py-1.5 border border-white hover:border-dark-gray items-center hover:bg-gray-light text-gray-dark w-full rounded-full cursor-pointer font-bold text-medium mb-2.5',
               {
                 'bg-gray-light border border-dark-gray ': isActive,
               }
@@ -47,13 +48,20 @@ export const Item = ({ isOpenAccordion, data }: Props) => {
   }
   return (
     <Accordion control={accordionControl}>
-      <Accordion.Title>
+      <Accordion.Title className=''>
         <div
           className={classNames(
-            'text-ellipsis overflow-hidden whitespace-nowrap cursor-pointer rounded-full text-medium font-bold text-gray-dark border border-white hover:border-dark-gray items-center px-[18px] py-1.5 hover:bg-gray-light mb-2.5'
+            'flex cursor-pointer rounded-full text-medium font-bold text-gray-dark border border-white hover:border-dark-gray items-center px-[18px] py-1.5 hover:bg-gray-light mb-2.5'
           )}
         >
-          {label}
+          <div className='w-full overflow-hidden text-ellipsis whitespace-nowrap '>
+            {label} ({items?.length})
+          </div>
+          <Icon
+            name={accordionControl.visible ? 'chevron-up' : 'chevron-down'}
+            className='ml-auto text-gray-500'
+            size={20}
+          />
         </div>
       </Accordion.Title>
       <Accordion.Content>
@@ -67,7 +75,7 @@ export const Item = ({ isOpenAccordion, data }: Props) => {
                   item.onClick?.();
                 }}
                 className={classNames(
-                  'text-ellipsis border border-white overflow-hidden whitespace-nowrap text-gray-dark w-full rounded-full cursor-pointer text-medium px-[18px] mb-2.5 py-1.5 hover:border-dark-gray items-center hover:bg-gray-light',
+                  'text-ellipsis overflow-hidden whitespace-nowrap hover:whitespace-normal border border-white  text-gray-dark w-full rounded-full cursor-pointer text-medium px-[18px] mb-2.5 py-1.5 hover:border-dark-gray items-center hover:bg-gray-light',
                   {
                     'bg-gray-light border border-dark-gray rounded-full': isActive,
                   }

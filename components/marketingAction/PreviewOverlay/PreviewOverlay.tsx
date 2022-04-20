@@ -97,12 +97,7 @@ export const PreviewOverlay = ({
             isOverlay
           />
         ) : (
-          <LinePreview
-            isOverlay
-            body={lineBody}
-            desktop={selectedDevice === 'desktop'}
-            color={color}
-          />
+          <LinePreview isOverlay body={lineBody} desktop={selectedDevice === 'desktop'} />
         )}
         <div className='flex items-center justify-center w-full'>
           <SwitchButtons

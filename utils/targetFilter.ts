@@ -3,8 +3,8 @@ import { MarketingActionSegment as MASegment, TARGET } from '@/types';
 const getTarget = (segment: string, member: boolean, sleep: boolean) => {
   return {
     segment,
+    is_sleep: sleep, // is_sleep should be add before is_member, hope BE side will have better idea.
     is_member: member,
-    is_sleep: sleep,
   };
 };
 

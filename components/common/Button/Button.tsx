@@ -174,7 +174,7 @@ export const Button = React.forwardRef<Ref, Props>(
     const borderColor = borderColors[colorScheme][variant];
     const textColor = textColors[colorScheme][variant];
     const underline = variant === 'link' && 'underline';
-    const fontWeigh = variant !== 'link' && 'font-semibold';
+    const fontWeigh = variant !== 'link' && 'font-bold';
     const padding = variant !== 'link' && 'px-6 py-2';
 
     return (

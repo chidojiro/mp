@@ -29,7 +29,7 @@ export const Action = ({ name, path, icon, targetCustomers, date }: Props) => {
       ? `actions/edit/${path}/${marketingActionId}`
       : 'reports/action-reports/line-email/1?targets=all';
 
-  const btn = marketingActionStatus === MAStatus.DRAFT ? t('editInEditor') : t('viewReport');
+  const isDraft = marketingActionStatus === MAStatus.DRAFT;
   const targetFilters = TargetFilterUtils.getTargetFilters(targetCustomers);
   return (
     <div className='p-10'>
@@ -54,9 +54,11 @@ export const Action = ({ name, path, icon, targetCustomers, date }: Props) => {
         </div>
       </div>
       <div className='flex justify-center w-full mt-7'>
-        <Link passHref href={`${prefixUrl}${url}`}>
-          <Button className='w-[360px] h-11'>{btn}</Button>
-        </Link>
+        {!isDraft && (
+          <Link passHref href={`${prefixUrl}${url}`}>
+            <Button className='w-[360px] h-11'>{t('viewReport')}</Button>
+          </Link>
+        )}
       </div>
     </div>
   );

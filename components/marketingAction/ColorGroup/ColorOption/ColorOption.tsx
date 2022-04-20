@@ -14,16 +14,15 @@ export const ColorOption = ({ color }: Props) => {
         <label className={'flex items-center mb-2.5 cursor-pointer'}>
           <div
             className={classNames(
-              'w-[34px] h-[34px] p-1 rounded flex items-center border bg-white',
+              'w-[34px] h-[34px] p-[3px] rounded flex items-center border bg-white',
+              isChecked ? 'border-secondary' : 'border-input',
               {
-                'border-input': !isChecked,
                 'border-danger': error,
               }
             )}
-            style={{ borderColor: isChecked ? color.value : '' }}
           >
             <div
-              className={classNames('w-full h-full rounded ')}
+              className={classNames('w-full h-full')}
               style={{ backgroundColor: color.value }}
             ></div>
           </div>
