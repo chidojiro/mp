@@ -6,38 +6,24 @@ import useSWR from 'swr';
 
 import { TargetFilterUtils } from '@/utils';
 import { MarketingActionAPI } from '@/apis';
-import { MarketingActionStatus as MAStatus, MarketingActionTypeMessage as TYPE } from '@/types';
+import {
+  MarketingActionRes,
+  MarketingActionStatus as MAStatus,
+  MarketingActionTypeMessage as TYPE,
+} from '@/types';
 import { SideMenu, SideMenuGroup, SideMenuItem } from '@/components/common';
 import { TargetFilter } from '@/components/TargetFilter';
 
 import { MarketingAction } from './MarketingAction';
 
-export const Detail = () => {
+type Props = {
+  marketingActions?: MarketingActionRes[];
+  mutateMarketingActions: () => void;
+};
+
+export const Detail = ({ marketingActions = [], mutateMarketingActions }: Props) => {
   const { query, pathname, push } = useRouter();
   const { t } = useTranslation('marketingAction');
-  const [filter, setFilter] = useState({});
-
-  useEffect(() => {
-    const _targets = [query.targets].flat().filter(Boolean);
-    if (_targets.length && _targets[0] !== 'all') {
-      const _targetSegments = TargetFilterUtils.getTargetCustomers(_targets as string[]);
-      setFilter(prevState => {
-        return { ...prevState, target_segments: JSON.stringify(_targetSegments) };
-      });
-    }
-  }, [query.targets]);
-
-  const maStatus = (query.marketingActionStatus as string) || MAStatus.RUNNING;
-
-  const { data, mutate } = useSWR(
-    ['/actions', filter],
-    () => MarketingActionAPI.list({ params: filter }),
-    {
-      fallbackData: {},
-    }
-  );
-
-  const marketingActions = data?.[maStatus] || [];
 
   useEffect(() => {
     if (marketingActions.length) {
@@ -90,7 +76,9 @@ export const Detail = () => {
           value: ma.id,
           onClick: () => handleMAChange({ marketingActionId: ma.id }),
           label: ma.description,
-          content: <MarketingAction marketingAction={ma} mutateMarketingActions={mutate} />,
+          content: (
+            <MarketingAction marketingAction={ma} mutateMarketingActions={mutateMarketingActions} />
+          ),
         };
       });
       return { ...menu, children };
@@ -100,7 +88,9 @@ export const Detail = () => {
       ...menu,
       value: ma.id,
       onClick: () => handleMAChange({ marketingActionId: ma.id }),
-      content: <MarketingAction marketingAction={ma} mutateMarketingActions={mutate} />,
+      content: (
+        <MarketingAction marketingAction={ma} mutateMarketingActions={mutateMarketingActions} />
+      ),
     };
   };
 

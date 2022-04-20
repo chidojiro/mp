@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
@@ -9,6 +9,9 @@ import { Layout } from '@/components/Layout';
 import { Tabs } from '@/components/common/Tabs';
 import { MarketingActionStatus as MAStatus } from '@/types';
 import { Detail } from '@/components/marketingAction/View';
+import { MarketingActionAPI } from '@/apis';
+import { TargetFilterUtils } from '@/utils';
+import useSWR from 'swr';
 
 export const getStaticProps = async ({ locale = 'ja' }) => ({
   props: {
@@ -19,6 +22,26 @@ export const getStaticProps = async ({ locale = 'ja' }) => ({
 export const ListActionPage = () => {
   const { t } = useTranslation(['marketingAction']);
   const { pathname, query } = useRouter();
+
+  const [filter, setFilter] = useState({});
+
+  useEffect(() => {
+    const _targets = [query.targets].flat().filter(Boolean);
+    if (_targets && _targets[0] !== 'all') {
+      const _targetSegments = TargetFilterUtils.getTargetCustomers(_targets as string[]);
+      setFilter(prevState => {
+        return { ...prevState, target_segments: JSON.stringify(_targetSegments) };
+      });
+    }
+  }, [query.targets]);
+
+  const { data, mutate } = useSWR(
+    ['/actions', filter],
+    () => MarketingActionAPI.list({ params: filter }),
+    {
+      fallbackData: {},
+    }
+  );
 
   const tabs = [
     {
@@ -34,7 +57,9 @@ export const ListActionPage = () => {
           <a className='block'>{t('inProgressTab')}</a>
         </Link>
       ),
-      content: <Detail />,
+      content: (
+        <Detail marketingActions={data?.[MAStatus.RUNNING]} mutateMarketingActions={mutate} />
+      ),
     },
     {
       value: MAStatus.COMPLETE,
@@ -49,7 +74,9 @@ export const ListActionPage = () => {
           <a className='block'>{t('finishedTab')}</a>
         </Link>
       ),
-      content: <Detail />,
+      content: (
+        <Detail marketingActions={data?.[MAStatus.COMPLETE]} mutateMarketingActions={mutate} />
+      ),
     },
     {
       value: MAStatus.DRAFT,
@@ -65,7 +92,7 @@ export const ListActionPage = () => {
         </Link>
       ),
 
-      content: <Detail />,
+      content: <Detail marketingActions={data?.[MAStatus.DRAFT]} mutateMarketingActions={mutate} />,
     },
   ];
   return (

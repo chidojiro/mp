@@ -19,7 +19,7 @@ export const CheckboxTag = ({ value, label, checked, onChange }: Props) => {
         'flex items-center gap-1',
         'border border-solid',
         {
-          'border-gray-500 bg-white text-gray-dark': !checked,
+          'border-input bg-white text-gray-dark': !checked,
           'bg-primary border-primary text-white': checked,
         }
       )}

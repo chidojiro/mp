@@ -20,6 +20,7 @@ type Props = {
 export const MarketingAction = ({ marketingAction, mutateMarketingActions }: Props) => {
   const { t } = useTranslation('marketingAction');
   const { t: tCommon } = useTranslation('common');
+  const { query, pathname, push } = useRouter();
 
   const {
     locale,
@@ -44,16 +45,25 @@ export const MarketingAction = ({ marketingAction, mutateMarketingActions }: Pro
     );
   };
 
-  const handleSuspendMA = () => {
-    MarketingActionAPI.update(marketingAction.id, {
+  const handleSuspendMA = async () => {
+    await MarketingActionAPI.update(marketingAction.id, {
       ...marketingAction,
+      marketing_action_type_alias: marketingAction.marketing_action_type?.alias,
       status: MarketingActionStatus.DRAFT,
     });
     mutateMarketingActions?.();
+    push({
+      pathname,
+      query: {
+        ...query,
+        marketingActionId: marketingAction.id,
+        marketingActionStatus: MarketingActionStatus.DRAFT,
+      },
+    });
   };
 
-  const handleDeleteMA = () => {
-    MarketingActionAPI.remove(marketingAction.id);
+  const handleDeleteMA = async () => {
+    await MarketingActionAPI.remove(marketingAction.id);
     mutateMarketingActions?.();
   };
 
