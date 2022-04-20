@@ -24,6 +24,11 @@ export type LoginResponse = {
   token_type: string;
 };
 
+export type NewPasswordPayload = {
+  token: string;
+  password: string;
+};
+
 const login = async (payload: LoginPayload) => {
   const { access_token } = await RestApi.post<LoginResponse>('/auth/login', payload);
   CookiesUtils.set(ACCESS_TOKEN_KEY, access_token);
@@ -60,4 +65,31 @@ const verifyToken = async (token: string) => {
     return false;
   }
 };
-export const AuthApi = { login, recoverPassword, verifyToken };
+
+const newPassword = async (payload: NewPasswordPayload) => {
+  try {
+    const response = await RestApi.post('/auth/password/reset', payload);
+    return response;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError;
+      if (400 === axiosError.response?.status) {
+        return {
+          status: 'error',
+          error: {
+            code: 'invalidToken',
+          },
+        };
+      }
+      if (422 === axiosError.response?.status) {
+        return {
+          status: 'error',
+          error: {
+            code: 'badRequest',
+          },
+        };
+      }
+    }
+  }
+};
+export const AuthApi = { login, recoverPassword, verifyToken, newPassword };

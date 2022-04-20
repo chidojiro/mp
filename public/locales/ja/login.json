@@ -18,6 +18,8 @@
   "email.invalid": "Email is invalid format",
   "email.notFound": "Email does not exist",
   "password.required": "パスワードを入力してください",
+  "password.minLength": "Password must be {{value}} character at least",
+  "password.maxLength": "Password must be {{value}} characters max",
   "passwordRecovery.emailSent": "An Email sent to your email. Please check and follow the instruction",
   "passwordRecovery.gotoLogin": "Go to Login"
 }

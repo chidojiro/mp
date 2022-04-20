@@ -1,73 +1,73 @@
 import React from 'react';
 
-import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
 
-import { AuthApi, LoginPayload } from '@/apis/auth';
 import { Form } from '@/components/common/Form';
-import { ErrorMessage } from '@/components/common/ErrorMessage';
 import { Button } from '@/components/common/Button';
-import { useStateToggle } from '@/hooks/useStateToggle';
-import { useNavigator } from '@/hooks/useNavigator';
+import { AuthApi } from '@/apis';
 
-export const NewPasswordForm = () => {
+import { PasswordField } from './PasswordField';
+import { ErrorMessage } from '../common';
+
+type Props = {
+  token: string;
+};
+
+type FormData = {
+  password: string;
+  passwordConfirm: string;
+  token: string;
+};
+export const NewPasswordForm = ({ token }: Props) => {
   const { t } = useTranslation('login');
   const [isProcessing, setProcessing] = React.useState(false);
-  const navigator = useNavigator();
-  const methods = useForm({
+  const [error, setError] = React.useState<string | null>(null);
+  const methods = useForm<FormData>({
     mode: 'onTouched',
+    defaultValues: {
+      token,
+    },
   });
-  const [isInvalid, setIsInvalid] = React.useState(false);
 
-  const [showPwd, toggleShowPwd] = useStateToggle(false);
-  const icon = showPwd ? <EyeIcon className='w-5 h-5' /> : <EyeOffIcon className='w-5 h-5' />;
-
-  const onSubmit = async (val: LoginPayload) => {
+  const onSubmit = async (val: FormData) => {
+    if (val.password !== val.passwordConfirm) {
+      methods.setError('passwordConfirm', { message: '' });
+      methods.setError('password', { message: '' });
+      setError('passwordNotMatched');
+      return;
+    }
+    setError(null);
     try {
       setProcessing(true);
-      await AuthApi.login(val);
-      await navigator.openDashboard();
-    } catch {
-      setIsInvalid(true);
-    } finally {
+      const response = await AuthApi.newPassword({
+        token: val.token,
+        password: val.password,
+      });
       setProcessing(false);
-    }
+      if (response.status === 'error') {
+        setError(response.data.error.code);
+      }
+    } catch (error) {}
   };
 
   return (
     <div className='w-[400px]'>
       <div className='mb-5 font-bold prose text-center text-h4'>{t('NewPasswordSetting')}</div>
       <Form methods={methods} onSubmit={onSubmit}>
-        <Form.Input
+        <PasswordField
           name='password'
+          onChange={() => setError(null)}
           className='w-full mt-2'
-          type={showPwd ? 'text' : 'password'}
           placeholder={t('newPassword')}
-          innerRight={
-            <div className='cursor-pointer select-none' onClick={() => toggleShowPwd()}>
-              {icon}
-            </div>
-          }
-          onChange={() => setIsInvalid(false)}
-          rules={{ required: true }}
         />
-        <Form.Input
-          name='password-confirm'
+        <PasswordField
+          name='passwordConfirm'
           className='w-full mt-2'
-          type={showPwd ? 'text' : 'password'}
           placeholder={t('newPasswordConfirm')}
-          innerRight={
-            <div className='cursor-pointer select-none' onClick={() => toggleShowPwd()}>
-              {icon}
-            </div>
-          }
-          onChange={() => setIsInvalid(false)}
-          rules={{ required: true }}
         />
-        {!!isInvalid && (
-          <ErrorMessage className='mt-1'>{t('incorrectEmailOrPassword')}</ErrorMessage>
-        )}
+        <input type='hidden' {...methods.register('token')} />
+        {!!error && <ErrorMessage className='mt-4'>{t(error)}</ErrorMessage>}
         <Button type='submit' className='w-full my-4 font-bold' disabled={isProcessing}>
           {t('change')}
         </Button>

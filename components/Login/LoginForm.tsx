@@ -54,11 +54,11 @@ export const LoginForm = () => {
     },
     minLength: {
       value: 8,
-      message: tCommon('validation.field.minLength', { value: 8 }),
+      message: t('password.minLength', { value: 8 }),
     },
     maxLength: {
       value: 48,
-      message: tCommon('validation.field.maxLength', { value: 48 }),
+      message: t('password.maxLength', { value: 48 }),
     },
   };
   const emailRules = {
