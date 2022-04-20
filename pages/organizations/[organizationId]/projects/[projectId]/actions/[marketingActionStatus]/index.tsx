@@ -4,6 +4,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import useSWR from 'swr';
 
 import { Layout } from '@/components/Layout';
 import { Tabs } from '@/components/common/Tabs';
@@ -11,7 +12,6 @@ import { MarketingActionStatus as MAStatus } from '@/types';
 import { Detail } from '@/components/marketingAction/View';
 import { MarketingActionAPI } from '@/apis';
 import { TargetFilterUtils } from '@/utils';
-import useSWR from 'swr';
 
 export const getStaticProps = async ({ locale = 'ja' }) => ({
   props: {
