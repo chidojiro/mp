@@ -66,13 +66,20 @@ export const PasswordRecoverForm = () => {
           <Button type='submit' className='w-full my-4 font-bold' disabled={isProcessing}>
             {t('submit')}
           </Button>
+          <Link href='/login'>
+            <Button variant='link' className='!block mx-auto'>
+              {t('login')}
+            </Button>
+          </Link>
         </Form>
       )}
       {isSuccess && (
         <div>
-          <div>{t('passwordRecovery.emailSent')}</div>
+          <div>{t('message.passwordRecovery.emailSent')}</div>
           <Link href='/login'>
-            <Button variant='link'>{t('passwordRecovery.gotoLogin')}</Button>
+            <Button variant='link' className='!block mx-auto'>
+              {t('login')}
+            </Button>
           </Link>
         </div>
       )}

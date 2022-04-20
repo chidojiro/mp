@@ -12,6 +12,8 @@ import { Button } from '@/components/common/Button';
 import { useStateToggle } from '@/hooks/useStateToggle';
 import { useNavigator } from '@/hooks/useNavigator';
 
+import { PasswordField } from './PasswordField';
+
 export const LoginForm = () => {
   const { t } = useTranslation('login');
   const { t: tCommon } = useTranslation('common');
@@ -84,20 +86,7 @@ export const LoginForm = () => {
           rules={emailRules}
         />
         <Form.ErrorMessage name='email' />
-        <Form.Input
-          name='password'
-          className='w-full mt-2'
-          type={showPwd ? 'text' : 'password'}
-          placeholder={t('password')}
-          innerRight={
-            <div className='cursor-pointer select-none' onClick={() => toggleShowPwd()}>
-              {icon}
-            </div>
-          }
-          rules={passwordRules}
-        />
-        <Form.ErrorMessage name='password' />
-
+        <PasswordField name='password' placeholder={t('password')} className='w-full mt-2' />
         <div className='mt-2'>
           {isInvalid && <ErrorMessage>{t('incorrectEmailOrPassword')}</ErrorMessage>}
         </div>
