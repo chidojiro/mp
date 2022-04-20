@@ -55,7 +55,7 @@ export const ListActionPage = () => {
           }}
         >
           <a className='block'>
-            {t('inProgressTab')} ({data?.[MAStatus.RUNNING].length})
+            {t('inProgressTab')} ({data?.[MAStatus.RUNNING]?.length})
           </a>
         </Link>
       ),
@@ -74,7 +74,7 @@ export const ListActionPage = () => {
           }}
         >
           <a className='block'>
-            {t('finishedTab')} ({data?.[MAStatus.COMPLETE].length})
+            {t('finishedTab')} ({data?.[MAStatus.COMPLETE]?.length})
           </a>
         </Link>
       ),
@@ -93,7 +93,7 @@ export const ListActionPage = () => {
           }}
         >
           <a className='block'>
-            {t('draftTab')} ({data?.[MAStatus.DRAFT].length})
+            {t('draftTab')} ({data?.[MAStatus.DRAFT]?.length})
           </a>
         </Link>
       ),
