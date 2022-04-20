@@ -20,7 +20,6 @@ type Props = {
 export const MarketingAction = ({ marketingAction, mutateMarketingActions }: Props) => {
   const { t } = useTranslation('marketingAction');
   const { t: tCommon } = useTranslation('common');
-  const { query, pathname, push } = useRouter();
 
   const {
     locale,
@@ -52,14 +51,6 @@ export const MarketingAction = ({ marketingAction, mutateMarketingActions }: Pro
       status: MarketingActionStatus.DRAFT,
     });
     mutateMarketingActions?.();
-    push({
-      pathname,
-      query: {
-        ...query,
-        marketingActionId: marketingAction.id,
-        marketingActionStatus: MarketingActionStatus.DRAFT,
-      },
-    });
   };
 
   const handleDeleteMA = async () => {

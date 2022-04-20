@@ -54,7 +54,9 @@ export const ListActionPage = () => {
             query: { ...query, marketingActionStatus: MAStatus.RUNNING, marketingActionId: 1 },
           }}
         >
-          <a className='block'>{t('inProgressTab')}</a>
+          <a className='block'>
+            {t('inProgressTab')} ({data?.[MAStatus.RUNNING].length})
+          </a>
         </Link>
       ),
       content: (
@@ -71,7 +73,9 @@ export const ListActionPage = () => {
             query: { ...query, marketingActionStatus: MAStatus.COMPLETE, marketingActionId: 1 },
           }}
         >
-          <a className='block'>{t('finishedTab')}</a>
+          <a className='block'>
+            {t('finishedTab')} ({data?.[MAStatus.COMPLETE].length})
+          </a>
         </Link>
       ),
       content: (
@@ -88,7 +92,9 @@ export const ListActionPage = () => {
             query: { ...query, marketingActionStatus: MAStatus.DRAFT, marketingActionId: 1 },
           }}
         >
-          <a className='block'>{t('draftTab')}</a>
+          <a className='block'>
+            {t('draftTab')} ({data?.[MAStatus.DRAFT].length})
+          </a>
         </Link>
       ),
 
