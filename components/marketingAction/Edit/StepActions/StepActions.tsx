@@ -38,7 +38,8 @@ export const StepActions = ({ onPreviewClick, onConfirmClick, complete, useToolt
         type={onConfirmClick ? 'button' : 'submit'}
         colorScheme='green'
         variant={complete ? 'outline' : 'solid'}
-        className='w-[240px]'>
+        className='w-[240px]'
+      >
         {t('confirm')}
         {!!useTooltip && <ConfirmButtonTooltip control={tooltipControl} />}
       </Button>

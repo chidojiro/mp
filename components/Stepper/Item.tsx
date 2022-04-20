@@ -36,7 +36,8 @@ export const Item = React.forwardRef<any, Props>(
               'flex z-10 items-center justify-center mr-5 border-2 rounded-full w-7 h-7',
               complete ? 'bg-mint-green border-mint-green' : 'bg-gray',
               isActive ? 'border-mint-green' : 'border-gray'
-            )}>
+            )}
+          >
             <Icon name='check' className='text-white' size={17} />
           </div>
           <div className={classNames('pl-8', 'flex items-center gap-2')}>
@@ -50,7 +51,8 @@ export const Item = React.forwardRef<any, Props>(
             'py-5 pl-8',
             'border-l-2 border-solid',
             complete ? 'border-mint-green' : 'border-gray'
-          )}>
+          )}
+        >
           {children}
         </div>
       </div>

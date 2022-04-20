@@ -19,7 +19,8 @@ export const ConfirmButtonTooltip = ({ control }: Props) => {
           "before:content-[''] before:absolute before:bottom-[-14px] before:right-1/2 before:border-primary",
           'before:w-6 before:h-[15px] before:shadow-[4px_4px_6px_0px_#00000029] before:border-r-[16px] before:border-b-[3px] before:rounded-br-[80px_50px]'
         )}
-        onClick={e => e.stopPropagation()}>
+        onClick={e => e.stopPropagation()}
+      >
         <Icon
           onClick={control?.close}
           name='popover-close'
