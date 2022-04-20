@@ -11,19 +11,12 @@ import { useVisibilityControl } from '@/hooks/useVisibilityControl';
 import { SSR } from '@/ssr';
 import { Profile } from '@/types';
 
-export const getStaticProps = async ({ locale = 'ja' }) => {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale!, ['common', 'account'])),
-    },
-  };
-};
-
-export const getServerSideProps = SSR.withProps('profile')((_, result) => {
+export const getServerSideProps = SSR.withProps('profile')(async ({ locale }, result) => {
   return {
     ...result,
     props: {
       ...result.props,
+      ...(await serverSideTranslations(locale!, ['common', 'account'])),
     },
   };
 });

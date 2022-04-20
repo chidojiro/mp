@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { GetServerSideProps, GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Link from 'next/link';
@@ -17,20 +17,13 @@ import { useProfile } from '@/hooks';
 import { SSR } from '@/ssr';
 import { Profile } from '@/types';
 
-export const getStaticProps: GetStaticProps = async ({ locale = 'ja' }) => {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['common', 'account'])),
-    },
-  };
-};
-
 export const getServerSideProps: GetServerSideProps = SSR.withProps('profile')(
-  async (_, result) => {
+  async ({ locale = 'ja' }, result) => {
     return {
       ...result,
       props: {
         ...result.props,
+        ...(await serverSideTranslations(locale, ['common', 'account'])),
       },
     };
   }

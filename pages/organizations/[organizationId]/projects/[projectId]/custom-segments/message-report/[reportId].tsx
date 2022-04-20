@@ -150,7 +150,8 @@ export const MessageReportDetails = ({}: Props) => {
       </Table>
       <Link
         passHref
-        href={`/organizations/${profile.data?.organization_id}/projects/${profile.data?.project_id}/custom-segments/message-report`}>
+        href={`/organizations/${profile.data?.organization_id}/projects/${profile.data?.project_id}/custom-segments/message-report`}
+      >
         <a className='flex justify-end mt-5'>
           <div className='flex items-center text-gray-600 transform translate-x-2'>
             {t('returnToList')}

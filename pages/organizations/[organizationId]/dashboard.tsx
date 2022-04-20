@@ -10,19 +10,12 @@ import { useReportData } from '@/hooks/api/useReportData';
 import { RfmReportDataItem } from '@/types/report';
 import { CustomerReportButton } from '@/components/CustomerReportButton';
 
-export const getStaticProps = async ({ locale = 'ja' }) => {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale)),
-    },
-  };
-};
-
-export const getServerSideProps = SSR.withProps('rfmReport')(async (_, result) => {
+export const getServerSideProps = SSR.withProps('rfmReport')(async ({ locale = 'ja' }, result) => {
   return {
     ...result,
     props: {
       ...result.props,
+      ...(await serverSideTranslations(locale)),
     },
   };
 });

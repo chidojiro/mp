@@ -29,7 +29,8 @@ export const ListActionPage = () => {
           href={{
             pathname,
             query: { ...query, marketingActionStatus: MAStatus.RUNNING, marketingActionId: 1 },
-          }}>
+          }}
+        >
           <a className='block'>{t('inProgressTab')}</a>
         </Link>
       ),
@@ -43,7 +44,8 @@ export const ListActionPage = () => {
           href={{
             pathname,
             query: { ...query, marketingActionStatus: MAStatus.COMPLETE, marketingActionId: 1 },
-          }}>
+          }}
+        >
           <a className='block'>{t('finishedTab')}</a>
         </Link>
       ),
@@ -57,7 +59,8 @@ export const ListActionPage = () => {
           href={{
             pathname,
             query: { ...query, marketingActionStatus: MAStatus.DRAFT, marketingActionId: 1 },
-          }}>
+          }}
+        >
           <a className='block'>{t('draftTab')}</a>
         </Link>
       ),
