@@ -31,7 +31,8 @@ export const TargetSettingsSection = ({}: Props) => {
           name='target_segments'
           valueAs={value => TargetFilterUtils.getTargetFilters(value)}
           changeAs={value => TargetFilterUtils.getTargetCustomers(value)}
-          rules={{ required: true }}>
+          rules={{ required: true }}
+        >
           {targetCustomers.map(({ value, label }) => (
             <CheckboxGroup.Option value={value} label={label} key={value} />
           ))}
