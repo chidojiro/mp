@@ -10,6 +10,7 @@ export type Props<T = any> = {
   className?: string;
   onBlur?: (e: any) => void;
   value?: any;
+  onChange?: (e: any) => void;
   emptyValue?: any;
   componentType?: 'checkbox' | 'radio' | 'common';
   component: React.ComponentType<T>;
@@ -28,6 +29,7 @@ export const Field = <T,>({
   errorGroup = [],
   emptyValue = '',
   inputRef,
+  onChange: onChangeProp,
   valueAs = (value: any) => value,
   changeAs = (value: any) => value,
   ...restProps
@@ -73,6 +75,7 @@ export const Field = <T,>({
     const _value = e.target?.value ?? (e as any) ?? emptyValue;
 
     onChange(changeAs(_value));
+    onChangeProp?.(e);
   };
 
   const handleBlur: React.FocusEventHandler<HTMLInputElement> = e => {
