@@ -12,10 +12,10 @@ import { Form } from '@/components/common/Form';
 import { Layout } from '@/components/Layout';
 import { Section } from '@/components/Section';
 import { Button } from '@/components/common/Button';
-import { EmailPattern } from '@/constants';
 import { useProfile } from '@/hooks';
 import { SSR } from '@/ssr';
 import { Profile } from '@/types';
+import { EmailField } from '@/components/EmailField';
 
 export const getServerSideProps: GetServerSideProps = SSR.withProps('profile')(
   async ({ locale = 'ja' }, result) => {
@@ -62,11 +62,7 @@ const Email: NextPage<EmailProps> = props => {
         <Section>
           <Section.Title>{t('emailAddressLoginId')}</Section.Title>
           <Section.Content className='flex items-center justify-between'>
-            <Form.Input
-              name='email'
-              className='w-[480px]'
-              rules={{ required: true, pattern: EmailPattern }}
-            />
+            <EmailField name='email' className='w-[480px]' />
           </Section.Content>
         </Section>
         <div className='flex justify-center gap-5 h-[52px] mt-10'>
