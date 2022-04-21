@@ -11,9 +11,9 @@ export const Section = ({ className, children }: Props) => {
     <div
       className={classNames(
         'px-10 py-8',
-        ' bg-gray-100',
+        ' bg-gray-A100',
         'first-of-type:rounded-t-lg last-of-type:rounded-b-lg',
-        'mb-2 last:mb-0',
+        'mb-1 last:mb-0',
         className
       )}
     >

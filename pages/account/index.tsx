@@ -67,7 +67,7 @@ const Account = (props: any) => {
       )}
       <Section>
         <Section.Title>{t('emailAddressLoginId')}</Section.Title>
-        <Section.Content className='flex items-center justify-between'>
+        <Section.Content className='flex items-center justify-between text-medium'>
           {profile.email}
           <Link href='/account/email'>
             <a className='underline text-primary'>{tCommon('change')}</a>
@@ -76,7 +76,7 @@ const Account = (props: any) => {
       </Section>
       <Section>
         <Section.Title>{t('password')}</Section.Title>
-        <Section.Content className='flex items-center justify-between'>
+        <Section.Content className='flex items-center justify-between text-medium'>
           ********
           <Link href='/account/password'>
             <a className='underline text-primary'>{tCommon('change')}</a>
