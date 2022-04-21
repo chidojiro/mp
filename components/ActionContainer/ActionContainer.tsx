@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 
 import { Button, Icon, IconName, Tag } from '@/components/common';
 import { AspectRatio } from '@/headless/AspectRatio';
-import { ClassName } from '@/types';
+import { ClassName, TARGET } from '@/types';
 import { useAuth } from '@/hooks/useAuth';
 
 import { Label } from './Label';
@@ -19,6 +19,9 @@ type Props = ClassName & {
   description: string;
   descriptionImageUrl: string;
   showUseTemplateBtn?: boolean;
+  output?: string;
+  targets?: any[];
+  appearance?: string;
 };
 
 export const ActionContainer = ({
@@ -28,6 +31,9 @@ export const ActionContainer = ({
   description,
   descriptionImageUrl,
   showUseTemplateBtn = true,
+  targets,
+  output,
+  appearance,
 }: Props) => {
   const { t } = useTranslation('marketingAction');
   const { t: tCommon } = useTranslation('common');
@@ -43,6 +49,16 @@ export const ActionContainer = ({
     );
   }, [auth, marketingActionName]);
 
+  const defaultTargets = targets || [
+    TARGET.F0_MEMBER,
+    TARGET.F1,
+    TARGET.F2,
+    TARGET.SEMI_LOYAL,
+    TARGET.LOYAL,
+    TARGET.F1_DORMANT,
+    TARGET.LOYAL_DORMANT,
+  ];
+
   return (
     <div className={classNames('p-10', 'rounded-lg border border-solid border-gray-500')}>
       <div className='flex items-center gap-5 mb-4'>
@@ -51,8 +67,8 @@ export const ActionContainer = ({
       </div>
       <div className='grid grid-cols-10 gap-6'>
         <div className='col-span-7'>
-          <div className='text-gray-800'>{description}</div>
-          <div className='flex flex-wrap gap-8 mt-5'>
+          <div className='leading-6 text-gray-800'>{description}</div>
+          <div className='flex flex-wrap mt-8 gap-x-8 gap-y-5'>
             <div className='flex'>
               <Label>{t('degreeOfPriority')}</Label>
               <Tag>
@@ -61,32 +77,27 @@ export const ActionContainer = ({
               </Tag>
             </div>
             <div className='flex'>
-              <Label>{t('relatedPages')}</Label>
-              <Tag>{t('TOP')}</Tag>
-            </div>
-            <div className='flex'>
               <Label>{t('output')}</Label>
-              <Tag>{t('lineEmail')}</Tag>
+              <Tag>{output || t('chatbot')}</Tag>
             </div>
-            <div className='flex'>
-              <Label>{t('appearancePage')}</Label>
-              <Tag>{t('category')}</Tag>
-            </div>
+            {appearance && (
+              <div className='flex'>
+                <Label>{t('appearancePage')}</Label>
+                <Tag>{appearance}</Tag>
+              </div>
+            )}
             <div className='flex'>
               <Label>{t('estimatedTimeRequired')}</Label>
-              <Tag>10{t('minute')}</Tag>
+              <div>10{t('minute')}</div>
             </div>
-          </div>
-          <div className='flex mt-5'>
-            <Label>{t('recommendedCustomer')}</Label>
-            <div className='flex flex-wrap gap-1'>
-              <Tag>{tCommon('f0member')}</Tag>
-              <Tag>{tCommon('f0others')}</Tag>
-              <Tag>{tCommon('semiLoyal')}</Tag>
-              <Tag>{tCommon('loyal')}</Tag>
-              <Tag>{tCommon('dormant')}</Tag>
-              <Tag>{tCommon('f1dormant')}</Tag>
-              <Tag>{tCommon('loyalDormant')}</Tag>
+
+            <div className='flex'>
+              <Label>{t('recommendedCustomer')}</Label>
+              <div className='flex flex-wrap gap-1'>
+                {defaultTargets.map(target => (
+                  <Tag key='target'>{tCommon(target)}</Tag>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -102,7 +113,7 @@ export const ActionContainer = ({
       )}
       {showUseTemplateBtn && (
         <Link passHref href={editUrl}>
-          <Button className='w-[360px] !block mx-auto mt-6'>{t('useThisTemplate')}</Button>
+          <Button className='w-[360px] h-[44px] !block mx-auto mt-6'>{t('useThisTemplate')}</Button>
         </Link>
       )}
     </div>

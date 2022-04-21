@@ -181,6 +181,8 @@ export const FreeShipping = () => {
         title={t('conditionalFreeShipping')}
         description={t('conditionalFreeShippingDescription')}
         descriptionImageUrl='/images/conditional-free-shipping-description.png'
+        output={t('popup')}
+        appearance={t('cart')}
       ></ActionContainer>
       <div className='mt-[60px]'>
         <Steppers steps={steps} onShowPreview={onShowPreview} />
