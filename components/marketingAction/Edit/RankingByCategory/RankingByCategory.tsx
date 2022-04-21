@@ -205,6 +205,7 @@ export const RankingByCategory = () => {
           title={t('rankingByCategoryBasedOnOverallPurchaseHistory')}
           description={t('rankingByCategoryBasedOnOverallPurchaseHistoryDescription')}
           descriptionImageUrl='/images/ranking-category.png'
+          appearance='TOP'
         ></ActionContainer>
       ) : (
         <ActionContainer
@@ -213,6 +214,7 @@ export const RankingByCategory = () => {
           title={t('rankingBasedOnOverallPurchaseHistory')}
           description={t('rankingBasedOnOverallPurchaseHistoryDescription')}
           descriptionImageUrl='/images/ranking-purchase.png'
+          appearance='TOP'
         ></ActionContainer>
       )}
       <Form methods={methods} className='mt-[60px]'>

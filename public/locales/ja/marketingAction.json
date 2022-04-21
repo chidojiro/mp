@@ -206,5 +206,6 @@
   "carouselTitle": "【第 <span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"rankPosPastMonth\">過去1ヶ月の売上ランキング順位</span>  位】<span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"productName\">商品名</span>",
   "carouselContent": "<span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"amountIncludingTax\">税込金額</span>（税込）/<span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"productDetail\">商品詳細</span>",
   "delete": "削除する",
-  "colorSettingsForBtn": "ボタン・リンクのカラー設定"
+  "colorSettingsForBtn": "ボタン・リンクのカラー設定",
+  "cart": "カート"
 }

@@ -207,5 +207,6 @@
   "carouselTitle": "<span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"rankPosPastMonth\">Sales ranking position for the past month</span><span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"productName\">Product name</span>",
   "carouselContent": "<span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"amountIncludingTax\">Amount including tax</span>(incl. tax)/<span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"productDetail\">Product details</span>",
   "delete": "Delete",
-  "colorSettingsForBtn": "Color settings for buttons and links"
+  "colorSettingsForBtn": "Color settings for buttons and links",
+  "cart": "Cart"
 }

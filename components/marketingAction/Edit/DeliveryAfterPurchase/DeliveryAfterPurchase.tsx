@@ -304,6 +304,8 @@ export const DeliveryAfterPurchase = ({}: Props) => {
         description={t('stepDeliveryAfterPurchaseDescription')}
         descriptionImageUrl='/images/step-delivery-after-purchase-description.png'
         flowImgUrl='/images/step-delivery-after-purchase-flow.png'
+        targets={[TARGET.F1, TARGET.F2, TARGET.SEMI_LOYAL, TARGET.LOYAL_DORMANT]}
+        output={t('messageDelivery')}
       ></ActionContainer>
       <Stepper className='mt-16'>
         <LineUsageSettingsStep

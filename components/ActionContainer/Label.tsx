@@ -7,5 +7,5 @@ type Props = ClassName & Children & {};
 
 // eslint-disable-next-line no-empty-pattern
 export const Label = ({ className, children }: Props) => {
-  return <div className={classNames('text-secondary mr-2', className)}>{children}</div>;
+  return <div className={classNames('text-secondary mr-3 font-bold', className)}>{children}</div>;
 };

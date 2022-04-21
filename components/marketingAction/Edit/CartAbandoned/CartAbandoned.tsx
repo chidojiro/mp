@@ -205,6 +205,7 @@ export const CartAbandoned = () => {
         description={t('cartAbandonedDescription')}
         descriptionImageUrl='/images/cart-abandoned-description.png'
         flowImgUrl='/images/cart-abandoned-flow.png'
+        output={t('messageDelivery')}
       ></ActionContainer>
       <Form methods={methods} className='mt-[60px]'>
         <Steppers steps={steps} onShowPreview={onShowPreview} />
