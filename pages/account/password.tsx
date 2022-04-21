@@ -3,7 +3,6 @@ import React from 'react';
 import { GetStaticProps, NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import axios, { AxiosError } from 'axios';
@@ -83,11 +82,6 @@ const Password: NextPage = () => {
           </Section.Content>
         </Section>
         <div className='flex justify-center gap-5 h-[52px] mt-10'>
-          <Link passHref href='/account'>
-            <Button colorScheme='negative' className='w-[480px]'>
-              {t('stopEditingAndReturn')}
-            </Button>
-          </Link>
           <Button className='w-[480px]' type='submit'>
             {t('sendConfirmationEmail')}
           </Button>
