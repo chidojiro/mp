@@ -41,19 +41,12 @@ const recoverPassword = async (payload: PasswordRecoverPayload) => {
     };
   } catch (error) {
     console.error(error);
-    if (axios.isAxiosError(error)) {
-      const axiosError = error as AxiosError;
-      if (axiosError.response?.status === 400) {
-        // invalid email
-        return axiosError.response.data as PasswordRecoveryResponse;
-      }
-      return {
-        status: 'error',
-        error: {
-          msg: 'unknownError',
-        },
-      };
-    }
+    return {
+      status: 'error',
+      error: {
+        msg: 'unknownError',
+      },
+    };
   }
 };
 

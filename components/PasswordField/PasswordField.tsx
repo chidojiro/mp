@@ -18,11 +18,11 @@ export const PasswordField = (props: Props) => {
     },
     minLength: {
       value: 8,
-      message: t('password.minLength', { value: 8 }),
+      message: t('password.lengthRule'),
     },
     maxLength: {
       value: 48,
-      message: t('password.maxLength', { value: 48 }),
+      message: t('password.lengthRule'),
     },
   };
   return (

@@ -7,9 +7,8 @@ import Link from 'next/link';
 import { Form } from '@/components/common/Form';
 import { Button } from '@/components/common/Button';
 import { AuthApi } from '@/apis';
-
-import { PasswordField } from './PasswordField';
-import { ErrorMessage } from '../common';
+import { PasswordField } from '@/components/PasswordField';
+import { ErrorMessage } from '@/components/common/ErrorMessage';
 
 type Props = {
   token: string;

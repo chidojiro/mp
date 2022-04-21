@@ -3,6 +3,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { PublicLayout } from '@/components/Login';
 import { NewPasswordForm } from '@/components/Login/NewPasswordForm';
+import { AuthApi } from '@/apis/auth';
 
 export const getServerSideProps: GetServerSideProps = async ({
   locale = 'ja',
@@ -19,15 +20,15 @@ export const getServerSideProps: GetServerSideProps = async ({
   }
 
   // verify token
-  // const response = await AuthApi.verifyToken(token as string);
-  // if (!response) {
-  //   return {
-  //     redirect: {
-  //       destination: '/login',
-  //     },
-  //     props: {},
-  //   };
-  // }
+  const response = await AuthApi.verifyToken(token as string);
+  if (!response) {
+    return {
+      redirect: {
+        destination: '/login',
+      },
+      props: {},
+    };
+  }
   return {
     props: {
       token,
