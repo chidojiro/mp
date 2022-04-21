@@ -5,6 +5,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Layout } from '@/components/Layout';
 import { SideMenu, SideMenuGroup } from '@/components/common/SideMenu';
 import { ActionContainer } from '@/components/ActionContainer';
+import { TARGET } from '@/types';
 
 export const getServerSideProps = async ({ locale = 'ja' }) => ({
   props: {
@@ -42,6 +43,7 @@ export const ListTemplatePage = () => {
               description={t('cartAbandonedDescription')}
               descriptionImageUrl='/images/cart-abandoned-description.png'
               flowImgUrl='/images/cart-abandoned-flow.png'
+              output={t('messageDelivery')}
             ></ActionContainer>
           ),
           label: t('cartAbandoned'),
@@ -57,6 +59,8 @@ export const ListTemplatePage = () => {
               description={t('stepDeliveryAfterPurchaseDescription')}
               descriptionImageUrl='/images/step-delivery-after-purchase-description.png'
               flowImgUrl='/images/step-delivery-after-purchase-flow.png'
+              targets={[TARGET.F1, TARGET.F2, TARGET.SEMI_LOYAL, TARGET.LOYAL_DORMANT]}
+              output={t('messageDelivery')}
             ></ActionContainer>
           ),
           label: t('stepDeliveryAfterPurchase'),
@@ -77,6 +81,15 @@ export const ListTemplatePage = () => {
               title={t('cartPageFaq')}
               description={t('cartPageFaqDescription')}
               descriptionImageUrl='/images/cart-page-faq-description.png'
+              targets={[
+                TARGET.F0_MEMBER,
+                TARGET.F0_OTHERS,
+                TARGET.F1,
+                TARGET.F2,
+                TARGET.SEMI_LOYAL,
+                TARGET.F1_DORMANT,
+              ]}
+              appearance={t('cart')}
             ></ActionContainer>
           ),
           label: t('cartPageFaq'),
@@ -91,6 +104,8 @@ export const ListTemplatePage = () => {
               title={t('recommendationDiagnosisBotStatic')}
               description={t('recommendationDiagnosisBotStaticDescription')}
               descriptionImageUrl='/images/recommendation-diagnosis-bot-description.png'
+              targets={[TARGET.F0_MEMBER, TARGET.F0_OTHERS, TARGET.F1]}
+              appearance={t('category')}
             ></ActionContainer>
           ),
           onClick: () => handleMAChange('recommendation-diagnosis-bot'),
@@ -105,6 +120,7 @@ export const ListTemplatePage = () => {
               title={t('rankingBasedOnOverallPurchaseHistory')}
               description={t('rankingBasedOnOverallPurchaseHistoryDescription')}
               descriptionImageUrl='/images/ranking-purchase.png'
+              appearance='TOP'
             ></ActionContainer>
           ),
           onClick: () => handleMAChange('ranking-based-on-overall-purchase-history'),
@@ -119,6 +135,7 @@ export const ListTemplatePage = () => {
               title={t('rankingByCategoryBasedOnOverallPurchaseHistory')}
               description={t('rankingByCategoryBasedOnOverallPurchaseHistoryDescription')}
               descriptionImageUrl='/images/ranking-category.png'
+              appearance='TOP'
             ></ActionContainer>
           ),
           onClick: () => handleMAChange('ranking-by-category'),
@@ -139,6 +156,8 @@ export const ListTemplatePage = () => {
               title={t('conditionalFreeShipping')}
               description={t('conditionalFreeShippingDescription')}
               descriptionImageUrl='/images/conditional-free-shipping-description.png'
+              output={t('popup')}
+              appearance={t('cart')}
             ></ActionContainer>
           ),
           onClick: () => handleMAChange('conditional-free-shipping'),

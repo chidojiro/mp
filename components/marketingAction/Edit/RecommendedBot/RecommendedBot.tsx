@@ -8,6 +8,7 @@ import { Button, Modal, Form } from '@/components/common';
 import { ActionContainer } from '@/components/ActionContainer';
 import { Step } from '@/constants';
 import { useVisibilityControl } from '@/hooks';
+import { TARGET } from '@/types';
 
 import { ChatOverlay } from '../ChatOverlay';
 import { Steps } from '../Steps';
@@ -147,6 +148,8 @@ export const RecommendedBot = () => {
         title={t('recommendationDiagnosisBotStatic')}
         description={t('recommendationDiagnosisBotStaticDescription')}
         descriptionImageUrl='/images/recommendation-diagnosis-bot-description.png'
+        targets={[TARGET.F0_MEMBER, TARGET.F0_OTHERS, TARGET.F1]}
+        appearance={t('category')}
       ></ActionContainer>
       <Form methods={methods} className='mt-[60px]'>
         <Steps steps={steps} onConfirm={onConfirm} onShowPreview={onShowPreview} />
