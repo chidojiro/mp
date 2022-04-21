@@ -6,5 +6,19 @@
   "titleMP": "ギブリー マーケティングプラットフォーム",
   "incorrectEmailOrPassword": "メールアドレスまたはパスワードが異なります",
   "logoTitle": "Web接客自動化ツール［シナリオEC］",
-  "description": "誰でも、すぐに、使いこなせる。 \nECマーケティングツール、登場。"
+  "description": "誰でも、すぐに、使いこなせる。 \nECマーケティングツール、登場。",
+  "passwordReset": "パスワードの再設定",
+  "passwordResetDescription": "パスワード再設定のためのメールを送信します。登録済みのメールアドレスを入力して、「送信する」ボタンをクリックしてください。",
+  "submit": "送信する",
+  "NewPasswordSetting": "新パスワード設定",
+  "newPassword": "新パスワード",
+  "newPasswordConfirm": "新パスワード（確認）",
+  "change": "変更する",
+  "email.required": "メールアドレスを入力してください",
+  "password.required": "パスワードを入力してください",
+  "email.invalidFormat": "正しい形式でメールアドレスを入力してください。",
+  "email.notFound": "登録されていないメールアドレスです",
+  "password.lengthRule": "パスワードは8文字以上48文字以下で設定してください。",
+  "message.passwordRecovery.emailSent": "確認メールを送信しました。",
+  "message.password.changed": "パスワードの変更が完了しました。"
 }

@@ -1,11 +1,9 @@
 import { useTranslation } from 'next-i18next';
-// import dynamic from 'next/dynamic';
 
-// import { LoginFormProps } from './LoginForm.types';
-import { LoginForm } from './LoginForm';
-// const LoginForm = dynamic<LoginFormProps>(() => import("./LoginForm").then(module => module.LoginForm));
+import { Children } from '@/types';
 
-export const Login = () => {
+type Props = Children;
+export const PublicLayout = ({ children }: Props) => {
   const { t } = useTranslation('login');
   return (
     <div className='grid h-screen grid-cols-2 overflow-hidden'>
@@ -19,9 +17,7 @@ export const Login = () => {
           <h3 className='font-semibold whitespace-pre-line'>{t('description')}</h3>
         </div>
       </div>
-      <div className='z-10 flex items-center justify-center bg-gray-light'>
-        <LoginForm />
-      </div>
+      <div className='z-10 flex items-center justify-center bg-gray-light'>{children}</div>
     </div>
   );
 };

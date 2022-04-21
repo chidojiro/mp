@@ -14,7 +14,6 @@ export const getServerSideProps = SSR.withProps('rfmReport')(async ({ locale = '
   return {
     ...result,
     props: {
-      ...result.props,
       ...(await serverSideTranslations(locale)),
     },
   };

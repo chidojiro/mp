@@ -3,11 +3,11 @@ import { useEffect } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetStaticProps, GetStaticPropsContext } from 'next';
 
-import { PublicLayout, LoginForm } from '@/components/Login';
 import { useNavigator } from '@/hooks/useNavigator';
 import { useAuth } from '@/hooks/useAuth';
+import { PasswordRecoverForm, PublicLayout } from '@/components/Login';
 
-const LoginPage = () => {
+const PasswordResetPage = () => {
   const navigator = useNavigator();
   const auth = useAuth();
   useEffect(() => {
@@ -17,7 +17,7 @@ const LoginPage = () => {
   }, [navigator, auth]);
   return (
     <PublicLayout>
-      <LoginForm />
+      <PasswordRecoverForm />
     </PublicLayout>
   );
 };
@@ -30,4 +30,4 @@ export const getStaticProps: GetStaticProps = async ({ locale = 'ja' }: GetStati
   };
 };
 
-export default LoginPage;
+export default PasswordResetPage;
