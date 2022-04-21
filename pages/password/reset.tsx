@@ -1,9 +1,11 @@
 import { GetServerSideProps, NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 import { PublicLayout } from '@/components/Login';
 import { NewPasswordForm } from '@/components/Login/NewPasswordForm';
 import { AuthApi } from '@/apis/auth';
+import { Logger } from '@/utils';
 
 export const getServerSideProps: GetServerSideProps = async ({
   locale = 'ja',
@@ -20,13 +22,15 @@ export const getServerSideProps: GetServerSideProps = async ({
   }
 
   // verify token
+  Logger.log('token:', token);
   const response = await AuthApi.verifyToken(token as string);
   if (!response) {
+    Logger.log('invalid token');
     return {
-      redirect: {
-        destination: '/login',
+      props: {
+        error: 'message.invalidToken',
+        ...(await serverSideTranslations(locale, ['common', 'login'])),
       },
-      props: {},
     };
   }
   return {
@@ -38,11 +42,14 @@ export const getServerSideProps: GetServerSideProps = async ({
 };
 type Props = {
   token: string;
+  error?: string;
 };
-export const Reset: NextPage<Props> = ({ token }) => {
+export const Reset: NextPage<Props> = ({ token, error }) => {
+  const { t } = useTranslation('login');
   return (
     <PublicLayout>
-      <NewPasswordForm token={token} />
+      {!!error && <div>{t(error)}</div>}
+      {!error && <NewPasswordForm token={token} />}
     </PublicLayout>
   );
 };

@@ -45,7 +45,6 @@ export const NewPasswordForm = ({ token }: Props) => {
         token: val.token,
         password: val.password,
       });
-      console.log('response:', response);
       setProcessing(false);
       if (response.status === 'error') {
         setError(response.error.code);

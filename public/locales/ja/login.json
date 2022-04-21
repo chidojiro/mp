@@ -20,5 +20,6 @@
   "email.notFound": "登録されていないメールアドレスです",
   "password.lengthRule": "パスワードは8文字以上48文字以下で設定してください。",
   "message.passwordRecovery.emailSent": "確認メールを送信しました。",
-  "message.password.changed": "パスワードの変更が完了しました。"
+  "message.password.changed": "パスワードの変更が完了しました。",
+  "message.invalidToken": "Token is invalid"
 }

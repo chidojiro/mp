@@ -1,4 +1,5 @@
 import { ACCESS_TOKEN_KEY } from '@/constants';
+import { Logger } from '@/utils';
 import { CookiesUtils } from '@/utils/cookieUtils';
 import axios, { AxiosError } from 'axios';
 
@@ -55,6 +56,13 @@ const verifyToken = async (token: string) => {
     await RestApi.get(`/auth/password/reset?token=${token}`);
     return true;
   } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError;
+      if (axiosError.response?.status === 204) {
+        return true;
+      }
+    }
+    Logger.log('error:', JSON.stringify((error as AxiosError).response));
     return false;
   }
 };

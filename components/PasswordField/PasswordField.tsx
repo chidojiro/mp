@@ -14,7 +14,7 @@ export const PasswordField = (props: Props) => {
   const passwordRules = {
     required: {
       value: true,
-      message: t('field.required'),
+      message: t('password.required'),
     },
     minLength: {
       value: 8,
