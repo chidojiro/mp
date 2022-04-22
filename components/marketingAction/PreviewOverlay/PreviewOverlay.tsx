@@ -18,6 +18,7 @@ type Props = {
   mailBody: string;
   lineBody: string;
   color?: string;
+  enableLine?: boolean;
 };
 
 export const PreviewOverlay = ({
@@ -27,6 +28,7 @@ export const PreviewOverlay = ({
   mailBody,
   lineBody,
   color,
+  enableLine = true,
 }: Props) => {
   const { t } = useTranslation('marketingAction');
   const [email, setEmail] = useState('');
@@ -100,12 +102,14 @@ export const PreviewOverlay = ({
           <LinePreview isOverlay body={lineBody} desktop={selectedDevice === 'desktop'} />
         )}
         <div className='flex items-center justify-center w-full'>
-          <SwitchButtons
-            value={selectedType}
-            className='mr-5'
-            onChange={handleTypeChange}
-            items={types}
-          ></SwitchButtons>
+          {enableLine && (
+            <SwitchButtons
+              value={selectedType}
+              className='mr-5'
+              onChange={handleTypeChange}
+              items={types}
+            ></SwitchButtons>
+          )}
           {isMail && (
             <SwitchButtons
               value={selectedDevice}

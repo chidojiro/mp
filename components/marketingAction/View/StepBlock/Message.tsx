@@ -1,10 +1,7 @@
 import { useTranslation } from 'next-i18next';
 
-import { Button } from '@/components/common';
-import { useVisibilityControl } from '@/hooks';
 import { ColorUtils } from '@/utils';
 import { StepMessage } from '@/types';
-import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
 
 import { Answer } from './Answer';
 import { Color } from './Color';
@@ -16,7 +13,7 @@ type Props = {
 
 export const Message = ({ message, enableLine = true }: Props) => {
   const { t } = useTranslation('marketingAction');
-  const previewMessageControl = useVisibilityControl();
+
   return (
     <>
       <Answer name={t('msgContentEmail')}>
@@ -47,22 +44,6 @@ export const Message = ({ message, enableLine = true }: Props) => {
       <Answer name={t('colorSettings')}>
         <Color color={message.color} label={t(ColorUtils.getName(message.color))} />
       </Answer>
-      <div className='text-center'>
-        <Button
-          colorScheme='negative'
-          className='text-medium w-[240px]'
-          onClick={previewMessageControl.open}
-        >
-          {t('viewPreview')}
-        </Button>
-      </div>
-      <PreviewOverlay
-        defaultType='mail'
-        mailHeadline={message.mail_content.title}
-        mailBody={message.mail_content.content}
-        lineBody={enableLine ? message.line_messages!.text_msg_content! : ''}
-        control={previewMessageControl}
-      />
     </>
   );
 };
