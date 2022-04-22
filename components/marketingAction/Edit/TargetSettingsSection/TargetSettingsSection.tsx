@@ -1,9 +1,11 @@
 import { useTranslation } from 'next-i18next';
 
 import { Section } from '@/components/Section';
-import { CheckboxGroup, Form } from '@/components/common';
+import { Form } from '@/components/common';
 import { Option, TARGET } from '@/types';
 import { TargetFilterUtils } from '@/utils';
+
+import { TargetCustomer } from '../TargetCustomerGroup/TargetCustomer';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};
@@ -21,6 +23,7 @@ export const TargetSettingsSection = ({}: Props) => {
     { label: tCommon('loyal'), value: TARGET.LOYAL },
     { label: tCommon('f1dormant'), value: TARGET.F1_DORMANT },
     { label: tCommon('loyalDormant'), value: TARGET.LOYAL_DORMANT },
+    { label: tCommon('otherDormant'), value: TARGET.OTHER_DORMANT },
   ];
 
   return (
@@ -33,8 +36,8 @@ export const TargetSettingsSection = ({}: Props) => {
           changeAs={value => TargetFilterUtils.getTargetCustomers(value)}
           rules={{ required: true }}
         >
-          {targetCustomers.map(({ value, label }) => (
-            <CheckboxGroup.Option value={value} label={label} key={value} />
+          {targetCustomers.map(option => (
+            <TargetCustomer key={option.value} option={option} />
           ))}
         </Form.CheckboxGroup>
       </Section.Content>
