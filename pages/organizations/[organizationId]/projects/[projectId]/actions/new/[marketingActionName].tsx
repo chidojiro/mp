@@ -5,7 +5,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Layout } from '@/components/Layout';
 import { SideMenu, SideMenuGroup } from '@/components/common/SideMenu';
 import { ActionContainer } from '@/components/ActionContainer';
-import { TARGET } from '@/types';
+import { MarketingActionAlias, TARGET } from '@/types';
 
 export const getServerSideProps = async ({ locale = 'ja' }) => ({
   props: {
@@ -38,6 +38,7 @@ export const ListTemplatePage = () => {
           content: (
             <ActionContainer
               key='cartAbandoned'
+              alias={MarketingActionAlias.CART_LEFT_NOTIFICATION}
               iconName='cart'
               title={t('cartAbandoned')}
               description={t('cartAbandonedDescription')}
@@ -55,6 +56,7 @@ export const ListTemplatePage = () => {
             <ActionContainer
               key='stepDeliveryAfterPurchase'
               iconName='mails'
+              alias={MarketingActionAlias.AFTER_PURCHASE}
               title={t('stepDeliveryAfterPurchase')}
               description={t('stepDeliveryAfterPurchaseDescription')}
               descriptionImageUrl='/images/step-delivery-after-purchase-description.png'
@@ -77,6 +79,7 @@ export const ListTemplatePage = () => {
           content: (
             <ActionContainer
               key='cartPageFaqDescription'
+              alias={MarketingActionAlias.CART_PAGE_FAQ}
               iconName='cart-question'
               title={t('cartPageFaq')}
               description={t('cartPageFaqDescription')}
@@ -100,6 +103,7 @@ export const ListTemplatePage = () => {
           content: (
             <ActionContainer
               key='recommendationDiagnosisBotStatic'
+              alias={MarketingActionAlias.RECOMMEND_DIAGNOSTIC}
               iconName='chatbot'
               title={t('recommendationDiagnosisBotStatic')}
               description={t('recommendationDiagnosisBotStaticDescription')}
@@ -116,6 +120,7 @@ export const ListTemplatePage = () => {
           content: (
             <ActionContainer
               key='rankingBasedOnOverallPurchaseHistory'
+              alias={MarketingActionAlias.HISTORY_PURCHASE}
               iconName='ranking'
               title={t('rankingBasedOnOverallPurchaseHistory')}
               description={t('rankingBasedOnOverallPurchaseHistoryDescription')}
@@ -131,6 +136,7 @@ export const ListTemplatePage = () => {
           content: (
             <ActionContainer
               key='rankingByCategoryBasedOnOverallPurchaseHistory'
+              alias={MarketingActionAlias.HISTORY_PURCHASE_CATEGORY}
               iconName='ranking-by-category'
               title={t('rankingByCategoryBasedOnOverallPurchaseHistory')}
               description={t('rankingByCategoryBasedOnOverallPurchaseHistoryDescription')}
@@ -152,6 +158,7 @@ export const ListTemplatePage = () => {
           content: (
             <ActionContainer
               key='conditionalFreeShipping'
+              alias={MarketingActionAlias.CONDITIONAL_FREE_SHIPPING}
               iconName='free-shipping'
               title={t('conditionalFreeShipping')}
               description={t('conditionalFreeShippingDescription')}

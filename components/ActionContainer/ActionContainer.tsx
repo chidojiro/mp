@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { Button, Icon, IconName, Tag } from '@/components/common';
+import { Icon, IconName, Tag } from '@/components/common';
 import { AspectRatio } from '@/headless/AspectRatio';
 import { ClassName, TARGET } from '@/types';
 import { useAuth } from '@/hooks/useAuth';
 
 import { Label } from './Label';
+import { ActionStatus } from './ActionStatus';
+import { EditButton } from './EditButton';
 
 type Props = ClassName & {
   iconName: IconName;
@@ -22,6 +23,7 @@ type Props = ClassName & {
   output?: string;
   targets?: any[];
   appearance?: string;
+  alias?: string;
 };
 
 export const ActionContainer = ({
@@ -34,6 +36,7 @@ export const ActionContainer = ({
   targets,
   output,
   appearance,
+  alias,
 }: Props) => {
   const { t } = useTranslation('marketingAction');
   const { t: tCommon } = useTranslation('common');
@@ -64,6 +67,7 @@ export const ActionContainer = ({
       <div className='flex items-center gap-5 mb-4'>
         <Icon size={50} name={iconName} />
         <h3 className='text-gray-800'>{title}</h3>
+        <ActionStatus alias={alias} />
       </div>
       <div className='grid grid-cols-10 gap-6'>
         <div className='col-span-7'>
@@ -95,7 +99,7 @@ export const ActionContainer = ({
               <Label>{t('recommendedCustomer')}</Label>
               <div className='flex flex-wrap gap-1'>
                 {defaultTargets.map(target => (
-                  <Tag key='target'>{tCommon(target)}</Tag>
+                  <Tag key={target}>{tCommon(target)}</Tag>
                 ))}
               </div>
             </div>
@@ -111,11 +115,7 @@ export const ActionContainer = ({
           <img className='mt-3' alt='flow-image' src={flowImgUrl} />
         </div>
       )}
-      {showUseTemplateBtn && (
-        <Link passHref href={editUrl}>
-          <Button className='w-[360px] h-[44px] !block mx-auto mt-6'>{t('useThisTemplate')}</Button>
-        </Link>
-      )}
+      {showUseTemplateBtn && <EditButton alias={alias} typeName={marketingActionName as string} />}
     </div>
   );
 };

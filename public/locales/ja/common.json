@@ -43,5 +43,6 @@
   "validation.field.minLength": "This field requires more than {{value}} characters",
   "validation.field.maxLength": "This field requires less than {{value}} characters",
   "accountSettings": "アカウント設定",
-  "logout": "ログアウト"
+  "logout": "ログアウト",
+  "inProgress": "実施中"
 }
