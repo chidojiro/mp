@@ -45,7 +45,7 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
 
   return (
     <div className='px-10 -mx-10 border-t-4 border-white mt-7 pb-7'>
-      <div className='px-10 -mx-10 border-b-4 border-white mt-7'>
+      <div className='mt-7'>
         <div className='flex items-center'>
           <Icon name='mail' className='mr-2' size={18} />
           <div className='font-semibold'>{t('msgContentEmail')}</div>
@@ -92,7 +92,7 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
         </div>
       </div>
       {useLine && (
-        <div className='mt-7'>
+        <div className='px-10 -mx-10 border-t-4 border-white pt-7 mt-7 '>
           <div className='flex items-center'>
             <Icon name='line' size={20} className='mr-2' />
             <div className='font-semibold'>{t('msgContentLine')}</div>
@@ -141,6 +141,7 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
         lineBody={message?.line_messages?.text_msg_content}
         control={previewMessageControl}
         color={message.color}
+        enableLine={useLine}
       />
     </div>
   );
