@@ -25,8 +25,8 @@ export const Step1Settings = () => {
         </div>
       </div>
       <div className='text-medium'>
-        <div className='mb-2.5 font-bold text-gray-dark'>{t('downloadTemplate')}</div>
-        <div className='mb-4 text-medium'>{t('downloadTemplateDesc')}</div>
+        <div className='mb-2.5 font-bold text-gray-dark'>{t('updateCSV')}</div>
+        <div className='mb-4 text-medium'>{t('faqCSVUploadDescription')}</div>
         <FileUploader />
       </div>
     </div>

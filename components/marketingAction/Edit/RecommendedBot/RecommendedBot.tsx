@@ -1,144 +1,162 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
-import Link from 'next/link';
-import { useForm, useWatch } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+import useSWR from 'swr';
 
-import { Button, Modal, Form } from '@/components/common';
+import { MarketingActionAPI } from '@/apis';
 import { ActionContainer } from '@/components/ActionContainer';
-import { Step } from '@/constants';
+import { Form } from '@/components/common';
 import { useVisibilityControl } from '@/hooks';
-import { TARGET } from '@/types';
+import { MarketingActionAlias, MarketingActionRes, MarketingActionStatus, TARGET } from '@/types';
+import { TargetFilterUtils } from '@/utils';
 
 import { ChatOverlay } from '../ChatOverlay';
-import { Steps } from '../Steps';
+import { ChatWindowSettings } from '../ChatWindowSettings';
+import { Steppers } from '../Steppers';
+import SavingActions from '../Steppers/SavingActions';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';
 import { Step1Settings } from './Step1Settings';
-import { ChatWindowSettings } from '../ChatWindowSettings';
 
 export const RecommendedBot = () => {
   const { t } = useTranslation('marketingAction');
-  const methods = useForm({
-    defaultValues: {
-      chat_settings: {
-        color: '#E63E28',
-        pc_appearance_time: '0',
-        mobile_appearance_time: '0',
-        pc_position: '0',
-        mobile_position: '0',
-        pc_unit: 'px',
-        mobile_unit: 'px',
-      },
-    } as any,
-  });
-  const { handleSubmit, watch } = methods;
-  const { control } = methods;
-  const modalControl = useVisibilityControl();
-  const [isCompleted, setIsCompleted] = useState(false);
-  const [isSaveAsDraft, setIsSaveAsDraft] = useState(false);
+  const [maId, setMaId] = useState('');
+  const {
+    push,
+    query: { marketingActionId },
+    asPath,
+  } = useRouter();
 
-  const step1 = useWatch({ name: 'aggregation_period', control });
-  const targetCustomers = useWatch({ name: 'target_customers', control });
-  const step2 = useWatch({ name: 'chat_settings', control });
-  const isStep3Done = !!targetCustomers?.length;
+  const methods = useForm();
   const chatPreviewControl = useVisibilityControl();
+  const step1Methods = useForm({});
 
-  const onSubmit = (data: any) => {
-    console.log('submit', data);
-  };
+  const step2Methods = useForm({
+    defaultValues: {
+      chat_window_color: '#E22B2D',
+      display_settings_pc: {
+        appear_time: 0,
+        position: 'right',
+        position_close_box: 0,
+        position_close_box_unit: 'px',
+      },
+      display_settings_mobile: {
+        appear_time: 0,
+        position: 'right',
+        position_close_box: 0,
+        position_close_box_unit: 'px',
+      },
+    },
+  });
+  const step3Methods = useForm({
+    defaultValues: {
+      target_customers: [
+        TARGET.F0_MEMBER,
+        TARGET.F1,
+        TARGET.F2,
+        TARGET.SEMI_LOYAL,
+        TARGET.LOYAL,
+        TARGET.F1_DORMANT,
+        TARGET.LOYAL_DORMANT,
+        TARGET.OTHER_DORMANT,
+      ],
+    },
+  });
 
-  const showModal = () => {
-    setIsCompleted(false);
-    setIsSaveAsDraft(false);
-    modalControl.open();
-  };
+  const chatSettings: any = step2Methods.getValues();
 
-  const onExecuteMA = () => {
-    console.log('aaa');
-    handleSubmit(onSubmit)();
-    setIsCompleted(true);
-  };
-
-  const onSaveAsDraft = () => {
-    modalControl.open();
-    handleSubmit(onSubmit)();
-    setIsCompleted(false);
-    setIsSaveAsDraft(true);
-  };
-
-  const setStepDone = (stepId: number, done: boolean) => {
-    setSteps(prevState =>
-      prevState.map(step => {
-        return step.id === stepId ? { ...step, isDone: done } : step;
-      })
-    );
-  };
-
-  const onConfirm = (stepId: number) => {
-    if (stepId === 1 && step1) {
-      // TODO save step 1
-      setStepDone(stepId, true);
-    } else if (stepId === 2 && isStep2Done()) {
-      // TODO save step 2
-      setStepDone(stepId, true);
-    } else if (stepId === 3 && isStep3Done) {
-      // TODO save step 3
-      setStepDone(stepId, true);
-    }
-  };
-
-  const isStep2Done = () => {
-    return step2 && Object.keys(step2).every(field => step2[field]);
-  };
-
-  const [steps, setSteps] = useState<Step[]>([
+  const steps = [
     {
       id: 1,
       name: t('csvFileUpload'),
       children: <Step1Settings />,
+      methods: step1Methods,
     },
     {
       id: 2,
       name: t('chatWindowSettings'),
       children: <ChatWindowSettings />,
       showPreviewBtn: true,
+      methods: step2Methods,
     },
     {
       id: 3,
       name: t('targetSetting'),
       children: <TargetCustomerGroup />,
+      methods: step3Methods,
     },
-  ]);
+  ];
+
+  const { data: marketingAction } = useSWR(
+    marketingActionId ? ['/actions', marketingActionId] : null,
+    () => MarketingActionAPI.get(marketingActionId as string)
+  );
+
+  const resetData = useCallback(
+    (marketingAction: MarketingActionRes) => {
+      const settings = marketingAction.settings;
+      // step1Methods.reset({ report_period: settings?.report_period });
+
+      step2Methods.reset({ ...settings });
+
+      const _targetSegments = TargetFilterUtils.getTargetFilters(marketingAction.target_segments);
+
+      step3Methods.reset({ target_customers: _targetSegments || [] });
+    },
+    [step1Methods, step2Methods, step3Methods]
+  );
 
   useEffect(() => {
-    setStepDone(1, false);
-  }, [step1]);
-
-  useEffect(() => {
-    setStepDone(2, false);
-  }, [step2]);
-
-  useEffect(() => {
-    setStepDone(4, false);
-  }, [targetCustomers]);
-
-  const modalDesc = () => {
-    let desc = 'executeTemplate';
-    if (isSaveAsDraft) {
-      desc = 'alertAfterSaveAsDraft';
-    } else if (isCompleted) {
-      desc = 'alertAfterExecuting';
+    if (marketingAction) {
+      resetData(marketingAction);
     }
-    return t(desc, { template: t('rankingByCategoryBasedOnOverallPurchaseHistory') });
+  }, [marketingAction, resetData]);
+
+  const prepareData = (status: MarketingActionStatus) => {
+    const _targetSegments = TargetFilterUtils.getTargetCustomers(
+      step3Methods.getValues('target_customers')
+    );
+
+    const data = {
+      start_at: new Date().toISOString(),
+      description: t('recommendationDiagnosisBotStatic'),
+      marketing_action_type_alias: MarketingActionAlias.RECOMMEND_DIAGNOSTIC,
+      status,
+      settings: {
+        recommend_source: 'string',
+        chat_window_color: chatSettings.chat_window_color,
+        display_settings_pc: chatSettings.display_settings_pc,
+        display_settings_mobile: chatSettings.display_settings_mobile,
+      },
+      target_segments: _targetSegments,
+    };
+    return data;
   };
 
-  const onShowPreview = (stepId: number) => {
+  const handleSaveMA = async (status: MarketingActionStatus) => {
+    const data = prepareData(status);
+    if (marketingActionId) {
+      await MarketingActionAPI.update(marketingActionId as string, data);
+    } else {
+      const res = await MarketingActionAPI.create(data);
+      setMaId(res.id);
+    }
+  };
+
+  const onShowPreview = () => {
     chatPreviewControl.open();
   };
 
-  const isGotoMABtn = isCompleted || isSaveAsDraft;
-  const gotoMyMAUrl = `/organizations/1/projects/1/actions/${isCompleted ? 'active' : 'draft'}`;
-  const unSavedSteps = steps.filter(step => !step.isDone).length;
+  const handleCloseModal = () => {
+    push(`${asPath}/${maId}`);
+  };
+
+  const isStepDone = (methods: any) => {
+    return methods.formState.isSubmitSuccessful && !methods.formState.isDirty;
+  };
+
+  const isDone = isStepDone(step1Methods) && isStepDone(step2Methods) && isStepDone(step3Methods);
 
   return (
     <div className='relative'>
@@ -151,44 +169,19 @@ export const RecommendedBot = () => {
         targets={[TARGET.F0_MEMBER, TARGET.F0_OTHERS, TARGET.F1]}
         appearance={t('category')}
       ></ActionContainer>
+
       <Form methods={methods} className='mt-[60px]'>
-        <Steps steps={steps} onConfirm={onConfirm} onShowPreview={onShowPreview} />
-        <div className='flex justify-center mt-10'>
-          <Button className='mr-5 min-w-[240px] h-[52px] bg-[#FF7F5C]' onClick={onSaveAsDraft}>
-            {t('saveDraft')}
-          </Button>
-          <Button colorScheme='negative' className='mr-5 min-w-[240px] h-[52px]'>
-            {t('stopEditing')}
-          </Button>
-          <Button onClick={showModal} className='min-w-[480px] h-[52px]' disabled={!!unSavedSteps}>
-            {t('implementTemplate')}
-          </Button>
-        </div>
+        <Steppers steps={steps} onShowPreview={onShowPreview} />
       </Form>
 
-      <ChatOverlay color={step2.color} control={chatPreviewControl} />
+      <ChatOverlay color={chatSettings.chat_window_color} control={chatPreviewControl} />
 
-      <Modal control={modalControl}>
-        <div className='text-center text-gray-dark'>
-          <Modal.Body className='leading-loose whitespace-pre-line'>{modalDesc()}</Modal.Body>
-          <Modal.Footer className='text-medium'>
-            {isGotoMABtn ? (
-              <Link passHref href={gotoMyMAUrl}>
-                <Modal.FooterButton colorScheme='negative' onClick={modalControl.close}>
-                  {t('gotoMyMA')}
-                </Modal.FooterButton>
-              </Link>
-            ) : (
-              <>
-                <Modal.FooterButton colorScheme='negative' onClick={modalControl.close}>
-                  {t('cancel')}
-                </Modal.FooterButton>
-                <Modal.FooterButton onClick={onExecuteMA}>{t('executeTest')}</Modal.FooterButton>
-              </>
-            )}
-          </Modal.Footer>
-        </div>
-      </Modal>
+      <SavingActions
+        disable={!isDone}
+        onSaveMarketingAction={handleSaveMA}
+        onCloseModal={handleCloseModal}
+        marketingActionName={t('recommendationDiagnosisBotStatic')}
+      />
     </div>
   );
 };
