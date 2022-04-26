@@ -26,7 +26,7 @@ export const EmailSettings = ({}: Props) => {
         <Section.Content>
           <Form.ContentEditable
             inputRef={emailFooterRef}
-            name='emailFooter'
+            name='email_footer'
             label={
               <div className='flex mb-2 space-x-2'>
                 <LinkButton onClick={() => ContentEditableUtils.underline(emailFooterRef)} />
@@ -40,7 +40,7 @@ export const EmailSettings = ({}: Props) => {
         <Section.Content>
           <Form.ContentEditable
             inputRef={emailSignatureRef}
-            name='emailSignature'
+            name='email_signature'
             label={
               <div className='flex mb-2 space-x-2'>
                 <LinkButton onClick={() => ContentEditableUtils.underline(emailSignatureRef)} />

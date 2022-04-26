@@ -5,3 +5,4 @@ export * from './conversionRate';
 export * from './report';
 export * from './profile';
 export * from './marketingActions';
+export * from './project';

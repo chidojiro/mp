@@ -30,7 +30,7 @@ export const PasswordRecoverForm = () => {
       </div>
       {!isSuccess && (
         <Form methods={methods} onSubmit={onSubmit}>
-          <EmailField name='email' className='w-full' placeholder={t('email')} />
+          <EmailField required name='email' className='w-full' placeholder={t('email')} />
           <Button type='submit' className='w-full my-4 font-bold' disabled={isProcessing}>
             {t('submit')}
           </Button>

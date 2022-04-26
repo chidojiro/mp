@@ -16,35 +16,31 @@ export const UrlSettings = ({}: Props) => {
       <Section>
         <Section.Title>{t('topPageUrl')}</Section.Title>
         <Section.Content>
-          <Form.Input name='topPageUrl' className='w-[480px]' placeholder='sample@gmail.com' />
+          <Form.Input name='top_page_url' className='w-[480px]' />
         </Section.Content>
       </Section>
       <Section>
         <Section.Title>{t('thanksPageUrl')}</Section.Title>
         <Section.Content>
-          <Form.Input name='thanksPageUrl' className='w-[480px]' placeholder='sample@gmail.com' />
+          <Form.Input name='thanks_page_url' className='w-[480px]' />
         </Section.Content>
       </Section>
       <Section>
         <Section.Title>{t('cartPageUrl')}</Section.Title>
         <Section.Content>
-          <Form.Input name='cartPageUrl' className='w-[480px]' placeholder='sample@gmail.com' />
+          <Form.Input name='cart_page_url' className='w-[480px]' />
         </Section.Content>
       </Section>
       <Section>
         <Section.Title>{t('productDetailPageUrl')}</Section.Title>
         <Section.Content>
-          <Form.Input
-            name='productDetailPageUrl'
-            className='w-[480px]'
-            placeholder='sample@gmail.com'
-          />
+          <Form.Input name='product_detail_page_url' className='w-[480px]' />
         </Section.Content>
       </Section>
       <Section>
         <Section.Title>{t('categoryPageUrl')}</Section.Title>
         <Section.Content>
-          <Form.Input name='categoryPageUrl' className='w-[480px]' placeholder='sample@gmail.com' />
+          <Form.Input name='category_page_url' className='w-[480px]' />
         </Section.Content>
       </Section>
     </div>

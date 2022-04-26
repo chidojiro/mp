@@ -4,6 +4,8 @@ import { ImageUploader } from '@/components/ImageUploader';
 import { Form } from '@/components/common';
 import { Section } from '@/components/Section';
 
+import { EmailField } from '../EmailField';
+
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};
 
@@ -17,7 +19,7 @@ export const BasicInformation = ({}: Props) => {
       <Section>
         <Section.Title>{t('brandName')}</Section.Title>
         <Section.Content>
-          <Form.Input name='brandName' className='w-[480px]' placeholder={t('store')} />
+          <Form.Input name='brand_name' className='w-[480px]' placeholder={t('store')} />
         </Section.Content>
       </Section>
       <Section>
@@ -30,7 +32,7 @@ export const BasicInformation = ({}: Props) => {
         <Section.Title>{t('hoursOfOperation')}</Section.Title>
         <Section.Content>
           <Form.Input
-            name='brandName'
+            name='business_hours'
             className='w-[480px]'
             placeholder={t('hoursOfOperationPlaceholder')}
           />
@@ -39,13 +41,13 @@ export const BasicInformation = ({}: Props) => {
       <Section>
         <Section.Title>{t('emailAddressForInquiries')}</Section.Title>
         <Section.Content>
-          <Form.Input name='brandName' className='w-[480px]' placeholder='sample@gmail.com' />
+          <EmailField name='contact_email' className='w-[480px]' placeholder='sample@gmail.com' />
         </Section.Content>
       </Section>
       <Section>
-        <Section.Title>{t('brandName')}</Section.Title>
+        <Section.Title>{t('contactPhone')}</Section.Title>
         <Section.Content>
-          <Form.Input name='brandName' className='w-[480px]' placeholder='0123-45-6789' />
+          <Form.Input name='contact_phone' className='w-[480px]' placeholder='0123-45-6789' />
         </Section.Content>
       </Section>
     </div>

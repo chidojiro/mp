@@ -16,25 +16,25 @@ export const SnsSettings = ({}: Props) => {
       <Section>
         <Section.Title>Twitter ID</Section.Title>
         <Section.Content>
-          <Form.Input name='twitterId' className='w-[480px]' placeholder='@twitterid' />
+          <Form.Input name='twitter_id' className='w-[480px]' placeholder='@twitterid' />
         </Section.Content>
       </Section>
       <Section>
         <Section.Title>Instagram ID</Section.Title>
         <Section.Content>
-          <Form.Input name='instagramId' className='w-[480px]' placeholder='@instagramid' />
+          <Form.Input name='instagram_id' className='w-[480px]' placeholder='@instagramid' />
         </Section.Content>
       </Section>
       <Section>
         <Section.Title>Facebook ID</Section.Title>
         <Section.Content>
-          <Form.Input name='facebookId' className='w-[480px]' placeholder='facebookid' />
+          <Form.Input name='facebook_id' className='w-[480px]' placeholder='facebookid' />
         </Section.Content>
       </Section>
       <Section>
         <Section.Title>LINE ID</Section.Title>
         <Section.Content>
-          <Form.Input name='lineId' className='w-[480px]' placeholder='@lineid' />
+          <Form.Input name='line_id' className='w-[480px]' placeholder='@lineid' />
         </Section.Content>
       </Section>
     </div>
