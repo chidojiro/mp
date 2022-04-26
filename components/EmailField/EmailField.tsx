@@ -8,17 +8,22 @@ import { EmailPattern } from '@/constants/misc';
 type Props = FieldProps & Omit<InputProps, keyof FieldProps>;
 
 export const EmailField = (props: Props) => {
-  const { t } = useTranslation('login');
-  const emailRules = {
-    required: {
-      value: true,
-      message: t('email.required'),
-    },
+  const { t } = useTranslation('common');
+  let emailRules: any = {
     pattern: {
       value: EmailPattern,
       message: t('email.invalidFormat'),
     },
   };
+  if (props.required) {
+    emailRules = {
+      ...emailRules,
+      required: {
+        value: true,
+        message: t('email.required'),
+      },
+    };
+  }
   return (
     <>
       <Form.Input {...props} type='email' rules={emailRules} />

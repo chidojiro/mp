@@ -52,7 +52,7 @@ const Email: NextPage<EmailProps> = props => {
         <Section>
           <Section.Title>{t('newEmailAddress')}</Section.Title>
           <Section.Content className='flex items-center justify-between'>
-            <EmailField name='email' className='w-[480px]' />
+            <EmailField required name='email' className='w-[480px]' />
           </Section.Content>
         </Section>
         <div className='flex justify-center gap-5 h-[52px] mt-10'>

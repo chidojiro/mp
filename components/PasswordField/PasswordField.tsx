@@ -8,7 +8,7 @@ import { FieldProps } from '@/headless/Form';
 type Props = FieldProps & Omit<PasswordInputProps, keyof FieldProps>;
 
 export const PasswordField = (props: Props) => {
-  const { t } = useTranslation('login');
+  const { t } = useTranslation('common');
   const [showPwd, toggleShowPwd] = useStateToggle(false);
   const icon = showPwd ? <EyeIcon className='w-5 h-5' /> : <EyeOffIcon className='w-5 h-5' />;
   const passwordRules = {

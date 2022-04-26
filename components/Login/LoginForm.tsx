@@ -48,7 +48,7 @@ export const LoginForm = () => {
     <div className='w-[400px]'>
       <div className='mb-5 font-bold prose text-center text-h4'>{t('login')}</div>
       <Form methods={methods} onSubmit={onSubmit}>
-        <EmailField name='email' className='w-full' placeholder={t('email')} />
+        <EmailField required name='email' className='w-full' placeholder={t('email')} />
         <PasswordField name='password' placeholder={t('password')} className='w-full mt-2' />
         <div className='mt-2'>
           {isInvalid && <ErrorMessage>{t('incorrectEmailOrPassword')}</ErrorMessage>}

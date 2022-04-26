@@ -11,17 +11,20 @@ type Props = {};
 // eslint-disable-next-line no-empty-pattern
 export const AdvancedSettings = ({}: Props) => {
   const { t } = useTranslation('settings');
-
+  const allROptions = [
+    { label: t('last180Days'), value: 180 },
+    {
+      value: 60,
+      label: t('last60Days'),
+    },
+  ];
   return (
     <div>
       <h5 className='mb-2.5'>{t('advancedSettings')}</h5>
       <Section>
         <Section.Title>{t('aggregationPeriodForRfmAnalysis')}</Section.Title>
         <Section.Content>
-          <Form.Select
-            options={[{ label: t('last180Days'), value: 'last180Days' }]}
-            name='aggregationPeriodForRfmAnalysis'
-          />
+          <Form.Select options={allROptions} name='const_r_rfm' />
         </Section.Content>
       </Section>
       <Section>
@@ -29,9 +32,9 @@ export const AdvancedSettings = ({}: Props) => {
         <Section.Content>
           <div className='flex items-center gap-2.5 flex-wrap text-medium'>
             {t('numberOfPurchasesInThePastYear')}
-            <Form.Input name='numberOfPurchasesInThePastYear' className='w-20' />
+            <Form.Input name='const_f_loyal' className='w-20' />
             {t('atLeastOnceAndTheTotalAmountOfPurchasesInThePast1Year')}
-            <Form.Input name='amount' className='w-20' />
+            <Form.Input name='const_m_loyal' className='w-20' />
             {t('yenOrMore')}
           </div>
         </Section.Content>
