@@ -85,7 +85,7 @@ export const ChatbotTable = ({ className }: Props) => {
   return (
     <Table className={className}>
       <Table.Head>
-        <Table.Row>
+        <Table.Row className='round-l round-r'>
           <Table.Cell>{t('measure')}</Table.Cell>
           <Table.Cell>{t('numberOfUUsDisplayed')}</Table.Cell>
           <Table.Cell>{t('openUUsRate')}</Table.Cell>
