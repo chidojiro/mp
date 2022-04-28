@@ -1,6 +1,6 @@
-import classNames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import classNames from 'classnames';
 
 import { Accordion } from '@/components/common/Accordion';
 import { Icon } from '@/components/common/Icon';
@@ -29,6 +29,7 @@ export const NavItem = ({ data, showLabel = true }: Props) => {
             'bg-dark-gray': isMatched(data),
             'pl-3': true,
           })}
+          title={label}
         >
           <Icon name={icon} className='w-4 h-4 mr-2 text-primary my-1' size={22} />
           {showLabel && label}
@@ -66,6 +67,7 @@ export const NavItem = ({ data, showLabel = true }: Props) => {
                   'bg-dark-gray': isMatched(item),
                 }
               )}
+              title={item.label}
             >
               {item.label}
             </a>
