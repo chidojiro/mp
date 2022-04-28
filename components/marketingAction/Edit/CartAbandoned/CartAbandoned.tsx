@@ -43,10 +43,7 @@ export const CartAbandoned = () => {
 
   const messageDefaultSettings = {
     send_at: '10:00',
-    mail_content: {
-      title: t('defaultHeadline'),
-      content: t('defaultTextEmail'),
-    },
+    mail_content: {},
     line_messages: {
       text_msg_display: false,
     },

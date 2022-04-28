@@ -24,7 +24,7 @@ export const EmailSettings = ({}: Props) => {
       <Section>
         <Section.Title>{t('emailFooter')}</Section.Title>
         <Section.Content>
-          <Form.ContentEditable
+          <Form.MentionsEditor
             inputRef={emailFooterRef}
             name='email_footer'
             label={
@@ -38,7 +38,7 @@ export const EmailSettings = ({}: Props) => {
       <Section>
         <Section.Title>{t('emailSignature')}</Section.Title>
         <Section.Content>
-          <Form.ContentEditable
+          <Form.MentionsEditor
             inputRef={emailSignatureRef}
             name='email_signature'
             label={

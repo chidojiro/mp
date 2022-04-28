@@ -177,8 +177,6 @@
   "screenRight": "Right end of screen",
   "upFromDefaultPosition": "Up from the default position",
   "suspendTemplate": "Suspend Template",
-  "defaultHeadline": "Did you forget\nto buy anything?",
-  "defaultTextEmail": "Thank you for visiting <span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"brandName\">Brand name</span>. The following items are still stored in your shopping cart. Please consider purchasing them before they are sold out.",
   "customerName": "Customer name",
   "brandName": "Brand name",
   "businessHours": "Business hours",

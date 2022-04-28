@@ -3,14 +3,17 @@ import React from 'react';
 import { AssertUtils } from '../../utils';
 
 export const useOnClickOutside = (
-  refsOrElements:
+  refsOrElements?:
     | Element
     | React.RefObject<Element>
     | null
-    | (Element | React.RefObject<Element> | null)[],
-  handler: (event: MouseEvent) => void
+    | (Element | React.RefObject<Element> | null)[]
+    | false,
+  handler?: (event: MouseEvent) => void
 ) => {
   const handleClick = (e: MouseEvent) => {
+    if (!refsOrElements) return;
+
     const isEveryOutside = [refsOrElements].flat().every(eleOrRef => {
       if (AssertUtils.isRef(eleOrRef)) {
         return !eleOrRef?.current?.contains(e.target as Node);
@@ -20,7 +23,7 @@ export const useOnClickOutside = (
     });
 
     if (isEveryOutside) {
-      handler(e);
+      handler?.(e);
     }
   };
 

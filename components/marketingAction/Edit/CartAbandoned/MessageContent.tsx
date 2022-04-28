@@ -38,7 +38,7 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
     previewMessageControl.open();
   };
 
-  const headingMentionOptions: Option[] = [
+  const headingMentionOptions: Option<string, string>[] = [
     { label: t('customerName'), value: 'customerName' },
     { label: t('brandName'), value: 'brandName' },
   ];
@@ -56,8 +56,8 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
               <div className='mb-2.5 font-semibold text-secondary text-medium'>
                 {t('headLines')}
               </div>
-              <Form.ContentEditable
-                options={headingMentionOptions}
+              <Form.MentionsEditor
+                mentionOptions={headingMentionOptions}
                 name={`${messageNum}.mail_content.title`}
                 rules={{ required: true }}
               />

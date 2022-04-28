@@ -13,6 +13,7 @@ export type Props = Pick<PopperProps<any>, 'placement'> &
     trigger: JSX.Element | HTMLElement;
     control?: VisibilityControl;
     offset?: [number, number];
+    closeOnClickOutside?: boolean;
   };
 
 export const Popover = ({
@@ -22,6 +23,7 @@ export const Popover = ({
   control: controlProp,
   placement = 'bottom-start',
   offset = [0, 4],
+  closeOnClickOutside = true,
 }: Props) => {
   const [triggerElement, setTriggerElement] = useState(null);
   const popoverRef = React.useRef(null);
@@ -63,7 +65,7 @@ export const Popover = ({
     });
   }, [control.toggle, isHTMLElementTrigger, trigger]);
 
-  useOnClickOutside([popoverRef, triggerElement], control.close);
+  useOnClickOutside(closeOnClickOutside && [popoverRef, triggerElement], control.close);
 
   return (
     <>

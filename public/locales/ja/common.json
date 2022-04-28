@@ -49,5 +49,6 @@
   "password.required": "パスワードを入力してください",
   "email.invalidFormat": "正しい形式でメールアドレスを入力してください。",
   "email.notFound": "登録されていないメールアドレスです",
-  "password.lengthRule": "パスワードは8文字以上48文字以下で設定してください。"
+  "password.lengthRule": "パスワードは8文字以上48文字以下で設定してください。",
+  "youCanEnterVariablesByPressingAtKey": "@キーを押して変数を入力できます"
 }

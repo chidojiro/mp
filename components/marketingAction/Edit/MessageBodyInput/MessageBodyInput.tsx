@@ -1,15 +1,9 @@
 import React from 'react';
 
 import { useTranslation } from 'next-i18next';
-import dynamic from 'next/dynamic';
 
 import { Form } from '@/components/common';
 import { Option } from '@/types';
-import { ContentEditableUtils } from '@/utils';
-
-import { VariableSign } from '../VariableSign';
-
-const EmojiSign = dynamic<any>(() => import('../EmojiSign').then(module => module.EmojiSign));
 
 type Props = {
   name: string;
@@ -17,7 +11,7 @@ type Props = {
   shouldValidate?: boolean;
   singleLine?: boolean;
   className?: string;
-  defaultOptions?: Option[];
+  defaultOptions?: Option<string, string>[];
 };
 
 export const MessageBodyInput = ({
@@ -28,27 +22,11 @@ export const MessageBodyInput = ({
   className,
   defaultOptions,
 }: Props) => {
+  console.log(name);
   const { t } = useTranslation('marketingAction');
   const mentionRef = React.useRef<HTMLDivElement>(null);
 
-  const mentionContainsSelection = () => {
-    const target = window.getSelection()?.anchorNode?.parentNode;
-    return mentionRef.current?.contains(target as Node);
-  };
-
-  const handleVariableSelect = (option: Option) => {
-    if (mentionContainsSelection()) {
-      ContentEditableUtils.insert(option);
-    }
-  };
-
-  const handleEmojiSelect = (emoji: string) => {
-    if (mentionContainsSelection()) {
-      document.execCommand('insertHTML', false, emoji);
-    }
-  };
-
-  const options = defaultOptions || [
+  const options: Option<string, string>[] = defaultOptions || [
     { label: t('customerName'), value: 'customerName' },
     { label: t('brandName'), value: 'brandName' },
     { label: t('businessHours'), value: 'businessHours' },
@@ -61,21 +39,14 @@ export const MessageBodyInput = ({
     { label: t('categoryPageUrl'), value: 'categoryPageUrl' },
   ];
 
-  const classLabel = showEmoji ? 'flex mb-2 space-x-2' : '';
-
   return (
     <div ref={mentionRef}>
-      <Form.ContentEditable
+      <Form.MentionsEditor
+        emoji={showEmoji}
         name={name}
         className={className || 'mt-5'}
-        options={options}
+        mentionOptions={options}
         singleLine={singleLine}
-        label={
-          <div className={classLabel}>
-            {showEmoji && <EmojiSign onSelect={handleEmojiSelect} />}
-            <VariableSign onSelect={handleVariableSelect} defaultOptions={options} />
-          </div>
-        }
         rules={shouldValidate ? { required: true } : undefined}
       />
     </div>

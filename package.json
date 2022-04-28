@@ -14,6 +14,8 @@
     "analyze": "ANALYZE=true yarn build"
   },
   "dependencies": {
+    "@draft-js-plugins/editor": "^4.1.3",
+    "@draft-js-plugins/mention": "^5.2.1",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.5",
     "@hookform/resolvers": "^2.8.5",
