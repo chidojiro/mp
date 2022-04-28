@@ -135,7 +135,7 @@ export const Sidebar = () => {
       )}
       style={{ height: 'calc(100vh - 48px)' }}
     >
-      <div className='flex flex-col flex-grow'>
+      <div className='flex flex-col flex-grow select-none'>
         {menu.map(menuItem => (
           <NavItem showLabel={open} key={menuItem.label} data={menuItem} />
         ))}
