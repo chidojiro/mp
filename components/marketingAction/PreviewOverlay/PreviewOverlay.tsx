@@ -29,7 +29,7 @@ export const PreviewOverlay = ({
   control,
   mailHeadline,
   mailBody,
-  lineBody = '',
+  lineBody,
   color,
   enableLine = true,
 }: Props) => {
@@ -74,11 +74,11 @@ export const PreviewOverlay = ({
 
   const handleExecuteTest = async ({ email }: any) => {
     const data = {
-      type: isMail ? 'email' : 'line',
+      type: 'email',
       content: {
         to: email,
-        subject: isMail ? mailHeadline : '',
-        body: isMail ? mailBody : lineBody,
+        subject: mailHeadline,
+        body: mailBody,
       },
     };
 
@@ -126,16 +126,18 @@ export const PreviewOverlay = ({
             ></SwitchButtons>
           )}
           {isMail && (
-            <SwitchButtons
-              value={selectedDevice}
-              className='mr-5'
-              onChange={handleDeviceChange}
-              items={devices}
-            ></SwitchButtons>
+            <div>
+              <SwitchButtons
+                value={selectedDevice}
+                className='mr-5'
+                onChange={handleDeviceChange}
+                items={devices}
+              ></SwitchButtons>
+              <Button className='w-[240px]' onClick={handleDeliveryTest}>
+                {t('testDelivery')}
+              </Button>
+            </div>
           )}
-          <Button className='w-[240px]' onClick={handleDeliveryTest}>
-            {t('testDelivery')}
-          </Button>
         </div>
       </Overlay>
       <Form methods={methods}>
