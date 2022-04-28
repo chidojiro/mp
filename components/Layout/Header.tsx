@@ -18,7 +18,7 @@ export const Header = () => {
       )}
     >
       <div className='flex items-center h-full'>
-        <Link href={`/organizations/${data.organization_id}/dashboard`} passHref>
+        <Link href={`/organizations/${data?.organization_id}/dashboard`} passHref>
           <img
             src='/images/synalio_header.svg'
             alt='logo'
