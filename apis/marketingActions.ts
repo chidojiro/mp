@@ -1,4 +1,4 @@
-import { MarketingActionRes } from '@/types';
+import { TestDelivery, MarketingActionRes } from '@/types';
 import { Logger } from '@/utils/Logger';
 
 import { RestApi, RestApiConfig } from './base';
@@ -38,4 +38,16 @@ const remove = (id: string) => {
   return RestApi.delete(`/actions/${id}`);
 };
 
-export const MarketingActionAPI = { list, create, update, get, remove, getActionsByAlias };
+const deliveryTestMail = (payload: TestDelivery) => {
+  return RestApi.post('/delivery', payload);
+};
+
+export const MarketingActionAPI = {
+  list,
+  create,
+  update,
+  get,
+  remove,
+  getActionsByAlias,
+  deliveryTestMail,
+};

@@ -159,3 +159,14 @@ export interface PopupSettingsData {
 export interface TargetCustomersData {
   target_customers: TARGET[];
 }
+
+export type Content = {
+  to: string;
+  subject: string;
+  body: string;
+};
+
+export type TestDelivery = {
+  type: string;
+  content: Content;
+};
