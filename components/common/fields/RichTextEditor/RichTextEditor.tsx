@@ -259,7 +259,7 @@ export const RichTextEditor = React.forwardRef(
     };
 
     const getMentionTriggerData = (editorState: EditorState) => {
-      const plainText = editorState.getCurrentContent().getPlainText();
+      const plainText = getCurrentBlock(editorState)!.getText()!;
       const anchorOffset = editorState.getSelection().getAnchorOffset();
       const start = plainText.slice(0, anchorOffset).lastIndexOf('@');
 

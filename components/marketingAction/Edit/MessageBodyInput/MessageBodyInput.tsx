@@ -22,7 +22,6 @@ export const MessageBodyInput = ({
   className,
   defaultOptions,
 }: Props) => {
-  console.log(name);
   const { t } = useTranslation('marketingAction');
   const mentionRef = React.useRef<HTMLDivElement>(null);
 
