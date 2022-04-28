@@ -111,18 +111,21 @@ function ReturnOfDormantCustomers(props: any) {
         </h5>
         <div className='grid grid-cols-2 gap-4 mt-6'>
           <CustomerReportButton
+            href=''
             featuredIcon={<Icon name='mails' size={30} />}
             label={t('postPurchaseStepDelivery')}
             subtext={t('mostRecentContribution', { amount: '256,000' })}
             clickActionText={t('viewReport')}
           />
           <CustomerReportButton
+            href=''
             featuredIcon={<Icon name='cart' size={30} />}
             label={t('periodicDeliveryRecommendation')}
             subtext={t('mostRecentContribution', { amount: '256,000' })}
             clickActionText={t('viewReport')}
           />
           <CustomerReportButton
+            href=''
             featuredIcon={<Icon name='chatbot' size={30} />}
             label={t('birthdayCoupon')}
             subtext={t('mostRecentContribution', { amount: '256,000' })}

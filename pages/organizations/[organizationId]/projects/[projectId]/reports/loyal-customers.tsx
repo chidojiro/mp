@@ -109,18 +109,21 @@ function F2ConversionRateTrends(props: any) {
         <h5 className='text-gray-600 mt-[60px]'>{t('measuresContributingToLoyaltyConversion')}</h5>
         <div className='grid grid-cols-2 gap-4 mt-6'>
           <CustomerReportButton
+            href=''
             featuredIcon={<Icon name='mails' size={30} />}
             label={t('postPurchaseStepDelivery')}
             subtext={t('mostRecentContribution', { amount: '356,000' })}
             clickActionText={t('viewReport')}
           />
           <CustomerReportButton
+            href=''
             featuredIcon={<Icon name='cart' size={30} />}
             label='条件付き送料無料'
             subtext={t('mostRecentContribution', { amount: '273,000' })}
             clickActionText={t('viewReport')}
           />
           <CustomerReportButton
+            href=''
             featuredIcon={<Icon name='chatbot' size={30} />}
             label='レコメンド診断ボット（静的）'
             subtext={t('mostRecentContribution', { amount: '216,000' })}

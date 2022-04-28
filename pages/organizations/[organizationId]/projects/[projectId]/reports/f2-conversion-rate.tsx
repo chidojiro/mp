@@ -104,18 +104,21 @@ function F2ConversionRateTrends() {
       <h5 className='text-gray-600 mt-[60px]'>{t('measuresThatContributedToF2Conversion')}</h5>
       <div className='grid grid-cols-2 gap-4 mt-6'>
         <CustomerReportButton
+          href=''
           featuredIcon={<Icon name='mails' size={30} />}
           label='購入後ステップ配信'
           subtext={t('mostRecentContribution', { amount: '556,000' })}
           clickActionText={t('viewReport')}
         />
         <CustomerReportButton
+          href=''
           featuredIcon={<Icon name='cart' size={30} />}
           label='かご落ち通知'
           subtext={t('mostRecentContribution', { amount: '351,000' })}
           clickActionText={t('viewReport')}
         />
         <CustomerReportButton
+          href=''
           featuredIcon={<Icon name='chatbot' size={30} />}
           label='レコメンド診断ボット（静的）'
           subtext={t('mostRecentContribution', { amount: '216,000' })}
