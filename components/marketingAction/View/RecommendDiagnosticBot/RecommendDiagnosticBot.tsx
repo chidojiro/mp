@@ -1,6 +1,7 @@
 import { useTranslation } from 'next-i18next';
 
-import { Answer, StepBlock, ChatWindowSettings } from '../StepBlock';
+import { StepBlock, ChatWindowSettings } from '../StepBlock';
+import UploadMessage from '../StepBlock/UploadMessage';
 
 type Props = {
   settings: any;
@@ -8,10 +9,11 @@ type Props = {
 
 export const RecommendDiagnosticBot = ({ settings }: Props) => {
   const { t } = useTranslation('marketingAction');
+
   return (
     <>
       <StepBlock stepName={t('csvFileUpload')}>
-        <Answer name={t('csvFileUpload')}>{settings.recommend_source}</Answer>
+        <UploadMessage sourceId={settings?.recommend_source} />
       </StepBlock>
       <ChatWindowSettings settings={settings} />
     </>

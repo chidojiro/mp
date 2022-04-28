@@ -1,7 +1,8 @@
 import { useTranslation } from 'next-i18next';
 
-import { Answer, StepBlock } from '../StepBlock';
+import { StepBlock } from '../StepBlock';
 import { ChatWindowSettings } from '../StepBlock/ChatWindowSettings';
+import UploadMessage from '../StepBlock/UploadMessage';
 
 type Props = {
   settings: any;
@@ -13,7 +14,7 @@ export const CartPageFAQ = ({ settings }: Props) => {
   return (
     <>
       <StepBlock stepName={t('faqContentCreation')}>
-        <Answer name={t('updateCSV')}>{settings.faq_source}</Answer>
+        <UploadMessage sourceId={settings?.faq_source} />
       </StepBlock>
       <ChatWindowSettings settings={settings} />
     </>
