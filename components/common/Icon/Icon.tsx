@@ -46,6 +46,7 @@ import Dashboard from './icons/dashboard.svg';
 import Settings from './icons/settings.svg';
 import Action from './icons/action.svg';
 import CustomSegment from './icons/custom-segment.svg';
+import Document from './icons/document.svg';
 
 const ICONS = {
   group: Group,
@@ -95,6 +96,7 @@ const ICONS = {
   settings: Settings,
   action: Action,
   'custom-segment': CustomSegment,
+  document: Document,
 };
 
 export type Name = keyof typeof ICONS;

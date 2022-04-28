@@ -28,6 +28,7 @@ export const RecommendedBot = () => {
     asPath,
   } = useRouter();
 
+  const [sourceId, setSourceId] = useState('');
   const methods = useForm();
   const chatPreviewControl = useVisibilityControl();
   const step1Methods = useForm({});
@@ -70,7 +71,7 @@ export const RecommendedBot = () => {
     {
       id: 1,
       name: t('csvFileUpload'),
-      children: <Step1Settings />,
+      children: <Step1Settings sourceId={sourceId} />,
       methods: step1Methods,
     },
     {
@@ -96,7 +97,7 @@ export const RecommendedBot = () => {
   const resetData = useCallback(
     (marketingAction: MarketingActionRes) => {
       const settings = marketingAction.settings;
-      // step1Methods.reset({ report_period: settings?.report_period });
+      step1Methods.reset({ recommend_source: settings?.recommend_source });
 
       step2Methods.reset({ ...settings });
 
@@ -113,6 +114,13 @@ export const RecommendedBot = () => {
     }
   }, [marketingAction, resetData]);
 
+  useEffect(() => {
+    const _id = marketingAction?.settings.recommend_source;
+    if (_id) {
+      setSourceId(_id);
+    }
+  }, [marketingAction]);
+
   const prepareData = (status: MarketingActionStatus) => {
     const _targetSegments = TargetFilterUtils.getTargetCustomers(
       step3Methods.getValues('target_customers')
@@ -124,7 +132,7 @@ export const RecommendedBot = () => {
       marketing_action_type_alias: MarketingActionAlias.RECOMMEND_DIAGNOSTIC,
       status,
       settings: {
-        recommend_source: 'string',
+        recommend_source: step1Methods.getValues('recommend_source'),
         chat_window_color: chatSettings.chat_window_color,
         display_settings_pc: chatSettings.display_settings_pc,
         display_settings_mobile: chatSettings.display_settings_mobile,

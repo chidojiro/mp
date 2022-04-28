@@ -1,14 +1,22 @@
 import { useTranslation } from 'next-i18next';
+import { Controller, useFormContext } from 'react-hook-form';
 
 import { Button } from '@/components/common';
 import { FileUploader } from '@/components/FileUploader';
+import { useAsset } from '@/hooks/api';
 
-export const Step1Settings = () => {
+type Props = {
+  sourceId: string;
+};
+
+export const Step1Settings = ({ sourceId }: Props) => {
   const { t } = useTranslation('marketingAction');
-  const aggregationPeriodOptions = [
-    { value: '1Month', label: t('1Month') },
-    { value: '1Week', label: t('1Week') },
-  ];
+  const {
+    formState: { errors },
+    control,
+  } = useFormContext();
+
+  const { data: source } = useAsset(sourceId);
 
   return (
     <div className='text-gray-700 '>
@@ -27,7 +35,18 @@ export const Step1Settings = () => {
       <div className='text-medium'>
         <div className='mb-2.5 font-bold text-gray-dark'>{t('updateCSV')}</div>
         <div className='mb-4 text-medium'>{t('faqCSVUploadDescription')}</div>
-        <FileUploader />
+        <Controller
+          control={control}
+          name='recommend_source'
+          rules={{ required: true }}
+          render={({ field: { onChange, ref } }) => (
+            <FileUploader
+              onChange={onChange}
+              isError={!!errors['recommend_source']}
+              name={source?.name}
+            />
+          )}
+        />
       </div>
     </div>
   );

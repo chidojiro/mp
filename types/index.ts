@@ -8,3 +8,4 @@ export * from './marketingAction';
 export * from './navigator';
 export * from './report';
 export * from './project';
+export * from './asset';

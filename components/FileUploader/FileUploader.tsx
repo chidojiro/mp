@@ -1,25 +1,64 @@
+import React, { useEffect, useState } from 'react';
+
 import { useTranslation } from 'next-i18next';
 import Dropzone from 'react-dropzone';
+import classNames from 'classnames';
+
+import { AssetAPI } from '@/apis/assets';
+import { AssetResourceType } from '@/types';
 
 import { Icon } from '../common';
 
-export const FileUploader = () => {
-  const { t } = useTranslation('marketingAction');
+type Props = {
+  name?: string;
+  isError?: boolean;
+  onChange?: (id: string) => void;
+};
 
-  const handleDrop = (acceptedFiles: File[]) => {
+export const FileUploader = ({ name, isError, onChange }: Props) => {
+  const { t } = useTranslation('marketingAction');
+  const [uploading, setUploading] = useState(false);
+
+  const [nameFile, setNameFile] = useState<string>(t('notSelected'));
+  const [currId, setCurrId] = useState('');
+
+  useEffect(() => {
+    name && setNameFile(name);
+  }, [name]);
+
+  const handleDrop = async (acceptedFiles: File[]) => {
+    setUploading(true);
     const file = acceptedFiles[0];
+    const res = await AssetAPI.create(file, AssetResourceType.marketingAction);
+    if (res.id) {
+      setNameFile(file.name);
+      onChange?.(res.id);
+      currId && (await AssetAPI.remove(currId));
+      setCurrId(res.id);
+    }
+    setUploading(false);
   };
 
   return (
     <div>
-      <Dropzone onDrop={handleDrop} multiple={false}>
+      <Dropzone
+        onDrop={handleDrop}
+        multiple={false}
+        accept={['image/*', 'text/csv']}
+        disabled={uploading}
+      >
         {({ getRootProps, getInputProps }) => (
           <div
             {...getRootProps({ className: 'dropzone' })}
-            className='flex items-center w-full text-center'
+            className='flex items-center w-full h-40 text-center'
           >
             <input {...getInputProps()} />
-            <div className='rounded flex items-center justify-center flex-col flex-1 border border-dashed border-gray text-gray-700 mr-2.5 py-6'>
+            <div
+              className={classNames(
+                'rounded flex h-full items-center justify-center flex-col flex-1 border border-dashed text-gray-700 mr-2.5 py-6',
+                isError ? 'border-danger' : 'border-gray'
+              )}
+            >
               <Icon name='upload' size={20} />
               <div className='mb-2.5 text-medium'>{t('dragNdrop')}</div>
               <button
@@ -28,6 +67,7 @@ export const FileUploader = () => {
               >
                 {t('selectFile')}
               </button>
+              <div className='mt-2 text-gray-500 text-small'>{nameFile}</div>
             </div>
           </div>
         )}
