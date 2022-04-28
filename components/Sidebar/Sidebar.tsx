@@ -122,7 +122,7 @@ export const Sidebar = () => {
   return (
     <div
       className={classNames(
-        'flex flex-col border-r border-input bg-gray-light w-[200px]',
+        'flex flex-col border-r border-input bg-gray-A100 w-[200px]',
         'fixed top-12 left-0'
       )}
       style={{ height: 'calc(100vh - 48px)' }}
