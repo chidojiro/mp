@@ -1,25 +1,26 @@
 import React from 'react';
-
-import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
+import classNames from 'classnames';
 
-import { Option } from '@/types';
+import { ClassName, Option } from '@/types';
 
 import { RichTextEditor, RichTextEditorProps, RichTextEditorRef } from '../RichTextEditor';
-import { VariableSign } from './VariableSign';
+
 import { EmojiSign } from './EmojiSign';
+import { VariableSign } from './VariableSign';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export type Props = Omit<RichTextEditorProps, 'ref'> & {
-  error?: boolean;
-  label?: React.ReactNode;
-  name?: string;
-  emoji?: boolean;
-};
+export type Props = Omit<RichTextEditorProps, 'ref'> &
+  ClassName & {
+    error?: boolean;
+    label?: React.ReactNode;
+    name?: string;
+    emoji?: boolean;
+  };
 
 // eslint-disable-next-line no-empty-pattern
 export const MentionsEditor = React.forwardRef(
-  ({ error, label, mentionOptions, emoji = false, ...restProps }: Props, ref: any) => {
+  ({ error, label, mentionOptions, emoji = false, className, ...restProps }: Props, ref: any) => {
     const { t } = useTranslation();
     const richTextEditorRef = React.useRef<RichTextEditorRef>();
 
@@ -32,7 +33,7 @@ export const MentionsEditor = React.forwardRef(
     };
 
     return (
-      <div>
+      <div className={className}>
         <input className='minimized' ref={ref} />
         {!!label && <label className='block mb-1 text-gray-5'>{label}</label>}
         <div

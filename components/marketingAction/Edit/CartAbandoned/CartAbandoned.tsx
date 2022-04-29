@@ -1,24 +1,25 @@
 import React, { useCallback, useEffect, useState } from 'react';
-
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
 import { MarketingActionAPI } from '@/apis';
-import { Form } from '@/components/common';
 import { ActionContainer } from '@/components/ActionContainer';
+import { Form } from '@/components/common';
+import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
 import { useVisibilityControl } from '@/hooks';
 import { MarketingActionAlias, MarketingActionStatus, TARGET } from '@/types';
 import { TargetFilterUtils } from '@/utils';
-import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
 
 import { Steppers } from '../Steppers';
 import SavingActions from '../Steppers/SavingActions';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';
+
 import { LineSettings } from './LineSettings';
 import { Message1Settings } from './Message1Settings';
 import { Message2Settings } from './Message2Settings';
+import { convertToStepMessageRaw, convertFromStepMessageRaw } from '../utils';
 
 export const CartAbandoned = () => {
   const { t } = useTranslation('marketingAction');
@@ -86,9 +87,13 @@ export const CartAbandoned = () => {
       const settings = marketingAction.settings;
       step1Methods.reset({ enable_line: settings?.enable_line });
 
-      step2Methods.reset({ ...settings?.step_messages?.[0] }, { keepDefaultValues: true });
+      step2Methods.reset(convertFromStepMessageRaw(settings?.step_messages?.[0]), {
+        keepDefaultValues: true,
+      });
 
-      step3Methods.reset({ ...settings?.step_messages?.[1] }, { keepDefaultValues: true });
+      step3Methods.reset(convertFromStepMessageRaw(settings?.step_messages?.[1]), {
+        keepDefaultValues: true,
+      });
 
       const _targetSegments = TargetFilterUtils.getTargetFilters(marketingAction.target_segments);
 
@@ -119,7 +124,10 @@ export const CartAbandoned = () => {
       status,
       settings: {
         enable_line: useLine,
-        step_messages: [firstMessage, secondMessage],
+        step_messages: [
+          convertToStepMessageRaw(firstMessage),
+          convertToStepMessageRaw(secondMessage),
+        ],
       },
       target_segments: _targetSegments,
     };

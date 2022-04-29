@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 
 import { Button } from '@/components/common';
-import { ContentEditableUtils } from '@/utils';
 
 type Props = {
   body?: string;
@@ -34,8 +33,6 @@ const btnHeightWithMargin = '85px';
 export const LinePreview = ({ body, isOverlay = false }: Props) => {
   const { t } = useTranslation('marketingAction');
 
-  const parsedBody = ContentEditableUtils.toPreviewString(body ?? '');
-
   return (
     <div
       className={classNames(
@@ -56,7 +53,7 @@ export const LinePreview = ({ body, isOverlay = false }: Props) => {
                   'before:w-[11px] before:h-[11px] before:border-b-[7px] before:rounded-bl-[40px_40px]'
                 )}
               >
-                {parsedBody}
+                {body}
               </div>
             </div>
           </div>

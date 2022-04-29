@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
-
 import { useTranslation } from 'next-i18next';
-import { useWatch } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 
-import { Form, Icon, RadioGroup } from '@/components/common';
-import { useVisibilityControl } from '@/hooks';
-import { Option, OPTIONS } from '@/types';
+import {
+  Form,
+  getPlainTextWithInterpolatedMentionValue,
+  Icon,
+  RadioGroup,
+} from '@/components/common';
+import { ColorGroup } from '@/components/marketingAction/ColorGroup';
 import { LinePreview } from '@/components/marketingAction/LinePreview';
 import { MailPreview } from '@/components/marketingAction/MailPreview';
 import { MessageContentPreviewType } from '@/components/marketingAction/MessageContentPreview';
-import { ColorGroup } from '@/components/marketingAction/ColorGroup';
 import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
+import { useVariables, useVisibilityControl } from '@/hooks';
+import { OPTIONS } from '@/types';
+import { MarketingActionAlias } from '@/types/marketingAction';
 
 import { MessageBodyInput } from '../MessageBodyInput';
 
@@ -38,10 +43,13 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
     previewMessageControl.open();
   };
 
-  const headingMentionOptions: Option<string, string>[] = [
-    { label: t('customerName'), value: 'customerName' },
-    { label: t('brandName'), value: 'brandName' },
-  ];
+  const { setValue } = useFormContext();
+
+  const { data: variables } = useVariables(MarketingActionAlias.CART_LEFT_NOTIFICATION);
+  const mentionOptions = variables.map(({ content, name_display }) => ({
+    label: name_display,
+    value: content,
+  }));
 
   return (
     <div className='px-10 -mx-10 border-t-4 border-white mt-7 pb-7'>
@@ -57,15 +65,26 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
                 {t('headLines')}
               </div>
               <Form.MentionsEditor
-                mentionOptions={headingMentionOptions}
-                name={`${messageNum}.mail_content.title`}
+                mentionOptions={mentionOptions}
+                name={`${messageNum}.mail_content.title_draft_raw`}
+                onChange={editorState => {
+                  setValue(
+                    `${messageNum}.mail_content.title`,
+                    getPlainTextWithInterpolatedMentionValue(editorState)
+                  );
+                  return editorState;
+                }}
                 rules={{ required: true }}
               />
             </div>
             <div className='mb-4'>
               <div className='mb-2.5 font-semibold text-secondary text-medium'>{t('bodyText')}</div>
 
-              <MessageBodyInput name={`${messageNum}.mail_content.content`} />
+              <MessageBodyInput
+                mentionOptions={mentionOptions}
+                name={`${messageNum}.mail_content.content`}
+                rawName={`${messageNum}.mail_content.content_draft_raw`}
+              />
             </div>
             <div className='mt-7'>
               <div className='mb-2 font-semibold text-secondary'>{t('colorSettingsForBtn')}</div>
@@ -115,7 +134,10 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
                   ))}
                 </Form.RadioGroup>
                 {showLineMsg && (
-                  <MessageBodyInput name={`${messageNum}.line_messages.text_msg_content`} />
+                  <MessageBodyInput
+                    name={`${messageNum}.line_messages.text_msg_content`}
+                    rawName={`${messageNum}.line_messages.text_msg_content_draft_raw`}
+                  />
                 )}
               </div>
             </div>
