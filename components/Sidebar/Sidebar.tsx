@@ -140,7 +140,7 @@ export const Sidebar = () => {
           <NavItem showLabel={open} key={menuItem.label} data={menuItem} />
         ))}
       </div>
-      <div className='flex-shrink-0 flex pb-5 border-t-2'>
+      <div className='flex-shrink-0 flex pb-1 border-t-2'>
         <span className='flex ml-auto' onClick={toggleSideBar}>
           {open && <ChevronLeftIcon width={40} fill='#BFBFBF' />}
           {!open && <ChevronRightIcon width={40} fill='#BFBFBF' />}
