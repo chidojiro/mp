@@ -1,6 +1,6 @@
-import classNames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import classNames from 'classnames';
 
 import { RadioGroup } from '@/components/common';
 
@@ -20,11 +20,11 @@ export const RadioTag = ({ value, label }: Props) => {
         <Link href={{ pathname, query: { ...query, actionType: value } }} passHref>
           <label
             className={classNames(
-              'rounded-full px-4 py-1.5 font-bold cursor-pointer text-medium',
+              'rounded-full px-4 py-1 font-bold cursor-pointer text-medium',
               'flex items-center gap-1',
               'border border-solid',
               {
-                'border-gray-500 bg-white': !isChecked,
+                'border-gray-300 bg-white': !isChecked,
                 'bg-primary border-primary text-white': isChecked,
               }
             )}

@@ -1,6 +1,6 @@
-import classNames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import classNames from 'classnames';
 
 import { Accordion } from '@/components/common/Accordion';
 import { Icon } from '@/components/common/Icon';
@@ -8,9 +8,9 @@ import { useVisibilityControl } from '@/hooks/useVisibilityControl';
 
 import { NavItemData } from './NavItem.types';
 
-type Props = { data: NavItemData };
+type Props = { data: NavItemData; showLabel: boolean };
 
-export const NavItem = ({ data }: Props) => {
+export const NavItem = ({ data, showLabel = true }: Props) => {
   const { path, label, children: navChildren = [], icon = 'group' } = data;
 
   const router = useRouter();
@@ -25,12 +25,14 @@ export const NavItem = ({ data }: Props) => {
     return (
       <Link passHref href={path}>
         <a
-          className={classNames('flex text-medium items-center px-6 py-2.5 hover:bg-dark-gray', {
+          className={classNames('flex text-medium items-center py-3 hover:bg-dark-gray', {
             'bg-dark-gray': isMatched(data),
+            'pl-3': true,
           })}
+          title={label}
         >
-          <Icon name={icon} className='w-4 h-4 mr-2 text-primary' />
-          {label}
+          <Icon name={icon} className='w-4 h-4 mr-2 text-primary my-1' size={22} />
+          {showLabel && label}
         </a>
       </Link>
     );
@@ -39,17 +41,18 @@ export const NavItem = ({ data }: Props) => {
     <Accordion control={accordionControl}>
       <Accordion.Title>
         <div
-          className={classNames(
-            'cursor-pointer flex text-medium items-center px-6 py-2.5 hover:bg-dark-gray'
-          )}
+          className={classNames({
+            'cursor-pointer flex text-medium items-center py-3 hover:bg-dark-gray': true,
+            'pl-3': true,
+          })}
         >
-          <Icon name={icon} size={16} className='mr-2 text-primary' />
-          {label}
-          {navChildren && (
+          <Icon name={icon} size={16} className='mr-2 text-primary my-1' />
+          {showLabel && label}
+          {showLabel && navChildren && (
             <Icon
               name={accordionControl.visible ? 'chevron-up' : 'chevron-down'}
               className='ml-auto text-gray-500'
-              size={20}
+              size={22}
             />
           )}
         </div>
@@ -64,6 +67,7 @@ export const NavItem = ({ data }: Props) => {
                   'bg-dark-gray': isMatched(item),
                 }
               )}
+              title={item.label}
             >
               {item.label}
             </a>

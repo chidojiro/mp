@@ -152,13 +152,13 @@ export const LineMailTable = ({ className }: Props) => {
   return (
     <Table className={className}>
       <Table.Head>
-        <Table.Row>
-          <Table.Cell>{t('measure')}</Table.Cell>
+        <Table.Row className='rounded-tl-md rounded-tr-md border-r-none border-l-none'>
+          <Table.Cell className='rounded-tl-md border-l-none'>{t('measure')}</Table.Cell>
           <Table.Cell>{t('deliveryType')}</Table.Cell>
           <Table.Cell>{t('numberOfUUsDelivered')}</Table.Cell>
           <Table.Cell>{t('openUuRate')}</Table.Cell>
           <Table.Cell>{t('clickedUuRate')}</Table.Cell>
-          <Table.Cell>{t('cvUuRate')}</Table.Cell>
+          <Table.Cell className='rounded-tr-md border-r-none'>{t('cvUuRate')}</Table.Cell>
         </Table.Row>
       </Table.Head>
       <Table.Body>

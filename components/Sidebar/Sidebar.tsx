@@ -2,12 +2,15 @@ import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 
 import { useProfile } from '@/hooks/api/useProfile';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
 
 import { NavItem } from './NavItem';
 import { NavItemData } from './NavItem.types';
+import { useState } from 'react';
 
 export const Sidebar = () => {
   const { t } = useTranslation();
+  const [open, setOpen] = useState(true);
   const profile = useProfile();
   const organizationPrefix = `/organizations/${profile.data?.organization_id}`;
   const projectPrefix = `${organizationPrefix}/projects/${profile.data?.project_id}`;
@@ -119,18 +122,29 @@ export const Sidebar = () => {
       icon: 'settings',
     },
   ];
+  const toggleSideBar = () => {
+    setOpen(!open);
+  };
   return (
     <div
       className={classNames(
-        'flex flex-col border-r border-input bg-gray-light w-[200px]',
-        'fixed top-12 left-0'
+        'flex flex-col border-r border-input bg-gray-A100 w-[200px]',
+        'fixed top-12 left-0',
+        open && 'w-[200px]',
+        !open && 'w-[45px]'
       )}
       style={{ height: 'calc(100vh - 48px)' }}
     >
-      <div className='flex flex-col flex-grow'>
+      <div className='flex flex-col flex-grow select-none'>
         {menu.map(menuItem => (
-          <NavItem key={menuItem.label} data={menuItem} />
+          <NavItem showLabel={open} key={menuItem.label} data={menuItem} />
         ))}
+      </div>
+      <div className='flex-shrink-0 flex pb-5 border-t-2'>
+        <span className='flex ml-auto' onClick={toggleSideBar}>
+          {open && <ChevronLeftIcon width={40} fill='#BFBFBF' />}
+          {!open && <ChevronRightIcon width={40} fill='#BFBFBF' />}
+        </span>
       </div>
     </div>
   );
