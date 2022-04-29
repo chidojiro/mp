@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { useTranslation } from 'next-i18next';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { Table } from '@/components/common';
 import { ClassName } from '@/types';
-import { ChevronRightIcon } from '@heroicons/react/solid';
+
+import { RowHeader } from './RowHeader';
 
 const data = [
   {
@@ -139,61 +139,12 @@ const data = [
   },
 ];
 
-const LinkWithArrow = React.forwardRef<HTMLAnchorElement, { title: string }>(({ title }, ref) => {
-  return (
-    <a ref={ref} className='mr-4 cursor-pointer'>
-      <span className='flex flex-row text-gray-600 font-medium hover:text-secondary'>
-        {title}
-        <ChevronRightIcon width={20} />
-      </span>
-    </a>
-  );
-});
-LinkWithArrow.displayName = 'LinkWithArrow';
-type RowHeaderProps = {
-  id: string;
-  title: string;
-  organizationId: string;
-  projectId: string;
-  actionType: string;
-};
-const RowHeader = ({ id, title, organizationId, projectId, actionType }: RowHeaderProps) => {
-  const { t } = useTranslation('report');
-  return (
-    <div className='flex flex-col'>
-      <div>
-        <span className='font-bold'>{title}</span>
-      </div>
-      <div className='flex flex-row mt-2'>
-        <Link
-          passHref
-          href={{
-            pathname: `${id}`,
-            query: { organizationId, projectId, actionType, targets: ['all'] },
-          }}
-        >
-          <LinkWithArrow title={t('viewMonthlyReport')} />
-        </Link>
-        <Link
-          passHref
-          href={{
-            pathname: `${id}`,
-            query: { organizationId, projectId, actionType, targets: ['all'] },
-          }}
-        >
-          <LinkWithArrow title={t('viewByUrlReport')} />
-        </Link>
-      </div>
-    </div>
-  );
-};
 type Props = ClassName;
 
 export const LineMailTable = ({ className = 'table-fixed' }: Props) => {
   const { t } = useTranslation('report');
   const {
-    query: { organizationId, projectId, actionType },
-    pathname,
+    query: { actionType },
   } = useRouter();
 
   const headers = [
@@ -222,10 +173,8 @@ export const LineMailTable = ({ className = 'table-fixed' }: Props) => {
             <Table.Row>
               <Table.Cell rowSpan={2}>
                 <RowHeader
-                  id={item.id}
                   title={t(item.name)}
-                  organizationId={organizationId as string}
-                  projectId={projectId as string}
+                  enableByUrlReport
                   actionType={actionType as string}
                 />
               </Table.Cell>
