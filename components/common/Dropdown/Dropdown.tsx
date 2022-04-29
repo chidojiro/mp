@@ -10,7 +10,7 @@ import { Popover, PopoverProps } from '../Popover';
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Props = PopoverProps & {
   options?: Option[];
-  onSelect?: (value: Option['value']) => void;
+  onSelect?: (value: Option['value'], option: Option) => void;
 };
 
 // eslint-disable-next-line no-empty-pattern
@@ -21,8 +21,8 @@ export const Dropdown = ({ options = [], onSelect, control: controlProp, ...rest
   const control = controlProp ?? ownControl;
 
   const handleSelect = React.useCallback(
-    (value: string) => {
-      onSelect?.(value);
+    (selectedValue: string, option: Option) => {
+      onSelect?.(selectedValue, option);
       control.close();
     },
     [control, onSelect]
@@ -32,7 +32,7 @@ export const Dropdown = ({ options = [], onSelect, control: controlProp, ...rest
     () => ({
       ArrowDown: () => setFocusedIndex(prev => Math.min(prev + 1, options.length - 1)),
       ArrowUp: () => setFocusedIndex(prev => Math.max(prev - 1, 0)),
-      Enter: () => handleSelect(options[focusedIndex].value),
+      Enter: () => handleSelect(options[focusedIndex].value, options[focusedIndex]),
       Escape: () => control.close(),
     }),
     [control, focusedIndex, handleSelect, options]
@@ -68,9 +68,9 @@ export const Dropdown = ({ options = [], onSelect, control: controlProp, ...rest
     <Popover control={control} {...restProps}>
       {!!options.length && (
         <div className={classNames('mp-dropdown', 'p-2.5', 'bg-white', 'rounded', 'shadow-md')}>
-          {options.map(({ label, value }, idx) => (
+          {options.map((option, idx) => (
             <div
-              onClick={() => handleSelect(value)}
+              onClick={() => handleSelect(option.value, option)}
               onMouseEnter={() => setFocusedIndex(idx)}
               className={classNames(
                 'mp-dropdown-option',
@@ -79,9 +79,9 @@ export const Dropdown = ({ options = [], onSelect, control: controlProp, ...rest
                 'p-2.5 rounded focus:bg-gray-200 cursor-pointer select-none',
                 { 'bg-gray-200': focusedIndex === idx }
               )}
-              key={value}
+              key={idx}
             >
-              {label}
+              {option.label}
             </div>
           ))}
         </div>

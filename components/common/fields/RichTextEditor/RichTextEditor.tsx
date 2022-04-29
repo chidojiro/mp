@@ -313,9 +313,7 @@ export const RichTextEditor = React.forwardRef(
       };
     };
 
-    const handleDropdownSelect = (selectedValue: string) => {
-      const selectedOption = mentionOptions.find(({ value }) => value === selectedValue)!;
-
+    const handleDropdownSelect = (_: string, selectedOption: Option) => {
       const { start } = getMentionTriggerData(editorState);
 
       const newEditorState = replaceText({
@@ -323,7 +321,7 @@ export const RichTextEditor = React.forwardRef(
         entityType: 'MENTION',
         start,
         end: editorState.getSelection().getAnchorOffset(),
-        newText: selectedOption.label,
+        newText: selectedOption.label as string,
         mutability: 'IMMUTABLE',
         data: selectedOption,
       });

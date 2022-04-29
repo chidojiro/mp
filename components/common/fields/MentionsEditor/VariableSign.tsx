@@ -16,8 +16,8 @@ type Props = ClassName & {
 export const VariableSign = ({ className, options, onSelect }: Props) => {
   const popoverControl = useVisibilityControl();
 
-  const handleSelect = (selectedValue: string) => {
-    onSelect?.(options.find(({ value }) => value === selectedValue)!);
+  const handleSelect = (_: string, option: Option) => {
+    onSelect?.(option as Option<string, string>);
   };
 
   return (
