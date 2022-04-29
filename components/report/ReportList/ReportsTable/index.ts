@@ -1,1 +1,0 @@
-export { ReportsTable } from './ReportsTable';

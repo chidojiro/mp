@@ -6,7 +6,6 @@ export enum MarketingActionStatus {
   SUSPEND = 'suspend',
   COMPLETE = 'complete',
 }
-
 export enum MarketingActionAlias {
   CART_LEFT_NOTIFICATION = 'CART_LEFT_NOTIFICATION',
   AFTER_PURCHASE = 'AFTER_PURCHASE',
@@ -17,6 +16,25 @@ export enum MarketingActionAlias {
   CONDITIONAL_FREE_SHIPPING = 'CONDITIONAL_FREE_SHIPPING',
 }
 
+export const MarketingActionAliasMap = {
+  'cart-abandoned': MarketingActionAlias.CART_LEFT_NOTIFICATION,
+  'step-delivery-after-purchase': MarketingActionAlias.AFTER_PURCHASE,
+  'ranking-based-on-overal-purchase-history': MarketingActionAlias.HISTORY_PURCHASE,
+  'ranking-by-category': MarketingActionAlias.HISTORY_PURCHASE_CATEGORY,
+  'conditional-free-shipping': MarketingActionAlias.CONDITIONAL_FREE_SHIPPING,
+  'recommendation-diagnosis-bot': MarketingActionAlias.RECOMMEND_DIAGNOSTIC,
+  'cart-page-faq': MarketingActionAlias.CART_PAGE_FAQ,
+};
+
+export enum MarketingActionAliasKey {
+  CART_LEFT_NOTIFICATION = 'cart-abandoned',
+  AFTER_PURCHASE = 'step-delivery-after-purchase',
+  CART_PAGE_FAQ = 'cart-page-faq',
+  RECOMMEND_DIAGNOSTIC = 'recommendation-diagnosis-bot',
+  HISTORY_PURCHASE = 'ranking-based-on-overal-purchase-history',
+  HISTORY_PURCHASE_CATEGORY = 'ranking-by-category',
+  CONDITIONAL_FREE_SHIPPING = 'conditional-free-shipping',
+}
 export enum TARGET {
   F0_MEMBER = 'f0member',
   F0_OTHERS = 'f0others',

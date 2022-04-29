@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { useTranslation } from 'next-i18next';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { Table } from '@/components/common';
-import { ClassName } from '@/types';
-import { ChevronRightIcon } from '@heroicons/react/solid';
+import { ClassName, MarketingActionAliasKey } from '@/types';
+
+import { RowHeader } from './RowHeader';
 
 const data = [
   {
@@ -44,6 +44,7 @@ const data = [
   {
     id: '1',
     name: 'カゴ落ち通知',
+    alias: MarketingActionAliasKey.CART_LEFT_NOTIFICATION,
     line: {
       numberOfUUsDelivered: '5,000',
       openUuRate: '200（4.0%）',
@@ -76,38 +77,7 @@ const data = [
   {
     id: '2',
     name: '購入後ステップ配信',
-    line: {
-      numberOfUUsDelivered: '5,000',
-      openUuRate: '200（4.0%）',
-      clickedUuRate: '200（4.0%）',
-      cvUuRate: {
-        intermediateCv: {
-          rate: '12（0.2％）',
-        },
-        finalCv: {
-          rate: '12（0.2％）',
-          price: '256,000円',
-        },
-      },
-    },
-    email: {
-      numberOfUUsDelivered: '5,000',
-      openUuRate: '200（4.0%）',
-      clickedUuRate: '200（4.0%）',
-      cvUuRate: {
-        intermediateCv: {
-          rate: '12（0.2％）',
-        },
-        finalCv: {
-          rate: '12（0.2％）',
-          price: '256,000円',
-        },
-      },
-    },
-  },
-  {
-    id: '3',
-    name: 'アンケート',
+    alias: MarketingActionAliasKey.AFTER_PURCHASE,
     line: {
       numberOfUUsDelivered: '5,000',
       openUuRate: '200（4.0%）',
@@ -139,63 +109,13 @@ const data = [
   },
 ];
 
-const LinkWithArrow = React.forwardRef<HTMLAnchorElement, { title: string }>(({ title }, ref) => {
-  return (
-    <a ref={ref} className='mr-4 cursor-pointer'>
-      <span className='flex flex-row text-gray-600 font-medium hover:text-secondary'>
-        {title}
-        <ChevronRightIcon width={20} />
-      </span>
-    </a>
-  );
-});
-LinkWithArrow.displayName = 'LinkWithArrow';
-type RowHeaderProps = {
-  id: string;
-  title: string;
-  organizationId: string;
-  projectId: string;
-  actionType: string;
-};
-const RowHeader = ({ id, title, organizationId, projectId, actionType }: RowHeaderProps) => {
-  const { t } = useTranslation('report');
-  return (
-    <div className='flex flex-col'>
-      <div>
-        <span className='font-bold'>{title}</span>
-      </div>
-      <div className='flex flex-row mt-2'>
-        <Link
-          passHref
-          href={{
-            pathname: `${id}`,
-            query: { organizationId, projectId, actionType, targets: ['all'] },
-          }}
-        >
-          <LinkWithArrow title={t('viewMonthlyReport')} />
-        </Link>
-        <Link
-          passHref
-          href={{
-            pathname: `${id}`,
-            query: { organizationId, projectId, actionType, targets: ['all'] },
-          }}
-        >
-          <LinkWithArrow title={t('viewByUrlReport')} />
-        </Link>
-      </div>
-    </div>
-  );
-};
 type Props = ClassName;
 
 export const LineMailTable = ({ className = 'table-fixed' }: Props) => {
   const { t } = useTranslation('report');
   const {
     query: { organizationId, projectId, actionType },
-    pathname,
   } = useRouter();
-
   const headers = [
     t('measure'),
     t('deliveryType'),
@@ -203,8 +123,8 @@ export const LineMailTable = ({ className = 'table-fixed' }: Props) => {
     t('openUuRate'),
     t('clickedUuRate'),
     t('cvUuRate'),
-    t('optOutUURate'),
   ];
+  const baseUrl = `/organizations/${organizationId}/projects/${projectId}/reports/action-reports`;
   return (
     <Table className={className}>
       <Table.Head>
@@ -222,11 +142,15 @@ export const LineMailTable = ({ className = 'table-fixed' }: Props) => {
             <Table.Row>
               <Table.Cell rowSpan={2}>
                 <RowHeader
-                  id={item.id}
                   title={t(item.name)}
-                  organizationId={organizationId as string}
-                  projectId={projectId as string}
-                  actionType={actionType as string}
+                  monthlyUrl={
+                    item.alias
+                      ? {
+                          pathname: `${baseUrl}/${item.alias}/monthly`,
+                          query: { targets: ['all'] },
+                        }
+                      : undefined
+                  }
                 />
               </Table.Cell>
               <Table.Cell>LINE</Table.Cell>
@@ -246,7 +170,6 @@ export const LineMailTable = ({ className = 'table-fixed' }: Props) => {
                   </div>
                 </div>
               </Table.Cell>
-              <Table.Cell className='text-right'>-</Table.Cell>
             </Table.Row>
             <Table.Row className='bg-gray-A200'>
               <Table.Cell>{t('email')}</Table.Cell>
@@ -266,7 +189,6 @@ export const LineMailTable = ({ className = 'table-fixed' }: Props) => {
                   </div>
                 </div>
               </Table.Cell>
-              <Table.Cell className='text-right'>-</Table.Cell>
             </Table.Row>
           </React.Fragment>
         ))}
