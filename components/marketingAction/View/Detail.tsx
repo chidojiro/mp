@@ -2,9 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
+import {
+  MarketingActionRes,
+  MarketingActionStatus,
+  MarketingActionTypeMessage as TYPE,
+} from '@/types';
 import { SideMenu, SideMenuGroup, SideMenuItem } from '@/components/common';
 import { TargetFilter } from '@/components/TargetFilter';
-import { MarketingActionRes, MarketingActionTypeMessage as TYPE } from '@/types';
+import { LanguageUtils } from '@/utils';
 
 import { MarketingAction } from './MarketingAction';
 
@@ -14,7 +19,7 @@ type Props = {
 };
 
 export const Detail = ({ marketingActions = [], mutateMarketingActions }: Props) => {
-  const { query, pathname, push } = useRouter();
+  const { query, pathname, push, locale } = useRouter();
   const { t } = useTranslation('marketingAction');
 
   useEffect(() => {
@@ -67,7 +72,7 @@ export const Detail = ({ marketingActions = [], mutateMarketingActions }: Props)
         return {
           value: ma.id,
           onClick: () => handleMAChange({ marketingActionId: ma.id }),
-          label: ma.description,
+          label: `${LanguageUtils.getDateFormat(ma.start_at, locale)} 〜`,
           content: (
             <MarketingAction marketingAction={ma} mutateMarketingActions={mutateMarketingActions} />
           ),
@@ -115,7 +120,13 @@ export const Detail = ({ marketingActions = [], mutateMarketingActions }: Props)
   ];
 
   const renderEmpty = () => {
-    return <div>{t('emptyMarketingAction')}</div>;
+    const status = query.marketingActionStatus;
+    if (status === MarketingActionStatus.RUNNING) {
+      return <div>{t('emptyRunningMarketingAction')}</div>;
+    } else if (status === MarketingActionStatus.COMPLETE) {
+      return <div>{t('emptyCompletedMarketingAction')}</div>;
+    }
+    return <div>{t('emptyDraftMarketingAction')}</div>;
   };
 
   const isEmpty = !marketingActions.length;
