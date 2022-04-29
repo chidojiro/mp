@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 
 import { Table } from '@/components/common';
 import { ClassName } from '@/types';
+import { ChevronRightIcon } from '@heroicons/react/solid';
 
 const data = [
   {
@@ -138,48 +139,96 @@ const data = [
   },
 ];
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-type Props = ClassName & {};
+const LinkWithArrow = React.forwardRef<HTMLAnchorElement, { title: string }>(({ title }, ref) => {
+  return (
+    <a ref={ref} className='mr-4 cursor-pointer'>
+      <span className='flex flex-row text-gray-600 font-medium hover:text-secondary'>
+        {title}
+        <ChevronRightIcon width={20} />
+      </span>
+    </a>
+  );
+});
+LinkWithArrow.displayName = 'LinkWithArrow';
+type RowHeaderProps = {
+  id: string;
+  title: string;
+  organizationId: string;
+  projectId: string;
+  actionType: string;
+};
+const RowHeader = ({ id, title, organizationId, projectId, actionType }: RowHeaderProps) => {
+  const { t } = useTranslation('report');
+  return (
+    <div className='flex flex-col'>
+      <div>
+        <span className='font-bold'>{title}</span>
+      </div>
+      <div className='flex flex-row mt-2'>
+        <Link
+          passHref
+          href={{
+            pathname: `${id}`,
+            query: { organizationId, projectId, actionType, targets: ['all'] },
+          }}
+        >
+          <LinkWithArrow title={t('viewMonthlyReport')} />
+        </Link>
+        <Link
+          passHref
+          href={{
+            pathname: `${id}`,
+            query: { organizationId, projectId, actionType, targets: ['all'] },
+          }}
+        >
+          <LinkWithArrow title={t('viewByUrlReport')} />
+        </Link>
+      </div>
+    </div>
+  );
+};
+type Props = ClassName;
 
-// eslint-disable-next-line no-empty-pattern
-export const LineMailTable = ({ className }: Props) => {
+export const LineMailTable = ({ className = 'table-fixed' }: Props) => {
   const { t } = useTranslation('report');
   const {
     query: { organizationId, projectId, actionType },
     pathname,
   } = useRouter();
 
+  const headers = [
+    t('measure'),
+    t('deliveryType'),
+    t('numberOfUUsDelivered'),
+    t('openUuRate'),
+    t('clickedUuRate'),
+    t('cvUuRate'),
+    t('optOutUURate'),
+  ];
   return (
     <Table className={className}>
       <Table.Head>
-        <Table.Row className='rounded-tl-md rounded-tr-md border-r-none border-l-none'>
-          <Table.Cell className='rounded-tl-md border-l-none'>{t('measure')}</Table.Cell>
-          <Table.Cell>{t('deliveryType')}</Table.Cell>
-          <Table.Cell>{t('numberOfUUsDelivered')}</Table.Cell>
-          <Table.Cell>{t('openUuRate')}</Table.Cell>
-          <Table.Cell>{t('clickedUuRate')}</Table.Cell>
-          <Table.Cell className='rounded-tr-md border-r-none'>{t('cvUuRate')}</Table.Cell>
+        <Table.Row className='rounded-tl-md rounded-tr-md'>
+          {headers.map(title => (
+            <Table.Header key={title} className='whitespace-pre text-center'>
+              {title}
+            </Table.Header>
+          ))}
         </Table.Row>
       </Table.Head>
       <Table.Body>
         {data.map(item => (
           <React.Fragment key={item.id}>
             <Table.Row>
-              <Table.Header rowSpan={2}>
-                {item.name === 'all' ? (
-                  t('all')
-                ) : (
-                  <Link
-                    passHref
-                    href={{
-                      pathname: `${pathname}/${item.id}`,
-                      query: { organizationId, projectId, actionType, targets: ['all'] },
-                    }}
-                  >
-                    <a className='underline text-primary'>{item.name}</a>
-                  </Link>
-                )}
-              </Table.Header>
+              <Table.Cell rowSpan={2}>
+                <RowHeader
+                  id={item.id}
+                  title={t(item.name)}
+                  organizationId={organizationId as string}
+                  projectId={projectId as string}
+                  actionType={actionType as string}
+                />
+              </Table.Cell>
               <Table.Cell>LINE</Table.Cell>
               <Table.Cell className='text-right'>{item.line.numberOfUUsDelivered}</Table.Cell>
               <Table.Cell className='text-right'>{item.line.openUuRate}</Table.Cell>
@@ -197,8 +246,9 @@ export const LineMailTable = ({ className }: Props) => {
                   </div>
                 </div>
               </Table.Cell>
+              <Table.Cell className='text-right'>-</Table.Cell>
             </Table.Row>
-            <Table.Row>
+            <Table.Row className='bg-gray-A200'>
               <Table.Cell>{t('email')}</Table.Cell>
               <Table.Cell className='text-right'>{item.line.numberOfUUsDelivered}</Table.Cell>
               <Table.Cell className='text-right'>{item.line.openUuRate}</Table.Cell>
@@ -216,6 +266,7 @@ export const LineMailTable = ({ className }: Props) => {
                   </div>
                 </div>
               </Table.Cell>
+              <Table.Cell className='text-right'>-</Table.Cell>
             </Table.Row>
           </React.Fragment>
         ))}

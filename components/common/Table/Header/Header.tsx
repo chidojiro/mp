@@ -14,8 +14,11 @@ export const Header = ({ className, ...restProps }: Props) => {
       {...restProps}
       className={classNames(
         'mp-table-header',
-        'text-left text-gray-800',
-        'border-r border-b border-solid border-gray-400 last-of-type:border-r-none',
+        'text-left text-white',
+        'first:border-l-0 first:rounded-tl-md',
+        'last:border-r-0 last:rounded-tr-md',
+        'bg-secondary border-white',
+        'border-r border-b border-solid border-1',
         'py-3 px-6',
         className
       )}
