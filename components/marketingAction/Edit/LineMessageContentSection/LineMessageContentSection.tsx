@@ -2,19 +2,25 @@ import { useTranslation } from 'next-i18next';
 import { useWatch } from 'react-hook-form';
 
 import { Form, Icon, RadioGroup } from '@/components/common';
-import { Section } from '@/components/Section';
 import { MessageContentPreview } from '@/components/marketingAction/MessageContentPreview';
+import { Section } from '@/components/Section';
 
 import { MessageBodyInput } from '../MessageBodyInput';
+import { Option } from '@/types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {
   namePrefix?: string;
   onPreviewClick: () => void;
+  mentionOptions: Option<string, string>[];
 };
 
 // eslint-disable-next-line no-empty-pattern
-export const LineMessageContentSection = ({ namePrefix, onPreviewClick }: Props) => {
+export const LineMessageContentSection = ({
+  namePrefix,
+  onPreviewClick,
+  mentionOptions,
+}: Props) => {
   const { t } = useTranslation('marketingAction');
 
   const bodyName = [namePrefix, 'line_messages.text_msg_content'].filter(Boolean).join('.');
@@ -43,7 +49,9 @@ export const LineMessageContentSection = ({ namePrefix, onPreviewClick }: Props)
           </div>
           {!!displayLineMessage && (
             <MessageBodyInput
+              mentionOptions={mentionOptions}
               name={bodyName}
+              rawName={`${bodyName}_draft_raw`}
               showEmoji={false}
               shouldValidate={displayLineMessage}
             />

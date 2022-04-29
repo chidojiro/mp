@@ -6,7 +6,6 @@ import Link from 'next/link';
 
 import { Button } from '@/components/common';
 import { ClassName } from '@/types';
-import { ContentEditableUtils } from '@/utils';
 
 type Props = ClassName & {
   headline?: string;
@@ -45,9 +44,6 @@ export const MailPreview = ({
 }: Props) => {
   const { t } = useTranslation('marketingAction');
 
-  const parsedBody = ContentEditableUtils.toPreviewString(body ?? '');
-  const parsedHeadline = ContentEditableUtils.toPreviewString(headline ?? '');
-
   return (
     <div
       className={classNames(
@@ -61,11 +57,11 @@ export const MailPreview = ({
         <h2 className='mb-4 text-center text-secondary'>Brand Logo</h2>
         <div className='flex justify-center w-full'>
           <h3 className='w-[160px] mb-4 whitespace-pre-line text-gray-dark text-center'>
-            {parsedHeadline}
+            {headline}
           </h3>
         </div>
         <div className='mb-3 font-semibold'>山田 太郎 様</div>
-        <div className='mb-8 break-words whitespace-pre-wrap text-gray-dark'>{parsedBody}</div>
+        <div className='mb-8 break-words whitespace-pre-wrap text-gray-dark'>{body}</div>
         {showViewShoppingCartButton && (
           <div className='w-full text-center'>
             <Button

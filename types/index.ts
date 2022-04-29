@@ -9,3 +9,4 @@ export * from './navigator';
 export * from './report';
 export * from './project';
 export * from './asset';
+export * from './variable';

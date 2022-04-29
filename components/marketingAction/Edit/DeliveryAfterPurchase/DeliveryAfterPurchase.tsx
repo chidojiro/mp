@@ -1,14 +1,15 @@
 import React from 'react';
-
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
 import useSWR from 'swr';
-import Link from 'next/link';
 
+import { MarketingActionAPI } from '@/apis/marketingActions';
+import { ActionContainer } from '@/components/ActionContainer';
 import { Button, Modal } from '@/components/common';
 import { Stepper } from '@/components/Stepper';
-import { ActionContainer } from '@/components/ActionContainer';
+import { useHref, useVisibilityControl } from '@/hooks';
 import {
   MarketingActionRes,
   MarketingActionStatus,
@@ -17,14 +18,13 @@ import {
   StepMessageTemplate,
   TARGET,
 } from '@/types';
-import { MarketingActionAPI } from '@/apis';
 import { TargetFilterUtils } from '@/utils';
-import { useHref, useVisibilityControl } from '@/hooks';
 
 import { LineUsageSettingsStep } from './LineUsageSettingsStep';
 import { Message1SettingsStep } from './Message1SettingsStep';
 import { Message2SettingsStep } from './Message2SettingsStep';
 import { TargetSettingsStep } from './TargetSettingsStep';
+import { convertToStepMessageRaw, convertFromStepMessageRaw } from '../utils';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};
@@ -130,8 +130,14 @@ export const DeliveryAfterPurchase = ({}: Props) => {
   React.useEffect(() => {
     if (data) {
       lineUsageSettingsStepMethods.reset({ enable_line: data.settings.enable_line });
-      message1SettingsStepMethods.reset(data.settings?.step_messages?.[0]);
-      message2SettingsStepMethods.reset(data.settings?.step_messages?.[1]);
+      message1SettingsStepMethods.reset(
+        data.settings?.step_messages?.[0] &&
+          convertFromStepMessageRaw(data.settings.step_messages[0])
+      );
+      message2SettingsStepMethods.reset(
+        data.settings?.step_messages?.[1] &&
+          convertFromStepMessageRaw(data.settings.step_messages[1])
+      );
       targetSettingsMethods.reset({ target_segments: data.target_segments });
     }
   }, [
@@ -144,8 +150,8 @@ export const DeliveryAfterPurchase = ({}: Props) => {
 
   const assembleData = (status: MarketingActionStatus) => {
     const lineUsageSettings = lineUsageSettingsStepMethods.getValues();
-    const message1Settings = message1SettingsStepMethods.getValues();
-    const message2Settings = message2SettingsStepMethods.getValues();
+    const message1Settings = message1SettingsStepMethods.getValues() as StepMessage;
+    const message2Settings = message2SettingsStepMethods.getValues() as StepMessage;
     const targetSettings = targetSettingsMethods.getValues();
 
     const data = {
@@ -155,7 +161,10 @@ export const DeliveryAfterPurchase = ({}: Props) => {
       status,
       settings: {
         ...lineUsageSettings,
-        step_messages: [message1Settings, message2Settings],
+        step_messages: [
+          convertToStepMessageRaw(message1Settings),
+          convertToStepMessageRaw(message2Settings),
+        ],
       },
       ...targetSettings,
     };
