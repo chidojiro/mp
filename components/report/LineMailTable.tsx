@@ -170,7 +170,6 @@ export const LineMailTable = ({ className = 'table-fixed' }: Props) => {
                   </div>
                 </div>
               </Table.Cell>
-              <Table.Cell className='text-right'>-</Table.Cell>
             </Table.Row>
             <Table.Row className='bg-gray-A200'>
               <Table.Cell>{t('email')}</Table.Cell>
