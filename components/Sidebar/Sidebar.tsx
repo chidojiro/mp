@@ -128,19 +128,18 @@ export const Sidebar = () => {
   return (
     <div
       className={classNames(
-        'flex flex-col border-r border-input bg-gray-A100 w-[200px]',
-        'fixed top-12 left-0',
+        'flex-1 flex flex-col border-r border-input bg-gray-A100',
+        'h-full left-0',
         open && 'w-[200px]',
         !open && 'w-[45px]'
       )}
-      style={{ height: 'calc(100vh - 48px)' }}
     >
       <div className='flex flex-col flex-grow select-none'>
         {menu.map(menuItem => (
           <NavItem showLabel={open} key={menuItem.label} data={menuItem} />
         ))}
       </div>
-      <div className='flex-shrink-0 flex pb-1 border-t-2'>
+      <div className='flex-shrink-0 flex border-t-2 sticky bottom-0'>
         <span className='flex ml-auto' onClick={toggleSideBar}>
           {open && <ChevronLeftIcon width={40} fill='#BFBFBF' />}
           {!open && <ChevronRightIcon width={40} fill='#BFBFBF' />}
