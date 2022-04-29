@@ -53,9 +53,17 @@
   "loyalDormantCustomers": "ロイヤル休眠顧客数",
   "measuresContributingToLoyaltyConversion": "ロイヤル転換に貢献した施策",
   "cartAbandoned": "カゴ落ち通知",
+  "cart-abandoned": "カゴ落ち通知",
   "measuresThatContributedToTheReturnOfDormantCustomers": "休眠顧客復帰に貢献した施策",
   "numberOfDormantCustomers": "休眠顧客数",
   "returnToList": "一覧に戻る",
   "viewMonthlyReport": "月ごとに見る",
-  "viewByUrlReport": "リンクURLごとに見る"
+  "viewByUrlReport": "リンクURLごとに見る",
+  "conditional-free-shipping": "条件付き送料無料",
+  "monthly": "（月ごと）",
+  "step-delivery-after-purchase": "購入後ステップ配信",
+  "cart-page-faq": "カートページFAQ",
+  "ranking-based-on-overal-purchase-history": "全体の購入履歴に基づくカテゴリー毎のランキング（動的）",
+  "ranking-by-category": "全体の購入履歴に基づくランキング（動的）",
+  "recommendation-diagnosis-bot": "レコメンド診断ボット（静的）"
 }

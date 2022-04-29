@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 
 import { Table } from '@/components/common';
-import { ClassName } from '@/types';
+import { ClassName, MarketingActionAliasKey } from '@/types';
 
 import { RowHeader } from './RowHeader';
 
@@ -28,6 +28,7 @@ const data = [
   {
     id: '1',
     name: 'カートページFAQ',
+    alias: MarketingActionAliasKey.CART_PAGE_FAQ,
     numberOfUUsDelivered: '5,000',
     openUuRate: '200（4.0%）',
     usedUuRate: '200（4.0%）',
@@ -43,7 +44,8 @@ const data = [
   },
   {
     id: '2',
-    name: '診断ボット',
+    name: '全体の購入履歴に基づくランキング（動的）',
+    alias: MarketingActionAliasKey.HISTORY_PURCHASE,
     numberOfUUsDelivered: '5,000',
     openUuRate: '200（4.0%）',
     usedUuRate: '200（4.0%）',
@@ -59,7 +61,25 @@ const data = [
   },
   {
     id: '3',
-    name: 'アンケートボット',
+    name: 'レコメンド診断ボット（静的）',
+    alias: MarketingActionAliasKey.RECOMMEND_DIAGNOSTIC,
+    numberOfUUsDelivered: '5,000',
+    openUuRate: '200（4.0%）',
+    usedUuRate: '200（4.0%）',
+    cvUuRate: {
+      intermediateCv: {
+        rate: '12（0.2％）',
+      },
+      finalCv: {
+        rate: '12（0.2％）',
+        price: '256,000円',
+      },
+    },
+  },
+  {
+    id: '4',
+    name: '全体の購入履歴に基づくカテゴリー毎のランキング（動的）',
+    alias: MarketingActionAliasKey.HISTORY_PURCHASE_CATEGORY,
     numberOfUUsDelivered: '5,000',
     openUuRate: '200（4.0%）',
     usedUuRate: '200（4.0%）',
@@ -82,7 +102,8 @@ type Props = ClassName & {};
 export const ChatbotTable = ({ className }: Props) => {
   const { t } = useTranslation('report');
   const {
-    query: { actionType },
+    pathname,
+    query: { organizationId, projectId, actionType },
   } = useRouter();
   const headers = [
     t('measure'),
@@ -91,6 +112,7 @@ export const ChatbotTable = ({ className }: Props) => {
     t('usedUuRate'),
     t('cvUuRate'),
   ];
+  const baseUrl = `/organizations/${organizationId}/projects/${projectId}/reports/action-reports`;
   return (
     <Table className={className}>
       <Table.Head>
@@ -106,7 +128,17 @@ export const ChatbotTable = ({ className }: Props) => {
         {data.map(item => (
           <Table.Row key={item.id}>
             <Table.Cell className='w-5/12'>
-              <RowHeader title={t(item.name)} actionType={actionType as string} />
+              <RowHeader
+                title={t(item.name)}
+                monthlyUrl={
+                  item.alias
+                    ? {
+                        pathname: `${baseUrl}/${item.alias}/monthly`,
+                        query: { targets: ['all'] },
+                      }
+                    : undefined
+                }
+              />
             </Table.Cell>
             <Table.Cell className='text-right w-1/12'>{item.numberOfUUsDelivered}</Table.Cell>
             <Table.Cell className='text-right w-2/12'>{item.openUuRate}</Table.Cell>

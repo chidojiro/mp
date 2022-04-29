@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 
 import { Table } from '@/components/common';
-import { ClassName } from '@/types';
+import { ClassName, MarketingActionAliasKey } from '@/types';
 
 import { RowHeader } from './RowHeader';
 
@@ -44,6 +44,7 @@ const data = [
   {
     id: '1',
     name: 'カゴ落ち通知',
+    alias: MarketingActionAliasKey.CART_LEFT_NOTIFICATION,
     line: {
       numberOfUUsDelivered: '5,000',
       openUuRate: '200（4.0%）',
@@ -76,38 +77,7 @@ const data = [
   {
     id: '2',
     name: '購入後ステップ配信',
-    line: {
-      numberOfUUsDelivered: '5,000',
-      openUuRate: '200（4.0%）',
-      clickedUuRate: '200（4.0%）',
-      cvUuRate: {
-        intermediateCv: {
-          rate: '12（0.2％）',
-        },
-        finalCv: {
-          rate: '12（0.2％）',
-          price: '256,000円',
-        },
-      },
-    },
-    email: {
-      numberOfUUsDelivered: '5,000',
-      openUuRate: '200（4.0%）',
-      clickedUuRate: '200（4.0%）',
-      cvUuRate: {
-        intermediateCv: {
-          rate: '12（0.2％）',
-        },
-        finalCv: {
-          rate: '12（0.2％）',
-          price: '256,000円',
-        },
-      },
-    },
-  },
-  {
-    id: '3',
-    name: 'アンケート',
+    alias: MarketingActionAliasKey.AFTER_PURCHASE,
     line: {
       numberOfUUsDelivered: '5,000',
       openUuRate: '200（4.0%）',
@@ -144,9 +114,8 @@ type Props = ClassName;
 export const LineMailTable = ({ className = 'table-fixed' }: Props) => {
   const { t } = useTranslation('report');
   const {
-    query: { actionType },
+    query: { organizationId, projectId, actionType },
   } = useRouter();
-
   const headers = [
     t('measure'),
     t('deliveryType'),
@@ -154,8 +123,8 @@ export const LineMailTable = ({ className = 'table-fixed' }: Props) => {
     t('openUuRate'),
     t('clickedUuRate'),
     t('cvUuRate'),
-    t('optOutUURate'),
   ];
+  const baseUrl = `/organizations/${organizationId}/projects/${projectId}/reports/action-reports`;
   return (
     <Table className={className}>
       <Table.Head>
@@ -174,8 +143,14 @@ export const LineMailTable = ({ className = 'table-fixed' }: Props) => {
               <Table.Cell rowSpan={2}>
                 <RowHeader
                   title={t(item.name)}
-                  enableByUrlReport
-                  actionType={actionType as string}
+                  monthlyUrl={
+                    item.alias
+                      ? {
+                          pathname: `${baseUrl}/${item.alias}/monthly`,
+                          query: { targets: ['all'] },
+                        }
+                      : undefined
+                  }
                 />
               </Table.Cell>
               <Table.Cell>LINE</Table.Cell>
@@ -215,7 +190,6 @@ export const LineMailTable = ({ className = 'table-fixed' }: Props) => {
                   </div>
                 </div>
               </Table.Cell>
-              <Table.Cell className='text-right'>-</Table.Cell>
             </Table.Row>
           </React.Fragment>
         ))}

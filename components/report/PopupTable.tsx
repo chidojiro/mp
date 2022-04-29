@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 
 import { Table } from '@/components/common';
-import { ClassName } from '@/types';
+import { ClassName, MarketingActionAliasKey } from '@/types';
 
 import { RowHeader } from './RowHeader';
 
@@ -26,37 +26,8 @@ const data = [
   },
   {
     id: '1',
-    name: 'LINE友だち追加',
-    numberOfUUsDisplayed: '5,000',
-    openUuRate: '200（4.0%）',
-    cvUuRate: {
-      intermediateCv: {
-        rate: '12（0.2％）',
-      },
-      finalCv: {
-        rate: '12（0.2％）',
-        price: '256,000円',
-      },
-    },
-  },
-  {
-    id: '2',
-    name: 'セール商品',
-    numberOfUUsDisplayed: '5,000',
-    openUuRate: '200（4.0%）',
-    cvUuRate: {
-      intermediateCv: {
-        rate: '12（0.2％）',
-      },
-      finalCv: {
-        rate: '12（0.2％）',
-        price: '256,000円',
-      },
-    },
-  },
-  {
-    id: '3',
-    name: 'オンライン商談訴求',
+    name: '条件付き送料無料',
+    alias: MarketingActionAliasKey.CONDITIONAL_FREE_SHIPPING,
     numberOfUUsDisplayed: '5,000',
     openUuRate: '200（4.0%）',
     cvUuRate: {
@@ -78,9 +49,11 @@ type Props = ClassName & {};
 export const PopupTable = ({ className }: Props) => {
   const { t } = useTranslation('report');
   const {
-    query: { actionType },
+    pathname,
+    query: { organizationId, projectId, actionType },
   } = useRouter();
   const headers = [t('measure'), t('numberOfUUsDelivered'), t('clickedUuRate'), t('cvUuRate')];
+  const baseUrl = `/organizations/${organizationId}/projects/${projectId}/reports/action-reports`;
   return (
     <Table className={className}>
       <Table.Head>
@@ -96,7 +69,17 @@ export const PopupTable = ({ className }: Props) => {
         {data.map(item => (
           <Table.Row key={item.id}>
             <Table.Cell className='w-3/6'>
-              <RowHeader title={t(item.name)} actionType={actionType as string} />
+              <RowHeader
+                title={t(item.name)}
+                monthlyUrl={
+                  item.alias
+                    ? {
+                        pathname: `${baseUrl}/${item.alias}/monthly`,
+                        query: { targets: ['all'] },
+                      }
+                    : undefined
+                }
+              />
             </Table.Cell>
             <Table.Cell className='text-right w-1/6'>{item.numberOfUUsDisplayed}</Table.Cell>
             <Table.Cell className='text-right w-1/6'>{item.openUuRate}</Table.Cell>
