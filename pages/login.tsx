@@ -1,15 +1,14 @@
 import { useEffect } from 'react';
-
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetStaticProps, GetStaticPropsContext } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { PublicLayout, LoginForm } from '@/components/Login';
-import { useNavigator } from '@/hooks/useNavigator';
+import { LoginForm,PublicLayout } from '@/components/Login';
 import { useAuth } from '@/hooks/useAuth';
-
+import { useNavigator } from '@/hooks/useNavigator';
 const LoginPage = () => {
   const navigator = useNavigator();
   const auth = useAuth();
+
   useEffect(() => {
     if (auth.isAuthenticated) {
       navigator.openDashboard();

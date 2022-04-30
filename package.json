@@ -98,7 +98,8 @@
   },
   "lint-staged": {
     "*.{js,json,css,scss,html,md,ts,tsx}": [
-      "prettier --write . "
+      "prettier --write ",
+      "eslint --fix"
     ]
   }
 }
