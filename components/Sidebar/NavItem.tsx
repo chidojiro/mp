@@ -25,9 +25,8 @@ export const NavItem = ({ data, showLabel = true }: Props) => {
     return (
       <Link passHref href={path}>
         <a
-          className={classNames('flex text-medium items-center py-3 hover:bg-dark-gray', {
+          className={classNames('flex text-medium items-center py-3  px-5 hover:bg-dark-gray', {
             'bg-dark-gray': isMatched(data),
-            'pl-3': true,
           })}
           title={label}
         >
@@ -42,8 +41,7 @@ export const NavItem = ({ data, showLabel = true }: Props) => {
       <Accordion.Title>
         <div
           className={classNames({
-            'cursor-pointer flex text-medium items-center py-3 hover:bg-dark-gray': true,
-            'pl-3': true,
+            'cursor-pointer flex text-medium items-center py-3 px-5 hover:bg-dark-gray': true,
           })}
         >
           <Icon name={icon} size={16} className='mr-2 text-primary my-1' />

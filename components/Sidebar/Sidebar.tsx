@@ -1,12 +1,12 @@
-import classNames from 'classnames';
+import { useState } from 'react';
 import { useTranslation } from 'next-i18next';
+import classNames from 'classnames';
 
 import { useProfile } from '@/hooks/api/useProfile';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
 
 import { NavItem } from './NavItem';
 import { NavItemData } from './NavItem.types';
-import { useState } from 'react';
 
 export const Sidebar = () => {
   const { t } = useTranslation();
@@ -139,10 +139,16 @@ export const Sidebar = () => {
           <NavItem showLabel={open} key={menuItem.label} data={menuItem} />
         ))}
       </div>
-      <div className='flex-shrink-0 flex border-t-2 sticky bottom-0'>
+      <div
+        className={classNames({
+          'flex-shrink-0 flex border-t-2 sticky bottom-0': true,
+          'px-3': open,
+          'px-auto': !open,
+        })}
+      >
         <span className='flex ml-auto' onClick={toggleSideBar}>
-          {open && <ChevronLeftIcon width={40} fill='#BFBFBF' />}
-          {!open && <ChevronRightIcon width={40} fill='#BFBFBF' />}
+          {open && <ChevronLeftIcon width={38} fill='#BFBFBF' />}
+          {!open && <ChevronRightIcon width={38} fill='#BFBFBF' />}
         </span>
       </div>
     </div>
