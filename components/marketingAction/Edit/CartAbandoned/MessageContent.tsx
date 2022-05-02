@@ -2,12 +2,8 @@ import React, { useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useFormContext, useWatch } from 'react-hook-form';
 
-import {
-  Form,
-  getPlainTextWithInterpolatedMentionValue,
-  Icon,
-  RadioGroup,
-} from '@/components/common';
+import { Form, Icon } from '@/components/common';
+import { getPlainTextWithInterpolatedMentionValue, RadioGroup } from '@/components/common/fields';
 import { ColorGroup } from '@/components/marketingAction/ColorGroup';
 import { LinePreview } from '@/components/marketingAction/LinePreview';
 import { MailPreview } from '@/components/marketingAction/MailPreview';

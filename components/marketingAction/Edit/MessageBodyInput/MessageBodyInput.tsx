@@ -2,8 +2,10 @@ import React from 'react';
 import { EditorState } from 'draft-js';
 import { useFormContext } from 'react-hook-form';
 
-import { Form, getPlainTextWithInterpolatedMentionValue } from '@/components/common';
+import { Form } from '@/components/common';
 import { Option } from '@/types';
+
+import { getPlainTextWithInterpolatedMentionValue } from '../../../common/fields';
 
 type Props = {
   name: string;

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import { RadioGroup } from '@/components/common';
+import { RadioGroup } from '@/components/common/fields';
 import { Option } from '@/types';
 
 type Props = {

@@ -1,12 +1,11 @@
 import React from 'react';
-
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 
+import { RadioGroup } from '@/components/common/fields';
 import { Layout } from '@/components/Layout';
-import { RadioGroup } from '@/components/common';
-import { Option } from '@/types';
 import { TargetFilter } from '@/components/TargetFilter';
+import { Option } from '@/types';
 
 import { RadioTag } from './RadioTag';
 import { ReportsTable } from './ReportsTable';

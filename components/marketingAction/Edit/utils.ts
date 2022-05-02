@@ -1,8 +1,8 @@
 import { convertFromRaw, convertToRaw, EditorState } from 'draft-js';
 import { cloneDeep } from 'lodash-es';
 
+import { richTextEditorDecorator } from '@/components/common/fields';
 import { StepMessage } from '@/types';
-import { richTextEditorDecorator } from '@/components/common';
 
 export const convertToStepMessageRaw = (stepMessage: StepMessage) => {
   const clonedStepMessage: any = cloneDeep(stepMessage);

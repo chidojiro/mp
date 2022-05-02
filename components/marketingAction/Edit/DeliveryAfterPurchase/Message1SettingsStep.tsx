@@ -2,7 +2,8 @@ import React from 'react';
 import { useTranslation } from 'next-i18next';
 import { FormProvider, UseFormReturn } from 'react-hook-form';
 
-import { Form, RadioGroup } from '@/components/common';
+import { Form } from '@/components/common';
+import { RadioGroup } from '@/components/common/fields';
 import { DeliveryDateTimeInput } from '@/components/marketingAction/DeliveryDateTimeInput';
 import { MessageContentPreviewType } from '@/components/marketingAction/MessageContentPreview';
 import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';

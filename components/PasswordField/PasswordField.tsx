@@ -1,9 +1,11 @@
 import { useTranslation } from 'next-i18next';
+
+import { Form } from '@/components/common';
+import { FieldProps } from '@/headless/Form';
+import { useStateToggle } from '@/hooks/useStateToggle';
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
 
-import { Form, PasswordInputProps } from '@/components/common';
-import { useStateToggle } from '@/hooks/useStateToggle';
-import { FieldProps } from '@/headless/Form';
+import { PasswordInputProps } from '../common/fields';
 
 type Props = FieldProps & Omit<PasswordInputProps, keyof FieldProps>;
 

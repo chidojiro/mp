@@ -1,15 +1,15 @@
 import React from 'react';
-
 import { useTranslation } from 'next-i18next';
 import { FormProvider, UseFormReturn } from 'react-hook-form';
 
-import { Form, RadioGroup } from '@/components/common';
-import { useVariables, useVisibilityControl } from '@/hooks';
-import { Stepper } from '@/components/Stepper';
-import { Section } from '@/components/Section';
+import { Form } from '@/components/common';
+import { RadioGroup } from '@/components/common/fields';
 import { DeliveryDateTimeInput } from '@/components/marketingAction/DeliveryDateTimeInput';
 import { MessageContentPreviewType } from '@/components/marketingAction/MessageContentPreview';
 import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
+import { Section } from '@/components/Section';
+import { Stepper } from '@/components/Stepper';
+import { useVariables, useVisibilityControl } from '@/hooks';
 import { StepMessageReportPeriod, StepMessageTemplate } from '@/types';
 import { MarketingActionAlias } from '@/types/marketingAction';
 

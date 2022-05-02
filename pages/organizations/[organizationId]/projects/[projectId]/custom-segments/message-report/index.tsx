@@ -1,12 +1,12 @@
 import React from 'react';
-
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
+import { Icon, Table } from '@/components/common';
+import { Select } from '@/components/common/fields';
 import { Layout } from '@/components/Layout';
-import { Icon, Select, Table } from '@/components/common';
 
 export const getServerSideProps = async ({ locale = 'ja' }) => {
   return {

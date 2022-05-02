@@ -1,12 +1,13 @@
 import { useTranslation } from 'next-i18next';
 import { useWatch } from 'react-hook-form';
 
-import { Form, Icon, RadioGroup } from '@/components/common';
+import { Form, Icon } from '@/components/common';
+import { RadioGroup } from '@/components/common/fields';
 import { MessageContentPreview } from '@/components/marketingAction/MessageContentPreview';
 import { Section } from '@/components/Section';
+import { Option } from '@/types';
 
 import { MessageBodyInput } from '../MessageBodyInput';
-import { Option } from '@/types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {
