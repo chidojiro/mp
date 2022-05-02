@@ -3,7 +3,8 @@ import { useTranslation } from 'next-i18next';
 import classNames from 'classnames';
 
 import { useProfile } from '@/hooks/api/useProfile';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
+
+import { Icon } from '../common/Icon';
 
 import { NavItem } from './NavItem';
 import { NavItemData } from './NavItem.types';
@@ -147,8 +148,8 @@ export const Sidebar = () => {
         })}
       >
         <span className='flex ml-auto' onClick={toggleSideBar}>
-          {open && <ChevronLeftIcon width={38} fill='#BFBFBF' />}
-          {!open && <ChevronRightIcon width={38} fill='#BFBFBF' />}
+          {open && <Icon name='chevron-down' size={38} fill='#BFBFBF' className='rotate-90' />}
+          {!open && <Icon name='chevron-down' size={38} fill='#BFBFBF' className='-rotate-90' />}
         </span>
       </div>
     </div>
