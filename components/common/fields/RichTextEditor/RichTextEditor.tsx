@@ -14,7 +14,7 @@ import {
 } from 'draft-js';
 
 import { useControllable, useVisibilityControl } from '@/hooks';
-import { Option } from '@/types';
+import { Option, RichOption, Variable } from '@/types';
 import { DomUtils } from '@/utils';
 
 import { Dropdown } from '../../Dropdown';
@@ -208,7 +208,7 @@ export type Props = {
   placeholder?: string;
   ref?: Ref;
   singleLine?: boolean;
-  mentionOptions?: Option<string, string>[];
+  mentionOptions?: RichOption<Variable>[];
 };
 
 export const emptyValue = EditorState.createEmpty(decorator);

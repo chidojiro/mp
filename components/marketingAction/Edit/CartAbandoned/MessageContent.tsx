@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'next-i18next';
+import { EditorState } from 'draft-js';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 import { Form, Icon } from '@/components/common';
-import { getPlainTextWithInterpolatedMentionValue, RadioGroup } from '@/components/common/fields';
+import { RadioGroup } from '@/components/common/fields';
 import { ColorGroup } from '@/components/marketingAction/ColorGroup';
 import { LinePreview } from '@/components/marketingAction/LinePreview';
 import { MailPreview } from '@/components/marketingAction/MailPreview';
@@ -14,6 +15,7 @@ import { OPTIONS } from '@/types';
 import { MarketingActionAlias } from '@/types/marketingAction';
 
 import { MessageBodyInput } from '../MessageBodyInput';
+import { getTemplateTextFromEditorState } from '../utils';
 
 type Props = {
   messageNum?: string;
@@ -42,10 +44,16 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
   const { setValue } = useFormContext();
 
   const { data: variables } = useVariables(MarketingActionAlias.CART_LEFT_NOTIFICATION);
-  const mentionOptions = variables.map(({ content, name_display }) => ({
-    label: name_display,
-    value: content,
+  const mentionOptions = variables.map(data => ({
+    label: data.name_display,
+    value: data.content,
+    data,
   }));
+
+  const handleChangeTitle = (editorState: EditorState) => {
+    const template = getTemplateTextFromEditorState(editorState);
+    setValue(`${messageNum}.mail_content.title`, template);
+  };
 
   return (
     <div className='px-10 -mx-10 border-t-4 border-white mt-7 pb-7'>
@@ -63,13 +71,7 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
               <Form.MentionsEditor
                 mentionOptions={mentionOptions}
                 name={`${messageNum}.mail_content.title_draft_raw`}
-                onChange={editorState => {
-                  setValue(
-                    `${messageNum}.mail_content.title`,
-                    getPlainTextWithInterpolatedMentionValue(editorState)
-                  );
-                  return editorState;
-                }}
+                onChange={handleChangeTitle}
                 rules={{ required: true }}
               />
             </div>

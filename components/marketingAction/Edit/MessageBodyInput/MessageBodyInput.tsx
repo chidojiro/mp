@@ -3,9 +3,9 @@ import { EditorState } from 'draft-js';
 import { useFormContext } from 'react-hook-form';
 
 import { Form } from '@/components/common';
-import { Option } from '@/types';
+import { RichOption, Variable } from '@/types';
 
-import { getPlainTextWithInterpolatedMentionValue } from '../../../common/fields';
+import { getTemplateTextFromEditorState } from '../utils';
 
 type Props = {
   name: string;
@@ -14,7 +14,7 @@ type Props = {
   shouldValidate?: boolean;
   singleLine?: boolean;
   className?: string;
-  mentionOptions?: Option<string, string>[];
+  mentionOptions?: RichOption<Variable>[];
 };
 
 export const MessageBodyInput = ({
@@ -30,12 +30,15 @@ export const MessageBodyInput = ({
 
   const { setValue } = useFormContext();
 
+  const handleChange = (editorState: EditorState) => {
+    const template = getTemplateTextFromEditorState(editorState);
+    console.log('template', template);
+    setValue(name, template);
+  };
   return (
     <div ref={mentionRef}>
       <Form.MentionsEditor
-        onChange={(editorState: EditorState) => {
-          setValue(name, getPlainTextWithInterpolatedMentionValue(editorState));
-        }}
+        onChange={handleChange}
         emoji={showEmoji}
         name={rawName}
         className={className || 'mt-5'}

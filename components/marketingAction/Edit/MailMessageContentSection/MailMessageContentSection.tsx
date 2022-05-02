@@ -4,7 +4,7 @@ import { useWatch } from 'react-hook-form';
 import { Form, Icon } from '@/components/common';
 import { MessageContentPreview } from '@/components/marketingAction/MessageContentPreview';
 import { Section } from '@/components/Section';
-import { Option } from '@/types';
+import { RichOption, Variable } from '@/types';
 
 import { MessageBodyInput } from '../MessageBodyInput';
 
@@ -12,7 +12,7 @@ import { MessageBodyInput } from '../MessageBodyInput';
 type Props = {
   namePrefix?: string;
   onPreviewClick: () => void;
-  mentionOptions: Option<string, string>[];
+  mentionOptions: RichOption<Variable>[];
 };
 
 // eslint-disable-next-line no-empty-pattern

@@ -53,9 +53,10 @@ export const Message2SettingsStep = React.forwardRef(
     };
 
     const { data: variables } = useVariables(MarketingActionAlias.AFTER_PURCHASE);
-    const mentionOptions = variables.map(({ content, name_display }) => ({
-      label: name_display,
-      value: content,
+    const mentionOptions = variables.map(data => ({
+      label: data.name_display,
+      value: data.content,
+      data,
     }));
 
     return (
