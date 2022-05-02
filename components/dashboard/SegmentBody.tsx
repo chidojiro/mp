@@ -17,7 +17,7 @@ const MemberTypeFragment = ({
   t: (key: string) => string;
 }) => {
   return (
-    <div className='container flex items-center justify-between my-2'>
+    <div className='container flex items-center justify-between mb-2'>
       <div
         className={classNames(
           'flex justify-center w-4 h-4 ml-6 mr-2 text-left text-white rounded-full bg-primary text-medium-sm',
@@ -42,7 +42,7 @@ const MemberTypeFragment = ({
 
 const GeneralFragmnet = ({ label, value, unit, boldValue = false }: any) => {
   return (
-    <div className='container flex items-center justify-between my-2'>
+    <div className='container flex items-center justify-between mb-2 last:mb-0'>
       <div className='ml-6 text-left whitespace-nowrap'>{label}</div>
       <div
         className={classNames(
@@ -56,17 +56,11 @@ const GeneralFragmnet = ({ label, value, unit, boldValue = false }: any) => {
     </div>
   );
 };
-const getTriangleClasses = (dataSet: string) =>
-  classNames({
-    'absolute cursor-pointer': true,
-    'right-[-15px]': dataSet !== 'loyal',
-    'rotate-180 right-[-8px]': dataSet === 'loyal',
-  });
 export const SegmentBody = ({ data }: SegmentBodyProps) => {
   const { t } = useTranslation('dashboard');
   return (
-    <div className='flex items-center justify-center h-full w-full relative'>
-      <div className='w-full text-medium h-full'>
+    <div className='flex flex-1 relative'>
+      <div className='flex-1 text-medium p-3'>
         <GeneralFragmnet
           label={data.target === 'f0' ? t('labelOther') : ''}
           unit={t('labelPeople')}
@@ -121,6 +115,7 @@ export const SegmentBody = ({ data }: SegmentBodyProps) => {
             unit={data.target === 'sleep' ? t('labelPeople') : t('labelYen')}
           />
         )}
+        {data.target === 'f0' && <div className='h-[15px]' />}
       </div>
     </div>
   );

@@ -1,15 +1,15 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { Icon } from '@/components/common/Icon';
-import { Layout } from '@/components/Layout';
-import { RfmSegmentTable } from '@/components/dashboard';
 import { CSVButton } from '@/components/common/Button';
-import { SSR } from '@/ssr';
-import { useReportData } from '@/hooks/api/useReportData';
-import { RfmReportDataItem } from '@/types/report';
+import { Icon, IconName } from '@/components/common/Icon';
 import { CustomerReportButton } from '@/components/CustomerReportButton';
+import { RfmSegmentTable } from '@/components/dashboard';
+import { Layout } from '@/components/Layout';
 import { useProfile } from '@/hooks';
+import { useReportData } from '@/hooks/api/useReportData';
+import { SSR } from '@/ssr';
+import { RfmReportDataItem } from '@/types/report';
 
 export const getServerSideProps = SSR.withProps('rfmReport')(async ({ locale = 'ja' }, result) => {
   return {
@@ -19,7 +19,6 @@ export const getServerSideProps = SSR.withProps('rfmReport')(async ({ locale = '
     },
   };
 });
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface DashboardProps {
   rfmReport: RfmReportDataItem[];
 }
@@ -28,6 +27,43 @@ function Dashboard(props: DashboardProps) {
   const { data } = useReportData('rfmReport', props.rfmReport);
   const { data: profile } = useProfile();
 
+  const reportButtons = [
+    {
+      href: 'f2-conversion-rate',
+      icon: 'f1-graduate',
+      label: 'f2ConversionRate',
+    },
+    {
+      href: 'semi-loyal-conversion-rate',
+      icon: 'f2-graduate',
+      label: 'semiLoyalConversionRate',
+    },
+    {
+      href: 'loyal-conversion-rate',
+      icon: 'semi-loyal-graduate',
+      label: 'loyalConversionRate',
+    },
+    {
+      href: 'loyal-customers',
+      icon: 'loyal-fluctuate',
+      label: 'loyalConversionRate',
+    },
+    {
+      href: 'dormant-customers-return',
+      icon: 'sleep-returned',
+      label: 'dormantCustomerReturnTrend',
+    },
+    {
+      href: 'f1-dormant-customers-return',
+      icon: 'f1-sleep-returned',
+      label: 'dormantF1CustomerReturnTrend',
+    },
+    {
+      href: 'loyal-dormant-customers-return',
+      icon: 'loyal-sleep-returned',
+      label: 'dormantLoyalCustomerReturnTrend',
+    },
+  ];
   return (
     <Layout title={t('menuDashboard')}>
       <h4 className='mt-5 mb-2 text-gray-600'>{t('dashboardCustomerAnalysis')}</h4>
@@ -46,41 +82,14 @@ function Dashboard(props: DashboardProps) {
 
       <div className='w-full'>
         <div className='grid grid-cols-2 grid-rows-4 gap-[10px]'>
-          <CustomerReportButton
-            href={`/organizations/${profile?.organization_id}/projects/${profile?.project_id}/reports/f2-conversion-rate`}
-            featuredIcon={<Icon name='f1-graduate' className='h-[25px] w-[65px]' />}
-            label={t('f2ConversionRate')}
-          />
-          <CustomerReportButton
-            href={`/organizations/${profile?.organization_id}/projects/${profile?.project_id}/reports/semi-loyal-conversion-rate`}
-            featuredIcon={<Icon name='f2-graduate' className='h-[25px] w-[65px]' />}
-            label={t('semiLoyalConversionRate')}
-          />
-          <CustomerReportButton
-            href={`/organizations/${profile?.organization_id}/projects/${profile?.project_id}/reports/loyal-conversion-rate`}
-            featuredIcon={<Icon name='semi-loyal-graduate' className='h-[25px] w-[65px]' />}
-            label={t('loyalConversionRate')}
-          />
-          <CustomerReportButton
-            href={`/organizations/${profile?.organization_id}/projects/${profile?.project_id}/reports/loyal-customers`}
-            featuredIcon={<Icon name='loyal-fluctuate' className='h-[25px] w-[65px]' />}
-            label={t('loyalCustomerTrend')}
-          />
-          <CustomerReportButton
-            href={`/organizations/${profile?.organization_id}/projects/${profile?.project_id}/reports/dormant-customers-return`}
-            featuredIcon={<Icon name='sleep-returned' className='h-[25px] w-[65px]' />}
-            label={t('dormantCustomerReturnTrend')}
-          />
-          <CustomerReportButton
-            href={`/organizations/${profile?.organization_id}/projects/${profile?.project_id}/reports/f1-dormant-customers-return`}
-            featuredIcon={<Icon name='f1-sleep-returned' className='h-[25px] w-[65px]' />}
-            label={t('dormantF1CustomerReturnTrend')}
-          />
-          <CustomerReportButton
-            href={`/organizations/${profile?.organization_id}/projects/${profile?.project_id}/reports/loyal-dormant-customers-return`}
-            featuredIcon={<Icon name='loyal-sleep-returned' className='h-[25px] w-[65px]' />}
-            label={t('dormantLoyalCustomerReturnTrend')}
-          />
+          {reportButtons.map(button => (
+            <CustomerReportButton
+              key={button.href}
+              href={`/organizations/${profile?.organization_id}/projects/${profile?.project_id}/reports/${button.href}`}
+              featuredIcon={<Icon name={button.icon as IconName} className='h-[25px] w-[65px]' />}
+              label={t(button.label)}
+            />
+          ))}
         </div>
       </div>
     </Layout>
