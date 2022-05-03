@@ -65,5 +65,7 @@
   "cart-page-faq": "カートページFAQ",
   "ranking-based-on-overal-purchase-history": "全体の購入履歴に基づくカテゴリー毎のランキング（動的）",
   "ranking-by-category": "全体の購入履歴に基づくランキング（動的）",
-  "recommendation-diagnosis-bot": "レコメンド診断ボット（静的）"
+  "recommendation-diagnosis-bot": "レコメンド診断ボット（静的）",
+  "viewFreeShippingReport": "定期配信(レコメンド)",
+  "viewBirthdayCouponReport": "バースデークーポン"
 }

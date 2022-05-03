@@ -97,18 +97,6 @@ module.exports = {
   mode: 'jit',
   content: ['./**/*.{tsx,ts,json}'],
   theme: {
-    fontSize: {
-      small: '10px',
-      'medium-sm': '11px',
-      medium: '12px',
-      'regular-sm': '13px',
-      regular: '14px',
-      h5: '16px',
-      h4: '18px',
-      h3: '20px',
-      h2: '24px',
-      h1: '28px',
-    },
     colors: {
       purple: {
         ...palette.purple,
@@ -161,6 +149,18 @@ module.exports = {
     },
 
     extend: {
+      fontSize: {
+        small: '10px',
+        'medium-sm': '11px',
+        medium: '12px',
+        'regular-sm': '13px',
+        regular: '14px',
+        h5: '16px',
+        h4: '18px',
+        h3: '20px',
+        h2: '24px',
+        h1: '28px',
+      },
       typography: {
         DEFAULT: {
           css: {

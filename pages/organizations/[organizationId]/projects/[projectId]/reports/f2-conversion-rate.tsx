@@ -1,10 +1,12 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
+import { Icon, IconName } from '@/components/common/Icon';
 import { ConversionRateChart } from '@/components/ConversionRateChart';
-import { Layout } from '@/components/Layout';
-import { Icon } from '@/components/common/Icon';
 import { CustomerReportButton } from '@/components/CustomerReportButton';
+import { Layout } from '@/components/Layout';
+import { useProfile } from '@/hooks/api/useProfile';
+import { NumberUtils } from '@/utils';
 
 export const getServerSideProps = async ({ locale = 'ja' }) => {
   return {
@@ -92,7 +94,28 @@ const data = [
 function F2ConversionRateTrends() {
   const { t } = useTranslation('report');
   const { t: tCommon } = useTranslation('common');
+  const { data: profile } = useProfile();
 
+  const reportButtons = [
+    {
+      href: `/organizations/${profile?.organization_id}/projects/${profile?.project_id}/reports/action-reports/step-delivery-after-purchase/monthly?targets=all`,
+      icon: 'mails',
+      label: t('postPurchaseStepDelivery'),
+      subLabel: t('mostRecentContribution', { amount: NumberUtils.formatMoney(256000) }),
+    },
+    {
+      href: `/organizations/${profile?.organization_id}/projects/${profile?.project_id}/reports/action-reports/conditional-free-shipping/monthly?targets=all`,
+      icon: 'cart',
+      label: t('viewFreeShippingReport'),
+      subLabel: t('mostRecentContribution', { amount: NumberUtils.formatMoney(48300) }),
+    },
+    {
+      href: '',
+      icon: 'chatbot',
+      label: t('viewBirthdayCouponReport'),
+      subLabel: t('mostRecentContribution', { amount: NumberUtils.formatMoney(37600) }),
+    },
+  ];
   return (
     <Layout title={tCommon('f2ConversionRateTrends')}>
       <ConversionRateChart
@@ -103,27 +126,16 @@ function F2ConversionRateTrends() {
       />
       <h5 className='text-gray-600 mt-[60px]'>{t('measuresThatContributedToF2Conversion')}</h5>
       <div className='grid grid-cols-2 gap-4 mt-6'>
-        <CustomerReportButton
-          href=''
-          featuredIcon={<Icon name='mails' size={30} />}
-          label='購入後ステップ配信'
-          subtext={t('mostRecentContribution', { amount: '556,000' })}
-          clickActionText={t('viewReport')}
-        />
-        <CustomerReportButton
-          href=''
-          featuredIcon={<Icon name='cart' size={30} />}
-          label='かご落ち通知'
-          subtext={t('mostRecentContribution', { amount: '351,000' })}
-          clickActionText={t('viewReport')}
-        />
-        <CustomerReportButton
-          href=''
-          featuredIcon={<Icon name='chatbot' size={30} />}
-          label='レコメンド診断ボット（静的）'
-          subtext={t('mostRecentContribution', { amount: '216,000' })}
-          clickActionText={t('viewReport')}
-        />
+        {reportButtons.map((button, index) => (
+          <CustomerReportButton
+            key={index}
+            href={button.href}
+            featuredIcon={<Icon name={button.icon as IconName} size={30} />}
+            label={button.label}
+            subtext={button.subLabel}
+            clickActionText={t('viewReport')}
+          />
+        ))}
       </div>
     </Layout>
   );
