@@ -1,10 +1,9 @@
 import { Fragment } from 'react';
-
-import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
-import { Menu, Transition } from '@headlessui/react';
+import classNames from 'classnames';
 
 import { useAuth } from '@/hooks/useAuth';
+import { Menu, Transition } from '@headlessui/react';
 
 export type ProfileDropdownProps = {
   text: string;
@@ -21,7 +20,7 @@ export const ProfileDropdown = ({ text }: ProfileDropdownProps) => {
   ];
   return (
     <Menu as='div' className='ml-3 relative'>
-      <div>
+      <div className='border p-2 rounded-md border-gray-300'>
         <Menu.Button className='max-w-xs bg-white flex items-center text-sm rounded-full'>
           <span className='sr-only'>Open user menu</span>
           <a className='font-bold text-medium'>{text}</a>
