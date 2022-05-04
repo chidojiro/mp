@@ -2,7 +2,6 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { CSVButton } from '@/components/common/Button';
-import { DatePicker } from '@/components/common/fields';
 import { Icon, IconName } from '@/components/common/Icon';
 import { CustomerReportButton } from '@/components/CustomerReportButton';
 import { RfmSegmentTable } from '@/components/dashboard';
@@ -24,7 +23,6 @@ export interface DashboardProps {
   rfmReport: RfmReportDataItem[];
 }
 function Dashboard(props: DashboardProps) {
-  return <DatePicker />;
   const { t } = useTranslation('dashboard');
   const { data } = useReportData('rfmReport', props.rfmReport);
   const { data: profile } = useProfile();
