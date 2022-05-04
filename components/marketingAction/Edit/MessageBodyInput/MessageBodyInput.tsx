@@ -3,7 +3,7 @@ import { EditorState } from 'draft-js';
 import { useFormContext } from 'react-hook-form';
 
 import { Form } from '@/components/common';
-import { RichOption, Variable } from '@/types';
+import { MentionData,Option } from '@/types';
 
 import { getTemplateTextFromEditorState } from '../utils';
 
@@ -14,7 +14,7 @@ type Props = {
   shouldValidate?: boolean;
   singleLine?: boolean;
   className?: string;
-  mentionOptions?: RichOption<Variable>[];
+  mentionOptions?: Option<MentionData, string>[];
 };
 
 export const MessageBodyInput = ({

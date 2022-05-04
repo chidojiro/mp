@@ -11,7 +11,7 @@ import { MailPreview } from '@/components/marketingAction/MailPreview';
 import { MessageContentPreviewType } from '@/components/marketingAction/MessageContentPreview';
 import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
 import { useVariables, useVisibilityControl } from '@/hooks';
-import { OPTIONS } from '@/types';
+import { MentionData, Option,OPTIONS } from '@/types';
 import { MarketingActionAlias } from '@/types/marketingAction';
 
 import { MessageBodyInput } from '../MessageBodyInput';
@@ -44,11 +44,13 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
   const { setValue } = useFormContext();
 
   const { data: variables } = useVariables(MarketingActionAlias.CART_LEFT_NOTIFICATION);
-  const mentionOptions = variables.map(data => ({
-    label: data.name_display,
-    value: data.content,
-    data,
-  }));
+  const mentionOptions = variables.map(
+    data =>
+      ({
+        label: data.name_display,
+        value: data,
+      } as Option<MentionData, string>)
+  );
 
   const handleChangeTitle = (editorState: EditorState) => {
     const template = getTemplateTextFromEditorState(editorState);

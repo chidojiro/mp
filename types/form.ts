@@ -5,6 +5,8 @@ export type Option<T = any, P = React.ReactNode> = {
   label: P;
 };
 
-export type RichOption<T> = Option<string, string> & {
-  data?: T;
+export type MentionData = {
+  name: string;
+  content: string;
+  type: string;
 };

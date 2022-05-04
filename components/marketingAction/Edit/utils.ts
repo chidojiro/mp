@@ -2,7 +2,7 @@ import { convertFromRaw, convertToRaw, EditorState } from 'draft-js';
 import { cloneDeep } from 'lodash-es';
 
 import { richTextEditorDecorator } from '@/components/common/fields';
-import { StepMessage, Variable } from '@/types';
+import { MentionData, StepMessage } from '@/types';
 
 export const convertToStepMessageRaw = (stepMessage: StepMessage) => {
   const clonedStepMessage: any = cloneDeep(stepMessage);
@@ -53,20 +53,20 @@ export const convertFromStepMessageRaw = (stepMessage: StepMessage) => {
 
 export const getTemplateTextFromEditorState = (editorState: EditorState): string => {
   const rawContent = convertToRaw(editorState.getCurrentContent());
-
+  console.log(rawContent);
   return rawContent.blocks
     .map(({ entityRanges, text }) => {
       let blockText = text;
       entityRanges
         .sort((first, second) => second.offset - first.offset)
         .forEach(({ key, offset, length }) => {
-          const {
-            data: { data },
-          } = rawContent.entityMap[key];
+          const { data } = rawContent.entityMap[key];
+          console.log('data:', data);
           if (!data) {
+            // no-data or without value
             return '';
           }
-          const { name, content } = data as Variable;
+          const { name } = data as MentionData;
           blockText =
             blockText.substring(0, offset) +
             '{{' +
@@ -83,18 +83,16 @@ export const getPreviewTextFromEditorState = (editorState: EditorState): string 
   const rawContent = convertToRaw(editorState.getCurrentContent());
 
   return rawContent.blocks
-    .map(({ entityRanges, text, ...restBlock }) => {
+    .map(({ entityRanges, text }) => {
       let blockText = text;
       entityRanges
         .sort((first, second) => second.offset - first.offset)
         .forEach(({ key, offset, length }) => {
-          const {
-            data: { data },
-          } = rawContent.entityMap[key];
+          const { data } = rawContent.entityMap[key];
           if (!data) {
             return '';
           }
-          const { name, content, type } = data as Variable;
+          const { name, type, content } = data as MentionData;
           if (type === 'static') {
             blockText =
               blockText.substring(0, offset) + content + blockText.substring(offset + length);

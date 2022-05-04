@@ -5,7 +5,7 @@ import { Form, Icon } from '@/components/common';
 import { RadioGroup } from '@/components/common/fields';
 import { MessageContentPreview } from '@/components/marketingAction/MessageContentPreview';
 import { Section } from '@/components/Section';
-import { RichOption, Variable } from '@/types';
+import { MentionData, Option } from '@/types';
 
 import { MessageBodyInput } from '../MessageBodyInput';
 
@@ -13,7 +13,7 @@ import { MessageBodyInput } from '../MessageBodyInput';
 type Props = {
   namePrefix?: string;
   onPreviewClick: () => void;
-  mentionOptions: RichOption<Variable>[];
+  mentionOptions: Option<MentionData, string>[];
 };
 
 // eslint-disable-next-line no-empty-pattern

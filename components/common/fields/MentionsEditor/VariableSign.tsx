@@ -1,15 +1,15 @@
 import classNames from 'classnames';
 
 import { useVisibilityControl } from '@/hooks';
-import { Option, ClassName } from '@/types';
+import { ClassName, MentionData,Option } from '@/types';
 
 import { Dropdown } from '../../Dropdown';
 import { Icon } from '../../Icon';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = ClassName & {
-  options: Option<string, string>[];
-  onSelect?: (option: Option<string, string>) => void;
+  options: Option<MentionData, string>[];
+  onSelect?: (option: Option<MentionData, string>) => void;
 };
 
 // eslint-disable-next-line no-empty-pattern
@@ -17,7 +17,7 @@ export const VariableSign = ({ className, options, onSelect }: Props) => {
   const popoverControl = useVisibilityControl();
 
   const handleSelect = (_: string, option: Option) => {
-    onSelect?.(option as Option<string, string>);
+    onSelect?.(option as Option<MentionData, string>);
   };
 
   return (
