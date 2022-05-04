@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-
-import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
+import classNames from 'classnames';
 import { FormProvider } from 'react-hook-form';
 
 import { Button, Icon } from '@/components/common';

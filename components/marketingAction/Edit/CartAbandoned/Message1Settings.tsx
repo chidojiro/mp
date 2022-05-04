@@ -1,9 +1,8 @@
 import React from 'react';
-
 import { useTranslation } from 'next-i18next';
 
-import { Section } from '@/components/Section';
 import { DeliveryDateTimeInput } from '@/components/marketingAction/DeliveryDateTimeInput';
+import { Section } from '@/components/Section';
 
 import { MessageContent } from './MessageContent';
 

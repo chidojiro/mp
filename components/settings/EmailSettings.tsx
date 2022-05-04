@@ -1,10 +1,9 @@
 import React from 'react';
-
 import { useTranslation } from 'next-i18next';
 
-import { ContentEditableUtils } from '@/utils';
 import { Form } from '@/components/common';
 import { Section } from '@/components/Section';
+import { ContentEditableUtils } from '@/utils';
 
 import { LinkButton } from './LinkButton';
 

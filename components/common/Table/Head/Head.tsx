@@ -1,5 +1,4 @@
 import React from 'react';
-
 import classNames from 'classnames';
 
 // eslint-disable-next-line @typescript-eslint/ban-types

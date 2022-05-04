@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { useRouter } from 'next/router';
 
 import { Redirect } from '@/components/common';

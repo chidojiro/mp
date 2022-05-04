@@ -1,10 +1,10 @@
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 
 import { Layout } from '@/components/Layout';
 
-import { CartAbandoned } from './CartAbandoned';
 import { CartFAQ } from './CartFAQ/CartFAQ';
+import { CartAbandoned } from './CartAbandoned';
 import { DeliveryAfterPurchase } from './DeliveryAfterPurchase';
 import { FreeShipping } from './FreeShipping';
 import { RankingByCategory } from './RankingByCategory';

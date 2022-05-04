@@ -1,5 +1,5 @@
-import classNames from 'classnames';
 import Link from 'next/link';
+import classNames from 'classnames';
 
 import { useProfile } from '@/hooks/api/useProfile';
 

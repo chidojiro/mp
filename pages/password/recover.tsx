@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
-
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetStaticProps, GetStaticPropsContext } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { useNavigator } from '@/hooks/useNavigator';
-import { useAuth } from '@/hooks/useAuth';
 import { PasswordRecoverForm, PublicLayout } from '@/components/Login';
+import { useAuth } from '@/hooks/useAuth';
+import { useNavigator } from '@/hooks/useNavigator';
 
 const PasswordResetPage = () => {
   const navigator = useNavigator();

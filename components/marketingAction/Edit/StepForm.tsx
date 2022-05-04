@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-
-import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
+import classNames from 'classnames';
 
 import { Button, Icon } from '@/components/common';
 import { Step } from '@/constants';

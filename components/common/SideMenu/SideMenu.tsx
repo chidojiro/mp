@@ -4,6 +4,7 @@ import { Tabs as HeadlessTabs, TabsProps as HeadlessTabsProps } from '@/headless
 import { ClassName } from '@/types';
 
 import { Icon, IconName } from '../Icon';
+
 import { Item, SideMenuItem } from './Item';
 
 export type GroupItem = {

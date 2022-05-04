@@ -1,15 +1,19 @@
 import React from 'react';
 
-import { ChevronRightIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
+import { ChevronDownIcon, ChevronRightIcon, ChevronUpIcon } from '@heroicons/react/solid';
 
-import CartQuestion from './icons/cart-question.svg';
+import Action from './icons/action.svg';
 import Cart from './icons/cart.svg';
+import CartQuestion from './icons/cart-question.svg';
 import Chatbot from './icons/chatbot.svg';
 import Chatbot2 from './icons/chatbot2.svg';
 import Check from './icons/check.svg';
 import ChevronRightCircle from './icons/chevron-right-circle.svg';
 import Clock from './icons/clock.svg';
 import Close from './icons/close.svg';
+import CustomSegment from './icons/custom-segment.svg';
+import Dashboard from './icons/dashboard.svg';
+import Document from './icons/document.svg';
 import Download from './icons/download.svg';
 import Emoji from './icons/emoji.svg';
 import f0Icon from './icons/f0-status.svg';
@@ -33,20 +37,16 @@ import popoverTail from './icons/popover-tail.svg';
 import PopularityRanking from './icons/popularity-ranking.svg';
 import Popup from './icons/popup.svg';
 import Ranking from './icons/ranking.svg';
+import RankingByCategory from './icons/ranking-by-category.svg';
 import Repeat from './icons/repeat.svg';
 import semiloyalGraduate from './icons/semiloyal-graduate.svg';
 import semiLoyalIcon from './icons/semiloyal-status.svg';
+import Settings from './icons/settings.svg';
 import sleepReturned from './icons/sleep-returned.svg';
 import sleepIcon from './icons/sleep-status.svg';
 import TriangleRight from './icons/triangle-right.svg';
 import Upload from './icons/upload.svg';
-import RankingByCategory from './icons/ranking-by-category.svg';
 import Variable from './icons/variable.svg';
-import Dashboard from './icons/dashboard.svg';
-import Settings from './icons/settings.svg';
-import Action from './icons/action.svg';
-import CustomSegment from './icons/custom-segment.svg';
-import Document from './icons/document.svg';
 
 const ICONS = {
   group: Group,

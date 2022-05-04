@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from 'react';
-
-import classNames from 'classnames';
-import { useTranslation } from 'next-i18next';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
+import classNames from 'classnames';
 
 import { Icon, IconName, Tag } from '@/components/common';
 import { AspectRatio } from '@/headless/AspectRatio';
-import { ClassName, TARGET } from '@/types';
 import { useAuth } from '@/hooks/useAuth';
+import { ClassName, TARGET } from '@/types';
 
-import { Label } from './Label';
 import { ActionStatus } from './ActionStatus';
 import { EditButton } from './EditButton';
+import { Label } from './Label';
 
 type Props = ClassName & {
   iconName: IconName;

@@ -1,13 +1,13 @@
-import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 
+import { MarketingActionAPI } from '@/apis';
 import { Button } from '@/components/common';
+import { MARKETING_ACTION_URL } from '@/constants';
+import { useProfile } from '@/hooks';
 import { MarketingActionAlias, MarketingActionRes, MarketingActionStatus } from '@/types';
 import { LanguageUtils, TargetFilterUtils } from '@/utils';
-import { MARKETING_ACTION_URL } from '@/constants';
-import { MarketingActionAPI } from '@/apis';
-import { useProfile } from '@/hooks';
 
 import { Action } from './Action';
 import { StepDelivery } from './StepDelivery';

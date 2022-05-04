@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 
-import { ImageUploader } from '@/components/ImageUploader';
 import { Form } from '@/components/common';
+import { ImageUploader } from '@/components/ImageUploader';
 import { Section } from '@/components/Section';
 
 import { EmailField } from '../EmailField';

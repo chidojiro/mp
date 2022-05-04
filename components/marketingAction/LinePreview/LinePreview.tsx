@@ -1,7 +1,6 @@
 import React from 'react';
-
-import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
+import classNames from 'classnames';
 
 import { Button } from '@/components/common';
 

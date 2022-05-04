@@ -1,7 +1,7 @@
 import React from 'react';
+import Link from 'next/link';
 
 import { ChevronRightIcon } from '@heroicons/react/solid';
-import Link from 'next/link';
 
 export type CustomerReportButtonProps = {
   /**

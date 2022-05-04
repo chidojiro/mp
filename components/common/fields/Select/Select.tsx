@@ -1,11 +1,10 @@
 import React, { Fragment } from 'react';
-
-import { Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/solid';
 import classNames from 'classnames';
 
 import { useControllable } from '@/hooks';
 import { Option } from '@/types';
+import { Menu, Transition } from '@headlessui/react';
+import { ChevronDownIcon } from '@heroicons/react/solid';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type Props = SelectProps;

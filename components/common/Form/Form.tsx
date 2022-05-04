@@ -16,13 +16,13 @@ import {
   PasswordInputProps,
   RadioGroup,
   RadioGroupProps,
+  richTextEditorEmptyValue,
   Select,
   SelectProps,
   TextArea,
   TextAreaProps,
   TimeInput,
   TimeInputProps,
-  richTextEditorEmptyValue,
 } from '../fields';
 
 // eslint-disable-next-line no-empty-pattern

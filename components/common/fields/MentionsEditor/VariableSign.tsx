@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 
 import { useVisibilityControl } from '@/hooks';
-import { ClassName, MentionData,Option } from '@/types';
+import { ClassName, MentionData, Option } from '@/types';
 
 import { Dropdown } from '../../Dropdown';
 import { Icon } from '../../Icon';

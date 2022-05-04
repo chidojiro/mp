@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next';
 
-import { StepBlock, ChatWindowSettings } from '../StepBlock';
+import { ChatWindowSettings, StepBlock } from '../StepBlock';
 import UploadMessage from '../StepBlock/UploadMessage';
 
 type Props = {

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import classNames from 'classnames';
 
 import { useControllable, useVisibilityControl } from '@/hooks';
@@ -7,6 +6,7 @@ import { NumberUtils } from '@/utils';
 
 import { Icon } from '../../Icon';
 import { Input, InputProps } from '../Input';
+
 import styles from './TimeInput.module.css';
 
 export type Props = Omit<InputProps, 'ref'>;

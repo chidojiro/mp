@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 
-import { Section } from '@/components/Section';
 import { ColorGroup } from '@/components/marketingAction/ColorGroup';
+import { Section } from '@/components/Section';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};
