@@ -12,8 +12,10 @@ import {
   Modifier,
   SelectionState,
 } from 'draft-js';
+import noop from 'lodash-es/noop';
 import ReactDOM from 'react-dom';
 
+import { Mention } from '@/components/common/Mention';
 import { useControllable, useVisibilityControl } from '@/hooks';
 import { ClassName, MentionData, Option } from '@/types';
 import { DomUtils } from '@/utils';
@@ -28,22 +30,6 @@ const MentionTrigger = (props: any) => {
   return (
     <span className='mention-trigger' data-offset-key={props.offsetKey}>
       {props.children}
-    </span>
-  );
-};
-
-const Mention = (props: any) => {
-  return (
-    <span>
-      <span
-        className={classNames(
-          'mention',
-          'inline-block py-0.5 px-2 mx-1 text-white bg-secondary rounded-full text-medium-sm'
-        )}
-        data-offset-key={props.offsetKey}
-      >
-        {props.children}
-      </span>
     </span>
   );
 };
@@ -212,12 +198,24 @@ export type Props = ClassName & {
   ref?: Ref;
   singleLine?: boolean;
   mentionOptions?: Option<MentionData, string>[];
+  readOnly?: boolean;
 };
 
 export const emptyValue = EditorState.createEmpty(decorator);
 
 export const RichTextEditor = React.forwardRef(
-  ({ mentionOptions = [], singleLine, value, onChange, placeholder, className }: Props, ref) => {
+  (
+    {
+      mentionOptions = [],
+      singleLine,
+      value,
+      onChange,
+      readOnly = false,
+      placeholder,
+      className,
+    }: Props,
+    ref
+  ) => {
     const [editorState, setEditorState] = useControllable<EditorState>({
       value,
       onChange,
@@ -450,19 +448,22 @@ export const RichTextEditor = React.forwardRef(
           placeholder={placeholder}
           ref={editorRef}
           editorState={editorState}
-          onChange={handleChange}
+          onChange={readOnly ? noop : handleChange}
           handleReturn={handleReturn}
           onEscape={closeMentionSuggestions}
           handlePastedText={singleLine ? handlePaste : undefined}
+          readOnly={readOnly}
         />
-        <Dropdown
-          closeOnClickOutside={false}
-          trigger={triggerNode!}
-          control={dropdownControl}
-          placement='right-start'
-          options={filteredMentionOptions}
-          onSelect={handleDropdownSelect}
-        />
+        {!readOnly && (
+          <Dropdown
+            closeOnClickOutside={false}
+            trigger={triggerNode!}
+            control={dropdownControl}
+            placement='right-start'
+            options={filteredMentionOptions}
+            onSelect={handleDropdownSelect}
+          />
+        )}
       </div>
     );
   }
