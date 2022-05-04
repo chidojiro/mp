@@ -17,7 +17,7 @@ type Props = {
 // eslint-disable-next-line no-empty-pattern
 export const StepActions = ({ onPreviewClick, onConfirmClick, complete, useTooltip }: Props) => {
   const { t } = useTranslation('marketingAction');
-  const tooltipControl = useVisibilityControl(useTooltip);
+  const tooltipControl = useVisibilityControl({ defaultVisible: useTooltip });
 
   React.useEffect(() => {
     if (complete) {

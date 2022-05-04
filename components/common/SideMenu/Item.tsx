@@ -22,7 +22,7 @@ type Props = {
 export const Item = ({ isOpenAccordion, data }: Props) => {
   const { label, value, content, children: items, onClick: onClickItem } = data;
 
-  const accordionControl = useVisibilityControl(isOpenAccordion);
+  const accordionControl = useVisibilityControl({ defaultVisible: isOpenAccordion });
   if (content) {
     return (
       <HeadlessTabs.Item content={content} value={value}>

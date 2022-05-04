@@ -19,7 +19,9 @@ export const NavItem = ({ data, showLabel = true }: Props) => {
     return item.matches?.includes(router.pathname) || item.path === router.pathname;
   };
 
-  const accordionControl = useVisibilityControl(navChildren.some(item => isMatched(item)));
+  const accordionControl = useVisibilityControl({
+    defaultVisible: navChildren.some(item => isMatched(item)),
+  });
 
   if (path)
     return (
