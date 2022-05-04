@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
-
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
 import useSWR from 'swr';
 
@@ -17,6 +16,7 @@ import { ChatWindowSettings } from '../ChatWindowSettings';
 import { Steppers } from '../Steppers';
 import SavingActions from '../Steppers/SavingActions';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';
+
 import { Step1Settings } from './Step1Settings';
 
 export const RecommendedBot = () => {

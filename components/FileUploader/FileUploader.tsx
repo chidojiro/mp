@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-
 import { useTranslation } from 'next-i18next';
-import Dropzone from 'react-dropzone';
 import classNames from 'classnames';
+import Dropzone from 'react-dropzone';
 
 import { AssetAPI } from '@/apis/assets';
 import { AssetResourceType } from '@/types';

@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 
-import { ColorUtils } from '@/utils';
 import { StepMessage } from '@/types';
+import { ColorUtils } from '@/utils';
 
 import { Answer } from './Answer';
 import { Color } from './Color';

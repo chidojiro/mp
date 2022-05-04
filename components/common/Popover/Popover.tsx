@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { PopperProps, usePopper } from 'react-popper';
 
 import { ConditionalWrapper, Portal } from '@/headless';

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 
-import { MarketingActionRes, MarketingActionTypeMessage as TYPE } from '@/types';
 import { SideMenu, SideMenuGroup, SideMenuItem } from '@/components/common';
 import { TargetFilter } from '@/components/TargetFilter';
+import { MarketingActionRes, MarketingActionTypeMessage as TYPE } from '@/types';
 
 import { MarketingAction } from './MarketingAction';
 

@@ -1,11 +1,11 @@
 import React from 'react';
-
 import { useTranslation } from 'next-i18next';
 import { useWatch } from 'react-hook-form';
 
-import { ColorGroup } from '../ColorGroup';
-import { ChatVisualImage } from './ChatVisualImage';
 import { ChatPreview } from '../ChatPreview';
+import { ColorGroup } from '../ColorGroup';
+
+import { ChatVisualImage } from './ChatVisualImage';
 
 export const Appearance = () => {
   const { t } = useTranslation('marketingAction');

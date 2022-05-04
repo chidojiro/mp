@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
-
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import useSWR from 'swr';
 
-import { Layout } from '@/components/Layout';
-import { Tabs } from '@/components/common/Tabs';
-import { MarketingActionStatus as MAStatus } from '@/types';
-import { Detail } from '@/components/marketingAction/View';
 import { MarketingActionAPI } from '@/apis';
+import { Tabs } from '@/components/common/Tabs';
+import { Layout } from '@/components/Layout';
+import { Detail } from '@/components/marketingAction/View';
+import { MarketingActionStatus as MAStatus } from '@/types';
 import { TargetFilterUtils } from '@/utils';
 
 export const getServerSideProps = async ({ locale = 'ja' }) => ({

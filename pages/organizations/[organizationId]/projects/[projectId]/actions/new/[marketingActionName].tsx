@@ -1,10 +1,10 @@
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { Layout } from '@/components/Layout';
-import { SideMenu, SideMenuGroup } from '@/components/common/SideMenu';
 import { ActionContainer } from '@/components/ActionContainer';
+import { SideMenu, SideMenuGroup } from '@/components/common/SideMenu';
+import { Layout } from '@/components/Layout';
 import { MarketingActionAlias, TARGET } from '@/types';
 
 export const getServerSideProps = async ({ locale = 'ja' }) => ({

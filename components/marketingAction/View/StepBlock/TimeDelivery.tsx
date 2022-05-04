@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 
-import { TimeUtils } from '@/utils';
 import { StepMessage } from '@/types';
+import { TimeUtils } from '@/utils';
 
 import { Answer } from './Answer';
 

@@ -1,7 +1,6 @@
 import { useCallback, useEffect } from 'react';
-
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
 import useSWR from 'swr';
 
@@ -10,6 +9,7 @@ import { ProjectData, ProjectSettingData } from '@/types';
 
 import { Button } from '../common/Button';
 import { Form } from '../common/Form';
+
 import { AdvancedSettings } from './AdvancedSettings';
 import { BasicInformation } from './BasicInformation';
 import { EmailSettings } from './EmailSettings';

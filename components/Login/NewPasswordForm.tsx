@@ -1,14 +1,13 @@
 import React from 'react';
-
+import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
-import Link from 'next/link';
 
-import { Form } from '@/components/common/Form';
-import { Button } from '@/components/common/Button';
 import { AuthApi } from '@/apis';
-import { PasswordField } from '@/components/PasswordField';
+import { Button } from '@/components/common/Button';
 import { ErrorMessage } from '@/components/common/ErrorMessage';
+import { Form } from '@/components/common/Form';
+import { PasswordField } from '@/components/PasswordField';
 
 type Props = {
   token: string;

@@ -1,7 +1,8 @@
-import { ChevronRightIcon } from '@heroicons/react/solid';
-import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 import { UrlObject } from 'url';
+
+import { ChevronRightIcon } from '@heroicons/react/solid';
 
 const LinkWithArrow = ({ title }: { title: string }) => {
   return (

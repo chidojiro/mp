@@ -1,10 +1,9 @@
 import React from 'react';
-
 import { useTranslation } from 'next-i18next';
 
+import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
 import { useVisibilityControl } from '@/hooks';
 import { MarketingActionAlias as MAAlias } from '@/types';
-import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
 
 import { CartAbandoned } from './CartAbandoned';
 import { CartPageFAQ } from './CartPageFAQ';
@@ -12,6 +11,7 @@ import { ConditionalFreeShipping } from './ConditionalFreeShipping';
 import { RankingByHistoryPurchase } from './RankingByHistoryPurchase';
 import { RecommendDiagnosticBot } from './RecommendDiagnosticBot';
 import { StepDeliveryAfterPurchase } from './StepDeliveryAfterPurchase';
+
 import style from './StepDelivery.module.css';
 
 type Props = {

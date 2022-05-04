@@ -1,19 +1,18 @@
 import React from 'react';
-
 import { GetServerSideProps, NextPage } from 'next';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
 import { ProfileApis } from '@/apis/profile';
+import { Button } from '@/components/common/Button';
 import { Form } from '@/components/common/Form';
+import { EmailField } from '@/components/EmailField';
 import { Layout } from '@/components/Layout';
 import { Section } from '@/components/Section';
-import { Button } from '@/components/common/Button';
 import { SSR } from '@/ssr';
 import { Profile } from '@/types';
-import { EmailField } from '@/components/EmailField';
 
 export const getServerSideProps: GetServerSideProps = SSR.withProps('profile')(
   async ({ locale = 'ja' }, result) => {

@@ -1,9 +1,9 @@
 import React from 'react';
-
 import { useTranslation } from 'next-i18next';
 
 import { Table } from '@/components/common';
 import { ClassName, MarketingActionAliasKey } from '@/types';
+
 import { RowHeader } from './RowHeader';
 
 const data = [

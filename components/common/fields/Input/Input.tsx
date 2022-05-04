@@ -1,8 +1,7 @@
 import React from 'react';
-
 import classNames from 'classnames';
 
-import { useStateToggle, useControllable } from '@/hooks';
+import { useControllable, useStateToggle } from '@/hooks';
 
 import { NumberInput } from './Number';
 import { InputProps } from './types';

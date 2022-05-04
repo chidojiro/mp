@@ -1,8 +1,7 @@
 import { useState } from 'react';
-
-import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 
 import { Button, Modal } from '@/components/common';
 import { useProfile, useVisibilityControl } from '@/hooks';

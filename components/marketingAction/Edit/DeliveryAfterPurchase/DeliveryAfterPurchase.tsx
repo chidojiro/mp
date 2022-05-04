@@ -20,11 +20,12 @@ import {
 } from '@/types';
 import { TargetFilterUtils } from '@/utils';
 
+import { convertFromStepMessageRaw, convertToStepMessageRaw } from '../utils';
+
 import { LineUsageSettingsStep } from './LineUsageSettingsStep';
 import { Message1SettingsStep } from './Message1SettingsStep';
 import { Message2SettingsStep } from './Message2SettingsStep';
 import { TargetSettingsStep } from './TargetSettingsStep';
-import { convertToStepMessageRaw, convertFromStepMessageRaw } from '../utils';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};

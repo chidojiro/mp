@@ -15,11 +15,11 @@ import { TargetFilterUtils } from '@/utils';
 import { Steppers } from '../Steppers';
 import SavingActions from '../Steppers/SavingActions';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';
+import { convertFromStepMessageRaw, convertToStepMessageRaw } from '../utils';
 
 import { LineSettings } from './LineSettings';
 import { Message1Settings } from './Message1Settings';
 import { Message2Settings } from './Message2Settings';
-import { convertToStepMessageRaw, convertFromStepMessageRaw } from '../utils';
 
 export const CartAbandoned = () => {
   const { t } = useTranslation('marketingAction');

@@ -1,11 +1,10 @@
 import React from 'react';
-
+import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
-import Link from 'next/link';
 
 import { AuthApi, PasswordRecoverPayload } from '@/apis/auth';
-import { Form, Button } from '@/components/common';
+import { Button, Form } from '@/components/common';
 import { EmailField } from '@/components/EmailField';
 
 export const PasswordRecoverForm = () => {

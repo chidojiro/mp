@@ -1,7 +1,6 @@
 import React from 'react';
-
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 
 import { Table } from '@/components/common';
 import { ClassName, MarketingActionAliasKey } from '@/types';

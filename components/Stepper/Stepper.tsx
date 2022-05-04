@@ -1,12 +1,12 @@
 import React from 'react';
-
 import classNames from 'classnames';
 
 import { Children, ClassName } from '@/types';
 
 import { Item } from './Item';
-import style from './Stepper.module.css';
 import { StepperContext } from './StepperContext';
+
+import style from './Stepper.module.css';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = Children & ClassName & {};

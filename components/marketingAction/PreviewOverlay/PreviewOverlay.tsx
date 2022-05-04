@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
 
+import { MarketingActionAPI } from '@/apis';
 import { Button, Form, Modal, SwitchButtons } from '@/components/common';
 import { Overlay } from '@/components/Layout';
+import { EmailPattern } from '@/constants';
 import { useVisibilityControl, VisibilityControl } from '@/hooks';
 import { Device, Option } from '@/types';
-import { EmailPattern } from '@/constants';
-import { MarketingActionAPI } from '@/apis';
 
 import { LinePreview } from '../LinePreview';
 import { MailPreview } from '../MailPreview';

@@ -1,25 +1,25 @@
 import React, { useCallback, useEffect, useState } from 'react';
-
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
 import useSWR from 'swr';
-import { useRouter } from 'next/router';
 
-import { Form } from '@/components/common';
+import { MarketingActionAPI } from '@/apis';
 import { ActionContainer } from '@/components/ActionContainer';
+import { Form } from '@/components/common';
+import { MARKETING_ACTION_URL } from '@/constants';
 import { useVisibilityControl } from '@/hooks';
 import { MarketingActionAlias, MarketingActionRes, MarketingActionStatus, TARGET } from '@/types';
-import { MarketingActionAPI } from '@/apis';
 import { TargetFilterUtils } from '@/utils';
-import { MARKETING_ACTION_URL } from '@/constants';
 
 import { ChatOverlay } from '../ChatOverlay';
+import { ChatWindowSettings } from '../ChatWindowSettings';
+import { Steppers } from '../Steppers';
+import SavingActions from '../Steppers/SavingActions';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';
+
 import { Step1Settings } from './Step1Settings';
 import { Step2Settings } from './Step2Settings';
-import { ChatWindowSettings } from '../ChatWindowSettings';
-import SavingActions from '../Steppers/SavingActions';
-import { Steppers } from '../Steppers';
 
 export const RankingByCategory = () => {
   const { t } = useTranslation('marketingAction');

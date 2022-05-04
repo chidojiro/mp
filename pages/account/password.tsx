@@ -1,19 +1,18 @@
 import React from 'react';
-
 import { GetStaticProps, NextPage } from 'next';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
 import axios, { AxiosError } from 'axios';
+import { useForm } from 'react-hook-form';
 
+import { ProfileApis } from '@/apis/profile';
+import { Button } from '@/components/common/Button';
 import { Form } from '@/components/common/Form';
 import { Layout } from '@/components/Layout';
-import { Section } from '@/components/Section';
-import { Button } from '@/components/common/Button';
-import { ChangePasswordPayload } from '@/types';
-import { ProfileApis } from '@/apis/profile';
 import { PasswordField } from '@/components/PasswordField/PasswordField';
+import { Section } from '@/components/Section';
+import { ChangePasswordPayload } from '@/types';
 
 export const getStaticProps: GetStaticProps = async ({ locale = 'ja' }) => {
   return {

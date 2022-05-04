@@ -1,16 +1,16 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { ChevronRightIcon } from '@heroicons/react/solid';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { Layout } from '@/components/Layout';
+import { ChatbotDetailReport } from '@/components/report/ChatbotDetailReport';
+import { NotificationDetailReport } from '@/components/report/NotificationDetailReport';
+import { PopupDetailreport } from '@/components/report/PopupDetailReport';
 import { TargetFilter } from '@/components/TargetFilter';
 import { useProfile } from '@/hooks/api/useProfile';
 import { MarketingActionAliasKey } from '@/types';
-import { NotificationDetailReport } from '@/components/report/NotificationDetailReport';
-import { ChatbotDetailReport } from '@/components/report/ChatbotDetailReport';
-import { PopupDetailreport } from '@/components/report/PopupDetailReport';
+import { ChevronRightIcon } from '@heroicons/react/solid';
 
 export const MonthlyReport = () => {
   const {

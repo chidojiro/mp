@@ -1,5 +1,5 @@
-import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
+import classNames from 'classnames';
 
 import { Icon } from '@/components/common/Icon';
 import { ClassName } from '@/types';

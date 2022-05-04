@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 
-import { Section } from '@/components/Section';
 import { Form } from '@/components/common';
+import { Section } from '@/components/Section';
 import { Option, TARGET } from '@/types';
 import { TargetFilterUtils } from '@/utils';
 

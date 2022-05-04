@@ -1,29 +1,29 @@
 import React, { useCallback, useEffect, useState } from 'react';
-
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
 import useSWR from 'swr';
 
+import { MarketingActionAPI } from '@/apis';
 import { ActionContainer } from '@/components/ActionContainer';
 import { Step } from '@/constants';
 import { useProfile, useVisibilityControl } from '@/hooks';
 import {
+  MarketingActionAlias,
+  MarketingActionRes,
   MarketingActionStatus,
   PopupSettingsData,
   TARGET,
   TargetCustomersData,
-  MarketingActionRes,
-  MarketingActionAlias,
 } from '@/types';
-import { MarketingActionAPI } from '@/apis';
 import { TargetFilterUtils } from '@/utils/targetFilter';
 
 import { Steppers } from '../Steppers';
+import SavingActions from '../Steppers/SavingActions';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';
+
 import { PopupSettings } from './PopupSettings';
 import { TemplatePreviewOverlay } from './TemplatePreviewOverlay';
-import SavingActions from '../Steppers/SavingActions';
 
 export const FreeShipping = () => {
   const { t } = useTranslation('marketingAction');

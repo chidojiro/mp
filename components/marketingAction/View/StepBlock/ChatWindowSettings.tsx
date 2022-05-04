@@ -1,12 +1,12 @@
 import { useTranslation } from 'next-i18next';
 
-import { ColorUtils } from '@/utils';
 import { ChatVisualImage } from '@/components/marketingAction/ChatWindowSettings';
+import { ColorUtils } from '@/utils';
 
 import { Answer } from './Answer';
+import { AppearanceCond } from './AppearanceCond';
 import { Color } from './Color';
 import { StepBlock } from './StepBlock';
-import { AppearanceCond } from './AppearanceCond';
 
 type Props = {
   settings: any;

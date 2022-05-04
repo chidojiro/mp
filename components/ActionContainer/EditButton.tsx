@@ -1,8 +1,7 @@
 import React from 'react';
-
 import Link from 'next/link';
-import useSWR from 'swr';
 import { useTranslation } from 'next-i18next';
+import useSWR from 'swr';
 
 import { ActionsByAliasResponse, MarketingActionAPI } from '@/apis/marketingActions';
 import { useProfile } from '@/hooks/api/useProfile';
