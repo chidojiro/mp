@@ -15,11 +15,11 @@ import { TargetFilterUtils } from '@/utils';
 import { Steppers } from '../Steppers';
 import SavingActions from '../Steppers/SavingActions';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';
+import { convertFromStepMessageRaw,convertToStepMessageRaw } from '../utils';
 
 import { LineSettings } from './LineSettings';
 import { Message1Settings } from './Message1Settings';
 import { Message2Settings } from './Message2Settings';
-import { convertToStepMessageRaw, convertFromStepMessageRaw } from '../utils';
 
 export const CartAbandoned = () => {
   const { t } = useTranslation('marketingAction');
@@ -179,8 +179,8 @@ export const CartAbandoned = () => {
       message = secondMessage;
     }
     setMessagePreview({
-      headline: message?.mail_content.title,
-      messageEmail: message?.mail_content.content,
+      headline: message?.mail_content.title_preview,
+      messageEmail: message?.mail_content.content_preview,
       messageLine: message?.line_messages.text_msg_content,
       color: message.color,
     });

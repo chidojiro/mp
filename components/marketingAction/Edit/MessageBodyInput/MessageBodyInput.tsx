@@ -3,9 +3,9 @@ import { EditorState } from 'draft-js';
 import { useFormContext } from 'react-hook-form';
 
 import { Form } from '@/components/common';
-import { MentionData,Option } from '@/types';
+import { MentionData, Option } from '@/types';
 
-import { getTemplateTextFromEditorState } from '../utils';
+import { getPreviewTextFromEditorState, getTemplateTextFromEditorState } from '../utils';
 
 type Props = {
   name: string;
@@ -34,6 +34,7 @@ export const MessageBodyInput = ({
     const template = getTemplateTextFromEditorState(editorState);
     console.log('template', template);
     setValue(name, template);
+    setValue(`${name}_preview`, getPreviewTextFromEditorState(editorState));
   };
   return (
     <div ref={mentionRef}>
