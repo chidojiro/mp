@@ -13,8 +13,9 @@ import {
   SelectionState,
 } from 'draft-js';
 
+import { Mention } from '@/components/common/Mention';
 import { useControllable, useVisibilityControl } from '@/hooks';
-import { MentionData,Option } from '@/types';
+import { MentionData, Option } from '@/types';
 import { DomUtils } from '@/utils';
 
 import { Dropdown } from '../../Dropdown';
@@ -25,22 +26,6 @@ const MentionTrigger = (props: any) => {
   return (
     <span className='mention-trigger' data-offset-key={props.offsetKey}>
       {props.children}
-    </span>
-  );
-};
-
-const Mention = (props: any) => {
-  return (
-    <span>
-      <span
-        className={classNames(
-          'mention',
-          'inline-block py-0.5 px-2 mx-1 text-white bg-secondary rounded-full text-medium-sm'
-        )}
-        data-offset-key={props.offsetKey}
-      >
-        {props.children}
-      </span>
     </span>
   );
 };

@@ -1,5 +1,6 @@
 import { useTranslation } from 'next-i18next';
 
+import { RichMessageView } from '@/components/marketingAction/View/StepBlock/RichMessageView';
 import { StepMessage } from '@/types';
 import { ColorUtils } from '@/utils';
 
@@ -18,15 +19,9 @@ export const Message = ({ message, enableLine = true }: Props) => {
     <>
       <Answer name={t('msgContentEmail')}>
         <div>[{t('headLines')}]</div>
-        <div
-          className='mt-2'
-          dangerouslySetInnerHTML={{ __html: message.mail_content.title }}
-        ></div>
+        <RichMessageView className='mt-2' rawContent={message.mail_content.title_draft_raw} />
         <div className='mt-3'>[{t('bodyText')}]</div>
-        <div
-          dangerouslySetInnerHTML={{ __html: message.mail_content.content }}
-          className='mt-2'
-        ></div>
+        <RichMessageView className='mt-2' rawContent={message.mail_content.content_draft_raw} />
       </Answer>
       {enableLine && (
         <Answer name={t('msgContentLine')}>

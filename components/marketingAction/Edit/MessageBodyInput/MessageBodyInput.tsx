@@ -32,7 +32,6 @@ export const MessageBodyInput = ({
 
   const handleChange = (editorState: EditorState) => {
     const template = getTextFromEditorState(editorState);
-    console.log('template', template);
     setValue(name, template);
     setValue(`${name}_preview`, getTextFromEditorState(editorState, true));
   };
