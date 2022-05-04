@@ -72,6 +72,7 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
               </div>
               <Form.MentionsEditor
                 mentionOptions={mentionOptions}
+                singleLine
                 name={`${messageNum}.mail_content.title_draft_raw`}
                 onChange={handleChangeTitle}
                 rules={{ required: true }}

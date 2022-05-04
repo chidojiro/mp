@@ -436,13 +436,14 @@ export const RichTextEditor = React.forwardRef(
     return (
       <div
         onClick={() => editorRef.current?.focus()}
-        className={classNames(
-          'rich-text-editor',
-          'w-full p-2',
-          'bg-white',
-          singleLine ? styles['rich-text-editor'] : 'min-h-[100px]',
-          className
-        )}
+        className={classNames({
+          'rich-text-editor': true,
+          'w-full p-2': true,
+          'bg-white': !readOnly,
+          [styles['rich-text-editor']]: singleLine,
+          'min-h-[100px]': !singleLine,
+          className: true,
+        })}
       >
         <Editor
           placeholder={placeholder}
