@@ -12,12 +12,15 @@ import {
   Modifier,
   SelectionState,
 } from 'draft-js';
+import ReactDOM from 'react-dom';
 
 import { useControllable, useVisibilityControl } from '@/hooks';
-import { MentionData,Option } from '@/types';
+import { ClassName, MentionData, Option } from '@/types';
 import { DomUtils } from '@/utils';
 
 import { Dropdown } from '../../Dropdown';
+
+import styles from './RichTextEditor.module.css';
 
 type DecoratorStrategyCallback = (start: number, end: number) => void;
 
@@ -202,7 +205,7 @@ export const getPlainTextWithInterpolatedMentionValue = (editorState: EditorStat
   }).getPlainText();
 };
 
-export type Props = {
+export type Props = ClassName & {
   value?: EditorState;
   onChange?: (editorState: EditorState) => void;
   placeholder?: string;
@@ -214,7 +217,7 @@ export type Props = {
 export const emptyValue = EditorState.createEmpty(decorator);
 
 export const RichTextEditor = React.forwardRef(
-  ({ mentionOptions = [], singleLine, value, onChange, placeholder }: Props, ref) => {
+  ({ mentionOptions = [], singleLine, value, onChange, placeholder, className }: Props, ref) => {
     const [editorState, setEditorState] = useControllable<EditorState>({
       value,
       onChange,
@@ -392,6 +395,44 @@ export const RichTextEditor = React.forwardRef(
       label.toLocaleLowerCase().includes(mentionQuery.toLocaleLowerCase())
     );
 
+    // https://github.com/facebook/draft-js/issues/657
+    // https://jsfiddle.net/orir/m6z0xn4r/317/
+    const handlePaste = (
+      text: string,
+      html: string | undefined,
+      editorState: EditorState
+    ): DraftHandleValue => {
+      setEditorState(
+        EditorState.push(
+          editorState,
+          Modifier.replaceText(
+            editorState.getCurrentContent(),
+            editorState.getSelection(),
+            text.replace(/\n/g, ' ')
+          ),
+          'insert-characters'
+        )
+      );
+
+      requestAnimationFrame(() => {
+        // eslint-disable-next-line react/no-find-dom-node
+        const editorNode = ReactDOM.findDOMNode(editorRef.current!)! as Element;
+        const scrollingContainer = editorNode.querySelector('.public-DraftStyleDefault-block')!;
+        const context = document.createElement('canvas').getContext('2d')!;
+        context.font = window.getComputedStyle(editorNode).font;
+
+        const textUpToEndOfPaste = editorState
+          .getCurrentContent()
+          .getPlainText(' ')
+          .substring(0, editorState.getSelection().getFocusOffset());
+        const pastedTextWidthOffset = context.measureText(textUpToEndOfPaste);
+
+        scrollingContainer.scrollLeft = pastedTextWidthOffset.width - editorNode.clientWidth / 2;
+      });
+
+      return 'handled';
+    };
+
     if (DomUtils.isServer()) return null;
 
     return (
@@ -401,7 +442,8 @@ export const RichTextEditor = React.forwardRef(
           'rich-text-editor',
           'w-full p-2',
           'bg-white',
-          singleLine ? 'w-[480px] h-10 mr-2 mb-1' : 'min-h-[100px]'
+          singleLine ? styles['rich-text-editor'] : 'min-h-[100px]',
+          className
         )}
       >
         <Editor
@@ -411,6 +453,7 @@ export const RichTextEditor = React.forwardRef(
           onChange={handleChange}
           handleReturn={handleReturn}
           onEscape={closeMentionSuggestions}
+          handlePastedText={singleLine ? handlePaste : undefined}
         />
         <Dropdown
           closeOnClickOutside={false}
