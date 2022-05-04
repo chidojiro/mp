@@ -209,5 +209,7 @@
   "delete": "Delete",
   "colorSettingsForBtn": "Color settings for buttons and links",
   "cart": "Cart",
-  "notSelected": "Not Selected"
+  "notSelected": "Not Selected",
+  "productAutoInserted": "Product information is automatically inserted",
+  "forgotSomething": "Are you sure you haven't forgotten something?"
 }

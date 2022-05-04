@@ -47,7 +47,7 @@ const SavingActions = ({
   };
 
   const onSuspend = () => {
-    onSaveMarketingAction(MarketingActionStatus.SUSPEND);
+    onSaveMarketingAction(MarketingActionStatus.DRAFT);
   };
 
   const modalDesc = () => {

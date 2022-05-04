@@ -208,5 +208,7 @@
   "delete": "削除する",
   "colorSettingsForBtn": "ボタン・リンクのカラー設定",
   "cart": "カート",
-  "notSelected": "選択されていません"
+  "notSelected": "選択されていません",
+  "productAutoInserted": "商品情報が自動挿入されます",
+  "forgotSomething": "お買い忘れはございませんか"
 }
