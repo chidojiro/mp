@@ -10,7 +10,7 @@ import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
 import { Section } from '@/components/Section';
 import { Stepper } from '@/components/Stepper';
 import { useVariables, useVisibilityControl } from '@/hooks';
-import { StepMessageTemplate } from '@/types';
+import { MentionData, Option, StepMessageTemplate } from '@/types';
 import { MarketingActionAlias } from '@/types/marketingAction';
 
 import { ColorSettingSection } from '../ColorSettingsSection';
@@ -53,11 +53,13 @@ export const Message1SettingsStep = React.forwardRef(
     };
 
     const { data: variables } = useVariables(MarketingActionAlias.AFTER_PURCHASE);
-    const mentionOptions = variables.map(data => ({
-      label: data.name_display,
-      value: data.content,
-      data,
-    }));
+    const mentionOptions = variables.map(
+      data =>
+        ({
+          label: data.name_display,
+          value: data,
+        } as Option<MentionData, string>)
+    );
 
     return (
       <Stepper.Item label={t('step1Setting')} complete={complete} ref={ref}>

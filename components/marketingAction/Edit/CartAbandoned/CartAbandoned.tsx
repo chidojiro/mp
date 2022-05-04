@@ -179,8 +179,8 @@ export const CartAbandoned = () => {
       message = secondMessage;
     }
     setMessagePreview({
-      headline: message?.mail_content.title,
-      messageEmail: message?.mail_content.content,
+      headline: message?.mail_content.title_preview,
+      messageEmail: message?.mail_content.content_preview,
       messageLine: message?.line_messages.text_msg_content,
       color: message.color,
     });

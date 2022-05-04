@@ -14,7 +14,7 @@ import {
 } from 'draft-js';
 
 import { useControllable, useVisibilityControl } from '@/hooks';
-import { Option, RichOption, Variable } from '@/types';
+import { MentionData,Option } from '@/types';
 import { DomUtils } from '@/utils';
 
 import { Dropdown } from '../../Dropdown';
@@ -100,7 +100,7 @@ type replaceTextParams = {
   start?: number;
   end?: number;
   newText: string;
-  data?: any;
+  data?: MentionData;
   mutability?: 'MUTABLE' | 'IMMUTABLE';
 };
 
@@ -143,7 +143,7 @@ const replaceText = (params: replaceTextParams) => {
       hasFocus: true,
     }),
     newText,
-    data,
+    undefined,
     entityKey
   );
 
@@ -163,7 +163,7 @@ const replaceText = (params: replaceTextParams) => {
 };
 
 export type Ref = {
-  insertMention: (option: Option<string, string>) => void;
+  insertMention: (option: Option) => void;
   insertText: (text: string) => void;
   getPlainTextWithInterpolatedMentionValue: () => string;
 };
@@ -208,7 +208,7 @@ export type Props = {
   placeholder?: string;
   ref?: Ref;
   singleLine?: boolean;
-  mentionOptions?: RichOption<Variable>[];
+  mentionOptions?: Option<MentionData, string>[];
 };
 
 export const emptyValue = EditorState.createEmpty(decorator);
@@ -225,11 +225,11 @@ export const RichTextEditor = React.forwardRef(
     const editorRef = React.useRef<any>(null);
 
     const insertMention = React.useCallback(
-      (option: Option<string, string>) => {
+      (option: Option<MentionData, string>) => {
         const newEditorState = replaceText({
           editorState,
           newText: option.label,
-          data: option,
+          data: option.value,
           entityType: 'MENTION',
           mutability: 'IMMUTABLE',
         });
@@ -323,7 +323,7 @@ export const RichTextEditor = React.forwardRef(
         end: editorState.getSelection().getAnchorOffset(),
         newText: selectedOption.label as string,
         mutability: 'IMMUTABLE',
-        data: selectedOption,
+        data: selectedOption.value,
       });
 
       setEditorState(newEditorState);

@@ -9,13 +9,12 @@ import { ColorGroup } from '@/components/marketingAction/ColorGroup';
 import { LinePreview } from '@/components/marketingAction/LinePreview';
 import { MailPreview } from '@/components/marketingAction/MailPreview';
 import { MessageContentPreviewType } from '@/components/marketingAction/MessageContentPreview';
-import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
 import { useVariables, useVisibilityControl } from '@/hooks';
-import { OPTIONS } from '@/types';
-import { MarketingActionAlias } from '@/types/marketingAction';
+import { MentionData, Option, OPTIONS } from '@/types';
+import { MailContent, MarketingActionAlias } from '@/types/marketingAction';
 
 import { MessageBodyInput } from '../MessageBodyInput';
-import { getTemplateTextFromEditorState } from '../utils';
+import { getTextFromEditorState } from '../utils';
 
 type Props = {
   messageNum?: string;
@@ -32,7 +31,7 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
     { value: OPTIONS.NO, label: t('noDisplay') },
   ];
 
-  const message = useWatch() as any;
+  const message = useWatch<MailContent>() as any;
 
   const showLineMsg = message?.line_messages?.text_msg_display;
 
@@ -44,15 +43,18 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
   const { setValue } = useFormContext();
 
   const { data: variables } = useVariables(MarketingActionAlias.CART_LEFT_NOTIFICATION);
-  const mentionOptions = variables.map(data => ({
-    label: data.name_display,
-    value: data.content,
-    data,
-  }));
+  const mentionOptions = variables.map(
+    data =>
+      ({
+        label: data.name_display,
+        value: data,
+      } as Option<MentionData, string>)
+  );
 
   const handleChangeTitle = (editorState: EditorState) => {
-    const template = getTemplateTextFromEditorState(editorState);
+    const template = getTextFromEditorState(editorState);
     setValue(`${messageNum}.mail_content.title`, template);
+    setValue(`${messageNum}.mail_content.title_preview`, getTextFromEditorState(editorState, true));
   };
 
   return (
@@ -100,8 +102,8 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
               </span>
             </div>
             <MailPreview
-              headline={message?.mail_content?.title}
-              body={message?.mail_content?.content}
+              headline={message?.mail_content?.title_preview}
+              body={message?.mail_content?.content_preview}
               desktop={false}
               color={message.color}
             />
@@ -154,15 +156,6 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
           </div>
         </div>
       )}
-      <PreviewOverlay
-        defaultType={currType}
-        mailHeadline={message?.mail_content.title}
-        mailBody={message?.mail_content.content}
-        lineBody={message?.line_messages?.text_msg_content}
-        control={previewMessageControl}
-        color={message.color}
-        enableLine={useLine}
-      />
     </div>
   );
 };

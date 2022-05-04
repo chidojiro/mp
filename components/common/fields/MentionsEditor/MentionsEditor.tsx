@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'next-i18next';
 import classNames from 'classnames';
 
-import { ClassName, Option } from '@/types';
+import { ClassName, MentionData, Option } from '@/types';
 
 import { RichTextEditor, RichTextEditorProps, RichTextEditorRef } from '../RichTextEditor';
 
@@ -24,7 +24,7 @@ export const MentionsEditor = React.forwardRef(
     const { t } = useTranslation();
     const richTextEditorRef = React.useRef<RichTextEditorRef>();
 
-    const handleVariableSelect = (option: Option<string, string>) => {
+    const handleVariableSelect = (option: Option<MentionData, string>) => {
       richTextEditorRef.current?.insertMention(option);
     };
 
