@@ -1,66 +1,39 @@
-import { useState } from 'react';
-import {
-  CompositeDecorator,
-  ContentBlock,
-  ContentState,
-  convertFromRaw,
-  Editor,
-  EditorState,
-} from 'draft-js';
-import noop from 'lodash-es/noop';
+import React from 'react';
+import { useTranslation } from 'next-i18next';
+import classNames from 'classnames';
 
-import { Mention } from '@/components/common/Mention/Mention';
+import {
+  RichTextEditor,
+  RichTextEditorProps,
+  RichTextEditorRef,
+} from '@/components/common/fields/RichTextEditor';
 import { ClassName } from '@/types';
 
-type RichMessageViewProps = ClassName & {
-  rawContent: string | EditorState;
-};
-
-type DecoratorStrategyCallback = (start: number, end: number) => void;
-const findEntityRanges = (type: string, contentBlock: ContentBlock, contentState: ContentState) => {
-  const ranges: [number, number][] = [];
-
-  contentBlock.findEntityRanges(
-    character => {
-      const entityKey = character.getEntity();
-      return entityKey !== null && contentState.getEntity(entityKey).getType() === type;
-    },
-    (start, end) => ranges.push([start, end])
-  );
-
-  return ranges;
-};
-const newEntityLocationStrategy = (type: string) => {
-  const findEntitiesOfType = (
-    contentBlock: ContentBlock,
-    callback: DecoratorStrategyCallback,
-    contentState: ContentState
-  ) => {
-    const entityRanges = findEntityRanges(type, contentBlock, contentState);
-
-    entityRanges.forEach(range => {
-      callback(...range);
-    });
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type Props = Omit<RichTextEditorProps, 'ref'> &
+  ClassName & {
+    error?: boolean;
+    label?: React.ReactNode;
+    name?: string;
+    emoji?: boolean;
   };
-  return findEntitiesOfType;
-};
 
-const decorator = new CompositeDecorator([
-  {
-    strategy: newEntityLocationStrategy('MENTION'),
-    component: Mention,
-  },
-]);
+// eslint-disable-next-line no-empty-pattern
+export const RichMessageView = React.forwardRef(
+  ({ error, label, mentionOptions, emoji = false, className, ...restProps }: Props, ref: any) => {
+    const { t } = useTranslation();
+    const richTextEditorRef = React.useRef<RichTextEditorRef>();
 
-export const RichMessageView = ({ rawContent, className }: RichMessageViewProps) => {
-  const [editorState, setEditorState] = useState<EditorState>(
-    typeof rawContent === 'string'
-      ? EditorState.createWithContent(convertFromRaw(JSON.parse(rawContent)), decorator)
-      : rawContent
-  );
-  return (
-    <div className={className}>
-      <Editor editorState={editorState} readOnly={true} onChange={noop} />
-    </div>
-  );
-};
+    return (
+      <div className={className}>
+        <input className='minimized' ref={ref} />
+        {!!label && <label className='block mb-1 text-gray-5'>{label}</label>}
+        <div className={classNames('overflow-hidden', 'border border-solid outline-none rounded')}>
+          <RichTextEditor {...restProps} readOnly ref={richTextEditorRef} />
+        </div>
+      </div>
+    );
+  }
+);
+
+RichMessageView.displayName = 'RichMessageView';
