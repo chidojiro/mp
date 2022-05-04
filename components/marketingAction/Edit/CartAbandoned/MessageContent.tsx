@@ -14,7 +14,7 @@ import { MentionData, Option, OPTIONS } from '@/types';
 import { MailContent, MarketingActionAlias } from '@/types/marketingAction';
 
 import { MessageBodyInput } from '../MessageBodyInput';
-import { getPreviewTextFromEditorState, getTemplateTextFromEditorState } from '../utils';
+import { getTextFromEditorState } from '../utils';
 
 type Props = {
   messageNum?: string;
@@ -52,16 +52,11 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
   );
 
   const handleChangeTitle = (editorState: EditorState) => {
-    const template = getTemplateTextFromEditorState(editorState);
+    const template = getTextFromEditorState(editorState);
     setValue(`${messageNum}.mail_content.title`, template);
-    setValue(
-      `${messageNum}.mail_content.title_preview`,
-      getPreviewTextFromEditorState(editorState)
-    );
+    setValue(`${messageNum}.mail_content.title_preview`, getTextFromEditorState(editorState, true));
   };
 
-  console.log('message:', message);
-  console.log('messageNum:', messageNum);
   return (
     <div className='px-10 -mx-10 border-t-4 border-white mt-7 pb-7'>
       <div className='mt-7'>

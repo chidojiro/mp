@@ -1,4 +1,4 @@
-import { convertFromRaw, convertToRaw, EditorState } from 'draft-js';
+import { convertFromRaw, convertToRaw, EditorState, RawDraftEntityRange } from 'draft-js';
 import { cloneDeep } from 'lodash-es';
 
 import { richTextEditorDecorator } from '@/components/common/fields';
@@ -51,61 +51,46 @@ export const convertFromStepMessageRaw = (stepMessage: StepMessage) => {
   return clonedStepMessage;
 };
 
-export const getTemplateTextFromEditorState = (editorState: EditorState): string => {
+const replaceByName = (blockText: string[], name: string, entity: RawDraftEntityRange) => {
+  const { offset, length } = entity;
+  const firstPart = blockText.slice(0, offset);
+  const lastPart = blockText.slice(offset + length);
+  return [...firstPart, `{{${name}}}`, ...lastPart];
+};
+
+const replaceByContent = (blockText: string[], data: MentionData, entity: RawDraftEntityRange) => {
+  const { offset, length } = entity;
+  const { name, type, content } = data;
+  const firstPart = blockText.slice(0, offset);
+  const lastPart = blockText.slice(offset + length);
+  if (type === 'static') {
+    return [...firstPart, `${content || ''}`, ...lastPart];
+  } else {
+    return [...firstPart, `{{${name}}}`, ...lastPart];
+  }
+};
+
+export const getTextFromEditorState = (editorState: EditorState, isPreview = false) => {
   const rawContent = convertToRaw(editorState.getCurrentContent());
-  console.log(rawContent);
   return rawContent.blocks
     .map(({ entityRanges, text }) => {
-      let blockText = text;
+      let blockText = Array.from(text);
       entityRanges
         .sort((first, second) => second.offset - first.offset)
         .forEach(({ key, offset, length }) => {
           const { data } = rawContent.entityMap[key];
-          console.log('data:', data);
           if (!data) {
             // no-data or without value
             return '';
           }
-          const { name } = data as MentionData;
-          blockText =
-            blockText.substring(0, offset) +
-            '{{' +
-            name +
-            '}}' +
-            blockText.substring(offset + length);
-        });
-      return blockText;
-    })
-    .join('\n');
-};
-
-export const getPreviewTextFromEditorState = (editorState: EditorState): string => {
-  const rawContent = convertToRaw(editorState.getCurrentContent());
-
-  return rawContent.blocks
-    .map(({ entityRanges, text }) => {
-      let blockText = text;
-      entityRanges
-        .sort((first, second) => second.offset - first.offset)
-        .forEach(({ key, offset, length }) => {
-          const { data } = rawContent.entityMap[key];
-          if (!data) {
-            return '';
-          }
-          const { name, type, content } = data as MentionData;
-          if (type === 'static') {
-            blockText =
-              blockText.substring(0, offset) + content + blockText.substring(offset + length);
+          if (!isPreview) {
+            const { name } = data as MentionData;
+            blockText = replaceByName(blockText, name, { key, offset, length });
           } else {
-            blockText =
-              blockText.substring(0, offset) +
-              '{{' +
-              name +
-              '}}' +
-              blockText.substring(offset + length);
+            blockText = replaceByContent(blockText, data as MentionData, { key, offset, length });
           }
         });
-      return blockText;
+      return blockText.join('');
     })
     .join('\n');
 };
