@@ -9,6 +9,7 @@ import { ColorGroup } from '@/components/marketingAction/ColorGroup';
 import { LinePreview } from '@/components/marketingAction/LinePreview';
 import { MailPreview } from '@/components/marketingAction/MailPreview';
 import { MessageContentPreviewType } from '@/components/marketingAction/MessageContentPreview';
+import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
 import { useVariables, useVisibilityControl } from '@/hooks';
 import { MentionData, Option, OPTIONS } from '@/types';
 import { MailContent, MarketingActionAlias } from '@/types/marketingAction';
@@ -157,6 +158,15 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
           </div>
         </div>
       )}
+      <PreviewOverlay
+        defaultType={currType}
+        mailHeadline={message?.mail_content.title_preview}
+        mailBody={message?.mail_content.content_preview}
+        lineBody={message?.line_messages?.text_msg_content}
+        control={previewMessageControl}
+        color={message.color}
+        enableLine={useLine}
+      />
     </div>
   );
 };

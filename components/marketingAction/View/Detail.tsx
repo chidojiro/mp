@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
+import { SideMenu, SideMenuGroup, SideMenuItem } from '@/components/common';
+import { DatePicker } from '@/components/common/fields';
+import { TargetFilter } from '@/components/TargetFilter';
 import {
   MarketingActionRes,
   MarketingActionStatus,
   MarketingActionTypeMessage as TYPE,
 } from '@/types';
-import { SideMenu, SideMenuGroup, SideMenuItem } from '@/components/common';
-import { TargetFilter } from '@/components/TargetFilter';
 import { LanguageUtils } from '@/utils';
 
 import { MarketingAction } from './MarketingAction';
@@ -16,11 +17,17 @@ import { MarketingAction } from './MarketingAction';
 type Props = {
   marketingActions?: MarketingActionRes[];
   mutateMarketingActions: () => void;
+  onChangePeriod: (dates: string[]) => void;
 };
 
-export const Detail = ({ marketingActions = [], mutateMarketingActions }: Props) => {
+export const Detail = ({
+  marketingActions = [],
+  mutateMarketingActions,
+  onChangePeriod,
+}: Props) => {
   const { query, pathname, push, locale } = useRouter();
   const { t } = useTranslation('marketingAction');
+  const [period, setPeriod] = useState([new Date(), new Date()]);
 
   useEffect(() => {
     if (marketingActions.length) {
@@ -139,10 +146,28 @@ export const Detail = ({ marketingActions = [], mutateMarketingActions }: Props)
     }
   }, [query.marketingActionId, query]);
 
+  const handleChangePeriod = (dates: Date | Date[]) => {
+    if (Array.isArray(dates)) {
+      if (dates.length) {
+        setPeriod([dates[0], dates[1]]);
+        const _from = dates[0].toISOString().slice(0, 10) || '';
+        const _to = dates[1].toISOString().slice(0, 10) || '';
+        onChangePeriod([_from, _to]);
+      } else {
+        setPeriod([]);
+        onChangePeriod([]);
+      }
+    }
+  };
+
   return (
     <div className='flex flex-col w-full h-full mt-7'>
       <div className='mb-[60px]'>
         <TargetFilter />
+        <div className='flex items-center gap-10 mt-5'>
+          <div className='font-bold'>{t('period')}</div>
+          <DatePicker range value={period} onChange={handleChangePeriod} />
+        </div>
       </div>
       {isEmpty ? renderEmpty() : <SideMenu groups={groups} value={value} />}
     </div>
