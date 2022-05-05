@@ -15,16 +15,10 @@ const products: any[] = [];
 products.push({
   image: '/images/product_example1.png',
   id: 1,
-  name: 'ブルーベリーケーキ　6個セット',
-  description: 'ここに商品説明が入ります。ここに商品説明が入ります。ここに商品説明が入ります。',
-  price: '1,200円',
 });
 products.push({
   image: '/images/product_example2.png',
   id: 2,
-  name: 'マカロン　ローズ　24個セット',
-  description: 'ここに商品説明が入ります。ここに商品説明が入ります。ここに商品説明が入ります。',
-  price: '3,600円（税込）',
 });
 
 const btnHeightWithMargin = '85px';
@@ -63,18 +57,19 @@ export const LinePreview = ({ body, isOverlay = false }: Props) => {
             {products.map(product => (
               <div
                 key={product.id}
-                className='w-[254px] bg-white mr-2 border-2 h-fit rounded-lg border-dashed border-secondary'
+                className='flex-none relative w-[254px] bg-white mr-2 border-2 h-fit rounded-lg border-dashed border-secondary'
               >
                 <img alt='' src={product.image} className='rounded-t-lg w-full h-[170px]' />
                 <div className='p-3.5 text-gray-dark'>
-                  <div className='truncate font-semibold mb-2 text-gray-dark text-[22px]'>
-                    {product.name}
+                  <div className='w-full font-semibold mb-2 text-gray-dark text-[22px]'>
+                    {t('forgotSomething')}
                   </div>
-                  <div className='mb-1 text-regular-sm'>{product.description}</div>
-                  <h3 className='mb-5 font-semibold text-right'>{product.price}</h3>
                   <Button variant='link' className='w-full font-semibold text-center no-underline'>
-                    {t('viewThisItem')}
+                    {t('viewShoppingCart')}
                   </Button>
+                </div>
+                <div className='absolute top-[10px] left-[12px] px-2 py-1 rounded-full text-medium text-white bg-secondary'>
+                  {t('productAutoInserted')}
                 </div>
               </div>
             ))}

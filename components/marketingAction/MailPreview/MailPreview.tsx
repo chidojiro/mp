@@ -48,12 +48,22 @@ export const MailPreview = ({
       className={classNames(
         'rounded bg-white opacity-100 border h-[667px] border-input',
         className,
-        desktop ? 'w-full p-10 pr-5' : 'w-[335px] p-5 pr-2.5'
+        desktop ? 'w-full px-10 pr-5 flex justify-center bg-gray-light' : 'w-[335px] p-5 pr-2.5'
       )}
       style={{ height: isOverlay ? `calc(100% - ${btnHeightWithMargin})` : '667px' }}
     >
-      <div className='h-full pr-1 overflow-y-scroll mp-scroll'>
-        <h2 className='mb-4 text-center text-secondary'>Brand Logo</h2>
+      <div
+        className={classNames('h-full pr-1 overflow-y-auto mp-scroll bg-white', {
+          'w-[600px] p-10': desktop,
+        })}
+      >
+        <div className='flex justify-center w-full mb-4'>
+          <img
+            className={classNames({ 'w-[134px]': !desktop })}
+            alt='brand-logo'
+            src='/images/brand-logo.png'
+          />
+        </div>
         <div className='flex justify-center w-full'>
           <h3 className='w-[160px] mb-4 whitespace-pre-line text-gray-dark text-center'>
             {headline}

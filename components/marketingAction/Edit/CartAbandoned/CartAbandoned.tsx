@@ -210,19 +210,22 @@ export const CartAbandoned = () => {
         description={t('cartAbandonedDescription')}
         descriptionImageUrl='/images/cart-abandoned-description.png'
         flowImgUrl='/images/cart-abandoned-flow.png'
-        output={t('messageDelivery')}
-      ></ActionContainer>
-      <Form methods={methods} className='mt-[60px]'>
-        <Steppers steps={steps} onShowPreview={onShowPreview} />
-      </Form>
-      <PreviewOverlay
-        defaultType='mail'
-        mailHeadline={messagePreview?.headline}
-        mailBody={messagePreview?.messageEmail}
-        lineBody={messagePreview?.messageLine}
-        color={messagePreview?.color}
-        control={previewMessageControl}
-      />
+        output={t('messageDelivery')}></ActionContainer>
+      <div className='relative'>
+        <Form methods={methods} className='mt-[60px]'>
+          <Steppers steps={steps} onShowPreview={onShowPreview} />
+        </Form>
+      </div>
+      <div className='relative'>
+        <PreviewOverlay
+          defaultType='mail'
+          mailHeadline={messagePreview?.headline}
+          mailBody={messagePreview?.messageEmail}
+          lineBody={messagePreview?.messageLine}
+          color={messagePreview?.color}
+          control={previewMessageControl}
+        />
+      </div>
       <SavingActions
         disable={!isDone}
         onSaveMarketingAction={handleSaveMA}

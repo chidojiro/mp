@@ -198,7 +198,9 @@
   "faqCSVUploadDescription": "Please upload the created CSV file from here. If you can upload successfully, STEP1 is finished.",
   "faqChatWindowSettingsDescription": "Create the appearance and behavior of the chatbot.",
   "exterior": "Exterior",
-  "emptyMarketingAction": "There are no measures under implementation.",
+  "emptyRunningMarketingAction": "There are no measures under implementation.",
+  "emptyCompletedMarketingAction": "There are no measures whose implementation has been completed.",
+  "emptyDraftMarketingAction": "There are no saved drafts.",
   "timeDeliverySettings": "{{time}} {{days}} days {{from_the_date_text}}",
   "save": "Save",
   "updateCSV": "Upload CSV file",
@@ -207,5 +209,7 @@
   "delete": "Delete",
   "colorSettingsForBtn": "Color settings for buttons and links",
   "cart": "Cart",
-  "notSelected": "Not Selected"
+  "notSelected": "Not Selected",
+  "productAutoInserted": "Product information is automatically inserted",
+  "forgotSomething": "Are you sure you haven't forgotten something?"
 }

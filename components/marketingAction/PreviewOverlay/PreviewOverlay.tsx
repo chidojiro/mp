@@ -102,7 +102,7 @@ export const PreviewOverlay = ({
         onClose={() => setIsFromTestModal(false)}
         control={control}
         title={t('preview')}
-        className='flex flex-col items-center justify-between h-[95%] w-[65%]'
+        className='flex flex-col items-center justify-between h-[95%] w-[70%]'
       >
         {isMail ? (
           <MailPreview

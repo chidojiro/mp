@@ -22,7 +22,7 @@ export const ListActionPage = () => {
   const { t } = useTranslation(['marketingAction']);
   const { pathname, query } = useRouter();
 
-  const [filter, setFilter] = useState({});
+  const [filter, setFilter] = useState({ start_to: new Date().toISOString().slice(0, 10) });
 
   useEffect(() => {
     const _targets = [query.targets].flat().filter(Boolean);
@@ -42,6 +42,17 @@ export const ListActionPage = () => {
     }
   );
 
+  const handleChangePeriod = (dates: string[]) => {
+    if (dates.length) {
+      setFilter(prevState => {
+        return { ...prevState, start_from: dates[0], start_to: dates[1] };
+      });
+    } else {
+      const { start_from, start_to, ...rest } = filter as any;
+      setFilter(rest);
+    }
+  };
+
   const tabs = [
     {
       value: MAStatus.RUNNING,
@@ -59,7 +70,11 @@ export const ListActionPage = () => {
         </Link>
       ),
       content: (
-        <Detail marketingActions={data?.[MAStatus.RUNNING]} mutateMarketingActions={mutate} />
+        <Detail
+          marketingActions={data?.[MAStatus.RUNNING]}
+          mutateMarketingActions={mutate}
+          onChangePeriod={handleChangePeriod}
+        />
       ),
     },
     {
@@ -78,7 +93,11 @@ export const ListActionPage = () => {
         </Link>
       ),
       content: (
-        <Detail marketingActions={data?.[MAStatus.COMPLETE]} mutateMarketingActions={mutate} />
+        <Detail
+          marketingActions={data?.[MAStatus.COMPLETE]}
+          mutateMarketingActions={mutate}
+          onChangePeriod={handleChangePeriod}
+        />
       ),
     },
     {
@@ -97,7 +116,13 @@ export const ListActionPage = () => {
         </Link>
       ),
 
-      content: <Detail marketingActions={data?.[MAStatus.DRAFT]} mutateMarketingActions={mutate} />,
+      content: (
+        <Detail
+          marketingActions={data?.[MAStatus.DRAFT]}
+          mutateMarketingActions={mutate}
+          onChangePeriod={handleChangePeriod}
+        />
+      ),
     },
   ];
   return (
