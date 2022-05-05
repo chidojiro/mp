@@ -1,5 +1,4 @@
 .rich-text-editor {
-  width: 480px;
 
   :global(.public-DraftStyleDefault-block) {
     overflow-x: auto;
