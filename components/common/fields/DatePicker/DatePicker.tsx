@@ -163,7 +163,7 @@ export const DatePicker = React.forwardRef<HTMLInputElement, Props>(
             <div className='flex items-center justify-center h-14'>
               {isArray(tempValue) ? (
                 <>
-                  <div className='px-2 border-b-2 w-35 h-5 border-secondary text-center text-xs'>
+                  <div className='px-2 border-b-2 w-35 h-5 border-secondary text-center text-xs min-w-[115px]'>
                     {temp0Date}
                   </div>
                   <Icon
@@ -171,12 +171,12 @@ export const DatePicker = React.forwardRef<HTMLInputElement, Props>(
                     className='mx-2 transition-none text-secondary'
                     size={12}
                   />
-                  <div className='px-2 border-b-2 w-35 h-5 border-secondary text-center text-xs'>
+                  <div className='px-2 border-b-2 w-35 h-5 border-secondary text-center text-xs min-w-[115px]'>
                     {temp1Date}
                   </div>
                 </>
               ) : (
-                <div className='px-2 border-b-2 w-35 h-5 border-secondary text-center text-xs'>
+                <div className='px-2 border-b-2 w-35 h-5 border-secondary text-center text-xs min-w-[115px]'>
                   {tempDate}
                 </div>
               )}

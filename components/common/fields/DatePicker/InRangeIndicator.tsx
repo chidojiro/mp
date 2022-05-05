@@ -35,10 +35,10 @@ export const InRangeIndicator = ({
       className={classNames('in-range-indicator', 'absolute w-full h-full top-0 left-0', {
         [activeClassName]: isDateActive(),
         'rounded-l-full':
-          dateRange?.[0].toString() === date.toString() || isActiveWeekdayOf(date, 0),
+          dateRange?.[0]?.toString() === date.toString() || isActiveWeekdayOf(date, 0),
         'rounded-r-full':
           dateRange?.length === 1 ||
-          dateRange?.[1].toString() === date.toString() ||
+          dateRange?.[1]?.toString() === date.toString() ||
           isActiveWeekdayOf(date, 6),
         className,
       })}

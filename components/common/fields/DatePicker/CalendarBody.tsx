@@ -33,6 +33,8 @@ export const CalendarBody = ({
   const isDateActive = (date: Date) => {
     if (!isArray(selectedDate)) return date.toString() === selectedDate?.toString();
 
+    if (selectedDate.length === 0) return false;
+
     if (selectedDate?.length === 1) return date.toString() === selectedDate[0]?.toString();
 
     return isWithinInterval(date, {
