@@ -8,6 +8,7 @@ import CartQuestion from './icons/cart-question.svg';
 import Chatbot from './icons/chatbot.svg';
 import Chatbot2 from './icons/chatbot2.svg';
 import Check from './icons/check.svg';
+import ChevronLeft from './icons/chevron-left.svg';
 import ChevronRightCircle from './icons/chevron-right-circle.svg';
 import Clock from './icons/clock.svg';
 import Close from './icons/close.svg';
@@ -49,6 +50,7 @@ import Upload from './icons/upload.svg';
 import Variable from './icons/variable.svg';
 
 const ICONS = {
+  'chevron-left': ChevronLeft,
   group: Group,
   repeat: Repeat,
   cart: Cart,

@@ -6,8 +6,7 @@ import { useProfile } from '@/hooks/api/useProfile';
 
 import { Icon } from '../common/Icon';
 
-import { NavItem } from './NavItem';
-import { NavItemData } from './NavItem.types';
+import { NavItem, NavItemData } from './NavItem';
 
 export const Sidebar = () => {
   const { t } = useTranslation();
@@ -17,7 +16,7 @@ export const Sidebar = () => {
   const projectPrefix = `${organizationPrefix}/projects/${profile.data?.project_id}`;
 
   const organizationMatchPrefix = '/organizations/[organizationId]';
-  const projectMatchPrefix = `${organizationPrefix}/projects/[projectId]`;
+  const projectMatchPrefix = `${organizationMatchPrefix}/projects/[projectId]`;
 
   const menu: NavItemData[] = [
     {
@@ -82,6 +81,7 @@ export const Sidebar = () => {
       matches: [
         `${projectMatchPrefix}/actions`,
         `${projectMatchPrefix}/actions/[marketingActionStatus]/[marketingActionId]`,
+        `${projectMatchPrefix}/actions/[marketingActionStatus]`,
         `${projectMatchPrefix}/actions/edit/[marketing_action_name]`,
         `${projectMatchPrefix}/actions/edit/[marketing_action_name]/`,
       ],
@@ -142,15 +142,21 @@ export const Sidebar = () => {
       </div>
       <div
         className={classNames({
-          'flex-shrink-0 flex border-t-2 sticky bottom-0': true,
+          'flex-shrink-0 flex border-t-2 sticky bottom-0 py-2': true,
           'px-3': open,
           'px-auto': !open,
         })}
       >
-        <span className='flex ml-auto' onClick={toggleSideBar}>
-          {open && <Icon name='chevron-down' size={38} fill='#BFBFBF' className='rotate-90' />}
-          {!open && <Icon name='chevron-down' size={38} fill='#BFBFBF' className='-rotate-90' />}
-        </span>
+        <Icon
+          name='chevron-left'
+          size={20}
+          onClick={toggleSideBar}
+          fill='#BFBFBF'
+          className={classNames({
+            'rotate-180 mx-auto': !open,
+            'ml-auto': open,
+          })}
+        />
       </div>
     </div>
   );

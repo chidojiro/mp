@@ -3,11 +3,16 @@ import { useRouter } from 'next/router';
 import classNames from 'classnames';
 
 import { Accordion } from '@/components/common/Accordion';
-import { Icon } from '@/components/common/Icon';
+import { Icon, IconName } from '@/components/common/Icon';
 import { useVisibilityControl } from '@/hooks/useVisibilityControl';
 
-import { NavItemData } from './NavItem.types';
-
+export type NavItemData = {
+  path?: string;
+  label: string;
+  children?: NavItemData[];
+  matches?: string[];
+  icon?: IconName;
+};
 type Props = { data: NavItemData; showLabel: boolean };
 
 export const NavItem = ({ data, showLabel = true }: Props) => {
@@ -23,35 +28,33 @@ export const NavItem = ({ data, showLabel = true }: Props) => {
     defaultVisible: navChildren.some(item => isMatched(item)),
   });
 
-  if (path)
+  const anchorClasses = classNames('flex text-medium items-center py-3 pl-3 hover:bg-dark-gray', {
+    'bg-dark-gray': isMatched(data),
+  });
+  const iconClasses = classNames('text-primary my-1', {
+    'mr-2': showLabel,
+  });
+  if (path) {
     return (
-      <Link passHref href={path}>
-        <a
-          className={classNames('flex text-medium items-center py-3  px-5 hover:bg-dark-gray', {
-            'bg-dark-gray': isMatched(data),
-          })}
-          title={label}
-        >
-          <Icon name={icon} className='w-4 h-4 mr-2 text-primary my-1' size={22} />
+      <Link passHref href={path ?? '#'}>
+        <a className={anchorClasses} title={label}>
+          <Icon name={icon} className={iconClasses} size={20} />
           {showLabel && label}
         </a>
       </Link>
     );
+  }
 
   return (
     <Accordion control={accordionControl}>
       <Accordion.Title>
-        <div
-          className={classNames({
-            'cursor-pointer flex text-medium items-center py-3 px-5 hover:bg-dark-gray': true,
-          })}
-        >
-          <Icon name={icon} size={16} className='mr-2 text-primary my-1' />
+        <div className={anchorClasses}>
+          <Icon name={icon} size={22} className={iconClasses} />
           {showLabel && label}
           {showLabel && navChildren && (
             <Icon
               name={accordionControl.visible ? 'chevron-up' : 'chevron-down'}
-              className='ml-auto text-gray-500'
+              className='ml-auto text-gray-500 mr-2'
               size={22}
             />
           )}
