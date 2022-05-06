@@ -5,6 +5,7 @@ import { FormProvider } from 'react-hook-form';
 
 import { Button, Icon } from '@/components/common';
 import { Step } from '@/constants';
+import { StepMessage } from '@/types';
 
 import styles from './StepForm.module.css';
 
@@ -12,7 +13,7 @@ type Props = {
   step: Step;
   isLastStep: boolean;
   isAlert: boolean;
-  onShowPreview: (stepId: number) => void;
+  onShowPreview: (message: StepMessage) => void;
   onConfirm: (stepId: number) => void;
 };
 
@@ -20,7 +21,7 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
   ({ step, isLastStep, isAlert, onShowPreview, onConfirm }, ref) => {
     const { t } = useTranslation('marketingAction');
     const { id, name, showPreviewBtn, children, methods } = step;
-    const [showAlert, setShowAlert] = useState(true);
+    const [showAlert, setShowAlert] = useState(isAlert);
     const [classAlert, setClassAlert] = useState('');
 
     const btnRef = useRef<any>(null);
@@ -114,7 +115,7 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
                 <Button
                   className='h-9 border-none bg-input-focus min-w-[240px] mr-2.5'
                   variant='outline'
-                  onClick={() => onShowPreview?.(id)}
+                  onClick={() => onShowPreview?.(methods.getValues())}
                 >
                   {t('viewPreview')}
                 </Button>

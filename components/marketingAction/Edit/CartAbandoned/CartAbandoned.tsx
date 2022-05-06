@@ -9,7 +9,7 @@ import { ActionContainer } from '@/components/ActionContainer';
 import { Form } from '@/components/common';
 import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
 import { useVisibilityControl } from '@/hooks';
-import { MarketingActionAlias, MarketingActionStatus, TARGET } from '@/types';
+import { MarketingActionAlias, MarketingActionStatus, StepMessage, TARGET } from '@/types';
 import { TargetFilterUtils } from '@/utils';
 
 import { Steppers } from '../Steppers';
@@ -144,6 +144,15 @@ export const CartAbandoned = () => {
     }
   };
 
+  const onShowPreview = (message: StepMessage, type = 'mail') => {
+    let _message = { ...message };
+    if (!_message.send_flag || !_message.has_self_mail_content) {
+      _message = firstMessage;
+    }
+    setMessagePreview({ ..._message, type });
+    previewMessageControl.open();
+  };
+
   const steps = [
     {
       id: 1,
@@ -154,14 +163,14 @@ export const CartAbandoned = () => {
     {
       id: 2,
       name: t('msgSetting1'),
-      children: <Message1Settings useLine={useLine} />,
+      children: <Message1Settings useLine={useLine} onShowPreview={onShowPreview} />,
       showPreviewBtn: true,
       methods: step2Methods,
     },
     {
       id: 3,
       name: t('msgSetting2'),
-      children: <Message2Settings useLine={useLine} />,
+      children: <Message2Settings useLine={useLine} onShowPreview={onShowPreview} />,
       showPreviewBtn: true,
       methods: step3Methods,
     },
@@ -172,20 +181,6 @@ export const CartAbandoned = () => {
       methods: step4Methods,
     },
   ];
-
-  const onShowPreview = (stepId: number) => {
-    let message = firstMessage;
-    if (stepId === 3 && secondMessage?.send_flag && secondMessage?.has_self_mail_content) {
-      message = secondMessage;
-    }
-    setMessagePreview({
-      headline: message?.mail_content.title_preview,
-      messageEmail: message?.mail_content.content_preview,
-      messageLine: message?.line_messages.text_msg_content,
-      color: message.color,
-    });
-    previewMessageControl.open();
-  };
 
   const handleCloseModal = () => {
     push(`${asPath}/${maId}`);
@@ -210,7 +205,8 @@ export const CartAbandoned = () => {
         description={t('cartAbandonedDescription')}
         descriptionImageUrl='/images/cart-abandoned-description.png'
         flowImgUrl='/images/cart-abandoned-flow.png'
-        output={t('messageDelivery')}></ActionContainer>
+        output={t('messageDelivery')}
+      ></ActionContainer>
       <div className='relative'>
         <Form methods={methods} className='mt-[60px]'>
           <Steppers steps={steps} onShowPreview={onShowPreview} />
@@ -218,11 +214,10 @@ export const CartAbandoned = () => {
       </div>
       <div className='relative'>
         <PreviewOverlay
-          defaultType='mail'
-          mailHeadline={messagePreview?.headline}
-          mailBody={messagePreview?.messageEmail}
-          lineBody={messagePreview?.messageLine}
-          color={messagePreview?.color}
+          defaultType={messagePreview?.type}
+          mailHeadline={messagePreview?.mail_content.title}
+          mailBody={messagePreview?.mail_content.content}
+          lineBody={messagePreview?.line_messages.text_msg_content}
           control={previewMessageControl}
         />
       </div>

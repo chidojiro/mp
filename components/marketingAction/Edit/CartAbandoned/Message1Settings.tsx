@@ -2,15 +2,18 @@ import React from 'react';
 import { useTranslation } from 'next-i18next';
 
 import { DeliveryDateTimeInput } from '@/components/marketingAction/DeliveryDateTimeInput';
+import { MessageContentPreviewType } from '@/components/marketingAction/MessageContentPreview';
 import { Section } from '@/components/Section';
+import { StepMessage } from '@/types';
 
 import { MessageContent } from './MessageContent';
 
 type Props = {
   useLine?: boolean;
+  onShowPreview: (message: StepMessage, type: MessageContentPreviewType) => void;
 };
 
-export const Message1Settings = ({ useLine = true }: Props) => {
+export const Message1Settings = ({ useLine = true, onShowPreview }: Props) => {
   const { t } = useTranslation('marketingAction');
 
   return (
@@ -21,7 +24,7 @@ export const Message1Settings = ({ useLine = true }: Props) => {
         inputDateName='send_after_days'
         inputTimeName='send_at'
       />
-      <MessageContent useLine={useLine} />
+      <MessageContent useLine={useLine} onShowPreview={onShowPreview} />
     </>
   );
 };
