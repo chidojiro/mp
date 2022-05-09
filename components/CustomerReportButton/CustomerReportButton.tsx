@@ -40,7 +40,7 @@ export const CustomerReportButton = ({
       </div>
     </div>
     <div className='flex items-center'>
-      <div className='mx-1 text-xs text-gray-600'>{clickActionText}</div>
+      <div className='mx-1 text-xs text-gray-600 whitespace-nowrap'>{clickActionText}</div>
       <div className='mr-3'>
         <ChevronRightIcon className='w-5 h-5 ml-2 -mr-1 bg text-secondary' aria-hidden='true' />
       </div>

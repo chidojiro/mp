@@ -13,7 +13,7 @@ const MemberTypeFragment = ({
 }: {
   count: number;
   percentage: number;
-  memberType: 'W' | 'L';
+  memberType: 'S' | 'L';
   t: (key: string) => string;
 }) => {
   return (
@@ -79,7 +79,7 @@ export const SegmentBody = ({ data }: SegmentBodyProps) => {
         <MemberTypeFragment
           count={data.webUsers}
           percentage={data.webPercentage}
-          memberType='W'
+          memberType='S'
           t={t}
         />
         <MemberTypeFragment
