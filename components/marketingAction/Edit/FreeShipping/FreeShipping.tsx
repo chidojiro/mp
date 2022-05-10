@@ -127,7 +127,7 @@ export const FreeShipping = () => {
     },
   ]);
 
-  const onShowPreview = (stepId: number) => {
+  const onShowPreview = () => {
     chatPreviewControl.open();
   };
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'next-i18next';
 import { EditorState } from 'draft-js';
 import { useFormContext, useWatch } from 'react-hook-form';
@@ -9,10 +9,9 @@ import { ColorGroup } from '@/components/marketingAction/ColorGroup';
 import { LinePreview } from '@/components/marketingAction/LinePreview';
 import { MailPreview } from '@/components/marketingAction/MailPreview';
 import { MessageContentPreviewType } from '@/components/marketingAction/MessageContentPreview';
-import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
-import { useVariables, useVisibilityControl } from '@/hooks';
+import { useVariables } from '@/hooks';
 import { MentionData, Option, OPTIONS } from '@/types';
-import { MailContent, MarketingActionAlias } from '@/types/marketingAction';
+import { MailContent, MarketingActionAlias, StepMessage } from '@/types/marketingAction';
 
 import { MessageBodyInput } from '../MessageBodyInput';
 import { getTextFromEditorState } from '../utils';
@@ -20,12 +19,11 @@ import { getTextFromEditorState } from '../utils';
 type Props = {
   messageNum?: string;
   useLine?: boolean;
+  onShowPreview?: (message: StepMessage, type: MessageContentPreviewType) => void;
 };
 
-export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
+export const MessageContent = ({ messageNum = '', useLine = true, onShowPreview }: Props) => {
   const { t } = useTranslation('marketingAction');
-  const previewMessageControl = useVisibilityControl();
-  const [currType, setCurrType] = useState<MessageContentPreviewType>('mail');
 
   const lineTextOptions = [
     { value: OPTIONS.YES, label: t('displayMsg') },
@@ -37,8 +35,7 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
   const showLineMsg = message?.line_messages?.text_msg_display;
 
   const onShowModal = (type: MessageContentPreviewType) => {
-    setCurrType(type);
-    previewMessageControl.open();
+    onShowPreview?.(message, type);
   };
 
   const { setValue } = useFormContext();
@@ -158,15 +155,6 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
           </div>
         </div>
       )}
-      <PreviewOverlay
-        defaultType={currType}
-        mailHeadline={message?.mail_content.title_preview}
-        mailBody={message?.mail_content.content_preview}
-        lineBody={message?.line_messages?.text_msg_content}
-        control={previewMessageControl}
-        color={message.color}
-        enableLine={useLine}
-      />
     </div>
   );
 };

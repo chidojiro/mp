@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
 import { Step } from '@/constants';
+import { StepMessage } from '@/types';
 
 import { StepForm } from './StepForm';
 
 type Props = {
   steps: Step[];
-  onShowPreview: (stepId: number) => void;
+  onShowPreview: (message: StepMessage) => void;
 };
 
 export const Steppers = ({ steps, onShowPreview }: Props) => {
