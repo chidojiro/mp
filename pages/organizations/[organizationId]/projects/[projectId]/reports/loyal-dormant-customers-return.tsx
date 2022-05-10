@@ -1,12 +1,12 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
+import { Icon } from '@/components/common';
+import { ConversionRateChart } from '@/components/ConversionRateChart';
+import { CustomerReportButton } from '@/components/CustomerReportButton';
 import { Layout } from '@/components/Layout';
 import { ServerSidePropsProvider } from '@/contexts';
 import { SSR } from '@/ssr';
-import { CustomerReportButton } from '@/components/CustomerReportButton';
-import { Icon } from '@/components/common';
-import { ConversionRateChart } from '@/components/ConversionRateChart';
 
 export const getServerSideProps = SSR.withProps('profile')(async ({ locale = 'ja' }, result) => {
   return {
@@ -111,18 +111,21 @@ function F2ConversionRateTrends(props: any) {
         </h5>
         <div className='grid grid-cols-2 gap-4 mt-6'>
           <CustomerReportButton
+            href=''
             featuredIcon={<Icon name='mails' size={30} />}
             label={t('postPurchaseStepDelivery')}
             subtext={t('mostRecentContribution', { amount: '256,000' })}
             clickActionText={t('viewReport')}
           />
           <CustomerReportButton
+            href=''
             featuredIcon={<Icon name='cart' size={30} />}
             label={t('periodicDeliveryRecommendation')}
             subtext={t('mostRecentContribution', { amount: '256,000' })}
             clickActionText={t('viewReport')}
           />
           <CustomerReportButton
+            href=''
             featuredIcon={<Icon name='chatbot' size={30} />}
             label={t('birthdayCoupon')}
             subtext={t('mostRecentContribution', { amount: '256,000' })}

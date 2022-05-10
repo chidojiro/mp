@@ -1,7 +1,5 @@
 import React from 'react';
-
 import classNames from 'classnames';
-
 import { Children, ClassName, HTMLButtonProps } from 'types';
 
 type Variant = 'link' | 'outline' | 'solid';

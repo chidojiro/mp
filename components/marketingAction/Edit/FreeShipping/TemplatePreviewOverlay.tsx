@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { useTranslation } from 'next-i18next';
 
 import { SwitchButtons } from '@/components/common';

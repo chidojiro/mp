@@ -1,0 +1,12 @@
+.rich-text-editor {
+
+  :global(.public-DraftStyleDefault-block) {
+    overflow-x: auto;
+    white-space: pre;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

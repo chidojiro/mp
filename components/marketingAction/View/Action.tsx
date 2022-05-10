@@ -1,11 +1,11 @@
-import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 
-import { Button, IconName, Icon, Tag } from '@/components/common';
+import { Button, Icon, IconName, Tag } from '@/components/common';
+import { useProfile } from '@/hooks';
 import { MarketingActionStatus as MAStatus, TargetSegment } from '@/types';
 import { TargetFilterUtils } from '@/utils';
-import { useProfile } from '@/hooks';
 
 type Props = {
   path: string;

@@ -1,8 +1,8 @@
-import useSWR from 'swr';
 import { useTranslation } from 'next-i18next';
-import { RefreshIcon } from '@heroicons/react/outline';
+import useSWR from 'swr';
 
 import { ActionsByAliasResponse, MarketingActionAPI } from '@/apis';
+import { RefreshIcon } from '@heroicons/react/outline';
 
 import { Badge } from './Badge';
 

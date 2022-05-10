@@ -1,12 +1,11 @@
 import { useState } from 'react';
-
 import { useTranslation } from 'next-i18next';
 
 import { SwitchButtons } from '@/components/common';
 import { Overlay } from '@/components/Layout';
+import { ChatPreview } from '@/components/marketingAction/ChatPreview';
 import { VisibilityControl } from '@/hooks';
 import { Device } from '@/types';
-import { ChatPreview } from '@/components/marketingAction/ChatPreview';
 
 type Props = {
   color: string;

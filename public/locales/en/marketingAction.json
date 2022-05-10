@@ -177,8 +177,6 @@
   "screenRight": "Right end of screen",
   "upFromDefaultPosition": "Up from the default position",
   "suspendTemplate": "Suspend Template",
-  "defaultHeadline": "Did you forget\nto buy anything?",
-  "defaultTextEmail": "Thank you for visiting <span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"brandName\">Brand name</span>. The following items are still stored in your shopping cart. Please consider purchasing them before they are sold out.",
   "customerName": "Customer name",
   "brandName": "Brand name",
   "businessHours": "Business hours",
@@ -200,7 +198,9 @@
   "faqCSVUploadDescription": "Please upload the created CSV file from here. If you can upload successfully, STEP1 is finished.",
   "faqChatWindowSettingsDescription": "Create the appearance and behavior of the chatbot.",
   "exterior": "Exterior",
-  "emptyMarketingAction": "There are no measures under implementation.",
+  "emptyRunningMarketingAction": "There are no measures under implementation.",
+  "emptyCompletedMarketingAction": "There are no measures whose implementation has been completed.",
+  "emptyDraftMarketingAction": "There are no saved drafts.",
   "timeDeliverySettings": "{{time}} {{days}} days {{from_the_date_text}}",
   "save": "Save",
   "updateCSV": "Upload CSV file",
@@ -208,5 +208,8 @@
   "carouselContent": "<span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"amountIncludingTax\">Amount including tax</span>(incl. tax)/<span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"productDetail\">Product details</span>",
   "delete": "Delete",
   "colorSettingsForBtn": "Color settings for buttons and links",
-  "cart": "Cart"
+  "cart": "Cart",
+  "notSelected": "Not Selected",
+  "productAutoInserted": "Product information is automatically inserted",
+  "forgotSomething": "Are you sure you haven't forgotten something?"
 }

@@ -1,9 +1,8 @@
 import React from 'react';
-
 import classNames from 'classnames';
 
-import { Children } from '@/types';
 import { Icon } from '@/components/common';
+import { Children } from '@/types';
 
 import { StepperContext } from './StepperContext';
 

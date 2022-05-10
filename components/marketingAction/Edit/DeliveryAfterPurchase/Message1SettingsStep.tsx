@@ -1,16 +1,17 @@
 import React from 'react';
-
 import { useTranslation } from 'next-i18next';
 import { FormProvider, UseFormReturn } from 'react-hook-form';
 
-import { Form, RadioGroup } from '@/components/common';
-import { useVisibilityControl } from '@/hooks';
-import { Section } from '@/components/Section';
-import { Stepper } from '@/components/Stepper';
+import { Form } from '@/components/common';
+import { RadioGroup } from '@/components/common/fields';
 import { DeliveryDateTimeInput } from '@/components/marketingAction/DeliveryDateTimeInput';
 import { MessageContentPreviewType } from '@/components/marketingAction/MessageContentPreview';
 import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
-import { StepMessageTemplate } from '@/types';
+import { Section } from '@/components/Section';
+import { Stepper } from '@/components/Stepper';
+import { useVariables, useVisibilityControl } from '@/hooks';
+import { MentionData, Option, StepMessageTemplate } from '@/types';
+import { MarketingActionAlias } from '@/types/marketingAction';
 
 import { ColorSettingSection } from '../ColorSettingsSection';
 import { LineMessageContentSection } from '../LineMessageContentSection';
@@ -51,6 +52,15 @@ export const Message1SettingsStep = React.forwardRef(
       control.open();
     };
 
+    const { data: variables } = useVariables(MarketingActionAlias.AFTER_PURCHASE);
+    const mentionOptions = variables.map(
+      data =>
+        ({
+          label: data.name_display,
+          value: data,
+        } as Option<MentionData, string>)
+    );
+
     return (
       <Stepper.Item label={t('step1Setting')} complete={complete} ref={ref}>
         <FormProvider {...formMethods}>
@@ -87,8 +97,16 @@ export const Message1SettingsStep = React.forwardRef(
               />
             </Form.RadioGroup>
           </Section>
-          <MailMessageContentSection onPreviewClick={handleMailPreviewClick} />
-          {!!enableLine && <LineMessageContentSection onPreviewClick={handleLinePreviewClick} />}
+          <MailMessageContentSection
+            mentionOptions={mentionOptions}
+            onPreviewClick={handleMailPreviewClick}
+          />
+          {!!enableLine && (
+            <LineMessageContentSection
+              mentionOptions={mentionOptions}
+              onPreviewClick={handleLinePreviewClick}
+            />
+          )}
           <ColorSettingSection />
           <StepActions
             complete={complete}

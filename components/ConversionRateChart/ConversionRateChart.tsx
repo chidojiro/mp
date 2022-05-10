@@ -1,19 +1,18 @@
 import React from 'react';
-
 import {
   Bar,
   CartesianGrid,
   ComposedChart,
   LabelList,
   Line,
-  Tooltip,
   ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
 } from 'recharts';
 
-import { DomUtils } from '@/utils/dom';
 import { CSVButton } from '@/components/common/Button';
+import { DomUtils } from '@/utils/dom';
 
 import styles from './ConversionRateChart.module.css';
 
@@ -97,6 +96,7 @@ export const ConversionRateChart = ({ bar1, bar2, bar3, line, data }: Conversion
             barSize={barWidth}
             fill='#FFBA00'
             textAnchor='start'
+            radius={[4, 4, 0, 0]}
           >
             <LabelList
               dataKey={bar1.dataKey}
@@ -110,6 +110,7 @@ export const ConversionRateChart = ({ bar1, bar2, bar3, line, data }: Conversion
             <Bar
               dataKey={bar2.dataKey}
               name={bar2.title}
+              radius={[4, 4, 0, 0]}
               barSize={barWidth}
               fill='#55C5D9'
               textAnchor='start'
@@ -127,6 +128,7 @@ export const ConversionRateChart = ({ bar1, bar2, bar3, line, data }: Conversion
             <Bar
               dataKey={bar3.dataKey}
               name={bar3.title}
+              radius={[4, 4, 0, 0]}
               barSize={barWidth}
               fill='#FF7F5C'
               textAnchor='start'
@@ -143,7 +145,9 @@ export const ConversionRateChart = ({ bar1, bar2, bar3, line, data }: Conversion
           {!!line && (
             <Line
               yAxisId='right'
-              type='monotone'
+              // type='monotone'
+              dot={false}
+              strokeWidth={2}
               dataKey={line.dataKey}
               name={line.title}
               unit='%'

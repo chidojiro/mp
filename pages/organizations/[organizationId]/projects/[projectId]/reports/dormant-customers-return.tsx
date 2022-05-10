@@ -1,12 +1,14 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { ServerSidePropsProvider } from '@/contexts';
-import { SSR } from '@/ssr';
+import { Icon, IconName } from '@/components/common';
+import { ConversionRateChart } from '@/components/ConversionRateChart';
 import { CustomerReportButton } from '@/components/CustomerReportButton';
 import { Layout } from '@/components/Layout';
-import { Icon } from '@/components/common';
-import { ConversionRateChart } from '@/components/ConversionRateChart';
+import { ServerSidePropsProvider } from '@/contexts';
+import { useProfile } from '@/hooks/api/useProfile';
+import { SSR } from '@/ssr';
+import { NumberUtils } from '@/utils/number';
 
 export const getServerSideProps = SSR.withProps('profile')(async ({ locale = 'ja' }, result) => {
   return {
@@ -96,7 +98,27 @@ const data = [
 function ReturnOfDormantCustomers(props: any) {
   const { t } = useTranslation('report');
   const { t: tCommon } = useTranslation('common');
-
+  const { data: profile } = useProfile();
+  const reportButtons = [
+    {
+      href: `/organizations/${profile?.organization_id}/projects/${profile?.project_id}/reports/action-reports/step-delivery-after-purchase/monthly?targets=all`,
+      icon: 'mails',
+      label: t('postPurchaseStepDelivery'),
+      subLabel: t('mostRecentContribution', { amount: NumberUtils.formatMoney(256000) }),
+    },
+    {
+      href: `/organizations/${profile?.organization_id}/projects/${profile?.project_id}/reports/action-reports/conditional-free-shipping/monthly?targets=all`,
+      icon: 'cart',
+      label: t('viewFreeShippingReport'),
+      subLabel: t('mostRecentContribution', { amount: NumberUtils.formatMoney(48300) }),
+    },
+    {
+      href: '',
+      icon: 'chatbot',
+      label: t('viewBirthdayCouponReport'),
+      subLabel: t('mostRecentContribution', { amount: NumberUtils.formatMoney(37600) }),
+    },
+  ];
   return (
     <ServerSidePropsProvider props={props}>
       <Layout title={tCommon('returnOfDormantCustomers')}>
@@ -110,24 +132,16 @@ function ReturnOfDormantCustomers(props: any) {
           {t('measuresThatContributedToTheReturnOfDormantCustomers')}
         </h5>
         <div className='grid grid-cols-2 gap-4 mt-6'>
-          <CustomerReportButton
-            featuredIcon={<Icon name='mails' size={30} />}
-            label={t('postPurchaseStepDelivery')}
-            subtext={t('mostRecentContribution', { amount: '256,000' })}
-            clickActionText={t('viewReport')}
-          />
-          <CustomerReportButton
-            featuredIcon={<Icon name='cart' size={30} />}
-            label={t('periodicDeliveryRecommendation')}
-            subtext={t('mostRecentContribution', { amount: '256,000' })}
-            clickActionText={t('viewReport')}
-          />
-          <CustomerReportButton
-            featuredIcon={<Icon name='chatbot' size={30} />}
-            label={t('birthdayCoupon')}
-            subtext={t('mostRecentContribution', { amount: '256,000' })}
-            clickActionText={t('viewReport')}
-          />
+          {reportButtons.map((button, index) => (
+            <CustomerReportButton
+              key={index}
+              href={button.href}
+              featuredIcon={<Icon name={button.icon as IconName} size={30} />}
+              label={button.label}
+              subtext={button.subLabel}
+              clickActionText={t('viewReport')}
+            />
+          ))}
         </div>
       </Layout>
     </ServerSidePropsProvider>

@@ -8,14 +8,17 @@ import {
   CheckboxGroup,
   CheckboxGroupProps,
   CheckboxProps,
+  DatePicker,
+  DatePickerProps,
   Input,
   InputProps,
-  ContentEditable,
-  ContentEditableProps,
+  MentionsEditor,
+  MentionsEditorProps,
   PasswordInput,
   PasswordInputProps,
   RadioGroup,
   RadioGroupProps,
+  richTextEditorEmptyValue,
   Select,
   SelectProps,
   TextArea,
@@ -51,8 +54,11 @@ const FormPasswordInput = (props: FieldProps & Omit<PasswordInputProps, keyof Fi
 const FormTimeInput = (props: FieldProps & Omit<TimeInputProps, keyof FieldProps>) => (
   <Field {...props} component={TimeInput} emptyValue='00:00' />
 );
-const FormContentEditable = (props: FieldProps & Omit<ContentEditableProps, keyof FieldProps>) => (
-  <Field {...props} component={ContentEditable} />
+const FormMentionsEditor = (props: FieldProps & Omit<MentionsEditorProps, keyof FieldProps>) => (
+  <Field {...props} component={MentionsEditor} emptyValue={richTextEditorEmptyValue} />
+);
+const FormDatePicker = (props: FieldProps & Omit<DatePickerProps, keyof FieldProps>) => (
+  <Field {...props} component={DatePicker} emptyValue={props.range ? [] : undefined} />
 );
 
 const FormErrorMessage = ({ name, className, ...restProps }: HTMLDivProps & { name: string }) => (
@@ -75,5 +81,6 @@ Form.RadioGroup = FormRadioGroup;
 Form.Select = FormSelect;
 Form.PasswordInput = FormPasswordInput;
 Form.TimeInput = FormTimeInput;
-Form.ContentEditable = FormContentEditable;
+Form.MentionsEditor = FormMentionsEditor;
+Form.DatePicker = FormDatePicker;
 Form.ErrorMessage = FormErrorMessage;

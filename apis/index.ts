@@ -6,3 +6,5 @@ export * from './report';
 export * from './profile';
 export * from './marketingActions';
 export * from './project';
+export * from './assets';
+export * from './variable';

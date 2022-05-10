@@ -176,8 +176,6 @@
   "screenRight": "画面右端",
   "upFromDefaultPosition": "デフォルトの位置から上に",
   "suspendTemplate": "施策を中断する",
-  "defaultHeadline": "お買い忘れは<br>ございませんか？<br>",
-  "defaultTextEmail": "いつも<span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"brandName\">ブランド名</span>をご利用いただきありがとうございます。以下の商品がショッピングカートに保存されたままになっています。 売り切れになってしまう前に、是非購入をご検討くださいませ。<br>",
   "customerName": "顧客名",
   "brandName": "ブランド名",
   "businessHours": "営業時間",
@@ -199,7 +197,9 @@
   "faqCSVUploadDescription": "作成したCSVファイルをこちらからアップロードしてください。正常にアップロードできたらSTEP1は終了です。",
   "faqChatWindowSettingsDescription": "チャットボットの外観の作成と挙動の設定を行います。",
   "exterior": "外観",
-  "emptyMarketingAction": "実施中の施策はありません。",
+  "emptyRunningMarketingAction": "実施中の施策はありません。",
+  "emptyCompletedMarketingAction": "実施が終了した施策はありません。",
+  "emptyDraftMarketingAction": "保存されている下書きはありません。",
   "timeDeliverySettings": "{{from_the_date_text}}{{days}}日後の{{time}}",
   "save": "保存する",
   "updateCSV": "CSVファイルのアップロード",
@@ -207,5 +207,8 @@
   "carouselContent": "<span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"amountIncludingTax\">税込金額</span>（税込）/<span class=\"caret-holder\"></span><span class=\"mention-item\" contenteditable=\"false\" data-value=\"productDetail\">商品詳細</span>",
   "delete": "削除する",
   "colorSettingsForBtn": "ボタン・リンクのカラー設定",
-  "cart": "カート"
+  "cart": "カート",
+  "notSelected": "選択されていません",
+  "productAutoInserted": "商品情報が自動挿入されます",
+  "forgotSomething": "お買い忘れはございませんか"
 }

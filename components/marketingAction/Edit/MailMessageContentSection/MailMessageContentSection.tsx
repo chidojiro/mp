@@ -2,8 +2,9 @@ import { useTranslation } from 'next-i18next';
 import { useWatch } from 'react-hook-form';
 
 import { Form, Icon } from '@/components/common';
-import { Section } from '@/components/Section';
 import { MessageContentPreview } from '@/components/marketingAction/MessageContentPreview';
+import { Section } from '@/components/Section';
+import { MentionData, Option } from '@/types';
 
 import { MessageBodyInput } from '../MessageBodyInput';
 
@@ -11,10 +12,15 @@ import { MessageBodyInput } from '../MessageBodyInput';
 type Props = {
   namePrefix?: string;
   onPreviewClick: () => void;
+  mentionOptions: Option<MentionData, string>[];
 };
 
 // eslint-disable-next-line no-empty-pattern
-export const MailMessageContentSection = ({ namePrefix, onPreviewClick }: Props) => {
+export const MailMessageContentSection = ({
+  namePrefix,
+  onPreviewClick,
+  mentionOptions,
+}: Props) => {
   const { t } = useTranslation('marketingAction');
 
   const headlineName = [namePrefix, 'mail_content.title'].filter(Boolean).join('.');
@@ -37,7 +43,11 @@ export const MailMessageContentSection = ({ namePrefix, onPreviewClick }: Props)
             label={<span className='text-secondary text-medium'>{t('headLines')}</span>}
             rules={{ required: true }}
           />
-          <MessageBodyInput name={bodyName} />
+          <MessageBodyInput
+            mentionOptions={mentionOptions}
+            name={bodyName}
+            rawName={`${bodyName}_draft_raw`}
+          />
         </div>
         <MessageContentPreview body={body} headline={headline} onPreviewClick={onPreviewClick} />
       </div>

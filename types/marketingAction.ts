@@ -1,20 +1,40 @@
+import { EditorState } from 'draft-js';
+
 export enum MarketingActionStatus {
   DRAFT = 'draft',
   RUNNING = 'running',
   SUSPEND = 'suspend',
   COMPLETE = 'complete',
 }
-
 export enum MarketingActionAlias {
   CART_LEFT_NOTIFICATION = 'CART_LEFT_NOTIFICATION',
   AFTER_PURCHASE = 'AFTER_PURCHASE',
   CART_PAGE_FAQ = 'CART_PAGE_FAQ',
   RECOMMEND_DIAGNOSTIC = 'RECOMMEND_DIAGNOSTIC',
-  HISTORY_PURCHASE = 'HISTORY_PURCHASE',
+  HISTORY_PURCHASE = 'HISTORY_PURCHASE_TOP',
   HISTORY_PURCHASE_CATEGORY = 'HISTORY_PURCHASE_CATEGORY',
   CONDITIONAL_FREE_SHIPPING = 'CONDITIONAL_FREE_SHIPPING',
 }
 
+export const MarketingActionAliasMap = {
+  'cart-abandoned': MarketingActionAlias.CART_LEFT_NOTIFICATION,
+  'step-delivery-after-purchase': MarketingActionAlias.AFTER_PURCHASE,
+  'ranking-based-on-overal-purchase-history': MarketingActionAlias.HISTORY_PURCHASE,
+  'ranking-by-category': MarketingActionAlias.HISTORY_PURCHASE_CATEGORY,
+  'conditional-free-shipping': MarketingActionAlias.CONDITIONAL_FREE_SHIPPING,
+  'recommendation-diagnosis-bot': MarketingActionAlias.RECOMMEND_DIAGNOSTIC,
+  'cart-page-faq': MarketingActionAlias.CART_PAGE_FAQ,
+};
+
+export enum MarketingActionAliasKey {
+  CART_LEFT_NOTIFICATION = 'cart-abandoned',
+  AFTER_PURCHASE = 'step-delivery-after-purchase',
+  CART_PAGE_FAQ = 'cart-page-faq',
+  RECOMMEND_DIAGNOSTIC = 'recommendation-diagnosis-bot',
+  HISTORY_PURCHASE = 'ranking-based-on-overal-purchase-history',
+  HISTORY_PURCHASE_CATEGORY = 'ranking-by-category',
+  CONDITIONAL_FREE_SHIPPING = 'conditional-free-shipping',
+}
 export enum TARGET {
   F0_MEMBER = 'f0member',
   F0_OTHERS = 'f0others',
@@ -70,14 +90,23 @@ export type MarketingActionType = {
 
 export type MailContent = {
   title: string;
+  title_draft_raw: string | EditorState;
+  title_preview?: string;
+
   content: string;
+  content_draft_raw: string | EditorState;
+  content_preview?: string;
 };
 
 export type LineMessages = {
   text_msg_display: boolean;
   text_msg_content: string;
+  text_msg_content_draft_raw: string | EditorState;
   flex_msg_image_ratio: '16:9';
   flex_msg_head: string;
+  flex_msg_head_draft_raw: string | EditorState;
+  push_msg_content: string;
+  push_msg_content_draft_raw: string | EditorState;
   notify_msg_token_list?: string;
 };
 
@@ -159,3 +188,14 @@ export interface PopupSettingsData {
 export interface TargetCustomersData {
   target_customers: TARGET[];
 }
+
+export type Content = {
+  to: string;
+  subject: string;
+  body: string;
+};
+
+export type TestDelivery = {
+  type: string;
+  content: Content;
+};

@@ -1,9 +1,9 @@
 import { useTranslation } from 'next-i18next';
 
-import { Form } from '@/components/common/Form';
 import { InputProps } from '@/components/common/fields';
-import { FieldProps } from '@/headless/Form';
+import { Form } from '@/components/common/Form';
 import { EmailPattern } from '@/constants/misc';
+import { FieldProps } from '@/headless/Form';
 
 type Props = FieldProps & Omit<InputProps, keyof FieldProps>;
 

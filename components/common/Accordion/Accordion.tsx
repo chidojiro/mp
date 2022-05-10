@@ -1,5 +1,4 @@
 import React from 'react';
-
 import noop from 'lodash-es/noop';
 
 import { useVisibilityControl, VisibilityControl } from '@/hooks';

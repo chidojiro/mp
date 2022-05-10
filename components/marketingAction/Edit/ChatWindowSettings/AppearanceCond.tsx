@@ -1,7 +1,9 @@
 import { useTranslation } from 'next-i18next';
 
-import { Form, RadioGroup } from '@/components/common';
+import { Form } from '@/components/common';
 import { Option } from '@/types';
+
+import { RadioGroup } from '../../../common/fields';
 
 export const AppearanceCond = () => {
   const { t } = useTranslation('marketingAction');

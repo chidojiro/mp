@@ -1,21 +1,22 @@
 import React, { useCallback, useEffect, useState } from 'react';
-
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
 import { MarketingActionAPI } from '@/apis';
-import { Form } from '@/components/common';
 import { ActionContainer } from '@/components/ActionContainer';
+import { Form } from '@/components/common';
+import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
 import { useVisibilityControl } from '@/hooks';
 import { MarketingActionAlias, MarketingActionStatus, TARGET } from '@/types';
 import { TargetFilterUtils } from '@/utils';
-import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
 
 import { Steppers } from '../Steppers';
 import SavingActions from '../Steppers/SavingActions';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';
+import { convertFromStepMessageRaw, convertToStepMessageRaw } from '../utils';
+
 import { LineSettings } from './LineSettings';
 import { Message1Settings } from './Message1Settings';
 import { Message2Settings } from './Message2Settings';
@@ -43,10 +44,7 @@ export const CartAbandoned = () => {
 
   const messageDefaultSettings = {
     send_at: '10:00',
-    mail_content: {
-      title: t('defaultHeadline'),
-      content: t('defaultTextEmail'),
-    },
+    mail_content: {},
     line_messages: {
       text_msg_display: false,
     },
@@ -89,9 +87,13 @@ export const CartAbandoned = () => {
       const settings = marketingAction.settings;
       step1Methods.reset({ enable_line: settings?.enable_line });
 
-      step2Methods.reset({ ...settings?.step_messages?.[0] }, { keepDefaultValues: true });
+      step2Methods.reset(convertFromStepMessageRaw(settings?.step_messages?.[0]), {
+        keepDefaultValues: true,
+      });
 
-      step3Methods.reset({ ...settings?.step_messages?.[1] }, { keepDefaultValues: true });
+      step3Methods.reset(convertFromStepMessageRaw(settings?.step_messages?.[1]), {
+        keepDefaultValues: true,
+      });
 
       const _targetSegments = TargetFilterUtils.getTargetFilters(marketingAction.target_segments);
 
@@ -122,7 +124,10 @@ export const CartAbandoned = () => {
       status,
       settings: {
         enable_line: useLine,
-        step_messages: [firstMessage, secondMessage],
+        step_messages: [
+          convertToStepMessageRaw(firstMessage),
+          convertToStepMessageRaw(secondMessage),
+        ],
       },
       target_segments: _targetSegments,
     };
@@ -174,8 +179,8 @@ export const CartAbandoned = () => {
       message = secondMessage;
     }
     setMessagePreview({
-      headline: message?.mail_content.title,
-      messageEmail: message?.mail_content.content,
+      headline: message?.mail_content.title_preview,
+      messageEmail: message?.mail_content.content_preview,
       messageLine: message?.line_messages.text_msg_content,
       color: message.color,
     });
@@ -207,17 +212,21 @@ export const CartAbandoned = () => {
         flowImgUrl='/images/cart-abandoned-flow.png'
         output={t('messageDelivery')}
       ></ActionContainer>
-      <Form methods={methods} className='mt-[60px]'>
-        <Steppers steps={steps} onShowPreview={onShowPreview} />
-      </Form>
-      <PreviewOverlay
-        defaultType='mail'
-        mailHeadline={messagePreview?.headline}
-        mailBody={messagePreview?.messageEmail}
-        lineBody={messagePreview?.messageLine}
-        color={messagePreview?.color}
-        control={previewMessageControl}
-      />
+      <div className='relative'>
+        <Form methods={methods} className='mt-[60px]'>
+          <Steppers steps={steps} onShowPreview={onShowPreview} />
+        </Form>
+      </div>
+      <div className='relative'>
+        <PreviewOverlay
+          defaultType='mail'
+          mailHeadline={messagePreview?.headline}
+          mailBody={messagePreview?.messageEmail}
+          lineBody={messagePreview?.messageLine}
+          color={messagePreview?.color}
+          control={previewMessageControl}
+        />
+      </div>
       <SavingActions
         disable={!isDone}
         onSaveMarketingAction={handleSaveMA}

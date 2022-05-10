@@ -1,1 +1,0 @@
-export { PopupTable } from './PopupTable';

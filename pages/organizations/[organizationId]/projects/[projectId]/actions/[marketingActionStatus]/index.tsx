@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
-
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import useSWR from 'swr';
 
-import { Layout } from '@/components/Layout';
-import { Tabs } from '@/components/common/Tabs';
-import { MarketingActionStatus as MAStatus } from '@/types';
-import { Detail } from '@/components/marketingAction/View';
 import { MarketingActionAPI } from '@/apis';
+import { Tabs } from '@/components/common/Tabs';
+import { Layout } from '@/components/Layout';
+import { Detail } from '@/components/marketingAction/View';
+import { MarketingActionStatus as MAStatus } from '@/types';
 import { TargetFilterUtils } from '@/utils';
 
 export const getServerSideProps = async ({ locale = 'ja' }) => ({
@@ -23,7 +22,7 @@ export const ListActionPage = () => {
   const { t } = useTranslation(['marketingAction']);
   const { pathname, query } = useRouter();
 
-  const [filter, setFilter] = useState({});
+  const [filter, setFilter] = useState({ start_to: new Date().toISOString().slice(0, 10) });
 
   useEffect(() => {
     const _targets = [query.targets].flat().filter(Boolean);
@@ -43,6 +42,17 @@ export const ListActionPage = () => {
     }
   );
 
+  const handleChangePeriod = (dates: string[]) => {
+    if (dates.length) {
+      setFilter(prevState => {
+        return { ...prevState, start_from: dates[0], start_to: dates[1] };
+      });
+    } else {
+      const { start_from, start_to, ...rest } = filter as any;
+      setFilter(rest);
+    }
+  };
+
   const tabs = [
     {
       value: MAStatus.RUNNING,
@@ -60,7 +70,11 @@ export const ListActionPage = () => {
         </Link>
       ),
       content: (
-        <Detail marketingActions={data?.[MAStatus.RUNNING]} mutateMarketingActions={mutate} />
+        <Detail
+          marketingActions={data?.[MAStatus.RUNNING]}
+          mutateMarketingActions={mutate}
+          onChangePeriod={handleChangePeriod}
+        />
       ),
     },
     {
@@ -79,7 +93,11 @@ export const ListActionPage = () => {
         </Link>
       ),
       content: (
-        <Detail marketingActions={data?.[MAStatus.COMPLETE]} mutateMarketingActions={mutate} />
+        <Detail
+          marketingActions={data?.[MAStatus.COMPLETE]}
+          mutateMarketingActions={mutate}
+          onChangePeriod={handleChangePeriod}
+        />
       ),
     },
     {
@@ -98,7 +116,13 @@ export const ListActionPage = () => {
         </Link>
       ),
 
-      content: <Detail marketingActions={data?.[MAStatus.DRAFT]} mutateMarketingActions={mutate} />,
+      content: (
+        <Detail
+          marketingActions={data?.[MAStatus.DRAFT]}
+          mutateMarketingActions={mutate}
+          onChangePeriod={handleChangePeriod}
+        />
+      ),
     },
   ];
   return (

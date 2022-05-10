@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
-
-import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 import { useForm, useWatch } from 'react-hook-form';
 
-import { Button, Modal, Form } from '@/components/common';
 import { ActionContainer } from '@/components/ActionContainer';
+import { Button, Form, Modal } from '@/components/common';
 import { Step } from '@/constants';
 import { useProfile, useVisibilityControl } from '@/hooks';
 import { TARGET } from '@/types';
 
 import { ChatOverlay } from '../ChatOverlay';
+import { ChatWindowSettings } from '../ChatWindowSettings';
 import { Steps } from '../Steps';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';
+
 import { Step1Settings } from './Step1Settings';
-import { ChatWindowSettings } from '../ChatWindowSettings';
 
 export const CartFAQ = () => {
   const { t } = useTranslation('marketingAction');

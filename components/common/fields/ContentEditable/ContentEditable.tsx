@@ -1,5 +1,4 @@
 import React from 'react';
-
 import classNames from 'classnames';
 import BaseContentEditable, { ContentEditableEvent } from 'react-contenteditable';
 
@@ -8,6 +7,7 @@ import { ClassName, Option } from '@/types';
 import { ContentEditableUtils } from '@/utils';
 
 import { Dropdown } from '../../Dropdown';
+
 import style from './ContentEditable.module.css';
 
 // eslint-disable-next-line @typescript-eslint/ban-types

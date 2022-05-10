@@ -1,10 +1,9 @@
 import React from 'react';
-
 import { useTranslation } from 'next-i18next';
 
+import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
 import { useVisibilityControl } from '@/hooks';
 import { MarketingActionAlias as MAAlias } from '@/types';
-import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
 
 import { CartAbandoned } from './CartAbandoned';
 import { CartPageFAQ } from './CartPageFAQ';
@@ -12,6 +11,7 @@ import { ConditionalFreeShipping } from './ConditionalFreeShipping';
 import { RankingByHistoryPurchase } from './RankingByHistoryPurchase';
 import { RecommendDiagnosticBot } from './RecommendDiagnosticBot';
 import { StepDeliveryAfterPurchase } from './StepDeliveryAfterPurchase';
+
 import style from './StepDelivery.module.css';
 
 type Props = {
@@ -49,9 +49,9 @@ export const StepDelivery = ({ settings, targetSettings, alias }: Props) => {
       </div>
       <PreviewOverlay
         defaultType='mail'
-        mailHeadline='お買い忘れはございませんか？<br>'
-        mailBody='いつも<span class="caret-holder"></span><span class="mention-item" contenteditable="false" data-value="brandName">ブランド名</span>をご利用いただきありがとうございます。以下の商品がショッピングカートに保存されたままになっています。 売り切れになってしまう前に、是非購入をご検討くださいませ。<br>'
-        lineBody='いつも<span class="caret-holder"></span><span class="mention-item" contenteditable="false" data-value="brandName">ブランド名</span>をご利用いただきありがとうございます。以下の商品がショッピングカートに保存されたままになっています。 売り切れになってしまう前に、是非購入をご検討くださいませ。<br>'
+        mailHeadline=''
+        mailBody=''
+        lineBody=''
         control={previewMessageControl}
       />
     </div>

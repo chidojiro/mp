@@ -1,5 +1,4 @@
 import React from 'react';
-
 import classNames from 'classnames';
 
 export type Props = React.DetailedHTMLProps<
@@ -13,7 +12,7 @@ export const Cell = ({ className, ...restProps }: Props) => {
       {...restProps}
       className={classNames(
         'mp-table-cell',
-        'border-r border-b border-solid border-gray-400 last-of-type:border-r-none',
+        'border-r border-b border-solid border-gray-400',
         'py-3 px-6 text-medium',
         className
       )}

@@ -1,10 +1,9 @@
 import React from 'react';
-
 import { useTranslation } from 'next-i18next';
 
-import { ContentEditableUtils } from '@/utils';
 import { Form } from '@/components/common';
 import { Section } from '@/components/Section';
+import { ContentEditableUtils } from '@/utils';
 
 import { LinkButton } from './LinkButton';
 
@@ -24,7 +23,7 @@ export const EmailSettings = ({}: Props) => {
       <Section>
         <Section.Title>{t('emailFooter')}</Section.Title>
         <Section.Content>
-          <Form.ContentEditable
+          <Form.MentionsEditor
             inputRef={emailFooterRef}
             name='email_footer'
             label={
@@ -38,7 +37,7 @@ export const EmailSettings = ({}: Props) => {
       <Section>
         <Section.Title>{t('emailSignature')}</Section.Title>
         <Section.Content>
-          <Form.ContentEditable
+          <Form.MentionsEditor
             inputRef={emailSignatureRef}
             name='email_signature'
             label={

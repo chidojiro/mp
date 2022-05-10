@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
-
 import { useTranslation } from 'next-i18next';
-import { useWatch } from 'react-hook-form';
+import { EditorState } from 'draft-js';
+import { useFormContext, useWatch } from 'react-hook-form';
 
-import { Form, Icon, RadioGroup } from '@/components/common';
-import { useVisibilityControl } from '@/hooks';
-import { Option, OPTIONS } from '@/types';
+import { Form, Icon } from '@/components/common';
+import { RadioGroup } from '@/components/common/fields';
+import { ColorGroup } from '@/components/marketingAction/ColorGroup';
 import { LinePreview } from '@/components/marketingAction/LinePreview';
 import { MailPreview } from '@/components/marketingAction/MailPreview';
 import { MessageContentPreviewType } from '@/components/marketingAction/MessageContentPreview';
-import { ColorGroup } from '@/components/marketingAction/ColorGroup';
 import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
+import { useVariables, useVisibilityControl } from '@/hooks';
+import { MentionData, Option, OPTIONS } from '@/types';
+import { MailContent, MarketingActionAlias } from '@/types/marketingAction';
 
 import { MessageBodyInput } from '../MessageBodyInput';
+import { getTextFromEditorState } from '../utils';
 
 type Props = {
   messageNum?: string;
@@ -29,7 +32,7 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
     { value: OPTIONS.NO, label: t('noDisplay') },
   ];
 
-  const message = useWatch() as any;
+  const message = useWatch<MailContent>() as any;
 
   const showLineMsg = message?.line_messages?.text_msg_display;
 
@@ -38,10 +41,22 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
     previewMessageControl.open();
   };
 
-  const headingMentionOptions: Option[] = [
-    { label: t('customerName'), value: 'customerName' },
-    { label: t('brandName'), value: 'brandName' },
-  ];
+  const { setValue } = useFormContext();
+
+  const { data: variables } = useVariables(MarketingActionAlias.CART_LEFT_NOTIFICATION);
+  const mentionOptions = variables.map(
+    data =>
+      ({
+        label: data.name_display,
+        value: data,
+      } as Option<MentionData, string>)
+  );
+
+  const handleChangeTitle = (editorState: EditorState) => {
+    const template = getTextFromEditorState(editorState);
+    setValue(`${messageNum}.mail_content.title`, template);
+    setValue(`${messageNum}.mail_content.title_preview`, getTextFromEditorState(editorState, true));
+  };
 
   return (
     <div className='px-10 -mx-10 border-t-4 border-white mt-7 pb-7'>
@@ -56,16 +71,22 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
               <div className='mb-2.5 font-semibold text-secondary text-medium'>
                 {t('headLines')}
               </div>
-              <Form.ContentEditable
-                options={headingMentionOptions}
-                name={`${messageNum}.mail_content.title`}
+              <Form.MentionsEditor
+                mentionOptions={mentionOptions}
+                singleLine
+                name={`${messageNum}.mail_content.title_draft_raw`}
+                onChange={handleChangeTitle}
                 rules={{ required: true }}
               />
             </div>
             <div className='mb-4'>
               <div className='mb-2.5 font-semibold text-secondary text-medium'>{t('bodyText')}</div>
 
-              <MessageBodyInput name={`${messageNum}.mail_content.content`} />
+              <MessageBodyInput
+                mentionOptions={mentionOptions}
+                name={`${messageNum}.mail_content.content`}
+                rawName={`${messageNum}.mail_content.content_draft_raw`}
+              />
             </div>
             <div className='mt-7'>
               <div className='mb-2 font-semibold text-secondary'>{t('colorSettingsForBtn')}</div>
@@ -83,8 +104,8 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
               </span>
             </div>
             <MailPreview
-              headline={message?.mail_content?.title}
-              body={message?.mail_content?.content}
+              headline={message?.mail_content?.title_preview}
+              body={message?.mail_content?.content_preview}
               desktop={false}
               color={message.color}
             />
@@ -115,7 +136,10 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
                   ))}
                 </Form.RadioGroup>
                 {showLineMsg && (
-                  <MessageBodyInput name={`${messageNum}.line_messages.text_msg_content`} />
+                  <MessageBodyInput
+                    name={`${messageNum}.line_messages.text_msg_content`}
+                    rawName={`${messageNum}.line_messages.text_msg_content_draft_raw`}
+                  />
                 )}
               </div>
             </div>
@@ -136,8 +160,8 @@ export const MessageContent = ({ messageNum = '', useLine = true }: Props) => {
       )}
       <PreviewOverlay
         defaultType={currType}
-        mailHeadline={message?.mail_content.title}
-        mailBody={message?.mail_content.content}
+        mailHeadline={message?.mail_content.title_preview}
+        mailBody={message?.mail_content.content_preview}
         lineBody={message?.line_messages?.text_msg_content}
         control={previewMessageControl}
         color={message.color}

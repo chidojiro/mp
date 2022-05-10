@@ -31,17 +31,17 @@ export const Step2Settings = ({ isMonthly }: Props) => {
         <div className='font-bold text-medium text-secondary'>{t('title')}</div>
         <MessageBodyInput
           name='carousel.title'
+          rawName='carousel.title_draft_raw'
           singleLine={true}
           showEmoji={false}
-          defaultOptions={options}
           className='flex flex-row-reverse items-center mt-2 mb-4'
         />
         <div className='font-bold text-medium text-secondary'>{t('note')}</div>
         <MessageBodyInput
           name='carousel.content'
+          rawName='carousel.content_draft_raw'
           singleLine={true}
           showEmoji={false}
-          defaultOptions={options}
           className='flex flex-row-reverse items-center mt-2'
         />
       </div>

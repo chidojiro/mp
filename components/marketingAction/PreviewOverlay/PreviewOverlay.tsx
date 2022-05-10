@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-
 import { useTranslation } from 'next-i18next';
+import { useForm } from 'react-hook-form';
 
-import { Button, Input, Modal, SwitchButtons } from '@/components/common';
+import { MarketingActionAPI } from '@/apis';
+import { Button, Form, Modal, SwitchButtons } from '@/components/common';
 import { Overlay } from '@/components/Layout';
+import { EmailPattern } from '@/constants';
 import { useVisibilityControl, VisibilityControl } from '@/hooks';
 import { Device, Option } from '@/types';
 
@@ -31,10 +33,12 @@ export const PreviewOverlay = ({
   enableLine = true,
 }: Props) => {
   const { t } = useTranslation('marketingAction');
-  const [email, setEmail] = useState('');
   const [selectedType, setSelectedType] = useState<MessageContentPreviewType>(defaultType);
   const [selectedDevice, setDevice] = useState<Device>('mobile');
   const [isFromTestModal, setIsFromTestModal] = useState(false);
+
+  const methods = useForm({});
+  const { handleSubmit, reset } = methods;
 
   useEffect(() => {
     if (control.visible && !isFromTestModal) {
@@ -67,14 +71,24 @@ export const PreviewOverlay = ({
     modalControl.open();
   };
 
-  const handleExecuteTest = () => {
-    if (email) {
-      // TODO send
-      modalControl.close();
-    }
+  const handleExecuteTest = async ({ email }: any) => {
+    const data = {
+      type: 'email',
+      content: {
+        to: email,
+        subject: mailHeadline,
+        body: mailBody,
+      },
+    };
+
+    await MarketingActionAPI.deliveryTestMail(data);
+
+    reset({});
+    modalControl.close();
   };
 
   const onCloseModal = () => {
+    reset({});
     modalControl.close();
     setIsFromTestModal(true);
     control.open();
@@ -88,7 +102,7 @@ export const PreviewOverlay = ({
         onClose={() => setIsFromTestModal(false)}
         control={control}
         title={t('preview')}
-        className='flex flex-col items-center justify-between h-[95%] w-[65%]'
+        className='flex flex-col items-center justify-between h-[95%] w-[70%]'
       >
         {isMail ? (
           <MailPreview
@@ -111,32 +125,46 @@ export const PreviewOverlay = ({
             ></SwitchButtons>
           )}
           {isMail && (
-            <SwitchButtons
-              value={selectedDevice}
-              className='mr-5'
-              onChange={handleDeviceChange}
-              items={devices}
-            ></SwitchButtons>
+            <div>
+              <SwitchButtons
+                value={selectedDevice}
+                className='mr-5'
+                onChange={handleDeviceChange}
+                items={devices}
+              ></SwitchButtons>
+              <Button className='w-[240px]' onClick={handleDeliveryTest}>
+                {t('testDelivery')}
+              </Button>
+            </div>
           )}
-          <Button className='w-[240px]' onClick={handleDeliveryTest}>
-            {t('testDelivery')}
-          </Button>
         </div>
       </Overlay>
-      <Modal control={modalControl}>
-        <Modal.Header>{t('testDeliveryEmail')}</Modal.Header>
-        <Modal.Body className='text-gray-dark'>
-          <div className='mb-5'>{t('testDeliveryEmailDesc')}</div>
-          <div className='text-secondary mb-2.5 font-bold text-medium'>{t('emailAddForTest')}</div>
-          <Input name='email_for_test' onChange={event => setEmail(event.target.value)} />
-        </Modal.Body>
-        <Modal.Footer className='text-medium'>
-          <Modal.FooterButton colorScheme='negative' onClick={onCloseModal}>
-            {t('cancel')}
-          </Modal.FooterButton>
-          <Modal.FooterButton onClick={handleExecuteTest}>{t('executeTest')}</Modal.FooterButton>
-        </Modal.Footer>
-      </Modal>
+      <Form methods={methods}>
+        <Modal control={modalControl}>
+          <Modal.Header>{t('testDeliveryEmail')}</Modal.Header>
+          <Modal.Body className='text-gray-dark'>
+            <div className='mb-5'>{t('testDeliveryEmailDesc')}</div>
+            <div className='text-secondary mb-2.5 font-bold text-medium'>
+              {t('emailAddForTest')}
+            </div>
+            <Form.Input
+              name='email'
+              rules={{
+                required: true,
+                pattern: EmailPattern,
+              }}
+            />
+          </Modal.Body>
+          <Modal.Footer className='text-medium'>
+            <Modal.FooterButton colorScheme='negative' onClick={onCloseModal}>
+              {t('cancel')}
+            </Modal.FooterButton>
+            <Modal.FooterButton onClick={handleSubmit(handleExecuteTest)}>
+              {t('executeTest')}
+            </Modal.FooterButton>
+          </Modal.Footer>
+        </Modal>
+      </Form>
     </>
   );
 };

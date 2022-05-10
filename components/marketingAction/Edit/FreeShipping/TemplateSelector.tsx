@@ -1,9 +1,8 @@
 import React from 'react';
-
 import classNames from 'classnames';
 
-import { Form, RadioGroup } from '@/components/common';
-
+import { Form } from '@/components/common';
+import { RadioGroup } from '@/components/common/fields';
 export const TemplateSelector = () => {
   return (
     <>

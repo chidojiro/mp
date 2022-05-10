@@ -1,81 +1,49 @@
 import React from 'react';
-
-import { useTranslation } from 'next-i18next';
-import dynamic from 'next/dynamic';
+import { EditorState } from 'draft-js';
+import { useFormContext } from 'react-hook-form';
 
 import { Form } from '@/components/common';
-import { Option } from '@/types';
-import { ContentEditableUtils } from '@/utils';
+import { MentionData, Option } from '@/types';
 
-import { VariableSign } from '../VariableSign';
-
-const EmojiSign = dynamic<any>(() => import('../EmojiSign').then(module => module.EmojiSign));
+import { getTextFromEditorState } from '../utils';
 
 type Props = {
   name: string;
+  rawName: string;
   showEmoji?: boolean;
   shouldValidate?: boolean;
   singleLine?: boolean;
   className?: string;
-  defaultOptions?: Option[];
+  mentionOptions?: Option<MentionData, string>[];
 };
 
 export const MessageBodyInput = ({
   name,
+  rawName,
   showEmoji = true,
   shouldValidate,
   singleLine = false,
   className,
-  defaultOptions,
+  mentionOptions = [],
 }: Props) => {
-  const { t } = useTranslation('marketingAction');
   const mentionRef = React.useRef<HTMLDivElement>(null);
 
-  const mentionContainsSelection = () => {
-    const target = window.getSelection()?.anchorNode?.parentNode;
-    return mentionRef.current?.contains(target as Node);
+  const { setValue } = useFormContext();
+
+  const handleChange = (editorState: EditorState) => {
+    const template = getTextFromEditorState(editorState);
+    setValue(name, template);
+    setValue(`${name}_preview`, getTextFromEditorState(editorState, true));
   };
-
-  const handleVariableSelect = (option: Option) => {
-    if (mentionContainsSelection()) {
-      ContentEditableUtils.insert(option);
-    }
-  };
-
-  const handleEmojiSelect = (emoji: string) => {
-    if (mentionContainsSelection()) {
-      document.execCommand('insertHTML', false, emoji);
-    }
-  };
-
-  const options = defaultOptions || [
-    { label: t('customerName'), value: 'customerName' },
-    { label: t('brandName'), value: 'brandName' },
-    { label: t('businessHours'), value: 'businessHours' },
-    { label: t('emailAddressForInquiries'), value: 'emailAddressForInquiries' },
-    { label: t('telephoneNumberForInquiry'), value: 'telephoneNumberForInquiry' },
-    { label: t('topPageUrl'), value: 'topPageUrl' },
-    { label: t('thanksPageUrl'), value: 'thanksPageUrl' },
-    { label: t('cartPageUrl'), value: 'cartPageUrl' },
-    { label: t('productDetailPageUrl'), value: 'productDetailPageUrl' },
-    { label: t('categoryPageUrl'), value: 'categoryPageUrl' },
-  ];
-
-  const classLabel = showEmoji ? 'flex mb-2 space-x-2' : '';
-
   return (
     <div ref={mentionRef}>
-      <Form.ContentEditable
-        name={name}
+      <Form.MentionsEditor
+        onChange={handleChange}
+        emoji={showEmoji}
+        name={rawName}
         className={className || 'mt-5'}
-        options={options}
+        mentionOptions={mentionOptions}
         singleLine={singleLine}
-        label={
-          <div className={classLabel}>
-            {showEmoji && <EmojiSign onSelect={handleEmojiSelect} />}
-            <VariableSign onSelect={handleVariableSelect} defaultOptions={options} />
-          </div>
-        }
         rules={shouldValidate ? { required: true } : undefined}
       />
     </div>

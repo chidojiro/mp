@@ -1,10 +1,10 @@
 import { GetServerSideProps, NextPage } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
+import { AuthApi } from '@/apis/auth';
 import { PublicLayout } from '@/components/Login';
 import { NewPasswordForm } from '@/components/Login/NewPasswordForm';
-import { AuthApi } from '@/apis/auth';
 import { Logger } from '@/utils';
 
 export const getServerSideProps: GetServerSideProps = async ({

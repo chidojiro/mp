@@ -1,19 +1,22 @@
-import classNames from 'classnames';
+import { useState } from 'react';
 import { useTranslation } from 'next-i18next';
+import classNames from 'classnames';
 
 import { useProfile } from '@/hooks/api/useProfile';
 
-import { NavItem } from './NavItem';
-import { NavItemData } from './NavItem.types';
+import { Icon } from '../common/Icon';
+
+import { NavItem, NavItemData } from './NavItem';
 
 export const Sidebar = () => {
   const { t } = useTranslation();
+  const [open, setOpen] = useState(true);
   const profile = useProfile();
   const organizationPrefix = `/organizations/${profile.data?.organization_id}`;
   const projectPrefix = `${organizationPrefix}/projects/${profile.data?.project_id}`;
 
   const organizationMatchPrefix = '/organizations/[organizationId]';
-  const projectMatchPrefix = `${organizationPrefix}/projects/[projectId]`;
+  const projectMatchPrefix = `${organizationMatchPrefix}/projects/[projectId]`;
 
   const menu: NavItemData[] = [
     {
@@ -78,6 +81,7 @@ export const Sidebar = () => {
       matches: [
         `${projectMatchPrefix}/actions`,
         `${projectMatchPrefix}/actions/[marketingActionStatus]/[marketingActionId]`,
+        `${projectMatchPrefix}/actions/[marketingActionStatus]`,
         `${projectMatchPrefix}/actions/edit/[marketing_action_name]`,
         `${projectMatchPrefix}/actions/edit/[marketing_action_name]/`,
       ],
@@ -119,18 +123,40 @@ export const Sidebar = () => {
       icon: 'settings',
     },
   ];
+  const toggleSideBar = () => {
+    setOpen(!open);
+  };
   return (
     <div
       className={classNames(
-        'flex flex-col border-r border-input bg-gray-light w-[200px]',
-        'fixed top-12 left-0'
+        'flex-1 flex flex-col border-r border-input bg-gray-A100',
+        'h-full left-0',
+        open && 'w-[200px]',
+        !open && 'w-[45px]'
       )}
-      style={{ height: 'calc(100vh - 48px)' }}
     >
-      <div className='flex flex-col flex-grow'>
+      <div className='flex flex-col flex-grow select-none'>
         {menu.map(menuItem => (
-          <NavItem key={menuItem.label} data={menuItem} />
+          <NavItem showLabel={open} key={menuItem.label} data={menuItem} />
         ))}
+      </div>
+      <div
+        className={classNames({
+          'flex-shrink-0 flex border-t-2 sticky bottom-0 py-2': true,
+          'px-3': open,
+          'px-auto': !open,
+        })}
+      >
+        <Icon
+          name='chevron-left'
+          size={20}
+          onClick={toggleSideBar}
+          fill='#BFBFBF'
+          className={classNames({
+            'rotate-180 mx-auto': !open,
+            'ml-auto': open,
+          })}
+        />
       </div>
     </div>
   );
