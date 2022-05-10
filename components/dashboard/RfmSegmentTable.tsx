@@ -54,7 +54,9 @@ export const RfmSegmentTable = ({ data, ...props }: RfmSegmentTableProps) => {
                 <Icon name={getIconName(dataSet.target)} className='w-10 h-10' />
               </div>
               <div className='text-regular mt-4 font-bold'>{t(dataSet.target)}</div>
-              <div className='text-medium-sm font-bold'>{t(dataSet.target + 'Subtext')}</div>
+              <div className='text-medium-sm font-bold whitespace-nowrap'>
+                {t(dataSet.target + 'Subtext')}
+              </div>
             </div>
             <div className={dashboardCardBodyClasses(index, data.length)}>
               <div className='flex flex-1 relative'>
