@@ -67,7 +67,7 @@ export const LinkButton = ({ className, onInsertConfirm }: Props) => {
       }
     >
       <FormProvider {...methods}>
-        <div className='rounded border border-solid border-gray-500 w-[600px]'>
+        <div className='rounded border border-solid border-gray-500 w-[600px] overflow-hidden'>
           <div className='px-5 py-2 flex justify-between text-white bg-secondary items-center'>
             <h5 className='font-semibold'>{t('link')}</h5>
             <Icon name='close' size={16} />
