@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import classNames from 'classnames';
 import { FormProvider } from 'react-hook-form';
 
 import { Button, Icon } from '@/components/common';
 import { Step } from '@/constants';
+import { StepMessage } from '@/types';
+
+import styles from './StepForm.module.css';
 
 type Props = {
   step: Step;
   isLastStep: boolean;
   isAlert: boolean;
-  onShowPreview: (stepId: number) => void;
+  onShowPreview: (message: StepMessage) => void;
   onConfirm: (stepId: number) => void;
 };
 
@@ -19,6 +22,9 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
     const { t } = useTranslation('marketingAction');
     const { id, name, showPreviewBtn, children, methods } = step;
     const [showAlert, setShowAlert] = useState(isAlert);
+    const [classAlert, setClassAlert] = useState('');
+
+    const btnRef = useRef<any>(null);
 
     const {
       handleSubmit,
@@ -62,6 +68,24 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
       );
     };
 
+    useEffect(() => {
+      window.addEventListener('scroll', scrollHandler);
+
+      return () => window.removeEventListener('scroll', scrollHandler);
+    }, []);
+
+    const scrollHandler = () => {
+      if (!classAlert && id === 1 && btnRef.current) {
+        const { top, bottom } = btnRef.current.getBoundingClientRect();
+        const vHeight = window.innerHeight || document.documentElement.clientHeight;
+        if ((top > 0 || bottom > 0) && top < vHeight) {
+          setClassAlert(styles['alert-show']);
+        }
+      }
+    };
+
+    const hidden = !showAlert || id !== 1;
+
     return (
       <FormProvider {...methods}>
         <div
@@ -91,7 +115,7 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
                 <Button
                   className='h-9 border-none bg-input-focus min-w-[240px] mr-2.5'
                   variant='outline'
-                  onClick={() => onShowPreview?.(id)}
+                  onClick={() => onShowPreview?.(methods.getValues())}
                 >
                   {t('viewPreview')}
                 </Button>
@@ -106,14 +130,19 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
                 </Button>
               ) : (
                 <Button
+                  ref={btnRef}
                   onClick={handleSubmit(onValidSubmit, onInvalidSubmit)}
-                  className='relative h-9 border-none bg-mint-green min-w-[240px]'
+                  className='relative h-9 border-none bg-mint-green min-w-[240px] ease-in duration-300'
                 >
                   {btnConfirm()}
-                  <div className={classNames('absolute', { hidden: !showAlert })}>
+                  <div
+                    className={classNames('absolute', classAlert, {
+                      hidden: hidden,
+                    })}
+                  >
                     <div
                       className={classNames(
-                        'shadow-[2px_4px_6px_0px_#00000029] w-[400px] px-[17px] py-[9px] relative rounded-full bg-primary bottom-16',
+                        'ease-in duration-300 shadow-[2px_4px_6px_0px_#00000029] w-[400px] px-[17px] py-[9px] relative rounded-full bg-primary bottom-16',
                         "before:content-[''] before:absolute before:bottom-[-14px] before:right-1/2 before:border-primary",
                         'before:w-6 before:h-[15px] before:shadow-[4px_4px_6px_0px_#00000029] before:border-r-[16px] before:border-b-[3px] before:rounded-br-[80px_50px]'
                       )}

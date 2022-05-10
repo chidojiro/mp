@@ -1,0 +1,12 @@
+.alert-show {
+    animation: 1s ease-in 0s 1 slideUp;
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
