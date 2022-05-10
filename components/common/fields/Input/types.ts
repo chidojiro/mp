@@ -7,7 +7,7 @@ export type BaseInputProps = Omit<HTMLInputProps, 'ref' | 'type'> & {
 type InputType = 'email' | 'file' | 'hidden' | 'number' | 'password' | 'tel' | 'text' | 'time';
 
 export type InputProps = BaseInputProps & {
-  label?: string;
+  label?: React.ReactNode;
   error?: boolean;
   addonBefore?: React.ReactNode;
   addonAfter?: React.ReactNode;

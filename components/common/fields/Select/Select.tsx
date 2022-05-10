@@ -16,6 +16,7 @@ export type SelectProps = {
   value?: string;
   onChange?: (value: string) => void;
   className?: string;
+  label?: React.ReactNode;
 };
 
 const getStylesByActiveStatus = (active: boolean) => {
@@ -35,6 +36,7 @@ export const Select = React.forwardRef<HTMLInputElement, Props>(
       name,
       options,
       className,
+      label,
       ...props
     }: SelectProps,
     ref
@@ -50,6 +52,7 @@ export const Select = React.forwardRef<HTMLInputElement, Props>(
     return (
       <Menu as='div' className='relative inline-block text-left'>
         <input name={name} className='minimized' ref={ref} />
+        {!!label && <span className='block mb-1'>{label}</span>}
         <div>
           <Menu.Button
             {...props}
@@ -62,7 +65,6 @@ export const Select = React.forwardRef<HTMLInputElement, Props>(
             <ChevronDownIcon className='w-5 h-5 ml-2 -mr-1 bg text-secondary' aria-hidden='true' />
           </Menu.Button>
         </div>
-
         <Transition
           as={Fragment}
           enter='transition ease-out duration-100'

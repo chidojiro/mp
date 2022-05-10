@@ -56,7 +56,13 @@ export const MentionsEditor = React.forwardRef(
               {!!emoji && <EmojiSign onSelect={handleEmojiSelect} />}
             </div>
           </div>
-          <RichTextEditor {...restProps} mentionOptions={mentionOptions} ref={richTextEditorRef} />
+          <RichTextEditor
+            {...restProps}
+            className='bg-white p-2'
+            styleless
+            mentionOptions={mentionOptions}
+            ref={richTextEditorRef}
+          />
         </div>
       </div>
     );

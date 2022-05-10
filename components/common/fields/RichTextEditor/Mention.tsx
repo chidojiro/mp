@@ -5,6 +5,7 @@ import { Children } from '@/types';
 type MentionProps = Children & {
   offsetKey: string;
 };
+
 export const Mention = (props: MentionProps) => {
   return (
     <span>

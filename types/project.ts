@@ -1,3 +1,5 @@
+import { EditorState } from 'draft-js';
+
 type ProjectSettings = {
   id: string;
   ec_site_protocol: string;
@@ -29,7 +31,9 @@ type ProjectSettings = {
   instagram_id: string;
   line_id: string;
   email_footer: string;
+  email_footer_draft_raw?: string | EditorState;
   email_signature: string;
+  email_signature_draft_raw?: string | EditorState;
 };
 
 export type ProjectSettingData = Partial<ProjectSettings>;

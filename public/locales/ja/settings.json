@@ -30,5 +30,6 @@
   "productDetailPageUrl": "商品詳細ページURL",
   "categoryPageUrl": "カテゴリページURL",
   "menuSettings": "設定",
-  "contactPhone": "問い合わせ用電話番号"
+  "contactPhone": "問い合わせ用電話番号",
+  "openInNewTab": "リンククリック時、別のタブで開く"
 }

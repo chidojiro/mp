@@ -52,5 +52,9 @@
   "password.lengthRule": "パスワードは8文字以上48文字以下で設定してください。",
   "youCanEnterVariablesByPressingAtKey": "@キーを押して変数を入力できます",
   "completed": "完了",
-  "clear": "クリア"
+  "clear": "クリア",
+  "type": "タイプ",
+  "emailAddress": "E-mailアドレス",
+  "cancel": "キャンセル",
+  "save": "保存する"
 }

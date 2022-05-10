@@ -1,16 +1,17 @@
-import { ProjectSettingData, ProjectData } from '@/types';
+import { ProjectData, ProjectSettingData } from '@/types';
 
 import { RestApi } from './base';
 
 const get = async (projectId: string) => {
-  return await RestApi.get<ProjectData>(`/projects/${projectId}`);
+  return RestApi.get<ProjectData>(`/projects/${projectId}`);
 };
 
-const updateSetting = async (data: ProjectSettingData) => {
+const update = async (data: ProjectSettingData) => {
   const { id, ...settings } = data;
-  return await RestApi.put(`/projects/${id}`, {
+
+  return RestApi.put(`/projects/${id}`, {
     settings,
   });
 };
 
-export const ProjectApis = { get, updateSetting };
+export const ProjectApis = { get, update };

@@ -1,9 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
+import { useFormContext } from 'react-hook-form';
 
 import { Form } from '@/components/common';
+import { RichTextEditorRef } from '@/components/common/fields';
 import { Section } from '@/components/Section';
-import { ContentEditableUtils } from '@/utils';
 
 import { LinkButton } from './LinkButton';
 
@@ -14,8 +15,10 @@ type Props = {};
 export const EmailSettings = ({}: Props) => {
   const { t } = useTranslation('settings');
 
-  const emailFooterRef = React.useRef<HTMLInputElement>();
-  const emailSignatureRef = React.useRef<HTMLInputElement>();
+  const emailFooterRef = React.useRef<RichTextEditorRef>();
+  const emailSignatureRef = React.useRef<RichTextEditorRef>();
+
+  const { setValue } = useFormContext();
 
   return (
     <div>
@@ -23,12 +26,15 @@ export const EmailSettings = ({}: Props) => {
       <Section>
         <Section.Title>{t('emailFooter')}</Section.Title>
         <Section.Content>
-          <Form.MentionsEditor
+          <Form.RichTextEditor
             inputRef={emailFooterRef}
-            name='email_footer'
+            name='email_footer_draft_raw'
+            onChange={() => {
+              setValue('email_footer', emailFooterRef.current?.getHtml());
+            }}
             label={
               <div className='flex mb-2 space-x-2'>
-                <LinkButton onClick={() => ContentEditableUtils.underline(emailFooterRef)} />
+                <LinkButton onInsertConfirm={data => emailFooterRef.current?.insertLink(data)} />
               </div>
             }
           />
@@ -37,12 +43,15 @@ export const EmailSettings = ({}: Props) => {
       <Section>
         <Section.Title>{t('emailSignature')}</Section.Title>
         <Section.Content>
-          <Form.MentionsEditor
+          <Form.RichTextEditor
             inputRef={emailSignatureRef}
-            name='email_signature'
+            name='email_signature_draft_raw'
+            onChange={() => {
+              setValue('email_signature', emailSignatureRef.current?.getHtml());
+            }}
             label={
               <div className='flex mb-2 space-x-2'>
-                <LinkButton onClick={() => ContentEditableUtils.underline(emailSignatureRef)} />
+                <LinkButton onInsertConfirm={data => emailSignatureRef.current?.insertLink(data)} />
               </div>
             }
           />

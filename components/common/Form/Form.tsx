@@ -18,7 +18,9 @@ import {
   PasswordInputProps,
   RadioGroup,
   RadioGroupProps,
+  RichTextEditor,
   richTextEditorEmptyValue,
+  RichTextEditorProps,
   Select,
   SelectProps,
   TextArea,
@@ -57,6 +59,9 @@ const FormTimeInput = (props: FieldProps & Omit<TimeInputProps, keyof FieldProps
 const FormMentionsEditor = (props: FieldProps & Omit<MentionsEditorProps, keyof FieldProps>) => (
   <Field {...props} component={MentionsEditor} emptyValue={richTextEditorEmptyValue} />
 );
+const FormRichTextEditor = (props: FieldProps & Omit<RichTextEditorProps, keyof FieldProps>) => (
+  <Field {...props} component={RichTextEditor} emptyValue={richTextEditorEmptyValue} />
+);
 const FormDatePicker = (props: FieldProps & Omit<DatePickerProps, keyof FieldProps>) => (
   <Field {...props} component={DatePicker} emptyValue={props.range ? [] : undefined} />
 );
@@ -84,3 +89,4 @@ Form.TimeInput = FormTimeInput;
 Form.MentionsEditor = FormMentionsEditor;
 Form.DatePicker = FormDatePicker;
 Form.ErrorMessage = FormErrorMessage;
+Form.RichTextEditor = FormRichTextEditor;

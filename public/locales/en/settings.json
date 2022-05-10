@@ -27,5 +27,6 @@
   "thanksPageUrl": "Thanks Page URL",
   "cartPageUrl": "Cart page URL",
   "productDetailPageUrl": "Product detail page URL",
-  "categoryPageUrl": "Category page URL"
+  "categoryPageUrl": "Category page URL",
+  "openInNewTab": "Open in a separate tab when clicking on a link"
 }

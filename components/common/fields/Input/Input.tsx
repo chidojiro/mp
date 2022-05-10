@@ -118,17 +118,24 @@ export const Input = React.forwardRef(
       <div
         className={classNames(
           'mp-input',
-          'w-full max-w-full relative overflow-hidden bg-white rounded',
-          borderClassNames,
           {
             minimized: isHidden,
           },
-
           className
         )}
       >
-        {!!label && <label htmlFor={name}>{label}</label>}
-        <div className={classNames('flex relative')}>
+        {!!label && (
+          <label className='block mb-1' htmlFor={name}>
+            {label}
+          </label>
+        )}
+        <div
+          className={classNames(
+            'flex relative',
+            'w-full max-w-full relative overflow-hidden bg-white rounded',
+            borderClassNames
+          )}
+        >
           {addonBefore && (
             <div
               className={classNames(

@@ -1,10 +1,11 @@
 import { useCallback, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
+import { convertToRaw, EditorState } from 'draft-js';
 import { useForm } from 'react-hook-form';
-import useSWR from 'swr';
 
 import { ProjectApis } from '@/apis';
+import { convertToEditorState } from '@/components/marketingAction/Edit/utils';
+import { useProject } from '@/project';
 import { ProjectData, ProjectSettingData } from '@/types';
 
 import { Button } from '../common/Button';
@@ -18,12 +19,9 @@ import { UrlSettings } from './UrlSettings';
 
 export const Settings = () => {
   const { t } = useTranslation('settings');
-  const {
-    query: { projectId },
-  } = useRouter();
-  const { data } = useSWR([`/projects/${projectId}`, projectId], () =>
-    ProjectApis.get(projectId as string)
-  );
+
+  const { data } = useProject();
+
   const methods = useForm<ProjectSettingData>({
     defaultValues: { const_r_rfm: 180, const_f_loyal: 5, const_m_loyal: 30000 },
   });
@@ -33,6 +31,12 @@ export const Settings = () => {
       methods.reset({
         id: data.id,
         ...data.settings,
+        email_footer_draft_raw: convertToEditorState(
+          data.settings.email_footer_draft_raw as string
+        ),
+        email_signature_draft_raw: convertToEditorState(
+          data.settings.email_signature_draft_raw as string
+        ),
       });
     },
     [methods]
@@ -41,11 +45,25 @@ export const Settings = () => {
     if (data) {
       resetData(data);
     }
-  }, [data]);
+  }, [data, resetData]);
+
   const onSubmit = async (data: ProjectSettingData) => {
-    console.log('data:', data);
+    const payload = {
+      ...data,
+      email_footer_draft_raw:
+        data.email_footer_draft_raw &&
+        JSON.stringify(
+          convertToRaw((data.email_footer_draft_raw as EditorState).getCurrentContent())
+        ),
+      email_signature_draft_raw:
+        data.email_signature_draft_raw &&
+        JSON.stringify(
+          convertToRaw((data.email_signature_draft_raw as EditorState).getCurrentContent())
+        ),
+    };
+
     try {
-      await ProjectApis.updateSetting(data);
+      await ProjectApis.update(payload);
     } catch (error) {
       console.error(error);
     }
@@ -59,7 +77,6 @@ export const Settings = () => {
         <EmailSettings />
         <AdvancedSettings />
       </div>
-      <input type='hidden' {...methods.register('id')} />
       <Button type='submit' className='!block mx-auto w-[480px] mt-[60px]'>
         {t('save')}
       </Button>

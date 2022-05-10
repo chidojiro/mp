@@ -46,5 +46,9 @@
   "logout": "Logout",
   "youCanEnterVariablesByPressingAtKey": "You can enter variables by pressing the @ key",
   "completed": "Completed",
-  "clear": "clear"
+  "clear": "clear",
+  "type": "Type",
+  "emailAddress": "E-mail address",
+  "cancel": "Cancel",
+  "save": "Save"
 }

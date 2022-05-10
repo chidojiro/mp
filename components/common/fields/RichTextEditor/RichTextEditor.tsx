@@ -1,194 +1,31 @@
 import React from 'react';
 import classNames from 'classnames';
-import {
-  CompositeDecorator,
-  ContentBlock,
-  ContentState,
-  convertFromRaw,
-  convertToRaw,
-  DraftHandleValue,
-  Editor,
-  EditorState,
-  Modifier,
-  SelectionState,
-} from 'draft-js';
+import { DraftHandleValue, Editor, EditorState, Modifier } from 'draft-js';
 import noop from 'lodash-es/noop';
 import ReactDOM from 'react-dom';
 
-import { Mention } from '@/components/common/Mention';
 import { useControllable, useVisibilityControl } from '@/hooks';
 import { ClassName, MentionData, Option } from '@/types';
 import { DomUtils } from '@/utils';
 
 import { Dropdown } from '../../Dropdown';
 
+import { InsertLinkParams } from './types';
+import {
+  emptyValue,
+  getCurrentBlock,
+  getPlainTextWithInterpolatedMentionValue,
+  replaceText,
+} from './utils';
+
 import styles from './RichTextEditor.module.css';
-
-type DecoratorStrategyCallback = (start: number, end: number) => void;
-
-const MentionTrigger = (props: any) => {
-  return (
-    <span className='mention-trigger' data-offset-key={props.offsetKey}>
-      {props.children}
-    </span>
-  );
-};
-
-const getCurrentBlock = (editorState: EditorState) => {
-  if (editorState.getSelection) {
-    const selectionState = editorState.getSelection();
-    const contentState = editorState.getCurrentContent();
-    const block = contentState.getBlockForKey(selectionState.getStartKey());
-    return block;
-  }
-};
-
-const findEntityRanges = (type: string, contentBlock: ContentBlock, contentState: ContentState) => {
-  const ranges: [number, number][] = [];
-
-  contentBlock.findEntityRanges(
-    character => {
-      const entityKey = character.getEntity();
-      return entityKey !== null && contentState.getEntity(entityKey).getType() === type;
-    },
-    (start, end) => ranges.push([start, end])
-  );
-
-  return ranges;
-};
-
-const newEntityLocationStrategy = (type: string) => {
-  const findEntitiesOfType = (
-    contentBlock: ContentBlock,
-    callback: DecoratorStrategyCallback,
-    contentState: ContentState
-  ) => {
-    const entityRanges = findEntityRanges(type, contentBlock, contentState);
-
-    entityRanges.forEach(range => {
-      callback(...range);
-    });
-  };
-  return findEntitiesOfType;
-};
-
-export const decorator = new CompositeDecorator([
-  {
-    strategy: newEntityLocationStrategy('MENTION_TRIGGER'),
-    component: MentionTrigger,
-  },
-  {
-    strategy: newEntityLocationStrategy('MENTION'),
-    component: Mention,
-  },
-]);
-
-type replaceTextParams = {
-  editorState: EditorState;
-  entityType?: string;
-  start?: number;
-  end?: number;
-  newText: string;
-  data?: MentionData;
-  mutability?: 'MUTABLE' | 'IMMUTABLE';
-};
-
-const replaceText = (params: replaceTextParams) => {
-  const {
-    editorState,
-    entityType,
-    start: startParam,
-    end: endParam,
-    newText,
-    mutability,
-    data,
-  } = params;
-
-  const start = startParam ?? editorState.getSelection().getStartOffset();
-  const end = endParam ?? editorState.getSelection().getEndOffset();
-
-  const currentBlock = getCurrentBlock(editorState);
-  if (!currentBlock) {
-    return editorState;
-  }
-  const blockKey = currentBlock.getKey();
-
-  const isWithEntity = entityType && mutability;
-
-  const contentState = editorState.getCurrentContent();
-  const modifiedContentState = isWithEntity
-    ? contentState.createEntity(entityType, mutability, data)
-    : contentState;
-  const entityKey = isWithEntity ? modifiedContentState.getLastCreatedEntityKey() : undefined;
-
-  const contentStateWithReplacedText = Modifier.replaceText(
-    modifiedContentState,
-    new SelectionState({
-      anchorKey: blockKey,
-      anchorOffset: start,
-      focusKey: blockKey,
-      focusOffset: end,
-      isBackward: false,
-      hasFocus: true,
-    }),
-    newText,
-    undefined,
-    entityKey
-  );
-
-  const newEditorState = EditorState.set(editorState, {
-    currentContent: contentStateWithReplacedText,
-    selection: new SelectionState({
-      anchorKey: blockKey,
-      anchorOffset: start + newText.length,
-      focusKey: blockKey,
-      focusOffset: start + newText.length,
-      isBackward: false,
-      hasFocus: true,
-    }),
-  });
-
-  return newEditorState;
-};
 
 export type Ref = {
   insertMention: (option: Option) => void;
   insertText: (text: string) => void;
   getPlainTextWithInterpolatedMentionValue: () => string;
-};
-
-export const getPlainTextWithInterpolatedMentionValue = (editorState: EditorState) => {
-  const rawContent = convertToRaw(editorState.getCurrentContent());
-
-  const newBlocks = rawContent.blocks.map(({ entityRanges, text, ...restBlock }) => {
-    const { segments } = entityRanges.reduce(
-      (acc, curRange) => {
-        if (rawContent.entityMap[curRange.key].type !== 'MENTION') return acc;
-
-        const { segments, offset } = acc;
-
-        const mentionValue = rawContent.entityMap[curRange.key].data.value;
-
-        return {
-          segments: [
-            ...segments.slice(0, segments.length - 1),
-            segments[segments.length - 1].slice(0, curRange.offset - offset),
-            mentionValue,
-            segments[segments.length - 1].slice(curRange.offset - offset + curRange.length),
-          ],
-          offset: curRange.offset + curRange.length,
-        };
-      },
-      { segments: [text], offset: 0 }
-    );
-
-    return { text: segments.join(''), entityRanges: [], ...restBlock };
-  });
-
-  return convertFromRaw({
-    blocks: newBlocks,
-    entityMap: {},
-  }).getPlainText();
+  getHtml: () => string;
+  insertLink: (data: InsertLinkParams) => void;
 };
 
 export type Props = ClassName & {
@@ -199,9 +36,9 @@ export type Props = ClassName & {
   singleLine?: boolean;
   mentionOptions?: Option<MentionData, string>[];
   readOnly?: boolean;
+  styleless?: boolean;
+  label?: React.ReactNode;
 };
-
-export const emptyValue = EditorState.createEmpty(decorator);
 
 export const RichTextEditor = React.forwardRef(
   (
@@ -213,8 +50,10 @@ export const RichTextEditor = React.forwardRef(
       readOnly = false,
       placeholder,
       className,
+      styleless,
+      label,
     }: Props,
-    ref
+    ref: any
   ) => {
     const [editorState, setEditorState] = useControllable<EditorState>({
       value,
@@ -249,42 +88,55 @@ export const RichTextEditor = React.forwardRef(
       [editorState, setEditorState]
     );
 
+    const insertLink = React.useCallback(
+      (data: InsertLinkParams) => {
+        const newEditorState = replaceText({
+          editorState,
+          newText: data.text ?? data.href,
+          data,
+          entityType: 'LINK',
+          mutability: 'IMMUTABLE',
+        });
+
+        setEditorState(newEditorState);
+      },
+      [editorState, setEditorState]
+    );
+
     const _getPlainTextWithInterpolatedMentionValue = React.useCallback(() => {
       return getPlainTextWithInterpolatedMentionValue(editorState);
+    }, [editorState]);
+
+    const getHtml = React.useCallback(() => {
+      return editorRef.current.editorContainer.innerHTML;
     }, []);
 
     React.useImperativeHandle(ref, () => ({
       insertMention,
       insertText,
       getPlainTextWithInterpolatedMentionValue: _getPlainTextWithInterpolatedMentionValue,
+      getHtml,
+      insertLink,
     }));
 
     const applyMentionTriggerEntity = React.useCallback((editorState: EditorState) => {
       const currentBlock = getCurrentBlock(editorState);
       if (!currentBlock) return editorState;
 
-      const mentionEntityRanges = findEntityRanges(
-        'MENTION',
-        currentBlock,
-        editorState.getCurrentContent()
-      );
-
       const anchorOffset = editorState.getSelection().getAnchorOffset();
-
-      const isAnchorOnMention = mentionEntityRanges.some(
-        range => range[0] < anchorOffset && range[1] >= anchorOffset
-      );
-
-      if (isAnchorOnMention) return editorState;
-
       const textUntilAnchor = currentBlock.getText().slice(0, anchorOffset);
       const lastAtCharacter = textUntilAnchor.lastIndexOf('@');
 
-      const isMentionBetweenAtAndAnchor = mentionEntityRanges.some(
-        range => lastAtCharacter < range[0] && anchorOffset >= range[1]
-      );
+      if (lastAtCharacter === -1) return editorState;
 
-      if (lastAtCharacter === -1 || isMentionBetweenAtAndAnchor) return editorState;
+      for (let offset = lastAtCharacter; offset <= anchorOffset; offset++) {
+        const currentEntityKey = currentBlock.getEntityAt(offset);
+
+        const currentEntity =
+          currentEntityKey && editorState.getCurrentContent().getEntity(currentEntityKey);
+
+        if (currentEntity && currentEntity.getType() !== 'MENTION_TRIGGER') return editorState;
+      }
 
       const mentionTriggerContent = textUntilAnchor.slice(lastAtCharacter, anchorOffset);
 
@@ -435,36 +287,46 @@ export const RichTextEditor = React.forwardRef(
 
     return (
       <div
-        onClick={() => editorRef.current?.focus()}
-        className={classNames({
-          'rich-text-editor': true,
-          'w-full p-2': true,
-          'bg-white': !readOnly,
-          [styles['rich-text-editor']]: singleLine,
-          'min-h-[100px]': !singleLine,
-          className: true,
-        })}
-      >
-        <Editor
-          placeholder={placeholder}
-          ref={editorRef}
-          editorState={editorState}
-          onChange={readOnly ? noop : handleChange}
-          handleReturn={handleReturn}
-          onEscape={closeMentionSuggestions}
-          handlePastedText={singleLine ? handlePaste : undefined}
-          readOnly={readOnly}
-        />
-        {!readOnly && (
-          <Dropdown
-            closeOnClickOutside={false}
-            trigger={triggerNode!}
-            control={dropdownControl}
-            placement='right-start'
-            options={filteredMentionOptions}
-            onSelect={handleDropdownSelect}
-          />
+        className={classNames(
+          'rich-text-editor',
+          'w-full',
+          {
+            [styles['rich-text-editor']]: singleLine,
+          },
+          className
         )}
+      >
+        <input className='minimized' ref={ref} />
+        {!!label && <label className='block mb-1 text-gray-5'>{label}</label>}
+        <div
+          onClick={() => editorRef.current?.focus()}
+          className={classNames({
+            'w-full p-2 bg-white rounded border border-input border-solid focus:border-input':
+              !styleless,
+            'min-h-[100px]': !singleLine,
+          })}
+        >
+          <Editor
+            placeholder={placeholder}
+            ref={editorRef}
+            editorState={editorState}
+            onChange={readOnly ? noop : handleChange}
+            handleReturn={handleReturn}
+            onEscape={closeMentionSuggestions}
+            handlePastedText={singleLine ? handlePaste : undefined}
+            readOnly={readOnly}
+          />
+          {!readOnly && (
+            <Dropdown
+              closeOnClickOutside={false}
+              trigger={triggerNode!}
+              control={dropdownControl}
+              placement='right-start'
+              options={filteredMentionOptions}
+              onSelect={handleDropdownSelect}
+            />
+          )}
+        </div>
       </div>
     );
   }

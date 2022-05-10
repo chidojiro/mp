@@ -29,7 +29,13 @@ export const RichMessageView = React.forwardRef(
         <input className='minimized' ref={ref} />
         {!!label && <label className='block mb-1 text-gray-5'>{label}</label>}
         <div className={classNames('overflow-hidden', 'border border-solid outline-none rounded')}>
-          <RichTextEditor {...restProps} readOnly ref={richTextEditorRef} />
+          <RichTextEditor
+            {...restProps}
+            styleless
+            className='p-2'
+            readOnly
+            ref={richTextEditorRef}
+          />
         </div>
       </div>
     );

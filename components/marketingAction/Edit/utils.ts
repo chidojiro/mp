@@ -1,7 +1,7 @@
 import { convertFromRaw, convertToRaw, EditorState, RawDraftEntityRange } from 'draft-js';
 import { cloneDeep } from 'lodash-es';
 
-import { richTextEditorDecorator } from '@/components/common/fields';
+import { richTextEditorDecorator, richTextEditorEmptyValue } from '@/components/common/fields';
 import { MentionData, StepMessage } from '@/types';
 
 export const convertToStepMessageRaw = (stepMessage: StepMessage) => {
@@ -93,4 +93,10 @@ export const getTextFromEditorState = (editorState: EditorState, isPreview = fal
       return blockText.join('');
     })
     .join('\n');
+};
+
+export const convertToEditorState = (raw?: string) => {
+  if (!raw) return richTextEditorEmptyValue;
+
+  return EditorState.createWithContent(convertFromRaw(JSON.parse(raw)), richTextEditorDecorator);
 };
