@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Button, Form, Popover } from '@/components/common';
-import { InsertLinkParams } from '@/components/common/fields';
+import { Checkbox, InsertLinkParams } from '@/components/common/fields';
 import { Icon } from '@/components/common/Icon';
 import { useVisibilityControl } from '@/hooks';
 import { ClassName } from '@/types';
@@ -17,7 +17,7 @@ export const LinkButton = ({ className, onInsertConfirm }: Props) => {
   const { t: tCommon } = useTranslation();
 
   const methods = useForm({ defaultValues: { type: 'email' } });
-  const { watch, handleSubmit, reset } = methods;
+  const { watch, handleSubmit, reset, register } = methods;
 
   const type = watch('type');
 
@@ -28,25 +28,35 @@ export const LinkButton = ({ className, onInsertConfirm }: Props) => {
           key='email'
           name='email'
           label={<span className='font-semibold'>{tCommon('emailAddress')}</span>}
+          rules={{ required: true }}
         />
       );
 
-    return <Form.Input name='url' label={<span className='font-semibold'>URL</span>} />;
+    return (
+      <Form.Input
+        name='url'
+        label={<span className='font-semibold'>URL</span>}
+        rules={{ required: true }}
+      />
+    );
   };
 
   const popoverControl = useVisibilityControl();
 
-  const onValidSubmit = ({ type, url, email }: any) => {
+  const onValidSubmit = ({ type, url, email, openInNewTab }: any) => {
+    console.log(openInNewTab);
     onInsertConfirm({
       href: type === 'email' ? `mailto:${email}` : url,
       text: type === 'email' ? email : url,
+      target: openInNewTab ? '_blank' : undefined,
     });
+
+    reset();
+    popoverControl.close();
   };
 
   const handleSave = () => {
     handleSubmit(onValidSubmit)();
-    reset();
-    popoverControl.close();
   };
 
   return (
@@ -83,11 +93,13 @@ export const LinkButton = ({ className, onInsertConfirm }: Props) => {
             />
             <div className='mt-5'></div>
             {renderInput()}
-            <Form.Checkbox
-              name='openInNewTab'
-              label={t('openInNewTab')}
-              className='mt-2 text-medium'
-            />
+            {type === 'url' && (
+              <Checkbox
+                label={t('openInNewTab')}
+                className='mt-2 text-medium'
+                {...register<any>('openInNewTab')}
+              />
+            )}
             <div className='flex items-center justify-center gap-2 mt-7'>
               <Button onClick={popoverControl.close} colorScheme='negative'>
                 {tCommon('cancel')}
