@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { addDays } from 'date-fns';
 import useSWR from 'swr';
 
 import { MarketingActionAPI } from '@/apis';
@@ -22,7 +23,9 @@ export const ListActionPage = () => {
   const { t } = useTranslation(['marketingAction']);
   const { pathname, query } = useRouter();
 
-  const [filter, setFilter] = useState({ start_to: new Date().toISOString().slice(0, 10) });
+  const [filter, setFilter] = useState({
+    start_to: addDays(new Date(), 1).toISOString().slice(0, 10),
+  });
 
   useEffect(() => {
     const _targets = [query.targets].flat().filter(Boolean);
