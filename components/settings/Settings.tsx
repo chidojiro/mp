@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 import { convertToRaw, EditorState } from 'draft-js';
+import { omitBy } from 'lodash-es';
 import { useForm } from 'react-hook-form';
 
 import { AssetAPI, ProjectApis } from '@/apis';
@@ -49,17 +50,19 @@ export const Settings = () => {
   }, [data, resetData]);
 
   const onSubmit = async (data: ProjectSettingData & { brand_logo_temp: File }) => {
-    const brandLogoResponse = await ApiUtils.poll({
-      api: () =>
-        AssetAPI.create(data.brand_logo_temp, AssetResourceType.project, undefined, {
-          acl: 'public',
-        }),
-      until: data => data.status === 'completed',
-    });
+    const brandLogoResponse = data.brand_logo_temp
+      ? await ApiUtils.poll({
+          api: () =>
+            AssetAPI.create(data.brand_logo_temp, AssetResourceType.project, undefined, {
+              acl: 'public',
+            }),
+          until: data => data.status === 'completed',
+        })
+      : undefined;
 
     const payload = {
       ...data,
-      brand_logo: brandLogoResponse.id,
+      brand_logo: brandLogoResponse?.id,
       email_footer_draft_raw:
         data.email_footer_draft_raw &&
         JSON.stringify(
@@ -73,7 +76,7 @@ export const Settings = () => {
     };
 
     try {
-      await ProjectApis.update(payload);
+      await ProjectApis.update(omitBy(payload, v => !v));
     } catch (error) {
       console.error(error);
     }
