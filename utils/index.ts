@@ -12,3 +12,4 @@ export { LanguageUtils } from './language';
 export { TargetFilterUtils } from './targetFilter';
 export { TimeUtils } from './time';
 export { ColorUtils } from './color';
+export { ApiUtils } from './api';

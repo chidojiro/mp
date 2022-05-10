@@ -3,10 +3,11 @@ import { useTranslation } from 'next-i18next';
 import { convertToRaw, EditorState } from 'draft-js';
 import { useForm } from 'react-hook-form';
 
-import { ProjectApis } from '@/apis';
+import { AssetAPI, ProjectApis } from '@/apis';
 import { convertToEditorState } from '@/components/marketingAction/Edit/utils';
 import { useProject } from '@/project';
-import { ProjectData, ProjectSettingData } from '@/types';
+import { AssetResourceType, ProjectData, ProjectSettingData } from '@/types';
+import { ApiUtils } from '@/utils';
 
 import { Button } from '../common/Button';
 import { Form } from '../common/Form';
@@ -47,9 +48,18 @@ export const Settings = () => {
     }
   }, [data, resetData]);
 
-  const onSubmit = async (data: ProjectSettingData) => {
+  const onSubmit = async (data: ProjectSettingData & { brand_logo_temp: File }) => {
+    const brandLogoResponse = await ApiUtils.poll({
+      api: () =>
+        AssetAPI.create(data.brand_logo_temp, AssetResourceType.project, undefined, {
+          acl: 'public',
+        }),
+      until: data => data.status === 'completed',
+    });
+
     const payload = {
       ...data,
+      brand_logo: brandLogoResponse.id,
       email_footer_draft_raw:
         data.email_footer_draft_raw &&
         JSON.stringify(

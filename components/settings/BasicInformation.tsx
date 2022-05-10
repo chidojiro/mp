@@ -1,8 +1,10 @@
 import { useTranslation } from 'next-i18next';
+import { useController, useFormContext } from 'react-hook-form';
 
 import { Form } from '@/components/common';
 import { ImageUploader } from '@/components/ImageUploader';
 import { Section } from '@/components/Section';
+import { CDN_URL } from '@/constants';
 
 import { EmailField } from '../EmailField';
 
@@ -12,6 +14,11 @@ type Props = {};
 // eslint-disable-next-line no-empty-pattern
 export const BasicInformation = ({}: Props) => {
   const { t } = useTranslation('settings');
+
+  const { control, watch } = useFormContext();
+
+  const imageController = useController({ control, name: 'brand_logo_temp' });
+  const brandLogoId = watch('brand_logo');
 
   return (
     <div>
@@ -25,7 +32,11 @@ export const BasicInformation = ({}: Props) => {
       <Section>
         <Section.Title>{t('brandLogo')}</Section.Title>
         <Section.Content>
-          <ImageUploader />
+          <ImageUploader
+            originalUrl={brandLogoId ? `${CDN_URL}/${brandLogoId}` : undefined}
+            value={imageController.field.value}
+            onChange={imageController.field.onChange}
+          />
         </Section.Content>
       </Section>
       <Section>

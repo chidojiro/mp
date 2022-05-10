@@ -3,27 +3,27 @@ import { useTranslation } from 'next-i18next';
 import classNames from 'classnames';
 import Dropzone from 'react-dropzone';
 
+import { useControllable } from '@/hooks';
+
 import { Icon } from '../common';
 
 type Props = {
   originalUrl?: string;
   className?: string;
+  value?: File;
+  onChange?: (value: File) => void;
 };
 
-export interface ImageType extends File {
-  preview: string;
-}
-
-export const ImageUploader = ({ originalUrl, className }: Props) => {
+export const ImageUploader = ({ originalUrl, className, value, onChange }: Props) => {
   const { t } = useTranslation();
   const [uploading, setUploading] = useState(false);
 
-  const [image, setImage] = useState<ImageType>();
+  const [image, setImage] = useControllable<File>({ value, onChange });
 
   const handleDrop = (acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
     setUploading(true);
-    setImage({ ...file, preview: URL.createObjectURL(file) });
+    setImage(file);
     setUploading(false);
   };
 
@@ -47,7 +47,7 @@ export const ImageUploader = ({ originalUrl, className }: Props) => {
   const renderUploadingImage = () => (
     <div className={classNames('w-[120px] h-[120px]', uploading ? 'opacity-50' : 'opacity-100')}>
       <img
-        src={image?.preview}
+        src={URL.createObjectURL(image)}
         alt='Logo'
         className={classNames('object-cover rounded w-full h-full', className)}
       />
