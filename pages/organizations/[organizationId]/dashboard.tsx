@@ -66,7 +66,7 @@ function Dashboard(props: DashboardProps) {
   ];
   return (
     <Layout title={t('menuDashboard')}>
-      <h4 className='mt-5 mb-2 text-gray-600'>{t('dashboardCustomerAnalysis')}</h4>
+      <h4 className='mt-5 mb-2 text-gray-600 font-bold'>{t('dashboardCustomerAnalysis')}</h4>
 
       <div className='flex items-end justify-between w-full mb-10'>
         <div className='flex'>

@@ -28,8 +28,12 @@ export const CartAbandoned = ({ settings }: Props) => {
     : t('deliverDifferentMsg');
 
   const openPreview = (message: StepMessage) => {
+    let _message = { ...message };
+    if (!_message.send_flag || !_message.has_self_mail_content) {
+      _message = firstMsg;
+    }
+    setMessagePreview(_message);
     previewMessageControl.open();
-    setMessagePreview(message);
   };
 
   return (

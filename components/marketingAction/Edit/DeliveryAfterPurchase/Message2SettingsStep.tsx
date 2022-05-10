@@ -10,7 +10,7 @@ import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
 import { Section } from '@/components/Section';
 import { Stepper } from '@/components/Stepper';
 import { useVariables, useVisibilityControl } from '@/hooks';
-import { MentionData,Option, StepMessageReportPeriod, StepMessageTemplate } from '@/types';
+import { MentionData, Option, StepMessageReportPeriod, StepMessageTemplate } from '@/types';
 import { MarketingActionAlias } from '@/types/marketingAction';
 
 import { ColorSettingSection } from '../ColorSettingsSection';

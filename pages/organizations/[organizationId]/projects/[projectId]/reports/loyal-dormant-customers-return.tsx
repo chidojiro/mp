@@ -106,7 +106,7 @@ function F2ConversionRateTrends(props: any) {
           bar2={{ dataKey: 'f2_uu', title: t('numberOfReturns') }}
           data={data}
         />
-        <h5 className='text-gray-600 mt-[60px]'>
+        <h5 className='text-gray-600 mt-[60px] font-bold'>
           {t('measuresThatContributedToReturnOfLoyalDormantCustomers')}
         </h5>
         <div className='grid grid-cols-2 gap-4 mt-6'>

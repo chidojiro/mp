@@ -1,7 +1,7 @@
 import { Asset } from '@/types';
 
-import { RestApi } from './base';
 import { AssetResourceType } from './../types/asset';
+import { RestApi } from './base';
 
 const get = (assetId: string) => {
   return RestApi.get<Asset>(`/assets/${assetId}`);

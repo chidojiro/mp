@@ -5,16 +5,18 @@ import { useWatch } from 'react-hook-form';
 import { Form } from '@/components/common';
 import { RadioGroup } from '@/components/common/fields';
 import { DeliveryDateTimeInput } from '@/components/marketingAction/DeliveryDateTimeInput';
+import { MessageContentPreviewType } from '@/components/marketingAction/MessageContentPreview';
 import { Section } from '@/components/Section';
-import { OPTIONS } from '@/types';
+import { OPTIONS, StepMessage } from '@/types';
 
 import { MessageContent } from './MessageContent';
 
 type Props = {
   useLine?: boolean;
+  onShowPreview: (message: StepMessage, type: MessageContentPreviewType) => void;
 };
 
-export const Message2Settings = ({ useLine }: Props) => {
+export const Message2Settings = ({ useLine, onShowPreview }: Props) => {
   const { t } = useTranslation('marketingAction');
   const secondMessage = useWatch() as any;
 
@@ -68,7 +70,9 @@ export const Message2Settings = ({ useLine }: Props) => {
               ))}
             </Form.RadioGroup>
           </div>
-          {secondMessage?.has_self_mail_content && <MessageContent useLine={useLine} />}
+          {secondMessage?.has_self_mail_content && (
+            <MessageContent useLine={useLine} onShowPreview={onShowPreview} />
+          )}
         </>
       )}
     </>
