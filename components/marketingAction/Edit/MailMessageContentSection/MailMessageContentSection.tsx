@@ -4,7 +4,7 @@ import { useWatch } from 'react-hook-form';
 import { Form, Icon } from '@/components/common';
 import { MessageContentPreview } from '@/components/marketingAction/MessageContentPreview';
 import { Section } from '@/components/Section';
-import { MentionData,Option } from '@/types';
+import { MentionData, Option } from '@/types';
 
 import { MessageBodyInput } from '../MessageBodyInput';
 

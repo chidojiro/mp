@@ -124,7 +124,9 @@ function F2ConversionRateTrends() {
         bar2={{ dataKey: 'f2_uu', title: t('numberOfF2Customers') }}
         data={data}
       />
-      <h5 className='text-gray-600 mt-[60px]'>{t('measuresThatContributedToF2Conversion')}</h5>
+      <h5 className='text-gray-600 mt-[60px] font-bold'>
+        {t('measuresThatContributedToF2Conversion')}
+      </h5>
       <div className='grid grid-cols-2 gap-4 mt-6'>
         {reportButtons.map((button, index) => (
           <CustomerReportButton

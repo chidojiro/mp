@@ -1,4 +1,4 @@
-import { TestDelivery, MarketingActionRes } from '@/types';
+import { MarketingActionRes,TestDelivery } from '@/types';
 import { Logger } from '@/utils/Logger';
 
 import { RestApi, RestApiConfig } from './base';

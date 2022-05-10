@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { GetStaticProps, GetStaticPropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { LoginForm,PublicLayout } from '@/components/Login';
+import { LoginForm, PublicLayout } from '@/components/Login';
 import { useAuth } from '@/hooks/useAuth';
 import { useNavigator } from '@/hooks/useNavigator';
 const LoginPage = () => {
