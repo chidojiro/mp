@@ -30,7 +30,6 @@ type Props = {
 
 export const Message = ({ isCarousel }: Props) => {
   const products = isCarousel ? productsCarousel : productsCarousel.slice(0, 1);
-  console.log(products);
 
   const ref = useRef<HTMLDivElement>(null);
   const [currentListIdx, setCurrentListIdx] = useState(0);
