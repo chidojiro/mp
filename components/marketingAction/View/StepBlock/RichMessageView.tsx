@@ -26,7 +26,13 @@ export const RichMessageView = React.forwardRef(
         <input className='minimized' ref={ref} />
         {!!label && <label className='block mb-1 text-gray-5'>{label}</label>}
         <div>
-          <RichTextEditor {...restProps} styleless readOnly isFromView ref={richTextEditorRef} />
+          <RichTextEditor
+            {...restProps}
+            styleless
+            readOnly
+            className='min-h-fit'
+            ref={richTextEditorRef}
+          />
         </div>
       </div>
     );

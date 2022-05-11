@@ -53,7 +53,6 @@ export const RichTextEditor = React.forwardRef(
       className,
       styleless,
       label,
-      isFromView = false,
     }: Props,
     ref: any
   ) => {
@@ -294,9 +293,11 @@ export const RichTextEditor = React.forwardRef(
           'w-full',
           {
             [styles['rich-text-editor']]: singleLine,
+            'min-h-[100px]': !singleLine,
           },
           className
-        )}>
+        )}
+      >
         <input className='minimized' ref={ref} />
         {!!label && <label className='block mb-1 text-gray-5'>{label}</label>}
         <div
@@ -304,8 +305,8 @@ export const RichTextEditor = React.forwardRef(
           className={classNames({
             'w-full p-2 bg-white rounded border border-input border-solid focus:border-input':
               !styleless,
-            'min-h-[100px]': !singleLine && !isFromView,
-          })}>
+          })}
+        >
           <Editor
             placeholder={placeholder}
             ref={editorRef}
