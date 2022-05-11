@@ -1,28 +1,34 @@
 const poll = <T = any>({
   api,
-  interval = 3000,
+  interval = 1000,
   until,
   retries = 5,
 }: {
   api: () => Promise<T>;
   interval?: number;
   until?: (data: T) => boolean;
-  // pass -1 to poll infinitely
   retries?: number;
 }): Promise<T> => {
-  return new Promise((resolve, rej) => {
+  return new Promise(async (resolve, rej) => {
     let response: any;
     let count = 0;
+    let timeout: NodeJS.Timeout;
 
-    const _interval = setInterval(async () => {
-      response = await api();
-      count++;
+    const continuePolling = () => {
+      timeout = setTimeout(async () => {
+        response = await api();
+        count++;
 
-      if (until?.(response) || (retries >= 0 && count > retries)) {
-        clearInterval(_interval);
-        resolve(response);
-      }
-    }, interval);
+        if (until?.(response) || count > retries) {
+          resolve(response);
+          clearTimeout(timeout);
+        } else {
+          continuePolling();
+        }
+      }, interval);
+    };
+
+    continuePolling();
   });
 };
 

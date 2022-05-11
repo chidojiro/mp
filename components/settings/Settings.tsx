@@ -5,13 +5,11 @@ import { omitBy } from 'lodash-es';
 import { useForm } from 'react-hook-form';
 
 import { AssetAPI, ProjectApis } from '@/apis';
+import { Button, Form } from '@/components/common';
 import { convertToEditorState } from '@/components/marketingAction/Edit/utils';
 import { useProject } from '@/project';
 import { AssetResourceType, ProjectData, ProjectSettingData } from '@/types';
 import { ApiUtils } from '@/utils';
-
-import { Button } from '../common/Button';
-import { Form } from '../common/Form';
 
 import { AdvancedSettings } from './AdvancedSettings';
 import { BasicInformation } from './BasicInformation';
@@ -27,10 +25,14 @@ export const Settings = () => {
   const methods = useForm<ProjectSettingData>({
     defaultValues: { const_r_rfm: 180, const_f_loyal: 5, const_m_loyal: 30000 },
   });
+  const {
+    reset,
+    formState: { isSubmitting, isSubmitSuccessful },
+  } = methods;
 
   const resetData = useCallback(
     (data: ProjectData) => {
-      methods.reset({
+      reset({
         id: data.id,
         ...data.settings,
         email_footer_draft_raw: convertToEditorState(
@@ -41,7 +43,7 @@ export const Settings = () => {
         ),
       });
     },
-    [methods]
+    [reset]
   );
   useEffect(() => {
     if (data) {
@@ -90,7 +92,12 @@ export const Settings = () => {
         <EmailSettings />
         <AdvancedSettings />
       </div>
-      <Button type='submit' className='!block mx-auto w-[480px] mt-[60px]'>
+      <Button
+        type='submit'
+        loading={isSubmitting}
+        complete={isSubmitSuccessful}
+        className='!block mx-auto w-[480px] mt-[60px]'
+      >
         {t('save')}
       </Button>
     </Form>
