@@ -1,0 +1,26 @@
+
+
+.checkmark {
+  animation: 3s checkmark linear forwards;
+  z-index: 10;
+  transform-origin: left;
+  
+  @keyframes checkmark {
+    0% {
+      stroke-dasharray: 180;
+      stroke-dashoffset: 180;
+      opacity: 0;
+    }
+    
+    10% {
+      opacity: 1;
+    }
+    
+    100% {
+      stroke-dasharray: 180;
+      stroke-dashoffset: 0;
+      position: absolute;
+      visibility: hidden;
+    }
+  }
+}

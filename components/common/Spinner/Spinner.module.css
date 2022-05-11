@@ -1,0 +1,37 @@
+
+
+.loader__line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 5;
+  stroke-linecap: round;
+  transform-origin: 50% 50%;
+  transform: rotate3d(0, 0, 1, 0deg);
+  animation: 2156ms spinner-arc ease-in-out infinite, 1829ms spinner-rotate linear infinite;
+
+  @keyframes spinner-rotate {
+    to {
+      transform: rotate3d(0, 0, 1, 360deg);
+    }
+  }
+  
+  @keyframes spinner-arc {
+    from {
+      stroke-dasharray: 0 150;
+      stroke-dashoffset: 0;
+    }
+  
+    to {
+      stroke-dasharray: 100 150;
+      stroke-dashoffset: -140;
+    }
+  }
+}
+
+.loader__ring {
+  fill: none;
+  stroke: #000;
+  stroke-width: 5;
+  opacity: 0.1;
+}
+

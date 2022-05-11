@@ -2,6 +2,10 @@ import React from 'react';
 import classNames from 'classnames';
 import { Children, ClassName, HTMLButtonProps } from 'types';
 
+import { Icon, Spinner } from '@/components/common';
+
+import styles from './Button.module.css';
+
 type Variant = 'link' | 'outline' | 'solid';
 type ColorScheme = 'primary' | 'secondary' | 'default' | 'danger' | 'green' | 'negative';
 type Size = 'xs' | 'sm' | 'md' | 'lg';
@@ -149,7 +153,8 @@ export type Props = Children &
     // size?: Size;
     colorScheme?: ColorScheme;
     icon?: React.ReactNode;
-    // loading?: boolean;
+    loading?: boolean;
+    complete?: boolean;
     style?: React.CSSProperties;
   };
 type Ref = HTMLButtonElement;
@@ -164,6 +169,8 @@ export const Button = React.forwardRef<Ref, Props>(
       disabled,
       icon,
       style,
+      loading,
+      complete,
       ...restProps
     },
     ref
@@ -174,6 +181,19 @@ export const Button = React.forwardRef<Ref, Props>(
     const underline = variant === 'link' && 'underline';
     const fontWeigh = variant !== 'link' && 'font-bold';
     const padding = variant !== 'link' && 'px-6 py-2';
+
+    const hasIcon = !!loading || !!complete || !!icon;
+
+    const renderIcon = () => {
+      if (loading) return <Spinner className={classNames(textColor, 'mr-3')} size={20} />;
+
+      if (complete)
+        return <Icon className={classNames(styles['checkmark'], 'mr-3')} name='check' size={20} />;
+
+      if (icon) return <span className='mr-3'>{icon}</span>;
+
+      return null;
+    };
 
     return (
       <button
@@ -195,8 +215,10 @@ export const Button = React.forwardRef<Ref, Props>(
         )}
         style={style}
       >
-        {!!icon && <div className='mr-3'>{icon}</div>}
-        {children}
+        <div className='flex items-center justify-center'>
+          {!!hasIcon && renderIcon()}
+          {children}
+        </div>
       </button>
     );
   }
