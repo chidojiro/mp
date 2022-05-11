@@ -38,7 +38,6 @@ export type Props = ClassName & {
   readOnly?: boolean;
   styleless?: boolean;
   label?: React.ReactNode;
-  isFromView?: boolean;
 };
 
 export const RichTextEditor = React.forwardRef(
