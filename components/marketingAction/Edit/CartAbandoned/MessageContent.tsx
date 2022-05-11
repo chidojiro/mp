@@ -4,33 +4,26 @@ import { EditorState } from 'draft-js';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 import { Form, Icon } from '@/components/common';
-import { RadioGroup } from '@/components/common/fields';
 import { ColorGroup } from '@/components/marketingAction/ColorGroup';
-import { LinePreview } from '@/components/marketingAction/LinePreview';
+import { LineMessage } from '@/components/marketingAction/Edit/CartAbandoned/LineMessage';
 import { MailPreview } from '@/components/marketingAction/MailPreview';
 import { MessageContentPreviewType } from '@/components/marketingAction/MessageContentPreview';
 import { useVariables } from '@/hooks';
-import { MentionData, Option, OPTIONS } from '@/types';
-import { MailContent, MarketingActionAlias, StepMessage } from '@/types/marketingAction';
+import { MentionData, Option } from '@/types';
+import { MarketingActionAlias, StepMessage } from '@/types/marketingAction';
 
 import { MessageBodyInput } from '../MessageBodyInput';
 import { getTextFromEditorState } from '../utils';
 
 type Props = {
-  messageNum?: string;
   useLine?: boolean;
   onShowPreview?: (message: StepMessage, type: MessageContentPreviewType) => void;
 };
 
-export const MessageContent = ({ messageNum = '', useLine = true, onShowPreview }: Props) => {
+export const MessageContent = ({ useLine = true, onShowPreview }: Props) => {
   const { t } = useTranslation('marketingAction');
 
-  const lineTextOptions = [
-    { value: OPTIONS.YES, label: t('displayMsg') },
-    { value: OPTIONS.NO, label: t('noDisplay') },
-  ];
-
-  const message = useWatch<MailContent>() as any;
+  const message = useWatch<StepMessage>() as any;
 
   const showLineMsg = message?.line_messages?.text_msg_display;
 
@@ -51,8 +44,8 @@ export const MessageContent = ({ messageNum = '', useLine = true, onShowPreview 
 
   const handleChangeTitle = (editorState: EditorState) => {
     const template = getTextFromEditorState(editorState);
-    setValue(`${messageNum}.mail_content.title`, template);
-    setValue(`${messageNum}.mail_content.title_preview`, getTextFromEditorState(editorState, true));
+    setValue('mail_content.title', template);
+    setValue('mail_content.title_preview', getTextFromEditorState(editorState, true));
   };
 
   return (
@@ -70,8 +63,7 @@ export const MessageContent = ({ messageNum = '', useLine = true, onShowPreview 
               </div>
               <Form.MentionsEditor
                 mentionOptions={mentionOptions}
-                singleLine
-                name={`${messageNum}.mail_content.title_draft_raw`}
+                name='mail_content.title_draft_raw'
                 onChange={handleChangeTitle}
                 rules={{ required: true }}
               />
@@ -81,13 +73,13 @@ export const MessageContent = ({ messageNum = '', useLine = true, onShowPreview 
 
               <MessageBodyInput
                 mentionOptions={mentionOptions}
-                name={`${messageNum}.mail_content.content`}
-                rawName={`${messageNum}.mail_content.content_draft_raw`}
+                name='mail_content.content'
+                rawName='mail_content.content_draft_raw'
               />
             </div>
             <div className='mt-7'>
               <div className='mb-2 font-semibold text-secondary'>{t('colorSettingsForBtn')}</div>
-              <ColorGroup name={`${messageNum}.color`} />
+              <ColorGroup name='color' />
             </div>
           </div>
           <div>
@@ -110,50 +102,12 @@ export const MessageContent = ({ messageNum = '', useLine = true, onShowPreview 
         </div>
       </div>
       {useLine && (
-        <div className='px-10 -mx-10 border-t-4 border-white pt-7 mt-7 '>
-          <div className='flex items-center'>
-            <Icon name='line' size={20} className='mr-2' />
-            <div className='font-semibold'>{t('msgContentLine')}</div>
-          </div>
-          <div className='flex justify-between mt-2 mb-7'>
-            <div className='flex-1 mr-10'>
-              <div className='mb-4'>
-                <div className='mb-2.5 font-semibold text-secondary text-medium'>
-                  {t('textMessage')}
-                </div>
-                <Form.RadioGroup name={`${messageNum}.line_messages.text_msg_display`}>
-                  {lineTextOptions.map(option => (
-                    <RadioGroup.Option
-                      colorScheme='secondary'
-                      key={option.value}
-                      className='mb-2.5 text-gray-dark text-medium'
-                      label={option.label}
-                      value={option.value}
-                    />
-                  ))}
-                </Form.RadioGroup>
-                {showLineMsg && (
-                  <MessageBodyInput
-                    name={`${messageNum}.line_messages.text_msg_content`}
-                    rawName={`${messageNum}.line_messages.text_msg_content_draft_raw`}
-                  />
-                )}
-              </div>
-            </div>
-            <div>
-              <div className='flex justify-between mb-2 text-medium'>
-                <span className='text-secondary'>{t('preview')}</span>
-                <span
-                  className='text-gray-700 underline cursor-pointer'
-                  onClick={() => onShowModal('line')}
-                >
-                  {t('openPreview')}
-                </span>
-              </div>
-              <LinePreview body={message?.line_messages?.text_msg_content} />
-            </div>
-          </div>
-        </div>
+        <LineMessage
+          showLineMsg={showLineMsg}
+          mentionOptions={mentionOptions}
+          message={message.line_messages}
+          onShowModal={onShowModal}
+        />
       )}
     </div>
   );

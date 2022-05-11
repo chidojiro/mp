@@ -8,14 +8,18 @@ import { MarketingActionAPI } from '@/apis';
 import { ActionContainer } from '@/components/ActionContainer';
 import { Form } from '@/components/common';
 import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
-import { useVisibilityControl } from '@/hooks';
+import { useVariables, useVisibilityControl } from '@/hooks';
 import { MarketingActionAlias, MarketingActionStatus, StepMessage, TARGET } from '@/types';
 import { TargetFilterUtils } from '@/utils';
 
 import { Steppers } from '../Steppers';
 import SavingActions from '../Steppers/SavingActions';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';
-import { convertFromStepMessageRaw, convertToStepMessageRaw } from '../utils';
+import {
+  convertFromStepMessageRaw,
+  convertToStepMessageRaw,
+  getDefaultMessageContentState,
+} from '../utils';
 
 import { LineSettings } from './LineSettings';
 import { Message1Settings } from './Message1Settings';
@@ -40,18 +44,32 @@ export const CartAbandoned = () => {
     () => MarketingActionAPI.get(marketingActionId as string)
   );
 
+  const { data: variables } = useVariables(MarketingActionAlias.CART_LEFT_NOTIFICATION);
+
   const step1Methods = useForm({ defaultValues: { enable_line: true } });
 
   const messageDefaultSettings = {
     send_at: '10:00',
-    mail_content: {},
+    mail_content: {
+      title: t('forgotSomething'),
+      title_preview: t('forgotSomething'),
+      title_draft_raw: getDefaultMessageContentState(t('forgotSomething')),
+      content: t('mailContentDefault', { brand_name: t('brandName') }),
+      content_draft_raw: getDefaultMessageContentState(
+        t('mailContentDefault', { brand_name: t('brandName') }),
+        [{ name: 'brand_name', displayName: t('brandName') }]
+      ),
+    },
     line_messages: {
       text_msg_display: false,
+      flex_msg_image_ratio: '16:9',
+      flex_msg_head: t('forgotSomethingLine'),
+      flex_msg_head_draft_raw: getDefaultMessageContentState(t('forgotSomethingLine')),
     },
     color: '#55C5D9',
     send_flag: true,
     content_verified: true,
-  };
+  } as any;
   const step2Methods = useForm({
     defaultValues: {
       send_after_days: '1',
@@ -101,6 +119,16 @@ export const CartAbandoned = () => {
     },
     [step1Methods, step2Methods, step3Methods, step4Methods]
   );
+
+  useEffect(() => {
+    if (!marketingActionId && variables.length) {
+      const preview = t('mailContentDefault', {
+        brand_name: variables.find(v => v.name === 'brand_name')?.content,
+      });
+      step2Methods.setValue('mail_content.content_preview', preview);
+      step3Methods.setValue('mail_content.content_preview', preview);
+    }
+  }, [variables, marketingActionId, t, step2Methods, step3Methods]);
 
   useEffect(() => {
     if (marketingAction) {

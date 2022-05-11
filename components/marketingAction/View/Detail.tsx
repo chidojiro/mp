@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
+import { addDays } from 'date-fns';
 
 import { SideMenu, SideMenuGroup, SideMenuItem } from '@/components/common';
 import { DatePicker } from '@/components/common/fields';
@@ -151,7 +152,7 @@ export const Detail = ({
       if (dates.length) {
         setPeriod([dates[0], dates[1]]);
         const _from = dates[0].toISOString().slice(0, 10) || '';
-        const _to = dates[1].toISOString().slice(0, 10) || '';
+        const _to = addDays(dates[1], 1).toISOString().slice(0, 10);
         onChangePeriod([_from, _to]);
       } else {
         setPeriod([]);

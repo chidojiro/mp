@@ -91,8 +91,56 @@ export const getTextFromEditorState = (editorState: EditorState, isPreview = fal
     .join('\n');
 };
 
+export const getEntityRange = (text: string, entity: string) => {
+  return {
+    offset: text.indexOf(entity),
+    length: entity.length,
+  };
+};
+
 export const convertToEditorState = (raw?: string) => {
   if (!raw) return richTextEditorEmptyValue;
 
   return EditorState.createWithContent(convertFromRaw(JSON.parse(raw)), richTextEditorDecorator);
+};
+
+export const getDefaultMessageContentState = (text: string, data: any[] = []) => {
+  const { entityMap, entityRanges } = data.reduce(
+    (prev, entity, index) => ({
+      entityMap: {
+        ...prev.entityMap,
+        [index]: {
+          type: 'MENTION',
+          mutability: 'IMMUTABLE',
+          data: {
+            name: entity.name,
+            type: 'static',
+            marketing_action_alias: null,
+            name_display: entity.displayName,
+          },
+        },
+      },
+      entityRanges: [
+        ...prev.entityRanges,
+        { ...getEntityRange(text, entity.displayName), key: index },
+      ],
+    }),
+    { entityMap: {}, entityRanges: [] }
+  );
+
+  const defaultMessageContentRaw = JSON.stringify({
+    blocks: [
+      {
+        text,
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: entityRanges,
+        data: {},
+      },
+    ],
+    entityMap: entityMap,
+  });
+
+  return convertToEditorState(defaultMessageContentRaw);
 };

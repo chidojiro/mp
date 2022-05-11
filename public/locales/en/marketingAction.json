@@ -211,12 +211,17 @@
   "cart": "Cart",
   "notSelected": "Not Selected",
   "productAutoInserted": "Product information is automatically inserted",
-  "forgotSomething": "Are you sure you haven't forgotten something?",
   "flexMessageImageRatio": "Flex message image ratio",
-  "flexMessageHeadings": "Flex Message Headings",
-  "horizontal": "Horizontal",
-  "vertical": "Vertical",
   "pushNotificationOrTalkListMessageChange": "Push Notification/Talk List Message Change",
   "pushNotificationOrTalkListMessageChangeDescription": "When text messages are displayed, the contents entered below are reflected only in the talk list, and the contents of text messages are reflected in push notifications. When not displaying, the content entered below will be reflected in both push notifications and the talk list.",
-  "implementationPeriod": "Implementation period"
+  "implementationPeriod": "Implementation period",
+  "forgotSomething": "Are you sure\nyou haven't forgotten something?",
+  "forgotSomethingLine": "Are you sure you haven't forgotten something?",
+  "flexMessageImage": "Flex message image ratio",
+  "horizontal": "3:2 (horizontal)",
+  "portrait": "3:4 (portrait)",
+  "flexMessageHeadings": "Flex Message Headings",
+  "pushNotification": "Push notification and talk list message changes",
+  "pushNotificationDesc": "When text messages are displayed, the following information is reflected only in the talk list, and the contents of text messages are reflected in push notifications. If you do not display the text message, the following information will be reflected in both the push notification and the talk list.",
+  "mailContentDefault": "Thank you for visiting {{brand_name}}. The following items are still stored in your shopping cart. Please consider purchasing them before they are sold out."
 }

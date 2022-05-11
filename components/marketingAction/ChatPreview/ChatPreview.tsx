@@ -8,7 +8,7 @@ type Props = {
 
 export const ChatPreview = ({ color }: Props) => {
   return (
-    <div className='bg-white w-[360px] h-[511px] shadow-[0px_0px_27px_0px_#00000029] rounded-lg'>
+    <div className='bg-white w-[360px] h-[511px] shadow-[0px_0px_27px_0px_#00000029] rounded-lg relative'>
       <div
         className='px-3 py-1 rounded-t-lg items-center justify-between flex h-[48px]'
         style={{ backgroundColor: color }}
@@ -19,9 +19,7 @@ export const ChatPreview = ({ color }: Props) => {
           <Icon name='close' className='w-[18px] h-[18px] text-[#E6E6E6] mr-2' />
         </div>
       </div>
-      <div className='pt-5 px-[45px]'>
-        <Message />
-      </div>
+      <Message isCarousel />
     </div>
   );
 };

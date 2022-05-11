@@ -292,7 +292,7 @@ export const RichTextEditor = React.forwardRef(
           'w-full',
           {
             [styles['rich-text-editor']]: singleLine,
-            'min-h-[100px]': !singleLine && !styleless,
+            'min-h-[100px]': !singleLine,
           },
           className
         )}
