@@ -20,6 +20,7 @@ import {
 } from '@/types';
 import { TargetFilterUtils } from '@/utils';
 
+import { ConfirmButtonTooltip } from '../ConfirmButtonTooltip';
 import { convertFromStepMessageRaw, convertToStepMessageRaw } from '../utils';
 
 import { LineUsageSettingsStep } from './LineUsageSettingsStep';
@@ -37,6 +38,8 @@ export const DeliveryAfterPurchase = ({}: Props) => {
   const message1SettingsRef = React.useRef<HTMLElement>();
   const message2SettingsRef = React.useRef<HTMLElement>();
   const targetSettingsRef = React.useRef<HTMLElement>();
+
+  const tooltipControl = useVisibilityControl({ defaultVisible: true });
 
   const { t } = useTranslation('marketingAction');
   const { getMarketingActionEditHref, getMarketingActionListHref, getMyMarketingActionListHref } =
@@ -66,6 +69,7 @@ export const DeliveryAfterPurchase = ({}: Props) => {
       send_at: '10:00',
       line_messages: {
         text_msg_display: false,
+        flex_msg_image_ratio: '1:1',
       },
       color: '#55C5D9',
       send_order: 1,
@@ -80,6 +84,7 @@ export const DeliveryAfterPurchase = ({}: Props) => {
       send_at: '10:00',
       line_messages: {
         text_msg_display: false,
+        flex_msg_image_ratio: '1:1',
       },
       color: '#55C5D9',
       report_period: StepMessageReportPeriod.MONTHLY,
@@ -98,6 +103,7 @@ export const DeliveryAfterPurchase = ({}: Props) => {
         TARGET.LOYAL_DORMANT,
         TARGET.OTHER_DORMANT,
       ]),
+      implementation_period_temp: [] as Date[],
     },
   });
 
@@ -139,7 +145,11 @@ export const DeliveryAfterPurchase = ({}: Props) => {
         data.settings?.step_messages?.[1] &&
           convertFromStepMessageRaw(data.settings.step_messages[1])
       );
-      targetSettingsMethods.reset({ target_segments: data.target_segments });
+      targetSettingsMethods.reset({
+        target_segments: data.target_segments,
+        implementation_period_temp:
+          data.start_at && data.end_at ? [new Date(data.start_at), new Date(data.end_at)] : [],
+      });
     }
   }, [
     data,
@@ -156,7 +166,8 @@ export const DeliveryAfterPurchase = ({}: Props) => {
     const targetSettings = targetSettingsMethods.getValues();
 
     const data = {
-      start_at: new Date().toISOString(), // TODO will remove once BE is update
+      start_at: targetSettings.implementation_period_temp[0].toISOString(),
+      end_at: targetSettings.implementation_period_temp[1].toISOString(),
       description: t('stepDeliveryAfterPurchase'),
       marketing_action_type_alias: 'AFTER_PURCHASE',
       status,
@@ -340,32 +351,26 @@ export const DeliveryAfterPurchase = ({}: Props) => {
           complete={isTargetSettingsComplete}
         />
       </Stepper>
-      <div className='flex justify-center gap-5 mt-10'>
+      <div className='flex justify-center gap-5 mt-14'>
         {!isEditing ? (
-          <>
-            <Button className='w-[240px]' colorScheme='danger' onClick={handleSaveAsDraftClick}>
-              {t('saveDraft')}
-            </Button>
-            <Button
-              colorScheme='negative'
-              className='w-[240px]'
-              onClick={() => push(getMarketingActionListHref())}
-            >
-              {t('stopEditing')}
-            </Button>
-          </>
+          <Button className='w-[240px]' colorScheme='negative' onClick={handleSaveAsDraftClick}>
+            {t('saveDraft')}
+          </Button>
         ) : (
           <Button className='w-[240px]' colorScheme='danger' onClick={handleSuspendClick}>
             {t('suspendTemplate')}
           </Button>
         )}
-        <Button
-          onClick={implementConfirmModalControl.open}
-          className='w-[480px]'
-          disabled={!isComplete}
-        >
-          {t('implementTemplate')}
-        </Button>
+        <div className='relative'>
+          <Button
+            onClick={implementConfirmModalControl.open}
+            className='w-[480px]'
+            disabled={!isComplete}
+          >
+            {t('implementTemplate')}
+          </Button>
+          <ConfirmButtonTooltip control={tooltipControl} />
+        </div>
       </div>
     </>
   );

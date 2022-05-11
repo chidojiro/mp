@@ -1,5 +1,4 @@
 import React, { RefObject } from 'react';
-
 import get from 'lodash-es/get';
 import { RegisterOptions, useController, useFormContext } from 'react-hook-form';
 
@@ -73,7 +72,6 @@ export const Field = <T,>({
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
     const _value = e.target?.value ?? (e as any) ?? emptyValue;
-
     onChange(changeAs(_value));
     onChangeProp?.(e);
   };

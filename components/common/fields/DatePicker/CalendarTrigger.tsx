@@ -46,7 +46,7 @@ export const CalendarTrigger = React.forwardRef(
     const resolveDisplayValue = () => {
       if (!selectedDate) return '';
 
-      if (range) return [temp0DisplayDate, temp1DisplayDate].join(DATE_SEPARATOR);
+      if (range) return [temp0DisplayDate, temp1DisplayDate].filter(Boolean).join(DATE_SEPARATOR);
 
       return tempDisplayDate;
     };
@@ -58,36 +58,30 @@ export const CalendarTrigger = React.forwardRef(
       <div
         ref={ref}
         className={classNames(
-          'rounded border border-input bg-white cursor-pointer',
+          'rounded border border-input bg-white cursor-pointer text-medium',
           'h-9 w-full pl-4',
-          'flex justify-between items-center',
+          'flex items-center',
           { 'border-danger': error },
           className
         )}
         {...restProps}
       >
+        <Icon name='calendar' size={18} className='mr-3' />
         {isValueNotEmpty ? (
-          <>
+          <div className='flex items-center flex-1 justify-between'>
             <div data-testid='vs-date-picker__value' className='truncate'>
               {resolveDisplayValue()}
             </div>
-            <div onClick={onClearClick} className='mr-2 hover:text-secondary'>
+            <div onClick={onClearClick} className='mx-4 text-secondary underline'>
               {t('clear')}
             </div>
-          </>
+          </div>
         ) : (
-          <>
-            <div className='truncate text-placeholder'>
-              {placeholder || t(range ? 'rangePlaceholder' : 'placeholder')}
+          <div className='flex items-center'>
+            <div className='truncate text-placeholder text-medium'>
+              {placeholder || t(range ? 'dateRangePlaceholder' : 'datePlaceholder')}
             </div>
-            <Icon
-              name='chevron-right'
-              size={18}
-              className={classNames('flex items-center ml-3 mr-2', {
-                'transform rotate-180': active,
-              })}
-            />
-          </>
+          </div>
         )}
       </div>
     );

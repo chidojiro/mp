@@ -1,8 +1,16 @@
 import { convertFromRaw, convertToRaw, EditorState, RawDraftEntityRange } from 'draft-js';
-import { cloneDeep } from 'lodash-es';
+import { cloneDeep, get, set } from 'lodash-es';
 
 import { richTextEditorDecorator, richTextEditorEmptyValue } from '@/components/common/fields';
 import { MentionData, StepMessage } from '@/types';
+
+const draftRawFields = [
+  'mail_content.content_draft_raw',
+  'mail_content.title_draft_raw',
+  'line_messages.text_msg_content_draft_raw',
+  'line_messages.flex_msg_head_draft_raw',
+  'line_messages.push_msg_content_draft_raw',
+];
 
 export const convertToStepMessageRaw = (stepMessage: StepMessage) => {
   const clonedStepMessage: any = cloneDeep(stepMessage);
@@ -13,15 +21,9 @@ export const convertToStepMessageRaw = (stepMessage: StepMessage) => {
     return JSON.stringify(convertToRaw(editorState.getCurrentContent()));
   };
 
-  clonedStepMessage.mail_content.content_draft_raw = convertEditorStateToJson(
-    stepMessage.mail_content.content_draft_raw as EditorState
-  );
-  clonedStepMessage.mail_content.title_draft_raw = convertEditorStateToJson(
-    stepMessage.mail_content.title_draft_raw as EditorState
-  );
-  clonedStepMessage.line_messages.text_msg_content_draft_raw = convertEditorStateToJson(
-    stepMessage.line_messages.text_msg_content_draft_raw as EditorState
-  );
+  draftRawFields.forEach(field => {
+    set(clonedStepMessage, field, convertEditorStateToJson(get(stepMessage, field)));
+  });
 
   return clonedStepMessage;
 };
@@ -38,15 +40,9 @@ export const convertFromStepMessageRaw = (stepMessage: StepMessage) => {
     );
   };
 
-  clonedStepMessage.mail_content.content_draft_raw = convertJsonToEditorState(
-    stepMessage.mail_content.content_draft_raw as string
-  );
-  clonedStepMessage.mail_content.title_draft_raw = convertJsonToEditorState(
-    stepMessage.mail_content.title_draft_raw as string
-  );
-  clonedStepMessage.line_messages.text_msg_content_draft_raw = convertJsonToEditorState(
-    stepMessage.line_messages.text_msg_content_draft_raw as string
-  );
+  draftRawFields.forEach(field => {
+    set(clonedStepMessage, field, convertJsonToEditorState(get(stepMessage, field)));
+  });
 
   return clonedStepMessage;
 };

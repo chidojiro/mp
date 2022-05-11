@@ -3,6 +3,7 @@ import React from 'react';
 import { ChevronDownIcon, ChevronRightIcon, ChevronUpIcon } from '@heroicons/react/solid';
 
 import Action from './icons/action.svg';
+import Calendar from './icons/calendar.svg';
 import Cart from './icons/cart.svg';
 import CartQuestion from './icons/cart-question.svg';
 import Chatbot from './icons/chatbot.svg';
@@ -99,6 +100,7 @@ const ICONS = {
   action: Action,
   'custom-segment': CustomSegment,
   document: Document,
+  calendar: Calendar,
 };
 
 export type Name = keyof typeof ICONS;

@@ -2,6 +2,8 @@ import React from 'react';
 import { useTranslation } from 'next-i18next';
 import { FormProvider, UseFormReturn } from 'react-hook-form';
 
+import { Form } from '@/components/common';
+import { Section } from '@/components/Section';
 import { Stepper } from '@/components/Stepper';
 
 import { StepActions } from '../StepActions';
@@ -26,6 +28,21 @@ export const TargetSettingsStep = React.forwardRef(({ formMethods, complete }: P
     <Stepper.Item label={t('targetAndTimePeriodSetting')} complete={complete} ref={ref}>
       <FormProvider {...formMethods}>
         <TargetSettingsSection />
+        <Section>
+          <Section.Title>{t('implementationPeriod')}</Section.Title>
+          <Section.Content>
+            <Form.DatePicker
+              className='w-1/2'
+              range
+              name='implementation_period_temp'
+              rules={{
+                validate: {
+                  required: v => !!v?.length,
+                },
+              }}
+            ></Form.DatePicker>
+          </Section.Content>
+        </Section>
         <StepActions
           onConfirmClick={handleSubmit(onValidSubmit, onInvalidSubmit)}
           complete={complete}

@@ -135,7 +135,7 @@
   "fromTheFirstDeliveryDate": "From the first delivery date",
   "targetAndTimePeriodSetting": "arget and time period setting",
   "pleaseFillInAllFields": "Please fill in all fields.",
-  "alertConfirm": "Please check the information you have entered and click if you are satisfied with the information.",
+  "alertConfirm": "Please check all steps <0><1></1></0>",
   "aggregationPeriodSettings": "Aggregation Period settings",
   "carouselDisplaySettings": "Carousel display item settings",
   "carouselDisplay": "Carousel display item",
@@ -211,5 +211,12 @@
   "cart": "Cart",
   "notSelected": "Not Selected",
   "productAutoInserted": "Product information is automatically inserted",
-  "forgotSomething": "Are you sure you haven't forgotten something?"
+  "forgotSomething": "Are you sure you haven't forgotten something?",
+  "flexMessageImageRatio": "Flex message image ratio",
+  "flexMessageHeadings": "Flex Message Headings",
+  "horizontal": "Horizontal",
+  "vertical": "Vertical",
+  "pushNotificationOrTalkListMessageChange": "Push Notification/Talk List Message Change",
+  "pushNotificationOrTalkListMessageChangeDescription": "When text messages are displayed, the contents entered below are reflected only in the talk list, and the contents of text messages are reflected in push notifications. When not displaying, the content entered below will be reflected in both push notifications and the talk list.",
+  "implementationPeriod": "Implementation period"
 }

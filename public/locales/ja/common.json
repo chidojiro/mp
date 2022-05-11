@@ -56,5 +56,6 @@
   "type": "タイプ",
   "emailAddress": "E-mailアドレス",
   "cancel": "キャンセル",
-  "save": "保存する"
+  "save": "保存する",
+  "dateRangePlaceholder": "期間を選択してください"
 }

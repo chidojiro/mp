@@ -50,5 +50,6 @@
   "type": "Type",
   "emailAddress": "E-mail address",
   "cancel": "Cancel",
-  "save": "Save"
+  "save": "Save",
+  "dateRangePlaceholder": "Please select a time period"
 }

@@ -13,7 +13,7 @@ type Props = Children & ClassName & {};
 
 // eslint-disable-next-line no-empty-pattern
 export const Stepper = ({ children, className }: Props) => {
-  const [completedSteps, setCompletedSteps] = React.useState<number[]>([]);
+  const [completedSteps, setCompletedSteps] = React.useState<number[]>([-1]);
   const stepsCountRef = React.useRef(-1);
 
   const increaseStepsCount = React.useCallback(() => {

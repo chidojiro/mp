@@ -20,7 +20,10 @@ export type Props = Omit<RichTextEditorProps, 'ref'> &
 
 // eslint-disable-next-line no-empty-pattern
 export const MentionsEditor = React.forwardRef(
-  ({ error, label, mentionOptions, emoji = false, className, ...restProps }: Props, ref: any) => {
+  (
+    { error, label, mentionOptions, emoji = false, className, singleLine, ...restProps }: Props,
+    ref: any
+  ) => {
     const { t } = useTranslation();
     const richTextEditorRef = React.useRef<RichTextEditorRef>();
 
@@ -58,7 +61,7 @@ export const MentionsEditor = React.forwardRef(
           </div>
           <RichTextEditor
             {...restProps}
-            className='bg-white p-2'
+            className={classNames('bg-white p-2', !singleLine && 'min-h-[100px]')}
             styleless
             mentionOptions={mentionOptions}
             ref={richTextEditorRef}

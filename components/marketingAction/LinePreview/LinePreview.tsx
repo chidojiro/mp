@@ -3,11 +3,16 @@ import { useTranslation } from 'next-i18next';
 import classNames from 'classnames';
 
 import { Button } from '@/components/common';
+import { AspectRatio } from '@/headless';
+import { MarketingActionAlias } from '@/types';
 
 type Props = {
   body?: string;
   desktop?: boolean;
   isOverlay?: boolean;
+  headline?: string;
+  marketingAction?: MarketingActionAlias;
+  imageRatio?: string;
 };
 
 //example test message
@@ -23,7 +28,13 @@ products.push({
 
 const btnHeightWithMargin = '85px';
 
-export const LinePreview = ({ body, isOverlay = false }: Props) => {
+export const LinePreview = ({
+  body,
+  isOverlay = false,
+  headline,
+  marketingAction,
+  imageRatio = '3:2',
+}: Props) => {
   const { t } = useTranslation('marketingAction');
 
   return (
@@ -59,13 +70,25 @@ export const LinePreview = ({ body, isOverlay = false }: Props) => {
                 key={product.id}
                 className='flex-none relative w-[254px] bg-white mr-2 border-2 h-fit rounded-lg border-dashed border-secondary'
               >
-                <img alt='' src={product.image} className='rounded-t-lg w-full h-[170px]' />
+                <AspectRatio ratio={imageRatio.replace(/:/g, '-') as any}>
+                  <img alt='' src={product.image} className='rounded-t-lg w-full h-full' />
+                </AspectRatio>
                 <div className='p-3.5 text-gray-dark'>
                   <div className='w-full font-semibold mb-2 text-gray-dark text-[22px]'>
-                    {t('forgotSomething')}
+                    {headline}
                   </div>
-                  <Button variant='link' className='w-full font-semibold text-center no-underline'>
-                    {t('viewShoppingCart')}
+                  <Button
+                    variant='link'
+                    className={classNames(
+                      'w-full font-semibold text-center no-underline font-[normal]',
+                      {
+                        'text-[#6490cb]': marketingAction === MarketingActionAlias.AFTER_PURCHASE,
+                      }
+                    )}
+                  >
+                    {marketingAction === MarketingActionAlias.CART_LEFT_NOTIFICATION
+                      ? t('viewShoppingCart')
+                      : t('viewThisItem')}
                   </Button>
                 </div>
                 <div className='absolute top-[10px] left-[12px] px-2 py-1 rounded-full text-medium text-white bg-secondary'>

@@ -62,7 +62,7 @@ export const Settings = () => {
 
     const payload = {
       ...data,
-      brand_logo: brandLogoResponse?.id,
+      brand_logo: brandLogoResponse?.path,
       email_footer_draft_raw:
         data.email_footer_draft_raw &&
         JSON.stringify(

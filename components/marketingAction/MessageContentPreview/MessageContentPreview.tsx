@@ -1,6 +1,7 @@
 import { useTranslation } from 'next-i18next';
 
 import { Button } from '@/components/common';
+import { MarketingActionAlias } from '@/types';
 
 import { LinePreview } from '../LinePreview';
 import { MailPreview } from '../MailPreview';
@@ -13,10 +14,23 @@ type Props = {
   body?: string;
   headline?: string;
   onPreviewClick: () => void;
+  color?: string;
+
+  desktop?: boolean;
+  showViewShoppingCartButton?: boolean;
+  isOverlay?: boolean;
+  marketingAction?: MarketingActionAlias;
+  flexMessageImageRatio?: string;
 };
 
 // eslint-disable-next-line no-empty-pattern
-export const MessageContentPreview = ({ type = 'mail', onPreviewClick, ...restProps }: Props) => {
+export const MessageContentPreview = ({
+  type = 'mail',
+  onPreviewClick,
+  color,
+  flexMessageImageRatio,
+  ...restProps
+}: Props) => {
   const { t } = useTranslation('marketingAction');
 
   return (
@@ -28,9 +42,9 @@ export const MessageContentPreview = ({ type = 'mail', onPreviewClick, ...restPr
         </Button>
       </div>
       {type === 'mail' ? (
-        <MailPreview showViewShoppingCartButton={false} {...restProps} />
+        <MailPreview showViewShoppingCartButton={false} color={color} {...restProps} />
       ) : (
-        <LinePreview {...restProps} />
+        <LinePreview imageRatio={flexMessageImageRatio} {...restProps} />
       )}
     </div>
   );

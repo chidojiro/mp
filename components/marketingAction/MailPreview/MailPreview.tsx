@@ -65,7 +65,7 @@ export const MailPreview = ({
           />
         </div>
         <div className='flex justify-center w-full'>
-          <h3 className='w-[160px] mb-4 whitespace-pre-line text-gray-dark text-center'>
+          <h3 className='max-w-[200px] mb-4 whitespace-pre-line text-gray-dark text-center'>
             {headline}
           </h3>
         </div>

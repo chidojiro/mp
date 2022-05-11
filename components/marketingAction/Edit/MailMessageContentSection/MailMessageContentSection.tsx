@@ -1,12 +1,13 @@
 import { useTranslation } from 'next-i18next';
-import { useWatch } from 'react-hook-form';
+import { EditorState } from 'draft-js';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 import { Form, Icon } from '@/components/common';
+import { ColorGroup } from '@/components/marketingAction/ColorGroup';
+import { getTextFromEditorState } from '@/components/marketingAction/Edit/utils';
 import { MessageContentPreview } from '@/components/marketingAction/MessageContentPreview';
 import { Section } from '@/components/Section';
 import { MentionData, Option } from '@/types';
-
-import { MessageBodyInput } from '../MessageBodyInput';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {
@@ -28,6 +29,9 @@ export const MailMessageContentSection = ({
 
   const headline = useWatch({ name: headlineName });
   const body = useWatch({ name: bodyName });
+  const mailColor = useWatch({ name: 'mail_content.color' });
+
+  const { setValue, getValues } = useFormContext();
 
   return (
     <Section>
@@ -38,18 +42,45 @@ export const MailMessageContentSection = ({
       <Section.Description>{t('descriptionPlaceholder')}</Section.Description>
       <div className='flex gap-10'>
         <div className='flex-1'>
-          <Form.TextArea
-            name={headlineName}
-            label={<span className='text-secondary text-medium'>{t('headLines')}</span>}
-            rules={{ required: true }}
-          />
-          <MessageBodyInput
+          <Form.MentionsEditor
+            onChange={(editorState: EditorState) => {
+              const template = getTextFromEditorState(editorState);
+              setValue(headlineName, template);
+            }}
+            name={`${headlineName}_draft_raw`}
             mentionOptions={mentionOptions}
-            name={bodyName}
-            rawName={`${bodyName}_draft_raw`}
+            rules={{
+              validate: {
+                required: (value: EditorState) => !!value && !!getTextFromEditorState(value),
+              },
+            }}
+            label={<span className='text-secondary text-medium'>{t('headLines')}</span>}
           />
+          <Form.MentionsEditor
+            onChange={(editorState: EditorState) => {
+              const template = getTextFromEditorState(editorState);
+              setValue(bodyName, template);
+            }}
+            name={`${bodyName}_draft_raw`}
+            mentionOptions={mentionOptions}
+            rules={{
+              validate: {
+                required: (value: EditorState) => !!value && !!getTextFromEditorState(value),
+              },
+            }}
+            label={<p className='text-secondary text-medium mt-5'>{t('bodyText')}</p>}
+          />
+          <div className='mt-5'>
+            <div className='text-secondary text-medium mb-1'>{t('colorSettingsForBtn')}</div>
+            <ColorGroup name='mail_content.color' />
+          </div>
         </div>
-        <MessageContentPreview body={body} headline={headline} onPreviewClick={onPreviewClick} />
+        <MessageContentPreview
+          color={mailColor}
+          body={body}
+          headline={headline}
+          onPreviewClick={onPreviewClick}
+        />
       </div>
     </Section>
   );

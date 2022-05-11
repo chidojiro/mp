@@ -49,6 +49,7 @@ export const DatePicker = React.forwardRef<HTMLInputElement, Props>(
       onChange,
       defaultValue,
     });
+    const isEmpty = value?.length;
     const [tempValue, setTempValue] = React.useState<Date | Date[] | undefined>(defaultValue);
     const [hoveredDate, setHoveredDate] = React.useState<Date>();
     const [viewingMonth, setViewingMonth] = React.useState<Date>(today);

@@ -44,7 +44,15 @@ export const MessageBodyInput = ({
         className={className || 'mt-5'}
         mentionOptions={mentionOptions}
         singleLine={singleLine}
-        rules={shouldValidate ? { required: true } : undefined}
+        rules={
+          shouldValidate
+            ? {
+                validate: {
+                  required: (value: EditorState) => !!value && !!getTextFromEditorState(value),
+                },
+              }
+            : undefined
+        }
       />
     </div>
   );

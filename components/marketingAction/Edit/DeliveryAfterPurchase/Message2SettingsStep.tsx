@@ -13,7 +13,6 @@ import { useVariables, useVisibilityControl } from '@/hooks';
 import { MentionData, Option, StepMessageReportPeriod, StepMessageTemplate } from '@/types';
 import { MarketingActionAlias } from '@/types/marketingAction';
 
-import { ColorSettingSection } from '../ColorSettingsSection';
 import { LineMessageContentSection } from '../LineMessageContentSection';
 import { MailMessageContentSection } from '../MailMessageContentSection';
 import { StepActions } from '../StepActions';
@@ -136,12 +135,11 @@ export const Message2SettingsStep = React.forwardRef(
           />
           {!!enableLine && (
             <LineMessageContentSection
+              marketingAction={MarketingActionAlias.AFTER_PURCHASE}
               mentionOptions={mentionOptions}
               onPreviewClick={handleLinePreviewClick}
             />
           )}
-
-          <ColorSettingSection />
 
           <StepActions
             complete={complete}
