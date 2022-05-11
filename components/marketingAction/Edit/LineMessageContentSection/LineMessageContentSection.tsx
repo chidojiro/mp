@@ -81,17 +81,9 @@ export const LineMessageContentSection = ({
               <p className='mb-2 mt-5 text-secondary'>{t('textMessage')}</p>
               <Form.RadioGroup name={flexMsgImageRatioName}>
                 <div className='flex flex-col gap-2'>
-                  <RadioGroup.Option
-                    colorScheme='secondary'
-                    label={`3:2 (${t('horizontal')})`}
-                    value='3:2'
-                  />
+                  <RadioGroup.Option colorScheme='secondary' label={t('horizontal')} value='3:2' />
                   <RadioGroup.Option colorScheme='secondary' label={`1:1`} value='1:1' />
-                  <RadioGroup.Option
-                    colorScheme='secondary'
-                    label={`9:16 (${t('vertical')})`}
-                    value='9:16'
-                  />
+                  <RadioGroup.Option colorScheme='secondary' label={t('portrait')} value='3:4' />
                 </div>
               </Form.RadioGroup>
 
