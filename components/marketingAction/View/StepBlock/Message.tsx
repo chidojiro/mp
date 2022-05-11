@@ -26,6 +26,15 @@ export const Message = ({ message, enableLine = true }: Props) => {
     }
     return val;
   };
+
+  const {
+    text_msg_display: isDisplayText,
+    text_msg_content_draft_raw: content,
+    flex_msg_head_draft_raw: headings,
+    flex_msg_image_ratio: ratio,
+    push_msg_content_draft_raw: pushMsgContent,
+  } = message.line_messages;
+
   return (
     <>
       <Answer name={t('msgContentEmail')}>
@@ -39,18 +48,27 @@ export const Message = ({ message, enableLine = true }: Props) => {
         <RichMessageView value={convertToEditorState(message.mail_content.content_draft_raw)} />
       </Answer>
       {enableLine && (
-        <Answer name={t('msgContentLine')}>
-          <div>[{t('textMessage')}]</div>
-          <div className='mt-2'>
-            {message.line_messages.text_msg_display ? t('displayMsg') : t('noDisplay')}
-          </div>
-          <div
-            dangerouslySetInnerHTML={{ __html: message.line_messages!.text_msg_content! }}
-            className='mt-2'
-          ></div>
-        </Answer>
+        <>
+          <Answer name={t('msgContentLine')}>
+            <div>[{t('textMessage')}]</div>
+            <div className='mt-2'>{isDisplayText ? t('displayMsg') : t('noDisplay')}</div>
+            {isDisplayText && (
+              <RichMessageView singleLine className='mt-2' value={convertToEditorState(content)} />
+            )}
+          </Answer>
+          <Answer name={t('flexMessageImage')}>{ratio}</Answer>
+          <Answer name={t('flexMessageHeadings')}>
+            <RichMessageView singleLine className='mt-2' value={convertToEditorState(headings)} />
+          </Answer>
+          <Answer name={t('pushNotification')}>
+            <RichMessageView
+              singleLine
+              className='mt-2'
+              value={convertToEditorState(pushMsgContent)}
+            />
+          </Answer>
+        </>
       )}
-
       <Answer name={t('colorSettings')}>
         <Color color={message.color} label={t(ColorUtils.getName(message.color))} />
       </Answer>

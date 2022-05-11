@@ -210,5 +210,13 @@
   "cart": "カート",
   "notSelected": "選択されていません",
   "productAutoInserted": "商品情報が自動挿入されます",
-  "forgotSomething": "お買い忘れはございませんか"
+  "forgotSomething": "お買い忘れは\nございませんか？",
+  "forgotSomethingLine": "お買い忘れはございませんか？",
+  "flexMessageImage": "フレックスメッセージの画像比率",
+  "horizontal": "3:2（横長）",
+  "portrait": "3:4（縦長）",
+  "flexMessageHeadings": "フレックスメッセージの見出し",
+  "pushNotification": "プッシュ通知・トークリストメッセージ変更",
+  "pushNotificationDesc": "テキストメッセージを表示する場合、以下の内容はトークリストのみに反映され、プッシュ通知にはテキストメッセージの内容が反映されます。表示しない場合、以下に入力した内容がプッシュ通知・トークリスト両方に反映されます。",
+  "mailContentDefault": "いつも{{brand_name}}をご利用いただきありがとうございます。以下の商品がショッピングカートに保存されたままになっています。売り切れになってしまう前に、ぜひ購入をご検討くださいませ。"
 }

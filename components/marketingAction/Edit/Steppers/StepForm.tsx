@@ -52,14 +52,14 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
           <div
             className={classNames(
               'flex items-center justify-center w-5 h-5 mr-2 rounded-full',
-              isComplete ? 'bg-gray' : ' bg-white'
+              isComplete ? ' bg-white' : 'bg-gray'
             )}
           >
             <Icon
               name='check'
               className={classNames(
                 'w-[10px] h-[8px]',
-                isComplete ? 'text-white' : 'text-mint-green'
+                isComplete ? 'text-mint-green' : 'text-white'
               )}
             />
           </div>
@@ -121,18 +121,16 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
                 </Button>
               )}
               {isComplete ? (
-                <Button
-                  colorScheme='green'
-                  variant='outline'
-                  className='relative h-9 min-w-[240px] border-2 text-white'
-                >
+                <Button className='relative h-9 min-w-[240px] border-none bg-mint-green'>
                   {btnConfirm()}
                 </Button>
               ) : (
                 <Button
                   ref={btnRef}
                   onClick={handleSubmit(onValidSubmit, onInvalidSubmit)}
-                  className='relative h-9 border-none bg-mint-green min-w-[240px] ease-in duration-300'
+                  className='relative h-9 border-2 text-white min-w-[240px] ease-in duration-300'
+                  colorScheme='green'
+                  variant='outline'
                 >
                   {btnConfirm()}
                   <div

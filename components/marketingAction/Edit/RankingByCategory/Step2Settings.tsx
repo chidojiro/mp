@@ -45,7 +45,7 @@ export const Step2Settings = ({ isMonthly }: Props) => {
           className='flex flex-row-reverse items-center mt-2'
         />
       </div>
-      <div className='p-10 w-[350px] bg-white rounded'>
+      <div className='w-[350px] bg-white rounded'>
         <Message />
       </div>
     </div>
