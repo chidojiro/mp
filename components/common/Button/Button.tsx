@@ -2,7 +2,8 @@ import React from 'react';
 import classNames from 'classnames';
 import { Children, ClassName, HTMLButtonProps } from 'types';
 
-import { Icon, Spinner } from '@/components/common';
+import { Icon } from '../../common/Icon';
+import { Spinner } from '../../common/Spinner';
 
 import styles from './Button.module.css';
 
