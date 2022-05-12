@@ -28,9 +28,12 @@ export const NavItem = ({ data, showLabel = true }: Props) => {
     defaultVisible: navChildren.some(item => isMatched(item)),
   });
 
-  const anchorClasses = classNames('flex text-medium items-center py-3 pl-3 hover:bg-dark-gray', {
-    'bg-dark-gray': isMatched(data),
-  });
+  const anchorClasses = classNames(
+    'flex text-medium items-center py-3 pl-3 hover:bg-dark-gray transition-all',
+    {
+      'bg-dark-gray': isMatched(data),
+    }
+  );
   const iconClasses = classNames('text-primary my-1', {
     'mr-2': showLabel,
   });
