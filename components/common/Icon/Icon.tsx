@@ -9,6 +9,7 @@ import CartQuestion from './icons/cart-question.svg';
 import Chatbot from './icons/chatbot.svg';
 import Chatbot2 from './icons/chatbot2.svg';
 import Check from './icons/check.svg';
+import CheckThin from './icons/check-thin.svg';
 import ChevronLeft from './icons/chevron-left.svg';
 import ChevronRightCircle from './icons/chevron-right-circle.svg';
 import Clock from './icons/clock.svg';
@@ -101,6 +102,7 @@ const ICONS = {
   'custom-segment': CustomSegment,
   document: Document,
   calendar: Calendar,
+  'check-thin': CheckThin,
 };
 
 export type Name = keyof typeof ICONS;

@@ -189,7 +189,9 @@ export const Button = React.forwardRef<Ref, Props>(
       if (loading) return <Spinner className={classNames(textColor, 'mr-3')} size={20} />;
 
       if (complete)
-        return <Icon className={classNames(styles['checkmark'], 'mr-3')} name='check' size={18} />;
+        return (
+          <Icon className={classNames(styles['checkmark'], 'mr-3')} name='check-thin' size={18} />
+        );
 
       if (icon) return <span className='mr-3'>{icon}</span>;
 
