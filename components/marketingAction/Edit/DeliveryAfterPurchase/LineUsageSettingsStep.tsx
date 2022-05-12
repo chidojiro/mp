@@ -28,6 +28,7 @@ export const LineUsageSettingsStep = ({ formMethods, complete }: Props) => {
         <StepActions
           onConfirmClick={handleSubmit(onValidSubmit, onInvalidSubmit)}
           complete={complete}
+          useTooltip
         />
       </FormProvider>
     </Stepper.Item>

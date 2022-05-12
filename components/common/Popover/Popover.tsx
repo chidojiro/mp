@@ -46,9 +46,7 @@ export const Popover = ({
   );
 
   React.useEffect(() => {
-    if (isHTMLElementTrigger) {
-      forceUpdate?.();
-    }
+    forceUpdate?.();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trigger, forceUpdate, (trigger as HTMLElement)?.innerHTML]);
 

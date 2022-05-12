@@ -1,13 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
+import { Trans, useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
 import useSWR from 'swr';
 
 import { MarketingActionAPI } from '@/apis/marketingActions';
 import { ActionContainer } from '@/components/ActionContainer';
-import { Button, Modal } from '@/components/common';
+import { Button, Icon, Modal } from '@/components/common';
 import { Stepper } from '@/components/Stepper';
 import { useHref, useVisibilityControl } from '@/hooks';
 import {
@@ -362,15 +362,28 @@ export const DeliveryAfterPurchase = ({}: Props) => {
             {t('suspendTemplate')}
           </Button>
         )}
-        <div className='relative'>
+        <div className='relative w-[480px]'>
+          <ConfirmButtonTooltip control={tooltipControl}>
+            <Trans
+              i18nKey='implementTemplateTooltip'
+              t={t}
+              components={[
+                <Icon
+                  key='check'
+                  name='check'
+                  size={10}
+                  className='p-1 text-primary inline-flex items-center justify-center w-5 h-5 mr-1 rounded-full bg-white'
+                ></Icon>,
+              ]}
+            />
+          </ConfirmButtonTooltip>
           <Button
             onClick={implementConfirmModalControl.open}
-            className='w-[480px]'
+            className='relative w-full'
             disabled={!isComplete}
           >
             {t('implementTemplate')}
           </Button>
-          <ConfirmButtonTooltip control={tooltipControl} />
         </div>
       </div>
     </>
