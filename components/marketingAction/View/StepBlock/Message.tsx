@@ -27,6 +27,8 @@ export const Message = ({ message, enableLine = true }: Props) => {
     return val;
   };
 
+  const { title_draft_raw: mailTitle, content_draft_raw: mailContent } = message.mail_content;
+
   const {
     text_msg_display: isDisplayText,
     text_msg_content_draft_raw: content,
@@ -39,13 +41,14 @@ export const Message = ({ message, enableLine = true }: Props) => {
     <>
       <Answer name={t('msgContentEmail')}>
         <div>[{t('headLines')}]</div>
-        <RichMessageView
-          singleLine
-          className='mt-2'
-          value={convertToEditorState(message.mail_content.title_draft_raw)}
-        />
+        {mailTitle ? (
+          <RichMessageView singleLine className='mt-2' value={convertToEditorState(mailTitle)} />
+        ) : (
+          <div> {message.mail_content.title} </div>
+        )}
+
         <div className='mt-3'>[{t('bodyText')}]</div>
-        <RichMessageView value={convertToEditorState(message.mail_content.content_draft_raw)} />
+        <RichMessageView value={convertToEditorState(mailContent)} />
       </Answer>
       {enableLine && (
         <>
@@ -56,17 +59,21 @@ export const Message = ({ message, enableLine = true }: Props) => {
               <RichMessageView singleLine className='mt-2' value={convertToEditorState(content)} />
             )}
           </Answer>
-          <Answer name={t('flexMessageImage')}>{ratio}</Answer>
-          <Answer name={t('flexMessageHeadings')}>
-            <RichMessageView singleLine className='mt-2' value={convertToEditorState(headings)} />
-          </Answer>
-          <Answer name={t('pushNotification')}>
-            <RichMessageView
-              singleLine
-              className='mt-2'
-              value={convertToEditorState(pushMsgContent)}
-            />
-          </Answer>
+          {ratio && <Answer name={t('flexMessageImage')}>{ratio}</Answer>}
+          {headings && (
+            <Answer name={t('flexMessageHeadings')}>
+              <RichMessageView singleLine className='mt-2' value={convertToEditorState(headings)} />
+            </Answer>
+          )}
+          {pushMsgContent && (
+            <Answer name={t('pushNotification')}>
+              <RichMessageView
+                singleLine
+                className='mt-2'
+                value={convertToEditorState(pushMsgContent)}
+              />
+            </Answer>
+          )}
         </>
       )}
       <Answer name={t('colorSettings')}>

@@ -7,6 +7,10 @@ import useSWR from 'swr';
 import { MarketingActionAPI } from '@/apis';
 import { ActionContainer } from '@/components/ActionContainer';
 import { Form } from '@/components/common';
+import {
+  convertFromCarouselRaw,
+  convertToCarouselRaw,
+} from '@/components/marketingAction/Edit/utils';
 import { MARKETING_ACTION_URL } from '@/constants';
 import { useVisibilityControl } from '@/hooks';
 import { MarketingActionAlias, MarketingActionRes, MarketingActionStatus, TARGET } from '@/types';
@@ -37,14 +41,7 @@ export const RankingByCategory = () => {
   const methods = useForm();
   const chatPreviewControl = useVisibilityControl();
   const step1Methods = useForm({ defaultValues: { report_period: 'monthly' } });
-  const step2Methods = useForm({
-    defaultValues: {
-      carousel: {
-        title: t('carouselTitle'),
-        content: t('carouselContent'),
-      },
-    },
-  });
+  const step2Methods = useForm();
 
   const step3Methods = useForm({
     defaultValues: {
@@ -120,7 +117,8 @@ export const RankingByCategory = () => {
       const settings = marketingAction.settings;
       step1Methods.reset({ report_period: settings?.report_period });
 
-      step2Methods.reset({ carousel: settings.carousel?.[0] });
+      settings.carousel?.[0] &&
+        step2Methods.reset({ carousel: convertFromCarouselRaw(settings.carousel[0]) });
 
       step3Methods.reset({ ...settings });
 
@@ -157,7 +155,7 @@ export const RankingByCategory = () => {
       status,
       settings: {
         report_period: reportPeriod,
-        carousel: [carousel],
+        carousel: [convertToCarouselRaw(carousel)],
         chat_window_color: chatSettings.chat_window_color,
         display_settings_pc: chatSettings.display_settings_pc,
         display_settings_mobile: chatSettings.display_settings_mobile,

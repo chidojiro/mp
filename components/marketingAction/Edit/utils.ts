@@ -2,7 +2,7 @@ import { convertFromRaw, convertToRaw, EditorState, RawDraftEntityRange } from '
 import { cloneDeep, get, set } from 'lodash-es';
 
 import { richTextEditorDecorator, richTextEditorEmptyValue } from '@/components/common/fields';
-import { MentionData, StepMessage } from '@/types';
+import { Carousel, MentionData, StepMessage } from '@/types';
 
 const draftRawFields = [
   'mail_content.content_draft_raw',
@@ -45,6 +45,43 @@ export const convertFromStepMessageRaw = (stepMessage: StepMessage) => {
   });
 
   return clonedStepMessage;
+};
+
+export const convertToCarouselRaw = (carousel: Carousel) => {
+  const clonedCarousel: any = cloneDeep(carousel);
+
+  const convertEditorStateToJson = (editorState: EditorState | undefined) => {
+    if (!editorState) return undefined;
+
+    return JSON.stringify(convertToRaw(editorState.getCurrentContent()));
+  };
+
+  clonedCarousel.content_draft_raw = convertEditorStateToJson(
+    carousel.content_draft_raw as EditorState
+  );
+  clonedCarousel.title_draft_raw = convertEditorStateToJson(
+    carousel.title_draft_raw as EditorState
+  );
+
+  return clonedCarousel;
+};
+
+export const convertFromCarouselRaw = (carousel: Carousel) => {
+  const clonedCarousel: any = cloneDeep(carousel);
+
+  const convertJsonToEditorState = (json?: string) => {
+    if (!json) return undefined;
+
+    return EditorState.createWithContent(
+      convertFromRaw(JSON.parse(json as string)),
+      richTextEditorDecorator
+    );
+  };
+
+  clonedCarousel.content_draft_raw = convertJsonToEditorState(carousel.content_draft_raw as string);
+  clonedCarousel.title_draft_raw = convertJsonToEditorState(carousel.title_draft_raw as string);
+
+  return clonedCarousel;
 };
 
 const replaceByName = (blockText: string[], name: string, entity: RawDraftEntityRange) => {

@@ -28,7 +28,7 @@ export const Detail = ({
 }: Props) => {
   const { query, pathname, push, locale } = useRouter();
   const { t } = useTranslation('marketingAction');
-  const [period, setPeriod] = useState([new Date(), new Date()]);
+  const [period, setPeriod] = useState<any>([]);
 
   useEffect(() => {
     if (marketingActions.length) {
