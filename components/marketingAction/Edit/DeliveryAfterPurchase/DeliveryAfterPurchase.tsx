@@ -329,6 +329,7 @@ export const DeliveryAfterPurchase = ({}: Props) => {
         output={t('messageDelivery')}
       ></ActionContainer>
       <Stepper className='mt-16'>
+        <Stepper.Navigator />
         <LineUsageSettingsStep
           formMethods={lineUsageSettingsStepMethods}
           complete={isLineUsageSettingsComplete}

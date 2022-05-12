@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { Children, ClassName } from '@/types';
 
 import { Item } from './Item';
+import { Navigator } from './Navigator';
 import { StepperContext } from './StepperContext';
 
 import style from './Stepper.module.css';
@@ -14,6 +15,7 @@ type Props = Children & ClassName & {};
 // eslint-disable-next-line no-empty-pattern
 export const Stepper = ({ children, className }: Props) => {
   const [completedSteps, setCompletedSteps] = React.useState<number[]>([-1]);
+  const [stepRefs, setStepRefs] = React.useState<any>([]);
   const stepsCountRef = React.useRef(-1);
 
   const increaseStepsCount = React.useCallback(() => {
@@ -34,8 +36,10 @@ export const Stepper = ({ children, className }: Props) => {
       stepsCount: stepsCountRef.current,
       completedSteps,
       toggleCompletedStep,
+      stepRefs,
+      setStepRefs,
     }),
-    [completedSteps, increaseStepsCount, toggleCompletedStep]
+    [completedSteps, increaseStepsCount, stepRefs, toggleCompletedStep]
   );
 
   return (
@@ -46,3 +50,4 @@ export const Stepper = ({ children, className }: Props) => {
 };
 
 Stepper.Item = Item;
+Stepper.Navigator = Navigator;

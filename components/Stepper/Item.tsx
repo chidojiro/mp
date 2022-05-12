@@ -11,13 +11,17 @@ type Props = Children & { label: React.ReactNode; complete?: boolean };
 export const Item = React.forwardRef<any, Props>(
   ({ label, children, complete = false }: Props, ref: any) => {
     const [index, setIndex] = React.useState(0);
-    const { increaseStepsCount, toggleCompletedStep, completedSteps } =
+    const { increaseStepsCount, toggleCompletedStep, completedSteps, setStepRefs } =
       React.useContext(StepperContext);
+    const internalRef = React.useRef<HTMLDivElement>(null);
+
+    React.useImperativeHandle(ref, () => internalRef.current, []);
 
     React.useEffect(() => {
       const index = increaseStepsCount();
       setIndex(index);
-    }, [increaseStepsCount]);
+      setStepRefs(prev => [...prev, internalRef]);
+    }, [increaseStepsCount, internalRef, setStepRefs]);
 
     React.useEffect(() => {
       toggleCompletedStep(index);
@@ -27,7 +31,7 @@ export const Item = React.forwardRef<any, Props>(
     const isActive = completedSteps.includes(index - 1);
 
     return (
-      <div className='mp-stepper-item' ref={ref}>
+      <div className='mp-stepper-item' ref={internalRef}>
         <div className={classNames('relative', 'flex items-center')}>
           <div
             className={classNames(
