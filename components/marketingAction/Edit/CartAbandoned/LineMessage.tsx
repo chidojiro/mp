@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next';
 import { EditorState } from 'draft-js';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 import { Form, Icon } from '@/components/common';
 import { RadioGroup } from '@/components/common/fields';
@@ -8,19 +8,19 @@ import { MessageBodyInput } from '@/components/marketingAction/Edit/MessageBodyI
 import { getTextFromEditorState } from '@/components/marketingAction/Edit/utils';
 import { LinePreview } from '@/components/marketingAction/LinePreview';
 import { MessageContentPreviewType } from '@/components/marketingAction/MessageContentPreview';
-import { LineMessages, Option, OPTIONS } from '@/types';
+import { Option, OPTIONS } from '@/types';
 
 type Props = {
   showLineMsg: boolean;
-  message: LineMessages;
   mentionOptions: Option<string, string>[];
   onShowModal: (type: MessageContentPreviewType) => void;
 };
 
-export const LineMessage = ({ showLineMsg, message, mentionOptions, onShowModal }: Props) => {
+export const LineMessage = ({ showLineMsg, mentionOptions, onShowModal }: Props) => {
   const { t } = useTranslation('marketingAction');
 
-  const { setValue, getValues } = useFormContext();
+  const { setValue } = useFormContext();
+  const lineMessage = useWatch({ name: 'line_messages' });
 
   const lineTextOptions = [
     { value: OPTIONS.YES, label: t('displayMsg') },
@@ -36,6 +36,7 @@ export const LineMessage = ({ showLineMsg, message, mentionOptions, onShowModal 
   const handleChangeHeadings = (editorState: EditorState) => {
     const template = getTextFromEditorState(editorState);
     setValue('line_messages.flex_msg_head', template);
+    setValue('line_messages.flex_msg_head_preview', getTextFromEditorState(editorState, true));
   };
 
   return (
@@ -119,7 +120,10 @@ export const LineMessage = ({ showLineMsg, message, mentionOptions, onShowModal 
               {t('openPreview')}
             </span>
           </div>
-          <LinePreview body={message?.text_msg_content} />
+          <LinePreview
+            body={lineMessage?.text_msg_content}
+            headline={lineMessage?.flex_msg_head_preview}
+          />
         </div>
       </div>
     </div>

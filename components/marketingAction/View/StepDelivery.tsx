@@ -1,8 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
 
-import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
-import { useVisibilityControl } from '@/hooks';
 import { MarketingActionAlias as MAAlias } from '@/types';
 
 import { CartAbandoned } from './CartAbandoned';
@@ -32,7 +30,6 @@ const MARKETING_ACTION_STEP_MESSAGE: { [key: string]: any } = {
 
 export const StepDelivery = ({ settings, targetSettings, alias }: Props) => {
   const { t } = useTranslation('marketingAction');
-  const previewMessageControl = useVisibilityControl();
 
   const renderStepMessage = () => {
     const Component = MARKETING_ACTION_STEP_MESSAGE[alias];
@@ -47,13 +44,6 @@ export const StepDelivery = ({ settings, targetSettings, alias }: Props) => {
         <div className='my-2 font-bold text-medium text-secondary'>{t('targetCustomer')}</div>
         <div className='mb-4 text-medium text-gray-dark'>{targetSettings}</div>
       </div>
-      <PreviewOverlay
-        defaultType='mail'
-        mailHeadline=''
-        mailBody=''
-        lineBody=''
-        control={previewMessageControl}
-      />
     </div>
   );
 };

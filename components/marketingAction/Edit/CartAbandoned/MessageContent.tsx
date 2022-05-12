@@ -97,7 +97,6 @@ export const MessageContent = ({ useLine = true, onShowPreview }: Props) => {
         <LineMessage
           showLineMsg={showLineMsg}
           mentionOptions={variablesAsMentionOptions}
-          message={message.line_messages}
           onShowModal={onShowModal}
         />
       )}

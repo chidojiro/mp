@@ -40,6 +40,7 @@ export const Message2SettingsStep = React.forwardRef(
     const mailHeadline = watch('mail_content.title');
     const mailBody = watch('mail_content.content');
     const lineBody = watch('line_messages.text_msg_content');
+    const lineHeadline = watch('line_messages.flex_msg_head_preview');
 
     const handleMailPreviewClick = () => {
       setPreviewType('mail');
@@ -62,6 +63,7 @@ export const Message2SettingsStep = React.forwardRef(
             mailHeadline={mailHeadline}
             mailBody={mailBody}
             lineBody={lineBody}
+            lineHeadline={lineHeadline}
           />
           <Section>
             <span className='text-gray-700 text-medium'>{t('descriptionPlaceholder')}</span>
