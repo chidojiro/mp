@@ -14,41 +14,12 @@ import { InsertLinkParams } from './types';
 import {
   emptyValue,
   getCurrentBlock,
+  getMentionTrigger,
   getPlainTextWithInterpolatedMentionValue,
   replaceText,
 } from './utils';
 
 import styles from './RichTextEditor.module.css';
-
-const getMentionTrigger = () => {
-  const focusNode = window.getSelection()?.focusNode;
-  if (!focusNode) return;
-
-  let mentionTrigger: Element | undefined = undefined;
-  if (
-    focusNode.parentElement?.parentElement?.parentElement?.classList.contains('mention-trigger')
-  ) {
-    // case the currently focused node is itself a mention trigger
-    mentionTrigger = focusNode.parentElement.parentElement.parentElement;
-  } else if (
-    // case it focus on the next element which is a plain text, we take the previous trigger node if any
-    focusNode.parentElement?.parentElement?.previousElementSibling?.classList.contains(
-      'mention-trigger'
-    )
-  ) {
-    mentionTrigger = focusNode.parentElement.parentElement.previousElementSibling;
-  } else if (
-    // case it focus on the next element which is a mention we take the previous trigger node if any
-    focusNode.parentElement?.parentElement?.parentElement?.parentElement?.previousElementSibling?.classList.contains(
-      'mention-trigger'
-    )
-  ) {
-    mentionTrigger =
-      focusNode.parentElement.parentElement.parentElement.parentElement.previousElementSibling;
-  }
-
-  return mentionTrigger;
-};
 
 export type Ref = {
   insertMention: (option: Option) => void;
@@ -142,7 +113,7 @@ export const RichTextEditor = React.forwardRef(
     }, [editorState]);
 
     const getHtml = React.useCallback(() => {
-      return editorRef.current.editorContainer.innerHTML;
+      return editorRef.current?.editorContainer.innerHTML;
     }, []);
 
     React.useImperativeHandle(ref, () => ({
@@ -214,8 +185,6 @@ export const RichTextEditor = React.forwardRef(
       },
       [closeMentionSuggestions, dropdownControl, mentionCloseForcer.visible]
     );
-
-    console.log(mentionQuery, dropdownControl.visible);
 
     const handleChange = (newEditorState: EditorState) => {
       const transformedEditorState = applyMentionTriggerEntityIfAny(newEditorState);
@@ -311,7 +280,7 @@ export const RichTextEditor = React.forwardRef(
       return 'handled';
     };
 
-    useOnClickOutside([dropdownRef, editorRef.current.editorContainer], () => {
+    useOnClickOutside([dropdownRef, editorRef.current?.editorContainer], () => {
       closeMentionSuggestions();
     });
 

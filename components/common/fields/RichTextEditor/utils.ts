@@ -186,3 +186,33 @@ export const getPlainTextWithInterpolatedMentionValue = (editorState: EditorStat
 };
 
 export const emptyValue = EditorState.createEmpty(decorator);
+
+export const getMentionTrigger = () => {
+  const focusNode = window.getSelection()?.focusNode;
+  if (!focusNode) return;
+
+  let mentionTrigger: Element | undefined = undefined;
+  if (
+    focusNode.parentElement?.parentElement?.parentElement?.classList.contains('mention-trigger')
+  ) {
+    // case the currently focused node is itself a mention trigger
+    mentionTrigger = focusNode.parentElement.parentElement.parentElement;
+  } else if (
+    // case it focus on the next element which is a plain text, we take the previous trigger node if any
+    focusNode.parentElement?.parentElement?.previousElementSibling?.classList.contains(
+      'mention-trigger'
+    )
+  ) {
+    mentionTrigger = focusNode.parentElement.parentElement.previousElementSibling;
+  } else if (
+    // case it focus on the next element which is a mention we take the previous trigger node if any
+    focusNode.parentElement?.parentElement?.parentElement?.parentElement?.previousElementSibling?.classList.contains(
+      'mention-trigger'
+    )
+  ) {
+    mentionTrigger =
+      focusNode.parentElement.parentElement.parentElement.parentElement.previousElementSibling;
+  }
+
+  return mentionTrigger;
+};
