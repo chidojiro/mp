@@ -186,7 +186,7 @@ export const Button = React.forwardRef<Ref, Props>(
     const hasIcon = !!loading || !!complete || !!icon;
 
     const renderIcon = () => {
-      if (loading) return <Spinner className={classNames(textColor, 'mr-3')} size={20} />;
+      if (loading) return <Spinner className={classNames(textColor, 'mr-3')} size={18} />;
 
       if (complete)
         return (

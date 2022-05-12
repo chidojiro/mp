@@ -16,8 +16,8 @@ export const Spinner = ({ className, size = 20, ...restProps }: Props) => {
       height={size}
       {...restProps}
     >
-      <circle className={styles['loader__ring']} cx='25' cy='25' r='22.5' />
-      <circle className={styles['loader__line']} cx='25' cy='25' r='22.5' />
+      <circle className={styles['spinner__ring']} cx='25' cy='25' r='22.5' />
+      <circle className={styles['spinner__line']} cx='25' cy='25' r='22.5' />
     </svg>
   );
 };
