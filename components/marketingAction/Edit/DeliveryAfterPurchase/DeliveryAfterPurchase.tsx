@@ -240,8 +240,6 @@ export const DeliveryAfterPurchase = ({}: Props) => {
   React.useEffect(() => {
     if (isComplete) {
       tooltipControl.close();
-    } else {
-      tooltipControl.open();
     }
   }, [isComplete, tooltipControl]);
 
