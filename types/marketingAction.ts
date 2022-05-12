@@ -128,6 +128,8 @@ export type StepMessage = {
 export type Carousel = {
   title: string;
   content: string;
+  content_draft_raw: string | EditorState;
+  title_draft_raw: string | EditorState;
 };
 
 export type MarketingActionRes = {
