@@ -20,7 +20,7 @@ export const RadioTag = ({ value, label }: Props) => {
         <Link href={{ pathname, query: { ...query, actionType: value } }} passHref>
           <label
             className={classNames(
-              'rounded-full px-4 py-1 font-bold cursor-pointer text-medium',
+              'rounded-full px-4 h-[30px] font-bold cursor-pointer text-medium',
               'flex items-center gap-1',
               'border border-solid',
               {

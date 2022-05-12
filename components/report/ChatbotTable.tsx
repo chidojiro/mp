@@ -32,9 +32,6 @@ const data = [
     openUuRate: '200（4.0%）',
     usedUuRate: '200（4.0%）',
     cvUuRate: {
-      intermediateCv: {
-        rate: '12（0.2％）',
-      },
       finalCv: {
         rate: '12（0.2％）',
         price: '256,000円',
@@ -143,10 +140,12 @@ export const ChatbotTable = ({ className }: Props) => {
             <Table.Cell className='text-right w-2/12'>{item.openUuRate}</Table.Cell>
             <Table.Cell className='text-right w-2/12'>{item.usedUuRate}</Table.Cell>
             <Table.Cell className='w-2/12'>
-              <div className='flex'>
-                <div className='text-orange'>{t('intermediateCv') + t('colon')}</div>
-                <div>{item.cvUuRate.intermediateCv.rate}</div>
-              </div>
+              {!!item.cvUuRate.intermediateCv?.rate && (
+                <div className='flex'>
+                  <div className='text-orange'>{t('intermediateCv') + t('colon')}</div>
+                  <div>{item.cvUuRate.intermediateCv.rate}</div>
+                </div>
+              )}
               <div className='flex mt-2'>
                 <div className='text-primary'>{t('finalCv') + t('colon')}</div>
                 <div>

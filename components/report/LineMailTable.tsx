@@ -49,9 +49,6 @@ const data = [
       openUuRate: '200（4.0%）',
       clickedUuRate: '200（4.0%）',
       cvUuRate: {
-        intermediateCv: {
-          rate: '12（0.2％）',
-        },
         finalCv: {
           rate: '12（0.2％）',
           price: '256,000円',
@@ -63,9 +60,6 @@ const data = [
       openUuRate: '200（4.0%）',
       clickedUuRate: '200（4.0%）',
       cvUuRate: {
-        intermediateCv: {
-          rate: '12（0.2％）',
-        },
         finalCv: {
           rate: '12（0.2％）',
           price: '256,000円',
@@ -82,9 +76,6 @@ const data = [
       openUuRate: '200（4.0%）',
       clickedUuRate: '200（4.0%）',
       cvUuRate: {
-        intermediateCv: {
-          rate: '12（0.2％）',
-        },
         finalCv: {
           rate: '12（0.2％）',
           price: '256,000円',
@@ -96,9 +87,6 @@ const data = [
       openUuRate: '200（4.0%）',
       clickedUuRate: '200（4.0%）',
       cvUuRate: {
-        intermediateCv: {
-          rate: '12（0.2％）',
-        },
         finalCv: {
           rate: '12（0.2％）',
           price: '256,000円',
@@ -157,10 +145,12 @@ export const LineMailTable = ({ className = 'table-fixed' }: Props) => {
               <Table.Cell className='text-right'>{item.line.openUuRate}</Table.Cell>
               <Table.Cell className='text-right'>{item.line.clickedUuRate}</Table.Cell>
               <Table.Cell>
-                <div className='flex'>
-                  <div className='text-orange'>{t('intermediateCv') + t('colon')}</div>
-                  <div>{item.line.cvUuRate.intermediateCv.rate}</div>
-                </div>
+                {!!item.line.cvUuRate.intermediateCv?.rate && (
+                  <div className='flex'>
+                    <div className='text-orange'>{t('intermediateCv') + t('colon')}</div>
+                    <div>{item.line.cvUuRate.intermediateCv.rate}</div>
+                  </div>
+                )}
                 <div className='flex mt-2'>
                   <div className='text-primary'>{t('finalCv') + t('colon')}</div>
                   <div>
@@ -176,10 +166,12 @@ export const LineMailTable = ({ className = 'table-fixed' }: Props) => {
               <Table.Cell className='text-right'>{item.line.openUuRate}</Table.Cell>
               <Table.Cell className='text-right'>{item.line.clickedUuRate}</Table.Cell>
               <Table.Cell>
-                <div className='flex'>
-                  <div className='text-orange'>{t('intermediateCv') + t('colon')}</div>
-                  <div>{item.line.cvUuRate.intermediateCv.rate}</div>
-                </div>
+                {item.line.cvUuRate.intermediateCv?.rate && (
+                  <div className='flex'>
+                    <div className='text-orange'>{t('intermediateCv') + t('colon')}</div>
+                    <div>{item.line.cvUuRate.intermediateCv.rate}</div>
+                  </div>
+                )}
                 <div className='flex mt-2'>
                   <div className='text-primary'>{t('finalCv') + t('colon')}</div>
                   <div>

@@ -202,7 +202,7 @@ export const Button = React.forwardRef<Ref, Props>(
         {...restProps}
         type={type}
         className={classNames(
-          'inline-flex justify-center items-center border rounded select-none',
+          'inline-flex justify-center items-center border rounded select-none filter hover:brightness-[0.85] transition-all',
           padding,
           textColor,
           backgroundColor,

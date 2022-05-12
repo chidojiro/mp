@@ -15,7 +15,7 @@ export const CheckboxTag = ({ value, label, checked, onChange }: Props) => {
   return (
     <label
       className={classNames(
-        'rounded-full px-4 py-1.5 font-bold cursor-pointer text-medium',
+        'rounded-full px-4 h-[30px] font-bold cursor-pointer text-medium',
         'flex items-center gap-1',
         'border border-solid',
         {
