@@ -64,6 +64,8 @@ export const RichTextEditor = React.forwardRef(
     const [mentionQuery, setMentionQuery] = React.useState('');
     const editorRef = React.useRef<any>(null);
 
+    const mentionTemporaryControl = useVisibilityControl();
+
     const insertMention = React.useCallback(
       (option: Option<MentionData, string>) => {
         const newEditorState = replaceText({
@@ -153,6 +155,7 @@ export const RichTextEditor = React.forwardRef(
     const handleChange = (newEditorState: EditorState) => {
       const transformedEditorState = applyMentionTriggerEntity(newEditorState);
       setEditorState(transformedEditorState);
+      mentionTemporaryControl.close();
     };
 
     const getMentionTriggerData = (editorState: EditorState) => {
@@ -184,13 +187,22 @@ export const RichTextEditor = React.forwardRef(
 
     const dropdownControl = useVisibilityControl();
 
-    const closeMentionSuggestions = React.useCallback(() => {
-      setTriggerNode(null);
-      setMentionQuery('');
-      dropdownControl.close();
-    }, [dropdownControl]);
+    const closeMentionSuggestions = React.useCallback(
+      (force?: boolean) => {
+        setTriggerNode(null);
+        setMentionQuery('');
+        dropdownControl.close();
+
+        if (force) {
+          mentionTemporaryControl.open();
+        }
+      },
+      [dropdownControl, mentionTemporaryControl]
+    );
 
     const checkIfShouldRenderSuggestions = React.useCallback(() => {
+      if (mentionTemporaryControl.visible) return;
+
       const focusNode = window.getSelection()?.focusNode;
 
       if (!focusNode) return;
@@ -312,7 +324,7 @@ export const RichTextEditor = React.forwardRef(
             editorState={editorState}
             onChange={readOnly ? noop : handleChange}
             handleReturn={handleReturn}
-            onEscape={closeMentionSuggestions}
+            onEscape={() => closeMentionSuggestions(true)}
             handlePastedText={singleLine ? handlePaste : undefined}
             readOnly={readOnly}
           />

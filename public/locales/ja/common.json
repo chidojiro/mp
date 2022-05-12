@@ -57,5 +57,7 @@
   "emailAddress": "E-mailアドレス",
   "cancel": "キャンセル",
   "save": "保存する",
-  "dateRangePlaceholder": "期間を選択してください"
+  "dateRangePlaceholder": "期間を選択してください",
+  "h": "時",
+  "m": "分"
 }

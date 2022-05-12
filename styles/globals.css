@@ -92,7 +92,7 @@
   }
 
   .disabled {
-    @apply cursor-default pointer-events-none opacity-70 !important;
+    @apply cursor-default pointer-events-none opacity-40 !important;
   }
 }
 

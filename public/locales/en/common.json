@@ -51,5 +51,7 @@
   "emailAddress": "E-mail address",
   "cancel": "Cancel",
   "save": "Save",
-  "dateRangePlaceholder": "Please select a time period"
+  "dateRangePlaceholder": "Please select a time period",
+  "h": "h",
+  "m": "m"
 }

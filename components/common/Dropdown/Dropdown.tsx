@@ -66,7 +66,14 @@ export const Dropdown = ({ options = [], onSelect, control: controlProp, ...rest
   return (
     <Popover control={control} {...restProps}>
       {!!options.length && (
-        <div className={classNames('mp-dropdown', 'p-2.5', 'bg-white', 'rounded', 'shadow-md')}>
+        <div
+          className={classNames(
+            'mp-dropdown',
+            'rounded',
+            'bg-white shadow-[0px_0px_6px_#00000029]',
+            'max-h-[50vh] overflow-auto'
+          )}
+        >
           {options.map((option, idx) => (
             <div
               onClick={() => handleSelect(option.value, option)}
@@ -75,7 +82,7 @@ export const Dropdown = ({ options = [], onSelect, control: controlProp, ...rest
                 'mp-dropdown-option',
                 'block w-full text-left',
                 'outline-none',
-                'p-2.5 rounded focus:bg-gray-200 cursor-pointer select-none',
+                'px-2.5 py-1.5 focus:bg-gray-200 cursor-pointer select-none',
                 { 'bg-gray-200': focusedIndex === idx }
               )}
               key={idx}

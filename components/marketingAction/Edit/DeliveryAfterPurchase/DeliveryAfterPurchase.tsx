@@ -237,6 +237,14 @@ export const DeliveryAfterPurchase = ({}: Props) => {
     isMessage2SettingsComplete &&
     isTargetSettingsComplete;
 
+  React.useEffect(() => {
+    if (isComplete) {
+      tooltipControl.close();
+    } else {
+      tooltipControl.open();
+    }
+  }, [isComplete, tooltipControl]);
+
   return (
     <>
       <Modal
