@@ -69,7 +69,7 @@ export const Popover = ({
       {clonedTrigger}
       <ConditionalWrapper active={usePortal} component={Portal as any}>
         <div ref={popoverRef} style={styles.popper} {...attributes.popper}>
-          {!!control.visible && children}
+          {!!control.visible && <div className='animate-fade-in'>{children}</div>}
         </div>
       </ConditionalWrapper>
     </>
