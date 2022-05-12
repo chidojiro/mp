@@ -32,7 +32,7 @@ export const EmojiSign = ({ className, onSelect }: Props) => {
         <div
           className={classNames(
             className,
-            'select-none',
+            'select-none cursor-pointer',
             'rounded border border-solid border-gray-300 w-7 h-7 flex items-center justify-center text-secondary bg-white'
           )}
         >
