@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'next-i18next';
 
-import { Button } from '@/components/common';
 import { useVisibilityControl } from '@/hooks';
 import { StepMessage } from '@/types';
 
@@ -41,20 +40,23 @@ export const CartAbandoned = ({ settings }: Props) => {
       <StepBlock stepName={t('useLine')}>
         <Answer name={t('useLine')}>{useLine}</Answer>
       </StepBlock>
-      <StepBlock stepName={t('msgSetting1')}>
+      <StepBlock
+        stepName={t('msgSetting1')}
+        showPreview
+        handlePreview={() => {
+          openPreview(firstMsg);
+        }}
+      >
         <TimeDelivery message={firstMsg} fromTheDateText={t('fromTheDateCartAbandoned')} />
         <Message message={firstMsg} enableLine={enableLine} />
-        <div className='text-center'>
-          <Button
-            colorScheme='negative'
-            className='text-medium w-[240px]'
-            onClick={() => openPreview(firstMsg)}
-          >
-            {t('viewPreview')}
-          </Button>
-        </div>
       </StepBlock>
-      <StepBlock stepName={t('msgSetting2')}>
+      <StepBlock
+        stepName={t('msgSetting2')}
+        showPreview
+        handlePreview={() => {
+          openPreview(secondMsg);
+        }}
+      >
         <Answer name={t('msg2Option')}>{useMsg2}</Answer>
         {secondMsg?.send_flag && (
           <>
@@ -63,23 +65,15 @@ export const CartAbandoned = ({ settings }: Props) => {
             {secondMsg.has_self_mail_content && (
               <Message enableLine={enableLine} message={secondMsg} />
             )}
-            <div className='text-center'>
-              <Button
-                colorScheme='negative'
-                className='text-medium w-[240px]'
-                onClick={() => openPreview(secondMsg)}
-              >
-                {t('viewPreview')}
-              </Button>
-            </div>
           </>
         )}
       </StepBlock>
 
       <PreviewOverlay
         defaultType='mail'
-        mailHeadline={messagePreview?.mail_content.title || ''}
-        mailBody={messagePreview?.mail_content.content || ''}
+        mailHeadline={messagePreview?.mail_content.title_preview || ''}
+        mailBody={messagePreview?.mail_content.content_preview || ''}
+        lineHeadline={messagePreview?.line_messages.flex_msg_head_preview || ''}
         lineBody={messagePreview?.line_messages.text_msg_content || ''}
         control={previewMessageControl}
         enableLine={enableLine}
