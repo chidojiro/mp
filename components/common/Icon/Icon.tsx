@@ -29,6 +29,7 @@ import FreeShipping from './icons/free-shipping.svg';
 import Group from './icons/group.svg';
 import Home from './icons/home.svg';
 import Line from './icons/line.svg';
+import Link from './icons/link.svg';
 import loyalFluctuate from './icons/loyal-fluctuate.svg';
 import loyalSleepReturned from './icons/loyal-sleep-returned.svg';
 import loyalIcon from './icons/loyal-status.svg';
@@ -103,6 +104,7 @@ const ICONS = {
   document: Document,
   calendar: Calendar,
   'check-thin': CheckThin,
+  link: Link,
 };
 
 export type Name = keyof typeof ICONS;

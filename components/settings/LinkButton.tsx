@@ -70,7 +70,7 @@ export const LinkButton = ({ className, onInsertConfirm }: Props) => {
             className
           )}
         >
-          <Icon name='variable' className='w-4 h-3.5 mr-1' />
+          <Icon name='link' className='w-4 h-3.5 mr-1' />
           <span className='text-medium text-gray-dark'>{t('link')}</span>
         </div>
       }
