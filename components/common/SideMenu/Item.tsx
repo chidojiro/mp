@@ -34,7 +34,7 @@ export const Item = ({ isOpenAccordion, data }: Props) => {
               onClickItem?.();
             }}
             className={classNames(
-              'text-ellipsis overflow-hidden whitespace-nowrap hover:whitespace-normal px-[18px] py-1.5 border border-white hover:border-dark-gray items-center hover:bg-gray-light text-gray-dark w-full rounded-full cursor-pointer font-bold text-medium mb-2.5',
+              'text-ellipsis overflow-hidden whitespace-nowrap hover:whitespace-normal px-[18px] py-1.5 border border-white hover:border-dark-gray items-center hover:bg-gray-light text-gray-dark w-full rounded-full cursor-pointer font-bold text-medium mb-2.5 transition-all',
               {
                 'bg-gray-light border border-dark-gray ': isActive,
               }

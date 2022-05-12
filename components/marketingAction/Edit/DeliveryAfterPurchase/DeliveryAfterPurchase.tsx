@@ -71,7 +71,9 @@ export const DeliveryAfterPurchase = ({}: Props) => {
         text_msg_display: false,
         flex_msg_image_ratio: '1:1',
       },
-      color: '#55C5D9',
+      mail_content: {
+        color: '#55C5D9',
+      },
       send_order: 1,
     },
   });
@@ -86,7 +88,9 @@ export const DeliveryAfterPurchase = ({}: Props) => {
         text_msg_display: false,
         flex_msg_image_ratio: '1:1',
       },
-      color: '#55C5D9',
+      mail_content: {
+        color: '#55C5D9',
+      },
       report_period: StepMessageReportPeriod.MONTHLY,
       send_order: 2,
     },

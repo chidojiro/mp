@@ -94,6 +94,8 @@ export type MailContent = {
 
   content: string;
   content_draft_raw: string | EditorState;
+
+  color: string;
 };
 
 export type LineMessages = {
@@ -119,7 +121,6 @@ export type StepMessage = {
   template?: StepMessageTemplate;
   mail_content: MailContent;
   line_messages: LineMessages;
-  color: string;
   has_self_mail_content: boolean;
   content_verified: boolean;
 };

@@ -77,7 +77,10 @@ export const Message = ({ message, enableLine = true }: Props) => {
         </>
       )}
       <Answer name={t('colorSettings')}>
-        <Color color={message.color} label={t(ColorUtils.getName(message.color))} />
+        <Color
+          color={message.mail_content.color}
+          label={t(ColorUtils.getName(message.mail_content.color))}
+        />
       </Answer>
     </>
   );
