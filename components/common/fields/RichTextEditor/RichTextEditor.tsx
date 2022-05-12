@@ -20,6 +20,36 @@ import {
 
 import styles from './RichTextEditor.module.css';
 
+const getMentionTrigger = () => {
+  const focusNode = window.getSelection()?.focusNode;
+  if (!focusNode) return;
+
+  let mentionTrigger: Element | undefined = undefined;
+  if (
+    focusNode.parentElement?.parentElement?.parentElement?.classList.contains('mention-trigger')
+  ) {
+    // case the currently focused node is itself a mention trigger
+    mentionTrigger = focusNode.parentElement.parentElement.parentElement;
+  } else if (
+    // case it focus on the next element which is a plain text, we take the previous trigger node if any
+    focusNode.parentElement?.parentElement?.previousElementSibling?.classList.contains(
+      'mention-trigger'
+    )
+  ) {
+    mentionTrigger = focusNode.parentElement.parentElement.previousElementSibling;
+  } else if (
+    // case it focus on the next element which is a mention we take the previous trigger node if any
+    focusNode.parentElement?.parentElement?.parentElement?.parentElement?.previousElementSibling?.classList.contains(
+      'mention-trigger'
+    )
+  ) {
+    mentionTrigger =
+      focusNode.parentElement.parentElement.parentElement.parentElement.previousElementSibling;
+  }
+
+  return mentionTrigger;
+};
+
 export type Ref = {
   insertMention: (option: Option) => void;
   insertText: (text: string) => void;
@@ -66,6 +96,7 @@ export const RichTextEditor = React.forwardRef(
     const dropdownRef = React.useRef<any>(null);
 
     const mentionCloseForcer = useVisibilityControl();
+    const dropdownControl = useVisibilityControl();
 
     const insertMention = React.useCallback(
       (option: Option<string, string>) => {
@@ -122,39 +153,72 @@ export const RichTextEditor = React.forwardRef(
       insertLink,
     }));
 
-    const applyMentionTriggerEntity = React.useCallback((editorState: EditorState) => {
-      const currentBlock = getCurrentBlock(editorState);
-      if (!currentBlock) return editorState;
+    const closeMentionSuggestions = React.useCallback(
+      (force?: boolean) => {
+        setTriggerNode(null);
+        setMentionQuery('');
+        dropdownControl.close();
 
-      const anchorOffset = editorState.getSelection().getAnchorOffset();
-      const textUntilAnchor = currentBlock.getText().slice(0, anchorOffset);
-      const lastAtCharacter = textUntilAnchor.lastIndexOf('@');
+        if (force) {
+          mentionCloseForcer.open();
+        }
+      },
+      [dropdownControl, mentionCloseForcer]
+    );
 
-      if (lastAtCharacter === -1) return editorState;
+    const applyMentionTriggerEntityIfAny = React.useCallback(
+      (editorState: EditorState): EditorState => {
+        const currentBlock = getCurrentBlock(editorState);
+        const anchorOffset = editorState.getSelection().getAnchorOffset();
+        const textUntilAnchor = currentBlock?.getText().slice(0, anchorOffset);
+        const lastAtCharacter = textUntilAnchor?.lastIndexOf('@');
 
-      for (let offset = lastAtCharacter; offset <= anchorOffset; offset++) {
-        const currentEntityKey = currentBlock.getEntityAt(offset);
+        if (
+          !currentBlock ||
+          mentionCloseForcer.visible ||
+          lastAtCharacter === -1 ||
+          lastAtCharacter === undefined ||
+          textUntilAnchor === undefined
+        ) {
+          closeMentionSuggestions();
+          return editorState;
+        }
 
-        const currentEntity =
-          currentEntityKey && editorState.getCurrentContent().getEntity(currentEntityKey);
+        for (let offset = lastAtCharacter; offset < anchorOffset; offset++) {
+          const currentEntityKey = currentBlock.getEntityAt(offset);
 
-        if (currentEntity && currentEntity.getType() !== 'MENTION_TRIGGER') return editorState;
-      }
+          const currentEntity = currentEntityKey
+            ? editorState.getCurrentContent().getEntity(currentEntityKey)
+            : undefined;
 
-      const mentionTriggerContent = textUntilAnchor.slice(lastAtCharacter, anchorOffset);
+          if (currentEntity && currentEntity.getType() !== 'MENTION_TRIGGER') {
+            closeMentionSuggestions();
+            return editorState;
+          }
+        }
 
-      return replaceText({
-        editorState,
-        entityType: 'MENTION_TRIGGER',
-        mutability: 'MUTABLE',
-        start: lastAtCharacter,
-        end: anchorOffset,
-        newText: mentionTriggerContent,
-      });
-    }, []);
+        const { content } = getMentionTriggerData(editorState);
+        setMentionQuery(content.slice(1));
+        dropdownControl.open();
+
+        const mentionTriggerContent = textUntilAnchor.slice(lastAtCharacter, anchorOffset);
+
+        return replaceText({
+          editorState,
+          entityType: 'MENTION_TRIGGER',
+          mutability: 'MUTABLE',
+          start: lastAtCharacter,
+          end: anchorOffset,
+          newText: mentionTriggerContent,
+        });
+      },
+      [closeMentionSuggestions, dropdownControl, mentionCloseForcer.visible]
+    );
+
+    console.log(mentionQuery, dropdownControl.visible);
 
     const handleChange = (newEditorState: EditorState) => {
-      const transformedEditorState = applyMentionTriggerEntity(newEditorState);
+      const transformedEditorState = applyMentionTriggerEntityIfAny(newEditorState);
       setEditorState(transformedEditorState);
       mentionCloseForcer.close();
     };
@@ -186,65 +250,16 @@ export const RichTextEditor = React.forwardRef(
       setEditorState(newEditorState);
     };
 
-    const dropdownControl = useVisibilityControl();
-
-    const closeMentionSuggestions = React.useCallback(
-      (force?: boolean) => {
-        setTriggerNode(null);
-        setMentionQuery('');
-        dropdownControl.close();
-
-        if (force) {
-          mentionCloseForcer.open();
-        }
-      },
-      [dropdownControl, mentionCloseForcer]
-    );
-
-    const checkIfShouldRenderSuggestions = React.useCallback(() => {
-      if (mentionCloseForcer.visible) return;
-
-      const focusNode = window.getSelection()?.focusNode;
-
-      if (!focusNode) return;
-
-      let mentionTrigger: Element | undefined = undefined;
-      if (
-        focusNode.parentElement?.parentElement?.parentElement?.classList.contains('mention-trigger')
-      ) {
-        // case the currently focused node is itself a mention trigger
-        mentionTrigger = focusNode.parentElement.parentElement.parentElement;
-      } else if (
-        // case it focus on the next element which is a plain text, we take the previous trigger node if any
-        focusNode.parentElement?.parentElement?.previousElementSibling?.classList.contains(
-          'mention-trigger'
-        )
-      ) {
-        mentionTrigger = focusNode.parentElement.parentElement.previousElementSibling;
-      } else if (
-        // case it focus on the next element which is a mention we take the previous trigger node if any
-        focusNode.parentElement?.parentElement?.parentElement?.parentElement?.previousElementSibling?.classList.contains(
-          'mention-trigger'
-        )
-      ) {
-        mentionTrigger =
-          focusNode.parentElement.parentElement.parentElement.parentElement.previousElementSibling;
-      }
-
-      if (!mentionTrigger) {
-        closeMentionSuggestions();
-        return;
-      }
+    const detectActiveTriggerNode = React.useCallback(() => {
+      const mentionTrigger = getMentionTrigger();
+      if (mentionCloseForcer.visible || !mentionTrigger) return;
 
       setTriggerNode(mentionTrigger);
-      const { content } = getMentionTriggerData(editorState);
-      setMentionQuery(content.slice(1));
-      dropdownControl.open();
-    }, [closeMentionSuggestions, dropdownControl, editorState, mentionCloseForcer.visible]);
+    }, [mentionCloseForcer.visible]);
 
     React.useEffect(() => {
-      checkIfShouldRenderSuggestions();
-    }, [checkIfShouldRenderSuggestions, editorState]);
+      detectActiveTriggerNode();
+    }, [detectActiveTriggerNode, editorState]);
 
     const handleReturn = (): DraftHandleValue => {
       if (dropdownControl.visible || singleLine) {
@@ -296,7 +311,7 @@ export const RichTextEditor = React.forwardRef(
       return 'handled';
     };
 
-    useOnClickOutside(dropdownRef, () => {
+    useOnClickOutside([dropdownRef, editorRef.current.editorContainer], () => {
       closeMentionSuggestions();
     });
 

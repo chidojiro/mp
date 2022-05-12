@@ -140,12 +140,8 @@ export const replaceText = (params: ReplaceTextParams) => {
   return newEditorState;
 };
 
-export const getPlainTextWithInterpolatedMentionValue = (
-  editorState: EditorState,
-  debug?: boolean
-) => {
+export const getPlainTextWithInterpolatedMentionValue = (editorState: EditorState) => {
   const rawContent = convertToRaw(editorState.getCurrentContent());
-  if (debug) console.log(rawContent);
 
   const newBlocks = rawContent.blocks.map(({ entityRanges, text, ...restBlock }) => {
     const { segments } = entityRanges.reduce(
@@ -158,7 +154,6 @@ export const getPlainTextWithInterpolatedMentionValue = (
 
         const sliceWithUnicode = (str: string, ...sliceArgs: any) => {
           if (!str) return str;
-          if (debug) console.log(str, sliceArgs);
 
           return Array.from(str)
             .slice(...sliceArgs)

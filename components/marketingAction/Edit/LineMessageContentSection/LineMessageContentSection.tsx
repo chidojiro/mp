@@ -59,7 +59,7 @@ export const LineMessageContentSection = ({
               <Form.MentionsEditor
                 className='mt-5'
                 onChange={(editorState: EditorState) => {
-                  const template = getPlainTextWithInterpolatedMentionValue(editorState, true);
+                  const template = getPlainTextWithInterpolatedMentionValue(editorState);
                   setValue(textMsgContentName, template);
                 }}
                 emoji
