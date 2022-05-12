@@ -8,7 +8,7 @@ import { MarketingActionAPI } from '@/apis';
 import { ActionContainer } from '@/components/ActionContainer';
 import { Form } from '@/components/common';
 import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
-import { useVariables, useVisibilityControl } from '@/hooks';
+import { useVisibilityControl } from '@/hooks';
 import { MarketingActionAlias, MarketingActionStatus, StepMessage, TARGET } from '@/types';
 import { TargetFilterUtils } from '@/utils';
 
@@ -44,15 +44,12 @@ export const CartAbandoned = () => {
     () => MarketingActionAPI.get(marketingActionId as string)
   );
 
-  const { data: variables } = useVariables(MarketingActionAlias.CART_LEFT_NOTIFICATION);
-
   const step1Methods = useForm({ defaultValues: { enable_line: true } });
 
   const messageDefaultSettings = {
     send_at: '10:00',
     mail_content: {
       title: t('forgotSomething'),
-      title_preview: t('forgotSomething'),
       title_draft_raw: getDefaultMessageContentState(t('forgotSomething')),
       content: t('mailContentDefault', { brand_name: t('brandName') }),
       content_draft_raw: getDefaultMessageContentState(
@@ -64,7 +61,6 @@ export const CartAbandoned = () => {
       text_msg_display: false,
       flex_msg_image_ratio: '16:9',
       flex_msg_head: t('forgotSomethingLine'),
-      flex_msg_head_preview: t('forgotSomethingLine'),
       flex_msg_head_draft_raw: getDefaultMessageContentState(t('forgotSomethingLine')),
     },
     color: '#55C5D9',
@@ -120,16 +116,6 @@ export const CartAbandoned = () => {
     },
     [step1Methods, step2Methods, step3Methods, step4Methods]
   );
-
-  useEffect(() => {
-    if (!marketingActionId && variables.length) {
-      const preview = t('mailContentDefault', {
-        brand_name: variables.find(v => v.name === 'brand_name')?.content,
-      });
-      step2Methods.setValue('mail_content.content_preview', preview);
-      step3Methods.setValue('mail_content.content_preview', preview);
-    }
-  }, [variables, marketingActionId, t, step2Methods, step3Methods]);
 
   useEffect(() => {
     if (marketingAction) {
@@ -244,9 +230,9 @@ export const CartAbandoned = () => {
       <div className='relative'>
         <PreviewOverlay
           defaultType={messagePreview?.type}
-          mailHeadline={messagePreview?.mail_content.title_preview}
-          mailBody={messagePreview?.mail_content.content_preview}
-          lineHeadline={messagePreview?.line_messages.flex_msg_head_preview}
+          mailHeadline={messagePreview?.mail_content.title}
+          mailBody={messagePreview?.mail_content.content}
+          lineHeadline={messagePreview?.line_messages.flex_msg_head}
           lineBody={messagePreview?.line_messages.text_msg_content}
           control={previewMessageControl}
         />

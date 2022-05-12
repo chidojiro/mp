@@ -102,7 +102,6 @@ export type LineMessages = {
   text_msg_content_draft_raw: string | EditorState;
   flex_msg_image_ratio: string;
   flex_msg_head: string;
-  flex_msg_head_preview: string;
   flex_msg_head_draft_raw: string | EditorState;
   push_msg_content: string;
   push_msg_content_draft_raw: string | EditorState;

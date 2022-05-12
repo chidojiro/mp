@@ -3,9 +3,8 @@ import { EditorState } from 'draft-js';
 import { useFormContext } from 'react-hook-form';
 
 import { Form } from '@/components/common';
+import { getPlainTextWithInterpolatedMentionValue } from '@/components/common/fields';
 import { Option } from '@/types';
-
-import { getTextFromEditorState } from '../utils';
 
 type Props = {
   name: string;
@@ -31,7 +30,7 @@ export const MessageBodyInput = ({
   const { setValue } = useFormContext();
 
   const handleChange = (editorState: EditorState) => {
-    const template = getTextFromEditorState(editorState);
+    const template = getPlainTextWithInterpolatedMentionValue(editorState);
     setValue(name, template);
   };
   return (
@@ -47,7 +46,8 @@ export const MessageBodyInput = ({
           shouldValidate
             ? {
                 validate: {
-                  required: (value: EditorState) => !!value && !!getTextFromEditorState(value),
+                  required: (value: EditorState) =>
+                    !!value && !!getPlainTextWithInterpolatedMentionValue(value),
                 },
               }
             : undefined
