@@ -8,12 +8,12 @@ import { MessageBodyInput } from '@/components/marketingAction/Edit/MessageBodyI
 import { getTextFromEditorState } from '@/components/marketingAction/Edit/utils';
 import { LinePreview } from '@/components/marketingAction/LinePreview';
 import { MessageContentPreviewType } from '@/components/marketingAction/MessageContentPreview';
-import { LineMessages, MentionData, Option, OPTIONS } from '@/types';
+import { LineMessages, Option, OPTIONS } from '@/types';
 
 type Props = {
   showLineMsg: boolean;
   message: LineMessages;
-  mentionOptions: Option<MentionData, string>[];
+  mentionOptions: Option<string, string>[];
   onShowModal: (type: MessageContentPreviewType) => void;
 };
 

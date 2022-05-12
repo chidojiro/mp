@@ -3,16 +3,15 @@ import { EditorState } from 'draft-js';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 import { Form, Icon } from '@/components/common';
-import { RadioGroup } from '@/components/common/fields';
-import { getTextFromEditorState } from '@/components/marketingAction/Edit/utils';
+import { getPlainTextWithInterpolatedMentionValue, RadioGroup } from '@/components/common/fields';
 import { MessageContentPreview } from '@/components/marketingAction/MessageContentPreview';
 import { Section } from '@/components/Section';
-import { MarketingActionAlias, MentionData, Option } from '@/types';
+import { MarketingActionAlias, Option } from '@/types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {
   onPreviewClick: () => void;
-  mentionOptions: Option<MentionData, string>[];
+  mentionOptions: Option<string, string>[];
   marketingAction?: MarketingActionAlias;
 };
 
@@ -60,12 +59,8 @@ export const LineMessageContentSection = ({
               <Form.MentionsEditor
                 className='mt-5'
                 onChange={(editorState: EditorState) => {
-                  const template = getTextFromEditorState(editorState);
+                  const template = getPlainTextWithInterpolatedMentionValue(editorState, true);
                   setValue(textMsgContentName, template);
-                  setValue(
-                    `${textMsgContentName}_preview`,
-                    getTextFromEditorState(editorState, true)
-                  );
                 }}
                 emoji
                 name={textMsgContentName + '_draft_raw'}
@@ -73,7 +68,8 @@ export const LineMessageContentSection = ({
                 rules={
                   displayLineMessage && {
                     validate: {
-                      required: (value: EditorState) => !!value && !!getTextFromEditorState(value),
+                      required: (value: EditorState) =>
+                        !!value && !!getPlainTextWithInterpolatedMentionValue(value),
                     },
                   }
                 }
@@ -90,7 +86,7 @@ export const LineMessageContentSection = ({
               <p className='mb-2 mt-5 text-secondary'>{t('flexMessageImageRatio')}</p>
               <Form.MentionsEditor
                 onChange={(editorState: EditorState) => {
-                  const template = getTextFromEditorState(editorState);
+                  const template = getPlainTextWithInterpolatedMentionValue(editorState);
                   setValue(flexMsgHeadName, template);
                 }}
                 singleLine
@@ -99,7 +95,8 @@ export const LineMessageContentSection = ({
                 rules={
                   displayLineMessage && {
                     validate: {
-                      required: (value: EditorState) => !!value && !!getTextFromEditorState(value),
+                      required: (value: EditorState) =>
+                        !!value && !!getPlainTextWithInterpolatedMentionValue(value),
                     },
                   }
                 }
@@ -113,7 +110,7 @@ export const LineMessageContentSection = ({
               </p>
               <Form.MentionsEditor
                 onChange={(editorState: EditorState) => {
-                  const template = getTextFromEditorState(editorState);
+                  const template = getPlainTextWithInterpolatedMentionValue(editorState);
                   setValue(pushMessageContentName, template);
                 }}
                 emoji
@@ -122,7 +119,8 @@ export const LineMessageContentSection = ({
                 rules={
                   displayLineMessage && {
                     validate: {
-                      required: (value: EditorState) => !!value && !!getTextFromEditorState(value),
+                      required: (value: EditorState) =>
+                        !!value && !!getPlainTextWithInterpolatedMentionValue(value),
                     },
                   }
                 }

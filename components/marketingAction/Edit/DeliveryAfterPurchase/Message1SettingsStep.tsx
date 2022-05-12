@@ -10,7 +10,7 @@ import { PreviewOverlay } from '@/components/marketingAction/PreviewOverlay';
 import { Section } from '@/components/Section';
 import { Stepper } from '@/components/Stepper';
 import { useVariables, useVisibilityControl } from '@/hooks';
-import { MentionData, Option, StepMessageTemplate } from '@/types';
+import { StepMessageTemplate } from '@/types';
 import { MarketingActionAlias } from '@/types/marketingAction';
 
 import { LineMessageContentSection } from '../LineMessageContentSection';
@@ -51,14 +51,7 @@ export const Message1SettingsStep = React.forwardRef(
       control.open();
     };
 
-    const { data: variables } = useVariables(MarketingActionAlias.AFTER_PURCHASE);
-    const mentionOptions = variables.map(
-      data =>
-        ({
-          label: data.name_display,
-          value: data,
-        } as Option<MentionData, string>)
-    );
+    const { variablesAsMentionOptions } = useVariables(MarketingActionAlias.AFTER_PURCHASE);
 
     return (
       <Stepper.Item label={t('step1Setting')} complete={complete} ref={ref}>
@@ -97,13 +90,13 @@ export const Message1SettingsStep = React.forwardRef(
             </Form.RadioGroup>
           </Section>
           <MailMessageContentSection
-            mentionOptions={mentionOptions}
+            mentionOptions={variablesAsMentionOptions}
             onPreviewClick={handleMailPreviewClick}
           />
           {!!enableLine && (
             <LineMessageContentSection
               marketingAction={MarketingActionAlias.AFTER_PURCHASE}
-              mentionOptions={mentionOptions}
+              mentionOptions={variablesAsMentionOptions}
               onPreviewClick={handleLinePreviewClick}
             />
           )}

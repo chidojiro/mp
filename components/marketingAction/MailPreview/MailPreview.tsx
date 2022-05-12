@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next';
 import classNames from 'classnames';
 
 import { Button } from '@/components/common';
+import { DynamicVariablePattern } from '@/constants';
 import { ClassName } from '@/types';
 
 type Props = ClassName & {
@@ -43,6 +44,9 @@ export const MailPreview = ({
 }: Props) => {
   const { t } = useTranslation('marketingAction');
 
+  const bodyPreview = body?.replace(DynamicVariablePattern, '○○○');
+  const headlinePreview = headline?.replace(DynamicVariablePattern, '○○○');
+
   return (
     <div
       className={classNames(
@@ -65,10 +69,12 @@ export const MailPreview = ({
           />
         </div>
         <div className='flex justify-center w-full'>
-          <h3 className='w-full mb-4 text-center whitespace-pre-line text-gray-dark'>{headline}</h3>
+          <h3 className='w-full mb-4 text-center whitespace-pre-line text-gray-dark'>
+            {headlinePreview}
+          </h3>
         </div>
         <div className='mb-3 font-semibold'>山田 太郎 様</div>
-        <div className='mb-8 break-words whitespace-pre-wrap text-gray-dark'>{body}</div>
+        <div className='mb-8 break-words whitespace-pre-wrap text-gray-dark'>{bodyPreview}</div>
         {showViewShoppingCartButton && (
           <div className='w-full text-center'>
             <Button

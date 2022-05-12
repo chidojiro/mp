@@ -3,7 +3,7 @@ import { EditorState } from 'draft-js';
 import { useFormContext } from 'react-hook-form';
 
 import { Form } from '@/components/common';
-import { MentionData, Option } from '@/types';
+import { Option } from '@/types';
 
 import { getTextFromEditorState } from '../utils';
 
@@ -14,7 +14,7 @@ type Props = {
   shouldValidate?: boolean;
   singleLine?: boolean;
   className?: string;
-  mentionOptions?: Option<MentionData, string>[];
+  mentionOptions?: Option<string, string>[];
 };
 
 export const MessageBodyInput = ({
@@ -33,7 +33,6 @@ export const MessageBodyInput = ({
   const handleChange = (editorState: EditorState) => {
     const template = getTextFromEditorState(editorState);
     setValue(name, template);
-    setValue(`${name}_preview`, getTextFromEditorState(editorState, true));
   };
   return (
     <div ref={mentionRef}>

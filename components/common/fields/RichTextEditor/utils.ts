@@ -140,8 +140,12 @@ export const replaceText = (params: ReplaceTextParams) => {
   return newEditorState;
 };
 
-export const getPlainTextWithInterpolatedMentionValue = (editorState: EditorState) => {
+export const getPlainTextWithInterpolatedMentionValue = (
+  editorState: EditorState,
+  debug?: boolean
+) => {
   const rawContent = convertToRaw(editorState.getCurrentContent());
+  if (debug) console.log(rawContent);
 
   const newBlocks = rawContent.blocks.map(({ entityRanges, text, ...restBlock }) => {
     const { segments } = entityRanges.reduce(
@@ -152,12 +156,24 @@ export const getPlainTextWithInterpolatedMentionValue = (editorState: EditorStat
 
         const mentionValue = rawContent.entityMap[curRange.key].data.value;
 
+        const sliceWithUnicode = (str: string, ...sliceArgs: any) => {
+          if (!str) return str;
+          if (debug) console.log(str, sliceArgs);
+
+          return Array.from(str)
+            .slice(...sliceArgs)
+            .join('');
+        };
+
         return {
           segments: [
             ...segments.slice(0, segments.length - 1),
-            segments[segments.length - 1].slice(0, curRange.offset - offset),
+            sliceWithUnicode(segments[segments.length - 1], 0, curRange.offset - offset),
             mentionValue,
-            segments[segments.length - 1].slice(curRange.offset - offset + curRange.length),
+            sliceWithUnicode(
+              segments[segments.length - 1],
+              curRange.offset - offset + curRange.length
+            ),
           ],
           offset: curRange.offset + curRange.length,
         };

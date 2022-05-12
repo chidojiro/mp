@@ -4,8 +4,8 @@ import { DraftHandleValue, Editor, EditorState, Modifier } from 'draft-js';
 import noop from 'lodash-es/noop';
 import ReactDOM from 'react-dom';
 
-import { useControllable, useVisibilityControl } from '@/hooks';
-import { ClassName, MentionData, Option } from '@/types';
+import { useControllable, useOnClickOutside, useVisibilityControl } from '@/hooks';
+import { ClassName, Option } from '@/types';
 import { DomUtils } from '@/utils';
 
 import { Dropdown } from '../../Dropdown';
@@ -34,7 +34,7 @@ export type Props = ClassName & {
   placeholder?: string;
   ref?: Ref;
   singleLine?: boolean;
-  mentionOptions?: Option<MentionData, string>[];
+  mentionOptions?: Option<string, string>[];
   readOnly?: boolean;
   styleless?: boolean;
   label?: React.ReactNode;
@@ -63,11 +63,12 @@ export const RichTextEditor = React.forwardRef(
     const [triggerNode, setTriggerNode] = React.useState<any>(null);
     const [mentionQuery, setMentionQuery] = React.useState('');
     const editorRef = React.useRef<any>(null);
+    const dropdownRef = React.useRef<any>(null);
 
-    const mentionTemporaryControl = useVisibilityControl();
+    const mentionCloseForcer = useVisibilityControl();
 
     const insertMention = React.useCallback(
-      (option: Option<MentionData, string>) => {
+      (option: Option<string, string>) => {
         const newEditorState = replaceText({
           editorState,
           newText: option.label,
@@ -155,7 +156,7 @@ export const RichTextEditor = React.forwardRef(
     const handleChange = (newEditorState: EditorState) => {
       const transformedEditorState = applyMentionTriggerEntity(newEditorState);
       setEditorState(transformedEditorState);
-      mentionTemporaryControl.close();
+      mentionCloseForcer.close();
     };
 
     const getMentionTriggerData = (editorState: EditorState) => {
@@ -179,7 +180,7 @@ export const RichTextEditor = React.forwardRef(
         end: editorState.getSelection().getAnchorOffset(),
         newText: selectedOption.label as string,
         mutability: 'IMMUTABLE',
-        data: selectedOption.value,
+        data: selectedOption,
       });
 
       setEditorState(newEditorState);
@@ -194,14 +195,14 @@ export const RichTextEditor = React.forwardRef(
         dropdownControl.close();
 
         if (force) {
-          mentionTemporaryControl.open();
+          mentionCloseForcer.open();
         }
       },
-      [dropdownControl, mentionTemporaryControl]
+      [dropdownControl, mentionCloseForcer]
     );
 
     const checkIfShouldRenderSuggestions = React.useCallback(() => {
-      if (mentionTemporaryControl.visible) return;
+      if (mentionCloseForcer.visible) return;
 
       const focusNode = window.getSelection()?.focusNode;
 
@@ -239,7 +240,7 @@ export const RichTextEditor = React.forwardRef(
       const { content } = getMentionTriggerData(editorState);
       setMentionQuery(content.slice(1));
       dropdownControl.open();
-    }, [closeMentionSuggestions, dropdownControl, editorState]);
+    }, [closeMentionSuggestions, dropdownControl, editorState, mentionCloseForcer.visible]);
 
     React.useEffect(() => {
       checkIfShouldRenderSuggestions();
@@ -295,6 +296,10 @@ export const RichTextEditor = React.forwardRef(
       return 'handled';
     };
 
+    useOnClickOutside(dropdownRef, () => {
+      closeMentionSuggestions();
+    });
+
     if (DomUtils.isServer()) return null;
 
     return (
@@ -330,6 +335,7 @@ export const RichTextEditor = React.forwardRef(
           />
           {!readOnly && (
             <Dropdown
+              ref={dropdownRef}
               closeOnClickOutside={false}
               trigger={triggerNode!}
               control={dropdownControl}

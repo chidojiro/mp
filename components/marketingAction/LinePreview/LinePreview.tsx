@@ -3,6 +3,7 @@ import { useTranslation } from 'next-i18next';
 import classNames from 'classnames';
 
 import { Button } from '@/components/common';
+import { DynamicVariablePattern } from '@/constants';
 import { AspectRatio } from '@/headless';
 import { MarketingActionAlias } from '@/types';
 
@@ -37,6 +38,9 @@ export const LinePreview = ({
 }: Props) => {
   const { t } = useTranslation('marketingAction');
 
+  const bodyPreview = body?.replace(DynamicVariablePattern, '○○○');
+  const headlinePreview = headline?.replace(DynamicVariablePattern, '○○○');
+
   return (
     <div
       className={classNames(
@@ -45,7 +49,7 @@ export const LinePreview = ({
       style={{ height: isOverlay ? `calc(100% - ${btnHeightWithMargin})` : '667px' }}
     >
       <div className='w-full h-full overflow-auto mp-scroll'>
-        {!!body && (
+        {!!bodyPreview && (
           <div className='flex'>
             <div className='mr-3 bg-gray-500 rounded-full w-7 h-7'></div>
             <div className=''>
@@ -57,7 +61,7 @@ export const LinePreview = ({
                   'before:w-[11px] before:h-[11px] before:border-b-[7px] before:rounded-bl-[40px_40px]'
                 )}
               >
-                {body}
+                {bodyPreview}
               </div>
             </div>
           </div>
@@ -75,7 +79,7 @@ export const LinePreview = ({
                 </AspectRatio>
                 <div className='p-3.5 text-gray-dark'>
                   <div className='w-full font-semibold mb-2 text-gray-dark text-[22px]'>
-                    {headline}
+                    {headlinePreview}
                   </div>
                   <Button
                     variant='link'

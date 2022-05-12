@@ -9,7 +9,6 @@ import { LineMessage } from '@/components/marketingAction/Edit/CartAbandoned/Lin
 import { MailPreview } from '@/components/marketingAction/MailPreview';
 import { MessageContentPreviewType } from '@/components/marketingAction/MessageContentPreview';
 import { useVariables } from '@/hooks';
-import { MentionData, Option } from '@/types';
 import { MarketingActionAlias, StepMessage } from '@/types/marketingAction';
 
 import { MessageBodyInput } from '../MessageBodyInput';
@@ -33,14 +32,7 @@ export const MessageContent = ({ useLine = true, onShowPreview }: Props) => {
 
   const { setValue } = useFormContext();
 
-  const { data: variables } = useVariables(MarketingActionAlias.CART_LEFT_NOTIFICATION);
-  const mentionOptions = variables.map(
-    data =>
-      ({
-        label: data.name_display,
-        value: data,
-      } as Option<MentionData, string>)
-  );
+  const { variablesAsMentionOptions } = useVariables(MarketingActionAlias.CART_LEFT_NOTIFICATION);
 
   const handleChangeTitle = (editorState: EditorState) => {
     const template = getTextFromEditorState(editorState);
@@ -62,7 +54,7 @@ export const MessageContent = ({ useLine = true, onShowPreview }: Props) => {
                 {t('headLines')}
               </div>
               <Form.MentionsEditor
-                mentionOptions={mentionOptions}
+                mentionOptions={variablesAsMentionOptions}
                 name='mail_content.title_draft_raw'
                 onChange={handleChangeTitle}
                 rules={{ required: true }}
@@ -72,7 +64,7 @@ export const MessageContent = ({ useLine = true, onShowPreview }: Props) => {
               <div className='mb-2.5 font-semibold text-secondary text-medium'>{t('bodyText')}</div>
 
               <MessageBodyInput
-                mentionOptions={mentionOptions}
+                mentionOptions={variablesAsMentionOptions}
                 name='mail_content.content'
                 rawName='mail_content.content_draft_raw'
               />
@@ -104,7 +96,7 @@ export const MessageContent = ({ useLine = true, onShowPreview }: Props) => {
       {useLine && (
         <LineMessage
           showLineMsg={showLineMsg}
-          mentionOptions={mentionOptions}
+          mentionOptions={variablesAsMentionOptions}
           message={message.line_messages}
           onShowModal={onShowModal}
         />

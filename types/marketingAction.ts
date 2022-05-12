@@ -91,11 +91,9 @@ export type MarketingActionType = {
 export type MailContent = {
   title: string;
   title_draft_raw: string | EditorState;
-  title_preview?: string;
 
   content: string;
   content_draft_raw: string | EditorState;
-  content_preview?: string;
 };
 
 export type LineMessages = {
