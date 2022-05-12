@@ -64,6 +64,7 @@ export const CartAbandoned = () => {
       text_msg_display: false,
       flex_msg_image_ratio: '16:9',
       flex_msg_head: t('forgotSomethingLine'),
+      flex_msg_head_preview: t('forgotSomethingLine'),
       flex_msg_head_draft_raw: getDefaultMessageContentState(t('forgotSomethingLine')),
     },
     color: '#55C5D9',
@@ -243,8 +244,9 @@ export const CartAbandoned = () => {
       <div className='relative'>
         <PreviewOverlay
           defaultType={messagePreview?.type}
-          mailHeadline={messagePreview?.mail_content.title}
-          mailBody={messagePreview?.mail_content.content}
+          mailHeadline={messagePreview?.mail_content.title_preview}
+          mailBody={messagePreview?.mail_content.content_preview}
+          lineHeadline={messagePreview?.line_messages.flex_msg_head_preview}
           lineBody={messagePreview?.line_messages.text_msg_content}
           control={previewMessageControl}
         />

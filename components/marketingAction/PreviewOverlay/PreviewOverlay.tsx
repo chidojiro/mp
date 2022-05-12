@@ -18,6 +18,7 @@ type Props = {
   control: VisibilityControl;
   mailHeadline: string;
   mailBody: string;
+  lineHeadline: string;
   lineBody: string;
   color?: string;
   enableLine?: boolean;
@@ -28,6 +29,7 @@ export const PreviewOverlay = ({
   control,
   mailHeadline,
   mailBody,
+  lineHeadline,
   lineBody,
   color,
   enableLine = true,
@@ -113,7 +115,12 @@ export const PreviewOverlay = ({
             isOverlay
           />
         ) : (
-          <LinePreview isOverlay body={lineBody} desktop={selectedDevice === 'desktop'} />
+          <LinePreview
+            headline={lineHeadline}
+            isOverlay
+            body={lineBody}
+            desktop={selectedDevice === 'desktop'}
+          />
         )}
         <div className='flex items-center justify-center w-full'>
           {enableLine && (
