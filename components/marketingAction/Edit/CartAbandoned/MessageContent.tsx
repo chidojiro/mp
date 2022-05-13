@@ -4,6 +4,7 @@ import { EditorState } from 'draft-js';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 import { Form, Icon } from '@/components/common';
+import { getPlainTextWithInterpolatedMentionValue } from '@/components/common/fields';
 import { ColorGroup } from '@/components/marketingAction/ColorGroup';
 import { LineMessage } from '@/components/marketingAction/Edit/CartAbandoned/LineMessage';
 import { MailPreview } from '@/components/marketingAction/MailPreview';
@@ -12,7 +13,6 @@ import { useVariables } from '@/hooks';
 import { MarketingActionAlias, StepMessage } from '@/types/marketingAction';
 
 import { MessageBodyInput } from '../MessageBodyInput';
-import { getTextFromEditorState } from '../utils';
 
 type Props = {
   useLine?: boolean;
@@ -35,9 +35,7 @@ export const MessageContent = ({ useLine = true, onShowPreview }: Props) => {
   const { variablesAsMentionOptions } = useVariables(MarketingActionAlias.CART_LEFT_NOTIFICATION);
 
   const handleChangeTitle = (editorState: EditorState) => {
-    const template = getTextFromEditorState(editorState);
-    setValue('mail_content.title', template);
-    setValue('mail_content.title_preview', getTextFromEditorState(editorState, true));
+    setValue('mail_content.title', getPlainTextWithInterpolatedMentionValue(editorState));
   };
 
   return (
@@ -85,8 +83,8 @@ export const MessageContent = ({ useLine = true, onShowPreview }: Props) => {
               </span>
             </div>
             <MailPreview
-              headline={message?.mail_content?.title_preview}
-              body={message?.mail_content?.content_preview}
+              headline={message?.mail_content?.title}
+              body={message?.mail_content?.content}
               desktop={false}
               color={message.color}
             />
