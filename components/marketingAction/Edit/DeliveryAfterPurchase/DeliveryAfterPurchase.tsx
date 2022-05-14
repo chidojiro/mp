@@ -42,8 +42,7 @@ export const DeliveryAfterPurchase = ({}: Props) => {
   const tooltipControl = useVisibilityControl({ defaultVisible: true });
 
   const { t } = useTranslation('marketingAction');
-  const { getMarketingActionEditHref, getMarketingActionListHref, getMyMarketingActionListHref } =
-    useHref();
+  const { getMarketingActionEditHref, getMyMarketingActionListHref } = useHref();
 
   const {
     query: { marketingActionId },
@@ -58,6 +57,10 @@ export const DeliveryAfterPurchase = ({}: Props) => {
     marketingActionId ? ['/actions', marketingActionId] : null,
     () => MarketingActionAPI.get(marketingActionId as string)
   );
+
+  const saveAsDraftMethods = useForm();
+  const suspendTemplateMethods = useForm();
+  const implementTemplateMethods = useForm();
 
   const lineUsageSettingsStepMethods = useForm({ defaultValues: { enable_line: true } });
   const message1SettingsStepMethods = useForm<Partial<StepMessage>>({
@@ -321,7 +324,11 @@ export const DeliveryAfterPurchase = ({}: Props) => {
             <Modal.FooterButton colorScheme='negative' onClick={implementConfirmModalControl.close}>
               {t('cancel')}
             </Modal.FooterButton>
-            <Modal.FooterButton onClick={handleImplementClick}>
+            <Modal.FooterButton
+              loading={implementTemplateMethods.formState.isSubmitting}
+              complete={implementTemplateMethods.formState.isSubmitSuccessful}
+              onClick={implementTemplateMethods.handleSubmit(handleImplementClick)}
+            >
               {t('implementTemplate')}
             </Modal.FooterButton>
           </Modal.Footer>
@@ -364,11 +371,23 @@ export const DeliveryAfterPurchase = ({}: Props) => {
       </Stepper>
       <div className='flex justify-center gap-5 mt-14'>
         {!isEditing ? (
-          <Button className='w-[240px]' colorScheme='negative' onClick={handleSaveAsDraftClick}>
+          <Button
+            className='w-[240px]'
+            colorScheme='negative'
+            onClick={saveAsDraftMethods.handleSubmit(handleSaveAsDraftClick)}
+            loading={saveAsDraftMethods.formState.isSubmitting}
+            complete={saveAsDraftMethods.formState.isSubmitSuccessful}
+          >
             {t('saveDraft')}
           </Button>
         ) : (
-          <Button className='w-[240px]' colorScheme='danger' onClick={handleSuspendClick}>
+          <Button
+            className='w-[240px]'
+            colorScheme='danger'
+            onClick={suspendTemplateMethods.handleSubmit(handleSuspendClick)}
+            loading={suspendTemplateMethods.formState.isSubmitting}
+            complete={suspendTemplateMethods.formState.isSubmitSuccessful}
+          >
             {t('suspendTemplate')}
           </Button>
         )}
