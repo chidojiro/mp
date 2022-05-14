@@ -2,11 +2,10 @@ import { useTranslation } from 'next-i18next';
 import { useController, useFormContext } from 'react-hook-form';
 
 import { Form } from '@/components/common';
+import { EmailField } from '@/components/EmailField';
 import { ImageUploader } from '@/components/ImageUploader';
 import { Section } from '@/components/Section';
 import { CDN_URL } from '@/constants';
-
-import { EmailField } from '../EmailField';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};

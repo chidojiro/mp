@@ -2,7 +2,7 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { Layout } from '@/components/Layout';
-import { Settings } from '@/components/settings';
+import { ProjectSettings } from '@/project';
 
 export const getServerSideProps = async ({ locale = 'ja' }) => ({
   props: {
@@ -15,7 +15,7 @@ const SettingsPage = () => {
 
   return (
     <Layout title={t('menuSettings')}>
-      <Settings />
+      <ProjectSettings />
     </Layout>
   );
 };

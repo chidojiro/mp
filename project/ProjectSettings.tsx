@@ -7,7 +7,6 @@ import { useForm } from 'react-hook-form';
 import { AssetAPI, ProjectApis } from '@/apis';
 import { Button, Form } from '@/components/common';
 import { convertToEditorState } from '@/components/marketingAction/Edit/utils';
-import { useProject } from '@/project';
 import { AssetResourceType, ProjectData, ProjectSettingData } from '@/types';
 import { ApiUtils } from '@/utils';
 
@@ -16,8 +15,9 @@ import { BasicInformation } from './BasicInformation';
 import { EmailSettings } from './EmailSettings';
 import { SnsSettings } from './SnsSettings';
 import { UrlSettings } from './UrlSettings';
+import { useProject } from './useProject';
 
-export const Settings = () => {
+export const ProjectSettings = () => {
   const { t } = useTranslation('settings');
 
   const { data } = useProject();
