@@ -3,8 +3,9 @@ import { useTranslation } from 'next-i18next';
 import classNames from 'classnames';
 
 import { Button } from '@/components/common';
-import { DynamicVariablePattern } from '@/constants';
+import { getVariableContentPreview } from '@/components/marketingAction/Edit/utils';
 import { AspectRatio } from '@/headless';
+import { useVariables } from '@/hooks';
 import { MarketingActionAlias } from '@/types';
 
 type Props = {
@@ -38,8 +39,10 @@ export const LinePreview = ({
 }: Props) => {
   const { t } = useTranslation('marketingAction');
 
-  const bodyPreview = body?.replace(DynamicVariablePattern, '○○○');
-  const headlinePreview = headline?.replace(DynamicVariablePattern, '○○○');
+  const { data: variables } = useVariables();
+
+  const bodyPreview = getVariableContentPreview(body ?? '', variables);
+  const headlinePreview = getVariableContentPreview(headline ?? '', variables);
 
   return (
     <div

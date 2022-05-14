@@ -2,7 +2,7 @@ import { convertFromRaw, convertToRaw, EditorState, RawDraftEntityRange } from '
 import { cloneDeep, get, set } from 'lodash-es';
 
 import { richTextEditorDecorator, richTextEditorEmptyValue } from '@/components/common/fields';
-import { Carousel, MentionData, StepMessage } from '@/types';
+import { Carousel, MentionData, StepMessage, Variable } from '@/types';
 
 const draftRawFields = [
   'mail_content.content_draft_raw',
@@ -180,4 +180,12 @@ export const getDefaultMessageContentState = (text: string, data: any[] = []) =>
   });
 
   return convertToEditorState(defaultMessageContentRaw);
+};
+
+export const getVariableContentPreview = (originalTemplate: string, variables: Variable[]) => {
+  return variables.reduce((accPreview, { content, name, type }) => {
+    if (type === 'dynamic') return accPreview?.replace(new RegExp(`\{\{${name}\}\}`), '○○○');
+
+    return accPreview?.replace(new RegExp(`\{\{${name}\}\}`), content);
+  }, originalTemplate);
 };
