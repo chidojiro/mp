@@ -170,8 +170,8 @@ export const DeliveryAfterPurchase = ({}: Props) => {
     const targetSettings = targetSettingsMethods.getValues();
 
     const data = {
-      start_at: targetSettings.implementation_period_temp[0].toISOString(),
-      end_at: targetSettings.implementation_period_temp[1].toISOString(),
+      start_at: targetSettings.implementation_period_temp[0]?.toISOString(),
+      end_at: targetSettings.implementation_period_temp[1]?.toISOString(),
       description: t('stepDeliveryAfterPurchase'),
       marketing_action_type_alias: 'AFTER_PURCHASE',
       status,
