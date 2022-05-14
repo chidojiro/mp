@@ -184,8 +184,10 @@ export const getDefaultMessageContentState = (text: string, data: any[] = []) =>
 
 export const getVariableContentPreview = (originalTemplate: string, variables: Variable[]) => {
   return variables.reduce((accPreview, { content, name, type }) => {
-    if (type === 'dynamic') return accPreview?.replace(new RegExp(`\{\{${name}\}\}`), '○○○');
+    const variableRegex = new RegExp(`\{\{${name}\}\}`);
 
-    return accPreview?.replace(new RegExp(`\{\{${name}\}\}`), content);
+    if (type === 'dynamic') return accPreview?.replace(variableRegex, '○○○');
+
+    return accPreview?.replace(variableRegex, content);
   }, originalTemplate);
 };
