@@ -15,7 +15,7 @@ const nextConfig = {
     ...i18n,
     localeDetection: false,
   },
-  webpack(config, { isServer }) {
+  webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
       issuer: { and: [/\.(js|ts)x?$/] },
@@ -38,11 +38,6 @@ const nextConfig = {
           },
         },
       ],
-    });
-
-    config.module.rules.push({
-      test: /.+\/index\.ts/i,
-      sideEffects: false,
     });
 
     return config;
