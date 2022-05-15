@@ -13,7 +13,7 @@ export const Navigator = ({}: Props) => {
 
   return (
     <div
-      style={{ boxShadow: `0px 0px 10px #0000004D;` }}
+      style={{ boxShadow: `0px 0px 10px #0000004D` }}
       className={classNames(
         'fixed right-0 top-[250px]',
         'bg-white',
