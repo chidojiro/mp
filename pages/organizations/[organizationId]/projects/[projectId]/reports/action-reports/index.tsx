@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
-import { Redirect } from '@/components/common';
+import { Redirect } from '@/common/Redirect';
 
 const Reports = () => {
   const { asPath } = useRouter();

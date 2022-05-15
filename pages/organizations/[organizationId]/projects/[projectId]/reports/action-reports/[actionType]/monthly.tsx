@@ -1,16 +1,15 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { TargetFilter } from '@/marketing-action/TargetFilter';
+import { PrivateLayout } from '@/layout/PrivateLayout';
+import { ChatbotDetailReport } from '@/report/ChatbotDetailReport';
+import { NotificationDetailReport } from '@/report/NotificationDetailReport';
+import { PopupDetailreport } from '@/report/PopupDetailReport';
+import { ChevronRightIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
-import { Layout } from '@/components/Layout';
-import { ChatbotDetailReport } from '@/components/report/ChatbotDetailReport';
-import { NotificationDetailReport } from '@/components/report/NotificationDetailReport';
-import { PopupDetailreport } from '@/components/report/PopupDetailReport';
-import { TargetFilter } from '@/components/TargetFilter';
-import { useProfile } from '@/hooks/api/useProfile';
-import { MarketingActionAliasKey } from '@/types';
-import { ChevronRightIcon } from '@heroicons/react/solid';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useProfile } from '@/auth/useProfile';
+import { MarketingActionAliasKey } from '@/marketing-action/types';
 
 export const MonthlyReport = () => {
   const {
@@ -35,7 +34,10 @@ export const MonthlyReport = () => {
   const isPopupType = (type: string) => MarketingActionAliasKey.CONDITIONAL_FREE_SHIPPING === type;
 
   return (
-    <Layout title={t('measureReport')} subTitle={`${t(actionType as string)}${t('monthly')}`}>
+    <PrivateLayout
+      title={t('measureReport')}
+      subTitle={`${t(actionType as string)}${t('monthly')}`}
+    >
       <div className='space-y-5'>
         <div className='flex items-center gap-5'>
           <div className='font-bold'>{t('period')}</div>
@@ -85,7 +87,7 @@ export const MonthlyReport = () => {
           </a>
         </Link>
       </div>
-    </Layout>
+    </PrivateLayout>
   );
 };
 

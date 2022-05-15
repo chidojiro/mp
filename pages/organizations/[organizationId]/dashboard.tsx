@@ -1,30 +1,32 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { CSVButton } from '@/components/common/Button';
-import { Icon, IconName } from '@/components/common/Icon';
-import { CustomerReportButton } from '@/components/CustomerReportButton';
-import { RfmSegmentTable } from '@/components/dashboard';
-import { Layout } from '@/components/Layout';
-import { useProfile } from '@/hooks';
-import { useReportData } from '@/hooks/api/useReportData';
-import { SSR } from '@/ssr';
-import { RfmReportDataItem } from '@/types/report';
+import { CSVButton } from '@/common/CSVButton';
+import { Icon, IconName } from '@/common/Icon';
+import { CustomerReportButton } from '@/report/CustomerReportButton';
+import { RfmSegmentTable } from '@/dashboard/RfmSegmentTable';
+import { PrivateLayout } from '@/layout/PrivateLayout';
+import { useReport } from '@/report/useReport';
+import { SsrUtils } from '@/ssr/utils';
+import { RfmReportDataItem } from '@/report/types';
+import { useProfile } from '@/auth/useProfile';
 
-export const getServerSideProps = SSR.withProps('rfmReport')(async ({ locale = 'ja' }, result) => {
-  return {
-    ...result,
-    props: {
-      ...(await serverSideTranslations(locale)),
-    },
-  };
-});
+export const getServerSideProps = SsrUtils.withProps('rfmReport')(
+  async ({ locale = 'ja' }, result) => {
+    return {
+      ...result,
+      props: {
+        ...(await serverSideTranslations(locale)),
+      },
+    };
+  }
+);
 export interface DashboardProps {
   rfmReport: RfmReportDataItem[];
 }
 function Dashboard(props: DashboardProps) {
   const { t } = useTranslation('dashboard');
-  const { data } = useReportData('rfmReport', props.rfmReport);
+  const { data } = useReport('rfmReport', props.rfmReport);
   const { data: profile } = useProfile();
 
   const reportButtons = [
@@ -65,7 +67,7 @@ function Dashboard(props: DashboardProps) {
     },
   ];
   return (
-    <Layout title={t('menuDashboard')}>
+    <PrivateLayout title={t('menuDashboard')}>
       <h4 className='mt-5 mb-2 text-gray-600 font-bold'>{t('dashboardCustomerAnalysis')}</h4>
 
       <div className='flex items-end justify-between w-full mb-10'>
@@ -92,7 +94,7 @@ function Dashboard(props: DashboardProps) {
           ))}
         </div>
       </div>
-    </Layout>
+    </PrivateLayout>
   );
 }
 

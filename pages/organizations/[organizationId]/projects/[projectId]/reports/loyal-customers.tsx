@@ -1,24 +1,26 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { Icon, IconName } from '@/components/common';
-import { ConversionRateChart } from '@/components/ConversionRateChart';
-import { CustomerReportButton } from '@/components/CustomerReportButton';
-import { Layout } from '@/components/Layout';
-import { ServerSidePropsProvider } from '@/contexts';
-import { useProfile } from '@/hooks/api/useProfile';
-import { SSR } from '@/ssr';
-import { NumberUtils } from '@/utils/number';
+import { Icon, IconName } from '@/common/Icon';
+import { NumberUtils } from '@/common/utils';
+import { ConversionRateChart } from '@/report/ConversionRateChart';
+import { CustomerReportButton } from '@/report/CustomerReportButton';
+import { PrivateLayout } from '@/layout/PrivateLayout';
+import { ServerSidePropsProvider } from '@/ssr/ServerSidePropsContext';
+import { SsrUtils } from '@/ssr/utils';
+import { useProfile } from '@/auth/useProfile';
 
-export const getServerSideProps = SSR.withProps('profile')(async ({ locale = 'ja' }, result) => {
-  return {
-    ...result,
-    props: {
-      ...result.props,
-      ...(await serverSideTranslations(locale!)),
-    },
-  };
-});
+export const getServerSideProps = SsrUtils.withProps('profile')(
+  async ({ locale = 'ja' }, result) => {
+    return {
+      ...result,
+      props: {
+        ...result.props,
+        ...(await serverSideTranslations(locale!)),
+      },
+    };
+  }
+);
 
 const data = [
   {
@@ -121,7 +123,7 @@ function F2ConversionRateTrends(props: any) {
   ];
   return (
     <ServerSidePropsProvider props={props}>
-      <Layout title={tCommon('numberOfLoyalCustomers')}>
+      <PrivateLayout title={tCommon('numberOfLoyalCustomers')}>
         <ConversionRateChart
           bar1={{ dataKey: 'f1_uu', title: t('numberOfLoyalCustomers') }}
           bar2={{ dataKey: 'bar2', title: t('numberOfSemiLoyalCustomers') }}
@@ -143,7 +145,7 @@ function F2ConversionRateTrends(props: any) {
             />
           ))}
         </div>
-      </Layout>
+      </PrivateLayout>
     </ServerSidePropsProvider>
   );
 }

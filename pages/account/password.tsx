@@ -1,18 +1,17 @@
-import React from 'react';
+import { ChangePasswordPayload } from '@/auth/types';
+import { Button } from '@/common/Button';
+import { Form } from '@/common/Form';
+import { PasswordField } from '@/common/PasswordField';
+import { Section } from '@/common/Section';
+import { PrivateLayout } from '@/layout/PrivateLayout';
+import axios, { AxiosError } from 'axios';
 import { GetStaticProps, NextPage } from 'next';
-import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import axios, { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-
-import { ProfileApis } from '@/apis/profile';
-import { Button } from '@/components/common/Button';
-import { Form } from '@/components/common/Form';
-import { Layout } from '@/components/Layout';
-import { PasswordField } from '@/components/PasswordField/PasswordField';
-import { Section } from '@/components/Section';
-import { ChangePasswordPayload } from '@/types';
+import { ProfileApis } from '@/auth/apis';
 
 export const getStaticProps: GetStaticProps = async ({ locale = 'ja' }) => {
   return {
@@ -51,7 +50,7 @@ const Password: NextPage = () => {
     }
   };
   return (
-    <Layout title={t('accountSettings')}>
+    <PrivateLayout title={t('accountSettings')}>
       <Form methods={methods} onSubmit={onSubmit}>
         <h3 className='mb-2'>{t('passwordChange')}</h3>
         <Section>
@@ -86,7 +85,7 @@ const Password: NextPage = () => {
           </Button>
         </div>
       </Form>
-    </Layout>
+    </PrivateLayout>
   );
 };
 

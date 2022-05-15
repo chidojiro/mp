@@ -1,11 +1,11 @@
-import { useRouter } from 'next/router';
+import { SideMenu, SideMenuGroupItem } from '@/common/SideMenu';
+import { PrivateLayout } from '@/layout/PrivateLayout';
+import { ActionContainer } from '@/marketing-action/ActionContainer';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
-import { ActionContainer } from '@/components/ActionContainer';
-import { SideMenu, SideMenuGroup } from '@/components/common/SideMenu';
-import { Layout } from '@/components/Layout';
-import { MarketingActionAlias, TARGET } from '@/types';
+import { useRouter } from 'next/router';
+import { MarketingActionAlias } from '@/marketing-action/types';
+import { TARGET } from '@/marketing-action/types';
 
 export const getServerSideProps = async ({ locale = 'ja' }) => ({
   props: {
@@ -29,7 +29,7 @@ export const ListTemplatePage = () => {
     });
   };
 
-  const groups: SideMenuGroup[] = [
+  const groups: SideMenuGroupItem[] = [
     {
       icon: 'mail',
       label: t('messageDelivery'),
@@ -182,9 +182,9 @@ function MarketingActions() {
   const { t } = useTranslation('marketingAction');
 
   return (
-    <Layout title={t('listOfPolicyTemplates')}>
+    <PrivateLayout title={t('listOfPolicyTemplates')}>
       <ListTemplatePage />
-    </Layout>
+    </PrivateLayout>
   );
 }
 

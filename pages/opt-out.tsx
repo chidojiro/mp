@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import { Button } from '@/components/common/Button';
+import { Button } from '@/common/Button';
 
 const OptOutPage = () => {
   return (

@@ -1,16 +1,15 @@
-import React from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { Profile } from '@/auth/types';
+import { Section } from '@/common/Section';
+import { useVisibilityControl } from '@/common/useVisibilityControl';
+import { PrivateLayout } from '@/layout/PrivateLayout';
+import { SsrUtils } from '@/ssr/utils';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React from 'react';
 
-import { Layout } from '@/components/Layout';
-import { Section } from '@/components/Section';
-import { useVisibilityControl } from '@/hooks/useVisibilityControl';
-import { SSR } from '@/ssr';
-import { Profile } from '@/types';
-
-export const getServerSideProps = SSR.withProps('profile')(async ({ locale }, result) => {
+export const getServerSideProps = SsrUtils.withProps('profile')(async ({ locale }, result) => {
   return {
     ...result,
     props: {
@@ -57,7 +56,7 @@ const Account = (props: any) => {
   }, []);
 
   return (
-    <Layout title={t('accountSettings')}>
+    <PrivateLayout title={t('accountSettings')}>
       {emailSuccessMessageControl.visible && (
         <div className='mb-5'>{t('emailAddressChangeIsComplete')}</div>
       )}
@@ -82,7 +81,7 @@ const Account = (props: any) => {
           </Link>
         </Section.Content>
       </Section>
-    </Layout>
+    </PrivateLayout>
   );
 };
 

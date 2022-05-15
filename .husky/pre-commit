@@ -5,4 +5,3 @@ set -e
 npm run typecheck
 node_modules/.bin/lint-staged
 npm run lint
-npx depcruise --config .dependency-cruiser.js components

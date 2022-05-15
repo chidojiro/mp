@@ -1,0 +1,2 @@
+useProfile @/auth/useProfile
+useProfile ./useProfile **/auth/**/*.{ts,tsx}

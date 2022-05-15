@@ -1,19 +1,22 @@
-import { useEffect } from 'react';
+import { useAuth } from '@/auth/useAuth';
+import { PublicLayout } from '@/layout/PublicLayout';
+import { LoginForm } from '@/login/LoginForm';
 import { GetStaticProps, GetStaticPropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useHrefs } from '@/navigation/useHrefs';
 
-import { LoginForm, PublicLayout } from '@/components/Login';
-import { useAuth } from '@/hooks/useAuth';
-import { useNavigator } from '@/hooks/useNavigator';
 const LoginPage = () => {
-  const navigator = useNavigator();
+  const router = useRouter();
+  const { getDashboardHref } = useHrefs();
   const auth = useAuth();
 
   useEffect(() => {
     if (auth.isAuthenticated) {
-      navigator.openDashboard();
+      router.push(getDashboardHref({ organizationId: auth.organizationId }));
     }
-  }, [navigator, auth]);
+  }, [auth, router, getDashboardHref]);
   return (
     <PublicLayout>
       <LoginForm />

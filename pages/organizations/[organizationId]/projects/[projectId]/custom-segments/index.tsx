@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import { Redirect } from '@/components/common';
+import { Redirect } from '@/common/Redirect';
 
 function CustonSegments() {
   const { asPath } = useRouter();

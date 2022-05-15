@@ -1,16 +1,15 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { PrivateLayout } from '@/layout/PrivateLayout';
+import { TargetFilter } from '@/marketing-action/TargetFilter';
+import { ChatbotDetailReport } from '@/report/ChatbotDetailReport';
+import { NotificationDetailReport } from '@/report/NotificationDetailReport';
+import { PopupDetailreport } from '@/report/PopupDetailReport';
+import { ChevronRightIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
-import { Layout } from '@/components/Layout';
-import { ChatbotDetailReport } from '@/components/report/ChatbotDetailReport';
-import { NotificationDetailReport } from '@/components/report/NotificationDetailReport';
-import { PopupDetailreport } from '@/components/report/PopupDetailReport';
-import { TargetFilter } from '@/components/TargetFilter';
-import { useProfile } from '@/hooks/api/useProfile';
-import { MarketingActionAliasKey } from '@/types';
-import { ChevronRightIcon } from '@heroicons/react/solid';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useProfile } from '@/auth/useProfile';
+import { MarketingActionAliasKey } from '@/marketing-action/types';
 
 export const ByUrlReport = () => {
   const {
@@ -34,7 +33,7 @@ export const ByUrlReport = () => {
   const isPopupType = (type: string) => MarketingActionAliasKey.CONDITIONAL_FREE_SHIPPING === type;
 
   return (
-    <Layout title={t('measureReport')} subTitle={t(actionType as string)}>
+    <PrivateLayout title={t('measureReport')} subTitle={t(actionType as string)}>
       <div className='space-y-5'>
         <div className='flex items-center gap-5'>
           <div className='font-bold'>{t('period')}</div>
@@ -84,7 +83,7 @@ export const ByUrlReport = () => {
           </a>
         </Link>
       </div>
-    </Layout>
+    </PrivateLayout>
   );
 };
 

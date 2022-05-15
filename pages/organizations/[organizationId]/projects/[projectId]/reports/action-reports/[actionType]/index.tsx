@@ -1,6 +1,5 @@
+import { ReportList } from '@/report/ReportList';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
-import { ReportList } from '@/components/report';
 
 export const getServerSideProps = async ({ locale = 'ja' }) => ({
   props: {

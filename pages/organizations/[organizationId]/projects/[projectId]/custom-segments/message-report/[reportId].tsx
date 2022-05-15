@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { Table } from '@/components/common';
-import { Select } from '@/components/common/fields';
-import { Layout } from '@/components/Layout';
-import { useProfile } from '@/hooks';
+import { Select } from '@/common/Select';
+import { Table } from '@/common/Table';
+import { PrivateLayout } from '@/layout/PrivateLayout';
 import { ChevronRightIcon } from '@heroicons/react/solid';
+import { useProfile } from '@/auth/useProfile';
 
 export const getServerSideProps = async ({ locale = 'ja' }) => {
   return {
@@ -66,7 +66,7 @@ export const MessageReportDetails = ({}: Props) => {
   const { t } = useTranslation('customSegment');
   const profile = useProfile();
   return (
-    <Layout title={t('segmentMessageReport')} subTitle={t('list')}>
+    <PrivateLayout title={t('segmentMessageReport')} subTitle={t('list')}>
       <div className='space-y-5'>
         <div className='flex items-center gap-5'>
           <div className='font-bold'>{t('targetSegment')}</div>
@@ -165,7 +165,7 @@ export const MessageReportDetails = ({}: Props) => {
           </div>
         </a>
       </Link>
-    </Layout>
+    </PrivateLayout>
   );
 };
 

@@ -1,19 +1,23 @@
-import { useEffect } from 'react';
+import { PasswordRecoverForm } from '@/auth/PasswordRecoverForm';
+import { useAuth } from '@/auth/useAuth';
+import { PublicLayout } from '@/layout/PublicLayout';
 import { GetStaticProps, GetStaticPropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
-import { PasswordRecoverForm, PublicLayout } from '@/components/Login';
-import { useAuth } from '@/hooks/useAuth';
-import { useNavigator } from '@/hooks/useNavigator';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useHrefs } from '@/navigation/useHrefs';
 
 const PasswordResetPage = () => {
-  const navigator = useNavigator();
+  const router = useRouter();
+  const { getDashboardHref } = useHrefs();
   const auth = useAuth();
+
   useEffect(() => {
     if (auth.isAuthenticated) {
-      navigator.openDashboard();
+      router.push(getDashboardHref({ organizationId: auth.organizationId }));
     }
-  }, [navigator, auth]);
+  }, [auth, router, getDashboardHref]);
+
   return (
     <PublicLayout>
       <PasswordRecoverForm />

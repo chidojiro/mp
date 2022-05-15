@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { Tabs } from '@/common/Tabs';
+import { PrivateLayout } from '@/layout/PrivateLayout';
+import { Detail } from '@/marketing-action-view';
+import { MarketingActionApis } from '@/marketing-action/apis';
+import { MarketingActionStatus } from '@/marketing-action/types';
+import { MarketingActionUtils } from '@/marketing-action/utils';
+import { addDays } from 'date-fns';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { addDays } from 'date-fns';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import useSWR from 'swr';
-
-import { MarketingActionAPI } from '@/apis';
-import { Tabs } from '@/components/common/Tabs';
-import { Layout } from '@/components/Layout';
-import { Detail } from '@/components/marketingAction/View';
-import { MarketingActionStatus as MAStatus } from '@/types';
-import { TargetFilterUtils } from '@/utils';
 
 export const getServerSideProps = async ({ locale = 'ja' }) => ({
   props: {
@@ -30,7 +29,7 @@ export const ListActionPage = () => {
   useEffect(() => {
     const _targets = [query.targets].flat().filter(Boolean);
     if (_targets && _targets[0] !== 'all') {
-      const _targetSegments = TargetFilterUtils.getTargetCustomers(_targets as string[]);
+      const _targetSegments = MarketingActionUtils.getTargetCustomers(_targets as string[]);
       setFilter(prevState => {
         return { ...prevState, target_segments: JSON.stringify(_targetSegments) };
       });
@@ -39,7 +38,7 @@ export const ListActionPage = () => {
 
   const { data, mutate } = useSWR(
     ['/actions', filter],
-    () => MarketingActionAPI.list({ params: filter }),
+    () => MarketingActionApis.list({ params: filter }),
     {
       fallbackData: {},
     }
@@ -58,70 +57,82 @@ export const ListActionPage = () => {
 
   const tabs = [
     {
-      value: MAStatus.RUNNING,
+      value: MarketingActionStatus.RUNNING,
       label: (
         <Link
           passHref
           href={{
             pathname,
-            query: { ...query, marketingActionStatus: MAStatus.RUNNING, marketingActionId: 1 },
+            query: {
+              ...query,
+              marketingActionStatus: MarketingActionStatus.RUNNING,
+              marketingActionId: 1,
+            },
           }}
         >
           <a className='block'>
-            {t('inProgressTab')} ({data?.[MAStatus.RUNNING]?.length})
+            {t('inProgressTab')} ({data?.[MarketingActionStatus.RUNNING]?.length})
           </a>
         </Link>
       ),
       content: (
         <Detail
-          marketingActions={data?.[MAStatus.RUNNING]}
+          marketingActions={data?.[MarketingActionStatus.RUNNING]}
           mutateMarketingActions={mutate}
           onChangePeriod={handleChangePeriod}
         />
       ),
     },
     {
-      value: MAStatus.COMPLETE,
+      value: MarketingActionStatus.COMPLETE,
       label: (
         <Link
           passHref
           href={{
             pathname,
-            query: { ...query, marketingActionStatus: MAStatus.COMPLETE, marketingActionId: 1 },
+            query: {
+              ...query,
+              marketingActionStatus: MarketingActionStatus.COMPLETE,
+              marketingActionId: 1,
+            },
           }}
         >
           <a className='block'>
-            {t('finishedTab')} ({data?.[MAStatus.COMPLETE]?.length})
+            {t('finishedTab')} ({data?.[MarketingActionStatus.COMPLETE]?.length})
           </a>
         </Link>
       ),
       content: (
         <Detail
-          marketingActions={data?.[MAStatus.COMPLETE]}
+          marketingActions={data?.[MarketingActionStatus.COMPLETE]}
           mutateMarketingActions={mutate}
           onChangePeriod={handleChangePeriod}
         />
       ),
     },
     {
-      value: MAStatus.DRAFT,
+      value: MarketingActionStatus.DRAFT,
       label: (
         <Link
           passHref
           href={{
             pathname,
-            query: { ...query, marketingActionStatus: MAStatus.DRAFT, marketingActionId: 1 },
+            query: {
+              ...query,
+              marketingActionStatus: MarketingActionStatus.DRAFT,
+              marketingActionId: 1,
+            },
           }}
         >
           <a className='block'>
-            {t('draftTab')} ({data?.[MAStatus.DRAFT]?.length})
+            {t('draftTab')} ({data?.[MarketingActionStatus.DRAFT]?.length})
           </a>
         </Link>
       ),
 
       content: (
         <Detail
-          marketingActions={data?.[MAStatus.DRAFT]}
+          marketingActions={data?.[MarketingActionStatus.DRAFT]}
           mutateMarketingActions={mutate}
           onChangePeriod={handleChangePeriod}
         />
@@ -129,7 +140,7 @@ export const ListActionPage = () => {
     },
   ];
   return (
-    <Layout title={t('menuMyMarketingAction')}>
+    <PrivateLayout title={t('menuMyMarketingAction')}>
       <div className='flex h-full'>
         <Tabs
           className='w-full h-full'
@@ -137,7 +148,7 @@ export const ListActionPage = () => {
           value={query.marketingActionStatus as string}
         />
       </div>
-    </Layout>
+    </PrivateLayout>
   );
 };
 

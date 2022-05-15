@@ -1,11 +1,10 @@
+import { AuthApis } from '@/auth/apis';
+import { NewPasswordForm } from '@/auth/NewPasswordForm';
+import { PublicLayout } from '@/layout/PublicLayout';
+import { Logger } from '@/common/utils';
 import { GetServerSideProps, NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
-import { AuthApi } from '@/apis/auth';
-import { PublicLayout } from '@/components/Login';
-import { NewPasswordForm } from '@/components/Login/NewPasswordForm';
-import { Logger } from '@/utils';
 
 export const getServerSideProps: GetServerSideProps = async ({
   locale = 'ja',
@@ -23,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   // verify token
   Logger.log('token:', token);
-  const response = await AuthApi.verifyToken(token as string);
+  const response = await AuthApis.verifyToken(token as string);
   if (!response) {
     Logger.log('invalid token');
     return {

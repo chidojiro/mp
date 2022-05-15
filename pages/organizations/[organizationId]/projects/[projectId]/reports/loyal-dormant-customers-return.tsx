@@ -1,22 +1,24 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { Icon } from '@/components/common';
-import { ConversionRateChart } from '@/components/ConversionRateChart';
-import { CustomerReportButton } from '@/components/CustomerReportButton';
-import { Layout } from '@/components/Layout';
-import { ServerSidePropsProvider } from '@/contexts';
-import { SSR } from '@/ssr';
+import { Icon } from '@/common/Icon';
+import { ConversionRateChart } from '@/report/ConversionRateChart';
+import { CustomerReportButton } from '@/report/CustomerReportButton';
+import { PrivateLayout } from '@/layout/PrivateLayout';
+import { ServerSidePropsProvider } from '@/ssr/ServerSidePropsContext';
+import { SsrUtils } from '@/ssr/utils';
 
-export const getServerSideProps = SSR.withProps('profile')(async ({ locale = 'ja' }, result) => {
-  return {
-    ...result,
-    props: {
-      ...result.props,
-      ...(await serverSideTranslations(locale!)),
-    },
-  };
-});
+export const getServerSideProps = SsrUtils.withProps('profile')(
+  async ({ locale = 'ja' }, result) => {
+    return {
+      ...result,
+      props: {
+        ...result.props,
+        ...(await serverSideTranslations(locale!)),
+      },
+    };
+  }
+);
 
 const data = [
   {
@@ -99,7 +101,7 @@ function F2ConversionRateTrends(props: any) {
 
   return (
     <ServerSidePropsProvider props={props}>
-      <Layout title={tCommon('loyalDormantCustomersReturn')}>
+      <PrivateLayout title={tCommon('loyalDormantCustomersReturn')}>
         <ConversionRateChart
           line={{ dataKey: 'f2_conversion_rate', title: t('returnRate') }}
           bar1={{ dataKey: 'f1_uu', title: t('numberOfLoyalDormantCustomers') }}
@@ -132,7 +134,7 @@ function F2ConversionRateTrends(props: any) {
             clickActionText={t('viewReport')}
           />
         </div>
-      </Layout>
+      </PrivateLayout>
     </ServerSidePropsProvider>
   );
 }

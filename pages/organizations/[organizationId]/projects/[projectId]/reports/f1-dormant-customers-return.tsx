@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { Layout } from '@/components/Layout';
+import { PrivateLayout } from '@/layout/PrivateLayout';
 
 export const getServerSideProps = async ({ locale = 'ja' }) => ({
   props: {
@@ -12,7 +12,7 @@ export const getServerSideProps = async ({ locale = 'ja' }) => ({
 function ReturnOfF1DormantCustomers() {
   const { t } = useTranslation();
 
-  return <Layout title={t('returnOfF1DormantCustomers')}></Layout>;
+  return <PrivateLayout title={t('returnOfF1DormantCustomers')}></PrivateLayout>;
 }
 
 export default ReturnOfF1DormantCustomers;

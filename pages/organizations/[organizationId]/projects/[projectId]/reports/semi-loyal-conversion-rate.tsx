@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { Layout } from '@/components/Layout';
+import { PrivateLayout } from '@/layout/PrivateLayout';
 
 export const getServerSideProps = async ({ locale = 'ja' }) => ({
   props: {
@@ -12,7 +12,7 @@ export const getServerSideProps = async ({ locale = 'ja' }) => ({
 function SemiLoyalConversionRate() {
   const { t } = useTranslation();
 
-  return <Layout title={t('semiLoyalConversionRate')}></Layout>;
+  return <PrivateLayout title={t('semiLoyalConversionRate')}></PrivateLayout>;
 }
 
 export default SemiLoyalConversionRate;

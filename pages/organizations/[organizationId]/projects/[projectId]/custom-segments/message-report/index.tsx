@@ -4,9 +4,10 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { Icon, Table } from '@/components/common';
-import { Select } from '@/components/common/fields';
-import { Layout } from '@/components/Layout';
+import { Icon } from '@/common/Icon';
+import { Select } from '@/common/Select';
+import { Table } from '@/common/Table';
+import { PrivateLayout } from '@/layout/PrivateLayout';
 
 export const getServerSideProps = async ({ locale = 'ja' }) => {
   return {
@@ -65,7 +66,7 @@ export const MessageReport = ({}: Props) => {
   const { asPath } = useRouter();
 
   return (
-    <Layout title={t('segmentMessageReport')} subTitle={t('list')}>
+    <PrivateLayout title={t('segmentMessageReport')} subTitle={t('list')}>
       <div className='space-y-5'>
         <div className='flex items-center gap-5'>
           <div className='font-bold'>{t('targetSegment')}</div>
@@ -138,7 +139,7 @@ export const MessageReport = ({}: Props) => {
           ))}
         </Table.Body>
       </Table>
-    </Layout>
+    </PrivateLayout>
   );
 };
 

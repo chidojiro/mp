@@ -1,20 +1,19 @@
-import React from 'react';
+import { Profile } from '@/auth/types';
+import { Button } from '@/common/Button';
+import { EmailField } from '@/common/EmailField';
+import { Form } from '@/common/Form';
+import { Section } from '@/common/Section';
+import { PrivateLayout } from '@/layout/PrivateLayout';
+import { SsrUtils } from '@/ssr/utils';
 import { GetServerSideProps, NextPage } from 'next';
-import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useRouter } from 'next/router';
+import React from 'react';
 import { useForm } from 'react-hook-form';
+import { ProfileApis } from '@/auth/apis';
 
-import { ProfileApis } from '@/apis/profile';
-import { Button } from '@/components/common/Button';
-import { Form } from '@/components/common/Form';
-import { EmailField } from '@/components/EmailField';
-import { Layout } from '@/components/Layout';
-import { Section } from '@/components/Section';
-import { SSR } from '@/ssr';
-import { Profile } from '@/types';
-
-export const getServerSideProps: GetServerSideProps = SSR.withProps('profile')(
+export const getServerSideProps: GetServerSideProps = SsrUtils.withProps('profile')(
   async ({ locale = 'ja' }, result) => {
     return {
       ...result,
@@ -45,7 +44,7 @@ const Email: NextPage<EmailProps> = props => {
   };
 
   return (
-    <Layout title={t('accountSettings')}>
+    <PrivateLayout title={t('accountSettings')}>
       <Form methods={methods} onSubmit={handleSubmit}>
         <h3 className='mb-2'>{t('changeEmailAddress')}</h3>
         <Section>
@@ -60,7 +59,7 @@ const Email: NextPage<EmailProps> = props => {
           </Button>
         </div>
       </Form>
-    </Layout>
+    </PrivateLayout>
   );
 };
 

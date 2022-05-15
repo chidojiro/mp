@@ -39,3 +39,5 @@ yarn-error.log*
 .env
 .eslintcache
 .idea
+
+scripts/rewrite-import-list.txt

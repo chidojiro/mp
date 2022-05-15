@@ -1,4 +1,4 @@
-import { Redirect } from '@/components/common/Redirect';
+import { Redirect } from '@/common/Redirect';
 
 export const IndexPage = () => {
   return <Redirect href='/login' method='replace' />;

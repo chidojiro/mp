@@ -1,12 +1,12 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { Icon, IconName } from '@/components/common/Icon';
-import { ConversionRateChart } from '@/components/ConversionRateChart';
-import { CustomerReportButton } from '@/components/CustomerReportButton';
-import { Layout } from '@/components/Layout';
-import { useProfile } from '@/hooks/api/useProfile';
-import { NumberUtils } from '@/utils';
+import { Icon, IconName } from '@/common/Icon';
+import { NumberUtils } from '@/common/utils';
+import { ConversionRateChart } from '@/report/ConversionRateChart';
+import { CustomerReportButton } from '@/report/CustomerReportButton';
+import { PrivateLayout } from '@/layout/PrivateLayout';
+import { useProfile } from '@/auth/useProfile';
 
 export const getServerSideProps = async ({ locale = 'ja' }) => {
   return {
@@ -117,7 +117,7 @@ function F2ConversionRateTrends() {
     },
   ];
   return (
-    <Layout title={tCommon('f2ConversionRateTrends')}>
+    <PrivateLayout title={tCommon('f2ConversionRateTrends')}>
       <ConversionRateChart
         line={{ dataKey: 'f2_conversion_rate', title: t('f2ConversionRate') }}
         bar1={{ dataKey: 'f1_uu', title: t('numberOfF1Customers') }}
@@ -139,7 +139,7 @@ function F2ConversionRateTrends() {
           />
         ))}
       </div>
-    </Layout>
+    </PrivateLayout>
   );
 }
 

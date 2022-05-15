@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
-import { Redirect } from '@/components/common';
-import { MarketingActionStatus } from '@/types';
+import { Redirect } from '@/common/Redirect';
+import { MarketingActionStatus } from '@/marketing-action/types';
 
 function MarketingActions() {
   const { asPath } = useRouter();
