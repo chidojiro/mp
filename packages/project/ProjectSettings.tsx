@@ -20,7 +20,7 @@ import { useProject } from './useProject';
 export const ProjectSettings = () => {
   const { t } = useTranslation('settings');
 
-  const { data } = useProject();
+  const { data: project } = useProject();
 
   const methods = useForm<ProjectSettingData>({
     defaultValues: { const_r_rfm: 180, const_f_loyal: 5, const_m_loyal: 30000 },
@@ -46,20 +46,17 @@ export const ProjectSettings = () => {
     [reset]
   );
   useEffect(() => {
-    if (data) {
-      resetData(data);
+    if (project) {
+      resetData(project);
     }
-  }, [data, resetData]);
+  }, [project, resetData]);
 
-  const onSubmit = async (data: ProjectSettingData & { brand_logo_temp: File }) => {
-    const { path } = await AssetApis.create(
-      data.brand_logo_temp,
-      AssetResourceType.project,
-      undefined,
-      {
-        acl: 'public',
-      }
-    );
+  const onSubmit = async (data: ProjectSettingData & { brand_logo_temp?: File }) => {
+    const { path = project?.settings.brand_logo } = data?.brand_logo_temp
+      ? await AssetApis.create(data.brand_logo_temp, AssetResourceType.project, undefined, {
+          acl: 'public',
+        })
+      : {};
     // const brandLogoResponse = data.brand_logo_temp
     //   ? await RestUtils.poll({
     //       api: () => AssetApis.get(id),
