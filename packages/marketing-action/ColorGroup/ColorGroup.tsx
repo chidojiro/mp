@@ -1,4 +1,5 @@
 import { useTranslation } from 'next-i18next';
+import classNames from 'classnames';
 
 import { Form } from '@/common/Form';
 import { Option } from '@/common/types';
@@ -8,11 +9,11 @@ import { ColorOption } from './ColorOption';
 
 type Props = {
   name: string;
-  cols?: number;
   isFull?: boolean;
+  className?: string;
 };
 
-export const ColorGroup = ({ name, cols = 4, isFull = false }: Props) => {
+export const ColorGroup = ({ name, className = 'grid-cols-4', isFull = false }: Props) => {
   const { t } = useTranslation('marketingAction');
   const messageColors: Option<string>[] = [
     { label: t('orange'), value: MESSAGE_COLORS.orange },
@@ -44,7 +45,7 @@ export const ColorGroup = ({ name, cols = 4, isFull = false }: Props) => {
 
   return (
     <Form.RadioGroup name={name} rules={{ required: true }}>
-      <div className={`grid grid-cols-${cols}`}>
+      <div className={classNames('grid', className)}>
         {colors.map(color => (
           <ColorOption key={color.value} color={color} />
         ))}
