@@ -20,7 +20,7 @@ export const Appearance = () => {
       <div className='mb-3 text-gray-700 text-medium'>{t('selectColorTheme')}</div>
       <div className='mb-3 flex grid grid-cols-2 gap-2.5'>
         <div className=''>
-          <ColorGroup isFull={true} name='chat_settings.color' cols={3} />
+          <ColorGroup isFull={true} name='chat_settings.color' className='grid-cols-3' />
         </div>
         <div className='py-10 relative flex items-center justify-center min-h-[320px] rounded px-5 py-3.5 gap-2.5 bg-white'>
           <ChatPreview color={color} />
