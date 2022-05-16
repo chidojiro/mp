@@ -9,6 +9,7 @@ import { PrivateLayout } from '@/layout/PrivateLayout';
 import { ServerSidePropsProvider } from '@/ssr/ServerSidePropsContext';
 import { SsrUtils } from '@/ssr/utils';
 import { useProfile } from '@/auth/useProfile';
+import { Colors } from '@/theme/constants';
 
 export const getServerSideProps = SsrUtils.withProps('profile')(
   async ({ locale = 'ja' }, result) => {
@@ -125,9 +126,28 @@ function ReturnOfDormantCustomers(props: any) {
     <ServerSidePropsProvider props={props}>
       <PrivateLayout title={tCommon('returnOfDormantCustomers')}>
         <ConversionRateChart
-          line={{ dataKey: 'f2_conversion_rate', title: t('returnRate') }}
-          bar1={{ dataKey: 'f1_uu', title: t('numberOfDormantCustomers') }}
-          bar2={{ dataKey: 'f2_uu', title: t('numberOfReturns') }}
+          charts={[
+            {
+              type: 'BAR',
+              dataKey: 'f1_uu',
+              title: t('numberOfDormantCustomers'),
+              color: Colors.secondary.DEFAULT,
+              width: 24,
+            },
+            {
+              type: 'BAR',
+              dataKey: 'f2_uu',
+              title: t('numberOfReturns'),
+              color: Colors.primary.DEFAULT,
+              width: 24,
+            },
+            {
+              type: 'LINE',
+              dataKey: 'f2_conversion_rate',
+              title: t('returnRate'),
+              color: Colors.danger,
+            },
+          ]}
           data={data}
         />
         <h5 className='text-gray-600 mt-[60px] font-bold'>

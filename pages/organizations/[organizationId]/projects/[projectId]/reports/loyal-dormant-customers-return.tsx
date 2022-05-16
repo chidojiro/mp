@@ -1,12 +1,10 @@
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
 import { Icon } from '@/common/Icon';
-import { ConversionRateChart } from '@/report/ConversionRateChart';
-import { CustomerReportButton } from '@/report/CustomerReportButton';
 import { PrivateLayout } from '@/layout/PrivateLayout';
+import { CustomerReportButton } from '@/report/CustomerReportButton';
 import { ServerSidePropsProvider } from '@/ssr/ServerSidePropsContext';
 import { SsrUtils } from '@/ssr/utils';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export const getServerSideProps = SsrUtils.withProps('profile')(
   async ({ locale = 'ja' }, result) => {
@@ -102,12 +100,12 @@ function F2ConversionRateTrends(props: any) {
   return (
     <ServerSidePropsProvider props={props}>
       <PrivateLayout title={tCommon('loyalDormantCustomersReturn')}>
-        <ConversionRateChart
+        {/* <ConversionRateChart
           line={{ dataKey: 'f2_conversion_rate', title: t('returnRate') }}
           bar1={{ dataKey: 'f1_uu', title: t('numberOfLoyalDormantCustomers') }}
           bar2={{ dataKey: 'f2_uu', title: t('numberOfReturns') }}
           data={data}
-        />
+        /> */}
         <h5 className='text-gray-600 mt-[60px] font-bold'>
           {t('measuresThatContributedToReturnOfLoyalDormantCustomers')}
         </h5>

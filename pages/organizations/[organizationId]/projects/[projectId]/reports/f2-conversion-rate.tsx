@@ -1,12 +1,12 @@
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
+import { useProfile } from '@/auth/useProfile';
 import { Icon, IconName } from '@/common/Icon';
 import { NumberUtils } from '@/common/utils';
+import { PrivateLayout } from '@/layout/PrivateLayout';
 import { ConversionRateChart } from '@/report/ConversionRateChart';
 import { CustomerReportButton } from '@/report/CustomerReportButton';
-import { PrivateLayout } from '@/layout/PrivateLayout';
-import { useProfile } from '@/auth/useProfile';
+import { Colors } from '@/theme/constants';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export const getServerSideProps = async ({ locale = 'ja' }) => {
   return {
@@ -119,9 +119,28 @@ function F2ConversionRateTrends() {
   return (
     <PrivateLayout title={tCommon('f2ConversionRateTrends')}>
       <ConversionRateChart
-        line={{ dataKey: 'f2_conversion_rate', title: t('f2ConversionRate') }}
-        bar1={{ dataKey: 'f1_uu', title: t('numberOfF1Customers') }}
-        bar2={{ dataKey: 'f2_uu', title: t('numberOfF2Customers') }}
+        charts={[
+          {
+            type: 'BAR',
+            dataKey: 'f1_uu',
+            title: t('numberOfF1Customers'),
+            color: Colors.secondary.DEFAULT,
+            width: 24,
+          },
+          {
+            type: 'BAR',
+            dataKey: 'f2_uu',
+            title: t('numberOfF2Customers'),
+            color: Colors.primary.DEFAULT,
+            width: 24,
+          },
+          {
+            type: 'LINE',
+            dataKey: 'f2_conversion_rate',
+            title: t('f2ConversionRate'),
+            color: Colors.danger,
+          },
+        ]}
         data={data}
       />
       <h5 className='text-gray-600 mt-[60px] font-bold'>

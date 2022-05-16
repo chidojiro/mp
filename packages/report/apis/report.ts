@@ -2,7 +2,17 @@ import { RestApiConfig, RestApis } from '@/rest/apis';
 import { RfmReportItemResponse } from '../types';
 import { RfmReportDataItem } from '../types';
 
+const getList = () => {
+  return RestApis.get('/reports/list');
+};
+
+const getF2ConversionRate = () => {
+  return RestApis.get('/reports/f2-conversion-rate');
+};
+
 export const ReportApis = {
+  getList,
+  getF2ConversionRate,
   rfm_report: async (config: RestApiConfig): Promise<RfmReportDataItem[]> => {
     const data = await RestApis.get<RfmReportItemResponse>('/reports/rfm', config);
 

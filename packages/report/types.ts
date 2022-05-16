@@ -74,3 +74,25 @@ export type ConversionRate = {
   organization_id: string;
   project_id: string;
 };
+
+export type BaseChartInfo = {
+  dataKey: string;
+  title: string;
+  color: string;
+  legendIcon?: React.ReactNode;
+  width?: number;
+};
+
+export type BarChartInfo = BaseChartInfo & {
+  type: 'BAR';
+  stackedBars?: BaseChartInfo[];
+  color?: string;
+  dataKey?: string;
+  stackId?: string;
+};
+
+export type LineChartInfo = BaseChartInfo & {
+  type: 'LINE';
+};
+
+export type ChartInfo = BarChartInfo | LineChartInfo;

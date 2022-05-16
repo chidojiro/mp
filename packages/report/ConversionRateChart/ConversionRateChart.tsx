@@ -1,3 +1,5 @@
+import { CSVButton } from '@/common/CSVButton';
+import { DomUtils } from '@/common/utils';
 import React from 'react';
 import {
   Bar,
@@ -10,59 +12,148 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-
-import { CSVButton } from '@/common/CSVButton';
-import { DomUtils } from '@/common/utils';
-
+import { BarChartInfo, ChartInfo, LineChartInfo } from '../types';
 import styles from './ConversionRateChart.module.css';
 
 export type ConversionRateChartProps = {
-  bar1: ChartInfo;
-  bar2?: ChartInfo;
-  bar3?: ChartInfo;
-  line?: ChartInfo;
+  charts: ChartInfo[];
   data: any[];
 };
 
-export type ChartInfo = {
-  dataKey: string;
-  title: string;
-};
 function numberWithCommas(x: number) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
-export const ConversionRateChart = ({ bar1, bar2, bar3, line, data }: ConversionRateChartProps) => {
+
+const renderBar = (chartInfo: BarChartInfo) => {
+  if (!chartInfo.stackedBars) {
+    return (
+      <Bar
+        dataKey={chartInfo.dataKey}
+        name={chartInfo.title}
+        barSize={chartInfo.width ?? 16}
+        fill={chartInfo.color}
+        textAnchor='start'
+        radius={[4, 4, 0, 0]}
+      >
+        <LabelList
+          dataKey={chartInfo.dataKey}
+          // formatter={(v: string) => numberWithCommas(parseInt(v))}
+          position='top'
+          stroke='#FFBA00'
+          fontSize={10}
+        />
+      </Bar>
+    );
+  }
+
+  return (
+    <>
+      {chartInfo.stackedBars.map(({ color, dataKey, title, width }) => (
+        <Bar
+          key={dataKey}
+          stackId={chartInfo.stackId}
+          dataKey={dataKey}
+          name={title}
+          barSize={width ?? 16}
+          fill={color}
+          textAnchor='start'
+          radius={[4, 4, 0, 0]}
+        >
+          <LabelList
+            dataKey={dataKey}
+            formatter={(v: string) => numberWithCommas(parseInt(v))}
+            position='top'
+            stroke='#FFBA00'
+            fontSize={10}
+          />
+        </Bar>
+      ))}
+    </>
+  );
+};
+
+const renderLine = (chartInfo: LineChartInfo) => {
+  return (
+    <Line
+      yAxisId='right'
+      // type='monotone'
+      dot={false}
+      strokeWidth={chartInfo.width ?? 2}
+      dataKey={chartInfo.dataKey}
+      name={chartInfo.title}
+      unit='%'
+      stroke={chartInfo.color}
+      activeDot={false}
+    >
+      <LabelList
+        dataKey={chartInfo.dataKey}
+        position='top'
+        stroke='#464646'
+        formatter={(v: string) => v + '%'}
+      />
+    </Line>
+  );
+};
+
+export const ConversionRateChart = ({ charts, data }: ConversionRateChartProps) => {
   if (DomUtils.isServer()) return <div></div>;
 
-  const barWidth = bar3 ? 16 : 24;
+  const renderLegend = () => {
+    return (
+      <div className='flex items-center gap-8'>
+        {charts.map(chart => {
+          if (chart.type === 'BAR') {
+            return (
+              <React.Fragment key={chart.dataKey ?? chart.title}>
+                <div className='flex items-center gap-2'>
+                  {chart.legendIcon ?? (
+                    <div className='w-3 h-3 rounded-sm' style={{ background: chart.color }}></div>
+                  )}
+                  {chart.title}
+                </div>
+                {(chart.stackedBars ?? []).map(stackedBar => (
+                  <div className='flex items-center gap-2' key={stackedBar.dataKey}>
+                    {stackedBar.legendIcon ?? (
+                      <div
+                        className='w-3 h-3 rounded-sm'
+                        style={{ background: stackedBar.color }}
+                      ></div>
+                    )}
+                    {stackedBar.title}
+                  </div>
+                ))}
+              </React.Fragment>
+            );
+          }
+
+          if (chart.type === 'LINE') {
+            return (
+              <div className='flex items-center gap-2' key={chart.dataKey ?? chart.title}>
+                <div className='w-3 h-0.5 rounded-sm' style={{ background: chart.color }}></div>
+                {chart.title}
+              </div>
+            );
+          }
+
+          return null;
+        })}
+      </div>
+    );
+  };
+
+  const renderCharts = () => {
+    return charts.map(chart => {
+      if (chart.type === 'BAR') return renderBar(chart);
+      if (chart.type === 'LINE') return renderLine(chart);
+
+      return null;
+    });
+  };
 
   return (
     <div>
       <div className='flex items-end justify-between px-16 mb-4'>
-        <div className='flex items-center gap-8'>
-          <div className='flex items-center gap-2'>
-            <div className='w-3 h-3 rounded-sm bg-secondary'></div>
-            {bar1.title}
-          </div>
-          {!!bar2 && (
-            <div className='flex items-center gap-2'>
-              <div className='w-3 h-3 rounded-sm bg-primary'></div>
-              {bar2.title}
-            </div>
-          )}
-          {!!bar3 && (
-            <div className='flex items-center gap-2'>
-              <div className='w-3 h-3 rounded-sm bg-danger'></div>
-              {bar3.title}
-            </div>
-          )}
-          {!!line && (
-            <div className='flex items-center gap-2'>
-              <div className='w-3 h-0.5 rounded-sm bg-danger'></div>
-              {line.title}
-            </div>
-          )}
-        </div>
+        {renderLegend()}
         <CSVButton />
       </div>
       <ResponsiveContainer width='100%' height={400}>
@@ -90,78 +181,7 @@ export const ConversionRateChart = ({ bar1, bar2, bar3, line, data }: Conversion
             yAxisId='right'
             orientation='right'
           />
-          <Bar
-            dataKey={bar1.dataKey}
-            name={bar1.title}
-            barSize={barWidth}
-            fill='#FFBA00'
-            textAnchor='start'
-            radius={[4, 4, 0, 0]}
-          >
-            <LabelList
-              dataKey={bar1.dataKey}
-              formatter={(v: string) => numberWithCommas(parseInt(v))}
-              position='top'
-              stroke='#FFBA00'
-              fontSize={10}
-            />
-          </Bar>
-          {!!bar2 && (
-            <Bar
-              dataKey={bar2.dataKey}
-              name={bar2.title}
-              radius={[4, 4, 0, 0]}
-              barSize={barWidth}
-              fill='#55C5D9'
-              textAnchor='start'
-            >
-              <LabelList
-                dataKey={bar2.dataKey}
-                position='top'
-                stroke='#55C5D9'
-                fontSize={10}
-                formatter={(v: string) => numberWithCommas(parseInt(v))}
-              />
-            </Bar>
-          )}
-          {!!bar3 && (
-            <Bar
-              dataKey={bar3.dataKey}
-              name={bar3.title}
-              radius={[4, 4, 0, 0]}
-              barSize={barWidth}
-              fill='#FF7F5C'
-              textAnchor='start'
-            >
-              <LabelList
-                dataKey={bar3.dataKey}
-                position='top'
-                formatter={(v: string) => numberWithCommas(parseInt(v))}
-                stroke='#FF7F5C'
-                fontSize={10}
-              />
-            </Bar>
-          )}
-          {!!line && (
-            <Line
-              yAxisId='right'
-              // type='monotone'
-              dot={false}
-              strokeWidth={2}
-              dataKey={line.dataKey}
-              name={line.title}
-              unit='%'
-              stroke='#FF7D58'
-              activeDot={false}
-            >
-              <LabelList
-                dataKey={line.dataKey}
-                position='top'
-                stroke='#464646'
-                formatter={(v: string) => v + '%'}
-              />
-            </Line>
-          )}
+          {renderCharts()}
           <Tooltip />
         </ComposedChart>
       </ResponsiveContainer>

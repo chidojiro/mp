@@ -9,6 +9,7 @@ import { PrivateLayout } from '@/layout/PrivateLayout';
 import { ServerSidePropsProvider } from '@/ssr/ServerSidePropsContext';
 import { SsrUtils } from '@/ssr/utils';
 import { useProfile } from '@/auth/useProfile';
+import { Colors } from '@/theme/constants';
 
 export const getServerSideProps = SsrUtils.withProps('profile')(
   async ({ locale = 'ja' }, result) => {
@@ -125,9 +126,29 @@ function F2ConversionRateTrends(props: any) {
     <ServerSidePropsProvider props={props}>
       <PrivateLayout title={tCommon('numberOfLoyalCustomers')}>
         <ConversionRateChart
-          bar1={{ dataKey: 'f1_uu', title: t('numberOfLoyalCustomers') }}
-          bar2={{ dataKey: 'bar2', title: t('numberOfSemiLoyalCustomers') }}
-          bar3={{ dataKey: 'f2_uu', title: t('loyalDormantCustomers') }}
+          charts={[
+            {
+              type: 'BAR',
+              dataKey: 'f1_uu',
+              title: t('numberOfLoyalCustomers'),
+              color: Colors.secondary.DEFAULT,
+              width: 16,
+            },
+            {
+              type: 'BAR',
+              dataKey: 'bar2',
+              title: t('numberOfSemiLoyalCustomers'),
+              color: Colors.primary.DEFAULT,
+              width: 16,
+            },
+            {
+              type: 'BAR',
+              dataKey: 'f2_uu',
+              title: t('loyalDormantCustomers'),
+              color: Colors.danger,
+              width: 16,
+            },
+          ]}
           data={data}
         />
         <h5 className='text-gray-600 mt-[60px] font-bold'>
