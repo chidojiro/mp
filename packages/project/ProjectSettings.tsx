@@ -10,7 +10,6 @@ import { Button } from '@/common/Button';
 import { Form } from '@/common/Form';
 import { convertToEditorState } from '@/marketing-action-edit/utils';
 import { ProjectApis } from '@/project/apis';
-import { RestUtils } from '@/rest/utils';
 import { ProjectData, ProjectSettingData } from './types';
 
 import { AdvancedSettings } from './AdvancedSettings';
@@ -55,19 +54,24 @@ export const ProjectSettings = () => {
   }, [data, resetData]);
 
   const onSubmit = async (data: ProjectSettingData & { brand_logo_temp: File }) => {
-    const brandLogoResponse = data.brand_logo_temp
-      ? await RestUtils.poll({
-          api: () =>
-            AssetApis.create(data.brand_logo_temp, AssetResourceType.project, undefined, {
-              acl: 'public',
-            }),
-          until: data => data.status === 'completed',
-        })
-      : undefined;
+    const { path } = await AssetApis.create(
+      data.brand_logo_temp,
+      AssetResourceType.project,
+      undefined,
+      {
+        acl: 'public',
+      }
+    );
+    // const brandLogoResponse = data.brand_logo_temp
+    //   ? await RestUtils.poll({
+    //       api: () => AssetApis.get(id),
+    //       until: data => data.status === 'completed',
+    //     })
+    //   : undefined;
 
     const payload = {
       ...data,
-      brand_logo: brandLogoResponse?.path,
+      brand_logo: path,
       email_footer_draft_raw:
         data.email_footer_draft_raw &&
         JSON.stringify(

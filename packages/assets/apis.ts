@@ -5,6 +5,7 @@ import { RestApis } from '../rest/apis';
 const get = (assetId: string) => {
   return RestApis.get<Asset>(`/assets/${assetId}`);
 };
+
 const create = (
   file: File,
   resourceType: AssetResourceType,

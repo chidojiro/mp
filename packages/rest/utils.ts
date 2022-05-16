@@ -1,8 +1,8 @@
 const poll = <T = any>({
   api,
-  interval = 1000,
+  interval = 2000,
   until,
-  retries = 5,
+  retries = 100,
 }: {
   api: () => Promise<T>;
   interval?: number;

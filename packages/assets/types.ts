@@ -8,7 +8,7 @@ export enum AssetResourceType {
 }
 
 export type Asset = {
-  id?: string;
+  id: string;
   name: string;
   mime_type: string;
   size: number;
