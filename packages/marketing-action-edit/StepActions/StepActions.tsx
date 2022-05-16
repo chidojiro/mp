@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Button } from '@/common/Button';
 import { Icon } from '@/common/Icon';
-import { ConfirmButtonTooltip } from '../ConfirmButtonTooltip';
+import { ConfirmButton } from '../ConfirmButton';
 import { useVisibilityControl } from '@/common/useVisibilityControl';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -33,31 +33,31 @@ export const StepActions = ({ onPreviewClick, onConfirmClick, complete, useToolt
           {t('viewPreview')}
         </Button>
       )}
-      <div className='w-[240px]'>
+      <div>
         {!!useTooltip && (
-          <ConfirmButtonTooltip control={tooltipControl}>{t('alertConfirm')}</ConfirmButtonTooltip>
-        )}
-        <Button
-          onClick={onConfirmClick}
-          type={onConfirmClick ? 'button' : 'submit'}
-          colorScheme='green'
-          variant={complete ? 'solid' : 'outline'}
-          className='w-full'
-        >
-          <div
-            className={classNames(
-              'flex items-center justify-center w-5 h-5 mr-2 rounded-full',
-              complete ? 'bg-white' : 'bg-gray'
-            )}
+          <ConfirmButton
+            tooltipContent={t('alertConfirm')}
+            className='w-[240px]'
+            onClick={onConfirmClick}
+            type={onConfirmClick ? 'button' : 'submit'}
+            colorScheme='green'
+            variant={complete ? 'solid' : 'outline'}
           >
-            <Icon
-              name='check'
-              size={10}
-              className={classNames(complete ? 'text-mint-green' : 'text-white')}
-            />
-          </div>
-          {t('confirm')}
-        </Button>
+            <div
+              className={classNames(
+                'flex items-center justify-center w-5 h-5 mr-2 rounded-full',
+                complete ? 'bg-white' : 'bg-gray'
+              )}
+            >
+              <Icon
+                name='check'
+                size={10}
+                className={classNames(complete ? 'text-mint-green' : 'text-white')}
+              />
+            </div>
+            {t('confirm')}
+          </ConfirmButton>
+        )}
       </div>
     </div>
   );

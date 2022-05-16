@@ -1,1 +1,0 @@
-export { ConfirmButtonTooltip } from './ConfirmButtonTooltip';

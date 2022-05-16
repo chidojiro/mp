@@ -5,7 +5,7 @@ import { useVisibilityControl } from './useVisibilityControl';
 import { VisibilityControl } from './useVisibilityControl';
 
 const Context = React.createContext<{ control: VisibilityControl }>({
-  control: { open: noop, close: noop, toggle: noop, visible: false },
+  control: { set: noop, open: noop, close: noop, toggle: noop, visible: false },
 });
 
 // eslint-disable-next-line @typescript-eslint/ban-types

@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import useSWR from 'swr';
-import { ConfirmButtonTooltip } from '../ConfirmButtonTooltip';
+import { ConfirmButton } from '../ConfirmButton';
 import { convertFromStepMessageRaw, convertToStepMessageRaw } from '../utils';
 import { LineUsageSettingsStep } from './LineUsageSettingsStep';
 import { Message1SettingsStep } from './Message1SettingsStep';
@@ -389,8 +389,10 @@ export const DeliveryAfterPurchase = ({}: Props) => {
             {t('suspendTemplate')}
           </Button>
         )}
-        <div className='relative w-[480px]'>
-          <ConfirmButtonTooltip control={tooltipControl}>
+        <ConfirmButton
+          className='w-[480px]'
+          control={tooltipControl}
+          tooltipContent={
             <Trans
               i18nKey='implementTemplateTooltip'
               t={t}
@@ -403,15 +405,12 @@ export const DeliveryAfterPurchase = ({}: Props) => {
                 ></Icon>,
               ]}
             />
-          </ConfirmButtonTooltip>
-          <Button
-            onClick={implementConfirmModalControl.open}
-            className='relative w-full'
-            disabled={!isComplete}
-          >
-            {t('implementTemplate')}
-          </Button>
-        </div>
+          }
+          onClick={implementConfirmModalControl.open}
+          disabled={!isComplete}
+        >
+          {t('implementTemplate')}
+        </ConfirmButton>
       </div>
     </>
   );

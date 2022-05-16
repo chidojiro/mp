@@ -3,6 +3,7 @@ import React from 'react';
 import { Fn } from './types';
 
 export type VisibilityControl = {
+  set: React.Dispatch<React.SetStateAction<boolean>>;
   open: () => void;
   close: () => void;
   toggle: () => void;
@@ -42,7 +43,7 @@ export const useVisibilityControl = (props?: Props) => {
   }, [onClose, onOpen]);
 
   return React.useMemo<VisibilityControl>(
-    () => ({ open, close, visible: visible, toggle }),
+    () => ({ open, close, visible: visible, toggle, set: setVisible }),
     [open, close, visible, toggle]
   );
 };
