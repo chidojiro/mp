@@ -19,8 +19,6 @@ export const ConfirmButton = ({
   const openControl = controlProp ?? ownControl;
   const appearControl = useVisibilityControl({ defaultVisible: !!openControl.open });
 
-  console.log(openControl.visible, appearControl.visible);
-
   React.useEffect(() => {
     const observer = new IntersectionObserver(
       entries => appearControl.set(entries[0].isIntersecting),
