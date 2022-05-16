@@ -1,16 +1,15 @@
-import { useTranslation } from 'next-i18next';
-import { EditorState } from 'draft-js';
-import { useFormContext, useWatch } from 'react-hook-form';
-
 import { Form } from '@/common/Form';
 import { Icon } from '@/common/Icon';
 import { RadioGroup } from '@/common/RadioGroup';
 import { getPlainTextWithInterpolatedMentionValue } from '@/common/RichTextEditor';
 import { Option } from '@/common/types';
-import { MessageBodyInput } from '@/marketing-action-edit/MessageBodyInput';
 import { LinePreview } from '@/marketing-action/LinePreview';
 import { MessageContentPreviewType } from '@/marketing-action/MessageContentPreview';
 import { OPTIONS } from '@/marketing-action/types';
+import { EditorState } from 'draft-js';
+import { useTranslation } from 'next-i18next';
+import { useFormContext, useWatch } from 'react-hook-form';
+import { MessageBodyInput } from '../MessageBodyInput';
 
 type Props = {
   showLineMsg: boolean;

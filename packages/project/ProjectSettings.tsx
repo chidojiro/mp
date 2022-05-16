@@ -1,21 +1,19 @@
-import { useCallback, useEffect } from 'react';
-import { useTranslation } from 'next-i18next';
-import { convertToRaw, EditorState } from 'draft-js';
-import { omitBy } from 'lodash-es';
-import { useForm } from 'react-hook-form';
-
 import { AssetApis } from '@/assets/apis';
 import { AssetResourceType } from '@/assets/types';
 import { Button } from '@/common/Button';
 import { Form } from '@/common/Form';
 import { convertToEditorState } from '@/marketing-action-edit/utils';
-import { ProjectApis } from '@/project/apis';
-import { ProjectData, ProjectSettingData } from './types';
-
+import { convertToRaw, EditorState } from 'draft-js';
+import { omitBy } from 'lodash-es';
+import { useTranslation } from 'next-i18next';
+import { useCallback, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { AdvancedSettings } from './AdvancedSettings';
+import { ProjectApis } from './apis';
 import { BasicInformation } from './BasicInformation';
 import { EmailSettings } from './EmailSettings';
 import { SnsSettings } from './SnsSettings';
+import { ProjectData, ProjectSettingData } from './types';
 import { UrlSettings } from './UrlSettings';
 import { useProject } from './useProject';
 

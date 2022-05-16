@@ -1,19 +1,17 @@
-import React from 'react';
-import { useTranslation } from 'next-i18next';
-import { EditorState } from 'draft-js';
-import { useFormContext, useWatch } from 'react-hook-form';
-
 import { Form } from '@/common/Form';
 import { Icon } from '@/common/Icon';
 import { getPlainTextWithInterpolatedMentionValue } from '@/common/RichTextEditor';
 import { ColorGroup } from '@/marketing-action/ColorGroup';
-import { LineMessage } from '@/marketing-action-edit/CartAbandoned/LineMessage';
 import { MailPreview } from '@/marketing-action/MailPreview';
 import { MessageContentPreviewType } from '@/marketing-action/MessageContentPreview';
-import { MessageBodyInput } from '../MessageBodyInput';
-import { MarketingActionAlias } from '@/marketing-action/types';
-import { StepMessage } from '@/marketing-action/types';
+import { MarketingActionAlias, StepMessage } from '@/marketing-action/types';
 import { useVariables } from '@/marketing-action/useVariables';
+import { EditorState } from 'draft-js';
+import { useTranslation } from 'next-i18next';
+import React from 'react';
+import { useFormContext, useWatch } from 'react-hook-form';
+import { LineMessage } from '../CartAbandoned/LineMessage';
+import { MessageBodyInput } from '../MessageBodyInput';
 
 type Props = {
   useLine?: boolean;

@@ -1,10 +1,8 @@
+import { RefreshIcon } from '@heroicons/react/outline';
 import { useTranslation } from 'next-i18next';
 import useSWR from 'swr';
-import { RefreshIcon } from '@heroicons/react/outline';
-
+import { ActionsByAliasResponse, MarketingActionApis } from '../apis';
 import { Badge } from './Badge';
-import { MarketingActionApis } from '@/marketing-action/apis';
-import { ActionsByAliasResponse } from '@/marketing-action/apis';
 
 type Props = {
   alias?: string;

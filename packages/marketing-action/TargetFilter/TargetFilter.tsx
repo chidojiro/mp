@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next';
 import { CheckboxGroup } from '@/common/CheckboxGroup';
 import { Option } from '@/common/types';
 import { CheckboxTag } from './CheckboxTag';
-import { TARGET } from '@/marketing-action/types';
+import { TARGET } from '../types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};

@@ -5,8 +5,8 @@ import classNames from 'classnames';
 
 import { Button } from '@/common/Button';
 import { ClassName } from '@/common/types';
-import { getVariableContentPreview } from '@/marketing-action-edit/utils';
-import { useVariables } from '@/marketing-action/useVariables';
+import { MarketingActionUtils } from './utils';
+import { useVariables } from './useVariables';
 
 type Props = ClassName & {
   headline?: string;
@@ -47,8 +47,8 @@ export const MailPreview = ({
 
   const { data: variables } = useVariables();
 
-  const bodyPreview = getVariableContentPreview(body ?? '', variables);
-  const headlinePreview = getVariableContentPreview(headline ?? '', variables);
+  const bodyPreview = MarketingActionUtils.getVariableContentPreview(body ?? '', variables);
+  const headlinePreview = MarketingActionUtils.getVariableContentPreview(headline ?? '', variables);
 
   return (
     <div

@@ -14,7 +14,7 @@ import { MailPreview } from './MailPreview';
 import { MessageContentPreviewType } from './MessageContentPreview';
 import { useVisibilityControl } from '@/common/useVisibilityControl';
 import { VisibilityControl } from '@/common/useVisibilityControl';
-import { MarketingActionApis } from '@/marketing-action/apis';
+import { MarketingActionApis } from './apis';
 
 type Props = {
   defaultType: MessageContentPreviewType;

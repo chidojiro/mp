@@ -1,4 +1,3 @@
-import { AuthApis } from '@/auth/apis';
 import { Button } from '@/common/Button';
 import { ErrorMessage } from '@/common/ErrorMessage';
 import { Form } from '@/common/Form';
@@ -7,6 +6,7 @@ import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { AuthApis } from './apis';
 
 type Props = {
   token: string;

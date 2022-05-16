@@ -4,7 +4,6 @@ import { cloneDeep, get, set } from 'lodash-es';
 import { richTextEditorDecorator, richTextEditorEmptyValue } from '@/common/RichTextEditor';
 import { StepMessage } from '@/marketing-action/types';
 import { Carousel } from '@/marketing-action/types';
-import { Variable } from '@/marketing-action/types';
 
 const draftRawFields = [
   'mail_content.content_draft_raw',
@@ -138,14 +137,4 @@ export const getDefaultMessageContentState = (text: string, data: any[] = []) =>
   });
 
   return convertToEditorState(defaultMessageContentRaw);
-};
-
-export const getVariableContentPreview = (originalTemplate: string, variables: Variable[]) => {
-  return variables.reduce((accPreview, { content, name, type }) => {
-    const variableRegex = new RegExp(`\{\{${name}\}\}`);
-
-    if (type === 'dynamic') return accPreview?.replace(variableRegex, '○○○');
-
-    return accPreview?.replace(variableRegex, content);
-  }, originalTemplate);
 };

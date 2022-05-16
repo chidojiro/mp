@@ -1,4 +1,3 @@
-import { AuthApis, PasswordRecoverPayload } from '@/auth/apis';
 import { Button } from '@/common/Button';
 import { EmailField } from '@/common/EmailField';
 import { Form } from '@/common/Form';
@@ -6,6 +5,7 @@ import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { AuthApis, PasswordRecoverPayload } from './apis';
 
 export const PasswordRecoverForm = () => {
   const { t } = useTranslation('login');

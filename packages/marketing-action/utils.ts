@@ -1,5 +1,5 @@
-import { MarketingActionSegment as MASegment } from './types';
-import { TARGET } from '@/marketing-action/types';
+import { MarketingActionSegment as MASegment, Variable } from './types';
+import { TARGET } from './types';
 
 const getTarget = (segment: string, member: boolean, sleep: boolean) => {
   return {
@@ -91,7 +91,18 @@ const getTargetFilters = (targetSegments: any) => {
   return _filters;
 };
 
+const getVariableContentPreview = (originalTemplate: string, variables: Variable[]) => {
+  return variables.reduce((accPreview, { content, name, type }) => {
+    const variableRegex = new RegExp(`\{\{${name}\}\}`);
+
+    if (type === 'dynamic') return accPreview?.replace(variableRegex, '○○○');
+
+    return accPreview?.replace(variableRegex, content);
+  }, originalTemplate);
+};
+
 export const MarketingActionUtils = {
   getTargetCustomers,
   getTargetFilters,
+  getVariableContentPreview,
 };

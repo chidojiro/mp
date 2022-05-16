@@ -1,6 +1,5 @@
 import { RestApis } from '@/rest/apis';
-import { MarketingActionAlias } from '@/marketing-action/types';
-import { Variable } from '@/marketing-action/types';
+import { MarketingActionAlias, Variable } from '../types';
 
 const list = async (marketingActionAlias: MarketingActionAlias) => {
   return await RestApis.get<Variable[]>(`/variables`, {

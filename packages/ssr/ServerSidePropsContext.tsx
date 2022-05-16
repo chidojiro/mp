@@ -1,6 +1,5 @@
-import React from 'react';
-
 import { Children } from '@/common/types';
+import React from 'react';
 
 export type ServerSidePropNames = 'profile';
 

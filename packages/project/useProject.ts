@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
-
-import { ProjectApis } from '@/project/apis';
+import { ProjectApis } from './apis';
 
 export const useProject = (_projectId?: string) => {
   const { query } = useRouter();

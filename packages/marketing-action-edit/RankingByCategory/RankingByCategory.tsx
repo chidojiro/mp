@@ -1,28 +1,28 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { Form } from '@/common/Form';
+import { useVisibilityControl } from '@/common/useVisibilityControl';
+import { ActionContainer } from '@/marketing-action/ActionContainer';
+import { MarketingActionApis } from '@/marketing-action/apis';
+import { MARKETING_ACTION_URL } from '@/marketing-action/constants';
+import {
+  MarketingActionAlias,
+  MarketingActionRes,
+  MarketingActionStatus,
+  TARGET,
+} from '@/marketing-action/types';
+import { MarketingActionUtils } from '@/marketing-action/utils';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useSWR from 'swr';
-import { Form } from '@/common/Form';
-import { ActionContainer } from '@/marketing-action/ActionContainer';
-import { convertFromCarouselRaw, convertToCarouselRaw } from '@/marketing-action-edit/utils';
-import { MarketingActionUtils } from '@/marketing-action/utils';
-
 import { ChatOverlay } from '../ChatOverlay';
 import { ChatWindowSettings } from '../ChatWindowSettings';
 import { Steppers } from '../Steppers';
 import SavingActions from '../Steppers/SavingActions';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';
-
+import { convertFromCarouselRaw, convertToCarouselRaw } from '../utils';
 import { Step1Settings } from './Step1Settings';
 import { Step2Settings } from './Step2Settings';
-import { useVisibilityControl } from '@/common/useVisibilityControl';
-import { MarketingActionStatus } from '@/marketing-action/types';
-import { MarketingActionAlias } from '@/marketing-action/types';
-import { TARGET } from '@/marketing-action/types';
-import { MarketingActionRes } from '@/marketing-action/types';
-import { MarketingActionApis } from '@/marketing-action/apis';
-import { MARKETING_ACTION_URL } from '@/marketing-action/constants';
 
 export const RankingByCategory = () => {
   const { t } = useTranslation('marketingAction');

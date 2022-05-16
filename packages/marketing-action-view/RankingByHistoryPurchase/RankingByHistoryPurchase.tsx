@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next';
 import { Button } from '@/common/Button';
 import { ChatOverlay } from '@/marketing-action-edit/ChatOverlay';
 import { convertToEditorState } from '@/marketing-action-edit/utils';
-import { RichMessageView } from '@/marketing-action-view/StepBlock/RichMessageView';
+import { RichMessageView } from '../StepBlock/RichMessageView';
 import { Answer, StepBlock } from '../StepBlock';
 import { ChatWindowSettings } from '../StepBlock/ChatWindowSettings';
 import { useVisibilityControl } from '@/common/useVisibilityControl';

@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import useSWR from 'swr';
 import { VariableApis } from './apis';
-import { MarketingActionAlias } from '@/marketing-action/types';
-import { Variable } from '@/marketing-action/types';
+import { MarketingActionAlias } from './types';
+import { Variable } from './types';
 
 const marketingActionQueryParamToAliasMap: Record<string, MarketingActionAlias> = {
   'step-delivery-after-purchase': MarketingActionAlias.AFTER_PURCHASE,

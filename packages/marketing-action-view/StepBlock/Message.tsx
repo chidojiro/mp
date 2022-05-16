@@ -3,7 +3,7 @@ import { convertFromRaw, EditorState } from 'draft-js';
 
 import { richTextEditorDecorator } from '@/common/RichTextEditor';
 import { ColorUtils } from '@/common/utils';
-import { RichMessageView } from '@/marketing-action-view/StepBlock/RichMessageView';
+import { RichMessageView } from '../StepBlock/RichMessageView';
 import { Answer } from './Answer';
 import { Color } from './Color';
 import { StepMessage } from '@/marketing-action/types';

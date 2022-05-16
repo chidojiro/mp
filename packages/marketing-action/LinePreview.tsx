@@ -3,10 +3,10 @@ import { useTranslation } from 'next-i18next';
 import classNames from 'classnames';
 
 import { Button } from '@/common/Button';
-import { getVariableContentPreview } from '@/marketing-action-edit/utils';
+import { MarketingActionUtils } from './utils';
 import { AspectRatio } from '@/headless';
-import { MarketingActionAlias } from '@/marketing-action/types';
-import { useVariables } from '@/marketing-action/useVariables';
+import { MarketingActionAlias } from './types';
+import { useVariables } from './useVariables';
 
 type Props = {
   body?: string;
@@ -41,8 +41,8 @@ export const LinePreview = ({
 
   const { data: variables } = useVariables();
 
-  const bodyPreview = getVariableContentPreview(body ?? '', variables);
-  const headlinePreview = getVariableContentPreview(headline ?? '', variables);
+  const bodyPreview = MarketingActionUtils.getVariableContentPreview(body ?? '', variables);
+  const headlinePreview = MarketingActionUtils.getVariableContentPreview(headline ?? '', variables);
 
   return (
     <div

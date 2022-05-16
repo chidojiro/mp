@@ -1,4 +1,4 @@
-import { MarketingActionAlias } from '@/marketing-action/types';
+import { MarketingActionAlias } from './types';
 
 export interface Step {
   id: number;

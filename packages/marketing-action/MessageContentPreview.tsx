@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next';
 import { Button } from '@/common/Button';
 import { LinePreview } from './LinePreview';
 import { MailPreview } from './MailPreview';
-import { MarketingActionAlias } from '@/marketing-action/types';
+import { MarketingActionAlias } from './types';
 
 export type MessageContentPreviewType = 'line' | 'mail';
 

@@ -1,11 +1,10 @@
-import React from 'react';
-import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
-import useSWR from 'swr';
-import { Button } from '@/common/Button';
 import { useProfile } from '@/auth/useProfile';
-import { MarketingActionApis } from '@/marketing-action/apis';
-import { ActionsByAliasResponse } from '@/marketing-action/apis';
+import { Button } from '@/common/Button';
+import { useTranslation } from 'next-i18next';
+import Link from 'next/link';
+import React from 'react';
+import useSWR from 'swr';
+import { ActionsByAliasResponse, MarketingActionApis } from '../apis';
 
 type Props = {
   typeName: string;
