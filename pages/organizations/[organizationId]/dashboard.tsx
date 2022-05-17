@@ -35,16 +35,16 @@ function Dashboard(props: DashboardProps) {
       icon: 'f1-graduate',
       label: 'f2ConversionRate',
     },
-    {
-      href: 'semi-loyal-conversion-rate',
-      icon: 'f2-graduate',
-      label: 'semiLoyalConversionRate',
-    },
-    {
-      href: 'loyal-conversion-rate',
-      icon: 'semi-loyal-graduate',
-      label: 'loyalConversionRate',
-    },
+    // {
+    //   href: 'semi-loyal-conversion-rate',
+    //   icon: 'f2-graduate',
+    //   label: 'semiLoyalConversionRate',
+    // },
+    // {
+    //   href: 'loyal-conversion-rate',
+    //   icon: 'semi-loyal-graduate',
+    //   label: 'loyalConversionRate',
+    // },
     {
       href: 'loyal-customers',
       icon: 'loyal-fluctuate',
@@ -55,11 +55,11 @@ function Dashboard(props: DashboardProps) {
       icon: 'sleep-returned',
       label: 'dormantCustomerReturnTrend',
     },
-    {
-      href: 'f1-dormant-customers-return',
-      icon: 'f1-sleep-returned',
-      label: 'dormantF1CustomerReturnTrend',
-    },
+    // {
+    //   href: 'f1-dormant-customers-return',
+    //   icon: 'f1-sleep-returned',
+    //   label: 'dormantF1CustomerReturnTrend',
+    // },
     {
       href: 'loyal-dormant-customers-return',
       icon: 'loyal-sleep-returned',
@@ -68,7 +68,7 @@ function Dashboard(props: DashboardProps) {
   ];
   return (
     <PrivateLayout title={t('menuDashboard')}>
-      <h4 className='mt-5 mb-2 text-gray-600 font-bold'>{t('dashboardCustomerAnalysis')}</h4>
+      <h4 className='mt-5 mb-2 font-bold text-gray-600'>{t('dashboardCustomerAnalysis')}</h4>
 
       <div className='flex items-end justify-between w-full mb-10'>
         <div className='flex'>

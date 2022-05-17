@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import classNames from 'classnames';
@@ -13,9 +15,14 @@ export type NavItemData = {
   matches?: string[];
   icon?: IconName;
 };
-type Props = { data: NavItemData; showLabel: boolean };
+type Props = {
+  data: NavItemData;
+  showLabel: boolean;
+  isSidebarClose: boolean;
+  setOpenSidebar: (value: boolean) => void;
+};
 
-export const NavItem = ({ data, showLabel = true }: Props) => {
+export const NavItem = ({ data, showLabel = true, isSidebarClose, setOpenSidebar }: Props) => {
   const { path, label, children: navChildren = [], icon = 'group' } = data;
 
   const router = useRouter();
@@ -28,8 +35,20 @@ export const NavItem = ({ data, showLabel = true }: Props) => {
     defaultVisible: navChildren.some(item => isMatched(item)),
   });
 
+  useEffect(() => {
+    isSidebarClose && accordionControl.set(false);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSidebarClose]);
+
+  useEffect(() => {
+    accordionControl.visible && setOpenSidebar(true);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accordionControl.visible]);
+
   const anchorClasses = classNames(
-    'flex text-medium items-center py-3 pl-3 hover:bg-dark-gray transition-all',
+    'cursor-pointer flex text-medium items-center py-3 pl-3 hover:bg-dark-gray transition-all',
     {
       'bg-dark-gray': isMatched(data),
     }
@@ -57,7 +76,7 @@ export const NavItem = ({ data, showLabel = true }: Props) => {
           {showLabel && navChildren && (
             <Icon
               name={accordionControl.visible ? 'chevron-up' : 'chevron-down'}
-              className='ml-auto text-gray-500 mr-2'
+              className='ml-auto mr-2 text-gray-500'
               size={22}
             />
           )}
@@ -67,12 +86,9 @@ export const NavItem = ({ data, showLabel = true }: Props) => {
         {navChildren.map(item => (
           <Link passHref href={item.path || ''} key={item.label}>
             <a
-              className={classNames(
-                'block text-medium items-center pl-12 pr-6 py-2.5 hover:bg-dark-gray hover:whitespace-normal truncate',
-                {
-                  'bg-dark-gray': isMatched(item),
-                }
-              )}
+              className={classNames('block text-medium items-center pl-12 pr-6 py-2.5', {
+                'bg-dark-gray': isMatched(item),
+              })}
               title={item.label}
             >
               {item.label}
