@@ -210,5 +210,13 @@
   "cart": "カート",
   "notSelected": "選択されていません",
   "productAutoInserted": "商品情報が自動挿入されます",
-  "forgotSomething": "お買い忘れはございませんか"
+  "forgotSomething": "お買い忘れはございませんか",
+  "shippingTemplateOneUntilFree": "送料無料まで",
+  "shippingTemplateAfter": "あと",
+  "yenMarker": "円",
+  "shippingTemplateOneThresholdUntilFree": "円以上購入で送料無料",
+  "shippingTemplateWithPurchaseOf": "のご購入で",
+  "shippingTemplateTwoFreeShipping": "配送料無料になります！",
+  "shippingTemplateTwoThresholdUntilFree": "円以上のご購入で",
+  "shippingTemplateTwoFreeShippingCampaing": "配送料無料キャンペーン中"
 }

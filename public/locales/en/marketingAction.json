@@ -211,5 +211,13 @@
   "cart": "Cart",
   "notSelected": "Not Selected",
   "productAutoInserted": "Product information is automatically inserted",
-  "forgotSomething": "Are you sure you haven't forgotten something?"
+  "forgotSomething": "Are you sure you haven't forgotten something?",
+  "shippingTemplateOneUntilFree": "Until free shipping",
+  "shippingTemplateAfter": "only",
+  "yenMarker": "円",
+  "shippingTemplateOneThresholdUntilFree": "円+ purchases ship for free",
+  "shippingTemplateWithPurchaseOf": "until",
+  "shippingTemplateTwoFreeShipping": "free shipping！",
+  "shippingTemplateTwoThresholdUntilFree": "円+ purchases",
+  "shippingTemplateTwoFreeShippingCampaing": "ship for free"
 }

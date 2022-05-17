@@ -3,7 +3,12 @@ import classNames from 'classnames';
 
 import { Form } from '@/components/common';
 import { RadioGroup } from '@/components/common/fields';
-export const TemplateSelector = () => {
+
+type Props = {
+  passTemplateSelection: any;
+};
+
+export const TemplateSelector = ({ passTemplateSelection }: Props) => {
   return (
     <>
       <div className='flex items-center'>
@@ -19,13 +24,19 @@ export const TemplateSelector = () => {
                   }
                 )}
               >
-                <img src='http://placehold.jp/128x128.png' alt='placeholder image' />
+                <img
+                  src='/images/free-shipping-template-1.png'
+                  height={128}
+                  width={128}
+                  alt='template1 image'
+                />
                 <input
                   value={value}
                   type='radio'
                   checked={isChecked}
                   className='hidden'
                   onChange={handleChange}
+                  onClick={passTemplateSelection('template1')}
                 />
               </label>
             )}
@@ -41,13 +52,19 @@ export const TemplateSelector = () => {
                   }
                 )}
               >
-                <img src='http://placehold.jp/128x128.png' alt='placeholder image' />
+                <img
+                  src='/images/free-shipping-template-2.png'
+                  height={128}
+                  width={128}
+                  alt='template2 image'
+                />
                 <input
                   value={value}
                   type='radio'
                   checked={isChecked}
                   className='hidden'
                   onChange={handleChange}
+                  onClick={passTemplateSelection('template2')}
                 />
               </label>
             )}

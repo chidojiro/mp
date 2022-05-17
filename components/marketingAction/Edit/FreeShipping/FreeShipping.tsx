@@ -27,6 +27,8 @@ import { TemplatePreviewOverlay } from './TemplatePreviewOverlay';
 
 export const FreeShipping = () => {
   const { t } = useTranslation('marketingAction');
+  const [freeShipAmount, setFreeShipAmount] = useState('');
+  const [templateSelection, setTemplateSelection] = useState('');
   const {
     push,
     query: { marketingActionId },
@@ -71,7 +73,7 @@ export const FreeShipping = () => {
   const popupFormMethods = useForm<PopupSettingsData>({
     defaultValues: {
       template_selection: 'template1',
-      free_shipping_amount: 1000,
+      free_shipping_amount: 5000,
       display_settings_pc: {
         appear_time: 0,
         position: 'right',
@@ -111,11 +113,24 @@ export const FreeShipping = () => {
 
   const chatPreviewControl = useVisibilityControl();
 
+  const passData = (amount: any) => {
+    setFreeShipAmount(amount);
+  };
+
+  const passTemplateSelection = (selection: any) => {
+    setTemplateSelection(selection.target.value);
+  };
+
   const [steps, setSteps] = useState<Step[]>([
     {
       id: 1,
       name: t('popupSettings'),
-      children: <PopupSettings />,
+      children: (
+        <PopupSettings
+          passData={() => passData}
+          passTemplateSelection={() => passTemplateSelection}
+        />
+      ),
       methods: popupFormMethods,
       showPreviewBtn: true,
     },
@@ -163,6 +178,12 @@ export const FreeShipping = () => {
       const _targetSegments = TargetFilterUtils.getTargetFilters(marketingAction.target_segments);
 
       targetCustomerMethods.reset({ target_customers: _targetSegments || [] });
+
+      settings?.free_shipping_amount
+        ? setFreeShipAmount(settings?.free_shipping_amount.toString())
+        : '';
+
+      settings?.template_selection ? setTemplateSelection(settings?.template_selection) : '';
     },
     [popupFormMethods, targetCustomerMethods]
   );
@@ -193,7 +214,11 @@ export const FreeShipping = () => {
           marketingActionName={t('conditionalFreeShipping')}
         />
       </div>
-      <TemplatePreviewOverlay control={chatPreviewControl} />
+      <TemplatePreviewOverlay
+        control={chatPreviewControl}
+        freeShippingCost={freeShipAmount}
+        templateSelection={templateSelection}
+      />
     </div>
   );
 };

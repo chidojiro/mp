@@ -24,6 +24,7 @@ import f1Icon from './icons/f1-status.svg';
 import f2Graduate from './icons/f2-graduate.svg';
 import f2Icon from './icons/f2-status.svg';
 import FreeShipping from './icons/free-shipping.svg';
+import FreeShippingTemplatePath from './icons/free-shipping-template-path.svg';
 import Group from './icons/group.svg';
 import Home from './icons/home.svg';
 import Line from './icons/line.svg';
@@ -99,6 +100,7 @@ const ICONS = {
   action: Action,
   'custom-segment': CustomSegment,
   document: Document,
+  'free-shipping-template-path': FreeShippingTemplatePath,
 };
 
 export type Name = keyof typeof ICONS;
