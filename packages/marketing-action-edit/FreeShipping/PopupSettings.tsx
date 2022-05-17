@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'next-i18next';
 
 import { Form } from '@/common/Form';
@@ -6,13 +7,23 @@ import { Option } from '@/common/types';
 
 import { TemplateSelector } from './TemplateSelector';
 
-export const PopupSettings = () => {
+type Props = {
+  passData: any;
+  passTemplateSelection: any;
+};
+
+export const PopupSettings = ({ passData, passTemplateSelection }: Props) => {
+  const [freeShipInput, setFreeShipInput] = useState('5000');
   const { t } = useTranslation('marketingAction');
   const unitOptions: Option<string>[] = [
     { label: 'px', value: 'px' },
     { label: '%', value: '%' },
     { label: 'vh', value: 'vh' },
   ];
+
+  const getInputData = ({ target }: any) => {
+    setFreeShipInput(target.value);
+  };
 
   return (
     <>
@@ -21,13 +32,20 @@ export const PopupSettings = () => {
         <div className='mb-4 text-medium'>
           ここに説明文が入ります。ここに説明文が入ります。ここに説明文が入ります。ここに説明文が入ります。ここに説明文が入ります。
         </div>
-        <TemplateSelector />
+        <TemplateSelector passTemplateSelection={passTemplateSelection} />
       </div>
 
       <div className='px-10 -mx-10 border-b-4 border-white pb-7 mt-[40px]'>
         <div className='mb-2 font-semibold'>{t('freeShippingAmountLabel')}</div>
         <div className='flex items-center'>
-          <Form.Input type='number' name='free_shipping_amount' className='w-20' />
+          <Form.Input
+            type='number'
+            name='free_shipping_amount'
+            className='w-20'
+            value={freeShipInput}
+            onInput={getInputData}
+            onChange={passData(freeShipInput)}
+          />
           <span className=' mx-2.5'>{t('freeShippingPriceEndLabel')}</span>
         </div>
       </div>
