@@ -17,11 +17,16 @@ import { StepMessageTemplate } from '@/marketing-action/types';
 import { useVariables } from '@/marketing-action/useVariables';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-type Props = { formMethods: UseFormReturn<any>; enableLine?: boolean; complete?: boolean };
+type Props = {
+  formMethods: UseFormReturn<any>;
+  enableLine?: boolean;
+  confirmed?: boolean;
+  onConfirmationChange: (isConfirmed: boolean) => void;
+};
 
 // eslint-disable-next-line no-empty-pattern
 export const Message1SettingsStep = React.forwardRef(
-  ({ formMethods, enableLine, complete }: Props, ref: any) => {
+  ({ formMethods, enableLine, confirmed, onConfirmationChange }: Props, ref: any) => {
     const { t } = useTranslation('marketingAction');
 
     const [previewType, setPreviewType] = React.useState<MessageContentPreviewType | null>(null);
@@ -30,6 +35,7 @@ export const Message1SettingsStep = React.forwardRef(
 
     const { watch, reset, handleSubmit } = formMethods;
     const onValidSubmit = (v: any) => {
+      onConfirmationChange(true);
       reset(v);
     };
     const onInvalidSubmit = () => {
@@ -54,7 +60,7 @@ export const Message1SettingsStep = React.forwardRef(
     const { variablesAsMentionOptions } = useVariables(MarketingActionAlias.AFTER_PURCHASE);
 
     return (
-      <Stepper.Item label={t('step1Setting')} complete={complete} ref={ref}>
+      <Stepper.Item label={t('step1Setting')} complete={confirmed} ref={ref}>
         <FormProvider {...formMethods}>
           <PreviewOverlay
             control={control}
@@ -102,9 +108,13 @@ export const Message1SettingsStep = React.forwardRef(
             />
           )}
           <StepActions
-            complete={complete}
+            onConfirmClick={
+              confirmed
+                ? () => onConfirmationChange(false)
+                : handleSubmit(onValidSubmit, onInvalidSubmit)
+            }
+            complete={confirmed}
             onPreviewClick={handleMailPreviewClick}
-            onConfirmClick={handleSubmit(onValidSubmit, onInvalidSubmit)}
           />
         </FormProvider>
       </Stepper.Item>

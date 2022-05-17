@@ -25,6 +25,7 @@ import { StepMessage } from '@/marketing-action/types';
 import { MarketingActionRes } from '@/marketing-action/types';
 import { MarketingActionApis } from '@/marketing-action/apis';
 import { useHrefs } from '@/navigation/useHrefs';
+import { cloneDeep } from 'lodash-es';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};
@@ -32,6 +33,12 @@ type Props = {};
 // eslint-disable-next-line no-empty-pattern
 export const DeliveryAfterPurchase = ({}: Props) => {
   const [newMarketingActionId, setNewMarketingActionId] = React.useState<string>();
+  const [stepConfirmedFlags, setStepConfirmedFlags] = React.useState<boolean[]>([
+    false,
+    false,
+    false,
+    false,
+  ]);
 
   const message1SettingsRef = React.useRef<HTMLElement>();
   const message2SettingsRef = React.useRef<HTMLElement>();
@@ -176,6 +183,7 @@ export const DeliveryAfterPurchase = ({}: Props) => {
       description: t('stepDeliveryAfterPurchase'),
       marketing_action_type_alias: 'AFTER_PURCHASE',
       status,
+      steps_confirmed_flag: stepConfirmedFlags,
       settings: {
         ...lineUsageSettings,
         step_messages: [
@@ -225,22 +233,40 @@ export const DeliveryAfterPurchase = ({}: Props) => {
 
   const isEditing = !!marketingActionId;
 
-  const isLineUsageSettingsComplete =
-    lineUsageSettingsStepMethods.formState.isSubmitSuccessful &&
-    !lineUsageSettingsStepMethods.formState.isDirty;
-  const isMessage1SettingsComplete =
-    message1SettingsStepMethods.formState.isSubmitSuccessful &&
-    !message1SettingsStepMethods.formState.isDirty;
-  const isMessage2SettingsComplete =
-    message2SettingsStepMethods.formState.isSubmitSuccessful &&
-    !message2SettingsStepMethods.formState.isDirty;
-  const isTargetSettingsComplete =
-    targetSettingsMethods.formState.isSubmitSuccessful && !targetSettingsMethods.formState.isDirty;
-  const isComplete =
-    isLineUsageSettingsComplete &&
-    isMessage1SettingsComplete &&
-    isMessage2SettingsComplete &&
-    isTargetSettingsComplete;
+  const setStepConfirmed = (step: number, isConfirmed: boolean) => {
+    setStepConfirmedFlags(prev => {
+      const clonedPrev = cloneDeep(prev);
+      clonedPrev[step] = isConfirmed;
+
+      return clonedPrev;
+    });
+  };
+
+  React.useEffect(() => {
+    if (lineUsageSettingsStepMethods.formState.isDirty) {
+      setStepConfirmed(0, false);
+    }
+  }, [lineUsageSettingsStepMethods.formState.isDirty]);
+
+  React.useEffect(() => {
+    if (message1SettingsStepMethods.formState.isDirty) {
+      setStepConfirmed(1, false);
+    }
+  }, [message1SettingsStepMethods.formState.isDirty]);
+
+  React.useEffect(() => {
+    if (message2SettingsStepMethods.formState.isDirty) {
+      setStepConfirmed(2, false);
+    }
+  }, [message2SettingsStepMethods.formState.isDirty]);
+
+  React.useEffect(() => {
+    if (targetSettingsMethods.formState.isDirty) {
+      setStepConfirmed(3, false);
+    }
+  }, [targetSettingsMethods.formState.isDirty]);
+
+  const isComplete = stepConfirmedFlags.every(Boolean);
 
   React.useEffect(() => {
     if (isComplete) {
@@ -347,24 +373,28 @@ export const DeliveryAfterPurchase = ({}: Props) => {
         <Stepper.Navigator />
         <LineUsageSettingsStep
           formMethods={lineUsageSettingsStepMethods}
-          complete={isLineUsageSettingsComplete}
+          confirmed={stepConfirmedFlags[0]}
+          onConfirmationChange={isConfirmed => setStepConfirmed(0, isConfirmed)}
         />
         <Message1SettingsStep
           ref={message1SettingsRef}
           enableLine={isLineEnabled}
           formMethods={message1SettingsStepMethods}
-          complete={isMessage1SettingsComplete}
+          confirmed={stepConfirmedFlags[1]}
+          onConfirmationChange={isConfirmed => setStepConfirmed(1, isConfirmed)}
         />
         <Message2SettingsStep
           ref={message2SettingsRef}
           enableLine={isLineEnabled}
           formMethods={message2SettingsStepMethods}
-          complete={isMessage2SettingsComplete}
+          confirmed={stepConfirmedFlags[2]}
+          onConfirmationChange={isConfirmed => setStepConfirmed(2, isConfirmed)}
         />
         <TargetSettingsStep
           ref={targetSettingsRef}
           formMethods={targetSettingsMethods}
-          complete={isTargetSettingsComplete}
+          confirmed={stepConfirmedFlags[3]}
+          onConfirmationChange={isConfirmed => setStepConfirmed(3, isConfirmed)}
         />
       </Stepper>
       <div className='flex justify-center gap-5 mt-14'>

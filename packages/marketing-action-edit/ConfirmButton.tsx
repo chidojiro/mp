@@ -12,6 +12,7 @@ export const ConfirmButton = ({
   children,
   control: controlProp,
   tooltipContent,
+  onClick,
   ...restProps
 }: Props) => {
   const buttonRef = React.useRef<any>(null);
@@ -31,6 +32,11 @@ export const ConfirmButton = ({
 
     observer.observe(buttonRef.current);
   }, [appearControl]);
+
+  const handleClick: React.MouseEventHandler<HTMLButtonElement> = e => {
+    openControl.close();
+    onClick?.(e);
+  };
 
   return (
     <div className={classNames('relative select-none transition-all')}>
@@ -54,7 +60,7 @@ export const ConfirmButton = ({
           />
         </div>
       )}
-      <Button ref={buttonRef} className='relative w-full' {...restProps}>
+      <Button ref={buttonRef} className='relative w-full' onClick={handleClick} {...restProps}>
         {children}
       </Button>
     </div>

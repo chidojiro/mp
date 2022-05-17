@@ -158,6 +158,7 @@ export type MarketingActionRes = {
   target_segments?: TargetSegment[];
   created_at?: string;
   ended_at?: string;
+  steps_confirmed_flag?: boolean[];
 };
 
 export const OPTIONS = {
