@@ -30,7 +30,7 @@ export const Action = ({ name, path, icon, targetCustomers, date }: Props) => {
   const url =
     marketingActionStatus === MAStatus.DRAFT
       ? `actions/edit/${path}/${marketingActionId}`
-      : 'reports/action-reports/line-email/1?targets=all';
+      : `reports/action-reports/${path}/monthly?targets=all`;
 
   const isDraft = marketingActionStatus === MAStatus.DRAFT;
   const targetFilters = MarketingActionUtils.getTargetFilters(targetCustomers);
