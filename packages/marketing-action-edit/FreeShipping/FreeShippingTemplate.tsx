@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
-
-import { Icon } from '@/components/common';
+import { Icon } from '@/packages/common/Icon';
 
 type Props = {
   templateSelection: string;

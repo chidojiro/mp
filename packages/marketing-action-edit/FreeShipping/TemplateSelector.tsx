@@ -1,8 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
-
-import { Form } from '@/components/common';
-import { RadioGroup } from '@/components/common/fields';
+import { Form } from '@/packages/common/Form';
+import { RadioGroup } from '@/packages/common/RadioGroup';
 
 type Props = {
   passTemplateSelection: any;
@@ -14,7 +13,7 @@ export const TemplateSelector = ({ passTemplateSelection }: Props) => {
       <div className='flex items-center'>
         <Form.RadioGroup name='template_selection'>
           <RadioGroup.Option key='template1' className='hidden' value='template1'>
-            {({ isChecked, value, handleChange }) => (
+            {({ isChecked, value, handleChange }: any) => (
               <label
                 className={classNames(
                   'h-52 w-52 mr-2 flex items-center justify-center bg-white rounded-[4px] border-2 hover:border-secondary cursor-pointer',
@@ -42,7 +41,7 @@ export const TemplateSelector = ({ passTemplateSelection }: Props) => {
             )}
           </RadioGroup.Option>
           <RadioGroup.Option key='template2' className='hidden' value='template2'>
-            {({ isChecked, value, handleChange }) => (
+            {({ isChecked, value, handleChange }: any) => (
               <label
                 className={classNames(
                   'h-52 w-52 mr-2 flex items-center justify-center bg-white rounded-[4px] border-2 hover:border-secondary cursor-pointer',
