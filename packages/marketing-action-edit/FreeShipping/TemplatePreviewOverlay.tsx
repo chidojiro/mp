@@ -6,11 +6,16 @@ import { SwitchButtons } from '@/common/SwitchButtons';
 import { Device } from '@/common/types';
 import { VisibilityControl } from '@/common/useVisibilityControl';
 
+// import { FreeShippingTemplate } from '@/components/marketingAction/Edit/FreeShipping/FreeShippingTemplate';
+import { FreeShippingTemplate } from './FreeShippingTemplate';
+
 type Props = {
   control: VisibilityControl;
+  freeShippingCost: any;
+  templateSelection: string;
 };
 
-export const TemplatePreviewOverlay = ({ control }: Props) => {
+export const TemplatePreviewOverlay = ({ control, freeShippingCost, templateSelection }: Props) => {
   const { t } = useTranslation('marketingAction');
   const [selectedDevice, setDevice] = useState<Device>('mobile');
 
@@ -27,9 +32,19 @@ export const TemplatePreviewOverlay = ({ control }: Props) => {
     <>
       <Overlay control={control} title={t('preview')} className='flex flex-col items-center'>
         {selectedDevice === 'desktop' ? (
-          <img src='http://placehold.jp/240x240.png' alt='placeholder image' />
+          <FreeShippingTemplate
+            templateSelection={templateSelection === '' ? 'template1' : templateSelection}
+            freeShippingCost={freeShippingCost.target?.value
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+          />
         ) : (
-          <img src='http://placehold.jp/240x240.png' alt='placeholder image' />
+          <FreeShippingTemplate
+            templateSelection={templateSelection === '' ? 'template1' : templateSelection}
+            freeShippingCost={freeShippingCost.target?.value
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+          />
         )}
         <div className='mt-[53px] w-full flex items-center justify-center'>
           <SwitchButtons
