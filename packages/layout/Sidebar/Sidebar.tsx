@@ -40,16 +40,16 @@ export const Sidebar = () => {
           label: t('f2ConversionRateTrends'),
           matches: [`${projectMatchPrefix}/reports/f2-conversion-rate`],
         },
-        {
-          path: `${projectPrefix}/reports/semi-loyal-conversion-rate`,
-          label: t('semiLoyalConversionRate'),
-          matches: [`${projectMatchPrefix}/reports/semi-loyal-conversion-rate`],
-        },
-        {
-          path: `${projectPrefix}/reports/loyal-conversion-rate`,
-          label: t('loyalConversionRate'),
-          matches: [`${projectMatchPrefix}/reports/loyal-conversion-rate`],
-        },
+        // {
+        //   path: `${projectPrefix}/reports/semi-loyal-conversion-rate`,
+        //   label: t('semiLoyalConversionRate'),
+        //   matches: [`${projectMatchPrefix}/reports/semi-loyal-conversion-rate`],
+        // },
+        // {
+        //   path: `${projectPrefix}/reports/loyal-conversion-rate`,
+        //   label: t('loyalConversionRate'),
+        //   matches: [`${projectMatchPrefix}/reports/loyal-conversion-rate`],
+        // },
         {
           path: `${projectPrefix}/reports/loyal-customers`,
           label: t('numberOfLoyalCustomers'),
@@ -60,11 +60,11 @@ export const Sidebar = () => {
           label: t('returnOfDormantCustomers'),
           matches: [`${projectMatchPrefix}/reports/dormant-customers-return`],
         },
-        {
-          path: `${projectPrefix}/reports/f1-dormant-customers-return`,
-          label: t('returnOfF1DormantCustomers'),
-          matches: [`${projectMatchPrefix}/reports/f1-dormant-customers-return`],
-        },
+        // {
+        //   path: `${projectPrefix}/reports/f1-dormant-customers-return`,
+        //   label: t('returnOfF1DormantCustomers'),
+        //   matches: [`${projectMatchPrefix}/reports/f1-dormant-customers-return`],
+        // },
         {
           path: `${projectPrefix}/reports/loyal-dormant-customers-return`,
           label: t('loyalDormantCustomersReturn'),
@@ -135,7 +135,13 @@ export const Sidebar = () => {
     >
       <div className='flex flex-col flex-grow select-none'>
         {menu.map(menuItem => (
-          <NavItem showLabel={open} key={menuItem.label} data={menuItem} />
+          <NavItem
+            showLabel={open}
+            key={menuItem.label}
+            data={menuItem}
+            isSidebarClose={!open}
+            setOpenSidebar={() => setOpen(true)}
+          />
         ))}
       </div>
       <div
@@ -150,7 +156,7 @@ export const Sidebar = () => {
           size={20}
           onClick={toggleSideBar}
           fill='#BFBFBF'
-          className={classNames({
+          className={classNames('cursor-pointer', {
             'rotate-180 mx-auto': !open,
             'ml-auto': open,
           })}
