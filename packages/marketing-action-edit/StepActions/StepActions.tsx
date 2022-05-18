@@ -27,19 +27,17 @@ export const StepActions = ({ onPreviewClick, onConfirmClick, complete, useToolt
       )}
       <div>
         <ConfirmButton
-          tooltipContent={useTooltip ? t('alertConfirm') : undefined}
+          tooltipContent={!complete && useTooltip ? t('alertConfirm') : undefined}
           className='w-[240px]'
           onClick={onConfirmClick}
           type={onConfirmClick ? 'button' : 'submit'}
           colorScheme='green'
-          variant={complete ? 'solid' : 'outline'}
-        >
+          variant={complete ? 'solid' : 'outline'}>
           <div
             className={classNames(
               'flex items-center justify-center w-5 h-5 mr-2 rounded-full',
               complete ? 'bg-white' : 'bg-gray'
-            )}
-          >
+            )}>
             <Icon
               name='check'
               size={10}

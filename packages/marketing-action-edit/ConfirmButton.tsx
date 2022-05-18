@@ -1,23 +1,16 @@
 import { Button, ButtonProps } from '@/common/Button';
 import { Icon } from '@/common/Icon';
-import { useVisibilityControl, VisibilityControl } from '@/common/useVisibilityControl';
+import { useVisibilityControl } from '@/common/useVisibilityControl';
 import classNames from 'classnames';
 import React from 'react';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-type Props = ButtonProps & { control?: VisibilityControl; tooltipContent?: React.ReactNode };
+type Props = ButtonProps & { tooltipContent?: React.ReactNode };
 
 // eslint-disable-next-line no-empty-pattern
-export const ConfirmButton = ({
-  children,
-  control: controlProp,
-  tooltipContent,
-  onClick,
-  ...restProps
-}: Props) => {
+export const ConfirmButton = ({ children, tooltipContent, onClick, ...restProps }: Props) => {
   const buttonRef = React.useRef<any>(null);
-  const ownControl = useVisibilityControl({ defaultVisible: !!tooltipContent });
-  const openControl = controlProp ?? ownControl;
+  const openControl = useVisibilityControl({ defaultVisible: !!tooltipContent });
   const appearControl = useVisibilityControl({ defaultVisible: !!openControl.open });
 
   React.useEffect(() => {
@@ -40,7 +33,7 @@ export const ConfirmButton = ({
 
   return (
     <div className={classNames('relative select-none transition-all')}>
-      {openControl.visible && (
+      {openControl.visible && tooltipContent && (
         <div
           className={classNames(
             'absolute transform -translate-x-1/2 -translate-y-full -top-5 left-1/2 transition-all duration-500',
@@ -50,8 +43,7 @@ export const ConfirmButton = ({
             {
               'opacity-0': !appearControl.visible,
             }
-          )}
-        >
+          )}>
           {tooltipContent}
           <Icon
             onClick={openControl?.close}

@@ -30,21 +30,17 @@ import { cloneDeep } from 'lodash-es';
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};
 
+const defaultStepConfirmedFlags = [false, false, false, false];
+
 // eslint-disable-next-line no-empty-pattern
 export const DeliveryAfterPurchase = ({}: Props) => {
   const [newMarketingActionId, setNewMarketingActionId] = React.useState<string>();
-  const [stepConfirmedFlags, setStepConfirmedFlags] = React.useState<boolean[]>([
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [stepConfirmedFlags, setStepConfirmedFlags] =
+    React.useState<boolean[]>(defaultStepConfirmedFlags);
 
   const message1SettingsRef = React.useRef<HTMLElement>();
   const message2SettingsRef = React.useRef<HTMLElement>();
   const targetSettingsRef = React.useRef<HTMLElement>();
-
-  const tooltipControl = useVisibilityControl({ defaultVisible: true });
 
   const { t } = useTranslation('marketingAction');
   const { getMarketingActionEditHref, getMyMarketingActionListHref } = useHrefs();
@@ -162,6 +158,7 @@ export const DeliveryAfterPurchase = ({}: Props) => {
         implementation_period_temp:
           data.start_at && data.end_at ? [new Date(data.start_at), new Date(data.end_at)] : [],
       });
+      setStepConfirmedFlags(data.settings.steps_confirmed_flag ?? defaultStepConfirmedFlags);
     }
   }, [
     data,
@@ -183,9 +180,9 @@ export const DeliveryAfterPurchase = ({}: Props) => {
       description: t('stepDeliveryAfterPurchase'),
       marketing_action_type_alias: 'AFTER_PURCHASE',
       status,
-      steps_confirmed_flag: stepConfirmedFlags,
       settings: {
         ...lineUsageSettings,
+        steps_confirmed_flag: stepConfirmedFlags,
         step_messages: [
           convertToStepMessageRaw(message1Settings),
           convertToStepMessageRaw(message2Settings),
@@ -268,12 +265,6 @@ export const DeliveryAfterPurchase = ({}: Props) => {
 
   const isComplete = stepConfirmedFlags.every(Boolean);
 
-  React.useEffect(() => {
-    if (isComplete) {
-      tooltipControl.close();
-    }
-  }, [isComplete, tooltipControl]);
-
   return (
     <>
       <Modal
@@ -285,8 +276,7 @@ export const DeliveryAfterPurchase = ({}: Props) => {
               marketingActionName: 'step-delivery-after-purchase',
             })
           )
-        }
-      >
+        }>
         <div className='text-center text-gray-dark'>
           <Modal.Body className='leading-loose whitespace-pre-line'>
             {t('alertAfterSaveAsDraft')}
@@ -297,8 +287,7 @@ export const DeliveryAfterPurchase = ({}: Props) => {
               href={getMyMarketingActionListHref({
                 marketingActionStatus: MarketingActionStatus.DRAFT,
                 marketingActionId: newMarketingActionId!,
-              })}
-            >
+              })}>
               <Modal.FooterButton colorScheme='negative' onClick={draftConfirmModalControl.close}>
                 {t('gotoMyMA')}
               </Modal.FooterButton>
@@ -315,8 +304,7 @@ export const DeliveryAfterPurchase = ({}: Props) => {
               marketingActionName: 'step-delivery-after-purchase',
             })
           )
-        }
-      >
+        }>
         <div className='text-center text-gray-dark'>
           <Modal.Body className='leading-loose whitespace-pre-line'>
             {t('alertAfterExecuting')}
@@ -327,12 +315,10 @@ export const DeliveryAfterPurchase = ({}: Props) => {
               href={getMyMarketingActionListHref({
                 marketingActionId: newMarketingActionId!,
                 marketingActionStatus: MarketingActionStatus.RUNNING,
-              })}
-            >
+              })}>
               <Modal.FooterButton
                 colorScheme='negative'
-                onClick={implementCompleteConfirmModalControl.close}
-              >
+                onClick={implementCompleteConfirmModalControl.close}>
                 {t('gotoMyMA')}
               </Modal.FooterButton>
             </Link>
@@ -351,8 +337,7 @@ export const DeliveryAfterPurchase = ({}: Props) => {
             <Modal.FooterButton
               loading={implementTemplateMethods.formState.isSubmitting}
               complete={implementTemplateMethods.formState.isSubmitSuccessful}
-              onClick={implementTemplateMethods.handleSubmit(handleImplementClick)}
-            >
+              onClick={implementTemplateMethods.handleSubmit(handleImplementClick)}>
               {t('implementTemplate')}
             </Modal.FooterButton>
           </Modal.Footer>
@@ -367,8 +352,7 @@ export const DeliveryAfterPurchase = ({}: Props) => {
         descriptionImageUrl='/images/step-delivery-after-purchase-description.png'
         flowImgUrl='/images/step-delivery-after-purchase-flow.png'
         targets={[TARGET.F1, TARGET.F2, TARGET.SEMI_LOYAL, TARGET.LOYAL_DORMANT]}
-        output={t('messageDelivery')}
-      ></ActionContainer>
+        output={t('messageDelivery')}></ActionContainer>
       <Stepper className='mt-16'>
         <Stepper.Navigator />
         <LineUsageSettingsStep
@@ -404,8 +388,7 @@ export const DeliveryAfterPurchase = ({}: Props) => {
             colorScheme='negative'
             onClick={saveAsDraftMethods.handleSubmit(handleSaveAsDraftClick)}
             loading={saveAsDraftMethods.formState.isSubmitting}
-            complete={saveAsDraftMethods.formState.isSubmitSuccessful}
-          >
+            complete={saveAsDraftMethods.formState.isSubmitSuccessful}>
             {t('saveDraft')}
           </Button>
         ) : (
@@ -414,14 +397,12 @@ export const DeliveryAfterPurchase = ({}: Props) => {
             colorScheme='danger'
             onClick={suspendTemplateMethods.handleSubmit(handleSuspendClick)}
             loading={suspendTemplateMethods.formState.isSubmitting}
-            complete={suspendTemplateMethods.formState.isSubmitSuccessful}
-          >
+            complete={suspendTemplateMethods.formState.isSubmitSuccessful}>
             {t('suspendTemplate')}
           </Button>
         )}
         <ConfirmButton
           className='w-[480px]'
-          control={tooltipControl}
           tooltipContent={
             <Trans
               i18nKey='implementTemplateTooltip'
@@ -431,14 +412,12 @@ export const DeliveryAfterPurchase = ({}: Props) => {
                   key='check'
                   name='check'
                   size={10}
-                  className='p-1 text-primary inline-flex items-center justify-center w-5 h-5 mr-1 rounded-full bg-white'
-                ></Icon>,
+                  className='p-1 text-primary inline-flex items-center justify-center w-5 h-5 mr-1 rounded-full bg-white'></Icon>,
               ]}
             />
           }
           onClick={implementConfirmModalControl.open}
-          disabled={!isComplete}
-        >
+          disabled={!isComplete}>
           {t('implementTemplate')}
         </ConfirmButton>
       </div>

@@ -36,7 +36,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
 
     const [hour, minute] = value.split(':');
 
-    const hourOptions = new Array(25).fill(null).map((_, idx) => ({
+    const hourOptions = new Array(24).fill(null).map((_, idx) => ({
       label: idx + t('h'),
       value: NumberUtils.pad(idx, 2),
     }));

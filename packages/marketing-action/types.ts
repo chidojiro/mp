@@ -153,12 +153,12 @@ export type MarketingActionRes = {
     free_shipping_amount?: number;
     report_period?: 'weekly' | 'monthly';
     carousel?: Carousel[];
+    steps_confirmed_flag?: boolean[];
   };
   status: MarketingActionStatus;
   target_segments?: TargetSegment[];
   created_at?: string;
   ended_at?: string;
-  steps_confirmed_flag?: boolean[];
 };
 
 export const OPTIONS = {
