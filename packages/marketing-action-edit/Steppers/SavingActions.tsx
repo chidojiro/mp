@@ -2,7 +2,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
+import { useForm } from 'react-hook-form';
 
+import { useHrefs } from '@/navigation/useHrefs';
 import { Button } from '@/common/Button';
 import { Modal } from '@/common/Modal';
 import { useVisibilityControl } from '@/common/useVisibilityControl';
@@ -25,10 +27,16 @@ const SavingActions = ({
   const { t } = useTranslation('marketingAction');
   const modalControl = useVisibilityControl();
   const {
+    push,
     query: { marketingActionId },
   } = useRouter();
   const [isCompleted, setIsCompleted] = useState(false);
   const [isSaveAsDraft, setIsSaveAsDraft] = useState(false);
+  const { getMyMarketingActionListHref } = useHrefs();
+
+  const saveAsDraftMethods = useForm();
+  const suspendTemplateMethods = useForm();
+  const implementTemplateMethods = useForm();
 
   const showModal = () => {
     setIsCompleted(false);
@@ -48,8 +56,9 @@ const SavingActions = ({
     modalControl.open();
   };
 
-  const onSuspend = () => {
-    onSaveMarketingAction(MarketingActionStatus.DRAFT);
+  const onSuspend = async () => {
+    await onSaveMarketingAction(MarketingActionStatus.DRAFT);
+    push(getMyMarketingActionListHref());
   };
 
   const modalDesc = () => {
@@ -77,13 +86,20 @@ const SavingActions = ({
         {marketingActionId ? (
           <>
             <Button
-              colorScheme='negative'
-              onClick={onSuspend}
-              className='mr-5 min-w-[240px] h-[52px] bg-[#FF7F5C] text-medium'
+              colorScheme='danger'
+              className='mr-5 min-w-[240px] h-[52px] text-medium'
+              onClick={suspendTemplateMethods.handleSubmit(onSuspend)}
+              loading={suspendTemplateMethods.formState.isSubmitting}
+              complete={suspendTemplateMethods.formState.isSubmitSuccessful}
             >
               {t('suspendTemplate')}
             </Button>
-            <Button onClick={onExecuteMA} className='min-w-[480px] h-[52px]'>
+            <Button
+              loading={implementTemplateMethods.formState.isSubmitting}
+              complete={implementTemplateMethods.formState.isSubmitSuccessful}
+              onClick={implementTemplateMethods.handleSubmit(onExecuteMA)}
+              className='min-w-[480px] h-[52px]'
+            >
               {t('save')}
             </Button>
           </>
@@ -91,7 +107,9 @@ const SavingActions = ({
           <>
             <Button
               colorScheme='negative'
-              onClick={onSaveAsDraft}
+              onClick={saveAsDraftMethods.handleSubmit(onSaveAsDraft)}
+              loading={saveAsDraftMethods.formState.isSubmitting}
+              complete={saveAsDraftMethods.formState.isSubmitSuccessful}
               className='mr-5 min-w-[240px] h-[52px]'
             >
               {t('saveDraft')}
@@ -118,7 +136,11 @@ const SavingActions = ({
                 <Modal.FooterButton colorScheme='negative' onClick={modalControl.close}>
                   {t('cancel')}
                 </Modal.FooterButton>
-                <Modal.FooterButton onClick={onExecuteMA}>
+                <Modal.FooterButton
+                  loading={implementTemplateMethods.formState.isSubmitting}
+                  complete={implementTemplateMethods.formState.isSubmitSuccessful}
+                  onClick={implementTemplateMethods.handleSubmit(onExecuteMA)}
+                >
                   {t('implementTemplate')}
                 </Modal.FooterButton>
               </>
