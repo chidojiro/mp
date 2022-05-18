@@ -6,7 +6,7 @@ import { Icon, IconName } from '@/common/Icon';
 import { CustomerReportButton } from '@/report/CustomerReportButton';
 import { RfmSegmentTable } from '@/dashboard/RfmSegmentTable';
 import { PrivateLayout } from '@/layout/PrivateLayout';
-import { useReport } from '@/report/useReport';
+import { useRfmReport } from '@/report/useRfmReport';
 import { SsrUtils } from '@/ssr/utils';
 import { RfmReportDataItem } from '@/report/types';
 import { useProfile } from '@/auth/useProfile';
@@ -26,7 +26,7 @@ export interface DashboardProps {
 }
 function Dashboard(props: DashboardProps) {
   const { t } = useTranslation('dashboard');
-  const { data } = useReport('rfmReport', props.rfmReport);
+  const { data } = useRfmReport('rfmReport', props.rfmReport);
   const { data: profile } = useProfile();
 
   const reportButtons = [

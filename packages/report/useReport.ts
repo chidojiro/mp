@@ -1,14 +1,14 @@
 import React from 'react';
-
 import useSWR from 'swr';
-import { ReportNames } from './types';
-import { RfmReportDataItem } from './types';
 import { ReportApis } from './apis';
+import { DeliveryType, MarketingActionReport } from './types';
 
-export function useReport(reportName: ReportNames, fallbackData?: RfmReportDataItem[]) {
-  const swrReturn = useSWR<RfmReportDataItem[]>('/reports/rfm', ReportApis.rfm_report, {
-    fallbackData: fallbackData,
-  });
+export function useReport(deliveryType: DeliveryType) {
+  const swrReturn = useSWR<MarketingActionReport[]>(
+    ['/reports', deliveryType],
+    () => ReportApis.getList(deliveryType),
+    {}
+  );
 
-  return React.useMemo(() => ({ ...swrReturn, data: swrReturn.data! }), [swrReturn]);
+  return React.useMemo(() => ({ ...swrReturn, data: swrReturn.data ?? [] }), [swrReturn]);
 }

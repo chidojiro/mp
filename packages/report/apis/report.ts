@@ -1,9 +1,10 @@
+import { TargetSegment } from '@/marketing-action/types';
 import { RestApiConfig, RestApis } from '@/rest/apis';
-import { RfmReportItemResponse } from '../types';
+import { DeliveryType, RfmReportItemResponse } from '../types';
 import { RfmReportDataItem } from '../types';
 
-const getList = () => {
-  return RestApis.get('/reports/list');
+const getList = (deliveryType: DeliveryType, targetSegments?: TargetSegment[]) => {
+  return RestApis.get('/reports/list', { params: { delivery_type: deliveryType } });
 };
 
 const getF2ConversionRate = () => {

@@ -5,41 +5,10 @@ import { useTranslation } from 'next-i18next';
 import { Table } from '@/common/Table';
 import { ClassName } from '@/common/types';
 import { RowHeader } from './RowHeader';
-import { MarketingActionAliasKey } from '@/marketing-action/types';
-
-const data = [
-  {
-    id: '0',
-    name: 'all',
-    numberOfUUsDisplayed: '5,000',
-    openUuRate: '200（4.0%）',
-    cvUuRate: {
-      intermediateCv: {
-        rate: '12（0.2％）',
-      },
-      finalCv: {
-        rate: '12（0.2％）',
-        price: '256,000円',
-      },
-    },
-  },
-  {
-    id: '1',
-    name: '条件付き送料無料',
-    alias: MarketingActionAliasKey.CONDITIONAL_FREE_SHIPPING,
-    numberOfUUsDisplayed: '5,000',
-    openUuRate: '200（4.0%）',
-    cvUuRate: {
-      intermediateCv: {
-        rate: '12（0.2％）',
-      },
-      finalCv: {
-        rate: '12（0.2％）',
-        price: '256,000円',
-      },
-    },
-  },
-];
+import { useReport } from './useReport';
+import { groupBy } from 'lodash-es';
+import { ReportUtils } from '@/report/utils';
+import { MarketingActionAlias } from '@/marketing-action/types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = ClassName & {};
@@ -47,11 +16,30 @@ type Props = ClassName & {};
 // eslint-disable-next-line no-empty-pattern
 export const PopupTable = ({ className }: Props) => {
   const { t } = useTranslation('report');
+  const { t: tMarketingAction } = useTranslation('marketingAction');
+
+  const { data: report } = useReport('bot');
+  const reportGroupedByAlias = groupBy(report, 'marketing_action.marketing_action_type.alias');
+  const all = ReportUtils.getTableData(report);
+  const freeShippingData = ReportUtils.getTableData(
+    reportGroupedByAlias[MarketingActionAlias.CONDITIONAL_FREE_SHIPPING]
+  );
+  const reportData = [all, freeShippingData];
+  const reportMetaData = [
+    { name: t('all'), showCustomUU: true },
+    {
+      name: tMarketingAction('conditionalFreeShipping'),
+      alias: MarketingActionAlias.CONDITIONAL_FREE_SHIPPING,
+      showCustomUU: true,
+    },
+  ];
+
   const {
     pathname,
     query: { organizationId, projectId, actionType },
   } = useRouter();
-  const headers = [t('measure'), t('numberOfUUsDelivered'), t('clickedUuRate'), t('cvUuRate')];
+
+  const headers = [t('measure'), t('numberOfUUsDisplayed'), t('clickedUuRate'), t('cvUuRate')];
   const baseUrl = `/organizations/${organizationId}/projects/${projectId}/reports/action-reports`;
   return (
     <Table className={className}>
@@ -65,33 +53,33 @@ export const PopupTable = ({ className }: Props) => {
         </Table.Row>
       </Table.Head>
       <Table.Body>
-        {data.map(item => (
-          <Table.Row key={item.id}>
+        {reportData.map((item, idx) => (
+          <Table.Row key={idx}>
             <Table.Cell className='w-3/6'>
               <RowHeader
-                title={t(item.name)}
+                title={t(reportMetaData[idx].name)}
                 monthlyUrl={
-                  item.alias
+                  reportMetaData[idx].alias
                     ? {
-                        pathname: `${baseUrl}/${item.alias}/monthly`,
+                        pathname: `${baseUrl}/${reportMetaData[idx].alias}/monthly`,
                         query: { targets: ['all'] },
                       }
                     : undefined
                 }
               />
             </Table.Cell>
-            <Table.Cell className='text-right w-1/6'>{item.numberOfUUsDisplayed}</Table.Cell>
-            <Table.Cell className='text-right w-1/6'>{item.openUuRate}</Table.Cell>
+            <Table.Cell className='text-right w-1/6'>{item.display_uu}</Table.Cell>
+            <Table.Cell className='text-right w-1/6'>{item.click_uu}</Table.Cell>
             <Table.Cell className='w-1/6'>
               <div className='flex'>
                 <div className='text-orange'>{t('intermediateCv') + t('colon')}</div>
-                <div>{item.cvUuRate.intermediateCv.rate}</div>
+                <div>{item.cv_uu.custom}</div>
               </div>
               <div className='flex mt-2'>
                 <div className='text-primary'>{t('finalCv') + t('colon')}</div>
                 <div>
-                  <div>{item.cvUuRate.finalCv.rate}</div>
-                  <div>{item.cvUuRate.finalCv.price}</div>
+                  <div>{item.cv_uu.final}</div>
+                  {/* <div>{item.cvUuRate.finalCv.price}</div> */}
                 </div>
               </div>
             </Table.Cell>

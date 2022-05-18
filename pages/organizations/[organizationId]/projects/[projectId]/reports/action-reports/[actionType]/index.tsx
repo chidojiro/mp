@@ -3,7 +3,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export const getServerSideProps = async ({ locale = 'ja' }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['common', 'report'])),
+    ...(await serverSideTranslations(locale, ['common', 'report', 'marketingAction'])),
   },
 });
 

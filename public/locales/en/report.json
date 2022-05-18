@@ -23,7 +23,7 @@
   "measure": "Measure",
   "deliveryType": "Delivery type",
   "openUuRate": "Number of open UUs (%)",
-  "clickedUuRate": "Number of CV UUs (%)",
+  "clickedUuRate": "Number of click UUs (%)",
   "total": "Total",
   "intermediateCv": "Intermediate CV",
   "finalCv": "Final CV",

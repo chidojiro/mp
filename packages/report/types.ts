@@ -1,3 +1,5 @@
+import { MarketingActionType } from '@/marketing-action/types';
+
 export type ReportNames = 'rfmReport';
 
 export type RfmReportDataItem = {
@@ -96,3 +98,29 @@ export type LineChartInfo = BaseChartInfo & {
 };
 
 export type ChartInfo = BarChartInfo | LineChartInfo;
+
+export type DeliveryType = 'bot' | 'notification' | 'popup';
+
+export type MarketingActionReport = {
+  notification_type?: 'line' | 'mail';
+  target_segment: string;
+  cv_type: string;
+  aggregation_start: string;
+  aggregation_end: string;
+  delivery_uu: number;
+  open_uu: number;
+  use_uu?: number;
+  click_uu?: number;
+  display_uu?: number;
+  cv_uu: number;
+  cv_amount: number;
+  id: string;
+  project_id: string;
+  organization_id: string;
+  marketing_action_id: string;
+  marketing_action: {
+    marketing_action_type: MarketingActionType;
+  };
+  created_at: Date;
+  updated_at: Date;
+};
