@@ -15,10 +15,11 @@ type Props = {
   isAlert: boolean;
   onShowPreview: (message: StepMessage) => void;
   onConfirm: (stepId: number) => void;
+  toggleCompletedStep?: (id: number, completed: boolean) => void;
 };
 
 export const StepForm = React.forwardRef<HTMLDivElement, Props>(
-  ({ step, isLastStep, isAlert, onShowPreview, onConfirm }, ref) => {
+  ({ step, isLastStep, isAlert, onShowPreview, onConfirm, toggleCompletedStep }, ref) => {
     const { t } = useTranslation('marketingAction');
     const { id, name, showPreviewBtn, children, methods } = step;
     const [showAlert, setShowAlert] = useState(isAlert);
@@ -68,23 +69,30 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
       );
     };
 
-    useEffect(() => {
-      window.addEventListener('scroll', scrollHandler);
-
-      return () => window.removeEventListener('scroll', scrollHandler);
-    }, []);
-
-    const scrollHandler = () => {
+    const scrollHandler = React.useCallback(() => {
       if (!classAlert && id === 1 && btnRef.current) {
         const { top, bottom } = btnRef.current.getBoundingClientRect();
         const vHeight = window.innerHeight || document.documentElement.clientHeight;
         if ((top > 0 || bottom > 0) && top < vHeight) {
           setClassAlert(styles['alert-show']);
+        } else {
+          setClassAlert('');
         }
       }
-    };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [id]);
+
+    useEffect(() => {
+      window.addEventListener('scroll', scrollHandler);
+
+      return () => window.removeEventListener('scroll', scrollHandler);
+    }, [scrollHandler]);
 
     const hidden = !showAlert || id !== 1;
+
+    React.useEffect(() => {
+      toggleCompletedStep?.(id, isComplete);
+    }, [toggleCompletedStep, id, isComplete]);
 
     return (
       <FormProvider {...methods}>
@@ -99,7 +107,7 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
             className={classNames(
               'flex z-10 items-center justify-center mr-5 border-2 rounded-full w-[30px] h-7',
               isComplete ? 'bg-mint-green border-mint-green' : 'bg-gray',
-              id == 1 || showAlert ? 'border-mint-green' : 'border-gray'
+              id == 1 || isAlert ? 'border-mint-green' : 'border-gray'
             )}
           >
             <Icon name='check' className='w-[17px] h-[13px] text-white' />
