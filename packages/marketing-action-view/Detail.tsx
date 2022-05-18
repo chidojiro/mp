@@ -149,8 +149,8 @@ export const Detail = ({
     if (Array.isArray(dates)) {
       if (dates.length) {
         setPeriod([dates[0], dates[1]]);
-        const _from = dates[0].toISOString().slice(0, 10) || '';
-        const _to = addDays(dates[1], 1).toISOString().slice(0, 10);
+        const _from = addDays(dates[0], 1).toISOString().slice(0, 10);
+        const _to = addDays(dates[1], 2).toISOString().slice(0, 10);
         onChangePeriod([_from, _to]);
       } else {
         setPeriod([]);
