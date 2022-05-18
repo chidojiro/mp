@@ -55,7 +55,7 @@ export const Steppers = ({ steps, confirmedSteps, onShowPreview, onConfirmChange
           <div key={idx + 1}>
             <span className='font-semibold text-mint-green text-small'>STEP{idx + 1}</span>
             <div
-              onClick={() => goToStep(idx + 2)}
+              onClick={() => goToStep(idx + 1)}
               className={classNames(
                 'flex cursor-pointer items-center justify-center rounded-full w-7 h-7',
                 step ? 'bg-mint-green border-mint-green' : 'bg-gray'

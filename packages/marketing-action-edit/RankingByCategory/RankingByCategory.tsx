@@ -24,6 +24,8 @@ import { convertFromCarouselRaw, convertToCarouselRaw } from '../utils';
 import { Step1Settings } from './Step1Settings';
 import { Step2Settings } from './Step2Settings';
 
+const defaultStepConfirmedFlags = [false, false, false, false];
+
 export const RankingByCategory = () => {
   const { t } = useTranslation('marketingAction');
   const [maId, setMaId] = useState('');
@@ -32,6 +34,9 @@ export const RankingByCategory = () => {
     query: { marketingActionId, marketingActionName },
     asPath,
   } = useRouter();
+
+  const [stepConfirmedFlags, setStepConfirmedFlags] =
+    React.useState<boolean[]>(defaultStepConfirmedFlags);
 
   const isRankingByCategory =
     marketingActionName ===
@@ -126,6 +131,8 @@ export const RankingByCategory = () => {
       );
 
       step4Methods.reset({ target_customers: _targetSegments || [] });
+
+      setStepConfirmedFlags(settings.steps_confirmed_flag ?? defaultStepConfirmedFlags);
     },
     [step1Methods, step2Methods, step3Methods, step4Methods]
   );
@@ -161,6 +168,7 @@ export const RankingByCategory = () => {
         display_settings_pc: chatSettings.display_settings_pc,
         display_settings_mobile: chatSettings.display_settings_mobile,
         chat_visuals: [], // BE is required
+        steps_confirmed_flag: stepConfirmedFlags,
       },
       target_segments: _targetSegments,
     };
@@ -185,15 +193,15 @@ export const RankingByCategory = () => {
     push(`${asPath}/${maId}`);
   };
 
-  const isStepDone = (methods: any) => {
-    return methods.formState.isSubmitSuccessful && !methods.formState.isDirty;
+  const handleConfirmChanged = (index: number, confirmed: boolean) => {
+    setStepConfirmedFlags(prev => {
+      const _steps = [...prev];
+      _steps[index] = confirmed;
+      return _steps;
+    });
   };
 
-  const isDone =
-    isStepDone(step1Methods) &&
-    isStepDone(step2Methods) &&
-    isStepDone(step3Methods) &&
-    isStepDone(step4Methods);
+  const isDone = stepConfirmedFlags.every(Boolean);
 
   return (
     <div className='relative'>
@@ -217,7 +225,12 @@ export const RankingByCategory = () => {
         ></ActionContainer>
       )}
       <Form methods={methods} className='mt-[60px]'>
-        <Steppers steps={steps} onShowPreview={onShowPreview} />
+        <Steppers
+          steps={steps}
+          onShowPreview={onShowPreview}
+          confirmedSteps={stepConfirmedFlags}
+          onConfirmChanged={handleConfirmChanged}
+        />
       </Form>
 
       <ChatOverlay color={chatSettings.chat_window_color} control={chatPreviewControl} />

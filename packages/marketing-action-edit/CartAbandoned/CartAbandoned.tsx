@@ -222,15 +222,7 @@ export const CartAbandoned = () => {
     push(`${asPath}/${maId}`);
   };
 
-  const isStepDone = (methods: any) => {
-    return methods.formState.isSubmitSuccessful && !methods.formState.isDirty;
-  };
-
-  const isDone =
-    isStepDone(step1Methods) &&
-    isStepDone(step2Methods) &&
-    isStepDone(step3Methods) &&
-    isStepDone(step4Methods);
+  const isDone = stepConfirmedFlags.every(Boolean);
 
   return (
     <div className='relative'>
