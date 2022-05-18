@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
+import { Trans, useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
 
 import { useHrefs } from '@/navigation/useHrefs';
@@ -10,6 +10,8 @@ import { Modal } from '@/common/Modal';
 import { useVisibilityControl } from '@/common/useVisibilityControl';
 import { useProfile } from '@/auth/useProfile';
 import { MarketingActionStatus } from '@/marketing-action/types';
+import { ConfirmButton } from '@/marketing-action-edit/ConfirmButton';
+import { Icon } from '@/common/Icon';
 
 type Props = {
   disable: boolean;
@@ -114,9 +116,27 @@ const SavingActions = ({
             >
               {t('saveDraft')}
             </Button>
-            <Button onClick={showModal} className='min-w-[480px] h-[52px]' disabled={disable}>
+            <ConfirmButton
+              className='w-[480px] h-[52px]'
+              tooltipContent={
+                <Trans
+                  i18nKey='implementTemplateTooltip'
+                  t={t}
+                  components={[
+                    <Icon
+                      key='check'
+                      name='check'
+                      size={10}
+                      className='inline-flex items-center justify-center w-5 h-5 p-1 mr-1 bg-white rounded-full text-primary'
+                    ></Icon>,
+                  ]}
+                />
+              }
+              onClick={showModal}
+              disabled={disable}
+            >
               {t('implementTemplate')}
-            </Button>
+            </ConfirmButton>
           </>
         )}
       </div>
