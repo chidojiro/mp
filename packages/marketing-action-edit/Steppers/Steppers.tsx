@@ -7,13 +7,14 @@ import classNames from 'classnames';
 
 type Props = {
   steps: Step[];
+  confirmedSteps?: boolean[];
   onShowPreview: (message: StepMessage) => void;
+  onConfirmChanged?: (index: number, changed: boolean) => void;
 };
 
-export const Steppers = ({ steps, onShowPreview }: Props) => {
+export const Steppers = ({ steps, confirmedSteps, onShowPreview, onConfirmChanged }: Props) => {
   const idLastStep = steps.length;
   const [refs, setRefs] = useState<any>();
-  const [completedSteps, setCompletedSteps] = useState<any[]>([]);
 
   useEffect(() => {
     const _refs = steps.reduce((acc: any, step: Step) => {
@@ -40,23 +41,6 @@ export const Steppers = ({ steps, onShowPreview }: Props) => {
     });
   };
 
-  const toggleCompletedStep = React.useCallback((id: number, completed: boolean) => {
-    setCompletedSteps(prev => {
-      const _id = prev.findIndex(step => step?.id === id);
-      let _completedSteps: any[] = [];
-      if (_id > -1) {
-        _completedSteps = prev.map(step => (step.id === id ? { ...step, completed } : step));
-      } else {
-        _completedSteps = [...prev, { id, completed }];
-      }
-      return _completedSteps;
-    });
-  }, []);
-
-  const isCompleted = (stepId: number) => {
-    return completedSteps.filter(step => step.id === stepId && step.completed)?.length;
-  };
-
   return (
     <>
       <div
@@ -67,14 +51,14 @@ export const Steppers = ({ steps, onShowPreview }: Props) => {
           'rounded-l border border-solid border-r-0 border-gray-500'
         )}
       >
-        {completedSteps.map(step => (
-          <div key={step.id}>
-            <span className='font-semibold text-mint-green text-small'>STEP{step.id}</span>
+        {confirmedSteps?.map((step, idx) => (
+          <div key={idx + 1}>
+            <span className='font-semibold text-mint-green text-small'>STEP{idx + 1}</span>
             <div
-              onClick={() => goToStep(step.id)}
+              onClick={() => goToStep(idx + 2)}
               className={classNames(
                 'flex cursor-pointer items-center justify-center rounded-full w-7 h-7',
-                step.completed ? 'bg-mint-green border-mint-green' : 'bg-gray'
+                step ? 'bg-mint-green border-mint-green' : 'bg-gray'
               )}
             >
               <Icon name='check' className='text-white' size={17} />
@@ -91,8 +75,9 @@ export const Steppers = ({ steps, onShowPreview }: Props) => {
           onConfirm={handleConfirm}
           onShowPreview={onShowPreview}
           ref={refs?.[step.id]}
-          isNextStep={!!isCompleted(step.id - 1)}
-          toggleCompletedStep={toggleCompletedStep}
+          isNextStep={idx !== 0 && confirmedSteps?.[idx - 1]}
+          confirmed={confirmedSteps?.[idx]}
+          onConfirmChanged={onConfirmChanged}
         />
       ))}
     </>

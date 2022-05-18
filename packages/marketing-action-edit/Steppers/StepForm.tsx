@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import classNames from 'classnames';
 import { FormProvider } from 'react-hook-form';
@@ -13,30 +13,38 @@ type Props = {
   step: Step;
   isLastStep: boolean;
   isNextStep?: boolean;
+  confirmed?: boolean;
   onShowPreview: (message: StepMessage) => void;
   onConfirm: (stepId: number) => void;
-  toggleCompletedStep?: (id: number, completed: boolean) => void;
+  onConfirmChanged?: (index: number, confirmed: boolean) => void;
 };
 
 export const StepForm = React.forwardRef<HTMLDivElement, Props>(
-  ({ step, isLastStep, isNextStep, onShowPreview, onConfirm, toggleCompletedStep }, ref) => {
+  (
+    { step, isLastStep, isNextStep, confirmed = false, onShowPreview, onConfirm, onConfirmChanged },
+    ref
+  ) => {
     const { t } = useTranslation('marketingAction');
     const { id, name, showPreviewBtn, children, methods } = step;
     const [showAlert, setShowAlert] = useState(id === 1);
 
     const {
       handleSubmit,
-      formState: { isSubmitSuccessful, isDirty },
+      formState: { isDirty },
       reset,
     } = methods;
 
     const onInvalidSubmit = () => {
       window.alert(t('pleaseFillInAllFields'));
     };
-    const isComplete = isSubmitSuccessful && !isDirty;
+
+    useEffect(() => {
+      isDirty && onConfirmChanged?.(id - 1, false);
+    }, [isDirty]);
 
     const onValidSubmit = (data: any) => {
       id === 1 && setShowAlert(false);
+      onConfirmChanged?.(id - 1, true);
       onConfirm(id);
       reset(data);
     };
@@ -47,14 +55,14 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
           <div
             className={classNames(
               'flex items-center justify-center w-5 h-5 mr-2 rounded-full',
-              isComplete ? ' bg-white' : 'bg-gray'
+              confirmed ? ' bg-white' : 'bg-gray'
             )}
           >
             <Icon
               name='check'
               className={classNames(
                 'w-[10px] h-[8px]',
-                isComplete ? 'text-mint-green' : 'text-white'
+                confirmed ? 'text-mint-green' : 'text-white'
               )}
             />
           </div>
@@ -63,11 +71,7 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
       );
     };
 
-    React.useEffect(() => {
-      toggleCompletedStep?.(id, isComplete);
-    }, [toggleCompletedStep, id, isComplete]);
-
-    const showGreenBorder = id === 1 || isComplete || isNextStep;
+    const showGreenBorder = id === 1 || confirmed || isNextStep;
 
     return (
       <FormProvider {...methods}>
@@ -75,13 +79,13 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
           ref={ref}
           className={classNames('flex relative', {
             'before:ml-3.5 before:border before:h-full before:absolute': isLastStep,
-            'before:border-mint-green': isComplete,
+            'before:border-mint-green': confirmed,
           })}
         >
           <div
             className={classNames(
               'flex z-10 items-center justify-center mr-5 border-2 rounded-full w-[30px] h-7',
-              isComplete ? 'bg-mint-green border-mint-green' : 'bg-gray',
+              confirmed ? 'bg-mint-green border-mint-green' : 'bg-gray',
               showGreenBorder ? 'border-mint-green' : 'border-gray'
             )}
           >
@@ -103,8 +107,11 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
                   {t('viewPreview')}
                 </Button>
               )}
-              {isComplete ? (
-                <Button className='relative h-9 min-w-[240px] border-none bg-mint-green'>
+              {confirmed ? (
+                <Button
+                  onClick={() => onConfirmChanged?.(id - 1, false)}
+                  className='relative h-9 min-w-[240px] border-none bg-mint-green'
+                >
                   {btnConfirm()}
                 </Button>
               ) : (
@@ -113,18 +120,18 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
                   className='w-[240px]'
                   onClick={handleSubmit(onValidSubmit, onInvalidSubmit)}
                   colorScheme='green'
-                  variant={isComplete ? 'solid' : 'outline'}
+                  variant={confirmed ? 'solid' : 'outline'}
                 >
                   <div
                     className={classNames(
                       'flex items-center justify-center w-5 h-5 mr-2 rounded-full',
-                      isComplete ? 'bg-white' : 'bg-gray'
+                      confirmed ? 'bg-white' : 'bg-gray'
                     )}
                   >
                     <Icon
                       name='check'
                       size={10}
-                      className={classNames(isComplete ? 'text-mint-green' : 'text-white')}
+                      className={classNames(confirmed ? 'text-mint-green' : 'text-white')}
                     />
                   </div>
                   {t('confirm')}
