@@ -1,31 +1,28 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import classNames from 'classnames';
 import { FormProvider } from 'react-hook-form';
 
 import { Button } from '@/common/Button';
 import { Icon } from '@/common/Icon';
-import styles from './StepForm.module.css';
 import { StepMessage } from '@/marketing-action/types';
 import { Step } from '@/marketing-action/constants';
+import { ConfirmButton } from '@/marketing-action-edit/ConfirmButton';
 
 type Props = {
   step: Step;
   isLastStep: boolean;
-  isAlert: boolean;
+  isNextStep?: boolean;
   onShowPreview: (message: StepMessage) => void;
   onConfirm: (stepId: number) => void;
   toggleCompletedStep?: (id: number, completed: boolean) => void;
 };
 
 export const StepForm = React.forwardRef<HTMLDivElement, Props>(
-  ({ step, isLastStep, isAlert, onShowPreview, onConfirm, toggleCompletedStep }, ref) => {
+  ({ step, isLastStep, isNextStep, onShowPreview, onConfirm, toggleCompletedStep }, ref) => {
     const { t } = useTranslation('marketingAction');
     const { id, name, showPreviewBtn, children, methods } = step;
-    const [showAlert, setShowAlert] = useState(isAlert);
-    const [classAlert, setClassAlert] = useState('');
-
-    const btnRef = useRef<any>(null);
+    const [showAlert, setShowAlert] = useState(id === 1);
 
     const {
       handleSubmit,
@@ -33,16 +30,13 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
       reset,
     } = methods;
 
-    useEffect(() => {
-      setShowAlert(isAlert);
-    }, [isAlert]);
-
     const onInvalidSubmit = () => {
       window.alert(t('pleaseFillInAllFields'));
     };
     const isComplete = isSubmitSuccessful && !isDirty;
 
     const onValidSubmit = (data: any) => {
+      id === 1 && setShowAlert(false);
       onConfirm(id);
       reset(data);
     };
@@ -69,30 +63,11 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
       );
     };
 
-    const scrollHandler = React.useCallback(() => {
-      if (!classAlert && id === 1 && btnRef.current) {
-        const { top, bottom } = btnRef.current.getBoundingClientRect();
-        const vHeight = window.innerHeight || document.documentElement.clientHeight;
-        if ((top > 0 || bottom > 0) && top < vHeight) {
-          setClassAlert(styles['alert-show']);
-        } else {
-          setClassAlert('');
-        }
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id]);
-
-    useEffect(() => {
-      window.addEventListener('scroll', scrollHandler);
-
-      return () => window.removeEventListener('scroll', scrollHandler);
-    }, [scrollHandler]);
-
-    const hidden = !showAlert || id !== 1;
-
     React.useEffect(() => {
       toggleCompletedStep?.(id, isComplete);
     }, [toggleCompletedStep, id, isComplete]);
+
+    const showGreenBorder = id === 1 || isComplete || isNextStep;
 
     return (
       <FormProvider {...methods}>
@@ -107,7 +82,7 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
             className={classNames(
               'flex z-10 items-center justify-center mr-5 border-2 rounded-full w-[30px] h-7',
               isComplete ? 'bg-mint-green border-mint-green' : 'bg-gray',
-              id == 1 || isAlert ? 'border-mint-green' : 'border-gray'
+              showGreenBorder ? 'border-mint-green' : 'border-gray'
             )}
           >
             <Icon name='check' className='w-[17px] h-[13px] text-white' />
@@ -133,36 +108,27 @@ export const StepForm = React.forwardRef<HTMLDivElement, Props>(
                   {btnConfirm()}
                 </Button>
               ) : (
-                <Button
-                  ref={btnRef}
+                <ConfirmButton
+                  tooltipContent={showAlert ? t('alertConfirm') : undefined}
+                  className='w-[240px]'
                   onClick={handleSubmit(onValidSubmit, onInvalidSubmit)}
-                  className='relative h-9 border-2 text-white min-w-[240px] ease-in duration-300'
                   colorScheme='green'
-                  variant='outline'
+                  variant={isComplete ? 'solid' : 'outline'}
                 >
-                  {btnConfirm()}
                   <div
-                    className={classNames('absolute', classAlert, {
-                      hidden: hidden,
-                    })}
+                    className={classNames(
+                      'flex items-center justify-center w-5 h-5 mr-2 rounded-full',
+                      isComplete ? 'bg-white' : 'bg-gray'
+                    )}
                   >
-                    <div
-                      className={classNames(
-                        'ease-in duration-300 shadow-[2px_4px_6px_0px_#00000029] w-[400px] px-[17px] py-[9px] relative rounded-full bg-primary bottom-16',
-                        "before:content-[''] before:absolute before:bottom-[-14px] before:right-1/2 before:border-primary",
-                        'before:w-6 before:h-[15px] before:shadow-[4px_4px_6px_0px_#00000029] before:border-r-[16px] before:border-b-[3px] before:rounded-br-[80px_50px]'
-                      )}
-                      onClick={e => e.stopPropagation()}
-                    >
-                      <Icon
-                        onClick={() => setShowAlert(false)}
-                        name='popover-close'
-                        className='absolute right-[-2px] top-[-5px] w-[18px] rounded-full h-[18px]'
-                      />
-                      <div className='font-bold text-white text-regular'>{t('alertConfirm')}</div>
-                    </div>
+                    <Icon
+                      name='check'
+                      size={10}
+                      className={classNames(isComplete ? 'text-mint-green' : 'text-white')}
+                    />
                   </div>
-                </Button>
+                  {t('confirm')}
+                </ConfirmButton>
               )}
             </div>
           </div>

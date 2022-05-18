@@ -12,7 +12,6 @@ type Props = {
 
 export const Steppers = ({ steps, onShowPreview }: Props) => {
   const idLastStep = steps.length;
-  const [currAlertId, setCurrAlertId] = useState(1);
   const [refs, setRefs] = useState<any>();
   const [completedSteps, setCompletedSteps] = useState<any[]>([]);
 
@@ -23,12 +22,13 @@ export const Steppers = ({ steps, onShowPreview }: Props) => {
     }, {});
 
     setRefs(_refs);
-  }, [steps]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleConfirm = (stepId: number) => {
     if (stepId !== idLastStep) {
       goToStep(stepId + 1);
-      setCurrAlertId(stepId + 1);
     }
   };
 
@@ -53,7 +53,9 @@ export const Steppers = ({ steps, onShowPreview }: Props) => {
     });
   }, []);
 
-  console.log(completedSteps);
+  const isCompleted = (stepId: number) => {
+    return completedSteps.filter(step => step.id === stepId && step.completed)?.length;
+  };
 
   return (
     <>
@@ -80,6 +82,7 @@ export const Steppers = ({ steps, onShowPreview }: Props) => {
           </div>
         ))}
       </div>
+
       {steps.map((step: Step, idx: number) => (
         <StepForm
           step={step}
@@ -88,7 +91,7 @@ export const Steppers = ({ steps, onShowPreview }: Props) => {
           onConfirm={handleConfirm}
           onShowPreview={onShowPreview}
           ref={refs?.[step.id]}
-          isAlert={currAlertId === step.id}
+          isNextStep={!!isCompleted(step.id - 1)}
           toggleCompletedStep={toggleCompletedStep}
         />
       ))}
