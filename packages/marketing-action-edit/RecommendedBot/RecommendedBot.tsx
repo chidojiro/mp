@@ -21,6 +21,8 @@ import { TARGET } from '@/marketing-action/types';
 import { MarketingActionRes } from '@/marketing-action/types';
 import { MarketingActionApis } from '@/marketing-action/apis';
 
+const defaultStepConfirmedFlags = [false, false, false];
+
 export const RecommendedBot = () => {
   const { t } = useTranslation('marketingAction');
   const [maId, setMaId] = useState('');
@@ -29,6 +31,9 @@ export const RecommendedBot = () => {
     query: { marketingActionId },
     asPath,
   } = useRouter();
+
+  const [stepConfirmedFlags, setStepConfirmedFlags] =
+    React.useState<boolean[]>(defaultStepConfirmedFlags);
 
   const [sourceId, setSourceId] = useState('');
   const methods = useForm();
@@ -108,6 +113,8 @@ export const RecommendedBot = () => {
       );
 
       step3Methods.reset({ target_customers: _targetSegments || [] });
+
+      setStepConfirmedFlags(settings.steps_confirmed_flag ?? defaultStepConfirmedFlags);
     },
     [step1Methods, step2Methods, step3Methods]
   );
@@ -140,6 +147,7 @@ export const RecommendedBot = () => {
         chat_window_color: chatSettings.chat_window_color,
         display_settings_pc: chatSettings.display_settings_pc,
         display_settings_mobile: chatSettings.display_settings_mobile,
+        steps_confirmed_flag: stepConfirmedFlags,
       },
       target_segments: _targetSegments,
     };
@@ -164,11 +172,15 @@ export const RecommendedBot = () => {
     push(`${asPath}/${maId}`);
   };
 
-  const isStepDone = (methods: any) => {
-    return methods.formState.isSubmitSuccessful && !methods.formState.isDirty;
+  const handleConfirmChanged = (index: number, confirmed: boolean) => {
+    setStepConfirmedFlags(prev => {
+      const _steps = [...prev];
+      _steps[index] = confirmed;
+      return _steps;
+    });
   };
 
-  const isDone = isStepDone(step1Methods) && isStepDone(step2Methods) && isStepDone(step3Methods);
+  const isDone = stepConfirmedFlags.every(Boolean);
 
   return (
     <div className='relative'>
@@ -183,7 +195,12 @@ export const RecommendedBot = () => {
       ></ActionContainer>
 
       <Form methods={methods} className='mt-[60px]'>
-        <Steppers steps={steps} onShowPreview={onShowPreview} />
+        <Steppers
+          steps={steps}
+          onShowPreview={onShowPreview}
+          confirmedSteps={stepConfirmedFlags}
+          onConfirmChanged={handleConfirmChanged}
+        />
       </Form>
 
       <ChatOverlay color={chatSettings.chat_window_color} control={chatPreviewControl} />

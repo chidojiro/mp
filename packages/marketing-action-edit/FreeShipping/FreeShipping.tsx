@@ -21,6 +21,8 @@ import { TargetCustomersData } from '@/marketing-action/types';
 import { MarketingActionApis } from '@/marketing-action/apis';
 import { Step } from '@/marketing-action/constants';
 
+const defaultStepConfirmedFlags = [false, false];
+
 export const FreeShipping = () => {
   const { t } = useTranslation('marketingAction');
   const [freeShipAmount, setFreeShipAmount] = useState('');
@@ -37,6 +39,9 @@ export const FreeShipping = () => {
     () => MarketingActionApis.get(marketingActionId as string)
   );
 
+  const [stepConfirmedFlags, setStepConfirmedFlags] =
+    React.useState<boolean[]>(defaultStepConfirmedFlags);
+
   // Prepare data before post
   const prepareData = (status: MarketingActionStatus) => {
     const _targetSegments = MarketingActionUtils.getTargetCustomers(
@@ -51,6 +56,7 @@ export const FreeShipping = () => {
       status,
       settings: {
         ...popupSettings,
+        steps_confirmed_flag: stepConfirmedFlags,
       },
       target_segments: _targetSegments,
     };
@@ -101,11 +107,7 @@ export const FreeShipping = () => {
     },
   });
 
-  const isStepDone = (methods: any) => {
-    return methods.formState.isSubmitSuccessful && !methods.formState.isDirty;
-  };
-
-  const isDone = isStepDone(popupFormMethods) && isStepDone(targetCustomerMethods);
+  const isDone = stepConfirmedFlags.every(Boolean);
 
   const chatPreviewControl = useVisibilityControl();
 
@@ -150,6 +152,14 @@ export const FreeShipping = () => {
     push(gotoMyMAUrl);
   };
 
+  const handleConfirmChanged = (index: number, confirmed: boolean) => {
+    setStepConfirmedFlags(prev => {
+      const _steps = [...prev];
+      _steps[index] = confirmed;
+      return _steps;
+    });
+  };
+
   const resetData = useCallback(
     (marketingAction: MarketingActionRes) => {
       const settings = marketingAction?.settings;
@@ -182,6 +192,8 @@ export const FreeShipping = () => {
         : '';
 
       settings?.template_selection ? setTemplateSelection(settings?.template_selection) : '';
+
+      setStepConfirmedFlags(settings?.steps_confirmed_flag ?? defaultStepConfirmedFlags);
     },
     [popupFormMethods, targetCustomerMethods]
   );
@@ -204,7 +216,12 @@ export const FreeShipping = () => {
         appearance={t('cart')}
       ></ActionContainer>
       <div className='mt-[60px]'>
-        <Steppers steps={steps} onShowPreview={onShowPreview} />
+        <Steppers
+          steps={steps}
+          onShowPreview={onShowPreview}
+          confirmedSteps={stepConfirmedFlags}
+          onConfirmChanged={handleConfirmChanged}
+        />
         <SavingActions
           disable={!isDone}
           onSaveMarketingAction={handleSaveMA}

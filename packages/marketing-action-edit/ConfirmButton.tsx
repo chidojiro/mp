@@ -2,7 +2,9 @@ import { Button, ButtonProps } from '@/common/Button';
 import { Icon } from '@/common/Icon';
 import { useVisibilityControl } from '@/common/useVisibilityControl';
 import classNames from 'classnames';
-import React from 'react';
+import React, { useState } from 'react';
+
+import styles from './ConfirmButton.module.css';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = ButtonProps & { tooltipContent?: React.ReactNode };
@@ -12,10 +14,20 @@ export const ConfirmButton = ({ children, tooltipContent, onClick, ...restProps 
   const buttonRef = React.useRef<any>(null);
   const openControl = useVisibilityControl({ defaultVisible: !!tooltipContent });
   const appearControl = useVisibilityControl({ defaultVisible: !!openControl.open });
+  const [classAlert, setClassAlert] = useState('');
 
   React.useEffect(() => {
     const observer = new IntersectionObserver(
-      entries => appearControl.set(entries[0].isIntersecting),
+      entries => {
+        const isIntersecting = entries[0].isIntersecting;
+        if (isIntersecting) {
+          setClassAlert(styles['alert-show']);
+        } else {
+          setClassAlert('');
+        }
+
+        appearControl.set(isIntersecting);
+      },
       {
         root: null,
         rootMargin: '0px',
@@ -36,14 +48,16 @@ export const ConfirmButton = ({ children, tooltipContent, onClick, ...restProps 
       {openControl.visible && tooltipContent && (
         <div
           className={classNames(
-            'absolute transform -translate-x-1/2 -translate-y-full -top-5 left-1/2 transition-all duration-500',
+            'font-bold absolute -top-5 left-1/2 -translate-x-1/2 -translate-y-full duration-500',
             'py-2 px-4 rounded-full whitespace-nowrap bg-primary text-white shadow-[2px_4px_6px_0px_#00000029]',
             "before:content-[''] before:absolute before:bottom-[-14px] before:right-1/2 before:border-primary",
             'before:w-6 before:h-[15px] before:shadow-[4px_4px_6px_0px_#00000029] before:border-r-[16px] before:border-b-[3px] before:rounded-br-[80px_50px]',
+            classAlert,
             {
               'opacity-0': !appearControl.visible,
             }
-          )}>
+          )}
+        >
           {tooltipContent}
           <Icon
             onClick={openControl?.close}
