@@ -1,151 +1,187 @@
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import { useForm, useWatch } from 'react-hook-form';
-
-import { Button } from '@/common/Button';
+import { useForm } from 'react-hook-form';
+import useSWR from 'swr';
 import { Form } from '@/common/Form';
-import { Modal } from '@/common/Modal';
 import { ActionContainer } from '@/marketing-action/ActionContainer';
+import { MarketingActionUtils } from '@/marketing-action/utils';
+
 import { ChatOverlay } from '../ChatOverlay';
 import { ChatWindowSettings } from '../ChatWindowSettings';
-import { Steps } from '../Steps';
+import { Steppers } from '../Steppers';
+import SavingActions from '../Steppers/SavingActions';
 import { TargetCustomerGroup } from '../TargetCustomerGroup';
 
 import { Step1Settings } from './Step1Settings';
 import { useVisibilityControl } from '@/common/useVisibilityControl';
-import { useProfile } from '@/auth/useProfile';
+import { MarketingActionStatus } from '@/marketing-action/types';
+import { MarketingActionAlias } from '@/marketing-action/types';
 import { TARGET } from '@/marketing-action/types';
-import { Step } from '@/marketing-action/constants';
+import { MarketingActionRes } from '@/marketing-action/types';
+import { MarketingActionApis } from '@/marketing-action/apis';
+
+const defaultStepConfirmedFlags = [false, false, false];
 
 export const CartFAQ = () => {
   const { t } = useTranslation('marketingAction');
-  const methods = useForm({
-    defaultValues: {
-      chat_settings: {
-        color: '#E63E28',
-        pc_appearance_time: '0',
-        mobile_appearance_time: '0',
-        pc_position: '0',
-        mobile_position: '0',
-        pc_unit: 'px',
-        mobile_unit: 'px',
-      },
-    } as any,
-  });
-  const { handleSubmit, watch } = methods;
-  const { control } = methods;
-  const modalControl = useVisibilityControl();
-  const [isCompleted, setIsCompleted] = useState(false);
-  const [isSaveAsDraft, setIsSaveAsDraft] = useState(false);
+  const [maId, setMaId] = useState('');
+  const {
+    push,
+    query: { marketingActionId },
+    asPath,
+  } = useRouter();
 
-  const step1 = useWatch({ name: 'faq_content_creation', control });
-  const targetCustomers = useWatch({ name: 'target_customers', control });
-  const step2 = useWatch({ name: 'chat_settings', control });
-  const isStep3Done = !!targetCustomers?.length;
+  const [stepConfirmedFlags, setStepConfirmedFlags] =
+    React.useState<boolean[]>(defaultStepConfirmedFlags);
+
+  const [sourceId, setSourceId] = useState('');
+  const methods = useForm();
   const chatPreviewControl = useVisibilityControl();
+  const step1Methods = useForm({});
 
-  const onSubmit = (data: any) => {
-    console.log('submit', data);
-  };
+  const step2Methods = useForm({
+    defaultValues: {
+      chat_window_color: '#E22B2D',
+      display_settings_pc: {
+        appear_time: 0,
+        position: 'right',
+        position_close_box: 0,
+        position_close_box_unit: 'px',
+      },
+      display_settings_mobile: {
+        appear_time: 0,
+        position: 'right',
+        position_close_box: 0,
+        position_close_box_unit: 'px',
+      },
+    },
+  });
+  const step3Methods = useForm({
+    defaultValues: {
+      target_customers: [
+        TARGET.F0_MEMBER,
+        TARGET.F1,
+        TARGET.F2,
+        TARGET.SEMI_LOYAL,
+        TARGET.LOYAL,
+        TARGET.F1_DORMANT,
+        TARGET.LOYAL_DORMANT,
+        TARGET.OTHER_DORMANT,
+      ],
+    },
+  });
 
-  const showModal = () => {
-    setIsCompleted(false);
-    setIsSaveAsDraft(false);
-    modalControl.open();
-  };
+  const chatSettings: any = step2Methods.getValues();
 
-  const onExecuteMA = () => {
-    handleSubmit(onSubmit)();
-    setIsCompleted(true);
-  };
-
-  const onSaveAsDraft = () => {
-    modalControl.open();
-    handleSubmit(onSubmit)();
-    setIsCompleted(false);
-    setIsSaveAsDraft(true);
-  };
-
-  const setStepDone = (stepId: number, done: boolean) => {
-    setSteps(prevState =>
-      prevState.map(step => {
-        return step.id === stepId ? { ...step, isDone: done } : step;
-      })
-    );
-  };
-
-  const onConfirm = (stepId: number) => {
-    // KEEP FOR NOW. I need to figure out how to handle this in the form, keep until that's resolved.
-    // if (stepId === 1 && step1) {
-    //   // TODO save step 1
-    //   setStepDone(stepId, true);
-    if (stepId === 1) {
-      // TODO save step 1
-      setStepDone(stepId, true);
-    } else if (stepId === 2 && isStep2Done()) {
-      // TODO save step 2
-      setStepDone(stepId, true);
-    } else if (stepId === 3 && isStep3Done) {
-      // TODO save step 3
-      setStepDone(stepId, true);
-    }
-  };
-
-  const isStep2Done = () => {
-    return step2 && Object.keys(step2).every(field => step2[field]);
-  };
-
-  const [steps, setSteps] = useState<Step[]>([
+  const steps = [
     {
       id: 1,
-      name: t('faqContentCreation'),
-      children: <Step1Settings />,
+      name: t('csvFileUpload'),
+      children: <Step1Settings sourceId={sourceId} />,
+      methods: step1Methods,
     },
     {
       id: 2,
       name: t('chatWindowSettings'),
       children: <ChatWindowSettings />,
       showPreviewBtn: true,
+      methods: step2Methods,
     },
     {
       id: 3,
       name: t('targetSetting'),
-      children: <TargetCustomerGroup isNonMember={true} />,
+      children: <TargetCustomerGroup />,
+      methods: step3Methods,
     },
-  ]);
+  ];
+
+  const { data: marketingAction } = useSWR(
+    marketingActionId ? ['/actions', marketingActionId] : null,
+    () => MarketingActionApis.get(marketingActionId as string)
+  );
+
+  const resetData = useCallback(
+    (marketingAction: MarketingActionRes) => {
+      const settings = marketingAction.settings;
+      console.log('settings: ', settings);
+      step1Methods.reset({ faq_source: settings?.faq_source });
+
+      step2Methods.reset({ ...settings });
+
+      const _targetSegments = MarketingActionUtils.getTargetFilters(
+        marketingAction.target_segments
+      );
+
+      step3Methods.reset({ target_customers: _targetSegments || [] });
+
+      setStepConfirmedFlags(settings.steps_confirmed_flag ?? defaultStepConfirmedFlags);
+    },
+    [step1Methods, step2Methods, step3Methods]
+  );
 
   useEffect(() => {
-    setStepDone(1, false);
-  }, [step1]);
-
-  useEffect(() => {
-    setStepDone(2, false);
-  }, [step2]);
-
-  useEffect(() => {
-    setStepDone(3, false);
-  }, [targetCustomers]);
-
-  const modalDesc = () => {
-    let desc = 'executeTemplate';
-    if (isSaveAsDraft) {
-      desc = 'alertAfterSaveAsDraft';
-    } else if (isCompleted) {
-      desc = 'alertAfterExecuting';
+    if (marketingAction) {
+      resetData(marketingAction);
     }
-    return t(desc, { template: t('cartPageFaq') });
+  }, [marketingAction, resetData]);
+
+  useEffect(() => {
+    const _id = marketingAction?.settings.faq_source;
+    if (_id) {
+      setSourceId(_id);
+    }
+  }, [marketingAction]);
+
+  const prepareData = (status: MarketingActionStatus) => {
+    const _targetSegments = MarketingActionUtils.getTargetCustomers(
+      step3Methods.getValues('target_customers')
+    );
+
+    const data = {
+      start_at: new Date().toISOString(),
+      description: t('cartPageFaq'),
+      marketing_action_type_alias: MarketingActionAlias.CART_PAGE_FAQ,
+      status,
+      settings: {
+        faq_source: step1Methods.getValues('faq_source'),
+        chat_window_color: chatSettings.chat_window_color,
+        display_settings_pc: chatSettings.display_settings_pc,
+        display_settings_mobile: chatSettings.display_settings_mobile,
+        steps_confirmed_flag: stepConfirmedFlags,
+      },
+      target_segments: _targetSegments,
+    };
+    return data;
   };
 
-  const onShowPreview = (stepId: number) => {
+  const handleSaveMA = async (status: MarketingActionStatus) => {
+    const data = prepareData(status);
+    if (marketingActionId) {
+      await MarketingActionApis.update(marketingActionId as string, data);
+    } else {
+      const res = await MarketingActionApis.create(data);
+      setMaId(res.id);
+    }
+  };
+
+  const onShowPreview = () => {
     chatPreviewControl.open();
   };
-  const profile = useProfile();
-  const isGotoMABtn = isCompleted || isSaveAsDraft;
-  const gotoMyMAUrl = `/organizations/${profile.data?.organization_id}/projects/${
-    profile.data?.project_id
-  }/actions/${isCompleted ? 'active' : 'draft'}`;
-  const unSavedSteps = steps.filter(step => !step.isDone).length;
+
+  const handleCloseModal = () => {
+    push(`${asPath}/${maId}`);
+  };
+
+  const handleConfirmChanged = (index: number, confirmed: boolean) => {
+    setStepConfirmedFlags(prev => {
+      const _steps = [...prev];
+      _steps[index] = confirmed;
+      return _steps;
+    });
+  };
+
+  const isDone = stepConfirmedFlags.every(Boolean);
 
   return (
     <div className='relative'>
@@ -165,44 +201,24 @@ export const CartFAQ = () => {
         ]}
         appearance={t('cart')}
       ></ActionContainer>
+
       <Form methods={methods} className='mt-[60px]'>
-        <Steps steps={steps} onConfirm={onConfirm} onShowPreview={onShowPreview} />
-        <div className='flex justify-center mt-10'>
-          <Button className='mr-5 min-w-[240px] h-[52px] bg-[#FF7F5C]' onClick={onSaveAsDraft}>
-            {t('saveDraft')}
-          </Button>
-          <Button colorScheme='negative' className='mr-5 min-w-[240px] h-[52px]'>
-            {t('stopEditing')}
-          </Button>
-          <Button onClick={showModal} className='min-w-[480px] h-[52px]' disabled={!!unSavedSteps}>
-            {t('implementTemplate')}
-          </Button>
-        </div>
+        <Steppers
+          steps={steps}
+          onShowPreview={onShowPreview}
+          confirmedSteps={stepConfirmedFlags}
+          onConfirmChanged={handleConfirmChanged}
+        />
       </Form>
 
-      <ChatOverlay color={step2.color} control={chatPreviewControl} />
+      <ChatOverlay color={chatSettings.chat_window_color} control={chatPreviewControl} />
 
-      <Modal control={modalControl}>
-        <div className='text-center text-gray-dark'>
-          <Modal.Body className='leading-loose whitespace-pre-line'>{modalDesc()}</Modal.Body>
-          <Modal.Footer className='text-medium'>
-            {isGotoMABtn ? (
-              <Link passHref href={gotoMyMAUrl}>
-                <Modal.FooterButton colorScheme='negative' onClick={modalControl.close}>
-                  {t('gotoMyMA')}
-                </Modal.FooterButton>
-              </Link>
-            ) : (
-              <>
-                <Modal.FooterButton colorScheme='negative' onClick={modalControl.close}>
-                  {t('cancel')}
-                </Modal.FooterButton>
-                <Modal.FooterButton onClick={onExecuteMA}>{t('executeTest')}</Modal.FooterButton>
-              </>
-            )}
-          </Modal.Footer>
-        </div>
-      </Modal>
+      <SavingActions
+        disable={!isDone}
+        onSaveMarketingAction={handleSaveMA}
+        onCloseModal={handleCloseModal}
+        marketingActionName={t('cartPageFaq')}
+      />
     </div>
   );
 };
