@@ -63,6 +63,7 @@ export const CartAbandoned = () => {
         t('mailContentDefault', { brand_name: t('brandName') }),
         [{ name: 'brand_name', displayName: t('brandName') }]
       ),
+      color: '#55C5D9',
     },
     line_messages: {
       text_msg_display: false,
@@ -70,7 +71,6 @@ export const CartAbandoned = () => {
       flex_msg_head: t('forgotSomethingLine'),
       flex_msg_head_draft_raw: getDefaultMessageContentState(t('forgotSomethingLine')),
     },
-    color: '#55C5D9',
     send_flag: true,
     content_verified: true,
   } as any;
@@ -248,10 +248,8 @@ export const CartAbandoned = () => {
       <div className='relative'>
         <PreviewOverlay
           defaultType={messagePreview?.type}
-          mailHeadline={messagePreview?.mail_content.title}
-          mailBody={messagePreview?.mail_content.content}
-          lineHeadline={messagePreview?.line_messages.flex_msg_head}
-          lineBody={messagePreview?.line_messages.text_msg_content}
+          mailContent={messagePreview?.mail_content}
+          lineMessage={messagePreview?.line_messages}
           control={previewMessageControl}
         />
       </div>

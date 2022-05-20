@@ -15,27 +15,22 @@ import { MessageContentPreviewType } from './MessageContentPreview';
 import { useVisibilityControl } from '@/common/useVisibilityControl';
 import { VisibilityControl } from '@/common/useVisibilityControl';
 import { MarketingActionApis } from './apis';
+import { LineMessages, MailContent } from '@/marketing-action/types';
 
 type Props = {
   defaultType: MessageContentPreviewType;
   control: VisibilityControl;
-  mailHeadline: string;
-  mailBody: string;
-  lineHeadline: string;
-  lineBody: string;
-  color?: string;
+  mailContent?: MailContent;
+  lineMessage?: LineMessages;
   enableLine?: boolean;
 };
 
 export const PreviewOverlay = ({
   defaultType,
   control,
-  mailHeadline,
-  mailBody,
-  lineHeadline,
-  lineBody,
-  color,
   enableLine = true,
+  mailContent,
+  lineMessage,
 }: Props) => {
   const { t } = useTranslation('marketingAction');
   const [selectedType, setSelectedType] = useState<MessageContentPreviewType>(defaultType);
@@ -81,8 +76,8 @@ export const PreviewOverlay = ({
       type: 'email',
       content: {
         to: email,
-        subject: mailHeadline,
-        body: mailBody,
+        subject: mailContent?.title || '',
+        body: mailContent?.content || '',
       },
     };
 
@@ -111,17 +106,17 @@ export const PreviewOverlay = ({
       >
         {isMail ? (
           <MailPreview
-            headline={mailHeadline}
-            body={mailBody}
+            headline={mailContent?.title}
+            body={mailContent?.content}
             desktop={selectedDevice === 'desktop'}
-            color={color}
+            color={mailContent?.color}
             isOverlay
           />
         ) : (
           <LinePreview
-            headline={lineHeadline}
+            headline={lineMessage?.flex_msg_head}
             isOverlay
-            body={lineBody}
+            body={lineMessage?.text_msg_content}
             desktop={selectedDevice === 'desktop'}
           />
         )}
