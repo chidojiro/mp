@@ -50,6 +50,17 @@ export const PopupSettings = ({ passData, passTemplateSelection }: Props) => {
         </div>
       </div>
 
+      <div className='px-10 -mx-10 border-b-4 border-white pb-7 mt-[40px]'>
+        <div className='mb-2 font-semibold'>{t('linkURL')}</div>
+        <div className='flex items-center mb-4'>
+          <Form.Input type='text' name='target_url' className='w-96' placeholder='www.sample.com' />
+        </div>
+        <div className='flex items-center'>
+          <Form.Checkbox name='is_open_new_tab' colorScheme='secondary' defaultChecked={true} />
+          <span className=' mx-2.5'>{t('openInNewWindow')}</span>
+        </div>
+      </div>
+
       <div className='pt-5'>
         <div className='mb-2 font-bold text-gray-dark'>{t('appearanceCond')}</div>
         <div className='text-gray-700 mb-14 text-medium'>{t('appearanceCondDesc')}</div>

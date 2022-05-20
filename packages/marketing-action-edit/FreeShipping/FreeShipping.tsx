@@ -76,6 +76,8 @@ export const FreeShipping = () => {
     defaultValues: {
       template_selection: 'template1',
       free_shipping_amount: 5000,
+      target_url: '',
+      is_open_new_tab: true,
       display_settings_pc: {
         appear_time: 0,
         position: 'right',
@@ -163,10 +165,13 @@ export const FreeShipping = () => {
   const resetData = useCallback(
     (marketingAction: MarketingActionRes) => {
       const settings = marketingAction?.settings;
+      console.log('action: ', marketingAction);
 
       popupFormMethods.reset({
         template_selection: settings?.template_selection,
         free_shipping_amount: settings?.free_shipping_amount,
+        target_url: settings?.target_url,
+        is_open_new_tab: settings?.is_open_new_tab,
         display_settings_pc: {
           appear_time: settings?.display_settings_pc?.appear_time,
           position: settings?.display_settings_pc?.position,
