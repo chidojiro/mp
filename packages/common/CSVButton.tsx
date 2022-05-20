@@ -14,7 +14,7 @@ export const CSVButton = ({ onClick, ...props }: CSVButtonProps) => {
   const { t } = useTranslation();
   return (
     <div
-      className='rounded bg-white border border-gray-500 w-40 h-10 flex items-center justify-center text-medium font-bold cursor-pointer'
+      className='rounded bg-white border border-gray-500 w-40 h-10 flex items-center justify-center text-medium font-bold cursor-pointer transition-all hover:bg-[#efefef]'
       onClick={onClick}
       {...props}
     >

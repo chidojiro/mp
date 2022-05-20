@@ -33,7 +33,8 @@ export const Tabs = ({ value, onChange, items, className }: TabsProps) => {
                         isActive
                           ? 'font-bold border-secondary text-secondary'
                           : 'border-transparent text-gray-800',
-                        'whitespace-nowrap py-4 px-1 border-b-[3px] font-medium text-sm flex-1'
+                        'whitespace-nowrap py-4 px-1 border-b-[3px] font-medium text-sm flex-1',
+                        'hover:border-secondary hover:text-secondary transition-all'
                       )}
                       aria-current={isActive ? 'page' : undefined}
                     >

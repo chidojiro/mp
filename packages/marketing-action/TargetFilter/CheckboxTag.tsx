@@ -15,9 +15,11 @@ export const CheckboxTag = ({ value, label, checked, onChange }: Props) => {
   return (
     <label
       className={classNames(
+        'group',
         'rounded-full px-4 h-[30px] font-bold cursor-pointer text-medium',
         'flex items-center gap-1',
         'border border-solid',
+        'hover:bg-primary hover:border-primary hover:text-white transition-all',
         {
           'border-input bg-white text-gray-dark': !checked,
           'bg-primary border-primary text-white': checked,
@@ -25,10 +27,13 @@ export const CheckboxTag = ({ value, label, checked, onChange }: Props) => {
       )}
     >
       <div
-        className={classNames('w-3 h-3 rounded-sm flex items-center justify-center', {
-          'bg-input': !checked,
-          'bg-white': checked,
-        })}
+        className={classNames(
+          'w-3 h-3 rounded-sm flex items-center justify-center group-hover:bg-white transition-all',
+          {
+            'bg-input': !checked,
+            'bg-white': checked,
+          }
+        )}
       >
         {checked && <Icon name='check' className='w-[10px] h-[8px] text-primary' />}
       </div>

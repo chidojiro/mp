@@ -34,7 +34,7 @@ export const CustomerReportButton = ({
 }: CustomerReportButtonProps) => (
   <Link href={href}>
     <div
-      className='border border-gray-500 border-solid rounded-md h-[60px] flex items-center justify-between text-gray-800 cursor-pointer'
+      className='border border-gray-500 border-solid rounded-md h-[60px] flex items-center justify-between text-gray-800 cursor-pointer hover:bg-[#efefef] transition-all'
       {...props}
     >
       <div className='flex items-center'>

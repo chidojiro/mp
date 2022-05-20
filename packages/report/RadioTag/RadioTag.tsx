@@ -20,9 +20,11 @@ export const RadioTag = ({ value, label }: Props) => {
         <Link href={{ pathname, query: { ...query, actionType: value } }} passHref>
           <label
             className={classNames(
+              'group',
               'rounded-full px-4 h-[30px] font-bold cursor-pointer text-medium',
               'flex items-center gap-1',
               'border border-solid',
+              'hover:bg-primary hover:border-primary hover:text-white transition-all',
               {
                 'border-gray-300 bg-white': !isChecked,
                 'bg-primary border-primary text-white': isChecked,
@@ -30,10 +32,14 @@ export const RadioTag = ({ value, label }: Props) => {
             )}
           >
             <div
-              className={classNames('w-3 h-3 rounded-full', 'flex items-center justify-center', {
-                'bg-input': !isChecked,
-                'bg-white': isChecked,
-              })}
+              className={classNames(
+                'w-3 h-3 rounded-full',
+                'flex items-center justify-center group-hover:bg-white transition-all',
+                {
+                  'bg-input': !isChecked,
+                  'bg-white': isChecked,
+                }
+              )}
             >
               {!!isChecked && <div className='w-1.5 h-1.5 rounded-full bg-primary'></div>}
             </div>
