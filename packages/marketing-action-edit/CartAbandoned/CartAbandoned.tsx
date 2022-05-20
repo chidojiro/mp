@@ -27,6 +27,8 @@ import { TARGET } from '@/marketing-action/types';
 import { StepMessage } from '@/marketing-action/types';
 import { MarketingActionApis } from '@/marketing-action/apis';
 
+const defaultStepConfirmedFlags = [false, false, false, false];
+
 export const CartAbandoned = () => {
   const { t } = useTranslation('marketingAction');
   const methods = useForm();
@@ -38,6 +40,9 @@ export const CartAbandoned = () => {
     query: { marketingActionId },
     asPath,
   } = useRouter();
+
+  const [stepConfirmedFlags, setStepConfirmedFlags] =
+    React.useState<boolean[]>(defaultStepConfirmedFlags);
 
   const previewMessageControl = useVisibilityControl();
 
@@ -58,6 +63,7 @@ export const CartAbandoned = () => {
         t('mailContentDefault', { brand_name: t('brandName') }),
         [{ name: 'brand_name', displayName: t('brandName') }]
       ),
+      color: '#55C5D9',
     },
     line_messages: {
       text_msg_display: false,
@@ -65,7 +71,6 @@ export const CartAbandoned = () => {
       flex_msg_head: t('forgotSomethingLine'),
       flex_msg_head_draft_raw: getDefaultMessageContentState(t('forgotSomethingLine')),
     },
-    color: '#55C5D9',
     send_flag: true,
     content_verified: true,
   } as any;
@@ -106,10 +111,12 @@ export const CartAbandoned = () => {
 
       step2Methods.reset(convertFromStepMessageRaw(settings?.step_messages?.[0]), {
         keepDefaultValues: true,
+        keepDirty: true,
       });
 
       step3Methods.reset(convertFromStepMessageRaw(settings?.step_messages?.[1]), {
         keepDefaultValues: true,
+        keepDirty: true,
       });
 
       const _targetSegments = MarketingActionUtils.getTargetFilters(
@@ -117,6 +124,7 @@ export const CartAbandoned = () => {
       );
 
       step4Methods.reset({ target_customers: _targetSegments || [] });
+      setStepConfirmedFlags(settings.steps_confirmed_flag ?? defaultStepConfirmedFlags);
     },
     [step1Methods, step2Methods, step3Methods, step4Methods]
   );
@@ -143,6 +151,7 @@ export const CartAbandoned = () => {
       status,
       settings: {
         enable_line: useLine,
+        steps_confirmed_flag: stepConfirmedFlags,
         step_messages: [
           convertToStepMessageRaw(firstMessage),
           convertToStepMessageRaw(secondMessage),
@@ -170,6 +179,14 @@ export const CartAbandoned = () => {
     }
     setMessagePreview({ ..._message, type });
     previewMessageControl.open();
+  };
+
+  const handleConfirmChanged = (index: number, confirmed: boolean) => {
+    setStepConfirmedFlags(prev => {
+      const _steps = [...prev];
+      _steps[index] = confirmed;
+      return _steps;
+    });
   };
 
   const steps = [
@@ -205,15 +222,7 @@ export const CartAbandoned = () => {
     push(`${asPath}/${maId}`);
   };
 
-  const isStepDone = (methods: any) => {
-    return methods.formState.isSubmitSuccessful && !methods.formState.isDirty;
-  };
-
-  const isDone =
-    isStepDone(step1Methods) &&
-    isStepDone(step2Methods) &&
-    isStepDone(step3Methods) &&
-    isStepDone(step4Methods);
+  const isDone = stepConfirmedFlags.every(Boolean);
 
   return (
     <div className='relative'>
@@ -228,16 +237,19 @@ export const CartAbandoned = () => {
       ></ActionContainer>
       <div className='relative'>
         <Form methods={methods} className='mt-[60px]'>
-          <Steppers steps={steps} onShowPreview={onShowPreview} />
+          <Steppers
+            steps={steps}
+            onShowPreview={onShowPreview}
+            confirmedSteps={stepConfirmedFlags}
+            onConfirmChanged={handleConfirmChanged}
+          />
         </Form>
       </div>
       <div className='relative'>
         <PreviewOverlay
           defaultType={messagePreview?.type}
-          mailHeadline={messagePreview?.mail_content.title}
-          mailBody={messagePreview?.mail_content.content}
-          lineHeadline={messagePreview?.line_messages.flex_msg_head}
-          lineBody={messagePreview?.line_messages.text_msg_content}
+          mailContent={messagePreview?.mail_content}
+          lineMessage={messagePreview?.line_messages}
           control={previewMessageControl}
         />
       </div>

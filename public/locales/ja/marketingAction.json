@@ -229,5 +229,7 @@
   "shippingTemplateWithPurchaseOf": "のご購入で",
   "shippingTemplateTwoFreeShipping": "配送料無料になります！",
   "shippingTemplateTwoThresholdUntilFree": "円以上のご購入で",
-  "shippingTemplateTwoFreeShippingCampaing": "配送料無料キャンペーン中"
+  "shippingTemplateTwoFreeShippingCampaing": "配送料無料キャンペーン中",
+  "linkURL": "リンク先URL",
+  "openInNewWindow": "別ウィンドウで開く"
 }

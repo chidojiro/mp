@@ -68,7 +68,7 @@ export const MessageContent = ({ useLine = true, onShowPreview }: Props) => {
             </div>
             <div className='mt-7'>
               <div className='mb-2 font-semibold text-secondary'>{t('colorSettingsForBtn')}</div>
-              <ColorGroup name='color' />
+              <ColorGroup name='mail_content.color' />
             </div>
           </div>
           <div>

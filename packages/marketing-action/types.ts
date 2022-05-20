@@ -154,6 +154,8 @@ export type MarketingActionRes = {
     report_period?: 'weekly' | 'monthly';
     carousel?: Carousel[];
     steps_confirmed_flag?: boolean[];
+    target_url: string;
+    is_open_new_tab: boolean;
   };
   status: MarketingActionStatus;
   target_segments?: TargetSegment[];
@@ -186,6 +188,8 @@ export interface PopupSettingsData {
   free_shipping_amount: number;
   display_settings_pc: DisplaySettingsData;
   display_settings_mobile: DisplaySettingsData;
+  target_url: string;
+  is_open_new_tab: boolean;
 }
 export interface TargetCustomersData {
   target_customers: TARGET[];
