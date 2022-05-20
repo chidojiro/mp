@@ -230,5 +230,7 @@
   "shippingTemplateWithPurchaseOf": "until",
   "shippingTemplateTwoFreeShipping": "free shipping！",
   "shippingTemplateTwoThresholdUntilFree": "円+ purchases",
-  "shippingTemplateTwoFreeShippingCampaing": "ship for free"
+  "shippingTemplateTwoFreeShippingCampaing": "ship for free",
+  "linkURL": "Link URL",
+  "openInNewWindow": "Open in a new window"
 }
