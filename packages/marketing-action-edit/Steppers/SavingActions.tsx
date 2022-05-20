@@ -49,6 +49,7 @@ const SavingActions = ({
   const onExecuteMA = async () => {
     await onSaveMarketingAction(MarketingActionStatus.RUNNING);
     setIsCompleted(true);
+    push(getMyMarketingActionListHref());
   };
 
   const onSaveAsDraft = async () => {

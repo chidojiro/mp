@@ -43,10 +43,8 @@ export const Message2SettingsStep = React.forwardRef(
       window.alert(t('pleaseFillInAllFields'));
     };
 
-    const mailHeadline = watch('mail_content.title');
-    const mailBody = watch('mail_content.content');
-    const lineBody = watch('line_messages.text_msg_content');
-    const lineHeadline = watch('line_messages.flex_msg_head');
+    const mailContent = watch('mail_content');
+    const lineMessage = watch('line_messages');
 
     const handleMailPreviewClick = () => {
       setPreviewType('mail');
@@ -66,10 +64,8 @@ export const Message2SettingsStep = React.forwardRef(
           <PreviewOverlay
             control={control}
             defaultType={previewType ?? 'mail'}
-            mailHeadline={mailHeadline}
-            mailBody={mailBody}
-            lineBody={lineBody}
-            lineHeadline={lineHeadline}
+            mailContent={mailContent}
+            lineMessage={lineMessage}
           />
           <Section>
             <span className='text-gray-700 text-medium'>{t('descriptionPlaceholder')}</span>
