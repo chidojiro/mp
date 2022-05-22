@@ -1,10 +1,13 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import axiosRetry, { isNetworkOrIdempotentRequestError } from 'axios-retry';
-import { nanoid } from 'nanoid';
-
+import { customAlphabet } from 'nanoid';
 import { ORANIZATION_HEADER, PROJECT_HEADER } from '@/auth/constants';
 import { CookiesUtils, DomUtils, Logger } from '@/common/utils';
 import { ACCESS_TOKEN_KEY, API_URI } from '@/env/constants';
+
+const ALPHABET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+const randomId = () => customAlphabet(ALPHABET, 32)();
 
 const myAxios = axios.create({
   baseURL: API_URI,
@@ -39,9 +42,9 @@ myAxios.interceptors.request.use(
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
     // config.headers['X-Frontend-Version'] = `${APP_VERSION}_${BUILD_NUMBER}`
-    config.headers['X-Request-Id'] = nanoid(32);
+    config.headers['X-Request-Id'] = randomId();
     if (config.method === 'post') {
-      config.headers['X-Idempotent-Key'] = nanoid(32);
+      config.headers['X-Idempotent-Key'] = randomId();
     }
 
     if (CookiesUtils.get(ORANIZATION_HEADER)) {
