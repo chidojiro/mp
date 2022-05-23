@@ -72,7 +72,7 @@ export const RichTextEditor = React.forwardRef(
         const newEditorState = replaceText({
           editorState,
           newText: option.label,
-          data: option.value,
+          data: option,
           entityType: 'MENTION',
           mutability: 'IMMUTABLE',
         });
