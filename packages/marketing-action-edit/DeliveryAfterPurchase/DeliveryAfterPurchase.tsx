@@ -71,7 +71,7 @@ export const DeliveryAfterPurchase = ({}: Props) => {
       template: StepMessageTemplate.REVIEW,
       send_after_days: 1,
       send_at: '10:00',
-      line_messages: {
+      line_message: {
         text_msg_display: false,
         flex_msg_image_ratio: '1:1',
       },
@@ -88,7 +88,7 @@ export const DeliveryAfterPurchase = ({}: Props) => {
       template: StepMessageTemplate.REVIEW,
       send_after_days: 1,
       send_at: '10:00',
-      line_messages: {
+      line_message: {
         text_msg_display: false,
         flex_msg_image_ratio: '1:1',
       },
@@ -276,7 +276,8 @@ export const DeliveryAfterPurchase = ({}: Props) => {
               marketingActionName: 'step-delivery-after-purchase',
             })
           )
-        }>
+        }
+      >
         <div className='text-center text-gray-dark'>
           <Modal.Body className='leading-loose whitespace-pre-line'>
             {t('alertAfterSaveAsDraft')}
@@ -287,7 +288,8 @@ export const DeliveryAfterPurchase = ({}: Props) => {
               href={getMyMarketingActionListHref({
                 marketingActionStatus: MarketingActionStatus.DRAFT,
                 marketingActionId: newMarketingActionId!,
-              })}>
+              })}
+            >
               <Modal.FooterButton colorScheme='negative' onClick={draftConfirmModalControl.close}>
                 {t('gotoMyMA')}
               </Modal.FooterButton>
@@ -304,7 +306,8 @@ export const DeliveryAfterPurchase = ({}: Props) => {
               marketingActionName: 'step-delivery-after-purchase',
             })
           )
-        }>
+        }
+      >
         <div className='text-center text-gray-dark'>
           <Modal.Body className='leading-loose whitespace-pre-line'>
             {t('alertAfterExecuting')}
@@ -315,10 +318,12 @@ export const DeliveryAfterPurchase = ({}: Props) => {
               href={getMyMarketingActionListHref({
                 marketingActionId: newMarketingActionId!,
                 marketingActionStatus: MarketingActionStatus.RUNNING,
-              })}>
+              })}
+            >
               <Modal.FooterButton
                 colorScheme='negative'
-                onClick={implementCompleteConfirmModalControl.close}>
+                onClick={implementCompleteConfirmModalControl.close}
+              >
                 {t('gotoMyMA')}
               </Modal.FooterButton>
             </Link>
@@ -337,7 +342,8 @@ export const DeliveryAfterPurchase = ({}: Props) => {
             <Modal.FooterButton
               loading={implementTemplateMethods.formState.isSubmitting}
               complete={implementTemplateMethods.formState.isSubmitSuccessful}
-              onClick={implementTemplateMethods.handleSubmit(handleImplementClick)}>
+              onClick={implementTemplateMethods.handleSubmit(handleImplementClick)}
+            >
               {t('implementTemplate')}
             </Modal.FooterButton>
           </Modal.Footer>
@@ -352,7 +358,8 @@ export const DeliveryAfterPurchase = ({}: Props) => {
         descriptionImageUrl='/images/step-delivery-after-purchase-description.png'
         flowImgUrl='/images/step-delivery-after-purchase-flow.png'
         targets={[TARGET.F1, TARGET.F2, TARGET.SEMI_LOYAL, TARGET.LOYAL_DORMANT]}
-        output={t('messageDelivery')}></ActionContainer>
+        output={t('messageDelivery')}
+      ></ActionContainer>
       <Stepper className='mt-16'>
         <Stepper.Navigator />
         <LineUsageSettingsStep
@@ -388,7 +395,8 @@ export const DeliveryAfterPurchase = ({}: Props) => {
             colorScheme='negative'
             onClick={saveAsDraftMethods.handleSubmit(handleSaveAsDraftClick)}
             loading={saveAsDraftMethods.formState.isSubmitting}
-            complete={saveAsDraftMethods.formState.isSubmitSuccessful}>
+            complete={saveAsDraftMethods.formState.isSubmitSuccessful}
+          >
             {t('saveDraft')}
           </Button>
         ) : (
@@ -397,7 +405,8 @@ export const DeliveryAfterPurchase = ({}: Props) => {
             colorScheme='danger'
             onClick={suspendTemplateMethods.handleSubmit(handleSuspendClick)}
             loading={suspendTemplateMethods.formState.isSubmitting}
-            complete={suspendTemplateMethods.formState.isSubmitSuccessful}>
+            complete={suspendTemplateMethods.formState.isSubmitSuccessful}
+          >
             {t('suspendTemplate')}
           </Button>
         )}
@@ -412,12 +421,14 @@ export const DeliveryAfterPurchase = ({}: Props) => {
                   key='check'
                   name='check'
                   size={10}
-                  className='p-1 text-primary inline-flex items-center justify-center w-5 h-5 mr-1 rounded-full bg-white'></Icon>,
+                  className='inline-flex items-center justify-center w-5 h-5 p-1 mr-1 bg-white rounded-full text-primary'
+                ></Icon>,
               ]}
             />
           }
           onClick={implementConfirmModalControl.open}
-          disabled={!isComplete}>
+          disabled={!isComplete}
+        >
           {t('implementTemplate')}
         </ConfirmButton>
       </div>

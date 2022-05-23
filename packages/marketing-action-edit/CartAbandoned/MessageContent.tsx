@@ -23,7 +23,7 @@ export const MessageContent = ({ useLine = true, onShowPreview }: Props) => {
 
   const message = useWatch<StepMessage>() as any;
 
-  const showLineMsg = message?.line_messages?.text_msg_display;
+  const showLineMsg = message?.line_message?.text_msg_display;
 
   const onShowModal = (type: MessageContentPreviewType) => {
     onShowPreview?.(message, type);

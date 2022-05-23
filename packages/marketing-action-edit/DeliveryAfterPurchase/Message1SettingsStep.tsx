@@ -43,7 +43,7 @@ export const Message1SettingsStep = React.forwardRef(
     };
 
     const mailContent = watch('mail_content');
-    const lineMessage = watch('line_messages');
+    const lineMessage = watch('line_message');
 
     const handleMailPreviewClick = () => {
       setPreviewType('mail');

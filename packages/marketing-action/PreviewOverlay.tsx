@@ -15,13 +15,13 @@ import { MessageContentPreviewType } from './MessageContentPreview';
 import { useVisibilityControl } from '@/common/useVisibilityControl';
 import { VisibilityControl } from '@/common/useVisibilityControl';
 import { MarketingActionApis } from './apis';
-import { LineMessages, MailContent } from '@/marketing-action/types';
+import { LineMessage, MailContent } from '@/marketing-action/types';
 
 type Props = {
   defaultType: MessageContentPreviewType;
   control: VisibilityControl;
   mailContent?: MailContent;
-  lineMessage?: LineMessages;
+  lineMessage?: LineMessage;
   enableLine?: boolean;
 };
 
