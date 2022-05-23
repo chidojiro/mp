@@ -34,7 +34,7 @@ export const Message = ({ message, enableLine = true }: Props) => {
     flex_msg_head_draft_raw: headings,
     flex_msg_image_ratio: ratio,
     push_msg_content_draft_raw: pushMsgContent,
-  } = message.line_messages;
+  } = message.line_message || {};
 
   return (
     <>

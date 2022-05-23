@@ -13,6 +13,7 @@ import { MarketingActionAlias } from '@/marketing-action/types';
 import { MarketingActionRes } from '@/marketing-action/types';
 import { MarketingActionApis } from '@/marketing-action/apis';
 import { MARKETING_ACTION_URL } from '@/marketing-action/constants';
+import { useForm } from 'react-hook-form';
 
 type Props = {
   marketingAction: MarketingActionRes;
@@ -29,6 +30,9 @@ export const MarketingAction = ({ marketingAction, mutateMarketingActions }: Pro
   } = useRouter();
 
   const profile = useProfile();
+
+  const suspendTemplateMethods = useForm();
+  const deleteTemplateMethods = useForm();
 
   const getRange = () => {
     const _startAt = LanguageUtils.getDateFormat(marketingAction?.start_at, locale);
@@ -91,14 +95,18 @@ export const MarketingAction = ({ marketingAction, mutateMarketingActions }: Pro
           <>
             {showSuspendBtn ? (
               <Button
-                onClick={handleSuspendMA}
+                onClick={suspendTemplateMethods.handleSubmit(handleSuspendMA)}
+                loading={suspendTemplateMethods.formState.isSubmitting}
+                complete={suspendTemplateMethods.formState.isSubmitSuccessful}
                 className='text-medium mr-5 min-w-[240px] bg-[#FF7F5C]'
               >
                 {t('suspendTemplate')}
               </Button>
             ) : (
               <Button
-                onClick={handleDeleteMA}
+                onClick={deleteTemplateMethods.handleSubmit(handleDeleteMA)}
+                loading={deleteTemplateMethods.formState.isSubmitting}
+                complete={deleteTemplateMethods.formState.isSubmitSuccessful}
                 className='text-medium mr-5 min-w-[240px]'
                 colorScheme='negative'
               >

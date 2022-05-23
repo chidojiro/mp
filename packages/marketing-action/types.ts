@@ -98,7 +98,7 @@ export type MailContent = {
   color: string;
 };
 
-export type LineMessages = {
+export type LineMessage = {
   text_msg_display: boolean;
   text_msg_content: string;
   text_msg_content_draft_raw: string | EditorState;
@@ -119,7 +119,7 @@ export type StepMessage = {
   report_period: StepMessageReportPeriod;
   template?: StepMessageTemplate;
   mail_content: MailContent;
-  line_messages: LineMessages;
+  line_message: LineMessage;
   has_self_mail_content: boolean;
   content_verified: boolean;
 };

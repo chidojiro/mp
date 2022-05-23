@@ -70,7 +70,7 @@ export const CartAbandoned = ({ settings }: Props) => {
       <PreviewOverlay
         defaultType='mail'
         mailContent={messagePreview?.mail_content}
-        lineMessage={messagePreview?.line_messages}
+        lineMessage={messagePreview?.line_message}
         control={previewMessageControl}
         enableLine={enableLine}
       />

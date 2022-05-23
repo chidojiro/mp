@@ -8,9 +8,9 @@ import { Carousel } from '@/marketing-action/types';
 const draftRawFields = [
   'mail_content.content_draft_raw',
   'mail_content.title_draft_raw',
-  'line_messages.text_msg_content_draft_raw',
-  'line_messages.flex_msg_head_draft_raw',
-  'line_messages.push_msg_content_draft_raw',
+  'line_message.text_msg_content_draft_raw',
+  'line_message.flex_msg_head_draft_raw',
+  'line_message.push_msg_content_draft_raw',
 ];
 
 export const convertToStepMessageRaw = (stepMessage: StepMessage) => {

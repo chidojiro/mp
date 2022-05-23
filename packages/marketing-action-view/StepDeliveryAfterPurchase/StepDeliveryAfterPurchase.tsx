@@ -20,14 +20,14 @@ export const StepDeliveryAfterPurchase = ({ settings }: Props) => {
   const useLine = enableLine ? t('lineOption') : t('noLine');
   const messages = settings.step_messages;
   const firstMsg = messages[0];
-  const secondMsg = settings.step_messages[1];
+  const secondMsg = settings.step_messages[1] ?? settings.step_messages[0];
 
   const getTemplateSelection = (message: StepMessage) => {
     return message.template === 'review' ? t('reviewPromotion') : t('rankingAppeal');
   };
 
-  const useMsg2 = secondMsg.send_flag ? t('performStep2') : t('doNotPerformStep2PerformStep1Only');
-  const period = secondMsg.report_period === 'weekly' ? t('1Week') : t('1Month');
+  const useMsg2 = secondMsg?.send_flag ? t('performStep2') : t('doNotPerformStep2PerformStep1Only');
+  const period = secondMsg?.report_period === 'weekly' ? t('1Week') : t('1Month');
 
   const openPreview = (message: StepMessage) => {
     let _message = { ...message };
@@ -54,27 +54,29 @@ export const StepDeliveryAfterPurchase = ({ settings }: Props) => {
         <Answer name={t('templateSelection')}>{getTemplateSelection(firstMsg)}</Answer>
         <Message message={firstMsg} enableLine={enableLine} />
       </StepBlock>
-      <StepBlock
-        stepName={t('step2Setting')}
-        showPreview
-        handlePreview={() => {
-          openPreview(secondMsg);
-        }}
-      >
-        <Answer name={t('withOrWithoutStep2')}>{useMsg2}</Answer>
-        {secondMsg?.send_flag && (
-          <>
-            <TimeDelivery message={secondMsg} fromTheDateText={t('fromTheDateOfPurchase')} />
-            <Answer name={t('templateSelection')}>{getTemplateSelection(secondMsg)}</Answer>
-            <Answer name={t('aggregationPeriod')}>{period}</Answer>
-            <Message enableLine={enableLine} message={secondMsg} />
-          </>
-        )}
-      </StepBlock>
+      {secondMsg && (
+        <StepBlock
+          stepName={t('step2Setting')}
+          showPreview
+          handlePreview={() => {
+            openPreview(secondMsg || firstMsg);
+          }}
+        >
+          <Answer name={t('withOrWithoutStep2')}>{useMsg2}</Answer>
+          {secondMsg?.send_flag && (
+            <>
+              <TimeDelivery message={secondMsg} fromTheDateText={t('fromTheDateOfPurchase')} />
+              <Answer name={t('templateSelection')}>{getTemplateSelection(secondMsg)}</Answer>
+              <Answer name={t('aggregationPeriod')}>{period}</Answer>
+              <Message enableLine={enableLine} message={secondMsg} />
+            </>
+          )}
+        </StepBlock>
+      )}
       <PreviewOverlay
         defaultType='mail'
         mailContent={messagePreview?.mail_content}
-        lineMessage={messagePreview?.line_messages}
+        lineMessage={messagePreview?.line_message}
         control={previewMessageControl}
         enableLine={enableLine}
       />

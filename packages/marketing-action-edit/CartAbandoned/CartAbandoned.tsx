@@ -65,7 +65,7 @@ export const CartAbandoned = () => {
       ),
       color: '#55C5D9',
     },
-    line_messages: {
+    line_message: {
       text_msg_display: false,
       flex_msg_image_ratio: '16:9',
       flex_msg_head: t('forgotSomethingLine'),
@@ -249,7 +249,7 @@ export const CartAbandoned = () => {
         <PreviewOverlay
           defaultType={messagePreview?.type}
           mailContent={messagePreview?.mail_content}
-          lineMessage={messagePreview?.line_messages}
+          lineMessage={messagePreview?.line_message}
           control={previewMessageControl}
         />
       </div>

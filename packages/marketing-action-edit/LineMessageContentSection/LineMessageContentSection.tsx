@@ -26,16 +26,16 @@ export const LineMessageContentSection = ({
 }: Props) => {
   const { t } = useTranslation('marketingAction');
 
-  const textMsgContentName = 'line_messages.text_msg_content';
-  const flexMsgImageRatioName = 'line_messages.flex_msg_image_ratio';
-  const flexMsgHeadName = 'line_messages.flex_msg_head';
-  const pushMessageContentName = 'line_messages.push_msg_content';
+  const textMsgContentName = 'line_message.text_msg_content';
+  const flexMsgImageRatioName = 'line_message.flex_msg_image_ratio';
+  const flexMsgHeadName = 'line_message.flex_msg_head';
+  const pushMessageContentName = 'line_message.push_msg_content';
 
   const { setValue } = useFormContext();
 
   const textMsgContent = useWatch({ name: textMsgContentName });
   const flexMsgHead = useWatch({ name: flexMsgHeadName });
-  const displayLineMessage = useWatch({ name: 'line_messages.text_msg_display' });
+  const displayLineMessage = useWatch({ name: 'line_message.text_msg_display' });
   const flexMsgImageRatio = useWatch({ name: flexMsgImageRatioName });
 
   return (
@@ -50,7 +50,7 @@ export const LineMessageContentSection = ({
         <div className='flex-1'>
           <div>
             <p className='mb-2 text-secondary'>{t('textMessage')}</p>
-            <Form.RadioGroup name='line_messages.text_msg_display'>
+            <Form.RadioGroup name='line_message.text_msg_display'>
               <div className='flex flex-col gap-2'>
                 <RadioGroup.Option colorScheme='secondary' label={t('displayMsg')} value='true' />
                 <RadioGroup.Option colorScheme='secondary' label={t('noDisplay')} value='false' />
@@ -77,7 +77,7 @@ export const LineMessageContentSection = ({
                   }
                 }
               />
-              <p className='mb-2 mt-5 text-secondary'>{t('textMessage')}</p>
+              <p className='mt-5 mb-2 text-secondary'>{t('textMessage')}</p>
               <Form.RadioGroup name={flexMsgImageRatioName}>
                 <div className='flex flex-col gap-2'>
                   <RadioGroup.Option colorScheme='secondary' label={t('horizontal')} value='3:2' />
@@ -86,7 +86,7 @@ export const LineMessageContentSection = ({
                 </div>
               </Form.RadioGroup>
 
-              <p className='mb-2 mt-5 text-secondary'>{t('flexMessageImageRatio')}</p>
+              <p className='mt-5 mb-2 text-secondary'>{t('flexMessageImageRatio')}</p>
               <Form.MentionsEditor
                 onChange={(editorState: EditorState) => {
                   const template = getPlainTextWithInterpolatedMentionValue(editorState);
@@ -105,10 +105,10 @@ export const LineMessageContentSection = ({
                 }
               />
 
-              <p className='mb-2 mt-5 text-secondary'>
+              <p className='mt-5 mb-2 text-secondary'>
                 {t('pushNotificationOrTalkListMessageChange')}
               </p>
-              <p className='text-gray-700 text-medium mb-2'>
+              <p className='mb-2 text-gray-700 text-medium'>
                 {t('pushNotificationOrTalkListMessageChangeDescription')}
               </p>
               <Form.MentionsEditor
