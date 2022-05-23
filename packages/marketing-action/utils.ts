@@ -93,7 +93,7 @@ const getTargetFilters = (targetSegments: any) => {
 
 const getVariableContentPreview = (originalTemplate: string, variables: Variable[]) => {
   return variables.reduce((accPreview, { content, name, type }) => {
-    const variableRegex = new RegExp(`\{\{${name}\}\}`);
+    const variableRegex = new RegExp(`\{\{${name}\}\}`, 'g');
 
     if (type === 'dynamic') return accPreview?.replace(variableRegex, '○○○');
 
