@@ -13,21 +13,21 @@ import { useHrefs } from '@/navigation/useHrefs';
 
 export const LoginForm = () => {
   const { t } = useTranslation('login');
-  const [isProcessing, setProcessing] = React.useState(false);
   const router = useRouter();
   const { getDashboardHref } = useHrefs();
   const methods = useForm({
     mode: 'onTouched',
   });
+  const {
+    formState: { isSubmitSuccessful, isSubmitting },
+  } = methods;
   const [isInvalid, setIsInvalid] = React.useState(false);
 
   const onSubmit = async (val: LoginPayload) => {
     try {
       methods.clearErrors();
-      setProcessing(true);
       await AuthApis.login(val);
       const profile = await ProfileApis.get();
-      setProcessing(false);
       router.push(getDashboardHref({ organizationId: profile.organization_id }));
     } catch (error) {
       console.error(error);
@@ -39,8 +39,6 @@ export const LoginForm = () => {
       methods.setError('password', { message: '' });
       // focus on email field
       methods.setFocus('email');
-    } finally {
-      setProcessing(false);
     }
   };
 
@@ -53,7 +51,12 @@ export const LoginForm = () => {
         <div className='mt-2'>
           {isInvalid && <ErrorMessage>{t('incorrectEmailOrPassword')}</ErrorMessage>}
         </div>
-        <Button type='submit' className='w-full my-4 font-bold' disabled={isProcessing}>
+        <Button
+          type='submit'
+          className='w-full my-4 font-bold'
+          loading={isSubmitting}
+          complete={isSubmitSuccessful}
+        >
           {t('login')}
         </Button>
         <Link href='/password/recover' passHref>
