@@ -2,12 +2,22 @@ import React from 'react';
 import classNames from 'classnames';
 import { Form } from '@/packages/common/Form';
 import { RadioGroup } from '@/packages/common/RadioGroup';
+import { FreeShippingTemplate } from '@/packages/marketing-action-edit/FreeShipping/FreeShippingTemplate';
 
 type Props = {
   passTemplateSelection: any;
+  freeShippingCost: any;
 };
 
-export const TemplateSelector = ({ passTemplateSelection }: Props) => {
+export const TemplateSelector = ({ passTemplateSelection, freeShippingCost }: Props) => {
+  const renderShipCost = (cost: any) => {
+    switch (cost) {
+      case cost?.target?.value:
+        return cost.target.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      default:
+        return cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+  };
   return (
     <>
       <div className='flex items-center'>
@@ -16,18 +26,16 @@ export const TemplateSelector = ({ passTemplateSelection }: Props) => {
             {({ isChecked, value, handleChange }: any) => (
               <label
                 className={classNames(
-                  'h-52 w-52 mr-2 flex items-center justify-center bg-white rounded-[4px] border-2 hover:border-secondary cursor-pointer',
+                  'h-content w-content p-8 mr-6 flex items-center justify-center bg-white rounded-[4px] border-2 hover:border-secondary cursor-pointer',
                   {
                     'border-secondary': isChecked,
                     'border-gray-100': !isChecked,
                   }
                 )}
               >
-                <img
-                  src='/images/free-shipping-template-1.png'
-                  height={128}
-                  width={128}
-                  alt='template1 image'
+                <FreeShippingTemplate
+                  templateSelection='template1'
+                  freeShippingCost={renderShipCost(freeShippingCost)}
                 />
                 <input
                   value={value}
@@ -44,18 +52,16 @@ export const TemplateSelector = ({ passTemplateSelection }: Props) => {
             {({ isChecked, value, handleChange }: any) => (
               <label
                 className={classNames(
-                  'h-52 w-52 mr-2 flex items-center justify-center bg-white rounded-[4px] border-2 hover:border-secondary cursor-pointer',
+                  'h-content w-content p-8 mr-2 flex items-center justify-center bg-white rounded-[4px] border-2 hover:border-secondary cursor-pointer',
                   {
                     'border-secondary': isChecked,
                     'border-gray-100': !isChecked,
                   }
                 )}
               >
-                <img
-                  src='/images/free-shipping-template-2.png'
-                  height={128}
-                  width={128}
-                  alt='template2 image'
+                <FreeShippingTemplate
+                  templateSelection='template2'
+                  freeShippingCost={renderShipCost(freeShippingCost)}
                 />
                 <input
                   value={value}
