@@ -21,7 +21,7 @@ export const LineMessage = ({ showLineMsg, mentionOptions, onShowModal }: Props)
   const { t } = useTranslation('marketingAction');
 
   const { setValue } = useFormContext();
-  const lineMessage = useWatch({ name: 'line_messages' });
+  const lineMessage = useWatch({ name: 'line_message' });
 
   const lineTextOptions = [
     { value: OPTIONS.YES, label: t('displayMsg') },
@@ -36,7 +36,7 @@ export const LineMessage = ({ showLineMsg, mentionOptions, onShowModal }: Props)
 
   const handleChangeHeadings = (editorState: EditorState) => {
     const template = getPlainTextWithInterpolatedMentionValue(editorState);
-    setValue('line_messages.flex_msg_head', template);
+    setValue('line_message.flex_msg_head', template);
   };
 
   return (
@@ -51,7 +51,7 @@ export const LineMessage = ({ showLineMsg, mentionOptions, onShowModal }: Props)
             <div className='mb-2.5 font-semibold text-secondary text-medium'>
               {t('textMessage')}
             </div>
-            <Form.RadioGroup name='line_messages.text_msg_display'>
+            <Form.RadioGroup name='line_message.text_msg_display'>
               {lineTextOptions.map(option => (
                 <RadioGroup.Option
                   colorScheme='secondary'
@@ -65,8 +65,8 @@ export const LineMessage = ({ showLineMsg, mentionOptions, onShowModal }: Props)
             {showLineMsg && (
               <MessageBodyInput
                 mentionOptions={mentionOptions}
-                name='line_messages.text_msg_content'
-                rawName='line_messages.text_msg_content_draft_raw'
+                name='line_message.text_msg_content'
+                rawName='line_message.text_msg_content_draft_raw'
               />
             )}
           </div>
@@ -74,7 +74,7 @@ export const LineMessage = ({ showLineMsg, mentionOptions, onShowModal }: Props)
             <div className='mb-2.5 font-semibold text-secondary text-medium'>
               {t('flexMessageImage')}
             </div>
-            <Form.RadioGroup name='line_messages.flex_msg_image_ratio'>
+            <Form.RadioGroup name='line_message.flex_msg_image_ratio'>
               {flexMessageOptions.map(option => (
                 <RadioGroup.Option
                   colorScheme='secondary'
@@ -93,7 +93,7 @@ export const LineMessage = ({ showLineMsg, mentionOptions, onShowModal }: Props)
             <Form.MentionsEditor
               mentionOptions={mentionOptions}
               singleLine
-              name='line_messages.flex_msg_head_draft_raw'
+              name='line_message.flex_msg_head_draft_raw'
               onChange={handleChangeHeadings}
               rules={{ required: true }}
             />
@@ -105,8 +105,8 @@ export const LineMessage = ({ showLineMsg, mentionOptions, onShowModal }: Props)
             <div className='mb-2.5 text-gray-700 text-medium'>{t('pushNotificationDesc')}</div>
             <MessageBodyInput
               mentionOptions={mentionOptions}
-              name='line_messages.push_msg_content'
-              rawName='line_messages.push_msg_content_draft_raw'
+              name='line_message.push_msg_content'
+              rawName='line_message.push_msg_content_draft_raw'
             />
           </div>
         </div>

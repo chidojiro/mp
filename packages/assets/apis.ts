@@ -15,6 +15,7 @@ const create = (
   data.append('upload_file', file, file.name);
   let _params: { [key: string]: string | number } = {
     resource_type: resourceType,
+    acl: 'private',
     ...params,
   };
   if (resourceID) {
