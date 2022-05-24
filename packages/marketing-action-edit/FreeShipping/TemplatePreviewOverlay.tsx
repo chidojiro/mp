@@ -6,7 +6,6 @@ import { SwitchButtons } from '@/common/SwitchButtons';
 import { Device } from '@/common/types';
 import { VisibilityControl } from '@/common/useVisibilityControl';
 
-// import { FreeShippingTemplate } from '@/components/marketingAction/Edit/FreeShipping/FreeShippingTemplate';
 import { FreeShippingTemplate } from './FreeShippingTemplate';
 
 type Props = {

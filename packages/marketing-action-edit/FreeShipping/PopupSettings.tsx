@@ -4,15 +4,17 @@ import { useTranslation } from 'next-i18next';
 import { Form } from '@/common/Form';
 import { RadioGroup } from '@/common/RadioGroup';
 import { Option } from '@/common/types';
+import { Button } from '@/common/Button';
 
 import { TemplateSelector } from './TemplateSelector';
 
 type Props = {
   passData: any;
   passTemplateSelection: any;
+  onShowPreview: any;
 };
 
-export const PopupSettings = ({ passData, passTemplateSelection }: Props) => {
+export const PopupSettings = ({ passData, passTemplateSelection, onShowPreview }: Props) => {
   const [freeShipInput, setFreeShipInput] = useState('5000');
   const { t } = useTranslation('marketingAction');
   const unitOptions: Option<string>[] = [
@@ -32,7 +34,22 @@ export const PopupSettings = ({ passData, passTemplateSelection }: Props) => {
         <div className='mb-4 text-medium'>
           ここに説明文が入ります。ここに説明文が入ります。ここに説明文が入ります。ここに説明文が入ります。ここに説明文が入ります。
         </div>
-        <TemplateSelector passTemplateSelection={passTemplateSelection} />
+        <TemplateSelector
+          passTemplateSelection={passTemplateSelection}
+          freeShippingCost={freeShipInput}
+        />
+      </div>
+
+      <div className='px-10 -mx-10 border-b-4 border-white pt-7 pb-7 bg-white'>
+        <div className='flex items-center justify-center'>
+          <Button
+            className='h-9 border-none bg-input-focus min-w-[240px] mr-2.5 text-medium'
+            variant='outline'
+            onClick={() => onShowPreview?.(1)}
+          >
+            {t('viewPreview')}
+          </Button>
+        </div>
       </div>
 
       <div className='px-10 -mx-10 border-b-4 border-white pb-7 mt-[40px]'>

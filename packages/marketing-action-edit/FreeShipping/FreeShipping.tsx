@@ -121,6 +121,10 @@ export const FreeShipping = () => {
     setTemplateSelection(selection.target.value);
   };
 
+  const onShowPreview = () => {
+    chatPreviewControl.open();
+  };
+
   const [steps, setSteps] = useState<Step[]>([
     {
       id: 1,
@@ -129,10 +133,10 @@ export const FreeShipping = () => {
         <PopupSettings
           passData={() => passData}
           passTemplateSelection={() => passTemplateSelection}
+          onShowPreview={onShowPreview}
         />
       ),
       methods: popupFormMethods,
-      showPreviewBtn: true,
     },
     {
       id: 2,
@@ -141,10 +145,6 @@ export const FreeShipping = () => {
       children: <TargetCustomerGroup isNonMember={true} />,
     },
   ]);
-
-  const onShowPreview = () => {
-    chatPreviewControl.open();
-  };
 
   const profile = useProfile();
   const handleCloseModal = () => {
@@ -165,7 +165,6 @@ export const FreeShipping = () => {
   const resetData = useCallback(
     (marketingAction: MarketingActionRes) => {
       const settings = marketingAction?.settings;
-      console.log('action: ', marketingAction);
 
       popupFormMethods.reset({
         template_selection: settings?.template_selection,
