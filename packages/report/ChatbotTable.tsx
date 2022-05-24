@@ -1,6 +1,6 @@
 import { Table } from '@/common/Table';
 import { ClassName } from '@/common/types';
-import { MarketingActionAlias } from '@/marketing-action/types';
+import { MarketingActionAliasKey } from '@/marketing-action/types';
 import { groupBy } from 'lodash-es';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -21,34 +21,34 @@ export const ChatbotTable = ({ className }: Props) => {
   const reportGroupedByAlias = groupBy(report, 'marketing_action.marketing_action_type.alias');
   const all = ReportUtils.getTableData(report);
   const cartFaqData = ReportUtils.getTableData(
-    reportGroupedByAlias[MarketingActionAlias.CART_PAGE_FAQ]
+    reportGroupedByAlias[MarketingActionAliasKey.CART_PAGE_FAQ]
   );
   const historyPurchaseData = ReportUtils.getTableData(
-    reportGroupedByAlias[MarketingActionAlias.HISTORY_PURCHASE]
+    reportGroupedByAlias[MarketingActionAliasKey.HISTORY_PURCHASE]
   );
   const diagnosticData = ReportUtils.getTableData(
-    reportGroupedByAlias[MarketingActionAlias.RECOMMEND_DIAGNOSTIC]
+    reportGroupedByAlias[MarketingActionAliasKey.RECOMMEND_DIAGNOSTIC]
   );
   const categoryData = ReportUtils.getTableData(
-    reportGroupedByAlias[MarketingActionAlias.HISTORY_PURCHASE_CATEGORY]
+    reportGroupedByAlias[MarketingActionAliasKey.HISTORY_PURCHASE_CATEGORY]
   );
   const reportData = [all, cartFaqData, historyPurchaseData, diagnosticData, categoryData];
   const reportMetaData = [
     { name: t('all'), showCustomUU: true },
-    { name: tMarketingAction('cartPageFaq'), alias: MarketingActionAlias.CART_PAGE_FAQ },
+    { name: tMarketingAction('cartPageFaq'), alias: MarketingActionAliasKey.CART_PAGE_FAQ },
     {
       name: tMarketingAction('rankingBasedOnOverallPurchaseHistory'),
-      alias: MarketingActionAlias.HISTORY_PURCHASE,
+      alias: MarketingActionAliasKey.HISTORY_PURCHASE,
       showCustomUU: true,
     },
     {
       name: tMarketingAction('recommendationDiagnosisBotStatic'),
-      alias: MarketingActionAlias.RECOMMEND_DIAGNOSTIC,
+      alias: MarketingActionAliasKey.RECOMMEND_DIAGNOSTIC,
       showCustomUU: true,
     },
     {
       name: tMarketingAction('rankingByCategoryBasedOnOverallPurchaseHistory'),
-      alias: MarketingActionAlias.HISTORY_PURCHASE_CATEGORY,
+      alias: MarketingActionAliasKey.HISTORY_PURCHASE_CATEGORY,
       showCustomUU: true,
     },
   ];

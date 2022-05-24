@@ -115,7 +115,7 @@ export const CartFAQ = () => {
 
       step3Methods.reset({ target_customers: _targetSegments || [] });
 
-      setStepConfirmedFlags(settings.steps_confirmed_flag ?? defaultStepConfirmedFlags);
+      setStepConfirmedFlags(settings?.steps_confirmed_flag ?? defaultStepConfirmedFlags);
     },
     [step1Methods, step2Methods, step3Methods]
   );

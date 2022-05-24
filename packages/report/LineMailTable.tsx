@@ -7,7 +7,7 @@ import { ClassName } from '@/common/types';
 import { RowHeader } from './RowHeader';
 import { useReport } from '@/report/useReport';
 import { groupBy } from 'lodash-es';
-import { MarketingActionAlias } from '@/marketing-action/types';
+import { MarketingActionAliasKey } from '@/marketing-action/types';
 import { ReportUtils } from './utils';
 
 type Props = ClassName;
@@ -22,18 +22,21 @@ export const LineMailTable = ({ className = 'table-fixed' }: Props) => {
 
   const all = ReportUtils.getTableDataGroupedByNotificationType(report);
   const cartAbandonedData = ReportUtils.getTableDataGroupedByNotificationType(
-    reportGroupedByAlias[MarketingActionAlias.CART_LEFT_NOTIFICATION]
+    reportGroupedByAlias[MarketingActionAliasKey.CART_LEFT_NOTIFICATION]
   );
   const afterPurchaseData = ReportUtils.getTableDataGroupedByNotificationType(
-    reportGroupedByAlias[MarketingActionAlias.AFTER_PURCHASE]
+    reportGroupedByAlias[MarketingActionAliasKey.AFTER_PURCHASE]
   );
   const reportData = [all, cartAbandonedData, afterPurchaseData];
   const reportMetaData = [
     { name: t('all'), showCustomUU: true },
-    { name: tMarketingAction('cartAbandoned'), alias: MarketingActionAlias.CART_LEFT_NOTIFICATION },
+    {
+      name: tMarketingAction('cartAbandoned'),
+      alias: MarketingActionAliasKey.CART_LEFT_NOTIFICATION,
+    },
     {
       name: tMarketingAction('stepDeliveryAfterPurchase'),
-      alias: MarketingActionAlias.AFTER_PURCHASE,
+      alias: MarketingActionAliasKey.AFTER_PURCHASE,
     },
   ];
 

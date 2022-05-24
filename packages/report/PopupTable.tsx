@@ -8,7 +8,7 @@ import { RowHeader } from './RowHeader';
 import { useReport } from './useReport';
 import { groupBy } from 'lodash-es';
 import { ReportUtils } from '@/report/utils';
-import { MarketingActionAlias } from '@/marketing-action/types';
+import { MarketingActionAliasKey } from '@/marketing-action/types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = ClassName & {};
@@ -22,14 +22,14 @@ export const PopupTable = ({ className }: Props) => {
   const reportGroupedByAlias = groupBy(report, 'marketing_action.marketing_action_type.alias');
   const all = ReportUtils.getTableData(report);
   const freeShippingData = ReportUtils.getTableData(
-    reportGroupedByAlias[MarketingActionAlias.CONDITIONAL_FREE_SHIPPING]
+    reportGroupedByAlias[MarketingActionAliasKey.CONDITIONAL_FREE_SHIPPING]
   );
   const reportData = [all, freeShippingData];
   const reportMetaData = [
     { name: t('all'), showCustomUU: true },
     {
       name: tMarketingAction('conditionalFreeShipping'),
-      alias: MarketingActionAlias.CONDITIONAL_FREE_SHIPPING,
+      alias: MarketingActionAliasKey.CONDITIONAL_FREE_SHIPPING,
       showCustomUU: true,
     },
   ];
