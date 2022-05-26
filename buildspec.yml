@@ -17,7 +17,7 @@ phases:
     commands:
       - echo Build started on `date`
       - yarn install --frozen-lockfile
-      - yarn build
+      - NODE_ENV=production yarn build
   post_build:
     commands:
       - echo Entered the post_build phase...
