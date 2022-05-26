@@ -17,7 +17,8 @@ phases:
     commands:
       - echo Build started on `date`
       - yarn install --frozen-lockfile
-      - yarn build
+      - echo $SENTRY_CONFIG_BASE64_ENCODED | base64 -d > .sentryclirc
+      - NODE_ENV=production yarn build
   post_build:
     commands:
       - echo Entered the post_build phase...
