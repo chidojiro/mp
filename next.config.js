@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { i18n } = require('./next-i18next.config');
-
-// eslint-disable-next-line import/order
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
+const { withSentryConfig } = require('@sentry/nextjs');
 
 /**
  * @type {import('next/dist/next-server/server/config').NextConfig}
@@ -43,4 +42,4 @@ const nextConfig = {
     return config;
   },
 };
-module.exports = withBundleAnalyzer(nextConfig);
+module.exports = withBundleAnalyzer(withSentryConfig(nextConfig, { silent: true }));

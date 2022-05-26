@@ -41,3 +41,5 @@ yarn-error.log*
 .idea
 
 scripts/rewrite-import-list.txt
+# Sentry
+.sentryclirc
