@@ -1,15 +1,13 @@
-import { TargetFilter } from '@/marketing-action/TargetFilter';
+import { useProfile } from '@/auth/useProfile';
 import { PrivateLayout } from '@/layout/PrivateLayout';
-import { ChatbotDetailReport } from '@/report/ChatbotDetailReport';
-import { NotificationDetailReport } from '@/report/NotificationDetailReport';
-import { PopupDetailreport } from '@/report/PopupDetailReport';
-import { ChevronRightIcon } from '@heroicons/react/solid';
+import { TargetFilter } from '@/marketing-action/TargetFilter';
+import { MarketingActionAliasKey } from '@/marketing-action/types';
+import { ChatbotDetailsTable } from '@/report/ChatbotDetailsTable';
+import { NotificationDetailsTable } from '@/report/NotificationDetailsTable';
+import { PopupDetailsTable } from '@/report/PopupDetailsTable';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useProfile } from '@/auth/useProfile';
-import { MarketingActionAliasKey } from '@/marketing-action/types';
 
 export const MonthlyReport = () => {
   const {
@@ -47,45 +45,26 @@ export const MonthlyReport = () => {
       </div>
       <div className='mt-10'>
         {isNotificationType(actionType as string) && (
-          <NotificationDetailReport
+          <NotificationDetailsTable
             organizationId={organizationId as string}
             projectId={projectId as string}
             actionType={actionType as string}
           />
         )}
         {isChatbotType(actionType as string) && (
-          <ChatbotDetailReport
+          <ChatbotDetailsTable
             organizationId={organizationId as string}
             projectId={projectId as string}
             actionType={actionType as string}
           />
         )}
         {isPopupType(actionType as string) && (
-          <PopupDetailreport
+          <PopupDetailsTable
             organizationId={organizationId as string}
             projectId={projectId as string}
             actionType={actionType as string}
           />
         )}
-      </div>
-      <div className='mt-auto text-gray-600'>
-        <Link
-          passHref
-          href={`/organizations/${profile?.organization_id}/projects/${profile?.project_id}/reports/action-reports/line-email?targets=all`}
-        >
-          <a className='flex justify-end mt-5 group'>
-            <div className='flex items-center transform translate-x-2'>
-              {t('returnToList')}
-              <ChevronRightIcon
-                scale={12}
-                className='text-gray-600 group-hover:text-secondary'
-                width={28}
-                height={28}
-                aria-hidden='true'
-              />
-            </div>
-          </a>
-        </Link>
       </div>
     </PrivateLayout>
   );

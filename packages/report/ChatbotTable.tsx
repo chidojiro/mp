@@ -1,12 +1,13 @@
 import { Table } from '@/common/Table';
 import { ClassName } from '@/common/types';
+import { NumberUtils } from '@/common/utils';
 import { MarketingActionAliasKey } from '@/marketing-action/types';
 import { groupBy } from 'lodash-es';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { RowHeader } from './RowHeader';
-import { useReport } from './useReport';
+import { useActionsReport } from './useActionsReport';
 import { ReportUtils } from './utils';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -17,7 +18,7 @@ export const ChatbotTable = ({ className }: Props) => {
   const { t } = useTranslation('report');
   const { t: tMarketingAction } = useTranslation('marketingAction');
 
-  const { data: report } = useReport('bot');
+  const { data: report } = useActionsReport('bot');
   const reportGroupedByAlias = groupBy(report, 'marketing_action.marketing_action_type.alias');
   const all = ReportUtils.getTableData(report);
   const cartFaqData = ReportUtils.getTableData(
@@ -54,8 +55,7 @@ export const ChatbotTable = ({ className }: Props) => {
   ];
 
   const {
-    pathname,
-    query: { organizationId, projectId, actionType },
+    query: { organizationId, projectId },
   } = useRouter();
   const headers = [
     t('measure'),
@@ -77,41 +77,59 @@ export const ChatbotTable = ({ className }: Props) => {
         </Table.Row>
       </Table.Head>
       <Table.Body>
-        {reportData.map((item, idx) => (
-          <Table.Row key={idx}>
-            <Table.Cell className='w-5/12'>
-              <RowHeader
-                title={t(reportMetaData[idx].name)}
-                monthlyUrl={
-                  reportMetaData[idx].alias
-                    ? {
-                        pathname: `${baseUrl}/${reportMetaData[idx].alias}/monthly`,
-                        query: { targets: ['all'] },
-                      }
-                    : undefined
-                }
-              />
-            </Table.Cell>
-            <Table.Cell className='text-right w-1/12'>{item.display_uu}</Table.Cell>
-            <Table.Cell className='text-right w-2/12'>{item.open_uu}</Table.Cell>
-            <Table.Cell className='text-right w-2/12'>{item.use_uu}</Table.Cell>
-            <Table.Cell className='w-2/12'>
-              {!!reportMetaData[idx].showCustomUU && (
-                <div className='flex'>
-                  <div className='text-orange'>{t('intermediateCv') + t('colon')}</div>
-                  <div>{item.cv_uu.custom}</div>
+        {reportData.map((item, idx) => {
+          const getRate = (uu: number) => {
+            if (item.display_uu === 0) return '(0.0%)';
+
+            return `(${((uu * 100) / item.display_uu).toFixed(1)}%)`;
+          };
+
+          return (
+            <Table.Row key={idx}>
+              <Table.Cell className='w-5/12'>
+                <RowHeader
+                  title={t(reportMetaData[idx].name)}
+                  monthlyUrl={
+                    reportMetaData[idx].alias
+                      ? {
+                          pathname: `${baseUrl}/${reportMetaData[idx].alias}/monthly`,
+                          query: { targets: ['all'] },
+                        }
+                      : undefined
+                  }
+                />
+              </Table.Cell>
+              <Table.Cell className='text-right w-1/12'>
+                {NumberUtils.separate(item.display_uu)}
+              </Table.Cell>
+              <Table.Cell className='text-right w-2/12'>
+                {NumberUtils.separate(item.open_uu)} {getRate(item.open_uu)}
+              </Table.Cell>
+              <Table.Cell className='text-right w-2/12'>
+                {NumberUtils.separate(item.use_uu)} {getRate(item.use_uu)}
+              </Table.Cell>
+              <Table.Cell className='w-2/12'>
+                {!!reportMetaData[idx].showCustomUU && (
+                  <div className='flex'>
+                    <div className='text-orange'>{t('intermediateCv') + t('colon')}</div>
+                    <div>
+                      {NumberUtils.separate(item.cv_uu.custom)} {getRate(item.cv_uu.custom)}
+                    </div>
+                  </div>
+                )}
+                <div className='flex mt-2'>
+                  <div className='text-primary'>{t('finalCv') + t('colon')}</div>
+                  <div>
+                    <div>
+                      {NumberUtils.separate(item.cv_uu.final)} {getRate(item.cv_uu.final)}
+                    </div>
+                    <div>{NumberUtils.separate(item.cv_uu.finalAmount)}円</div>
+                  </div>
                 </div>
-              )}
-              <div className='flex mt-2'>
-                <div className='text-primary'>{t('finalCv') + t('colon')}</div>
-                <div>
-                  <div>{item.cv_uu.final}</div>
-                  {/* <div>{item.cvUuRate.finalCv.price}</div> */}
-                </div>
-              </div>
-            </Table.Cell>
-          </Table.Row>
-        ))}
+              </Table.Cell>
+            </Table.Row>
+          );
+        })}
       </Table.Body>
     </Table>
   );

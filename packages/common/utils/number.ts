@@ -6,6 +6,9 @@ const pad = (num: string | number | undefined, size = 2) => {
   return _num;
 };
 
+const separate = (number: number, separator = ',') =>
+  number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator);
+
 const formatMoney = (num: number) => {
   return num.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 };
@@ -22,6 +25,7 @@ const formatQuantity = (num: number) => {
 
 export const NumberUtils = {
   pad,
+  separate,
   formatMoney,
   formatPercent,
   formatQuantity,

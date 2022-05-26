@@ -1,8 +1,8 @@
 import { PrivateLayout } from '@/layout/PrivateLayout';
 import { TargetFilter } from '@/marketing-action/TargetFilter';
-import { ChatbotDetailReport } from '@/report/ChatbotDetailReport';
-import { NotificationDetailReport } from '@/report/NotificationDetailReport';
-import { PopupDetailreport } from '@/report/PopupDetailReport';
+import { ChatbotDetailsTable } from '@/report/ChatbotDetailsTable';
+import { NotificationDetailsTable } from '@/report/NotificationDetailsTable';
+import { PopupDetailsTable } from '@/report/PopupDetailsTable';
 import { ChevronRightIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -43,21 +43,21 @@ export const ByUrlReport = () => {
       </div>
       <div className='mt-10'>
         {isNotificationType(actionType as string) && (
-          <NotificationDetailReport
+          <NotificationDetailsTable
             organizationId={organizationId as string}
             projectId={projectId as string}
             actionType={actionType as string}
           />
         )}
         {isChatbotType(actionType as string) && (
-          <ChatbotDetailReport
+          <ChatbotDetailsTable
             organizationId={organizationId as string}
             projectId={projectId as string}
             actionType={actionType as string}
           />
         )}
         {isPopupType(actionType as string) && (
-          <PopupDetailreport
+          <PopupDetailsTable
             organizationId={organizationId as string}
             projectId={projectId as string}
             actionType={actionType as string}

@@ -5,10 +5,11 @@ import { useTranslation } from 'next-i18next';
 import { Table } from '@/common/Table';
 import { ClassName } from '@/common/types';
 import { RowHeader } from './RowHeader';
-import { useReport } from './useReport';
+import { useActionsReport } from './useActionsReport';
 import { groupBy } from 'lodash-es';
 import { ReportUtils } from '@/report/utils';
 import { MarketingActionAliasKey } from '@/marketing-action/types';
+import { NumberUtils } from '@/common/utils';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = ClassName & {};
@@ -18,7 +19,7 @@ export const PopupTable = ({ className }: Props) => {
   const { t } = useTranslation('report');
   const { t: tMarketingAction } = useTranslation('marketingAction');
 
-  const { data: report } = useReport('bot');
+  const { data: report } = useActionsReport('bot');
   const reportGroupedByAlias = groupBy(report, 'marketing_action.marketing_action_type.alias');
   const all = ReportUtils.getTableData(report);
   const freeShippingData = ReportUtils.getTableData(
@@ -53,38 +54,54 @@ export const PopupTable = ({ className }: Props) => {
         </Table.Row>
       </Table.Head>
       <Table.Body>
-        {reportData.map((item, idx) => (
-          <Table.Row key={idx}>
-            <Table.Cell className='w-3/6'>
-              <RowHeader
-                title={t(reportMetaData[idx].name)}
-                monthlyUrl={
-                  reportMetaData[idx].alias
-                    ? {
-                        pathname: `${baseUrl}/${reportMetaData[idx].alias}/monthly`,
-                        query: { targets: ['all'] },
-                      }
-                    : undefined
-                }
-              />
-            </Table.Cell>
-            <Table.Cell className='text-right w-1/6'>{item.display_uu}</Table.Cell>
-            <Table.Cell className='text-right w-1/6'>{item.click_uu}</Table.Cell>
-            <Table.Cell className='w-1/6'>
-              <div className='flex'>
-                <div className='text-orange'>{t('intermediateCv') + t('colon')}</div>
-                <div>{item.cv_uu.custom}</div>
-              </div>
-              <div className='flex mt-2'>
-                <div className='text-primary'>{t('finalCv') + t('colon')}</div>
-                <div>
-                  <div>{item.cv_uu.final}</div>
-                  {/* <div>{item.cvUuRate.finalCv.price}</div> */}
+        {reportData.map((item, idx) => {
+          const getRate = (uu: number) => {
+            if (item.display_uu === 0) return '(0.0%)';
+
+            return `(${((uu * 100) / item.display_uu).toFixed(1)}%)`;
+          };
+
+          return (
+            <Table.Row key={idx}>
+              <Table.Cell className='w-3/6'>
+                <RowHeader
+                  title={t(reportMetaData[idx].name)}
+                  monthlyUrl={
+                    reportMetaData[idx].alias
+                      ? {
+                          pathname: `${baseUrl}/${reportMetaData[idx].alias}/monthly`,
+                          query: { targets: ['all'] },
+                        }
+                      : undefined
+                  }
+                />
+              </Table.Cell>
+              <Table.Cell className='text-right w-1/6'>
+                {NumberUtils.separate(item.display_uu)}
+              </Table.Cell>
+              <Table.Cell className='text-right w-1/6'>
+                {NumberUtils.separate(item.click_uu)} {getRate(item.click_uu)}
+              </Table.Cell>
+              <Table.Cell className='w-1/6'>
+                <div className='flex'>
+                  <div className='text-orange'>{t('intermediateCv') + t('colon')}</div>
+                  <div>
+                    {NumberUtils.separate(item.cv_uu.custom)} {getRate(item.cv_uu.custom)}
+                  </div>
                 </div>
-              </div>
-            </Table.Cell>
-          </Table.Row>
-        ))}
+                <div className='flex mt-2'>
+                  <div className='text-primary'>{t('finalCv') + t('colon')}</div>
+                  <div>
+                    <div>
+                      {NumberUtils.separate(item.cv_uu.final)} {getRate(item.cv_uu.final)}
+                    </div>
+                    <div>{item.cv_uu.finalAmount}円</div>
+                  </div>
+                </div>
+              </Table.Cell>
+            </Table.Row>
+          );
+        })}
       </Table.Body>
     </Table>
   );

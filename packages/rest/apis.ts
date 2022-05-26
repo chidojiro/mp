@@ -72,7 +72,7 @@ myAxios.interceptors.response.use(
     if (response.headers[PROJECT_HEADER]) {
       CookiesUtils.set(PROJECT_HEADER, response.headers[PROJECT_HEADER]);
     }
-    return response.data.result ?? response.data.results ?? response.data.data ?? response.data;
+    return response.data.data;
   },
   function (error: AxiosError) {
     Logger.log('error:', JSON.stringify(error?.response?.data));

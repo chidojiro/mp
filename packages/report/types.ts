@@ -104,7 +104,7 @@ export type DeliveryType = 'bot' | 'notification' | 'popup';
 export type MarketingActionReport = {
   notification_type?: 'line' | 'mail';
   target_segment: string;
-  cv_type: string;
+  cv_type: 'custom' | 'final';
   aggregation_start: string;
   aggregation_end: string;
   delivery_uu: number;
@@ -123,4 +123,17 @@ export type MarketingActionReport = {
   };
   created_at: Date;
   updated_at: Date;
+};
+
+export type MarketingActionMonthlyReport = {
+  project_id: string;
+  organization_id: string;
+  alias: string;
+  aggregated_month: string;
+  cv_uu: number;
+  cv_amount: number;
+  notification_type: 'line' | 'mail';
+  delivery_uu: number;
+  click_uu: number;
+  open_uu: number;
 };

@@ -1,10 +1,21 @@
-import { TargetSegment } from '@/marketing-action/types';
 import { RestApiConfig, RestApis } from '@/rest/apis';
 import { DeliveryType, RfmReportItemResponse } from '../types';
 import { RfmReportDataItem } from '../types';
+import qs from 'qs';
 
-const getList = (deliveryType: DeliveryType, targetSegments?: TargetSegment[]) => {
-  return RestApis.get('/reports/list', { params: { delivery_type: deliveryType } });
+const getActionMonthly = (alias: string, target_segment?: string[]) => {
+  return RestApis.get(`/reports/actions/${alias}/monthly`, {
+    params: { target_segment },
+  });
+};
+
+const getActions = (delivery_type: DeliveryType, target_segment?: string[]) => {
+  return RestApis.get('/reports/actions', {
+    params: { delivery_type, target_segment },
+    paramsSerializer: params => {
+      return qs.stringify(params, { arrayFormat: 'repeat' });
+    },
+  });
 };
 
 const getF2ConversionRate = () => {
@@ -12,7 +23,8 @@ const getF2ConversionRate = () => {
 };
 
 export const ReportApis = {
-  getList,
+  getActionMonthly,
+  getActions,
   getF2ConversionRate,
   rfm_report: async (config: RestApiConfig): Promise<RfmReportDataItem[]> => {
     const data = await RestApis.get<RfmReportItemResponse>('/reports/rfm', config);

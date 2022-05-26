@@ -36,15 +36,15 @@ export enum MarketingActionAliasKey {
   CONDITIONAL_FREE_SHIPPING = 'conditional-free-shipping',
 }
 export enum TARGET {
-  F0_MEMBER = 'f0member',
-  F0_OTHERS = 'f0others',
-  F1 = 'F1',
-  F2 = 'F2',
-  SEMI_LOYAL = 'semiLoyal',
+  F0_MEMBER = 'f0_member',
+  F0_OTHERS = 'f0_other',
+  F1 = 'f1',
+  F2 = 'f2',
+  SEMI_LOYAL = 'next_loyal',
   LOYAL = 'loyal',
-  F1_DORMANT = 'f1dormant',
-  LOYAL_DORMANT = 'loyalDormant',
-  OTHER_DORMANT = 'otherDormant',
+  F1_DORMANT = 'f1_sleep',
+  LOYAL_DORMANT = 'loyal_sleep',
+  OTHER_DORMANT = 'other_sleep',
 }
 
 export enum MarketingActionSegment {
