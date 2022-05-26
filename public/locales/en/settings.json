@@ -28,5 +28,6 @@
   "cartPageUrl": "Cart page URL",
   "productDetailPageUrl": "Product detail page URL",
   "categoryPageUrl": "Category page URL",
-  "openInNewTab": "Open in a separate tab when clicking on a link"
+  "openInNewTab": "Open in a separate tab when clicking on a link",
+  "fLoyalNumber.min": "Please set 4 or more as the number of purchases"
 }
