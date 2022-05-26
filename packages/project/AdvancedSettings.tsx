@@ -3,6 +3,8 @@ import { useTranslation } from 'next-i18next';
 
 import { Form } from '@/common/Form';
 import { Section } from '@/common/Section';
+import { useFormContext } from 'react-hook-form';
+import { ErrorMessage } from '@/common/ErrorMessage';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};
@@ -17,6 +19,11 @@ export const AdvancedSettings = ({}: Props) => {
       label: t('last60Days'),
     },
   ];
+
+  const {
+    formState: { errors },
+  } = useFormContext();
+
   return (
     <div>
       <h5 className='mb-2.5'>{t('advancedSettings')}</h5>
@@ -31,11 +38,24 @@ export const AdvancedSettings = ({}: Props) => {
         <Section.Content>
           <div className='flex items-center gap-2.5 flex-wrap text-medium'>
             {t('numberOfPurchasesInThePastYear')}
-            <Form.Input name='const_f_loyal' className='w-20' />
+            <Form.Input
+              type='number'
+              name='const_f_loyal'
+              className='w-20'
+              rules={{
+                min: {
+                  value: 4,
+                  message: t('fLoyalNumber.min'),
+                },
+              }}
+            />
             {t('atLeastOnceAndTheTotalAmountOfPurchasesInThePast1Year')}
-            <Form.Input name='const_m_loyal' className='w-20' />
+            <Form.Input type='number' name='const_m_loyal' className='w-20' />
             {t('yenOrMore')}
           </div>
+          {errors.const_f_loyal && (
+            <ErrorMessage className='text-medium'>{errors.const_f_loyal.message}</ErrorMessage>
+          )}
         </Section.Content>
       </Section>
     </div>
