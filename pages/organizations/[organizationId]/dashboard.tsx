@@ -7,20 +7,16 @@ import { CustomerReportButton } from '@/report/CustomerReportButton';
 import { RfmSegmentTable } from '@/dashboard/RfmSegmentTable';
 import { PrivateLayout } from '@/layout/PrivateLayout';
 import { useRfmReport } from '@/report/useRfmReport';
-import { SsrUtils } from '@/ssr/utils';
 import { RfmReportDataItem } from '@/report/types';
 import { useProfile } from '@/auth/useProfile';
 
-export const getServerSideProps = SsrUtils.withProps('rfmReport')(
-  async ({ locale = 'ja' }, result) => {
-    return {
-      ...result,
-      props: {
-        ...(await serverSideTranslations(locale)),
-      },
-    };
-  }
-);
+export const getServerSideProps = async ({ locale = 'ja' }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale)),
+    },
+  };
+};
 export interface DashboardProps {
   rfmReport: RfmReportDataItem[];
 }

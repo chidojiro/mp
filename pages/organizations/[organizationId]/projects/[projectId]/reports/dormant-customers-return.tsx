@@ -6,22 +6,16 @@ import { NumberUtils } from '@/common/utils';
 import { ConversionRateChart } from '@/report/ConversionRateChart';
 import { CustomerReportButton } from '@/report/CustomerReportButton';
 import { PrivateLayout } from '@/layout/PrivateLayout';
-import { ServerSidePropsProvider } from '@/ssr/ServerSidePropsContext';
-import { SsrUtils } from '@/ssr/utils';
 import { useProfile } from '@/auth/useProfile';
 import { Colors } from '@/theme/constants';
 
-export const getServerSideProps = SsrUtils.withProps('profile')(
-  async ({ locale = 'ja' }, result) => {
-    return {
-      ...result,
-      props: {
-        ...result.props,
-        ...(await serverSideTranslations(locale!)),
-      },
-    };
-  }
-);
+export const getServerSideProps = async ({ locale = 'ja' }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale!)),
+    },
+  };
+};
 
 const data = [
   {
@@ -123,50 +117,48 @@ function ReturnOfDormantCustomers(props: any) {
     },
   ];
   return (
-    <ServerSidePropsProvider props={props}>
-      <PrivateLayout title={tCommon('returnOfDormantCustomers')}>
-        <ConversionRateChart
-          charts={[
-            {
-              type: 'BAR',
-              dataKey: 'f1_uu',
-              title: t('numberOfDormantCustomers'),
-              color: Colors.secondary.DEFAULT,
-              width: 24,
-            },
-            {
-              type: 'BAR',
-              dataKey: 'f2_uu',
-              title: t('numberOfReturns'),
-              color: Colors.primary.DEFAULT,
-              width: 24,
-            },
-            {
-              type: 'LINE',
-              dataKey: 'f2_conversion_rate',
-              title: t('returnRate'),
-              color: Colors.danger,
-            },
-          ]}
-          data={data}
-        />
-        <h5 className='text-gray-600 mt-[60px] font-bold'>
-          {t('measuresThatContributedToTheReturnOfDormantCustomers')}
-        </h5>
-        <div className='grid grid-cols-2 gap-4 mt-6'>
-          {reportButtons.map((button, index) => (
-            <CustomerReportButton
-              key={index}
-              href={button.href}
-              featuredIcon={<Icon name={button.icon as IconName} size={30} />}
-              label={button.label}
-              subtext={button.subLabel}
-              clickActionText={t('viewReport')}
-            />
-          ))}
-        </div>
-      </PrivateLayout>
-    </ServerSidePropsProvider>
+    <PrivateLayout title={tCommon('returnOfDormantCustomers')}>
+      <ConversionRateChart
+        charts={[
+          {
+            type: 'BAR',
+            dataKey: 'f1_uu',
+            title: t('numberOfDormantCustomers'),
+            color: Colors.secondary.DEFAULT,
+            width: 24,
+          },
+          {
+            type: 'BAR',
+            dataKey: 'f2_uu',
+            title: t('numberOfReturns'),
+            color: Colors.primary.DEFAULT,
+            width: 24,
+          },
+          {
+            type: 'LINE',
+            dataKey: 'f2_conversion_rate',
+            title: t('returnRate'),
+            color: Colors.danger,
+          },
+        ]}
+        data={data}
+      />
+      <h5 className='text-gray-600 mt-[60px] font-bold'>
+        {t('measuresThatContributedToTheReturnOfDormantCustomers')}
+      </h5>
+      <div className='grid grid-cols-2 gap-4 mt-6'>
+        {reportButtons.map((button, index) => (
+          <CustomerReportButton
+            key={index}
+            href={button.href}
+            featuredIcon={<Icon name={button.icon as IconName} size={30} />}
+            label={button.label}
+            subtext={button.subLabel}
+            clickActionText={t('viewReport')}
+          />
+        ))}
+      </div>
+    </PrivateLayout>
   );
 }
 

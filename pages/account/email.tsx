@@ -4,7 +4,6 @@ import { EmailField } from '@/common/EmailField';
 import { Form } from '@/common/Form';
 import { Section } from '@/common/Section';
 import { PrivateLayout } from '@/layout/PrivateLayout';
-import { SsrUtils } from '@/ssr/utils';
 import { GetServerSideProps, NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -13,17 +12,13 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { ProfileApis } from '@/auth/apis';
 
-export const getServerSideProps: GetServerSideProps = SsrUtils.withProps('profile')(
-  async ({ locale = 'ja' }, result) => {
-    return {
-      ...result,
-      props: {
-        ...result.props,
-        ...(await serverSideTranslations(locale, ['common', 'account'])),
-      },
-    };
-  }
-);
+export const getServerSideProps: GetServerSideProps = async ({ locale = 'ja' }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common', 'account'])),
+    },
+  };
+};
 interface EmailProps {
   profile: Profile;
 }

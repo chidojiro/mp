@@ -1,22 +1,16 @@
 import { Icon } from '@/common/Icon';
 import { PrivateLayout } from '@/layout/PrivateLayout';
 import { CustomerReportButton } from '@/report/CustomerReportButton';
-import { ServerSidePropsProvider } from '@/ssr/ServerSidePropsContext';
-import { SsrUtils } from '@/ssr/utils';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-export const getServerSideProps = SsrUtils.withProps('profile')(
-  async ({ locale = 'ja' }, result) => {
-    return {
-      ...result,
-      props: {
-        ...result.props,
-        ...(await serverSideTranslations(locale!)),
-      },
-    };
-  }
-);
+export const getServerSideProps = async ({ locale = 'ja' }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale!)),
+    },
+  };
+};
 
 const data = [
   {
@@ -98,42 +92,40 @@ function F2ConversionRateTrends(props: any) {
   const { t: tCommon } = useTranslation('common');
 
   return (
-    <ServerSidePropsProvider props={props}>
-      <PrivateLayout title={tCommon('loyalDormantCustomersReturn')}>
-        {/* <ConversionRateChart
+    <PrivateLayout title={tCommon('loyalDormantCustomersReturn')}>
+      {/* <ConversionRateChart
           line={{ dataKey: 'f2_conversion_rate', title: t('returnRate') }}
           bar1={{ dataKey: 'f1_uu', title: t('numberOfLoyalDormantCustomers') }}
           bar2={{ dataKey: 'f2_uu', title: t('numberOfReturns') }}
           data={data}
         /> */}
-        <h5 className='text-gray-600 mt-[60px] font-bold'>
-          {t('measuresThatContributedToReturnOfLoyalDormantCustomers')}
-        </h5>
-        <div className='grid grid-cols-2 gap-4 mt-6'>
-          <CustomerReportButton
-            href=''
-            featuredIcon={<Icon name='mails' size={30} />}
-            label={t('postPurchaseStepDelivery')}
-            subtext={t('mostRecentContribution', { amount: '256,000' })}
-            clickActionText={t('viewReport')}
-          />
-          <CustomerReportButton
-            href=''
-            featuredIcon={<Icon name='cart' size={30} />}
-            label={t('periodicDeliveryRecommendation')}
-            subtext={t('mostRecentContribution', { amount: '256,000' })}
-            clickActionText={t('viewReport')}
-          />
-          <CustomerReportButton
-            href=''
-            featuredIcon={<Icon name='chatbot' size={30} />}
-            label={t('birthdayCoupon')}
-            subtext={t('mostRecentContribution', { amount: '256,000' })}
-            clickActionText={t('viewReport')}
-          />
-        </div>
-      </PrivateLayout>
-    </ServerSidePropsProvider>
+      <h5 className='text-gray-600 mt-[60px] font-bold'>
+        {t('measuresThatContributedToReturnOfLoyalDormantCustomers')}
+      </h5>
+      <div className='grid grid-cols-2 gap-4 mt-6'>
+        <CustomerReportButton
+          href=''
+          featuredIcon={<Icon name='mails' size={30} />}
+          label={t('postPurchaseStepDelivery')}
+          subtext={t('mostRecentContribution', { amount: '256,000' })}
+          clickActionText={t('viewReport')}
+        />
+        <CustomerReportButton
+          href=''
+          featuredIcon={<Icon name='cart' size={30} />}
+          label={t('periodicDeliveryRecommendation')}
+          subtext={t('mostRecentContribution', { amount: '256,000' })}
+          clickActionText={t('viewReport')}
+        />
+        <CustomerReportButton
+          href=''
+          featuredIcon={<Icon name='chatbot' size={30} />}
+          label={t('birthdayCoupon')}
+          subtext={t('mostRecentContribution', { amount: '256,000' })}
+          clickActionText={t('viewReport')}
+        />
+      </div>
+    </PrivateLayout>
   );
 }
 

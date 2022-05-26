@@ -2,22 +2,19 @@ import { Profile } from '@/auth/types';
 import { Section } from '@/common/Section';
 import { useVisibilityControl } from '@/common/useVisibilityControl';
 import { PrivateLayout } from '@/layout/PrivateLayout';
-import { SsrUtils } from '@/ssr/utils';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-export const getServerSideProps = SsrUtils.withProps('profile')(async ({ locale }, result) => {
+export const getServerSideProps = async ({ locale }: any) => {
   return {
-    ...result,
     props: {
-      ...result.props,
       ...(await serverSideTranslations(locale!, ['common', 'account'])),
     },
   };
-});
+};
 
 const Account = (props: any) => {
   const { t } = useTranslation('account');
