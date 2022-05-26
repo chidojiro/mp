@@ -1,15 +1,14 @@
-import React from 'react';
-import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
-
 import { Table } from '@/common/Table';
 import { ClassName } from '@/common/types';
-import { RowHeader } from './RowHeader';
+import { NumberUtils } from '@/common/utils';
+import { MarketingActionAliasKey } from '@/marketing-action/types';
 import { useActionsReport } from '@/report/useActionsReport';
 import { groupBy } from 'lodash-es';
-import { MarketingActionAliasKey } from '@/marketing-action/types';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { RowHeader } from './RowHeader';
 import { ReportUtils } from './utils';
-import { NumberUtils } from '@/common/utils';
 
 type Props = ClassName;
 
@@ -18,8 +17,6 @@ export const NotificationTable = ({ className = 'table-fixed' }: Props) => {
   const { t: tMarketingAction } = useTranslation('marketingAction');
 
   const { data: report } = useActionsReport('notification');
-
-  console.log(report);
 
   const reportGroupedByAlias = groupBy(report, 'marketing_action.marketing_action_type.alias');
 
@@ -72,7 +69,7 @@ export const NotificationTable = ({ className = 'table-fixed' }: Props) => {
           const getRate = (uu: number, type: 'line' | 'mail') => {
             if (item[type].delivery_uu === 0) return '(0.0%)';
 
-            return `(${(uu / item[type].delivery_uu).toFixed(1)}%)`;
+            return `(${((uu * 100) / item[type].delivery_uu).toFixed(1)}%)`;
           };
 
           return (
@@ -148,7 +145,7 @@ export const NotificationTable = ({ className = 'table-fixed' }: Props) => {
                         {NumberUtils.separate(item.mail.cv_uu.final)}{' '}
                         {getRate(item.mail.cv_uu.final, 'mail')}
                       </div>
-                      <div>{item.mail.cv_uu.finalAmount}円</div>
+                      <div>{NumberUtils.separate(item.mail.cv_uu.finalAmount)}円</div>
                     </div>
                   </div>
                 </Table.Cell>

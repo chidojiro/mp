@@ -9,6 +9,7 @@ import { ReportUtils } from '@/report/utils';
 import { groupBy } from 'lodash-es';
 import { format } from 'date-fns';
 import { ReturnToListButton } from '@/report/ReturnToListButton';
+import { NumberUtils } from '@/common/utils';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = ClassName & {
@@ -60,7 +61,7 @@ export const NotificationDetailsTable = ({ className }: Props) => {
             const getRate = (uu: number, type: 'line' | 'mail') => {
               if (item.data[type].delivery_uu === 0) return '(0.0%)';
 
-              return `(${(uu / item.data[type].delivery_uu).toFixed(1)}%)`;
+              return `(${((uu * 100) / item.data[type].delivery_uu).toFixed(1)}%)`;
             };
 
             return (
@@ -70,37 +71,47 @@ export const NotificationDetailsTable = ({ className }: Props) => {
                     <RowHeader title={item.aggregated_month} />
                   </Table.Cell>
                   <Table.Cell className='text-right'>LINE</Table.Cell>
-                  <Table.Cell className='text-right'>{item.data.line.delivery_uu}</Table.Cell>
                   <Table.Cell className='text-right'>
-                    {item.data.line.open_uu} {getRate(item.data.line.open_uu, 'line')}
+                    {NumberUtils.separate(item.data.line.delivery_uu)}
                   </Table.Cell>
                   <Table.Cell className='text-right'>
-                    {item.data.line.click_uu} {getRate(item.data.line.click_uu, 'line')}
+                    {NumberUtils.separate(item.data.line.open_uu)}{' '}
+                    {getRate(item.data.line.open_uu, 'line')}
+                  </Table.Cell>
+                  <Table.Cell className='text-right'>
+                    {NumberUtils.separate(item.data.line.click_uu)}{' '}
+                    {getRate(item.data.line.click_uu, 'line')}
                   </Table.Cell>
                   <Table.Cell>
                     <div>
                       <div>
-                        {item.data.line.cv_uu.custom} {getRate(item.data.line.cv_uu.custom, 'line')}
+                        {NumberUtils.separate(item.data.line.cv_uu.custom)}{' '}
+                        {getRate(item.data.line.cv_uu.custom, 'line')}
                       </div>
-                      <div>{item.data.line.cv_uu.finalAmount}円</div>
+                      <div>{NumberUtils.separate(item.data.line.cv_uu.finalAmount)}円</div>
                     </div>
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
                   <Table.Cell className='text-right'>{t('email')}</Table.Cell>
-                  <Table.Cell className='text-right'>{item.data.mail.delivery_uu}</Table.Cell>
                   <Table.Cell className='text-right'>
-                    {item.data.mail.open_uu} {getRate(item.data.mail.open_uu, 'mail')}
+                    {NumberUtils.separate(item.data.mail.delivery_uu)}
                   </Table.Cell>
                   <Table.Cell className='text-right'>
-                    {item.data.mail.click_uu} {getRate(item.data.mail.click_uu, 'mail')}
+                    {NumberUtils.separate(item.data.mail.open_uu)}{' '}
+                    {getRate(item.data.mail.open_uu, 'mail')}
+                  </Table.Cell>
+                  <Table.Cell className='text-right'>
+                    {NumberUtils.separate(item.data.mail.click_uu)}{' '}
+                    {getRate(item.data.mail.click_uu, 'mail')}
                   </Table.Cell>
                   <Table.Cell>
                     <div>
                       <div>
-                        {item.data.mail.cv_uu.custom} {getRate(item.data.mail.cv_uu.custom, 'mail')}
+                        {NumberUtils.separate(item.data.mail.cv_uu.custom)}{' '}
+                        {getRate(item.data.mail.cv_uu.custom, 'mail')}
                       </div>
-                      <div>{item.data.mail.cv_uu.finalAmount}円</div>
+                      <div>{NumberUtils.separate(item.data.mail.cv_uu.finalAmount)}円</div>
                     </div>
                   </Table.Cell>
                 </Table.Row>
