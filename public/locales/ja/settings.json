@@ -32,5 +32,6 @@
   "menuSettings": "設定",
   "contactPhone": "問い合わせ用電話番号",
   "openInNewTab": "リンククリック時、別のタブで開く",
-  "fLoyalNumber.min": "購入回数には「4」以上の数値を設定してください。"
+  "fLoyalNumber.min": "購入回数には「4」以上の数値を設定してください。",
+  "mLoyalNumber.min": "総購入金額には「0」以上の数値を設定してください。"
 }

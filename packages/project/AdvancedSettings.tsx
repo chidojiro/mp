@@ -50,11 +50,24 @@ export const AdvancedSettings = ({}: Props) => {
               }}
             />
             {t('atLeastOnceAndTheTotalAmountOfPurchasesInThePast1Year')}
-            <Form.Input type='number' name='const_m_loyal' className='w-20' />
+            <Form.Input
+              type='number'
+              name='const_m_loyal'
+              className='w-20'
+              rules={{
+                min: {
+                  value: 1,
+                  message: t('mLoyalNumber.min'),
+                },
+              }}
+            />
             {t('yenOrMore')}
           </div>
           {errors.const_f_loyal && (
             <ErrorMessage className='text-medium'>{errors.const_f_loyal.message}</ErrorMessage>
+          )}
+          {errors.const_m_loyal && (
+            <ErrorMessage className='text-medium'>{errors.const_m_loyal.message}</ErrorMessage>
           )}
         </Section.Content>
       </Section>

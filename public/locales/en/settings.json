@@ -29,5 +29,6 @@
   "productDetailPageUrl": "Product detail page URL",
   "categoryPageUrl": "Category page URL",
   "openInNewTab": "Open in a separate tab when clicking on a link",
-  "fLoyalNumber.min": "Please set 4 or more as the number of purchases"
+  "fLoyalNumber.min": "Please set 4 or more as the number of purchases",
+  "mLoyalNumber.min": "The total purchase amount should be set to a number greater than or equal to \"0\"."
 }
