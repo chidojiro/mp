@@ -40,21 +40,21 @@ export const Sidebar = () => {
           label: t('f2ConversionRateTrends'),
           matches: [`${projectMatchPrefix}/reports/f2-conversion-rate`],
         },
-        // {
-        //   path: `${projectPrefix}/reports/semi-loyal-conversion-rate`,
-        //   label: t('semiLoyalConversionRate'),
-        //   matches: [`${projectMatchPrefix}/reports/semi-loyal-conversion-rate`],
-        // },
-        // {
-        //   path: `${projectPrefix}/reports/loyal-conversion-rate`,
-        //   label: t('loyalConversionRate'),
-        //   matches: [`${projectMatchPrefix}/reports/loyal-conversion-rate`],
-        // },
         {
-          path: `${projectPrefix}/reports/loyal-customers`,
-          label: t('numberOfLoyalCustomers'),
-          matches: [`${projectMatchPrefix}/reports/loyal-customers`],
+          path: `${projectPrefix}/reports/semi-loyal-conversion-rate`,
+          label: t('semiLoyalConversionRate'),
+          matches: [`${projectMatchPrefix}/reports/semi-loyal-conversion-rate`],
         },
+        {
+          path: `${projectPrefix}/reports/loyal-conversion-rate`,
+          label: t('loyalConversionRate'),
+          matches: [`${projectMatchPrefix}/reports/loyal-conversion-rate`],
+        },
+        // {
+        //   path: `${projectPrefix}/reports/loyal-customers`,
+        //   label: t('numberOfLoyalCustomers'),
+        //   matches: [`${projectMatchPrefix}/reports/loyal-customers`],
+        // },
         {
           path: `${projectPrefix}/reports/dormant-customers-return`,
           label: t('returnOfDormantCustomers'),

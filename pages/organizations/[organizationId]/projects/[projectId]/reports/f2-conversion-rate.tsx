@@ -2,11 +2,13 @@ import { useProfile } from '@/auth/useProfile';
 import { Icon, IconName } from '@/common/Icon';
 import { NumberUtils } from '@/common/utils';
 import { PrivateLayout } from '@/layout/PrivateLayout';
+import { ReportApis } from '@/report/apis';
 import { ConversionRateChart } from '@/report/ConversionRateChart';
 import { CustomerReportButton } from '@/report/CustomerReportButton';
 import { Colors } from '@/theme/constants';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import useSWR from 'swr';
 
 export const getServerSideProps = async ({ locale = 'ja' }) => {
   return {
@@ -16,85 +18,20 @@ export const getServerSideProps = async ({ locale = 'ja' }) => {
   };
 };
 
-const data = [
-  {
-    f1_uu: 3053,
-    f2_uu: 226,
-    f2_conversion_rate: 7.4,
-    created_at: '2021/6',
-  },
-  {
-    f1_uu: 2335,
-    f2_uu: 176,
-    f2_conversion_rate: 7.5,
-    created_at: '2021/7',
-  },
-  {
-    f1_uu: 2286,
-    f2_uu: 207,
-    f2_conversion_rate: 9.1,
-    created_at: '2021/8',
-  },
-  {
-    f1_uu: 2070,
-    f2_uu: 138,
-    f2_conversion_rate: 6.7,
-    created_at: '2021/9',
-  },
-  {
-    f1_uu: 1752,
-    f2_uu: 123,
-    f2_conversion_rate: 7.0,
-    created_at: '2021/10',
-  },
-  {
-    f1_uu: 1929,
-    f2_uu: 148,
-    f2_conversion_rate: 7.7,
-    created_at: '2021/11',
-  },
-  {
-    f1_uu: 2374,
-    f2_uu: 210,
-    f2_conversion_rate: 8.8,
-    created_at: '2021/12',
-  },
-  {
-    f1_uu: 1997,
-    f2_uu: 167,
-    f2_conversion_rate: 8.4,
-    created_at: '2022/1',
-  },
-  {
-    f1_uu: 1765,
-    f2_uu: 131,
-    f2_conversion_rate: 7.4,
-    created_at: '2022/2',
-  },
-  {
-    f1_uu: 1629,
-    f2_uu: 118,
-    f2_conversion_rate: 7.2,
-    created_at: '2022/3',
-  },
-  {
-    f1_uu: 1704,
-    f2_uu: 138,
-    f2_conversion_rate: 8.1,
-    created_at: '2022/4',
-  },
-  {
-    f1_uu: 1811,
-    f2_uu: 154,
-    f2_conversion_rate: 8.5,
-    created_at: '2022/5',
-  },
-];
-
 function F2ConversionRateTrends() {
   const { t } = useTranslation('report');
   const { t: tCommon } = useTranslation('common');
   const { data: profile } = useProfile();
+
+  const { data = [] } = useSWR('/f2-conversion-rate', () => ReportApis.getF2ConversionRate());
+
+  const chartData = data
+    .sort((a: any, b: any) => a.aggregated_month - b.aggregated_month)
+    .map(({ aggregated_month, ...rest }: any) => ({
+      ...rest,
+      aggregated_month: aggregated_month.split('-').slice(0, 2).join('/'),
+    }))
+    .slice(0, 12);
 
   const reportButtons = [
     {
@@ -141,7 +78,7 @@ function F2ConversionRateTrends() {
             color: Colors.danger,
           },
         ]}
-        data={data}
+        data={chartData}
       />
       <h5 className='text-gray-600 mt-[60px] font-bold'>
         {t('measuresThatContributedToF2Conversion')}

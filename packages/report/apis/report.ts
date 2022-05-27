@@ -22,10 +22,20 @@ const getF2ConversionRate = () => {
   return RestApis.get('/reports/f2-conversion-rate');
 };
 
+const getLoyalConversionRate = () => {
+  return RestApis.get('/reports/loyal-conversion-rate');
+};
+
+const getNextLoyalConversionRate = () => {
+  return RestApis.get('/reports/next-loyal-conversion-rate');
+};
+
 export const ReportApis = {
   getActionMonthly,
   getActions,
   getF2ConversionRate,
+  getLoyalConversionRate,
+  getNextLoyalConversionRate,
   rfm_report: async (config: RestApiConfig): Promise<RfmReportDataItem[]> => {
     const data = await RestApis.get<RfmReportItemResponse>('/reports/rfm', config);
 

@@ -39,7 +39,7 @@ const renderBar = (chartInfo: BarChartInfo) => {
           dataKey={chartInfo.dataKey}
           // formatter={(v: string) => numberWithCommas(parseInt(v))}
           position='top'
-          stroke='#FFBA00'
+          stroke={chartInfo.color}
           fontSize={10}
         />
       </Bar>
@@ -63,7 +63,7 @@ const renderBar = (chartInfo: BarChartInfo) => {
             dataKey={dataKey}
             formatter={(v: string) => numberWithCommas(parseInt(v))}
             position='top'
-            stroke='#FFBA00'
+            stroke={chartInfo.color}
             fontSize={10}
           />
         </Bar>
@@ -164,7 +164,7 @@ export const ConversionRateChart = ({ charts, data }: ConversionRateChartProps) 
             tick={{ fontSize: 12, color: '#464646' }}
             tickMargin={12}
             stroke='#BFBFBF'
-            dataKey='created_at'
+            dataKey='aggregated_month'
           ></XAxis>
           <YAxis
             tickLine={false}

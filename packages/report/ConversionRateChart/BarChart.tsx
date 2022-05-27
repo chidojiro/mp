@@ -24,7 +24,7 @@ export const BarChart = ({ chartInfo }: Props) => {
           dataKey={chartInfo.dataKey}
           // formatter={(v: string) => numberWithCommas(parseInt(v))}
           position='top'
-          stroke='#FFBA00'
+          stroke={chartInfo.color}
           fontSize={10}
         />
       </Bar>
