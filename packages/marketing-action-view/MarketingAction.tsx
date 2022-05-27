@@ -1,3 +1,4 @@
+import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -8,12 +9,13 @@ import { MarketingActionUtils } from '@/marketing-action/utils';
 import { Action } from './Action';
 import { StepDelivery } from './StepDelivery';
 import { useProfile } from '@/auth/useProfile';
-import { MarketingActionStatus } from '@/marketing-action/types';
+import { MarketingActionStatus, TARGET } from '@/marketing-action/types';
 import { MarketingActionAlias } from '@/marketing-action/types';
 import { MarketingActionRes } from '@/marketing-action/types';
 import { MarketingActionApis } from '@/marketing-action/apis';
 import { MARKETING_ACTION_URL } from '@/marketing-action/constants';
 import { useForm } from 'react-hook-form';
+import { Option } from '@/common/types';
 
 type Props = {
   marketingAction: MarketingActionRes;
@@ -31,6 +33,21 @@ export const MarketingAction = ({ marketingAction, mutateMarketingActions }: Pro
 
   const profile = useProfile();
 
+  const targetOptions = React.useMemo<Option[]>(
+    () => [
+      { label: tCommon('f0member'), value: TARGET.F0_MEMBER },
+      { label: tCommon('f0others'), value: TARGET.F0_OTHERS },
+      { label: tCommon('F1'), value: TARGET.F1 },
+      { label: tCommon('F2'), value: TARGET.F2 },
+      { label: tCommon('semiLoyal'), value: TARGET.SEMI_LOYAL },
+      { label: tCommon('loyal'), value: TARGET.LOYAL },
+      { label: tCommon('f1dormant'), value: TARGET.F1_DORMANT },
+      { label: tCommon('loyalDormant'), value: TARGET.LOYAL_DORMANT },
+      { label: tCommon('otherDormant'), value: TARGET.OTHER_DORMANT },
+    ],
+    [tCommon]
+  );
+
   const suspendTemplateMethods = useForm();
   const deleteTemplateMethods = useForm();
 
@@ -42,11 +59,15 @@ export const MarketingAction = ({ marketingAction, mutateMarketingActions }: Pro
     return `${_startAt} 〜 ${_endAt}`;
   };
 
+  const getTargetLabel = (value: string) => {
+    return targetOptions.filter(option => option.value === value)[0].label as string;
+  };
+
   const targetSettings = () => {
     return (
-      MarketingActionUtils.getTargetFilters(marketingAction.target_segments)
-        .map(target => tCommon(target))
-        .join(', ') || ''
+      MarketingActionUtils.getTargetFilters(marketingAction.target_segments).map(target =>
+        getTargetLabel(target)
+      ) || []
     );
   };
 
@@ -78,12 +99,12 @@ export const MarketingAction = ({ marketingAction, mutateMarketingActions }: Pro
           icon={marketingActionUrl.icon}
           path={marketingActionUrl.path}
           name={marketingAction?.description || ''}
-          targetCustomers={marketingAction.target_segments || []}
+          targetCustomers={targetSettings() || []}
           date={getRange()}
         />
         <StepDelivery
           settings={marketingAction.settings}
-          targetSettings={targetSettings()}
+          targetSettings={targetSettings().join(', ')}
           alias={
             marketingAction.marketing_action_type?.alias ||
             MarketingActionAlias.CART_LEFT_NOTIFICATION
