@@ -6,15 +6,13 @@ import { Button } from '@/common/Button';
 import { Icon, IconName } from '@/common/Icon';
 import { Tag } from '@/common/Tag';
 import { MarketingActionStatus as MAStatus } from '@/marketing-action/types';
-import { MarketingActionUtils } from '@/marketing-action/utils';
 import { useProfile } from '@/auth/useProfile';
-import { TargetSegment } from '@/marketing-action/types';
 
 type Props = {
   path: string;
   name: string;
   icon: IconName;
-  targetCustomers: TargetSegment[];
+  targetCustomers: string[];
   date?: string;
 };
 
@@ -33,7 +31,7 @@ export const Action = ({ name, path, icon, targetCustomers, date }: Props) => {
       : `reports/action-reports/${path}/monthly?targets=all`;
 
   const isDraft = marketingActionStatus === MAStatus.DRAFT;
-  const targetFilters = MarketingActionUtils.getTargetFilters(targetCustomers);
+
   return (
     <div className='p-10'>
       <div className='flex items-center'>
@@ -45,8 +43,8 @@ export const Action = ({ name, path, icon, targetCustomers, date }: Props) => {
           <div className='flex mt-4'>
             <span className='mr-2 font-bold text-secondary'>{t('targetCustomer')}</span>
             <div className='flex flex-wrap gap-1'>
-              {targetFilters.map((target, index) => (
-                <Tag key={index}>{tCommon(target)}</Tag>
+              {targetCustomers.map((label, index) => (
+                <Tag key={index}>{label}</Tag>
               ))}
             </div>
           </div>
