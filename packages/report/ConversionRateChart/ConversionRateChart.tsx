@@ -34,6 +34,7 @@ const renderBar = (chartInfo: BarChartInfo) => {
         fill={chartInfo.color}
         textAnchor='start'
         radius={[4, 4, 0, 0]}
+        isAnimationActive={false}
       >
         <LabelList
           dataKey={chartInfo.dataKey}
@@ -58,6 +59,7 @@ const renderBar = (chartInfo: BarChartInfo) => {
           fill={color}
           textAnchor='start'
           radius={[4, 4, 0, 0]}
+          isAnimationActive={false}
         >
           <LabelList
             dataKey={dataKey}
@@ -84,6 +86,7 @@ const renderLine = (chartInfo: LineChartInfo) => {
       unit='%'
       stroke={chartInfo.color}
       activeDot={false}
+      isAnimationActive={false}
     >
       <LabelList
         dataKey={chartInfo.dataKey}

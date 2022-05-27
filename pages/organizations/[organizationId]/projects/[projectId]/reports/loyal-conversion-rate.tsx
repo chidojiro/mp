@@ -54,27 +54,27 @@ function RoyalConversionRate() {
     },
   ];
   return (
-    <PrivateLayout title={tCommon('f2ConversionRateTrends')}>
+    <PrivateLayout title={tCommon('loyalConversionRate')}>
       <ConversionRateChart
         charts={[
           {
             type: 'BAR',
             dataKey: 'next_loyal_uu',
-            title: t('numberOfF1Customers'),
+            title: '',
             color: Colors.secondary.DEFAULT,
             width: 24,
           },
           {
             type: 'BAR',
             dataKey: 'loyal_uu',
-            title: t('numberOfF2Customers'),
+            title: '',
             color: Colors.primary.DEFAULT,
             width: 24,
           },
           {
             type: 'LINE',
             dataKey: 'loyal_conversion_rate',
-            title: t('f2ConversionRate'),
+            title: '',
             color: Colors.danger,
           },
         ]}
