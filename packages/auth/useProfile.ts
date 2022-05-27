@@ -11,5 +11,8 @@ export function useProfile(fallbackData?: Profile) {
     fallbackData: fallbackData ?? props.profile,
   });
 
-  return React.useMemo(() => ({ ...swrReturn, data: swrReturn.data! }), [swrReturn]);
+  return React.useMemo(
+    () => ({ ...swrReturn, data: swrReturn.data ?? ({} as Profile) }),
+    [swrReturn]
+  );
 }
