@@ -3,13 +3,13 @@ import { RestApiConfig, RestApis } from '@/rest/apis';
 import { MarketingActionRes, TestDelivery } from '../types';
 
 const list = (config: RestApiConfig) => {
-  return RestApis.get<{ [key: string]: MarketingActionRes[] }>('/actions', config);
+  return RestApis.get<{ [key: string]: MarketingActionRes[] }>('/actions/', config);
 };
 type Status = 'running' | 'complete' | 'draft';
 export type ActionsByAliasResponse = Record<Status, MarketingActionRes[]>;
 const getActionsByAlias = async (alias: string): Promise<ActionsByAliasResponse | null> => {
   try {
-    const response = await RestApis.get('/actions', {
+    const response = await RestApis.get('/actions/', {
       params: {
         alias,
       },
@@ -22,7 +22,7 @@ const getActionsByAlias = async (alias: string): Promise<ActionsByAliasResponse 
 };
 
 const create = (payload: any) => {
-  return RestApis.post<MarketingActionRes>('/actions', payload);
+  return RestApis.post<MarketingActionRes>('/actions/', payload);
 };
 
 const update = (id: string, payload: any) => {
@@ -38,7 +38,7 @@ const remove = (id: string) => {
 };
 
 const deliveryTestMail = (payload: TestDelivery) => {
-  return RestApis.post('/delivery', payload);
+  return RestApis.post('/delivery/', payload);
 };
 
 export const MarketingActionApis = {
