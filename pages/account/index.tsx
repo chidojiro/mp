@@ -1,4 +1,4 @@
-import { Profile } from '@/auth/types';
+import { useProfile } from '@/auth/useProfile';
 import { Section } from '@/common/Section';
 import { useVisibilityControl } from '@/common/useVisibilityControl';
 import { PrivateLayout } from '@/layout/PrivateLayout';
@@ -16,11 +16,11 @@ export const getServerSideProps = async ({ locale }: any) => {
   };
 };
 
-const Account = (props: any) => {
+const Account = () => {
   const { t } = useTranslation('account');
   const { t: tCommon } = useTranslation();
   const router = useRouter();
-  const profile = props.profile as Profile;
+  const { data: profile } = useProfile();
 
   const emailSuccessMessageControl = useVisibilityControl();
   const passwordSuccessMessageControl = useVisibilityControl();
