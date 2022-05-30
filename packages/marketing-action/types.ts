@@ -7,13 +7,13 @@ export enum MarketingActionStatus {
   COMPLETE = 'complete',
 }
 export enum MarketingActionAlias {
-  CART_LEFT_NOTIFICATION = 'CART_LEFT_NOTIFICATION',
-  AFTER_PURCHASE = 'AFTER_PURCHASE',
-  CART_PAGE_FAQ = 'CART_PAGE_FAQ',
-  RECOMMEND_DIAGNOSTIC = 'RECOMMEND_DIAGNOSTIC',
-  HISTORY_PURCHASE = 'HISTORY_PURCHASE_TOP',
-  HISTORY_PURCHASE_CATEGORY = 'HISTORY_PURCHASE_CATEGORY',
-  CONDITIONAL_FREE_SHIPPING = 'CONDITIONAL_FREE_SHIPPING',
+  CART_LEFT_NOTIFICATION = 'cart_left_notification',
+  AFTER_PURCHASE = 'after_purchase',
+  CART_PAGE_FAQ = 'cart_page_faq',
+  RECOMMEND_DIAGNOSTIC = 'recommend_diagnostic',
+  HISTORY_PURCHASE = 'history_purchase_top',
+  HISTORY_PURCHASE_CATEGORY = 'history_purchase_category',
+  CONDITIONAL_FREE_SHIPPING = 'conditional_free_shipping',
 }
 
 export const MarketingActionAliasMap = {
