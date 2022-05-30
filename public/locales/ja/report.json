@@ -67,5 +67,9 @@
   "ranking-by-category": "全体の購入履歴に基づくランキング（動的）",
   "recommendation-diagnosis-bot": "レコメンド診断ボット（静的）",
   "viewFreeShippingReport": "定期配信(レコメンド)",
-  "viewBirthdayCouponReport": "バースデークーポン"
+  "viewBirthdayCouponReport": "バースデークーポン",
+  "measuresThatContributedToSemiLoyalConversion": "準ロイヤル転換に貢献した施策",
+  "measuresThatContributedToLoyalConversion": "ロイヤル転換に貢献した施策",
+  "semiLoyalConversionRate": "準ロイヤル転換率",
+  "loyalConversionRate": "ロイヤル転換率"
 }

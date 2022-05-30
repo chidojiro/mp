@@ -54,5 +54,9 @@
   "cartAbandoned": "Failed Notifications",
   "measuresThatContributedToTheReturnOfDormantCustomers": "Measures that contributed to the return of dormant customers",
   "numberOfDormantCustomers": "Number of dormant customers",
-  "returnToList": "Return to list"
+  "returnToList": "Return to list",
+  "measuresThatContributedToSemiLoyalConversion": "Measures that contributed to semi-loyal conversion",
+  "measuresThatContributedToLoyalConversion": "Measures that contributed to loyal conversion",
+  "semiLoyalConversionRate": "Semi-Loyal Conversion Rate",
+  "loyalConversionRate": "Loyal conversion rate"
 }

@@ -62,28 +62,28 @@ function SemiRoyalConversionRate() {
           {
             type: 'BAR',
             dataKey: 'f2_uu',
-            title: '',
+            title: t('numberOfF2Customers'),
             color: Colors.secondary.DEFAULT,
             width: 24,
           },
           {
             type: 'BAR',
             dataKey: 'next_loyal_uu',
-            title: '',
+            title: t('numberOfSemiLoyalCustomers'),
             color: Colors.primary.DEFAULT,
             width: 24,
           },
           {
             type: 'LINE',
             dataKey: 'next_loyal_conversion_rate',
-            title: '',
+            title: t('semiLoyalConversionRate'),
             color: Colors.danger,
           },
         ]}
         data={chartData}
       />
       <h5 className='text-gray-600 mt-[60px] font-bold'>
-        {t('measuresThatContributedToF2Conversion')}
+        {t('measuresThatContributedToSemiLoyalConversion')}
       </h5>
       <div className='grid grid-cols-2 gap-4 mt-6'>
         {reportButtons.map((button, index) => (
