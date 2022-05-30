@@ -45,7 +45,6 @@
   "viewReport": "View Report",
   "numberOfLoyalDormantCustomers": "Number of Loyal Dormant Customers",
   "numberOfReturns": "Number of returns",
-  "returnRate": "Return rate",
   "measuresThatContributedToF2Conversion": "Measures that contributed to F2 conversion",
   "numberOfLoyalCustomers": "Number of loyal customers",
   "numberOfSemiLoyalCustomers": "Number of Semi-Loyal Customers",
@@ -53,10 +52,18 @@
   "measuresContributingToLoyaltyConversion": "Measures Contributing to Loyalty Conversion",
   "cartAbandoned": "Failed Notifications",
   "measuresThatContributedToTheReturnOfDormantCustomers": "Measures that contributed to the return of dormant customers",
-  "numberOfDormantCustomers": "Number of dormant customers",
   "returnToList": "Return to list",
   "measuresThatContributedToSemiLoyalConversion": "Measures that contributed to semi-loyal conversion",
   "measuresThatContributedToLoyalConversion": "Measures that contributed to loyal conversion",
   "semiLoyalConversionRate": "Semi-Loyal Conversion Rate",
-  "loyalConversionRate": "Loyal conversion rate"
+  "loyalConversionRate": "Loyal conversion rate",
+  "numberOfDormantCustomers": "Number of dormant customers",
+  "numberOfReturningCustomers": "Number of returning customers",
+  "numberOfReturningCustomersDif": "Number of returning customers (difference from previous month)",
+  "numberOfDefectedCustomers": "Number of defected customers",
+  "returnRate": "Return rate",
+  "measuresThatContributedToDormantCustomersConversion": "Measures that contributed to the return of dormant customers",
+  "sleepLoyalReturnDescription": "Dormant = last purchase 181-360 days ago / Dereverted = 361 days or more since last purchase",
+  "loyalDormantCustomersReturn": "Return of loyal dormant customers",
+  "returnOfDormantCustomers": "Return of dormant customers"
 }

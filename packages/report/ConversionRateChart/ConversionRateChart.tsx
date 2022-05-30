@@ -8,16 +8,17 @@ import {
   LabelList,
   Line,
   ResponsiveContainer,
-  Tooltip,
   XAxis,
   YAxis,
 } from 'recharts';
 import { BarChartInfo, ChartInfo, LineChartInfo } from '../types';
 import styles from './ConversionRateChart.module.css';
+import { Legends } from './Legends';
 
 export type ConversionRateChartProps = {
   charts: ChartInfo[];
   data: any[];
+  legend?: React.ReactNode | null;
 };
 
 function numberWithCommas(x: number) {
@@ -28,13 +29,14 @@ const renderBar = (chartInfo: BarChartInfo) => {
   if (!chartInfo.stackedBars) {
     return (
       <Bar
-        dataKey={chartInfo.dataKey}
+        dataKey={chartInfo.dataKey ?? ''}
         name={chartInfo.title}
         barSize={chartInfo.width ?? 16}
         fill={chartInfo.color}
         textAnchor='start'
         radius={[4, 4, 0, 0]}
         isAnimationActive={false}
+        yAxisId='left'
       >
         <LabelList
           dataKey={chartInfo.dataKey}
@@ -49,23 +51,24 @@ const renderBar = (chartInfo: BarChartInfo) => {
 
   return (
     <>
-      {chartInfo.stackedBars.map(({ color, dataKey, title, width }) => (
+      {chartInfo.stackedBars.map(({ color, dataKey, title }, idx) => (
         <Bar
           key={dataKey}
-          stackId={chartInfo.stackId}
+          stackId={chartInfo.stackId ?? 'stacked-bar'}
           dataKey={dataKey}
           name={title}
-          barSize={width ?? 16}
+          barSize={chartInfo.width ?? 16}
           fill={color}
           textAnchor='start'
-          radius={[4, 4, 0, 0]}
+          radius={idx === chartInfo.stackedBars!.length - 1 ? [4, 4, 0, 0] : undefined}
           isAnimationActive={false}
+          yAxisId='left'
         >
           <LabelList
             dataKey={dataKey}
             formatter={(v: string) => numberWithCommas(parseInt(v))}
-            position='top'
-            stroke={chartInfo.color}
+            position='insideTop'
+            stroke='#fff'
             fontSize={10}
           />
         </Bar>
@@ -74,74 +77,48 @@ const renderBar = (chartInfo: BarChartInfo) => {
   );
 };
 
-const renderLine = (chartInfo: LineChartInfo) => {
+const renderLine = ({
+  axis = 'right',
+  width = 2,
+  dataKey,
+  title,
+  color,
+  labelProps,
+  ...restChartInfo
+}: LineChartInfo) => {
   return (
     <Line
-      yAxisId='right'
+      yAxisId={axis}
       // type='monotone'
       dot={false}
-      strokeWidth={chartInfo.width ?? 2}
-      dataKey={chartInfo.dataKey}
-      name={chartInfo.title}
-      unit='%'
-      stroke={chartInfo.color}
+      strokeWidth={width}
+      dataKey={dataKey}
+      name={title}
+      unit={axis === 'right' ? '%' : ''}
+      stroke={color}
       activeDot={false}
       isAnimationActive={false}
     >
       <LabelList
-        dataKey={chartInfo.dataKey}
+        dataKey={dataKey}
         position='top'
         stroke='#464646'
-        formatter={(v: string) => v + '%'}
+        formatter={(v: string) => (axis === 'right' ? v + '%' : v)}
+        {...labelProps}
       />
     </Line>
   );
 };
 
-export const ConversionRateChart = ({ charts, data }: ConversionRateChartProps) => {
+export const ConversionRateChart = ({ charts, data, legend }: ConversionRateChartProps) => {
   if (DomUtils.isServer()) return <div></div>;
 
   const renderLegend = () => {
-    return (
-      <div className='flex items-center gap-8'>
-        {charts.map(chart => {
-          if (chart.type === 'BAR') {
-            return (
-              <React.Fragment key={chart.dataKey ?? chart.title}>
-                <div className='flex items-center gap-2'>
-                  {chart.legendIcon ?? (
-                    <div className='w-3 h-3 rounded-sm' style={{ background: chart.color }}></div>
-                  )}
-                  {chart.title}
-                </div>
-                {(chart.stackedBars ?? []).map(stackedBar => (
-                  <div className='flex items-center gap-2' key={stackedBar.dataKey}>
-                    {stackedBar.legendIcon ?? (
-                      <div
-                        className='w-3 h-3 rounded-sm'
-                        style={{ background: stackedBar.color }}
-                      ></div>
-                    )}
-                    {stackedBar.title}
-                  </div>
-                ))}
-              </React.Fragment>
-            );
-          }
+    if (legend !== undefined) return legend;
 
-          if (chart.type === 'LINE') {
-            return (
-              <div className='flex items-center gap-2' key={chart.dataKey ?? chart.title}>
-                <div className='w-3 h-0.5 rounded-sm' style={{ background: chart.color }}></div>
-                {chart.title}
-              </div>
-            );
-          }
+    const legends = charts.map(({ color, title, type }) => ({ color, title, type }));
 
-          return null;
-        })}
-      </div>
-    );
+    return <Legends items={legends} />;
   };
 
   const renderCharts = () => {
@@ -173,7 +150,10 @@ export const ConversionRateChart = ({ charts, data }: ConversionRateChartProps) 
             tickLine={false}
             tick={{ fontSize: 12, color: '#464646' }}
             tickMargin={12}
+            yAxisId='left'
             stroke='#BFBFBF'
+            domain={[0, (dataMax: number) => dataMax * 1.2]}
+            allowDataOverflow
           />
           <YAxis
             tickLine={false}
@@ -183,9 +163,9 @@ export const ConversionRateChart = ({ charts, data }: ConversionRateChartProps) 
             stroke='#BFBFBF'
             yAxisId='right'
             orientation='right'
+            allowDataOverflow
           />
           {renderCharts()}
-          <Tooltip />
         </ComposedChart>
       </ResponsiveContainer>
     </div>

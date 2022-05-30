@@ -1,4 +1,5 @@
 import { MarketingActionType } from '@/marketing-action/types';
+import { LabelListProps } from 'recharts';
 
 export type ReportNames = 'rfmReport';
 
@@ -79,15 +80,16 @@ export type ConversionRate = {
 
 export type BaseChartInfo = {
   dataKey: string;
-  title: string;
+  title?: string;
   color: string;
   legendIcon?: React.ReactNode;
   width?: number;
+  labelProps?: Omit<LabelListProps<any>, 'dataKey'>;
 };
 
-export type BarChartInfo = BaseChartInfo & {
+export type BarChartInfo = Omit<BaseChartInfo, 'dataKey'> & {
   type: 'BAR';
-  stackedBars?: BaseChartInfo[];
+  stackedBars?: Omit<BaseChartInfo, 'width'>[];
   color?: string;
   dataKey?: string;
   stackId?: string;
@@ -95,6 +97,8 @@ export type BarChartInfo = BaseChartInfo & {
 
 export type LineChartInfo = BaseChartInfo & {
   type: 'LINE';
+  axis?: 'left' | 'right';
+  unit?: string;
 };
 
 export type ChartInfo = BarChartInfo | LineChartInfo;

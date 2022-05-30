@@ -46,7 +46,6 @@
   "viewReport": "レポートを見る",
   "numberOfLoyalDormantCustomers": "ロイヤル休眠顧客数",
   "numberOfReturns": "復帰数",
-  "returnRate": "復帰率",
   "measuresThatContributedToF2Conversion": "F2転換に貢献した施策",
   "numberOfLoyalCustomers": "ロイヤル顧客数",
   "numberOfSemiLoyalCustomers": "準ロイヤル顧客数",
@@ -55,7 +54,6 @@
   "cartAbandoned": "カゴ落ち通知",
   "cart-abandoned": "カゴ落ち通知",
   "measuresThatContributedToTheReturnOfDormantCustomers": "休眠顧客復帰に貢献した施策",
-  "numberOfDormantCustomers": "休眠顧客数",
   "returnToList": "一覧に戻る",
   "viewMonthlyReport": "月ごとに見る",
   "viewByUrlReport": "リンクURLごとに見る",
@@ -71,5 +69,14 @@
   "measuresThatContributedToSemiLoyalConversion": "準ロイヤル転換に貢献した施策",
   "measuresThatContributedToLoyalConversion": "ロイヤル転換に貢献した施策",
   "semiLoyalConversionRate": "準ロイヤル転換率",
-  "loyalConversionRate": "ロイヤル転換率"
+  "loyalConversionRate": "ロイヤル転換率",
+  "numberOfDormantCustomers": "休眠顧客数",
+  "numberOfReturningCustomers": "復帰数",
+  "numberOfReturningCustomersDif": "復帰数（前月差分）",
+  "numberOfDefectedCustomers": "離反顧客数",
+  "returnRate": "復帰率",
+  "measuresThatContributedToDormantCustomersConversion": "休眠顧客復帰に貢献した施策",
+  "sleepReturnDescription": "※休眠＝最後の購入が181〜360日前／離反＝最後の購入から361日以上経過",
+  "loyalDormantCustomersReturn": "ロイヤル休眠顧客復帰推移",
+  "returnOfDormantCustomers": "休眠顧客復帰推移"
 }

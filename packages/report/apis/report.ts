@@ -30,9 +30,19 @@ const getNextLoyalConversionRate = () => {
   return RestApis.get('/reports/next-loyal-conversion-rate');
 };
 
+const getTotalSleepRecovery = () => {
+  return RestApis.get('/reports/actions/total-sleep-recovery');
+};
+
+const getLoyalSleepRecovery = () => {
+  return RestApis.get('/reports/actions/loyal-sleep-recovery');
+};
+
 export const ReportApis = {
   getActionMonthly,
   getActions,
+  getTotalSleepRecovery,
+  getLoyalSleepRecovery,
   getF2ConversionRate,
   getLoyalConversionRate,
   getNextLoyalConversionRate,
