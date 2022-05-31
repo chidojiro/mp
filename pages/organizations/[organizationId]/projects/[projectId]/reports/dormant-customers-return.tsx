@@ -3,9 +3,8 @@ import { Icon, IconName } from '@/common/Icon';
 import { NumberUtils } from '@/common/utils';
 import { PrivateLayout } from '@/layout/PrivateLayout';
 import { ReportApis } from '@/report/apis';
-import { ConversionRateChart, Legends } from '@/report/ConversionRateChart';
+import { SleepConversionChart } from '@/report/ConversionRateChart';
 import { CustomerReportButton } from '@/report/CustomerReportButton';
-import { Colors } from '@/theme/constants';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import useSWR from 'swr';
@@ -24,14 +23,6 @@ function SleepCustomersReturn() {
   const { data: profile } = useProfile();
 
   const { data = [] } = useSWR('/loyal-sleep-recovery', () => ReportApis.getLoyalSleepRecovery());
-
-  const chartData = data
-    .sort((a: any, b: any) => a.aggregated_month - b.aggregated_month)
-    .map(({ aggregated_month, ...rest }: any) => ({
-      ...rest,
-      aggregated_month: aggregated_month.split('-').slice(0, 2).join('/'),
-    }))
-    .slice(0, 12);
 
   const reportButtons = [
     {
@@ -55,54 +46,7 @@ function SleepCustomersReturn() {
   ];
   return (
     <PrivateLayout title={tCommon('returnOfDormantCustomers')}>
-      <ConversionRateChart
-        legend={
-          <div>
-            <Legends
-              items={[
-                { color: '#FF7F5C', title: t('numberOfDormantCustomers') },
-                { color: '#91D5E2', title: t('numberOfReturningCustomers') },
-                { color: Colors.primary.DEFAULT, title: t('numberOfReturningCustomersDif') },
-                { color: Colors.gray[500], title: t('numberOfDefectedCustomers') },
-                { color: Colors.secondary.DEFAULT, title: t('returnRate') },
-              ]}
-            />
-            <div className='text-medium text-gray-600 mt-1'>{t('sleepReturnDescription')}</div>
-          </div>
-        }
-        charts={[
-          {
-            type: 'BAR',
-            stackedBars: [
-              { color: '#91D5E2', dataKey: 'recovery_uu' },
-              { color: Colors.primary.DEFAULT, dataKey: 'latest_recovery_uu' },
-              { color: Colors.gray[500], dataKey: 'deep_sleep_uu' },
-              { color: '#FF7F5C', dataKey: 'sleep_uu' },
-            ],
-            color: Colors.secondary.DEFAULT,
-            width: 32,
-          },
-          {
-            type: 'LINE',
-            dataKey: 'total_uu',
-            color: 'transparent',
-            width: 1,
-            axis: 'left',
-            labelProps: {
-              fontSize: 12,
-            },
-          },
-          {
-            type: 'LINE',
-            dataKey: 'recovery_rate',
-            color: Colors.secondary.DEFAULT,
-            labelProps: {
-              fontSize: 10,
-            },
-          },
-        ]}
-        data={chartData}
-      />
+      <SleepConversionChart data={data} type='total' />
       <h5 className='text-gray-600 mt-[60px] font-bold'>
         {t('measuresThatContributedToDormantCustomersConversion')}
       </h5>

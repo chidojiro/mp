@@ -1,4 +1,5 @@
 import { CSVButton } from '@/common/CSVButton';
+import { Children } from '@/common/types';
 import { DomUtils } from '@/common/utils';
 import React from 'react';
 import {
@@ -15,7 +16,7 @@ import { BarChartInfo, ChartInfo, LineChartInfo } from '../types';
 import styles from './ConversionRateChart.module.css';
 import { Legends } from './Legends';
 
-export type ConversionRateChartProps = {
+export type ConversionRateChartProps = Children & {
   charts: ChartInfo[];
   data: any[];
   legend?: React.ReactNode | null;
@@ -110,7 +111,12 @@ const renderLine = ({
   );
 };
 
-export const ConversionRateChart = ({ charts, data, legend }: ConversionRateChartProps) => {
+export const ConversionRateChart = ({
+  charts,
+  data,
+  legend,
+  children,
+}: ConversionRateChartProps) => {
   if (DomUtils.isServer()) return <div></div>;
 
   const renderLegend = () => {
@@ -166,6 +172,7 @@ export const ConversionRateChart = ({ charts, data, legend }: ConversionRateChar
             allowDataOverflow
           />
           {renderCharts()}
+          {children}
         </ComposedChart>
       </ResponsiveContainer>
     </div>
