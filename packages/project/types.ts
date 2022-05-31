@@ -43,3 +43,14 @@ export type ProjectData = {
   name?: string;
   settings: ProjectSettingData;
 };
+
+export type Attribute = {
+  id: string;
+  name: string;
+  type: string;
+  tags: string;
+  label: string;
+  content: string;
+  created_at: Date;
+  updated_at: Date;
+};

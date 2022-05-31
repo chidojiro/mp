@@ -237,7 +237,7 @@ export const RichTextEditor = React.forwardRef(
     };
 
     const filteredMentionOptions = mentionOptions.filter(({ label }) =>
-      label.toLocaleLowerCase().includes(mentionQuery.toLocaleLowerCase())
+      label?.toLocaleLowerCase().includes(mentionQuery.toLocaleLowerCase())
     );
 
     // https://github.com/facebook/draft-js/issues/657

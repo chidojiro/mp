@@ -1,6 +1,6 @@
 import { Logger } from '@/common/utils';
 import { RestApiConfig, RestApis } from '@/rest/apis';
-import { MarketingActionRes, TestDelivery } from '../types';
+import { MarketingActionRes, TestDelivery } from './types';
 
 const list = (config: RestApiConfig) => {
   return RestApis.get<{ [key: string]: MarketingActionRes[] }>('/actions/', config);

@@ -1,10 +1,10 @@
 import { Option } from '@/common/types';
+import { ProjectApis } from '@/project/apis';
+import { Attribute } from '@/project/types';
 import { useRouter } from 'next/router';
 import React from 'react';
 import useSWR from 'swr';
-import { VariableApis } from './apis';
 import { MarketingActionAlias } from './types';
-import { Variable } from './types';
 
 const marketingActionQueryParamToAliasMap: Record<string, MarketingActionAlias> = {
   'step-delivery-after-purchase': MarketingActionAlias.AFTER_PURCHASE,
@@ -19,9 +19,13 @@ const marketingActionQueryParamToAliasMap: Record<string, MarketingActionAlias> 
 export const useVariables = (alias?: MarketingActionAlias) => {
   const { query } = useRouter();
   const _alias = alias ?? marketingActionQueryParamToAliasMap[query.marketingActionName as string];
-  const swrReturn = useSWR<Variable[]>(['/variables', alias], () => VariableApis.list(_alias), {
-    fallbackData: [],
-  });
+  const swrReturn = useSWR<Attribute[]>(
+    ['/variables', alias],
+    () => ProjectApis.listAttributes(query.projectId as string, _alias),
+    {
+      fallbackData: [],
+    }
+  );
 
   return React.useMemo(
     () => ({
@@ -30,7 +34,7 @@ export const useVariables = (alias?: MarketingActionAlias) => {
       variablesAsMentionOptions: swrReturn.data!.map(
         data =>
           ({
-            label: data.name_display,
+            label: data.label,
             value: `{{${data.name}}}`,
           } as Option<string, string>)
       ),
