@@ -78,6 +78,7 @@ function SemiRoyalConversionRate() {
             dataKey: 'next_loyal_conversion_rate',
             title: t('semiLoyalConversionRate'),
             color: Colors.danger,
+            formatter: v => NumberUtils.formatPercent(v) + '%',
           },
         ]}
         data={chartData}

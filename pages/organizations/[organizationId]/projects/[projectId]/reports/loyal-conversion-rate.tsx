@@ -76,6 +76,7 @@ function RoyalConversionRate() {
             dataKey: 'loyal_conversion_rate',
             title: t('loyalConversionRate'),
             color: Colors.danger,
+            formatter: v => NumberUtils.formatPercent(v) + '%',
           },
         ]}
         data={chartData}
