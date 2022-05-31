@@ -74,7 +74,7 @@ function RoyalConversionRate() {
           {
             type: 'LINE',
             dataKey: 'loyal_conversion_rate',
-            title: t('semiLoyalConversionRate'),
+            title: t('loyalConversionRate'),
             color: Colors.danger,
           },
         ]}
