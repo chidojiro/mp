@@ -20,7 +20,7 @@ export const EditButton = ({ alias = '', typeName }: Props) => {
   React.useEffect(() => {
     let url = `/organizations/${profile.data?.organization_id}/projects/${profile.data?.project_id}/actions/edit/${typeName}`;
     if (data) {
-      const allActions = [...data?.running, ...data?.draft, ...data?.complete];
+      const allActions = [...data?.active, ...data?.draft, ...data?.expired];
       if (allActions.length === 1) {
         url = `${url}/${allActions[0].id}`;
       }

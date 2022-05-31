@@ -5,7 +5,7 @@ import { MarketingActionRes, TestDelivery } from './types';
 const list = (config: RestApiConfig) => {
   return RestApis.get<{ [key: string]: MarketingActionRes[] }>('/actions/', config);
 };
-type Status = 'running' | 'complete' | 'draft';
+type Status = 'active' | 'expired' | 'draft';
 export type ActionsByAliasResponse = Record<Status, MarketingActionRes[]>;
 const getActionsByAlias = async (alias: string): Promise<ActionsByAliasResponse | null> => {
   try {

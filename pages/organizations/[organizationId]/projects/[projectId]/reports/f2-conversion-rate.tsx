@@ -76,6 +76,7 @@ function F2ConversionRateTrends() {
             dataKey: 'f2_conversion_rate',
             title: t('f2ConversionRate'),
             color: Colors.danger,
+            formatter: v => NumberUtils.formatPercent(v) + '%',
           },
         ]}
         data={chartData}

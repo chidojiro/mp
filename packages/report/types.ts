@@ -84,6 +84,7 @@ export type BaseChartInfo = {
   color: string;
   legendIcon?: React.ReactNode;
   width?: number;
+  formatter?: (v: any) => string;
   labelProps?: Omit<LabelListProps<any>, 'dataKey'>;
 };
 

@@ -12,7 +12,7 @@ export const ActionStatus = ({ alias = '' }: Props) => {
   const { data } = useSWR<ActionsByAliasResponse | null, any>(['/actionByAlias', alias], () =>
     MarketingActionApis.getActionsByAlias(alias)
   );
-  const isRunning = !!data && data?.running && data?.running.length > 0;
+  const isRunning = !!data && data?.active && data?.active.length > 0;
   if (isRunning) {
     return (
       <div key={alias}>

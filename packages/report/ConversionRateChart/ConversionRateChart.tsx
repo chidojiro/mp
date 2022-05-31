@@ -1,6 +1,6 @@
 import { CSVButton } from '@/common/CSVButton';
 import { Children } from '@/common/types';
-import { DomUtils } from '@/common/utils';
+import { DomUtils, NumberUtils } from '@/common/utils';
 import React from 'react';
 import {
   Bar,
@@ -86,6 +86,7 @@ const renderLine = ({
   title,
   color,
   labelProps,
+  formatter,
   ...restChartInfo
 }: LineChartInfo) => {
   return (
@@ -105,7 +106,8 @@ const renderLine = ({
         dataKey={dataKey}
         position='top'
         stroke='#464646'
-        formatter={(v: string) => (axis === 'right' ? v + '%' : v)}
+        formatter={formatter}
+        fontSize={10}
         {...labelProps}
       />
     </Line>
@@ -159,14 +161,17 @@ export const ConversionRateChart = ({
             tickMargin={12}
             yAxisId='left'
             stroke='#BFBFBF'
-            domain={[0, (dataMax: number) => Math.round(dataMax * 1.2)]}
+            tickCount={8}
+            domain={[0, (dataMax: number) => Math.round(dataMax * 1.125)]}
             allowDataOverflow
           />
           <YAxis
             tickLine={false}
             tick={{ fontSize: 12, color: '#464646' }}
             tickMargin={12}
-            tickFormatter={tick => tick + '%'}
+            tickCount={8}
+            tickFormatter={tick => NumberUtils.formatPercent(tick) + '%'}
+            domain={[0, (dataMax: number) => Math.round(dataMax * 1.125)]}
             stroke='#BFBFBF'
             yAxisId='right'
             orientation='right'

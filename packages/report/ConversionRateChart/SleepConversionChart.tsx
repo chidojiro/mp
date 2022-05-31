@@ -3,6 +3,7 @@ import { ConversionRateChart } from './ConversionRateChart';
 import { Colors } from '@/theme/constants';
 import { useTranslation } from 'next-i18next';
 import { omitBy } from 'lodash-es';
+import { NumberUtils } from '@/common/utils';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = { data: any; type: 'loyal' | 'total' | 'f1' };
@@ -74,6 +75,7 @@ export const SleepConversionChart = ({ data, type }: Props) => {
             fontSize: 10,
           },
           title: t('returnRate'),
+          formatter: v => NumberUtils.formatPercent(parseFloat(v)) + '%',
         },
         {
           type: 'LINE',

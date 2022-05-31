@@ -2,9 +2,9 @@ import { EditorState } from 'draft-js';
 
 export enum MarketingActionStatus {
   DRAFT = 'draft',
-  RUNNING = 'running',
+  RUNNING = 'active',
   SUSPEND = 'suspend',
-  COMPLETE = 'complete',
+  COMPLETE = 'expired',
 }
 export enum MarketingActionAlias {
   CART_LEFT_NOTIFICATION = 'cart_left_notification',
