@@ -6,6 +6,9 @@ import qs from 'qs';
 const getActionMonthly = (alias: string, target_segment?: string[]) => {
   return RestApis.get(`/reports/actions/${alias}/monthly`, {
     params: { target_segment },
+    paramsSerializer: params => {
+      return qs.stringify(params, { arrayFormat: 'repeat' });
+    },
   });
 };
 
