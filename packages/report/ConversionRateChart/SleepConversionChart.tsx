@@ -50,13 +50,30 @@ export const SleepConversionChart = ({ data, type }: Props) => {
         {
           type: 'BAR',
           stackedBars: [
-            { color: '#91D5E2', dataKey: 'recovery_uu' },
-            { color: Colors.primary.DEFAULT, dataKey: 'latest_recovery_uu' },
-            { color: Colors.gray[500], dataKey: 'deep_sleep_uu' },
-            { color: '#FF7F5C', dataKey: 'sleep_uu' },
+            { color: '#91D5E2', dataKey: 'recovery_uu', title: t('numberOfReturningCustomers') },
+            {
+              color: Colors.primary.DEFAULT,
+              dataKey: 'latest_recovery_uu',
+              title: t('numberOfReturningCustomersDif'),
+            },
+            {
+              color: Colors.gray[500],
+              dataKey: 'deep_sleep_uu',
+              title: t('numberOfDefectedCustomers'),
+            },
+            { color: '#FF7F5C', dataKey: 'sleep_uu', title: t(getTranslationKey()) },
           ],
           color: Colors.secondary.DEFAULT,
           width: 32,
+        },
+        {
+          type: 'LINE',
+          dataKey: 'recovery_rate',
+          color: Colors.secondary.DEFAULT,
+          labelProps: {
+            fontSize: 10,
+          },
+          title: t('returnRate'),
         },
         {
           type: 'LINE',
@@ -66,14 +83,6 @@ export const SleepConversionChart = ({ data, type }: Props) => {
           axis: 'left',
           labelProps: {
             fontSize: 12,
-          },
-        },
-        {
-          type: 'LINE',
-          dataKey: 'recovery_rate',
-          color: Colors.secondary.DEFAULT,
-          labelProps: {
-            fontSize: 10,
           },
         },
       ]}

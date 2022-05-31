@@ -9,6 +9,7 @@ import {
   LabelList,
   Line,
   ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
 } from 'recharts';
@@ -172,6 +173,7 @@ export const ConversionRateChart = ({
             allowDataOverflow
           />
           {renderCharts()}
+          <Tooltip />
           {children}
         </ComposedChart>
       </ResponsiveContainer>
