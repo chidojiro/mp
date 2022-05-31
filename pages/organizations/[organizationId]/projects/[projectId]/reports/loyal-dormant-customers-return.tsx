@@ -6,6 +6,7 @@ import { ReportApis } from '@/report/apis';
 import { ConversionRateChart, Legends } from '@/report/ConversionRateChart';
 import { CustomerReportButton } from '@/report/CustomerReportButton';
 import { Colors } from '@/theme/constants';
+import { omitBy } from 'lodash-es';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import useSWR from 'swr';
@@ -31,7 +32,8 @@ function LoyalSleepCustomersReturn() {
       ...rest,
       aggregated_month: aggregated_month.split('-').slice(0, 2).join('/'),
     }))
-    .slice(0, 12);
+    .slice(0, 12)
+    .map((data: any) => omitBy(data, v => !v));
 
   const reportButtons = [
     {
