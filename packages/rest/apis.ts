@@ -76,12 +76,12 @@ myAxios.interceptors.response.use(
   },
   function (error: AxiosError) {
     Logger.log('error:', JSON.stringify(error?.response?.data));
-    if (
-      [401, 403].includes(error?.response?.status ?? 200) &&
-      !DomUtils.isServer() &&
-      location.pathname !== '/login'
-    )
+    if (error?.response?.status === 401 && !DomUtils.isServer() && location.pathname !== '/login') {
+      CookiesUtils.remove(ACCESS_TOKEN_KEY);
+      CookiesUtils.remove(ORANIZATION_HEADER);
+      CookiesUtils.remove(PROJECT_HEADER);
       location.href = '/login';
+    }
     return Promise.reject(error);
   }
 );
