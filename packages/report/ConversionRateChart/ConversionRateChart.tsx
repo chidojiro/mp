@@ -152,7 +152,7 @@ export const ConversionRateChart = ({ charts, data, legend }: ConversionRateChar
             tickMargin={12}
             yAxisId='left'
             stroke='#BFBFBF'
-            domain={[0, (dataMax: number) => dataMax * 1.2]}
+            domain={[0, (dataMax: number) => Math.round(dataMax * 1.2)]}
             allowDataOverflow
           />
           <YAxis
